@@ -1,0 +1,97 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+<LinearLayout
+        android:id="@+id/vTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/theme_blue"
+        android:orientation="horizontal" >
+
+        <ImageButton
+            android:id="@+id/tabFb"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_tab"
+            android:src="@drawable/ic_fb" />
+
+        <View
+            android:id="@+id/view1"
+            style="@style/divider_blue"
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+        <ImageButton
+            android:id="@+id/tabTw"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_tab"
+            android:src="@drawable/ic_tw" />
+        <View
+            android:id="@+id/view2"
+            style="@style/divider_blue"
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />
+
+
+        <ImageButton
+            android:id="@+id/tabIg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_tab"
+            android:src="@drawable/ic_instagram"
+            />
+        <View
+            android:id="@+id/view3"
+            style="@style/divider_blue"
+            android:layout_width="1dp"
+            android:layout_height="match_parent" />  
+
+        <ImageButton
+            android:id="@+id/tabMail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/btn_tab"
+            android:src="@drawable/ic_mail" />
+    </LinearLayout>
+
+<ImageView
+    android:id="@+id/imageView1"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:scaleType="fitXY"
+    android:src="@drawable/dummy_image" />
+
+    <RelativeLayout
+        android:id="@+id/vBottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/theme_blue"
+        android:padding="40dp" >
+
+            <TextView
+                android:id="@+id/btnDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_download" 
+                android:layout_centerVertical="true"/>
+
+            <TextView
+                android:id="@+id/btnShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_share"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+</LinearLayout>
