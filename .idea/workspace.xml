@@ -29,15 +29,16 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/echopen/asso/echopen/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.578125">
-              <caret line="228" column="62" selection-start-line="228" selection-start-column="62" selection-end-line="228" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.28807947">
+              <caret line="197" column="13" selection-start-line="197" selection-start-column="13" selection-end-line="197" selection-end-column="13" />
               <folding>
+                <element signature="imports" expanded="true" />
                 <element signature="e#2494#2680#0" expanded="true" />
                 <element signature="e#2679#2680#0" expanded="true" />
                 <element signature="e#2808#3989#0" expanded="true" />
                 <element signature="e#3988#3989#0" expanded="true" />
-                <element signature="e#8490#8521#0" expanded="true" />
-                <element signature="e#8750#8796#0" expanded="true" />
+                <element signature="e#8423#8454#0" expanded="true" />
+                <element signature="e#8683#8729#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1846,15 +1847,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/echopen/asso/echopen/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.578125">
-          <caret line="228" column="62" selection-start-line="228" selection-start-column="62" selection-end-line="228" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.28807947">
+          <caret line="197" column="13" selection-start-line="197" selection-start-column="13" selection-end-line="197" selection-end-column="13" />
           <folding>
+            <element signature="imports" expanded="true" />
             <element signature="e#2494#2680#0" expanded="true" />
             <element signature="e#2679#2680#0" expanded="true" />
             <element signature="e#2808#3989#0" expanded="true" />
             <element signature="e#3988#3989#0" expanded="true" />
-            <element signature="e#8490#8521#0" expanded="true" />
-            <element signature="e#8750#8796#0" expanded="true" />
+            <element signature="e#8423#8454#0" expanded="true" />
+            <element signature="e#8683#8729#0" expanded="true" />
           </folding>
         </state>
       </provider>

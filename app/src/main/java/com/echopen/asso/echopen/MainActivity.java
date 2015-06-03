@@ -195,8 +195,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             if (display == setting.DISPLAY_FILTER) {
                 display = setting.DISPLAY_PHOTO;
                 setupContainer();
-            } else
-                startActivity(new Intent(this, Share.class));
+            }
         } else if (v.getId() == R.id.tabSetting) {
             startActivity(new Intent(this, Settings.class));
         }
@@ -284,14 +283,18 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
-
         if (itemId == R.id.btnCapture) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setItems(R.array.choose_camera, mDialogListener);
                 AlertDialog dialog = builder.create();
                 dialog.show();
         }
-
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        startActivity(new Intent(this, Share.class));
     }
 }
