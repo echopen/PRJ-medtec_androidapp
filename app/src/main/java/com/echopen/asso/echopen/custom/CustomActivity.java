@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.TouchEffect;
 
 /**
@@ -25,7 +26,6 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
     protected int theme;
 
     public static final TouchEffect TOUCH = new TouchEffect();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

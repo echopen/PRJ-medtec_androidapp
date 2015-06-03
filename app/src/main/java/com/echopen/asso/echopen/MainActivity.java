@@ -23,29 +23,20 @@ import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.CameraFragment;
 import com.echopen.asso.echopen.ui.FilterFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.utils.Constants;
 
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity
 
 {
-    private static final int SWIPE_MIN_DISTANCE = 120;
-
-    private static final int SWIPE_MAX_OFF_PATH = 250;
-
-    private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-
-    public static final int DISPLAY_VIDEO = 2;
-
-    public static final int DISPLAY_FILTER = 1;
-
-    public static final int DISPLAY_PHOTO = 0;
-
+    
     private int display;
 
     private MainActionController mainActionController;
 
     public GestureDetector gesture;
 
+    public Constants.Settings setting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,26 +93,25 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         public boolean onFling(android.view.MotionEvent e1,
                                android.view.MotionEvent e2, float velocityX, float velocityY) {
 
-            if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
+            if (Math.abs(e1.getY() - e2.getY()) > setting.SWIPE_MAX_OFF_PATH)
                 return false;
             else {
                 try {
-                    if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
-                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                        if (display != DISPLAY_VIDEO) {
+                    if (e1.getX() - e2.getX() > setting.SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > setting.SWIPE_THRESHOLD_VELOCITY) {
+                        if (display != setting.DISPLAY_VIDEO) {
                             display++;
                             setupContainer();
                         }
 
-                    } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
-                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                        if (display != DISPLAY_PHOTO) {
+                    } else if (e2.getX() - e1.getX() > setting.SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > setting.SWIPE_THRESHOLD_VELOCITY) {
+                        if (display != setting.DISPLAY_PHOTO) {
                             display--;
                             setupContainer();
                         }
                     }
                 } catch (Exception e) {
-                    // nothing
                 }
                 return true;
             }
@@ -140,19 +130,19 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
 
         Fragment f;
-        if (display != DISPLAY_FILTER)
+        if (display != setting.DISPLAY_FILTER)
             f = new CameraFragment();
         else
             f = new FilterFragment();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, f).commit();
 
-        if (display == DISPLAY_VIDEO) {
+        if (display == setting.DISPLAY_VIDEO) {
             mainActionController.displayVideo();
         } else {
             mainActionController.displayImages();
 
-            if (display == DISPLAY_PHOTO) {
+            if (display == setting.DISPLAY_PHOTO) {
                 mainActionController.displayPhoto();
             } else {
                 mainActionController.displayOtherImage();
@@ -165,35 +155,35 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     public void onClick(View v) {
         super.onClick(v);
 
-        if (display != DISPLAY_PHOTO
+        if (display != setting.DISPLAY_PHOTO
                 && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
-            display = DISPLAY_PHOTO;
+            display = setting.DISPLAY_PHOTO;
             setupContainer();
         } else if (v.getId() == R.id.btn2) {
-            if (display == DISPLAY_VIDEO) {
-                display = DISPLAY_FILTER;
+            if (display == setting.DISPLAY_VIDEO) {
+                display = setting.DISPLAY_FILTER;
                 setupContainer();
-            } else if (display == DISPLAY_FILTER) {
-                display = DISPLAY_PHOTO;
+            } else if (display == setting.DISPLAY_FILTER) {
+                display = setting.DISPLAY_PHOTO;
                 setupContainer();
             }
         } else if (v.getId() == R.id.btn4) {
-            if (display == DISPLAY_PHOTO) {
-                display = DISPLAY_FILTER;
+            if (display == setting.DISPLAY_PHOTO) {
+                display = setting.DISPLAY_FILTER;
                 setupContainer();
-            } else if (display == DISPLAY_FILTER) {
-                display = DISPLAY_VIDEO;
+            } else if (display == setting.DISPLAY_FILTER) {
+                display = setting.DISPLAY_VIDEO;
                 setupContainer();
             }
-        } else if (v.getId() == R.id.btn5 && display == DISPLAY_PHOTO) {
-            display = DISPLAY_VIDEO;
+        } else if (v.getId() == R.id.btn5 && display == setting.DISPLAY_PHOTO) {
+            display = setting.DISPLAY_VIDEO;
             setupContainer();
-        } else if (display != DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
-            display = DISPLAY_FILTER;
+        } else if (display != setting.DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
+            display = setting.DISPLAY_FILTER;
             setupContainer();
         } else if (v.getId() == R.id.btnCapture) {
-            if (display == DISPLAY_FILTER) {
-                display = DISPLAY_PHOTO;
+            if (display == setting.DISPLAY_FILTER) {
+                display = setting.DISPLAY_PHOTO;
                 setupContainer();
             } else
                 startActivity(new Intent(this, Share.class));
@@ -204,12 +194,12 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     protected DialogInterface.OnClickListener mDialogListener =
             new DialogInterface.OnClickListener() {
-
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     switch (which) {
                         case 0:
-                            //
+                            Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            startActivityForResult(photoIntent, setting.TAKE_PHOTO_REQUEST);
                             break;
                         case 1:
                             //
