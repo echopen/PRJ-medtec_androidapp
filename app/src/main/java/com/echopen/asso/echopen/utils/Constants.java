@@ -1,5 +1,7 @@
 package com.echopen.asso.echopen.utils;
 
+import java.util.Locale;
+
 /**
  * Created with IntelliJ IDEA.
  * User benchoufi
@@ -46,7 +48,7 @@ public class Constants {
 
         public static final int DISPLAY_PHOTO = 0;
 
-        public static final int TAKE_PHOTO_REQUEST = 0;
+        public static final int TAKE_PHOTO = 0;
 
         public static final int TAKE_VIDEO_REQUEST = 1;
 
@@ -58,9 +60,12 @@ public class Constants {
 
         public static final int MEDIA_TYPE_VIDEO = 5;
 
-        public static final int FILE_SIZE_LIMIT = 1024*1024*10; // 10 MB
+        public static final int FILE_SIZE_LIMIT = 1024*1024*10;
     }
 
+    public static class Internationalization{
+        public static final Locale locale_country = Locale.FRANCE;
+    }
     public static class ParseConstants {
         private ParseConstants() {}
     }

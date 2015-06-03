@@ -2,7 +2,7 @@
 <resources>
    <string name="app_name">echopen</string>
    <string name="refresh">Refresh</string>
-    <string name="error_external_storage">Storage Error</string>
+    <string name="external_storage_error">Extenal Storage Error</string>
     <string-array
         name="choose_camera">
         <item>Take Picture</item>

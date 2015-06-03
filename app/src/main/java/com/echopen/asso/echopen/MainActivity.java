@@ -7,9 +7,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
@@ -25,6 +28,11 @@ import com.echopen.asso.echopen.ui.FilterFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Constants;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity
 
@@ -37,6 +45,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     public GestureDetector gesture;
 
     public Constants.Settings setting;
+
+    protected Uri uri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -199,17 +209,78 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                     switch (which) {
                         case 0:
                             Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            startActivityForResult(photoIntent, setting.TAKE_PHOTO_REQUEST);
+                            uri = getFileUri(setting.MEDIA_TYPE_IMAGE);
+                            if (uri == null)
+                                getErrorStorageMessage();
+                            else {
+                                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                                startActivityForResult(photoIntent, setting.TAKE_PHOTO);
+                            }
                             break;
                         case 1:
-                            //
+                            Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+                            uri = getFileUri(setting.MEDIA_TYPE_VIDEO);
+                            if (uri == null)
+                                getErrorStorageMessage();
+                            else {
+                                videoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                                videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
+                                videoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0); // 0 = lowest res
+                                startActivityForResult(videoIntent, setting.TAKE_VIDEO_REQUEST);
+                            }
+                            break;
                         case 2:
                             //
                         case 3:
                             //
                     }
                 }
+
+                private void getErrorStorageMessage() {
+                    Toast.makeText(MainActivity.this, R.string.external_storage_error,
+                            Toast.LENGTH_LONG).show();
+                }
+
+                private Uri getFileUri(int mediaType) {
+                    if (isExternalStorageAvailable()) {
+                        String appName = MainActivity.this.getString(R.string.app_name);
+                        File mediaStorageDir = new File(
+                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                                appName);
+                        if (! mediaStorageDir.exists()) {
+                            if (! mediaStorageDir.mkdirs()) {
+                                Log.e("TAGGY", "Failed to create directory.");
+                                return null;
+                            }
+                        }
+                        File mediaFile;
+                        Date now = new Date();
+                        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Constants.Internationalization.locale_country).format(now);
+                        String path = mediaStorageDir.getPath() + File.separator;
+                        if (mediaType == setting.MEDIA_TYPE_IMAGE) {
+                            // @todo : validate .jpg extension
+                            mediaFile = new File(path + "IMG_" + timestamp + ".jpg");
+                        }
+                        else if (mediaType == setting.MEDIA_TYPE_VIDEO) {
+                            mediaFile = new File(path + "VID_" + timestamp + ".mp4");
+                        }
+                        else {
+                            return null;
+                        }
+                        Log.d("TAGGY", "File: " + Uri.fromFile(mediaFile));
+                        return Uri.fromFile(mediaFile);
+                    }
+                    else
+                        return null;
+                }
+
+                private boolean isExternalStorageAvailable() {
+                    String state = Environment.getExternalStorageState();
+                    if (state.equals(Environment.MEDIA_MOUNTED)) { return true; }
+                    else { return false; }
+                }
             };
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
