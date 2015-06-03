@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">echopen</string>
+   <string name="app_name">echopen</string>
    <string name="refresh">Refresh</string>
+    <string name="error_external_storage">Storage Error</string>
+    <string-array
+        name="choose_camera">
+        <item>Take Picture</item>
+        <item>Take Picture</item>
+        <item>Choose Picture</item>
+        <item>Choose Picture</item>
+    </string-array>
 </resources>

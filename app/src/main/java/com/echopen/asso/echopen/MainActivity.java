@@ -4,14 +4,19 @@
 package com.echopen.asso.echopen;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.Toast;
 
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
@@ -43,8 +48,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initSwipeViews();
@@ -59,8 +63,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     }
 
 
-    private void initViewComponents()
-    {
+    private void initViewComponents() {
         setTouchNClick(R.id.btnCapture);
         setTouchNClick(R.id.btnEffect);
         setTouchNClick(R.id.btnPic);
@@ -81,15 +84,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     }
 
-    private void initSwipeViews()
-    {
+    private void initSwipeViews() {
         gesture = new GestureDetector(this, gestureListner);
 
         OnTouchListener otl = new OnTouchListener() {
 
             @Override
-            public boolean onTouch(View v, MotionEvent event)
-            {
+            public boolean onTouch(View v, MotionEvent event) {
                 return gesture.onTouchEvent(event);
             }
         };
@@ -99,36 +100,27 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     private SimpleOnGestureListener gestureListner = new SimpleOnGestureListener() {
         @Override
         public boolean onFling(android.view.MotionEvent e1,
-                               android.view.MotionEvent e2, float velocityX, float velocityY)
-        {
+                               android.view.MotionEvent e2, float velocityX, float velocityY) {
 
             if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
                 return false;
-            else
-            {
-                try
-                {
+            else {
+                try {
                     if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
-                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
-                    {
-                        if (display != DISPLAY_VIDEO)
-                        {
+                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                        if (display != DISPLAY_VIDEO) {
                             display++;
                             setupContainer();
                         }
 
-                    }
-                    else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
-                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY)
-                    {
-                        if (display != DISPLAY_PHOTO)
-                        {
+                    } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                        if (display != DISPLAY_PHOTO) {
                             display--;
                             setupContainer();
                         }
                     }
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
                     // nothing
                 }
                 return true;
@@ -137,16 +129,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
     };
 
-    public void goBackFromFragment(int display)
-    {
+    public void goBackFromFragment(int display) {
         this.display = display;
         setupContainer();
     }
 
-    private void setupContainer()
-    {
-        while (getSupportFragmentManager().getBackStackEntryCount() > 0)
-        {
+    private void setupContainer() {
+        while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStackImmediate();
         }
 
@@ -158,20 +147,14 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content_frame, f).commit();
 
-        if (display == DISPLAY_VIDEO)
-        {
+        if (display == DISPLAY_VIDEO) {
             mainActionController.displayVideo();
-        }
-        else
-        {
+        } else {
             mainActionController.displayImages();
 
-            if (display == DISPLAY_PHOTO)
-            {
+            if (display == DISPLAY_PHOTO) {
                 mainActionController.displayPhoto();
-            }
-            else
-            {
+            } else {
                 mainActionController.displayOtherImage();
             }
         }
@@ -179,66 +162,75 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     }
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         super.onClick(v);
 
         if (display != DISPLAY_PHOTO
-                && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1))
-        {
+                && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
             display = DISPLAY_PHOTO;
             setupContainer();
-        }
-        else if (v.getId() == R.id.btn2)
-        {
-            if (display == DISPLAY_VIDEO)
-            {
+        } else if (v.getId() == R.id.btn2) {
+            if (display == DISPLAY_VIDEO) {
                 display = DISPLAY_FILTER;
                 setupContainer();
-            }
-            else if (display == DISPLAY_FILTER)
-            {
+            } else if (display == DISPLAY_FILTER) {
                 display = DISPLAY_PHOTO;
                 setupContainer();
             }
-        }
-        else if (v.getId() == R.id.btn4)
-        {
-            if (display == DISPLAY_PHOTO)
-            {
+        } else if (v.getId() == R.id.btn4) {
+            if (display == DISPLAY_PHOTO) {
                 display = DISPLAY_FILTER;
                 setupContainer();
-            }
-            else if (display == DISPLAY_FILTER)
-            {
+            } else if (display == DISPLAY_FILTER) {
                 display = DISPLAY_VIDEO;
                 setupContainer();
             }
-        }
-        else if (v.getId() == R.id.btn5 && display == DISPLAY_PHOTO)
-        {
+        } else if (v.getId() == R.id.btn5 && display == DISPLAY_PHOTO) {
             display = DISPLAY_VIDEO;
             setupContainer();
-        }
-        else if (display != DISPLAY_FILTER && v.getId() == R.id.btnEffect)
-        {
+        } else if (display != DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
             display = DISPLAY_FILTER;
             setupContainer();
-        }
-        else if (v.getId() == R.id.btnCapture)
-        {
-            if (display == DISPLAY_FILTER)
-            {
+        } else if (v.getId() == R.id.btnCapture) {
+            if (display == DISPLAY_FILTER) {
                 display = DISPLAY_PHOTO;
                 setupContainer();
-            }
-            else
+            } else
                 startActivity(new Intent(this, Share.class));
-        }
-        else if (v.getId() == R.id.tabSetting)
-        {
+        } else if (v.getId() == R.id.tabSetting) {
             startActivity(new Intent(this, Settings.class));
         }
     }
 
+    protected DialogInterface.OnClickListener mDialogListener =
+            new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    switch (which) {
+                        case 0:
+                            //
+                            break;
+                        case 1:
+                            //
+                        case 2:
+                            //
+                        case 3:
+                            //
+                    }
+                }
+            };
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.btnCapture) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setItems(R.array.choose_camera, mDialogListener);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+        }
+
+        return true;
+    }
 }
