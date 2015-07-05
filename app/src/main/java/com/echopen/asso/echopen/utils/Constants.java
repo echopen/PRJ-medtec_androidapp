@@ -31,6 +31,10 @@ public class Constants {
 
         public static final String HEADER_PARSE_APP_ID = "X-Parse-Application-Id";
 
+        public static final String PARSE_APP_ID = "";
+
+        public static final String PARSE_REST_API_KEY = "";
+
         public static final String CONTENT_TYPE_JSON = "application/json";
     }
 

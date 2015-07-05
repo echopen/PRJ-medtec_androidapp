@@ -31,12 +31,8 @@ import com.echopen.asso.echopen.utils.Constants;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 
-
-public class MainActivity extends CustomActivity implements AbstractActionActivity
-
-{
+public class MainActivity extends CustomActivity implements AbstractActionActivity {
     
     private int display;
 
@@ -158,7 +154,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                 mainActionController.displayOtherImage();
             }
         }
-
     }
 
     @Override

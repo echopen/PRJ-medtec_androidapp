@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.utils.Constants;
 
 public class FilterFragment extends Fragment
 {
@@ -36,7 +37,7 @@ public class FilterFragment extends Fragment
 					long arg3)
 			{
 				((MainActivity) getActivity())
-						.goBackFromFragment(MainActivity.DISPLAY_PHOTO);
+						.goBackFromFragment(Constants.Settings.DISPLAY_PHOTO);
 			}
 		});
 		list.setOnTouchListener(new OnTouchListener() {
