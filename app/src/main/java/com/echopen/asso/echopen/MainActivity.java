@@ -26,6 +26,7 @@ import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.CameraFragment;
 import com.echopen.asso.echopen.ui.FilterFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.File;
@@ -33,7 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
-    
+
     private int display;
 
     private MainActionController mainActionController;
@@ -159,7 +160,11 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     public void onClick(View v) {
         super.onClick(v);
+        chooseCamera(v);
+        runCamera();
+    }
 
+    private void chooseCamera(View v) {
         if (display != setting.DISPLAY_PHOTO
                 && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
             display = setting.DISPLAY_PHOTO;
@@ -196,100 +201,38 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
     }
 
-    protected DialogInterface.OnClickListener mDialogListener =
-            new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    switch (which) {
-                        case 0:
-                            Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                            uri = getFileUri(setting.MEDIA_TYPE_IMAGE);
-                            if (uri == null)
-                                getErrorStorageMessage();
-                            else {
-                                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                                startActivityForResult(photoIntent, setting.TAKE_PHOTO);
-                            }
-                            break;
-                        case 1:
-                            Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-                            uri = getFileUri(setting.MEDIA_TYPE_VIDEO);
-                            if (uri == null)
-                                getErrorStorageMessage();
-                            else {
-                                videoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                                videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
-                                videoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0); // 0 = lowest res
-                                startActivityForResult(videoIntent, setting.TAKE_VIDEO_REQUEST);
-                            }
-                            break;
-                        case 2:
-                            //
-                        case 3:
-                            //
-                    }
-                }
-
-                private void getErrorStorageMessage() {
-                    Toast.makeText(MainActivity.this, R.string.external_storage_error,
-                            Toast.LENGTH_LONG).show();
-                }
-
-                private Uri getFileUri(int mediaType) {
-                    if (isExternalStorageAvailable()) {
-                        String appName = MainActivity.this.getString(R.string.app_name);
-                        File mediaStorageDir = new File(
-                                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
-                                appName);
-                        if (! mediaStorageDir.exists()) {
-                            if (! mediaStorageDir.mkdirs()) {
-                                Log.e("TAGGY", "Failed to create directory.");
-                                return null;
-                            }
-                        }
-                        File mediaFile;
-                        Date now = new Date();
-                        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Constants.Internationalization.locale_country).format(now);
-                        String path = mediaStorageDir.getPath() + File.separator;
-                        if (mediaType == setting.MEDIA_TYPE_IMAGE) {
-                            // @todo : validate .jpg extension
-                            mediaFile = new File(path + "IMG_" + timestamp + ".jpg");
-                        }
-                        else if (mediaType == setting.MEDIA_TYPE_VIDEO) {
-                            mediaFile = new File(path + "VID_" + timestamp + ".mp4");
-                        }
-                        else {
-                            return null;
-                        }
-                        Log.d("TAGGY", "File: " + Uri.fromFile(mediaFile));
-                        return Uri.fromFile(mediaFile);
-                    }
-                    else
-                        return null;
-                }
-
-                private boolean isExternalStorageAvailable() {
-                    String state = Environment.getExternalStorageState();
-                    if (state.equals(Environment.MEDIA_MOUNTED)) { return true; }
-                    else { return false; }
-                }
-            };
+    private void runCamera() {
+        if (display == setting.DISPLAY_PHOTO) {
+            Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            uri = AppHelper.getFileUri(MainActivity.this, setting.MEDIA_TYPE_IMAGE);
+            if (uri == null)
+                AppHelper.getErrorStorageMessage(MainActivity.this);
+            else {
+                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                startActivityForResult(photoIntent, setting.TAKE_PHOTO);
+            }
+        } else if (display == setting.DISPLAY_VIDEO) {
+            Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
+            uri = AppHelper.getFileUri(MainActivity.this, setting.MEDIA_TYPE_VIDEO);
+            if (uri == null)
+                AppHelper.getErrorStorageMessage(MainActivity.this);
+            else {
+                videoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+                videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
+                videoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0); // 0 = lowest res
+                startActivityForResult(videoIntent, setting.TAKE_VIDEO_REQUEST);
+            }
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == R.id.btnCapture) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setItems(R.array.choose_camera, mDialogListener);
-                AlertDialog dialog = builder.create();
-                dialog.show();
-        }
         return true;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        startActivity(new Intent(this, Share.class));
+        startActivity(new Intent(this, MainActivity.class));
     }
 }

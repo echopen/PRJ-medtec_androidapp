@@ -63,7 +63,6 @@ public class CameraFragment extends Fragment
 		for (int i = 0; i < mNumberOfCameras; i++)
 		{
 			Camera.getCameraInfo(i, cameraInfo);
-			Log.d("TAGGY", cameraInfo.toString());
 			if (cameraInfo.facing == CameraInfo.CAMERA_FACING_BACK)
 			{
 				mCurrentCamera = mDefaultCameraId = i;

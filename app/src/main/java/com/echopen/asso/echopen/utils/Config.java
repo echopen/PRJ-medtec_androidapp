@@ -15,7 +15,7 @@ public class Config {
       }
       return config;
     }
-    
+
     public String getState() {
         return state;
     }

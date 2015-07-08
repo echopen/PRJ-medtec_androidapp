@@ -27,10 +27,6 @@ public class Share extends CustomActivity
     {
         setTouchNClick(R.id.btnDownload);
         setTouchNClick(R.id.btnShare);
-        setTouchNClick(R.id.tabFb);
-        setTouchNClick(R.id.tabTw);
-        setTouchNClick(R.id.tabMail);
-        setTouchNClick(R.id.tabIg);
 
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));
@@ -45,9 +41,7 @@ public class Share extends CustomActivity
         {
             finish();
         }
-        else if (v.getId() == R.id.btnShare || v.getId() == R.id.tabFb
-                || v.getId() == R.id.tabTw || v.getId() == R.id.tabIg
-                || v.getId() == R.id.tabMail)
+        else if (v.getId() == R.id.btnShare)
         {
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("image/*");
