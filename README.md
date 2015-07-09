@@ -1,7 +1,6 @@
 # project
 Documentation and issue about echopen -- Perhaps some duplication with http://echopen.org/
 
-<<<<<< HEAD
 To drive your code, here's the MOCKUP that we have set with medical doctors, engineers and designers.  
 
 ![alt tag](http://echopen.org/images/a/ab/Echopen_MockUp_1.png)
