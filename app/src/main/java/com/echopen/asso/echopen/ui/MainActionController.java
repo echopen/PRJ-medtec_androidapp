@@ -1,7 +1,6 @@
 package com.echopen.asso.echopen.ui;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 

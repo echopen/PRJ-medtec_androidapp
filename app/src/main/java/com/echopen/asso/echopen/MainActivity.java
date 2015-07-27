@@ -29,10 +29,6 @@ import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Constants;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
     private int display;

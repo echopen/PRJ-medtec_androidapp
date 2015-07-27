@@ -37,6 +37,9 @@
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <activity
+            android:name=".custom.CustomActivity">
+        </activity>
+        <activity
             android:name="Share"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
