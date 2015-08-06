@@ -31,7 +31,6 @@ public class Settings extends CustomActivity implements AbstractActionActivity
 
     private SettingActionController settingActionController;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

@@ -19,7 +19,6 @@ public class Share extends CustomActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.share);
-
         initViewComponents();
     }
 
@@ -27,9 +26,6 @@ public class Share extends CustomActivity
     {
         setTouchNClick(R.id.btnDownload);
         setTouchNClick(R.id.btnShare);
-
-        applyBgTheme(findViewById(R.id.vTop));
-        applyBgTheme(findViewById(R.id.vBottom));
     }
 
     @Override
@@ -47,7 +43,6 @@ public class Share extends CustomActivity
             i.setType("image/*");
             startActivity(Intent.createChooser(i, "Share via"));
         }
-
     }
 
 }

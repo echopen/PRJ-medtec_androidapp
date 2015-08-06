@@ -75,7 +75,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));
-
     }
 
     private void initSwipeViews() {
