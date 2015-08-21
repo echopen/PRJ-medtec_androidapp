@@ -5,15 +5,17 @@ package com.echopen.asso.echopen.utils;
  */
 public class Config {
 
-    private static Config config;
+    private static Config config = null;
     private String state;
     private Constants constants;
 
-    public static Config Config(){
-      if(config.getState() == null) {
-          config = new Config();
-      }
-      return config;
+    private Config(){}
+
+    public static Config getInstance() {
+        if (config == null) {
+            config = new Config();
+        }
+        return config;
     }
 
     public String getState() {
