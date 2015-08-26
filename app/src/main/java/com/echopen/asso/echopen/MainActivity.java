@@ -4,22 +4,19 @@
 package com.echopen.asso.echopen;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
-import android.widget.Toast;
 
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
@@ -28,6 +25,11 @@ import com.echopen.asso.echopen.ui.FilterFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Constants;
+
+import boofcv.android.ConvertBitmap;
+import boofcv.io.image.UtilImageIO;
+import boofcv.struct.image.ImageUInt8;
+
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 

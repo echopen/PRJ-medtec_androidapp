@@ -10,7 +10,6 @@ import android.view.View.OnClickListener;
 import android.view.WindowManager;
 
 import com.echopen.asso.echopen.R;
-import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.TouchEffect;
 
 /**
