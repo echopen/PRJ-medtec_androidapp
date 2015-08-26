@@ -75,7 +75,6 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
 
     public View setTouchNClick(int id)
     {
-
         View v = setClick(id);
         v.setOnTouchListener(TOUCH);
         return v;
@@ -84,7 +83,6 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
 
     public View setClick(int id)
     {
-
         View v = findViewById(id);
         v.setOnClickListener(this);
         return v;

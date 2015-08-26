@@ -12,6 +12,13 @@
         android:layout_height="match_parent"
         android:clickable="true"
         />
+    <LinearLayout
+        android:id="@+id/vMiddle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/echo_image"
+        android:orientation="vertical" >
+    </LinearLayout>
 <LinearLayout
         android:id="@+id/vTop"
         android:layout_width="match_parent"

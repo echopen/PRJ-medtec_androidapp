@@ -4,6 +4,9 @@
 package com.echopen.asso.echopen;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -21,14 +24,12 @@ import android.view.View.OnTouchListener;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.CameraFragment;
+import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.FilterFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Constants;
 
-import boofcv.android.ConvertBitmap;
-import boofcv.io.image.UtilImageIO;
-import boofcv.struct.image.ImageUInt8;
 
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
@@ -75,8 +76,22 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setClick(R.id.btn4);
         setClick(R.id.btn5);
 
+        setClickToFilter(R.id.vMiddle);
+
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));
+    }
+
+    private void setClickToFilter(int mainframe) {
+        final View mainFrame = findViewById(mainframe);
+        mainFrame.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                FragmentManager manager = getFragmentManager();
+                FilterDialogFragment filterDialogFragment = new FilterDialogFragment();
+                filterDialogFragment.show(manager, "fragment_edit_name");
+            }
+
+        });
     }
 
     private void initSwipeViews() {
