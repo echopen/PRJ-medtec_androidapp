@@ -18,6 +18,20 @@ The image `img_kydney.bmp` is more realistic than `img_obs.bmp`.
 ![alt tag](http://echopen.org/images/e/e1/Image_kydney.png)
 ![alt tag](http://echopen.org/images/0/0a/Image_obs.png)
 
+### Image Processing *this is exploratory*
+
+EchOpen will rely on `BoofCV` library as main image processing tool. It is pure `JAVA` libraries, contrary to the well-known `OpenCV`, which is `c/c++` library. 
+
+As specified in the `BoofCV` doc, one have to turn the images - say for instance bitmap image - in `ImageUInt8` class in order to use simply `BoofCV`
+
+```
+File image = new File($ultrasound_file);
+Bitmap bitmap = BitmapFactory.decodeFile(image.getAbsolutePath());
+ImageUInt8 boofcv_image = ConvertBitmap.bitmapToGray(bitmap, (ImageUInt8) null, null);
+```
+
+for those interested, here's a [link](http://boofcv.org/index.php?title=Performance:OpenCV:BoofCV) to find OpenCV vs. BoofCV performance benchmark. As said there, `OpenCV` seems better on low level operations but `BoofCV` seems better on most of high level operations. 
+
 ## Documentation and Issues
 
 Documentation and issue about echopen -- Perhaps some duplication with http://echopen.org/
