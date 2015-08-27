@@ -42,6 +42,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+
         initSwipeViews();
         initViewComponents();
         initActionController();
