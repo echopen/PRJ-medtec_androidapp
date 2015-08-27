@@ -4,11 +4,18 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.filters.WaveletDenoise;
 
 import java.util.ArrayList;
+
+import boofcv.android.ConvertBitmap;
+import boofcv.struct.image.ImageFloat32;
 
 /**
  * Created by mehdibenchoufi on 26/08/15.
@@ -37,6 +44,11 @@ public class FilterDialogFragment extends DialogFragment {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 // todo : to be completed filters in action
+                ImageView image = (ImageView) getActivity().findViewById(R.id.echo);
+                WaveletDenoise waveletDenoise = new WaveletDenoise(image);
+                waveletDenoise.denoise();
+                Bitmap bitmap = waveletDenoise.getBitmap();
+                image.setImageBitmap(bitmap);
             }
         })
                 .setNegativeButton(getResources().getString(R.string.cancel_dialog), new DialogInterface.OnClickListener() {

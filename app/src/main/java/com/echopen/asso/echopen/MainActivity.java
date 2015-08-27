@@ -6,8 +6,6 @@ package com.echopen.asso.echopen;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -27,12 +25,6 @@ import com.echopen.asso.echopen.ui.FilterFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Constants;
-
-import java.io.File;
-
-import boofcv.android.ConvertBitmap;
-import boofcv.struct.image.ImageUInt8;
-
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 

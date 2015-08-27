@@ -100,15 +100,11 @@
     <orderEntry type="library" exported="" name="CWAC-SackOfViewsAdapter" level="project" />
     <orderEntry type="library" exported="" name="geo-0.18" level="project" />
     <orderEntry type="library" exported="" name="dagger-1.1.0" level="project" />
-    <orderEntry type="library" exported="" name="xpp3_min-1.1.4c" level="project" />
     <orderEntry type="library" exported="" name="commons-io-2.0.1" level="project" />
-    <orderEntry type="library" exported="" name="io-0.18" level="project" />
     <orderEntry type="library" exported="" name="android-0.18" level="project" />
     <orderEntry type="library" exported="" name="core-0.26" level="project" />
-    <orderEntry type="library" exported="" name="xstream-1.4.7" level="project" />
     <orderEntry type="library" exported="" name="javax.inject-1" level="project" />
-    <orderEntry type="library" exported="" name="ddogleg-0.6" level="project" />
     <orderEntry type="library" exported="" name="ip-0.18" level="project" />
-    <orderEntry type="library" exported="" name="xmlpull-1.1.3.1" level="project" />
+    <orderEntry type="library" exported="" name="ddogleg-0.6" level="project" />
   </component>
 </module>

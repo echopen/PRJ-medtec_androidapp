@@ -2,29 +2,33 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    
+    android:orientation="vertical">
 
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true"
-        />
+        android:clickable="true" />
+
     <LinearLayout
         android:id="@+id/vMiddle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/echo_image"
-        android:orientation="vertical" >
+        android:background="@drawable/theme_blue"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/echo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/echo_image" />
     </LinearLayout>
-<LinearLayout
+    <LinearLayout
         android:id="@+id/vTop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/theme_blue"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <ImageButton
             android:id="@+id/tabSetting"
@@ -47,6 +51,7 @@
             android:layout_weight="1"
             android:background="@drawable/btn_tab"
             android:src="@drawable/ic_brightness" />
+
         <View
             android:id="@+id/view2"
             style="@style/divider_blue"
@@ -69,11 +74,12 @@
             android:background="@drawable/btn_tab"
             android:src="@drawable/ic_grid"
             android:visibility="gone" />
+
         <View
             android:id="@+id/view3"
             style="@style/divider_blue"
             android:layout_width="1dp"
-            android:layout_height="match_parent" />  
+            android:layout_height="match_parent" />
 
         <ImageButton
             android:id="@+id/tabSuffle"
@@ -83,20 +89,21 @@
             android:background="@drawable/btn_tab"
             android:src="@drawable/ic_suffle" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/vBottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:background="@color/theme_blue"
         android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_alignParentBottom="true" >
+        android:padding="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="bottom|center_horizontal"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/btn1"
@@ -143,7 +150,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:gravity="center" >
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/btnPic"
