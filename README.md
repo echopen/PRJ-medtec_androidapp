@@ -22,7 +22,7 @@ The image `img_kydney.bmp` is more realistic than `img_obs.bmp`.
 
 EchOpen will rely on `BoofCV` library as main image processing tool. It is pure `JAVA` libraries, contrary to the well-known `OpenCV`, which is `c/c++` library. 
 
-As specified in the `BoofCV` doc, one have to turn the images - say for instance bitmap image - in `ImageUInt8` class in order to use simply `BoofCV`
+As specified in the `BoofCV` doc, one have to turn the images - say for instance bitmap image - in `ImageUInt8` or `ImageFloat32` class in order to use simply `BoofCV`
 
 ```
 File image = new File($ultrasound_file);
@@ -31,6 +31,16 @@ ImageUInt8 boofcv_image = ConvertBitmap.bitmapToGray(bitmap, (ImageUInt8) null, 
 ```
 
 for those interested, here's a [link](http://boofcv.org/index.php?title=Performance:OpenCV:BoofCV) to find OpenCV vs. BoofCV performance benchmark. As said there, `OpenCV` seems better on low level operations but `BoofCV` seems better on most of high level operations. 
+
+The client does not worry about `BootCV` Images class, they are instanciated from `BaseImage`. Then client throws to image processor class an `ImageView` and gets backs a `BitMap` class. Any filter must inherit from `BaseProcess`. For instance, the app implements this kind of code corresponding to a wavelette denoising treatment. 
+
+```
+WaveletDenoise waveletDenoise = new WaveletDenoise(image);
+waveletDenoise.denoise();
+bitmap = waveletDenoise.getBitmap();
+```
+
+Processing can take a long time. It is recommended to wrap it in an `AsyncTask` !
 
 ## Documentation and Issues
 
