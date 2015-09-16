@@ -8,6 +8,8 @@ import java.util.Locale;
  * Imported from the Donnfelker Android Bootstrap
  */
 public class Constants {
+
+    /* Some systematic constants - To be used later if we need login system */
     public static class Auth {
         private Auth() {}
 
@@ -67,9 +69,41 @@ public class Constants {
         public static final int FILE_SIZE_LIMIT = 1024*1024*10;
     }
 
+    public static class PreProcParam{
+        /** todo define the pre-processing params -
+        largest number of pixels in x-direction -
+        largest number of pixels in y-direction -
+         number of weight coefficients
+        **/
+        public static final int N_x = 1024;
+
+        public static final int N_y = 1024;
+
+        public static final int NUM_LINES = 128;
+
+        public static final int NUM_SAMPLES = 128;
+
+        public static final int NUM_IMG_DATA = 128;
+
+        public static final int RADIAL_IMG_INIT = 0;
+
+        public static final int RADIAL_DATA_INIT = 0;
+
+        public static final int ANGLE_INIT = 0;
+
+        public static final int STEP_ANGLE_INIT = 0;
+
+        public static final int STEP_RADIAL_INIT = 0;
+
+        public static final int IMAGE_SIZE = 0;
+
+        public static final int SCALE_FACTOR = 0;
+    }
+
     public static class Internationalization{
         public static final Locale locale_country = Locale.FRANCE;
     }
+
     public static class ParseConstants {
         private ParseConstants() {}
     }
