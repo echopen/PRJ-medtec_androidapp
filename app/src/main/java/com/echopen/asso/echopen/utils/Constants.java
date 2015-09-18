@@ -100,6 +100,10 @@ public class Constants {
         public static final int SCALE_FACTOR = 0;
     }
 
+    public static class JNI_SETTINGS{
+        public static final String LOCAL_MODULE = "com.echopen.asso.echopen";
+    }
+
     public static class Internationalization{
         public static final Locale locale_country = Locale.FRANCE;
     }

@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
@@ -38,6 +39,12 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     protected Uri uri;
 
+    public native String  stringFromJNI();
+
+    static {
+        System.loadLibrary(Constants.JNI_SETTINGS.LOCAL_MODULE);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +55,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initViewComponents();
         initActionController();
         setupContainer();
+        Log.d("TAGGY", stringFromJNI());
     }
 
     public void initActionController() {

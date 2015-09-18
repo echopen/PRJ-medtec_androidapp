@@ -11,11 +11,11 @@ public class ScanConversion {
 
     private int numWeightPixels;
 
-    private ArrayList<Integer> weight = new ArrayList<>(numWeightPixels);
+    private ArrayList<Integer> weight = new ArrayList<Integer>(numWeightPixels);
 
-    private ArrayList<Integer> indexData = new ArrayList<>(numPixels);
+    private ArrayList<Integer> indexData = new ArrayList<Integer>(numPixels);
 
-    private ArrayList<Integer> indexImg = new ArrayList<>(numPixels);
+    private ArrayList<Integer> indexImg = new ArrayList<Integer>(numPixels);
 
     public int getNumPixels() {
         return numPixels;
