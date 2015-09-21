@@ -75,29 +75,35 @@ public class Constants {
         largest number of pixels in y-direction -
          number of weight coefficients
         **/
-        public static final int N_x = 1024;
+        public static final int SPEED_OF_SOUND = 1540;
 
-        public static final int N_y = 1024;
+        public static final int SAMPLING_FREQUENCY = (int) Math.pow(100,5);
+
+        public static final int N_x = 512;
+
+        public static final int N_z = 512;
 
         public static final int NUM_LINES = 128;
 
-        public static final int NUM_SAMPLES = 128;
+        public static final double IMAGE_SIZE = 0.105;
+
+        public static final int IMAGE_WIDTH = (int) Math.round((90/180*Math.PI));
+
+        public static final int NUM_SAMPLES = 1672;
 
         public static final int NUM_IMG_DATA = 128;
 
-        public static final int RADIAL_IMG_INIT = 0;
+        public static final double RADIAL_IMG_INIT = 0.02;
 
-        public static final int RADIAL_DATA_INIT = 0;
+        public static final int RADIAL_DATA_INIT = SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
 
         public static final int ANGLE_INIT = 0;
 
-        public static final int STEP_ANGLE_INIT = 0;
+        public static final float STEP_ANGLE_INIT = (int) Math.round(IMAGE_WIDTH/NUM_LINES);
 
-        public static final int STEP_RADIAL_INIT = 0;
+        public static final int STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
 
-        public static final int IMAGE_SIZE = 0;
-
-        public static final int SCALE_FACTOR = 0;
+        public static final int SCALE_FACTOR = 1;
     }
 
     public static class JNI_SETTINGS{

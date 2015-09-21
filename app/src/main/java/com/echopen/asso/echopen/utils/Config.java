@@ -10,7 +10,7 @@ import android.view.WindowManager;
  */
 public class Config {
 
-    private static Config config = null;
+    public static Config config = null;
 
     private static Context context;
 

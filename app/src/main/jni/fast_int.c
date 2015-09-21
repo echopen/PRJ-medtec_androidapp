@@ -330,5 +330,6 @@ void mexFunction(int  nlhs,         mxArray  *plhs[],
 }
 
 void Java_com_echopen_asso_echopen_fast_int_MainActivity_frameFromJNI( JNIEnv* env,
-                                                       jobject thiz ){
+                                                       jobject thiz,  ){
+
                                                        }
