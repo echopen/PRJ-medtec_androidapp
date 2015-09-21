@@ -66,18 +66,17 @@ public class ScanConversion {
 
     private void make_tables(){
 
-        start_depth = Constants.PreProcParam.RADIAL_IMG_INIT;
-        D=floor(Constants.PreProcParam.NUM_SAMPLES/1024);
-        Constants.PreProcParam.NUM_SAMPLES/D
+        /*start_depth = Constants.PreProcParam.RADIAL_IMG_INIT;
+        D = floor(Constants.PreProcParam.NUM_SAMPLES / 1024);
+        Constants.PreProcParam.NUM_SAMPLES / D
         start_of_data = delta_r;
         delta_r * D = Constants.PreProcParam.STEP_RADIAL_INIT;
         dtheta = Constants.PreProcParam.STEP_ANGLE_INIT;
-        theta_start = -no_lines/2*dtheta;
+        theta_start = -no_lines / 2 * dtheta;
         no_lines = Constants.PreProcParam.NUM_LINES;
         scaling = Constants.PreProcParam.SCALE_FACTOR;
         Nx = Constants.PreProcParam.N_x;
-        Nz = Constants.PreProcParam.N_z;
-
+        Nz = Constants.PreProcParam.N_z;*/
     };
 
 
