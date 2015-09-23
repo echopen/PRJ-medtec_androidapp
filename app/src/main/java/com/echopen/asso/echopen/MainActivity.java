@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.CameraFragment;
@@ -36,8 +37,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     protected Uri uri;
 
-    public native String  stringFromJNI();
-
     static {
         System.loadLibrary(Constants.JNI_SETTINGS.LOCAL_MODULE);
     }
@@ -52,7 +51,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initViewComponents();
         initActionController();
         setupContainer();
-        Log.d("TAGGY", stringFromJNI());
+        ScanConversion scanConversion = new ScanConversion(0);
+        scanConversion.make_tables();
     }
 
     public void initActionController() {

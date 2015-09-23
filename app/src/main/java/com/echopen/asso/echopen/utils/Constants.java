@@ -85,7 +85,7 @@ public class Constants {
 
         public static final int NUM_LINES = 128;
 
-        public static final double IMAGE_SIZE = 0.105;
+        public static final float IMAGE_SIZE = (float) 0.105;
 
         public static final int IMAGE_WIDTH = (int) Math.round((90/180*Math.PI));
 
@@ -95,7 +95,7 @@ public class Constants {
 
         public static final double RADIAL_IMG_INIT = 0.02;
 
-        public static final int RADIAL_DATA_INIT = SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
+        public static final int RADIAL_DATA_INIT = (int) SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
 
         public static final int ANGLE_INIT = 0;
 
@@ -104,6 +104,29 @@ public class Constants {
         public static final int STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
 
         public static final int SCALE_FACTOR = 1;
+
+        public static int[] getLoadIntegerConstants() {
+            int[] int_constants = new int[4];
+            int_constants[0] = PreProcParam.NUM_LINES;
+            int_constants[1] = PreProcParam.SCALE_FACTOR;
+            int_constants[2] = PreProcParam.N_z;
+            int_constants[3] = PreProcParam.N_x;
+            return int_constants;
+        }
+
+        public static float[] getLoadFloatConstants() {
+            float[] float_constants = new float[8];
+            float_constants[0] = (float) PreProcParam.RADIAL_IMG_INIT;
+            float_constants[1] = PreProcParam.IMAGE_SIZE;
+            float_constants[2] = PreProcParam.STEP_RADIAL_INIT;
+            float_constants[3] = (float) (PreProcParam.RADIAL_DATA_INIT * Math.floor(PreProcParam.NUM_SAMPLES / 1024));
+            float_constants[4] = (float)  Math.floor(PreProcParam.NUM_SAMPLES / 1024);
+            float_constants[5] = PreProcParam.NUM_LINES/ 2 *float_constants[0];
+            float_constants[6] = - PreProcParam.STEP_ANGLE_INIT;
+            float_constants[7] = PreProcParam.NUM_LINES;
+
+            return float_constants;
+        }
     }
 
     public static class JNI_SETTINGS{

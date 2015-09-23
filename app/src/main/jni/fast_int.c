@@ -43,10 +43,6 @@
 #include <ctype.h>
 #include <jni.h>
 
-/*  Include typedefinitions for the mex file            */
-
-#include "mex.h"
-
 /*------------------------------------------------------------*/
 /*  Define various data type, so that they are the same for   */
 /*  different compilers and machines.                         */
@@ -237,54 +233,54 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
 /*--------------------------------------------------------------------------*/
 
 
-void mexFunction(int  nlhs,         mxArray  *plhs[],
+/*void mexFunction(int  nlhs,         mxArray  *plhs[],
                  int  nrhs,   const mxArray  *prhs[])
 
-{int main_code;    /*  Code for the module called   */
-    /*   1 - Table definition        */
-    /*   2 - Image interpolation     */
+{int main_code;    *//*  Code for the module called   *//*
+    *//*   1 - Table definition        *//*
+    *//*   2 - Image interpolation     *//*
 
-    unsigned char *envelope_data;  /*  Pointer to the envelope detected and log-compressed data */
-    int           dimension[2];    /*  Dimension of the resulting array                         */
+    unsigned char *envelope_data;  *//*  Pointer to the envelope detected and log-compressed data *//*
+    int           dimension[2];    *//*  Dimension of the resulting array                         *//*
 
-    /* Check for proper number of arguments */
+    *//* Check for proper number of arguments *//*
 
     if (nrhs == 0)
         mexErrMsgTxt("Error 1: Illegal calling of the fast_int mex-code");
 
-    /*  Get the function code and the main code   */
+    *//*  Get the function code and the main code   *//*
 
     main_code = floor(mxGetScalar (prhs[0]) + 0.5);
 
-    /*  Branch out to the different modules         */
+    *//*  Branch out to the different modules         *//*
 
     switch (main_code)
     {
-        /*   Make the tables for image interpolation  */
+        *//*   Make the tables for image interpolation  *//*
         case 1:{
             if ((nrhs<2) && (nlhs<1))
                 mexErrMsgTxt("Error 5: Too few input parameters to make interpolation tables");
             else
             {
 
-                /*  Decode the variables for the table  */
+                *//*  Decode the variables for the table  *//*
 
-                start_depth = mxGetScalar (prhs[1]);            /*  Depth for start of image in meters    */
-                image_size = mxGetScalar (prhs[2]);             /*  Size of image in meters               */
+                start_depth = mxGetScalar (prhs[1]);            *//*  Depth for start of image in meters    *//*
+                image_size = mxGetScalar (prhs[2]);             *//*  Size of image in meters               *//*
 
-                start_of_data = mxGetScalar (prhs[3]);          /*  Depth for start of data in meters     */
-                delta_r = mxGetScalar (prhs[4]);                /*  Sampling interval for data in meters  */
-                N_samples = floor(mxGetScalar (prhs[5]) + 0.5); /*  Number of samples in one envelope line*/
+                start_of_data = mxGetScalar (prhs[3]);          *//*  Depth for start of data in meters     *//*
+                delta_r = mxGetScalar (prhs[4]);                *//*  Sampling interval for data in meters  *//*
+                N_samples = floor(mxGetScalar (prhs[5]) + 0.5); *//*  Number of samples in one envelope line*//*
 
-                theta_start = mxGetScalar (prhs[6]);            /*  Angle for first line in image         */
-                delta_theta = mxGetScalar (prhs[7]);            /*  Angle between individual lines        */
-                N_lines = floor(mxGetScalar (prhs[8]) + 0.5);   /*  Number of acquired lines              */
+                theta_start = mxGetScalar (prhs[6]);            *//*  Angle for first line in image         *//*
+                delta_theta = mxGetScalar (prhs[7]);            *//*  Angle between individual lines        *//*
+                N_lines = floor(mxGetScalar (prhs[8]) + 0.5);   *//*  Number of acquired lines              *//*
 
-                scaling = mxGetScalar (prhs[9]);                /*  Scaling factor form envelope to image */
-                Nz = floor(mxGetScalar (prhs[10]) + 0.5);       /*  Size of image in pixels               */
-                Nx = floor(mxGetScalar (prhs[11]) + 0.5);       /*  Size of image in pixels               */
+                scaling = mxGetScalar (prhs[9]);                *//*  Scaling factor form envelope to image *//*
+                Nz = floor(mxGetScalar (prhs[10]) + 0.5);       *//*  Size of image in pixels               *//*
+                Nx = floor(mxGetScalar (prhs[11]) + 0.5);       *//*  Size of image in pixels               *//*
 
-                /*  Call the procedure and make the table  */
+                *//*  Call the procedure and make the table  *//*
 
                 make_tables (start_depth, image_size,
                              start_of_data, delta_r, N_samples,
@@ -297,7 +293,7 @@ void mexFunction(int  nlhs,         mxArray  *plhs[],
             break;
         }
 
-            /*   Make image interpolation                  */
+            *//*   Make image interpolation                  *//*
         case 2:{
             if (table_set_up != 1)
                 mexErrMsgTxt("Error 3: Table not set-up before calling make_interpolation, call make_tables first.");
@@ -306,11 +302,11 @@ void mexFunction(int  nlhs,         mxArray  *plhs[],
                 mexErrMsgTxt("Error 4: Too few input and output parameters to make interpolation");
             else
             {
-                /*  Decode the variables before calling   */
+                *//*  Decode the variables before calling   *//*
 
-                envelope_data = (unsigned char *) mxGetPr (prhs[1]);      /*  The envelope detected and log-compressed data */
+                envelope_data = (unsigned char *) mxGetPr (prhs[1]);      *//*  The envelope detected and log-compressed data *//*
 
-                /*  Create the array that should hold the output image  */
+                *//*  Create the array that should hold the output image  *//*
 
                 dimension[0]=Nz;
                 dimension[1]=Nx;
@@ -327,9 +323,18 @@ void mexFunction(int  nlhs,         mxArray  *plhs[],
         }
     }
     return;
+}*/
+
+JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_frameFromJNI
+( JNIEnv* env,jobject thiz, jintArray int_constants_arr, jcharArray char_constants_arr, jbyteArray data){
+    jbyte *byte_array = (*env)->GetByteArrayElements(env, data, NULL);
+    jint *int_array;
+    jchar *char_array;
+
+    int_array = (*env)->GetIntArrayElements(env, int_constants_arr, NULL);
+    char_array = (*env)->GetCharArrayElements(env, char_constants_arr, NULL);
+
+    (*env)->ReleaseByteArrayElements(env, data, byte_array, 0);
+    (*env)->ReleaseIntArrayElements(env, int_constants_arr, int_array, 0);
+    (*env)->ReleaseCharArrayElements(env, char_constants_arr, char_array, 0);
 }
-
-void Java_com_echopen_asso_echopen_fast_int_MainActivity_frameFromJNI( JNIEnv* env,
-                                                       jobject thiz,  ){
-
-                                                       }
