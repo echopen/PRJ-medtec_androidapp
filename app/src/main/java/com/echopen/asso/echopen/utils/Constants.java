@@ -72,37 +72,52 @@ public class Constants {
     public static class PreProcParam{
         /** todo define the pre-processing params -
         largest number of pixels in x-direction -
-        largest number of pixels in y-direction -
+        largest number of pixels in z-direction -
          number of weight coefficients
         **/
+        /* speed of sound in m.s^{—1} */
         public static final int SPEED_OF_SOUND = 1540;
 
+        /* sampling frequency in Hz */
         public static final int SAMPLING_FREQUENCY = (int) Math.pow(100,5);
 
+        /* no dimension param */
         public static final int N_x = 512;
 
+        /* no dimension param */
         public static final int N_z = 512;
 
+        /* no dimension param */
         public static final int NUM_LINES = 128;
 
+        /* size of image in m (meters)*/
         public static final float IMAGE_SIZE = (float) 0.105;
 
+        /* image width in rad */
         public static final int IMAGE_WIDTH = (int) Math.round((90/180*Math.PI));
 
+        /* no dimension param */
         public static final int NUM_SAMPLES = 1672;
 
+        /* no dimension param */
         public static final int NUM_IMG_DATA = 128;
 
+        /* depth for start of image in m (meters) */
         public static final double RADIAL_IMG_INIT = 0.02;
 
+        /* depth for start of data in m (meters) */
         public static final int RADIAL_DATA_INIT = (int) SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
 
+        /* angle init in rad */
         public static final int ANGLE_INIT = 0;
 
+        /* no dimension param */
         public static final float STEP_ANGLE_INIT = (int) Math.round(IMAGE_WIDTH/NUM_LINES);
 
+        /* sampling interval for data in m (meters)*/
         public static final int STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
 
+        /* no dimension param */
         public static final int SCALE_FACTOR = 1;
 
         public static int[] getLoadIntegerConstants() {

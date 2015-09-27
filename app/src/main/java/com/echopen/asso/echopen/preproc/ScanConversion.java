@@ -203,22 +203,22 @@ public class ScanConversion {
     }
 
     public void compute_tables() {
-		double start_depth = PreProcParam.RADIAL_IMG_INIT; /*  Depth for start of image in meters    */
-		double image_size = PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
+		double start_depth = Constants.PreProcParam.RADIAL_IMG_INIT; /*  Depth for start of image in meters    */
+		double image_size = Constants.PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
 
-		double start_of_data = PreProcParam.STEP_RADIAL_INIT;   /*  Depth for start of data in meters     */
-		double delta_r = PreProcParam.RADIAL_DATA_INIT * Math.floor(PreProcParam.NUM_SAMPLES / 1024; /*  Sampling interval for data in meters  */
-		int N_samples  = Math.floor(PreProcParam.NUM_SAMPLES / 1024);       /*  Number of data samples                */
+		double start_of_data = Constants.PreProcParam.STEP_RADIAL_INIT;   /*  Depth for start of data in meters     */
+		double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT * Math.floor(Constants.PreProcParam.NUM_SAMPLES / 1024; /*  Sampling interval for data in meters  */
+		int N_samples  = (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES / 1024);       /*  Number of data samples                */
 
-		double theta_start = PreProcParam.NUM_LINES/ 2 * start_depth;     /*  Angle for first line in image         */
-		double delta_theta = - PreProcParam.STEP_ANGLE_INIT; /*  Angle between individual lines        */
-		int N_lines = PreProcParam.NUM_LINES;         /*  Number of acquired lines              */
+		double theta_start = Constants.PreProcParam.NUM_LINES/ 2 * start_depth;     /*  Angle for first line in image         */
+		double delta_theta = - Constants.PreProcParam.STEP_ANGLE_INIT; /*  Angle between individual lines        */
+		int N_lines = Constants.PreProcParam.NUM_LINES;         /*  Number of acquired lines              */
 
-		double scaling = PreProcParam.SCALE_FACTOR;         /*  Scaling factor form envelope to image */
-		int Nz = PreProcParam.N_z;              /*  Size of image in pixels               */
-		int Nx = PreProcParam.N_x;              /*  Size of image in pixels               */
+		double scaling = Constants.PreProcParam.SCALE_FACTOR;         /*  Scaling factor form envelope to image */
+		int Nz = Constants.PreProcParam.N_z;              /*  Size of image in pixels               */
+		int Nx = Constants.PreProcParam.N_x;              /*  Size of image in pixels               */
 
-		const int Ncoef_max = 4;
+		int Ncoef_max = 4;
 		double weight_coef[Nz * Nx * Ncoef_max];    /*  The weight table                      */
 		int index_samp_line[Nz * Nx];/*  Index for the data sample number      */
 		int image_index[Nz * Nx];
