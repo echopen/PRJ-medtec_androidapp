@@ -7,8 +7,6 @@ wiki](http://echopen.org)
 
 ## Licence
 
-...
-
 
 ## Documentation
 
@@ -18,9 +16,15 @@ wiki](http://echopen.org)
 
 ## How to contribute
 
+Report a bug, ask for features, for all of this, we use [Github issues](https://github.com/echopen/android-app/issues)
+
+You can clone the projet, add something or fix a bug and make a pull request. We
+try to read them quick as possible.
 
 ## Authors
 
+* benchoufi33
+* loic-fejoz
 
 ## Contact
 
