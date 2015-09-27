@@ -51,8 +51,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initViewComponents();
         initActionController();
         setupContainer();
-        ScanConversion scanConversion = new ScanConversion(0);
-        scanConversion.make_tables();
     }
 
     public void initActionController() {

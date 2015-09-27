@@ -207,7 +207,7 @@ public class ScanConversion {
 		double image_size = Constants.PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
 
 		double start_of_data = Constants.PreProcParam.STEP_RADIAL_INIT;   /*  Depth for start of data in meters     */
-		double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT * Math.floor(Constants.PreProcParam.NUM_SAMPLES / 1024; /*  Sampling interval for data in meters  */
+		double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT * Math.floor(Constants.PreProcParam.NUM_SAMPLES / 1024); /*  Sampling interval for data in meters  */
 		int N_samples  = (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES / 1024);       /*  Number of data samples                */
 
 		double theta_start = Constants.PreProcParam.NUM_LINES/ 2 * start_depth;     /*  Angle for first line in image         */
@@ -218,12 +218,12 @@ public class ScanConversion {
 		int Nz = Constants.PreProcParam.N_z;              /*  Size of image in pixels               */
 		int Nx = Constants.PreProcParam.N_x;              /*  Size of image in pixels               */
 
-		int Ncoef_max = 4;
-		double weight_coef[Nz * Nx * Ncoef_max];    /*  The weight table                      */
-		int index_samp_line[Nz * Nx];/*  Index for the data sample number      */
+		/*int Ncoef_max = 4;
+		double weight_coef[Nz * Nx * Ncoef_max];    *//*  The weight table                      *//*
+		int index_samp_line[Nz * Nx];*//*  Index for the data sample number      *//*
 		int image_index[Nz * Nx];
 		make_tables(start_depth, image_size, start_of_data, delta_r, N_samples, theta_start, delta_theta, N_lines, scaling, Nz, Nx, weight_coef, index_samp_line, image_index);
-		// TODO convert arrays to fields.
+		// TODO convert arrays to fields.*/
     }
 
     public void compute_interpolation() {
