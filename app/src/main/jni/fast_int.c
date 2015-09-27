@@ -200,7 +200,7 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
 
                          unsigned char *image)            /*  The resulting image                           */
 
-{int           i;                 /*  Integer loop counter                */
+{   int           i;                 /*  Integer loop counter                */
     int           ij_index_coef;     /*  Index into coefficient array        */
     unsigned char *env_pointer;      /*  Pointer to the envelope data        */
     float         *weight_pointer;   /*  Pointer to the weight coefficients  */
@@ -326,15 +326,15 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
 }*/
 
 JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_frameFromJNI
-( JNIEnv* env,jobject thiz, jintArray int_constants_arr, jcharArray char_constants_arr, jbyteArray data){
+( JNIEnv* env,jobject thiz, jintArray int_constants_arr, jfloatArray float_constants_arr, jbyteArray data){
     jbyte *byte_array = (*env)->GetByteArrayElements(env, data, NULL);
     jint *int_array;
-    jchar *char_array;
+    jfloat *float_array;
 
     int_array = (*env)->GetIntArrayElements(env, int_constants_arr, NULL);
-    char_array = (*env)->GetCharArrayElements(env, char_constants_arr, NULL);
+    float_array = (*env)->GetFloatArrayElements(env, float_constants_arr, NULL);
 
     (*env)->ReleaseByteArrayElements(env, data, byte_array, 0);
     (*env)->ReleaseIntArrayElements(env, int_constants_arr, int_array, 0);
-    (*env)->ReleaseCharArrayElements(env, char_constants_arr, char_array, 0);
+    (*env)->ReleaseFloatArrayElements(env, float_constants_arr, float_array, 0);
 }
