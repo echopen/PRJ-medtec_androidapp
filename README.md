@@ -18,6 +18,10 @@ The image `img_kydney.bmp` is more realistic than `img_obs.bmp`.
 ![alt tag](http://echopen.org/images/e/e1/Image_kydney.png)
 ![alt tag](http://echopen.org/images/0/0a/Image_obs.png)
 
+
+`phantom/img_kydney.txt` and `phantom/img_obs.txt` corresponds to the raw signal that needs to be filtered. They serve as basis for the envelope detection from which pixels intensity are deduced. ** The resulting pixel file sits in `data_kydney.csv`**
+
+
 ### Image Processing *this is exploratory*
 
 EchOpen will rely on `BoofCV` library as main image processing tool. It is pure `JAVA` libraries, contrary to the well-known `OpenCV`, which is `c/c++` library. 
