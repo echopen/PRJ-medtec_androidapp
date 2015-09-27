@@ -29,6 +29,10 @@ try to read them quick as possible.
 
 ## Contact
 
+* Twitter [@echopenorg](http://twitter.com/echopenorg)
+* Facebook [Echopen](https://www.facebook.com/groups/599174686826294/)
+* Email [contact@echopen.org](mailto:contact@echopen.org)
+
 
 ## Challenges and To Dos
 
