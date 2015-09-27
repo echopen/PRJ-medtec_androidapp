@@ -23,8 +23,9 @@ try to read them quick as possible.
 
 ## Authors
 
-* benchoufi33
-* loic-fejoz
+* [Benchoufi33](http://github.com/benchoufi33)
+* [Loïc Fejoz](http://github.com/loic-fejoz)
+* [Yannick](http://github.com/yaf)
 
 ## Contact
 
