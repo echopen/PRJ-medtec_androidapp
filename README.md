@@ -13,6 +13,13 @@ wiki](http://echopen.org)
 
 ## Installation (for Developers)
 
+As an android app, you need to have a java JDK installed.
+We use [Gradle](http://gradle.org/) as builder tools. You need to install it
+too.
+After, you can execute `gradle` in project directory.
+
+    It seems that we use android-sdk 19 but current android-sdk version is 24
+    now...
 
 ## How to contribute
 
