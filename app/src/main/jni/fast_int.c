@@ -1,6 +1,7 @@
 //
 // Created by mehdi Benchoufi on 16/09/15.
 //
+#include <android/log.h>
 
 #ifndef OPENGL_FAST_INT_H
 #define OPENGL_FAST_INT_H
@@ -89,7 +90,7 @@ int     Nz, Nx;                                   /*  Size of image in pixels   
 /*  Function for calculating the different weight tables for the interpolation  */
 /*------------------------------------------------------------------------------*/
 
-void  make_tables (double  start_depth,     /*  Depth for start of image in meters    */
+int  make_tables (double  start_depth,     /*  Depth for start of image in meters    */
                    double  image_size,      /*  Size of image in meters               */
 
                    double  start_of_data,   /*  Depth for start of data in meters     */
@@ -129,10 +130,10 @@ void  make_tables (double  start_depth,     /*  Depth for start of image in mete
     int     ij_index;       /*  Index into array                           */
     int     ij_index_coef;  /*  Index into coefficient array               */
 
-
     dz = image_size/Nz;
     dx = image_size/Nx;
     z = start_depth;
+
     ij_index = 0;
     ij_index_coef = 0;
 
@@ -151,6 +152,8 @@ void  make_tables (double  start_depth,     /*  Depth for start of image in mete
             line = (theta - theta_start)/delta_theta;
             index_samp = floor(samp);
             index_line = floor(line);
+
+            //__android_log_print(ANDROID_LOG_INFO, "YMohApp", "The value of i : %d j : %d is radius %f", i , j, radius);
 
             /*  Test whether the samples are outside the array        */
 
@@ -178,10 +181,9 @@ void  make_tables (double  start_depth,     /*  Depth for start of image in mete
         }
         z = z + dz;
     }
-    *N_values = ij_index;
-    printf ("Table has now been set-up, %d x %d, %d %d values\n",Nz,Nx,ij_index,*N_values);
+            __android_log_print(ANDROID_LOG_INFO, "YWWSYMohApp", "Ok %d", index_samp_line[0]);
 
-
+    return ij_index;
 }
 
 /*--------------------------------------------------------*/
@@ -196,7 +198,7 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
                          int            *index_samp_line, /*  Index for the data sample number              */
                          int            *image_index,     /*  Index for the image matrix                    */
                          float          *weight_coef,     /*  The weight table                              */
-                         int            N_values,         /*  Number of values to calculate in the image      */
+                         int            n_values,         /*  Number of values to calculate in the image      */
 
                          unsigned char *image)            /*  The resulting image                           */
 
@@ -206,17 +208,22 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
     float         *weight_pointer;   /*  Pointer to the weight coefficients  */
 
     ij_index_coef = 0;
-    for (i=0; i<N_values; i++)
+
+    for (i=0; i<n_values; i++)
     {
         weight_pointer = &(weight_coef[ij_index_coef]);
         env_pointer = &(envelope_data[index_samp_line[i]]);
+
         image[image_index[i]]
                 =         weight_pointer[0] * env_pointer[0]
                           + weight_pointer[1] * env_pointer[1]
                           + weight_pointer[2] * env_pointer[N_samples]
                           + weight_pointer[3] * env_pointer[N_samples+1] + 0.5;
+
         ij_index_coef = ij_index_coef + 4;
+        __android_log_print(ANDROID_LOG_INFO, "WWSYMohApp", "Ok 4");
     }
+    __android_log_print(ANDROID_LOG_INFO, "WWSWYMohApp", "This is all me");
 }
 
 
@@ -325,16 +332,32 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
     return;
 }*/
 
-JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_frameFromJNI
-( JNIEnv* env,jobject thiz, jintArray int_constants_arr, jfloatArray float_constants_arr, jbyteArray data){
-    jbyte *byte_array = (*env)->GetByteArrayElements(env, data, NULL);
+JNIEXPORT jcharArray JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_frameFromJNI
+( JNIEnv* env,jobject thiz, jbyteArray data, jintArray int_constants_arr, jdoubleArray double_constants_arr){
+    jbyte *byte_array;
     jint *int_array;
-    jfloat *float_array;
+    jdouble *double_array;
+    jcharArray result = (*env)->NewCharArray(env, 512*512);
+    jboolean iscopy;
+    unsigned char *image;
+    int n_values;
 
-    int_array = (*env)->GetIntArrayElements(env, int_constants_arr, NULL);
-    float_array = (*env)->GetFloatArrayElements(env, float_constants_arr, NULL);
+
+    double_array = (*env)->GetDoubleArrayElements(env, double_constants_arr, NULL);
+    byte_array = (*env)->GetByteArrayElements(env, data, &iscopy);
+    int_array = (*env)->GetIntArrayElements(env, int_constants_arr, &iscopy);
+
+    n_values = make_tables(double_array[0], double_array[1], double_array[2], double_array[3],
+    (int) double_array[4], double_array[5], double_array[6],
+     int_array[0],(double) int_array[1],int_array[2],int_array[3],
+     index_samp_line, image_index, weight_coef, N_values);
+
+     make_interpolation(byte_array, double_array[4], index_samp_line, image_index, weight_coef, n_values, image);
 
     (*env)->ReleaseByteArrayElements(env, data, byte_array, 0);
     (*env)->ReleaseIntArrayElements(env, int_constants_arr, int_array, 0);
-    (*env)->ReleaseFloatArrayElements(env, float_constants_arr, float_array, 0);
+    (*env)->ReleaseDoubleArrayElements(env, double_constants_arr, double_array, 0);
+
+    (*env)->SetIntArrayRegion(env, result, 0, 512*512, image);
+    return result;
 }

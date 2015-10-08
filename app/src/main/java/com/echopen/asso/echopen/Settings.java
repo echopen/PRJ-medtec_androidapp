@@ -98,7 +98,6 @@ public class Settings extends CustomActivity implements AbstractActionActivity
     private void getSettings()
     {
         sList = new ArrayList<Data>();
-        sList.add(new Data("Hospital Cloud Sync", "", 0));
     }
 
     private class SettingAdapter extends BaseAdapter

@@ -1,5 +1,6 @@
 /Users/mehdibenchoufi/project/app/src/main/obj/local/armeabi/objs-debug/com.echopen.asso.echopen/fast_int.o: \
  /Users/mehdibenchoufi/project/app/src/main/jni/fast_int.c \
+ /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/android/log.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/stdlib.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -33,6 +34,8 @@
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/asm/page.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/ctype.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h
+
+/Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/android/log.h:
 
 /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/stdlib.h:
 

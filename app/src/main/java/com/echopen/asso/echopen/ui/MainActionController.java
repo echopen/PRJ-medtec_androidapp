@@ -1,7 +1,9 @@
 package com.echopen.asso.echopen.ui;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
@@ -103,5 +105,10 @@ public class MainActionController extends AbstractActionController {
 
         b = (TextView) findViewById(R.id.btn5);
         b.setVisibility(View.INVISIBLE);
+    }
+
+    public void displayMainFrame(Bitmap bitmap){
+        ImageView echoImage = (ImageView) findViewById(R.id.echo);
+        echoImage.setImageBitmap(bitmap);
     }
 }

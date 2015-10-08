@@ -3,6 +3,8 @@ package com.echopen.asso.echopen;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -15,6 +17,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import com.echopen.asso.echopen.model.Data;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
@@ -25,11 +28,18 @@ import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Constants;
 
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
     private int display;
 
     private MainActionController mainActionController;
+
+    private ScanConversion scanConversion;
 
     public GestureDetector gesture;
 
@@ -44,6 +54,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
@@ -51,8 +62,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initViewComponents();
         initActionController();
         setupContainer();
-        ScanConversion scanConversion = new ScanConversion(0);
-        scanConversion.make_tables();
     }
 
     public void initActionController() {
@@ -167,6 +176,23 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             } else {
                 mainActionController.displayOtherImage();
             }
+
+            AssetManager assetManager = getResources().getAssets();
+            try {
+                InputStream inputStream = assetManager.open("data/data_kydney.csv");
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                scanConversion = new ScanConversion(inputStreamReader);
+                //scanConversion.compute_interpolation();
+
+                Data data = new Data(inputStreamReader);
+                char[] envelope_data = data.getEnvelopeData();
+                byte[] byte_envelope_data = new String(envelope_data).getBytes();
+                double[] test = scanConversion.frameFromJNI(byte_envelope_data, Constants.PreProcParam.getLoadIntegerConstants(), Constants.PreProcParam.getLoadDoubleConstants());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //Bitmap bitmap = scanConversion.getBitmap();
+            //mainActionController.displayMainFrame(bitmap);
         }
     }
 

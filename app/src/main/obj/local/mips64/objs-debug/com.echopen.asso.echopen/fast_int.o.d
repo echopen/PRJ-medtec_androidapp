@@ -1,5 +1,6 @@
 /Users/mehdibenchoufi/project/app/src/main/obj/local/mips64/objs-debug/com.echopen.asso.echopen/fast_int.o: \
  /Users/mehdibenchoufi/project/app/src/main/jni/fast_int.c \
+ /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/android/log.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/stdlib.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/sys/cdefs.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/sys/cdefs_elf.h \
@@ -33,6 +34,8 @@
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/sys/syslimits.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/ctype.h \
  /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/jni.h
+
+/Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/android/log.h:
 
 /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-mips64/usr/include/stdlib.h:
 
