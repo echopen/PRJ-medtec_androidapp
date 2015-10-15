@@ -38,6 +38,10 @@ public class Constants {
         public static final String PARSE_REST_API_KEY = "";
 
         public static final String CONTENT_TYPE_JSON = "application/json";
+
+        public static final String REDPITAYA_UDP_IP = "192.168.1.12";
+
+        public static final int REDPITAYA_UDP_PORT = 7536;
     }
 
     public static class Settings{

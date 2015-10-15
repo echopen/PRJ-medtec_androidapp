@@ -181,8 +181,6 @@ int  make_tables (double  start_depth,     /*  Depth for start of image in meter
         }
         z = z + dz;
     }
-            __android_log_print(ANDROID_LOG_INFO, "YWWSYMohApp", "Ok %d", index_samp_line[0]);
-
     return ij_index;
 }
 
@@ -202,7 +200,10 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
 
                          unsigned char *image)            /*  The resulting image                           */
 
-{   int           i;                 /*  Integer loop counter                */
+{
+    __android_log_print(ANDROID_LOG_INFO, "fYMohApp", "Ok top %d", index_samp_line[0]);
+
+    int           i;                 /*  Integer loop counter                */
     int           ij_index_coef;     /*  Index into coefficient array        */
     unsigned char *env_pointer;      /*  Pointer to the envelope data        */
     float         *weight_pointer;   /*  Pointer to the weight coefficients  */
@@ -214,6 +215,12 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
         weight_pointer = &(weight_coef[ij_index_coef]);
         env_pointer = &(envelope_data[index_samp_line[i]]);
 
+        __android_log_print(ANDROID_LOG_INFO, "WKKKSYMohApp", "Ok N_samples %d", N_samples);
+       __android_log_print(ANDROID_LOG_INFO, "WKKKSYMohApp", "Ok 5 %d", index_samp_line[0]);
+      /* __android_log_print(ANDROID_LOG_INFO, "WKSYMohApp", "Ok 6 %f", weight_pointer[1] * env_pointer[1]);
+       __android_log_print(ANDROID_LOG_INFO, "WKSYMohApp", "Ok 7 %f", weight_pointer[2] * env_pointer[N_samples]);
+       __android_log_print(ANDROID_LOG_INFO, "WKSYMohApp", "Ok 8 %f", weight_pointer[3] * env_pointer[N_samples+1] + 0.5);*/
+
         image[image_index[i]]
                 =         weight_pointer[0] * env_pointer[0]
                           + weight_pointer[1] * env_pointer[1]
@@ -221,7 +228,6 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
                           + weight_pointer[3] * env_pointer[N_samples+1] + 0.5;
 
         ij_index_coef = ij_index_coef + 4;
-        __android_log_print(ANDROID_LOG_INFO, "WWSYMohApp", "Ok 4");
     }
     __android_log_print(ANDROID_LOG_INFO, "WWSWYMohApp", "This is all me");
 }
@@ -333,8 +339,8 @@ void make_interpolation (unsigned char  *envelope_data,   /*  The envelope detec
 }*/
 
 JNIEXPORT jcharArray JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_frameFromJNI
-( JNIEnv* env,jobject thiz, jbyteArray data, jintArray int_constants_arr, jdoubleArray double_constants_arr){
-    jbyte *byte_array;
+( JNIEnv* env,jobject thiz, jcharArray data, jintArray int_constants_arr, jdoubleArray double_constants_arr){
+    jchar *char_array;
     jint *int_array;
     jdouble *double_array;
     jcharArray result = (*env)->NewCharArray(env, 512*512);
@@ -344,7 +350,7 @@ JNIEXPORT jcharArray JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversio
 
 
     double_array = (*env)->GetDoubleArrayElements(env, double_constants_arr, NULL);
-    byte_array = (*env)->GetByteArrayElements(env, data, &iscopy);
+    char_array = (*env)->GetCharArrayElements(env, data, &iscopy);
     int_array = (*env)->GetIntArrayElements(env, int_constants_arr, &iscopy);
 
     n_values = make_tables(double_array[0], double_array[1], double_array[2], double_array[3],
@@ -352,9 +358,12 @@ JNIEXPORT jcharArray JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversio
      int_array[0],(double) int_array[1],int_array[2],int_array[3],
      index_samp_line, image_index, weight_coef, N_values);
 
-     make_interpolation(byte_array, double_array[4], index_samp_line, image_index, weight_coef, n_values, image);
+         __android_log_print(ANDROID_LOG_INFO, "exists", "Ok top what %d", index_samp_line[0]);
 
-    (*env)->ReleaseByteArrayElements(env, data, byte_array, 0);
+
+     make_interpolation(char_array, double_array[4], *index_samp_line, image_index, weight_coef, n_values, image);
+
+    (*env)->ReleaseCharArrayElements(env, data, char_array, 0);
     (*env)->ReleaseIntArrayElements(env, int_constants_arr, int_array, 0);
     (*env)->ReleaseDoubleArrayElements(env, double_constants_arr, double_array, 0);
 

@@ -287,5 +287,5 @@ public class ScanConversion {
         bitmap.setPixels(pixelsArray, 0, 512, 0, 0, 512, 512);
     }
 
-    public native double[] frameFromJNI(byte[] data, int[] int_constants, double[] double_constants );
+    public native double[] frameFromJNI(char[] data, int[] int_constants, double[] double_constants );
 }

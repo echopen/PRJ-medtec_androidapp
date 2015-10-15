@@ -2,10 +2,12 @@ package com.echopen.asso.echopen;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 import com.echopen.asso.echopen.model.Data;
+import com.echopen.asso.echopen.model.UDPData;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
@@ -32,6 +35,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.UnknownHostException;
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
@@ -54,6 +58,14 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Log.d("Tagyy", "hello world !");
+        try {
+            UDPData udpData = new UDPData(this, "127.0.0.1",80);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         setContentView(R.layout.activity_main);
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -186,8 +198,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
                 Data data = new Data(inputStreamReader);
                 char[] envelope_data = data.getEnvelopeData();
-                byte[] byte_envelope_data = new String(envelope_data).getBytes();
-                double[] test = scanConversion.frameFromJNI(byte_envelope_data, Constants.PreProcParam.getLoadIntegerConstants(), Constants.PreProcParam.getLoadDoubleConstants());
+                //byte[] byte_envelope_data = new String(envelope_data).getBytes();
+                double[] test = scanConversion.frameFromJNI(envelope_data, Constants.PreProcParam.getLoadIntegerConstants(), Constants.PreProcParam.getLoadDoubleConstants());
             } catch (IOException e) {
                 e.printStackTrace();
             }
