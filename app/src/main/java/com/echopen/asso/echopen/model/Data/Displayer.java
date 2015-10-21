@@ -32,7 +32,7 @@ public class Displayer {
     private void setAssetManager(Activity activity) {
         AssetManager assetManager = activity.getResources().getAssets();
         try {
-            InputStream inputStream = assetManager.open("data/raw_data/r_sigmoy.csv");
+            InputStream inputStream = assetManager.open("data/raw_data/redpitaya_phantom.csv");
             inputStreamReader = new InputStreamReader(inputStream);
         } catch (IOException e) {
             e.printStackTrace();
