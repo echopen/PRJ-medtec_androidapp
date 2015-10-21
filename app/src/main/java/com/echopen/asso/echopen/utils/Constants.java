@@ -38,6 +38,10 @@ public class Constants {
         public static final String PARSE_REST_API_KEY = "";
 
         public static final String CONTENT_TYPE_JSON = "application/json";
+
+        public static final String REDPITAYA_UDP_IP = "192.168.1.12";
+
+        public static final int REDPITAYA_UDP_PORT = 7536;
     }
 
     public static class Settings{
@@ -71,54 +75,51 @@ public class Constants {
 
     public static class PreProcParam{
         /** todo define the pre-processing params -
-        largest number of pixels in x-direction -
-        largest number of pixels in z-direction -
+         largest number of pixels in x-direction -
+         largest number of pixels in z-direction -
          number of weight coefficients
-        **/
+         **/
         /* speed of sound in m.s^{—1} */
         public static final int SPEED_OF_SOUND = 1540;
 
         /* sampling frequency in Hz */
-        public static final int SAMPLING_FREQUENCY = (int) Math.pow(100,5);
+        public static final int SAMPLING_FREQUENCY = (int) 125 /16 * (int) Math.pow(10,6);
 
-        /* no dimension param */
-        public static final int N_x = 512;
+        public static final int N_x = 256;
 
-        /* no dimension param */
-        public static final int N_z = 512;
+        public static final int N_z = 256;
 
-        /* no dimension param */
-        public static final int NUM_LINES = 128;
+        public static final int tmp_NUM_LINES = 60;
 
-        /* size of image in m (meters)*/
-        public static final float IMAGE_SIZE = (float) 0.105;
+        public static final int NUM_LINES = 120;
+
+        public static final int tmp_SAMPLING_POINTS = 1052;
+
+        public static final float IMAGE_SIZE = (float) 0.201;
 
         /* image width in rad */
-        public static final int IMAGE_WIDTH = (int) Math.round((90/180*Math.PI));
+        public static final double IMAGE_WIDTH = 0.5 * Math.PI;
 
-        /* no dimension param */
-        public static final int NUM_SAMPLES = 1672;
+        public static final int NUM_SAMPLES = 511;
 
-        /* no dimension param */
-        public static final int NUM_IMG_DATA = 128;
+        public static final int NUM_IMG_DATA = 120;
 
-        /* depth for start of image in m (meters) */
-        public static final double RADIAL_IMG_INIT = 0.02;
+        public static final double RADIAL_IMG_INIT = 0.013;
 
         /* depth for start of data in m (meters) */
-        public static final int RADIAL_DATA_INIT = (int) SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
+        public static final double RADIAL_DATA_INIT = SPEED_OF_SOUND/2*1/(double) SAMPLING_FREQUENCY;
 
-        /* angle init in rad */
         public static final int ANGLE_INIT = 0;
 
         /* no dimension param */
-        public static final float STEP_ANGLE_INIT = (int) Math.round(IMAGE_WIDTH/NUM_LINES);
+        public static final float STEP_ANGLE_INIT = (float) (IMAGE_WIDTH/NUM_LINES);
 
         /* sampling interval for data in m (meters)*/
-        public static final int STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/SAMPLING_FREQUENCY;
+        public static final double STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/(double) SAMPLING_FREQUENCY;
 
-        /* no dimension param */
         public static final int SCALE_FACTOR = 1;
+
+        public static final int tmp_NUM_UDP_PACKET_CHUNKS = 4;
 
         public static int[] getLoadIntegerConstants() {
             int[] int_constants = new int[4];
@@ -130,17 +131,27 @@ public class Constants {
         }
 
         public static float[] getLoadFloatConstants() {
-            float[] float_constants = new float[8];
+            float[] float_constants = new float[7];
             float_constants[0] = (float) PreProcParam.RADIAL_IMG_INIT;
             float_constants[1] = PreProcParam.IMAGE_SIZE;
-            float_constants[2] = PreProcParam.STEP_RADIAL_INIT;
-            float_constants[3] = (float) (PreProcParam.RADIAL_DATA_INIT * Math.floor(PreProcParam.NUM_SAMPLES / 1024));
-            float_constants[4] = (float)  Math.floor(PreProcParam.NUM_SAMPLES / 1024);
-            float_constants[5] = PreProcParam.NUM_LINES/ 2 *float_constants[0];
+            float_constants[2] = (float) PreProcParam.STEP_RADIAL_INIT;
+            float_constants[3] = (float) (PreProcParam.RADIAL_DATA_INIT);
+            float_constants[4] = (float)  Math.floor(PreProcParam.NUM_SAMPLES);
+            float_constants[5] =  Constants.PreProcParam.NUM_LINES/ 2 * PreProcParam.STEP_ANGLE_INIT;
             float_constants[6] = - PreProcParam.STEP_ANGLE_INIT;
-            float_constants[7] = PreProcParam.NUM_LINES;
-
             return float_constants;
+        }
+
+        public static double[] getLoadDoubleConstants() {
+            double[] double_constants = new double[7];
+            double_constants[0] = PreProcParam.RADIAL_IMG_INIT;
+            double_constants[1] = PreProcParam.IMAGE_SIZE;
+            double_constants[2] = PreProcParam.STEP_RADIAL_INIT;
+            double_constants[3] = PreProcParam.RADIAL_DATA_INIT;
+            double_constants[4] =  Math.floor(PreProcParam.NUM_SAMPLES);
+            double_constants[5] =  Constants.PreProcParam.NUM_LINES/ 2 * PreProcParam.STEP_ANGLE_INIT;
+            double_constants[6] = - PreProcParam.STEP_ANGLE_INIT;
+            return double_constants;
         }
     }
 
