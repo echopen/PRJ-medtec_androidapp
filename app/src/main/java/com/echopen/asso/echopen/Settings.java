@@ -15,13 +15,12 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
-import java.util.ArrayList;
-
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
-import com.echopen.asso.echopen.model.Data;
+import com.echopen.asso.echopen.model.Data.Data;
 import com.echopen.asso.echopen.ui.SettingActionController;
+
+import java.util.ArrayList;
 
 
 public class Settings extends CustomActivity implements AbstractActionActivity
@@ -98,7 +97,6 @@ public class Settings extends CustomActivity implements AbstractActionActivity
     private void getSettings()
     {
         sList = new ArrayList<Data>();
-        sList.add(new Data("Hospital Cloud Sync", "", 0));
     }
 
     private class SettingAdapter extends BaseAdapter
