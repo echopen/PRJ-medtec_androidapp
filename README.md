@@ -30,7 +30,7 @@ try to read them quick as possible.
 
 ## Authors
 
-* [Benchoufi33](http://github.com/benchoufi33)
+* [@nowami](http://github.com/benchoufi)
 * [Loïc Fejoz](http://github.com/loic-fejoz)
 * [Yannick](http://github.com/yaf)
 
