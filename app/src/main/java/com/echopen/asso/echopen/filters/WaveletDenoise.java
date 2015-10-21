@@ -13,6 +13,7 @@ import boofcv.struct.image.ImageFloat32;
 
 /**
  * Created by mehdibenchoufi on 27/08/15.
+ * This is only an example of Post Processing : Wavelet Denoising
  */
 public class WaveletDenoise extends BaseProcess {
 

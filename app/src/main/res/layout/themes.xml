@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:background="@color/theme_blue"
         android:text="BLUE" />
-    <Button
+
+    <Button
         android:id="@+id/themeYellow"
         style="@style/them_btn"
         android:layout_width="match_parent"

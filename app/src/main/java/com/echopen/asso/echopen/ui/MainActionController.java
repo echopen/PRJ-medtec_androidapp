@@ -2,11 +2,19 @@ package com.echopen.asso.echopen.ui;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.utils.Config;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class MainActionController extends AbstractActionController {
 
@@ -110,5 +118,6 @@ public class MainActionController extends AbstractActionController {
     public void displayMainFrame(Bitmap bitmap){
         ImageView echoImage = (ImageView) findViewById(R.id.echo);
         echoImage.setImageBitmap(bitmap);
+        echoImage.setColorFilter(Config.colorMatrixColorFilter);
     }
 }

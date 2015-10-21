@@ -2,40 +2,30 @@ package com.echopen.asso.echopen;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.LinearLayout;
 
-import com.echopen.asso.echopen.model.Data;
-import com.echopen.asso.echopen.model.UDPData;
+import com.echopen.asso.echopen.model.Data.UDPToBitmapDisplayer;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
-import com.echopen.asso.echopen.ui.CameraFragment;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
-import com.echopen.asso.echopen.ui.FilterFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.AppHelper;
+import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.UnknownHostException;
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
@@ -43,37 +33,35 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     private MainActionController mainActionController;
 
-    private ScanConversion scanConversion;
-
     public GestureDetector gesture;
 
     public Constants.Settings setting;
 
     protected Uri uri;
 
-    static {
-        System.loadLibrary(Constants.JNI_SETTINGS.LOCAL_MODULE);
-    }
+    private static boolean testEchopen = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Log.d("Tagyy", "hello world !");
-        try {
-            UDPData udpData = new UDPData(this, "127.0.0.1",80);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
         setContentView(R.layout.activity_main);
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.vMiddle);
+        linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
         initSwipeViews();
         initViewComponents();
         initActionController();
         setupContainer();
+        Config.getInstance(this);
+
+        try {
+            UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void initActionController() {
@@ -98,7 +86,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setClick(R.id.btn4);
         setClick(R.id.btn5);
 
-        setClickToFilter(R.id.vMiddle);
+        //setClickToFilter(R.id.vMiddle);
 
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));
@@ -170,49 +158,25 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             getSupportFragmentManager().popBackStackImmediate();
         }
 
-        Fragment f;
-        if (display != setting.DISPLAY_FILTER)
-            f = new CameraFragment();
-        else
-            f = new FilterFragment();
+        /*Fragment f;
+        f = new FilterFragment();
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, f).commit();
+                .replace(R.id.content_frame, f).commit();*/
 
-        if (display == setting.DISPLAY_VIDEO) {
-            mainActionController.displayVideo();
+        mainActionController.displayImages();
+
+        if (display == setting.DISPLAY_PHOTO) {
+            mainActionController.displayPhoto();
         } else {
-            mainActionController.displayImages();
-
-            if (display == setting.DISPLAY_PHOTO) {
-                mainActionController.displayPhoto();
-            } else {
-                mainActionController.displayOtherImage();
-            }
-
-            AssetManager assetManager = getResources().getAssets();
-            try {
-                InputStream inputStream = assetManager.open("data/data_kydney.csv");
-                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-                scanConversion = new ScanConversion(inputStreamReader);
-                //scanConversion.compute_interpolation();
-
-                Data data = new Data(inputStreamReader);
-                char[] envelope_data = data.getEnvelopeData();
-                //byte[] byte_envelope_data = new String(envelope_data).getBytes();
-                double[] test = scanConversion.frameFromJNI(envelope_data, Constants.PreProcParam.getLoadIntegerConstants(), Constants.PreProcParam.getLoadDoubleConstants());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //Bitmap bitmap = scanConversion.getBitmap();
-            //mainActionController.displayMainFrame(bitmap);
+            mainActionController.displayOtherImage();
         }
     }
 
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        chooseCamera(v);
-        runCamera();
+        //chooseCamera(v);
+        //runCamera();
     }
 
     private void chooseCamera(View v) {

@@ -27,8 +27,7 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
     public static final TouchEffect TOUCH = new TouchEffect();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         theme = getAppTheme();
@@ -37,8 +36,7 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
+    public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
             finish();
         return super.onOptionsItemSelected(item);
@@ -49,8 +47,7 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
         v.setBackgroundResource(theme);
     }
 
-    protected void setupActionBar()
-    {
+    protected void setupActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -61,28 +58,24 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
         actionBar.setBackgroundDrawable(getResources().getDrawable(theme));
     }
 
-    protected void saveAppTheme(int theme)
-    {
+    protected void saveAppTheme(int theme) {
         PreferenceManager.getDefaultSharedPreferences(this).edit()
                 .putInt(THEME, theme).commit();
     }
 
-    protected int getAppTheme()
-    {
+    protected int getAppTheme() {
         return PreferenceManager.getDefaultSharedPreferences(this).getInt(
                 THEME, THEME_BLUE);
     }
 
-    public View setTouchNClick(int id)
-    {
+    public View setTouchNClick(int id) {
         View v = setClick(id);
         v.setOnTouchListener(TOUCH);
         return v;
     }
 
 
-    public View setClick(int id)
-    {
+    public View setClick(int id) {
         View v = findViewById(id);
         v.setOnClickListener(this);
         return v;
@@ -90,8 +83,7 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
 
 
     @Override
-    public void onClick(View v)
-    {
+    public void onClick(View v) {
         //todo to be implemented
     }
 }

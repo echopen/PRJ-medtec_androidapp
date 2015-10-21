@@ -26,7 +26,7 @@ public class BaseProcess {
         bitmap = ((BitmapDrawable) imageview.getDrawable()).getBitmap();
     }
 
-    protected void getBackBitmap(){
+    protected void getBackBitmap() {
         bitmap = ConvertBitmap.grayToBitmap((ImageFloat32) imageBase.getImage(), Bitmap.Config.ARGB_8888);
     }
 }

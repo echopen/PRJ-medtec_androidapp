@@ -4,7 +4,7 @@ import boofcv.struct.image.ImageSingleBand;
 
 /**
  * Created by mehdibenchoufi on 27/08/15.
- * getImage() will be needed at least by BaseProcess to get through back to the caller the Bitmap taht will be set as
+ * getImage() will be needed at least by BaseProcess to get through back to the caller the Bitmap that will be set as
  * app's ImageView
  */
 public class AbstractBaseImage {

@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
-import com.echopen.asso.echopen.model.Data;
+import com.echopen.asso.echopen.model.Data.Data;
 import com.echopen.asso.echopen.ui.SettingActionController;
 
 

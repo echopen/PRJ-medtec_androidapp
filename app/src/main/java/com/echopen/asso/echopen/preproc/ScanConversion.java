@@ -1,33 +1,35 @@
 package com.echopen.asso.echopen.preproc;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.echopen.asso.echopen.model.Data;
+import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 /**
  * Created by mehdibenchoufi on 16/09/15.
  */
 public class ScanConversion {
 
-    private int numPixels;
+    public static ScanConversion singletonScanConversion = null;
 
-    private int numWeightPixels;
+    private static int numPixels;
 
-    private double[] weight = new double[numWeightPixels];
+    private static int numWeightPixels;
 
-    private int[] indexData = new int[numPixels];
+    private static double[] weight = new double[numWeightPixels];
 
-    private int[] indexImg = new int[numPixels];
+    private static int[] indexData = new int[numPixels];
+
+    private static int[] indexImg = new int[numPixels];
+
+    private int[] scannedArray;
+
+    public char[] imagedArray;
 
     private InputStreamReader inputStreamReader;
 
-    private Bitmap bitmap;
+    private static int[][] udpDataArray;
 
     public void setNumPixels(int numPixels) {
         this.numPixels = numPixels;
@@ -70,16 +72,45 @@ public class ScanConversion {
         return numPixels;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public int[] getScannedArray() {
+        return scannedArray;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setScannedArray(int[] scannedArray) {
+        this.scannedArray = scannedArray;
+    }
+
+    public int[][] getUdpDataArray() {
+        return ScanConversion.udpDataArray;
+    }
+
+    public void setUdpDataArray(int[][] udpDataArray) {
+        ScanConversion.udpDataArray = udpDataArray;
     }
 
     public ScanConversion(InputStreamReader inputStreamReader) {
         this.inputStreamReader = inputStreamReader;
+    }
+
+    public ScanConversion(int[][] udpDataArray) {
+        ScanConversion.udpDataArray = udpDataArray;
+    }
+
+    public static ScanConversion getInstance(InputStreamReader inputStreamReader) {
+        if (singletonScanConversion == null) {
+            singletonScanConversion = new ScanConversion(inputStreamReader);
+            compute_tables();
+        }
+        return singletonScanConversion;
+    }
+
+    public static ScanConversion getInstance(int[][] udpDataArray) {
+        if (singletonScanConversion == null) {
+            singletonScanConversion = new ScanConversion(udpDataArray);
+            compute_tables();
+        }
+        ScanConversion.udpDataArray = udpDataArray;
+        return singletonScanConversion;
     }
 
     /**
@@ -99,7 +130,7 @@ public class ScanConversion {
      * @param image_index
      * @return N_values Number of values to calculate in the image
      */
-    private int make_tables(double start_depth,     /*  Depth for start of image in meters    */
+    public static int make_tables(double start_depth,     /*  Depth for start of image in meters    */
                             double image_size,      /*  Size of image in meters               */
 
                             double start_of_data,   /*  Depth for start of data in meters     */
@@ -186,15 +217,15 @@ public class ScanConversion {
         N_values = ij_index;
         //System.out.println("Table has now been set-up, %d x %d, %d %d values\n",Nz,Nx,ij_index, N_values);
         // as for a test purpose
-        this.numPixels = N_values;
-        this.indexData = index_samp_line;
-        this.indexImg = image_index;
-        this.weight =  weight_coef;
+        ScanConversion.numPixels = N_values;
+        ScanConversion.indexData = index_samp_line;
+        ScanConversion.indexImg = image_index;
+        ScanConversion.weight =  weight_coef;
 
         return N_values;
     }
 
-    private void make_interpolation (char envelope_data[],   /*  The envelope detected and log-compressed data */
+    private void make_interpolation (int envelope_data[],   /*  The envelope detected and log-compressed data */
                                      int            N_samples,        /*  Number of samples in one envelope line        */
 
                                      int            index_samp_line[], /*  Index for the data sample number              */
@@ -202,7 +233,7 @@ public class ScanConversion {
                                      double          weight_coef[],     /*  The weight table                              */
                                      int            N_values,         /*  Number of values to calculate in the image      */
 
-                                     char image[]            /*  The resulting image                           */
+                                     int image[]            /*  The resulting image                           */
     ) {
         int           i;                 /*  Integer loop counter                */
         int           ij_index_coef;     /*  Index into coefficient array        */
@@ -224,7 +255,7 @@ public class ScanConversion {
         }
     }
 
-    public void compute_tables() {
+    public static void compute_tables() {
         double start_depth = Constants.PreProcParam.RADIAL_IMG_INIT; /*  Depth for start of image in meters    */
         double image_size = Constants.PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
 
@@ -251,41 +282,38 @@ public class ScanConversion {
         // TODO convert arrays to fields.*/
     }
 
-    public void compute_interpolation() throws IOException {
-        Data data = new Data(inputStreamReader);
-        char[] envelope_data = data.getEnvelopeData();
+    public int[] getDataFromInterpolation(){
+        try {
+            return compute_interpolation();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private int[] compute_interpolation() throws IOException {
+        ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
+        int[] envelope_data = echoData.getEnvelopeData();
 
         // set data.getEnvelopeData in envelope_data for measure performance that begins here
 
-        compute_tables();
-
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
-        char[] image = new char[Nz * Nx];
+        int[] image = new int[Nz * Nx];
         int N_samples =  (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES);
 
-        make_interpolation(envelope_data, N_samples, this.indexData, this.indexImg, this.weight, this.numPixels, image);
+
+        make_interpolation(envelope_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels, image);
 
         // end of performance measure
 
         int[] num = new int[Nz * Nx];
-        for (int i = 0; i < Nz; i++)
-        {
+
+        for (int i = 0; i < Nz; i++) {
             for (int j = 0; j < Nx ; j++) {
                 num[j*Nz + i] = image[j + Nx*i];
             }
         }
-        setBitmap(num);
+        return num;
     }
-
-    private void setBitmap(int[] pixelsArray) {
-        bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);
-
-        //BitmapFactory.Options thumbOpts = new BitmapFactory.Options();
-        //thumbOpts.inSampleSize = 4;
-        //Bitmap bmp = BitmapFactory.decodeFile(imagePath, mThumbOpts);
-        bitmap.setPixels(pixelsArray, 0, 512, 0, 0, 512, 512);
-    }
-
-    public native double[] frameFromJNI(char[] data, int[] int_constants, double[] double_constants );
 }
