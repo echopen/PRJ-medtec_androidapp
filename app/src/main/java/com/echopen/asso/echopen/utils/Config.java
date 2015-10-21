@@ -1,8 +1,9 @@
 package com.echopen.asso.echopen.utils;
 
 import android.content.Context;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.util.DisplayMetrics;
-import android.view.Display;
 import android.view.WindowManager;
 
 /**
@@ -10,13 +11,15 @@ import android.view.WindowManager;
  */
 public class Config {
 
-    public static Config config = null;
+    public static Config singletonConfig = null;
 
     private static Context context;
 
     private int height;
 
     private int width;
+
+    public static ColorMatrixColorFilter colorMatrixColorFilter;
 
     public int getHeight() {
         return height;
@@ -41,17 +44,18 @@ public class Config {
     }
 
     public static Config getInstance(Context context) {
-        if (config == null) {
-            config = new Config(context);
+        if (singletonConfig == null) {
+            singletonConfig = new Config(context);
             initDisplayInfo(context);
-            config.setHeightAndWidth();
+            singletonConfig.setHeightAndWidth();
+            singletonConfig.setColorFilter();
         }
-        return config;
+        return singletonConfig;
     }
 
     /* todo : we need to check if this supports any version
      * perhaps we need to check if : Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2
-     * */
+     */
     private static void initDisplayInfo(Context context){
         metrics = new DisplayMetrics();
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
@@ -61,5 +65,14 @@ public class Config {
     private void setHeightAndWidth(){
         this.height = metrics.heightPixels;
         this.width = metrics.widthPixels;
+    }
+
+    /* Set grayscale color filter. This is used to filter the Bitmap echo Image
+     * in grayscale mode. See `MainActionController`for usage
+     */
+    private void setColorFilter(){
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        colorMatrixColorFilter = new ColorMatrixColorFilter(matrix);
     }
 }
