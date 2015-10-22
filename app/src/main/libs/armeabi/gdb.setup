@@ -1,0 +1,3 @@
+set solib-search-path /Users/mehdibenchoufi/project/app/src/main/obj/local/armeabi
+source /Users/mehdibenchoufi/Downloads/android-ndk-r10e/prebuilt/common/gdb/common.setup
+directory /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-14/arch-arm/usr/include /Users/mehdibenchoufi/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include /Users/mehdibenchoufi/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/libs/armeabi/include /Users/mehdibenchoufi/Downloads/android-ndk-r10e/sources/cxx-stl/gnu-libstdc++/4.8/include/backward /Users/mehdibenchoufi/project/app/src/main/jni
