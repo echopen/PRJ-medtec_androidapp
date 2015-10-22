@@ -20,4 +20,7 @@
         <item>Choose Picture</item>
         <item>Choose Picture</item>
     </string-array>
+    <string name="title_activity_live_feature">LiveFeatureActivity</string>
+    <string name="iDesc">NV21 Decoding</string>
+    <string name="eDesc">Decoding+Laplacian</string>
 </resources>

@@ -16,6 +16,10 @@
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus"/>
 
+    <!--add-on for the GPU-->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -51,6 +55,11 @@
             android:name="Settings"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name="example.LiveFeatureActivity"
+            android:label="@string/title_activity_live_feature"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 </manifest>
