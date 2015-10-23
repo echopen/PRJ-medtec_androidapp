@@ -13,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.echopen.asso.echopen.R;
+
 public class LiveFeatureActivity extends Activity {
 
 	static {

@@ -16,7 +16,6 @@ import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 
 import com.echopen.asso.echopen.model.Data.UDPToBitmapDisplayer;
-import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
