@@ -33,6 +33,8 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     native private void runfilter(Bitmap out, byte[] in, int width, int height, int choice);
 
+    native private void scanConverter(Bitmap out, byte[] in, int width, int height);
+
     public CameraPreview(Context context) {
         super(context);
         getHolder().addCallback(this);

@@ -18,9 +18,11 @@ JNIEXPORT returnType JNICALL Java_##fullClassName##_##func(JNIEnv *env, jclass c
 #define DECLARE_WITHPARAMS(returnType,fullClassName,func,...) \
 JNIEXPORT returnType JNICALL Java_##fullClassName##_##func(JNIEnv *env, jclass clazz,__VA_ARGS__);
 
-DECLARE_NOPARAMS(jboolean,com_example_LiveFeatureActivity,compileKernels)
+DECLARE_NOPARAMS(jboolean,com_echopen_asso_echopen_LiveFeatureActivity,compileKernels)
 
-DECLARE_WITHPARAMS(void,com_example_CameraPreview,runfilter,jobject outBmp, jbyteArray inData, jint width, jint height, jint choice)
+DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_example_CameraPreview,runfilter,jobject outBmp, jbyteArray inData, jint width, jint height, jint choice)
+
+DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_example_CameraPreview,scanConverter,jobject outBmp, jbyteArray inData, jint width, jint height)
 
 #ifdef __cplusplus
 }

@@ -1,4 +1,4 @@
-package com.echopen.asso.echopen.example;
+package com.echopen.asso.echopen;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.example.CameraPreview;
 
 public class LiveFeatureActivity extends Activity {
 
@@ -30,8 +30,7 @@ public class LiveFeatureActivity extends Activity {
 		InputStream in;
 		try {
 			in = getAssets().open(f);
-			final File of = new File(getDir("execdir",MODE_PRIVATE), f);
-
+			final File of = new File(getDir("execdir",MODE_WORLD_WRITEABLE), f);
 			final OutputStream out = new FileOutputStream(of);
 
 			final byte b[] = new byte[65535];
@@ -50,10 +49,22 @@ public class LiveFeatureActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_live_feature);
-        copyFile("kernels.cl");
+		copyFile("kernels.cl");
+		copyFile("scan_conversion_kernel.cl");
 
-        if( compileKernels() == false )
-            Log.i(TAG,"Kernel compilation failed");
+		Log.i(TAG, "Kernel compilation beginning");
+
+		try{
+			if( compileKernels() == false )
+				Log.i(TAG,"Kernel compilation failed");
+			else
+				Log.i(TAG,"Kernel compilation succedeed");
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		Log.i(TAG,"Kernel compilation ending");
 
         mPreview = new CameraPreview(this);
         FrameLayout preview = (FrameLayout) findViewById(R.id.camera_preview);
