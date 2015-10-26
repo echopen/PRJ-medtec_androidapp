@@ -50,7 +50,18 @@ try to read them quick as possible.
   ![alt tag](http://echopen.org/images/0/07/Echopen_MockUp_1.2.png)
   ![alt tag](http://echopen.org/images/e/e2/Echopen_MockUp_1_2.png)
 
-### Simulation
+### Testing Data
+
+  A lots of tools enable you to test and play with the data : 
+  
+  
+  #### Real Data
+  You'll find in the [kit-soft](https://github.com/echopen/kit-soft/) repo, you'll find some real data file [raw_data.txt](https://github.com/echopen/kit-soft/tree/master/data) that was output by our hardware suite.
+  
+  In this repo, you'll find all the tools to install in local a `UDP` server that can simulate a real time data coming from our hardware.    
+  
+  
+  #### Simulated data
 
   You'll find in `phantom/img_kydney.txt` and `phantom/img_obs.txt` the data that is output from the Hardware. The goal is to build and obtain from each of these double arrays the images stored respectively as `phantom/img_kydney.bmp` and `phantom/img_obs.bmp`.
 
@@ -58,6 +69,10 @@ try to read them quick as possible.
 
   ![alt tag](http://echopen.org/images/e/e1/Image_kydney.png)
   ![alt tag](http://echopen.org/images/0/0a/Image_obs.png)
+    
+   #### Simulating with a plain `JAVA` app
+   
+   In the `phantom/test_data` directory, you'll find a plain `JAVA` app that lets you test and taste the data without the hassle of bothering with `Android` configuration and other heaviness. 
 
 
   `phantom/img_kydney.txt` and `phantom/img_obs.txt` corresponds to the raw signal that needs to be filtered. They serve as basis for the envelope detection from which pixels intensity are deduced. ** The resulting pixel file sits in `data_kydney.csv`**
