@@ -123,9 +123,9 @@ void helper(uint32_t* out, int osize, uint8_t* in, int isize, int w, int h, int 
                 isize*sizeof(cl_uchar), in, NULL);
         cl::Buffer bufferOut = cl::Buffer(gContext, CL_MEM_READ_WRITE, osize*sizeof(cl_uchar4));
         cl::Buffer bufferOut2= cl::Buffer(gContext, CL_MEM_READ_WRITE, osize*sizeof(cl_uchar4));
-        gNV21Kernel.setArg(2,w);
 
         gNV21Kernel.setArg(3,h);
+        gNV21Kernel.setArg(2,w);
         gNV21Kernel.setArg(1,bufferIn);
         gNV21Kernel.setArg(0,bufferOut);
         gQueue.enqueueNDRangeKernel(gNV21Kernel,
@@ -191,23 +191,34 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_runfi
     AndroidBitmap_unlockPixels(env, outBmp);
 }
 
-void runScanConverter(uint32_t* out, int size, uint8_t* in, int length, int weight, int height)
+void runScanConverter(uint32_t* out, int size, uint8_t* in,
+int length, int weight, int height, int n_samples,
+jint* index_data_array, jint* img_data_array, jdouble* weight_array, int num_pixels)
 {
     try {
         cl::Buffer bufferIn = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
                 isize*sizeof(cl_uchar), in, NULL);
         cl::Buffer bufferOut = cl::Buffer(gContext, CL_MEM_READ_WRITE, size*sizeof(cl_uchar4));
-        cl::Buffer bufferOut2= cl::Buffer(gContext, CL_MEM_READ_WRITE, size*sizeof(cl_uchar4));
 
+        scanConverterK.setArg(0,bufferOut);
+        scanConverterK.setArg(1,size);
+        scanConverterK.setArg(2,envelope_data);
+        scanConverterK.setArg(3,length);
+        scanConverterK.setArg(4,im_width);
+        scanConverterK.setArg(5,im_height);
+        scanConverterK.setArg(6,N_samples);
+        scanConverterK.setArg(7,index_samp_line);
+        scanConverterK.setArg(8,weight_coef);
+        scanConverterK.setArg(9,n_values);
 
-        gQueue.enqueueNDRangeKernel(gNV21Kernel,
+        gQueue.enqueueNDRangeKernel(scanConverterK,
                 cl::NullRange,
                 cl::NDRange( (int)ceil((float)weight/16.0float)*16,(int)ceil((float)h/16.0f)*16),
                 cl::NDRange(8,8),
                 NULL,
                 NULL);
 
-        gQueue.enqueueReadBuffer(bufferOut2, CL_TRUE, 0, osize*sizeof(cl_uchar4), out);
+        gQueue.enqueueReadBuffer(bufferOut, CL_TRUE, 0, osize*sizeof(cl_uchar4), out);
     }
     catch (cl::Error e) {
         LOGI("@scanConverter: %s %d \n",e.what(),e.err());
@@ -220,11 +231,19 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_scanC
         jobject bitmapOut,
         jbyteArray byteArrayData,
         jint width,
-        jint height)
+        jint height,
+        jint n_samples,
+        jintArray index_data,
+        jintArray index_img,
+        jdoubleArray weight,
+        jint num_pixels)
 {
     int size = width*height;
     int length = size + size/2;
     LOGI("this is the size %d", length);
+    jint *index_data_array;
+    jint *img_data_array;
+    jdouble *weight_array;
 
     AndroidBitmapInfo bitmapInfo;
     if (AndroidBitmap_getInfo(env, outBitmap, &bitmapInfo) < 0) {
@@ -245,9 +264,13 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_scanC
         throwJavaException(env,"scanConverter","Get byte data failed to NULL");
         return;
     }
-    // call helper for processing frame
-    runScanConverter(bitmapContent,size,(uint8_t*)arrayPointer,length,width,height);
-    // This is absolutely neccessary before calling any other JNI function
+
+    index_data_array = (*env)->GetIntArrayElements(env, index_data, &iscopy);
+    img_data_array= (*env)->GetIntArrayElements(env, img_data, &iscopy);
+    weight_array = (*env)->GetDoubleArrayElements(env, *weight, NULL);
+
+
+    runScanConverter(bitmapContent, size, (uint8_t*)arrayPointer, length, width, height, n_samples, index_data_array, img_data_array, weight_array, num_pixels);
     env->ReleasePrimitiveArrayCritical(byteArrayData,arrayPointer,0);
     AndroidBitmap_unlockPixels(env, bitmapOut);
 }

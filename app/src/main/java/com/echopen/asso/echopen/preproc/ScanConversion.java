@@ -1,6 +1,10 @@
 package com.echopen.asso.echopen.preproc;
 
+import android.app.Activity;
+import android.graphics.Bitmap;
+
 import com.echopen.asso.echopen.model.Data.ReadableData;
+import com.echopen.asso.echopen.model.Data.tmpData;
 import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
@@ -10,6 +14,17 @@ import java.io.InputStreamReader;
  * Created by mehdibenchoufi on 16/09/15.
  */
 public class ScanConversion {
+
+    static {
+        System.loadLibrary("JNIProcessor");
+    }
+
+    native private void scanConverter(Bitmap out, int[] in,
+                                      int width,
+                                      int[] index_data,
+                                      int[] index_img,
+                                      double[] weight,
+                                      int num_pixels);
 
     public static ScanConversion singletonScanConversion = null;
 
@@ -94,6 +109,10 @@ public class ScanConversion {
 
     public ScanConversion(int[][] udpDataArray) {
         ScanConversion.udpDataArray = udpDataArray;
+    }
+
+    public ScanConversion(Activity activity) throws IOException {
+        tmp_compute_interpolation(activity);
     }
 
     public static ScanConversion getInstance(InputStreamReader inputStreamReader) {
@@ -304,6 +323,39 @@ public class ScanConversion {
 
 
         make_interpolation(envelope_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels, image);
+
+        // end of performance measure
+
+        int[] num = new int[Nz * Nx];
+
+        for (int i = 0; i < Nz; i++) {
+            for (int j = 0; j < Nx ; j++) {
+                num[j*Nz + i] = image[j + Nx*i];
+            }
+        }
+        return num;
+    }
+
+    private int[] tmp_compute_interpolation(Activity activity) throws IOException {
+        tmpData tmp_data = new tmpData("","","",activity);
+        char[] envelope_data = tmp_data.getEnvelopeData();
+
+        int Nz = Constants.PreProcParam.N_z;
+        int Nx = Constants.PreProcParam.N_x;
+        int[] image = new int[Nz * Nx];
+        int N_samples =  (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES);
+
+        int[] num_data = new int[Nz * Nx];
+
+        for (int i = 0; i < Nz; i++) {
+            for (int j = 0; j < Nx ; j++) {
+                num_data[j*Nz + i] = (int) envelope_data[j*Nz + i];
+            }
+        }
+
+        Bitmap bitmap = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888);
+
+        scanConverter(bitmap, num_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
 
         // end of performance measure
 
