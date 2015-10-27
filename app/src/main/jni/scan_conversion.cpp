@@ -23,7 +23,7 @@ struct openCLMeta{
     cl::Device echoDevice;
     cl::Program echoProgram;
     cl::Kernel echoKernel;
-}
+};
 
 char *file_contents(const char *filename, int *length)
 {
@@ -141,7 +141,7 @@ void helper(uint32_t* out, int osize, uint8_t* in, int isize, int w, int h, int 
             gLaplacianK.setArg(0,bufferOut2);
             gQueue.enqueueNDRangeKernel(gLaplacianK,
                     cl::NullRange,
-                    cl::NDRange( (int)ceil((float)w/16.0f)*16,(int)ceil((float)h/16.0f)*16),
+                    cl::NDRange((int)ceil((float)w/16.0f)*16,(int)ceil((float)h/16.0f)*16),
                     cl::NDRange(16,16),
                     NULL,
                     NULL);
@@ -197,28 +197,29 @@ jint* index_data_array, jint* img_data_array, jdouble* weight_array, int num_pix
 {
     try {
         cl::Buffer bufferIn = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
-                isize*sizeof(cl_uchar), in, NULL);
+                length*sizeof(cl_uchar), in, NULL);
         cl::Buffer bufferOut = cl::Buffer(gContext, CL_MEM_READ_WRITE, size*sizeof(cl_uchar4));
 
         scanConverterK.setArg(0,bufferOut);
         scanConverterK.setArg(1,size);
-        scanConverterK.setArg(2,envelope_data);
+        scanConverterK.setArg(2,in);
         scanConverterK.setArg(3,length);
-        scanConverterK.setArg(4,im_width);
-        scanConverterK.setArg(5,im_height);
-        scanConverterK.setArg(6,N_samples);
-        scanConverterK.setArg(7,index_samp_line);
-        scanConverterK.setArg(8,weight_coef);
-        scanConverterK.setArg(9,n_values);
+        scanConverterK.setArg(4,width);
+        scanConverterK.setArg(5,height);
+        scanConverterK.setArg(6,n_samples);
+        scanConverterK.setArg(7,index_data_array);
+        scanConverterK.setArg(8,img_data_array);
+        scanConverterK.setArg(9,weight_array);
+        scanConverterK.setArg(10,num_pixels);
 
         gQueue.enqueueNDRangeKernel(scanConverterK,
                 cl::NullRange,
-                cl::NDRange( (int)ceil((float)weight/16.0float)*16,(int)ceil((float)h/16.0f)*16),
+                cl::NDRange((int)ceil((float)width/16.0f)*16,(int)ceil((float)height/16.0f)*16),
                 cl::NDRange(8,8),
                 NULL,
                 NULL);
 
-        gQueue.enqueueReadBuffer(bufferOut, CL_TRUE, 0, osize*sizeof(cl_uchar4), out);
+        gQueue.enqueueReadBuffer(bufferOut, CL_TRUE, 0, size*sizeof(cl_uchar4), out);
     }
     catch (cl::Error e) {
         LOGI("@scanConverter: %s %d \n",e.what(),e.err());
@@ -246,7 +247,7 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_scanC
     jdouble *weight_array;
 
     AndroidBitmapInfo bitmapInfo;
-    if (AndroidBitmap_getInfo(env, outBitmap, &bitmapInfo) < 0) {
+    if (AndroidBitmap_getInfo(env, bitmapOut, &bitmapInfo) < 0) {
         throwJavaException(env,"scanConverter","Error retrieving bitmap meta data");
         return;
     }
@@ -266,8 +267,8 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_scanC
     }
 
     index_data_array = (*env)->GetIntArrayElements(env, index_data, &iscopy);
-    img_data_array= (*env)->GetIntArrayElements(env, img_data, &iscopy);
-    weight_array = (*env)->GetDoubleArrayElements(env, *weight, NULL);
+    img_data_array= (*env)->GetIntArrayElements(env, index_img, &iscopy);
+    weight_array = (*env)->GetDoubleArrayElements(env, weight, NULL);
 
 
     runScanConverter(bitmapContent, size, (uint8_t*)arrayPointer, length, width, height, n_samples, index_data_array, img_data_array, weight_array, num_pixels);

@@ -16,6 +16,7 @@ import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 
 import com.echopen.asso.echopen.model.Data.UDPToBitmapDisplayer;
+import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
@@ -57,7 +58,9 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         Config.getInstance(this);
 
         try {
-            UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
+            ScanConversion scanConversion = new ScanConversion(this);
+            scanConversion.tmp_compute_interpolation(this);
+            //UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -336,7 +336,7 @@ public class ScanConversion {
         return num;
     }
 
-    private int[] tmp_compute_interpolation(Activity activity) throws IOException {
+    public int[] tmp_compute_interpolation(Activity activity) throws IOException {
         tmpData tmp_data = new tmpData("","","",activity);
         char[] envelope_data = tmp_data.getEnvelopeData();
 
