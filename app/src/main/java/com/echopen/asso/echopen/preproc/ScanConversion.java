@@ -21,6 +21,8 @@ public class ScanConversion {
 
     native private void scanConverter(Bitmap out, int[] in,
                                       int width,
+                                      int height,
+                                      int num_samples,
                                       int[] index_data,
                                       int[] index_img,
                                       double[] weight,
@@ -337,6 +339,8 @@ public class ScanConversion {
     }
 
     public int[] tmp_compute_interpolation(Activity activity) throws IOException {
+        compute_tables();
+
         tmpData tmp_data = new tmpData("","","",activity);
         char[] envelope_data = tmp_data.getEnvelopeData();
 
@@ -345,17 +349,16 @@ public class ScanConversion {
         int[] image = new int[Nz * Nx];
         int N_samples =  (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES);
 
-        int[] num_data = new int[Nz * Nx];
+        int len = envelope_data.length;
+        int[] num_data = new int[len];
 
-        for (int i = 0; i < Nz; i++) {
-            for (int j = 0; j < Nx ; j++) {
-                num_data[j*Nz + i] = (int) envelope_data[j*Nz + i];
-            }
+        for (int i = 0; i < len; i++) {
+                num_data[i] = (int) envelope_data[i];
         }
 
-        Bitmap bitmap = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);
 
-        scanConverter(bitmap, num_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
+        scanConverter(bitmap, num_data, 0, 0, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
 
         // end of performance measure
 

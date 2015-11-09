@@ -192,7 +192,7 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_runfi
 }
 
 void runScanConverter(uint32_t* out, int size, uint8_t* in,
-int length, int weight, int height, int n_samples,
+int length, int width, int height, int n_samples,
 jint* index_data_array, jint* img_data_array, jdouble* weight_array, int num_pixels)
 {
     try {
@@ -226,11 +226,11 @@ jint* index_data_array, jint* img_data_array, jdouble* weight_array, int num_pix
     }
 }
 
-JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_scanConverter(
+JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_scanConverter(
         JNIEnv *env,
         jclass clazz,
         jobject bitmapOut,
-        jbyteArray byteArrayData,
+        jintArray intArrayData,
         jint width,
         jint height,
         jint n_samples,
@@ -239,12 +239,15 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_scanC
         jdoubleArray weight,
         jint num_pixels)
 {
-    int size = width*height;
+    LOGI("this is the size");
+
+    /*int size = width*height;
     int length = size + size/2;
     LOGI("this is the size %d", length);
     jint *index_data_array;
     jint *img_data_array;
     jdouble *weight_array;
+    jboolean iscopy;
 
     AndroidBitmapInfo bitmapInfo;
     if (AndroidBitmap_getInfo(env, bitmapOut, &bitmapInfo) < 0) {
@@ -260,18 +263,18 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_scanC
         throwJavaException(env,"scanConverter","Unable to lock bitmap pixels");
         return;
     }
-    jbyte* arrayPointer = (jbyte*)env->GetPrimitiveArrayCritical(byteArrayData, 0);
+    jint* arrayPointer = env->GetIntArrayElements(intArrayData, 0);
     if (arrayPointer == NULL) {
         throwJavaException(env,"scanConverter","Get byte data failed to NULL");
         return;
     }
 
-    index_data_array = (*env)->GetIntArrayElements(env, index_data, &iscopy);
-    img_data_array= (*env)->GetIntArrayElements(env, index_img, &iscopy);
-    weight_array = (*env)->GetDoubleArrayElements(env, weight, NULL);
+    index_data_array = env->GetIntArrayElements(index_data, 0);
+    img_data_array= env->GetIntArrayElements(index_img, 0);
+    weight_array = env->GetDoubleArrayElements(weight, 0);
 
 
     runScanConverter(bitmapContent, size, (uint8_t*)arrayPointer, length, width, height, n_samples, index_data_array, img_data_array, weight_array, num_pixels);
-    env->ReleasePrimitiveArrayCritical(byteArrayData,arrayPointer,0);
-    AndroidBitmap_unlockPixels(env, bitmapOut);
+    env->ReleasePrimitiveArrayCritical(intArrayData,arrayPointer,0);
+    AndroidBitmap_unlockPixels(env, bitmapOut);*/
 }

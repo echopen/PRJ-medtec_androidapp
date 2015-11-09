@@ -22,7 +22,11 @@ DECLARE_NOPARAMS(jboolean,com_echopen_asso_echopen_LiveFeatureActivity,compileKe
 
 DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_example_CameraPreview,runfilter,jobject outBmp, jbyteArray inData, jint width, jint height, jint choice)
 
-DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_example_CameraPreview,scanConverter,jobject outBmp, jbyteArray inData, jint width, jint height)
+DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_preproc_ScanConversion,scanConverter,jobject outBmp, jbyteArray inData, jint width, jint height, jint n_samples,
+                   jintArray index_data,
+                   jintArray index_img,
+                   jdoubleArray weight,
+                   jint num_pixels)
 
 #ifdef __cplusplus
 }
