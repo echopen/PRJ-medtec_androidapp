@@ -7,7 +7,7 @@ __kernel void scanConverter( __global uchar4* out,
                           int N_samples,
                           int* index_samp_line,
                           int* image_index,
-                          double* weight_coef,
+                          __global double* weight_coef,
                           int n_values)
 {
     int           ij_index_coef;

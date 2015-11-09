@@ -50,7 +50,7 @@ public class LiveFeatureActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_live_feature);
 		copyFile("kernels.cl");
-		copyFile("scan_conversion_kernel.cl");
+		//copyFile("scan_conversion_kernel.cl");
 
 		Log.i(TAG, "Kernel compilation beginning");
 

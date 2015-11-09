@@ -92,8 +92,8 @@ JNIEXPORT jboolean JNICALL Java_com_echopen_asso_echopen_LiveFeatureActivity_com
         std::vector<cl::Device> devices = gContext.getInfo<CL_CONTEXT_DEVICES>();
         gQueue = cl::CommandQueue(gContext, devices[0], 0, &err);
         int src_length = 0;
-		//const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/kernels.cl",&src_length);
-		const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/scan_conversion_kernel.cl",&src_length);
+		const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/kernels.cl",&src_length);
+		//const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/scan_conversion_kernel.cl",&src_length);
 
         cl::Program::Sources sources(1,std::make_pair(src, src_length) );
 
@@ -103,9 +103,9 @@ JNIEXPORT jboolean JNICALL Java_com_echopen_asso_echopen_LiveFeatureActivity_com
 
         while(program.getBuildInfo<CL_PROGRAM_BUILD_STATUS>(devices[0]) != CL_BUILD_SUCCESS);
 
-        //gNV21Kernel = cl::Kernel(program, "nv21torgba", &err);
-        //gLaplacianK = cl::Kernel(program, "laplacian", &err);
-        scanConverterK = cl::Kernel(program, "scanConverter", &err);
+        gNV21Kernel = cl::Kernel(program, "nv21torgba", &err);
+        gLaplacianK = cl::Kernel(program, "laplacian", &err);
+        //scanConverterK = cl::Kernel(program, "scanConverter", &err);
 
         return true;
     }
