@@ -113,8 +113,8 @@ public class ScanConversion {
         ScanConversion.udpDataArray = udpDataArray;
     }
 
-    public ScanConversion(Activity activity) throws IOException {
-        tmp_compute_interpolation(activity);
+    public ScanConversion(Activity activity, Bitmap mBackBuffer) throws IOException {
+        tmp_compute_interpolation(activity, mBackBuffer);
     }
 
     public static ScanConversion getInstance(InputStreamReader inputStreamReader) {
@@ -338,7 +338,7 @@ public class ScanConversion {
         return num;
     }
 
-    public int[] tmp_compute_interpolation(Activity activity) throws IOException {
+    public int[] tmp_compute_interpolation(Activity activity, Bitmap mBackBuffer) {
         compute_tables();
 
         tmpData tmp_data = new tmpData("","","",activity);
@@ -353,12 +353,13 @@ public class ScanConversion {
         int[] num_data = new int[len];
 
         for (int i = 0; i < len; i++) {
-                num_data[i] = (int) envelope_data[i];
+                //num_data[i] = (int) envelope_data[i];
+            num_data[i] = 50;
         }
 
-        Bitmap bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);
+        //Bitmap bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);
 
-        scanConverter(bitmap, num_data, 0, 0, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
+        scanConverter(mBackBuffer, num_data, 512, 512, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
 
         // end of performance measure
 

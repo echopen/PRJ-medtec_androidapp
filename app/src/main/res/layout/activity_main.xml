@@ -17,12 +17,19 @@
         android:background="@drawable/theme_blue"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/echo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/echo_image" />
+        <FrameLayout
+            android:id="@+id/echo_image_preview"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/echo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:src="@drawable/arrow_blue" />
+        </FrameLayout>
+
         <RelativeLayout
             style="@style/GenericProgressBackground"
             android:id="@+id/loadingPanel"

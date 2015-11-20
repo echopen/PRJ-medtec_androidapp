@@ -1,24 +1,28 @@
-__kernel void scanConverter( __global uchar4* out,
+__kernel void scanConverter( __global uchar* out,
                             int size,
-                          __global uchar*  envelope_data,
+                          __global uchar4*  envelope_data,
                           int length,
                           int im_width,
                           int im_height,
                           int N_samples,
-                          int* index_samp_line,
-                          int* image_index,
-                          __global double* weight_coef,
+                          __global uchar* index_samp_line,
+                          __global uchar* image_index,
+                          __global uchar* weight_coef,
                           int n_values)
 {
     int           ij_index_coef;
-    unsigned char *env_pointer;   
-    float         *weight_pointer;
+    __global uint *env_pointer;
+    __global uchar *weight_pointer;
 
     int i = get_global_id(0);
-    ij_index_coef = 4 *i;
+    int gx	= get_global_id(0);
+    int gy	= get_global_id(1);
+    int inIdx= gy*im_width+gx;
+
+    ij_index_coef = 4 *inIdx;
     weight_pointer = &(weight_coef[ij_index_coef]);
-    env_pointer = &(envelope_data[index_samp_line[i]]);
-    image[image_index[i]]
+    env_pointer = &(envelope_data[index_samp_line[inIdx]]);
+    out[image_index[inIdx]]
             =         weight_pointer[0] * env_pointer[0]
                       + weight_pointer[1] * env_pointer[1]
                       + weight_pointer[2] * env_pointer[N_samples]

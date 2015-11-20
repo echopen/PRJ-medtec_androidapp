@@ -7,29 +7,39 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import com.echopen.asso.echopen.example.CameraPreview;
 import com.echopen.asso.echopen.model.Data.UDPToBitmapDisplayer;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.SurfaceImage;
 import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
     private int display;
+
+    private SurfaceImage surfaceImage;
 
     private MainActionController mainActionController;
 
@@ -39,7 +49,31 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     protected Uri uri;
 
-    private static boolean testEchopen = true;
+    static {
+        System.loadLibrary("JNIProcessor");
+    }
+
+    native private boolean compileKernels();
+
+    private void copyFile(final String f) {
+        InputStream in;
+        try {
+            in = getAssets().open(f);
+            final File of = new File(getDir("execdir",MODE_WORLD_WRITEABLE), f);
+            final OutputStream out = new FileOutputStream(of);
+
+            final byte b[] = new byte[65535];
+            int sz = 0;
+            while ((sz = in.read(b)) > 0) {
+                out.write(b, 0, sz);
+            }
+            in.close();
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,13 +91,27 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setupContainer();
         Config.getInstance(this);
 
-        try {
-            ScanConversion scanConversion = new ScanConversion(this);
-            scanConversion.tmp_compute_interpolation(this);
-            //UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
-        } catch (IOException e) {
+        copyFile("scan_conversion_kernel.cl");
+
+        Log.i("TAGGY", "Kernel compilation beginning");
+
+        try{
+            if( compileKernels() == false )
+                Log.i("TAGGY","Kernel compilation failed");
+            else
+                Log.i("TAGGY","Kernel compilation succedeed");
+        }
+        catch (Exception e)
+        {
             e.printStackTrace();
         }
+
+        surfaceImage = new SurfaceImage(this.getBaseContext(), this);
+        FrameLayout preview = (FrameLayout) findViewById(R.id.echo_image_preview);
+        preview.addView(surfaceImage);
+
+        Log.d("TAGG", "Hello");
+        //UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
     }
 
     public void initActionController() {

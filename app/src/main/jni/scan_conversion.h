@@ -20,9 +20,16 @@ JNIEXPORT returnType JNICALL Java_##fullClassName##_##func(JNIEnv *env, jclass c
 
 DECLARE_NOPARAMS(jboolean,com_echopen_asso_echopen_LiveFeatureActivity,compileKernels)
 
+DECLARE_NOPARAMS(jboolean,com_echopen_asso_echopen_MainActivity,compileKernels)
+
 DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_example_CameraPreview,runfilter,jobject outBmp, jbyteArray inData, jint width, jint height, jint choice)
 
-DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_preproc_ScanConversion,scanConverter,jobject outBmp, jbyteArray inData, jint width, jint height, jint n_samples,
+DECLARE_WITHPARAMS(void,com_echopen_asso_echopen_preproc_ScanConversion,scanConverter,
+jobject outBmp,
+jintArray inData,
+jint width,
+jint height,
+jint n_samples,
                    jintArray index_data,
                    jintArray index_img,
                    jdoubleArray weight,

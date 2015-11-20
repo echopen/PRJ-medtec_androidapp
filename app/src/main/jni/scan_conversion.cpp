@@ -75,9 +75,10 @@ void cb(cl_program p,void* data)
     LOGE("Build log \n %s\n",bug);
 }
 
-JNIEXPORT jboolean JNICALL Java_com_echopen_asso_echopen_LiveFeatureActivity_compileKernels(JNIEnv *env, jclass clazz)
+JNIEXPORT jboolean JNICALL Java_com_echopen_asso_echopen_MainActivity_compileKernels(JNIEnv *env, jclass clazz)
 {
     // Find OCL devices and compile kernels
+
     cl_int err = CL_SUCCESS;
     try {
         std::vector<cl::Platform> platforms;
@@ -92,8 +93,8 @@ JNIEXPORT jboolean JNICALL Java_com_echopen_asso_echopen_LiveFeatureActivity_com
         std::vector<cl::Device> devices = gContext.getInfo<CL_CONTEXT_DEVICES>();
         gQueue = cl::CommandQueue(gContext, devices[0], 0, &err);
         int src_length = 0;
-		const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/kernels.cl",&src_length);
-		//const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/scan_conversion_kernel.cl",&src_length);
+		//const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/kernels.cl",&src_length);
+		const char* src  = file_contents("/data/data/com.echopen.asso.echopen/app_execdir/scan_conversion_kernel.cl",&src_length);
 
         cl::Program::Sources sources(1,std::make_pair(src, src_length) );
 
@@ -103,9 +104,9 @@ JNIEXPORT jboolean JNICALL Java_com_echopen_asso_echopen_LiveFeatureActivity_com
 
         while(program.getBuildInfo<CL_PROGRAM_BUILD_STATUS>(devices[0]) != CL_BUILD_SUCCESS);
 
-        gNV21Kernel = cl::Kernel(program, "nv21torgba", &err);
-        gLaplacianK = cl::Kernel(program, "laplacian", &err);
-        //scanConverterK = cl::Kernel(program, "scanConverter", &err);
+        //gNV21Kernel = cl::Kernel(program, "nv21torgba", &err);
+        //gLaplacianK = cl::Kernel(program, "laplacian", &err);
+        scanConverterK = cl::Kernel(program, "scanConverter", &err);
 
         return true;
     }
@@ -164,7 +165,6 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_runfi
 {
     int outsz = width*height;
     int insz = outsz + outsz/2;
-    LOGI("this is the size %d", insz);
     AndroidBitmapInfo bmpInfo;
     if (AndroidBitmap_getInfo(env, outBmp, &bmpInfo) < 0) {
         throwJavaException(env,"gaussianBlur","Error retrieving bitmap meta data");
@@ -199,27 +199,31 @@ jint* index_data_array, jint* img_data_array, jdouble* weight_array, int num_pix
         cl::Buffer bufferIn = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
                 length*sizeof(cl_uchar), in, NULL);
         cl::Buffer bufferOut = cl::Buffer(gContext, CL_MEM_READ_WRITE, size*sizeof(cl_uchar4));
+        cl::Buffer indexData = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
+                        length*sizeof(cl_uchar), (uint32_t*)index_data_array, NULL);
+        cl::Buffer imgData = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
+                        length*sizeof(cl_uchar), (uint32_t*)img_data_array, NULL);
+        cl::Buffer weightData = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
+                        4*length*sizeof(cl_uchar),(uint32_t*) weight_array, NULL);
 
         scanConverterK.setArg(0,bufferOut);
         scanConverterK.setArg(1,size);
-        scanConverterK.setArg(2,in);
+        scanConverterK.setArg(2,bufferIn);
         scanConverterK.setArg(3,length);
         scanConverterK.setArg(4,width);
         scanConverterK.setArg(5,height);
         scanConverterK.setArg(6,n_samples);
-        scanConverterK.setArg(7,index_data_array);
-        scanConverterK.setArg(8,img_data_array);
-        scanConverterK.setArg(9,weight_array);
+        scanConverterK.setArg(7,indexData);
+        scanConverterK.setArg(8,imgData);
+        scanConverterK.setArg(9,weightData);
         scanConverterK.setArg(10,num_pixels);
-
         gQueue.enqueueNDRangeKernel(scanConverterK,
                 cl::NullRange,
                 cl::NDRange((int)ceil((float)width/16.0f)*16,(int)ceil((float)height/16.0f)*16),
                 cl::NDRange(8,8),
                 NULL,
                 NULL);
-
-        gQueue.enqueueReadBuffer(bufferOut, CL_TRUE, 0, size*sizeof(cl_uchar4), out);
+        gQueue.enqueueReadBuffer(bufferOut, CL_TRUE, 0, size*sizeof(cl_uchar), out);
     }
     catch (cl::Error e) {
         LOGI("@scanConverter: %s %d \n",e.what(),e.err());
@@ -239,11 +243,8 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_scan
         jdoubleArray weight,
         jint num_pixels)
 {
-    LOGI("this is the size");
-
-    /*int size = width*height;
-    int length = size + size/2;
-    LOGI("this is the size %d", length);
+    int size = width*height;
+    int length = size;
     jint *index_data_array;
     jint *img_data_array;
     jdouble *weight_array;
@@ -273,8 +274,7 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_scan
     img_data_array= env->GetIntArrayElements(index_img, 0);
     weight_array = env->GetDoubleArrayElements(weight, 0);
 
-
     runScanConverter(bitmapContent, size, (uint8_t*)arrayPointer, length, width, height, n_samples, index_data_array, img_data_array, weight_array, num_pixels);
-    env->ReleasePrimitiveArrayCritical(intArrayData,arrayPointer,0);
-    AndroidBitmap_unlockPixels(env, bitmapOut);*/
+    env->ReleaseIntArrayElements(intArrayData,arrayPointer,0);
+    AndroidBitmap_unlockPixels(env, bitmapOut);
 }
