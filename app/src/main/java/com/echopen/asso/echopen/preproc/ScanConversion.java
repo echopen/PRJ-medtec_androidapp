@@ -359,7 +359,7 @@ public class ScanConversion {
 
         //Bitmap bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);
 
-        scanConverter(mBackBuffer, num_data, 512, 512, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
+        scanConverter(mBackBuffer, num_data,  512, 512, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
 
         // end of performance measure
 

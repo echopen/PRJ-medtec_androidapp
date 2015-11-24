@@ -1,6 +1,8 @@
+uchar4 convertYtoRGBA(int y);
+
 __kernel void scanConverter( __global uchar4* out,
                             int size,
-                          __global uchar4*  envelope_data,
+                          __global uchar*  envelope_data,
                           int length,
                           int im_width,
                           int im_height,
@@ -11,7 +13,7 @@ __kernel void scanConverter( __global uchar4* out,
                           int n_values)
 {
     int           ij_index_coef;
-    __global uint *env_pointer;
+    __global uchar *env_pointer;
     __global uchar *weight_pointer;
 
     int i = get_global_id(0);
@@ -23,26 +25,26 @@ __kernel void scanConverter( __global uchar4* out,
     weight_pointer = &(weight_coef[ij_index_coef]);
     env_pointer = &(envelope_data[index_samp_line[inIdx]]);
 
-    int y  = (0xFF & ((int) weight_pointer[0] * env_pointer[0]
+    int y  = (0xFF & ((int) (weight_pointer[0] * env_pointer[0]
                                                   + weight_pointer[1] * env_pointer[1]
                                                   + weight_pointer[2] * env_pointer[N_samples]
 
-                                                  + weight_pointer[3] * env_pointer[N_samples+1] + 0.5))
+                                                  + weight_pointer[3] * env_pointer[N_samples+1] + ((uchar)0.5))));
     out[image_index[inIdx]]
-            =         convertYVUtoRGBA(y);
+            =         convertYtoRGBA(y);
 }
 
-uchar4 convertYVUtoRGBA(int y)
+uchar4 convertYtoRGBA(int y)
 {
     uchar4 ret;
     y-=16;
     int b = y;
     int g = y;
     int r = y;
-    ret.x = r>255? 255 : r<0 ? 0 : r;
-    ret.y = g>255? 255 : g<0 ? 0 : g;
-    ret.z = b>255? 255 : b<0 ? 0 : b;
-    ret.w = 255;
+    ret.y = r>255? 255 : r<0 ? 0 : r;
+    ret.z = g>255? 255 : g<0 ? 0 : g;
+    ret.w = b>255? 255 : b<0 ? 0 : b;
+    ret.x = 255;
     return ret;
 }
 
