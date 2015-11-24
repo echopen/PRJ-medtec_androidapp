@@ -25,7 +25,7 @@ public class ScanConversion {
                                       int num_samples,
                                       int[] index_data,
                                       int[] index_img,
-                                      double[] weight,
+                                      float[] weight,
                                       int num_pixels);
 
     public static ScanConversion singletonScanConversion = null;
@@ -358,8 +358,11 @@ public class ScanConversion {
         }
 
         //Bitmap bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);
-
-        scanConverter(mBackBuffer, num_data,  512, 512, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels);
+        float[] floatWeight = new float[ScanConversion.weight.length];
+        for(int i = 0; i < ScanConversion.weight.length; i++) {
+            floatWeight[i] = (float)ScanConversion.weight[i];
+        }
+        scanConverter(mBackBuffer, num_data,  512, 512, N_samples, ScanConversion.indexData, ScanConversion.indexImg, floatWeight, ScanConversion.numPixels);
 
         // end of performance measure
 

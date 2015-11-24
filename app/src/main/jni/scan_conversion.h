@@ -32,7 +32,7 @@ jint height,
 jint n_samples,
                    jintArray index_data,
                    jintArray index_img,
-                   jdoubleArray weight,
+                   jfloatArray weight,
                    jint num_pixels)
 
 #ifdef __cplusplus

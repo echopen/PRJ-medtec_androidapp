@@ -37,14 +37,13 @@ __kernel void scanConverter( __global uchar4* out,
 uchar4 convertYtoRGBA(int y)
 {
     uchar4 ret;
-    y-=16;
     int b = y;
     int g = y;
     int r = y;
-    ret.y = r>255? 255 : r<0 ? 0 : r;
-    ret.z = g>255? 255 : g<0 ? 0 : g;
-    ret.w = b>255? 255 : b<0 ? 0 : b;
-    ret.x = 255;
+    ret.x = r>255? 255 : r<0 ? 0 : r;
+    ret.y = g>255? 255 : g<0 ? 0 : g;
+    ret.z = b>255? 255 : b<0 ? 0 : b;
+    ret.w = 0;
     return ret;
 }
 
