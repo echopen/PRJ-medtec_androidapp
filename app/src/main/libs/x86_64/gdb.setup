@@ -1,3 +1,0 @@
-set solib-search-path /Users/mehdibenchoufi/project/app/src/main/obj/local/x86_64
-source /Users/mehdibenchoufi/Downloads/android-ndk-r10e/prebuilt/common/gdb/common.setup
-directory /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-21/arch-x86_64/usr/include /Users/mehdibenchoufi/project/app/src/main/jni /Users/mehdibenchoufi/Downloads/android-ndk-r10e/sources/cxx-stl/system
