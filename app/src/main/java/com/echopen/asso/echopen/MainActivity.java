@@ -85,7 +85,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setClick(R.id.btn4);
         setClick(R.id.btn5);
 
-        //setClickToFilter(R.id.vMiddle);
+        setClickToFilter(R.id.vMiddle);
 
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));
@@ -174,7 +174,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        //chooseCamera(v);
+        chooseCamera(v);
         //runCamera();
     }
 
