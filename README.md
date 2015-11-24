@@ -16,9 +16,31 @@ wiki](http://echopen.org)
 As an android app, you need to have a java JDK installed.
 We use [Gradle](http://gradle.org/) as builder tools. You need to install it
 too.
-After, you can execute `gradle` in project directory.
+Before being able to build the app, you need to specify, in a local.properties file, in the root folder, the Android SDK and NDK location, with sdk.dir and ndk.dir, example:
 
-    It seems that we use android-sdk 19 but current android-sdk version is 24
+	sdk.dir=/Path/To/Your/.../Android/sdk
+	ndk.dir=/Path/To/Your/.../android-ndk-r10e
+
+After, you can launch the Gradle wrapper from the project directory, example:
+
+Mac/Linux
+	
+	./gradlew assembleDebug
+	
+Windows
+
+	gradlew.bat assembleDebug
+	
+
+To install on a device:
+
+* Switch the Android device to dev mode (generally, tap 7 times on "Version number" in parameters)
+* Enable USB debugging
+* Connect the device to your computer (with screen unlocked to see the prompt)
+* Accept the prompt on your device, to authorize your computer
+* Launch gradlew with `installDebug`
+
+Note: It seems that we use android-sdk 19 but current android-sdk version is 24
     now...
 
 ## How to contribute
