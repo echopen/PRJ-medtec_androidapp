@@ -2,6 +2,7 @@ package com.echopen.asso.echopen.preproc;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.model.Data.tmpData;
@@ -9,6 +10,7 @@ import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 /**
  * Created by mehdibenchoufi on 16/09/15.
@@ -351,10 +353,13 @@ public class ScanConversion {
 
         int len = envelope_data.length;
         int[] num_data = new int[len];
+        //Random generator = new Random();
 
         for (int i = 0; i < len; i++) {
-                //num_data[i] = (int) envelope_data[i];
-            num_data[i] = 50;
+            /*if((int) envelope_data[i] > 0) index++;
+            Log.d("TAGGY", "grt !"+ index);*/
+            num_data[i] = 255 /*- (int) envelope_data[i]*/;
+            //num_data[i] = generator.nextInt(255);
         }
 
         //Bitmap bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);

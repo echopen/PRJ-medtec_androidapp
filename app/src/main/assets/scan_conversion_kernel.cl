@@ -7,14 +7,14 @@ __kernel void scanConverter( __global uchar4* out,
                           int im_width,
                           int im_height,
                           int N_samples,
-                          __global uchar* index_samp_line,
-                          __global uchar* image_index,
-                          __global uchar* weight_coef,
+                          __global int* index_samp_line,
+                          __global int* image_index,
+                          __global float* weight_coef,
                           int n_values)
 {
     int           ij_index_coef;
     __global uchar *env_pointer;
-    __global uchar *weight_pointer;
+    __global float *weight_pointer;
 
     int i = get_global_id(0);
     int gx	= get_global_id(0);

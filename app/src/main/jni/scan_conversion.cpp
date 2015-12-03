@@ -200,11 +200,11 @@ jint* index_data_array, jint* img_data_array, jfloat* weight_array, int num_pixe
                 length*sizeof(cl_uchar), in, NULL);
         cl::Buffer bufferOut = cl::Buffer(gContext, CL_MEM_READ_WRITE, size*sizeof(cl_uchar4));
         cl::Buffer indexData = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
-                        length*sizeof(cl_uchar), (uint32_t*)index_data_array, NULL);
+                        length*sizeof(cl_int), index_data_array, NULL);
         cl::Buffer imgData = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
-                        length*sizeof(cl_uchar), (uint32_t*)img_data_array, NULL);
+                        length*sizeof(cl_int), img_data_array, NULL);
         cl::Buffer weightData = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
-                        4*length*sizeof(cl_float),(float*) weight_array, NULL);
+                        4*length*sizeof(cl_float), weight_array, NULL);
 
         scanConverterK.setArg(0,bufferOut);
         scanConverterK.setArg(1,size);
@@ -271,8 +271,23 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_scan
     }
 
     index_data_array = env->GetIntArrayElements(index_data, 0);
+    if(env->ExceptionCheck()){
+        env->ExceptionDescribe();
+        throwJavaException(env,"scanConverter","get int array index_data");
+        return;
+    }
     img_data_array= env->GetIntArrayElements(index_img, 0);
+    if(env->ExceptionCheck()){
+            env->ExceptionDescribe();
+            throwJavaException(env,"scanConverter","get int array index_img");
+            return;
+        }
     weight_array = env->GetFloatArrayElements(weight, 0);
+    if(env->ExceptionCheck()){
+                env->ExceptionDescribe();
+                throwJavaException(env,"scanConverter","get int array weight");
+                return;
+    }
 
     runScanConverter(bitmapContent, size, (uint8_t*)arrayPointer, length, width, height, n_samples, index_data_array, img_data_array, weight_array, num_pixels);
     env->ReleaseIntArrayElements(intArrayData,arrayPointer,0);

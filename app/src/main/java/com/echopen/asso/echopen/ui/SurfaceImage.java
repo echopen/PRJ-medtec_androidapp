@@ -91,7 +91,6 @@ public class SurfaceImage extends SurfaceView implements SurfaceHolder.Callback{
             Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,1)));
             Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,2)));
             Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,3)));
-
             pCanvas.drawBitmap(mBackBuffer, mSrcRect, mTrgtRect, null);
         }
     }
