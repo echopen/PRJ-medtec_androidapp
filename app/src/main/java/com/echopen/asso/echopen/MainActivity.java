@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
@@ -20,26 +19,45 @@ import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
-import com.echopen.asso.echopen.utils.AppHelper;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
 
+/**
+ * MainActivity class handles the main screen of the app.
+ * Tools are called in the following order :
+ * - initSwipeViews() handles the gesture tricks via GestureDetector class
+ * - initViewComponents() mainly sets the clickable elements
+ * - initActionController() and setupContainer() : in order to separate concerns, View parts are handled by the initActionController()
+ * method which calls the MainActionController class that deals with MainActivity Views,
+ * especially handles the display of the main screen picture
+ * These two methods should be refactored into one
+ */
+
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
+    /* integer constant that switch wether the photo or the video is on */
     private int display;
 
+    /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
 
     public GestureDetector gesture;
 
+    /* main UI constants of the app */
     public Constants.Settings setting;
 
+    /** locator of the screenshots or - the runcamera() method that processes it is currently unused
+    * for the moment - but it will be plugged again later in the developement
+    */
     protected Uri uri;
 
-    private static boolean testEchopen = true;
-
+    /** This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
+    * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
+    * and then displays them.
+    * Also, this method uses the Config singleton class that provides device-specific constants
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +81,21 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
     }
 
+    /*
+    * initActionController() is used to separate concerns
+    * MainActionController sets the main UI elements and handles the display of the main screen picture
+    * @param no params
+    * */
     public void initActionController() {
         Activity activity = this;
         mainActionController = new MainActionController(activity);
     }
 
-
+    /*
+    * Set the clickable elements and applies theme.
+    * For the moment, users can't set the theme
+    * @param no param
+    * */
     private void initViewComponents() {
         setTouchNClick(R.id.btnCapture);
         setTouchNClick(R.id.btnEffect);
@@ -91,6 +118,11 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         applyBgTheme(findViewById(R.id.vBottom));
     }
 
+
+    /**
+     * Sets a click listener on the LinearLayout that wraps the main screen picture
+     * @param mainframe, the LinearLayout's id that wraps the main screen picture
+     */
     private void setClickToFilter(int mainframe) {
         final View mainFrame = findViewById(mainframe);
         mainFrame.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +131,12 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                 FilterDialogFragment filterDialogFragment = new FilterDialogFragment();
                 filterDialogFragment.show(manager, "fragment_edit_name");
             }
-
         });
     }
 
+    /**
+     * Initiates the swip view
+     */
     private void initSwipeViews() {
         gesture = new GestureDetector(this, gestureListner);
 
@@ -116,6 +150,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         findViewById(R.id.content_frame).setOnTouchListener(otl);
     }
 
+    /**
+     * Deals with the gesture switch wether the photo or the video is choosen by the user
+     * In each case, setupContainer() is called
+     */
     private SimpleOnGestureListener gestureListner = new SimpleOnGestureListener() {
         @Override
         public boolean onFling(android.view.MotionEvent e1,
@@ -147,11 +185,18 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
     };
 
+    /**
+    * Prepare the call to setupContainer() that switch fragments  wether the photo or the video is choosen by the user
+    * @param display, integer constant that switch wether the photo or the video is on
+    */
     public void goBackFromFragment(int display) {
         this.display = display;
         setupContainer();
     }
 
+    /**
+     * Switch fragments  wether the photo or the video is choosen by the user
+     */
     private void setupContainer() {
         while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
             getSupportFragmentManager().popBackStackImmediate();
@@ -171,13 +216,21 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
     }
 
+    /**
+     * Handles clickable View that enable to choose camera or to start a new intent
+     * @param v, the clickable View
+     */
     @Override
     public void onClick(View v) {
         super.onClick(v);
         chooseCamera(v);
-        //runCamera();
     }
 
+    /**
+     * Choose which camera to use with the help of clickable View
+     * Starts the Setting activity, if the setting button is clicked
+     * @param v, the clickable View
+     */
     private void chooseCamera(View v) {
         if (display != setting.DISPLAY_PHOTO
                 && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
@@ -215,35 +268,24 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
     }
 
-    private void runCamera() {
-        if (display == setting.DISPLAY_PHOTO) {
-            Intent photoIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            uri = AppHelper.getFileUri(MainActivity.this, setting.MEDIA_TYPE_IMAGE);
-            if (uri == null)
-                AppHelper.getErrorStorageMessage(MainActivity.this);
-            else {
-                photoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                startActivityForResult(photoIntent, setting.TAKE_PHOTO);
-            }
-        } else if (display == setting.DISPLAY_VIDEO) {
-            Intent videoIntent = new Intent(MediaStore.ACTION_VIDEO_CAPTURE);
-            uri = AppHelper.getFileUri(MainActivity.this, setting.MEDIA_TYPE_VIDEO);
-            if (uri == null)
-                AppHelper.getErrorStorageMessage(MainActivity.this);
-            else {
-                videoIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-                videoIntent.putExtra(MediaStore.EXTRA_DURATION_LIMIT, 10);
-                videoIntent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 0); // 0 = lowest res
-                startActivityForResult(videoIntent, setting.TAKE_VIDEO_REQUEST);
-            }
-        }
-    }
-
+    /**
+     * @param item, MenuItem instance
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return true;
     }
 
+    /**
+     * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
+     * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
+     * the resultCode it returned, and any additional data from it.”,
+     * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
+     * @param requestCode
+     * @param resultCode
+     * @param data, Intent instance
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
