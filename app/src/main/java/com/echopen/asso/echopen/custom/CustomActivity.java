@@ -14,6 +14,9 @@ import com.echopen.asso.echopen.utils.TouchEffect;
 
 /**
  * Common class to all activities
+ * setupActionBar() sets the action bar
+ * There is an implementation of a color theme choice. The user theme choice is set and saved via getAppThme
+ * and saveAppTheme() methods
  */
 public class CustomActivity extends FragmentActivity implements OnClickListener
 {
