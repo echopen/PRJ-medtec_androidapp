@@ -2,100 +2,177 @@ package com.echopen.asso.echopen.preproc;
 
 import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by mehdibenchoufi on 16/09/15.
+ * ScanConversion is the class that processes the scan conversion which allows one to
+ * recreate a clinical image from a set of data sent by a probe.
+ * The received image depends on the geometry of the probe. This process intends to recreate the ‘real’ image.
+ * An ultrasound beamformer generates coherently summed image data in polar format while the standard TV raster display is rectangular.
+ * Hence, polar to Cartesian scan conversion is necessary before display.
+ *
+ * Mainly, the scan conversion transform the incoming raw data in two steps
+ *  - maps polar coordinates to cartesian coordinates
+ *  - interpolates data : roughly speaking, steps between the spatial interval for data
+ *  will not match with the step of two contiguous pixels. This create the need for interpolation.
+ *
+ *  In order to interpolate, we use the function make_tables() : this methods affects weights to the each
+ *  4-uplets of pixels, that are as close to 1 as the the mismatch described above is weak
+ *
+ * @see more explantation : http://echopen.org/index.php?title=Challenge_scan_conversion, http://echopen.org/index.php?title=Scan_Conversion,
  */
 public class ScanConversion {
 
+    /* This class is a singleton Class*/
     public static ScanConversion singletonScanConversion = null;
 
+    /* the number of pixels of the display app screen zone */
     private static int numPixels;
 
+    /* the number of weight pixels, generally numWeightPixels = 4*numPixels */
     private static int numWeightPixels;
 
+    /* the weight double array affects weight to each 4-uplets of pixels */
     private static double[] weight = new double[numWeightPixels];
 
+    /* Index for the data sample number */
     private static int[] indexData = new int[numPixels];
 
+    /* the specific index system of the image matrix */
     private static int[] indexImg = new int[numPixels];
 
+    /* the ScanConversion class mainly processes data and outputs processed data stored in scannedArray*/
     private int[] scannedArray;
 
-    public char[] imagedArray;
-
+    /* for testing purpose, the data can be gathered from a csv file, this express the needs of an InputStreamReader */
     private InputStreamReader inputStreamReader;
 
+    /* the incoming data comes in UDP format. It is stored in udpDataArray */
     private static int[][] udpDataArray;
 
+    /**
+     * @param numPixels
+     */
     public void setNumPixels(int numPixels) {
         this.numPixels = numPixels;
     }
 
+    /**
+     * @return numWeightPixels
+     */
     public int getNumWeightPixels() {
         return numWeightPixels;
     }
 
+    /**
+     * @param numWeightPixels
+     */
     public void setNumWeightPixels(int numWeightPixels) {
         this.numWeightPixels = numWeightPixels;
     }
 
+    /**
+     * @return wieght
+     */
     public double[] getWeight() {
         return weight;
     }
 
+    /**
+     * @param weight
+     */
     public void setWeight(double[] weight) {
         this.weight = weight;
     }
 
-
+    /**
+     * @return indexImg
+     */
     public int[] getIndexImg() {
         return indexImg;
     }
 
+    /**
+     * @param indexImg
+     */
     public void setIndexImg(int[] indexImg) {
         this.indexImg = indexImg;
     }
 
+    /**
+     * @return indexData
+     */
     public int[] getIndexData() {
         return indexData;
     }
 
+    /**
+     * @param indexData
+     */
     public void setIndexData(int[] indexData) {
         this.indexData = indexData;
     }
 
+    /**
+     * @return numPixels
+     */
     public int getNumPixels() {
         return numPixels;
     }
 
+    /**
+     * @return scannedArray
+     */
     public int[] getScannedArray() {
         return scannedArray;
     }
 
+    /**
+     * @param scannedArray
+     */
     public void setScannedArray(int[] scannedArray) {
         this.scannedArray = scannedArray;
     }
 
+    /**
+     * @return udpDataArray
+     */
     public int[][] getUdpDataArray() {
         return ScanConversion.udpDataArray;
     }
 
+    /**
+     * @param udpDataArray
+     */
     public void setUdpDataArray(int[][] udpDataArray) {
         ScanConversion.udpDataArray = udpDataArray;
     }
 
+    /**
+     * ScanConversion constructor with InputStreamReader argument
+     * for testing purpose, the data can be gathered from a csv file,
+     * this express the needs of an InputStreamReader
+     * @param inputStreamReader
+     */
     public ScanConversion(InputStreamReader inputStreamReader) {
         this.inputStreamReader = inputStreamReader;
     }
 
+    /**
+     * ScanConversion constructor with udpDataArray argument
+     * @param udpDataArray
+     */
     public ScanConversion(int[][] udpDataArray) {
         ScanConversion.udpDataArray = udpDataArray;
     }
 
+    /**
+     * Singleton getInstance method, with InputStreamReader argument
+     * inputStreamReader holds the simulated data stored in a csv format
+     * @param inputStreamReader
+     * @return
+     */
     public static ScanConversion getInstance(InputStreamReader inputStreamReader) {
         if (singletonScanConversion == null) {
             singletonScanConversion = new ScanConversion(inputStreamReader);
@@ -104,6 +181,12 @@ public class ScanConversion {
         return singletonScanConversion;
     }
 
+    /**
+     * Singleton getInstance method, with udpDataArray argument
+     * udpDataArray holds the incoming data
+     * @param udpDataArray
+     * @return
+     */
     public static ScanConversion getInstance(int[][] udpDataArray) {
         if (singletonScanConversion == null) {
             singletonScanConversion = new ScanConversion(udpDataArray);
@@ -114,6 +197,9 @@ public class ScanConversion {
     }
 
     /**
+     * make_tables() compute the weights affected to each 4-uplets of pixels.
+     * This table is calculated only once in the whole process, since it onmy dependes of physical
+     * constants that are determined by the hardware and the properties of the mobile device
      * @param start_depth
      * @param image_size
      * @param start_of_data
@@ -225,6 +311,19 @@ public class ScanConversion {
         return N_values;
     }
 
+    /**
+     * This method applies the weight coefficients (computed in make_tables()) and applies them
+     * to the incoming envelope_data. This performs the two steps, namemy
+     *  - maping polar coordinates to cartesian coordinates
+     *  - interpolating data
+     * @param envelope_data
+     * @param N_samples
+     * @param index_samp_line
+     * @param image_index
+     * @param weight_coef
+     * @param N_values
+     * @param image
+     */
     private void make_interpolation (int envelope_data[],   /*  The envelope detected and log-compressed data */
                                      int            N_samples,        /*  Number of samples in one envelope line        */
 
@@ -255,6 +354,16 @@ public class ScanConversion {
         }
     }
 
+    /**
+     * This method is preparing the make_tables() method call. All the constants are set into variables passed as
+     * arguments to the make_tables()
+     * These arguments are essentially, the depth for start of image in meters, the size of image in meters,
+     * the sampling interval for data in meters, the number of data samples, the angle between individual lines,
+     * the angle for first line in image, the number of acquired lines, the scaling factor form envelope to image,
+     * the size of image in pixels.
+     *
+     * All theses constants are set from the Constants class.
+     */
     public static void compute_tables() {
         double start_depth = Constants.PreProcParam.RADIAL_IMG_INIT; /*  Depth for start of image in meters    */
         double image_size = Constants.PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
@@ -291,6 +400,13 @@ public class ScanConversion {
         return null;
     }
 
+    /**
+     * Fetches the UDP data stored in udpDataArray, and then passes it to make_interpolation()
+     * in order to scan converts it.
+     * This produces an image array of scan converted data, which corresponds precisely to the pixel image
+     * @return int[], array of pixels corresponding to the  scan converted image
+     * @throws IOException
+     */
     private int[] compute_interpolation() throws IOException {
         ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
         int[] envelope_data = echoData.getEnvelopeData();
@@ -302,9 +418,7 @@ public class ScanConversion {
         int[] image = new int[Nz * Nx];
         int N_samples =  (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES);
 
-
         make_interpolation(envelope_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels, image);
-
         // end of performance measure
 
         int[] num = new int[Nz * Nx];
