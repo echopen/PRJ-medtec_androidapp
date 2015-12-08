@@ -3,10 +3,13 @@ package com.echopen.asso.echopen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-
 import com.echopen.asso.echopen.custom.CustomActivity;
 
-
+/**
+ * This class will be documented more precisely as much as it is needed. For now on,
+ * this class is almost not used but it is the basis of the developement of the data transmission
+ * of pictures over network
+ */
 public class Share extends CustomActivity
 {
 
@@ -40,6 +43,5 @@ public class Share extends CustomActivity
             startActivity(Intent.createChooser(i, "Share via"));
         }
     }
-
 }
 

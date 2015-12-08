@@ -5,10 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-
+/**
+ * This class holds for a custom SplashScreen
+ */
 public class SplashScreen extends Activity
 {
 
+    /* Reflects the state of the activity, when set to false, the activity will finish soon */
     private boolean isRunning;
 
     @Override
@@ -21,6 +24,11 @@ public class SplashScreen extends Activity
         startSplash();
     }
 
+    /**
+     * A thread calls doFinish() method after 3000s spleeping
+     * Splash picture will be displayed inbetween
+     * Then the Mainactivity is launched
+     */
     private void startSplash()
     {
         new Thread(new Runnable() {
@@ -47,6 +55,9 @@ public class SplashScreen extends Activity
         }).start();
     }
 
+    /**
+     * kicks the Mainactivity intent
+     */
     private synchronized void doFinish()
     {
         if (isRunning)
@@ -59,7 +70,7 @@ public class SplashScreen extends Activity
         }
     }
 
-    /* (non-Javadoc)
+    /*
      * @see android.app.Activity#onKeyDown(int, android.view.KeyEvent)
      */
     @Override

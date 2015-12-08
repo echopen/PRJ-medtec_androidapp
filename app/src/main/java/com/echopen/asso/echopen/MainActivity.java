@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
-
 import com.echopen.asso.echopen.model.Data.UDPToBitmapDisplayer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
@@ -21,7 +20,6 @@ import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
-
 import java.io.IOException;
 
 /**

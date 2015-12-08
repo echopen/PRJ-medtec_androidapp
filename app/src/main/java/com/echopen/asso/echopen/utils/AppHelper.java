@@ -5,20 +5,25 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.echopen.asso.echopen.R;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by mehdibenchoufi on 08/07/15.
+ * This class stores all smart tools and all generic pieces of code,
+ * that helps readability and lets the code DRY.
  */
 public class AppHelper {
 
     public static Constants.Settings setting;
 
+    /**
+     * gets the URI of a file, depending on it media type, image or video
+     * @param activity
+     * @param mediaType
+     * @return
+     */
     public static Uri getFileUri(Activity activity, int mediaType) {
         if (isExternalStorageAvailable()) {
             String appName = activity.getString(R.string.app_name);
@@ -52,12 +57,20 @@ public class AppHelper {
             return null;
     }
 
+    /**
+     * Checks if the external Storage is available
+     * @return
+     */
     public static boolean isExternalStorageAvailable() {
         String state = Environment.getExternalStorageState();
         if (state.equals(Environment.MEDIA_MOUNTED)) { return true; }
         else { return false; }
     }
 
+    /**
+     * Custom toasted error message
+     * @param activity
+     */
     public static void getErrorStorageMessage(Activity activity) {
         Toast.makeText(activity, R.string.external_storage_error,
                 Toast.LENGTH_LONG).show();
