@@ -169,7 +169,8 @@ public class ScanConversion {
 
     /**
      * Singleton getInstance method, with InputStreamReader argument
-     * inputStreamReader holds the simulated data stored in a csv format
+     * inputStreamReader holds the simulated data stored in a csv format,
+     * in a file stored in the assets folder
      * @param inputStreamReader
      * @return
      */

@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by mehdibenchoufi on 21/10/15.
  */
 public class ReadableData extends Data {
 

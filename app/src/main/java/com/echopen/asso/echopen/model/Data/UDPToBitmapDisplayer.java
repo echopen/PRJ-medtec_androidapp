@@ -16,16 +16,32 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
 /**
- * Created by mehdibenchoufi on 09/10/15.
+ * This Class inherits form Displayer class. The latter connects with the UI of the MainActivity
+ * handled by the MainActionController class.
+ *
+ * Specifically
+ *
+ * @todo: implement a code pattern protocol-agnostic.
  */
 public class UDPToBitmapDisplayer extends Displayer {
 
+    /* The MainActivity variable */
     private Activity activity;
 
+    /* The ip to get the incoming UDP data */
     private String ip;
 
+    /* The port on which listening the incoming UDP data */
     private int port;
 
+    /**
+     *
+     * @param activity, practically the MainActivity
+     * @param mainActionController, holds the UI of the MainActivity
+     * @param ip, ip to get the incoming UDP data
+     * @param port, port on which listening the incoming UDP data
+     * @throws IOException
+     */
     public UDPToBitmapDisplayer(Activity activity, MainActionController mainActionController, String ip, int port) throws IOException {
         super(activity, mainActionController);
         this.ip = ip;
@@ -34,6 +50,16 @@ public class UDPToBitmapDisplayer extends Displayer {
         getUDPData();
     }
 
+    /**
+     * This method does  many things
+     *  - listening to the incoming data on $ip:$port
+     *  - gives the data to the ScanConversion class in order to get the scan converted data
+     *  - transforms the scan converted data into an image via EchoIntImage class
+     *  - creates the bitmap from some instance of EchoIntImage
+     *  - refreshes the UI with the data in a new thread
+     *  This is done via an AsyncTask because you can't play with UDP in the main thread
+     * @throws IOException
+     */
     private void getUDPData() throws IOException {
 
         class ProcessUPDTask extends AsyncTask<Void, Void, Void> {
@@ -52,6 +78,13 @@ public class UDPToBitmapDisplayer extends Displayer {
                 this.port = port;
             }
 
+            /**
+             * A Socket is opened once for all
+             * Get the UDP data, converts it via the ScanConversion class, create a bitmap
+             * refreshes the UI with the data in a new thread with the help of runOnUiThread() method
+             * @param Voids
+             * @return
+             */
             @Override
             protected Void doInBackground(Void... Voids) {
                 int udpDataCounterColumn = 0;
