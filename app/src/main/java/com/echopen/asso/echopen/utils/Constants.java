@@ -83,17 +83,15 @@ public class Constants {
         public static final int SPEED_OF_SOUND = 1540;
 
         /* sampling frequency in Hz */
-        public static final int SAMPLING_FREQUENCY = (int) 125 /16 * (int) Math.pow(10,6);
+        public static final int SAMPLING_FREQUENCY = (int) 125 /32 * (int) Math.pow(10,6);
 
-        public static final int N_x = 256;
+        public static final int N_x = 512;
 
-        public static final int N_z = 256;
+        public static final int N_z = 512;
 
         public static final int tmp_NUM_LINES = 60;
 
         public static final int NUM_LINES = 120;
-
-        public static final int tmp_SAMPLING_POINTS = 1052;
 
         public static final float IMAGE_SIZE = (float) 0.201;
 
@@ -118,6 +116,8 @@ public class Constants {
         public static final double STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/(double) SAMPLING_FREQUENCY;
 
         public static final int SCALE_FACTOR = 1;
+
+        public static final int tmp_SAMPLING_POINTS = 1052;
 
         public static final int tmp_NUM_UDP_PACKET_CHUNKS = 4;
 

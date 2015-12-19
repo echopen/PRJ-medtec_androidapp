@@ -18,7 +18,7 @@ public class Data
     protected int image;
 
     /* int array holding the pixel array data */
-    protected char[]  envelopeData;
+    protected int[]  envelopeData;
 
     /**
      *
@@ -69,14 +69,14 @@ public class Data
     /**
      * @return envelopeData, pixel array data
      */
-    public char[] getEnvelopeData() {
+    public int[] getEnvelopeData() {
         return envelopeData;
     }
 
     /**
      * @param envelopeData
      */
-    public void setEnvelopeData(char[] envelopeData) {
+    public void setEnvelopeData(int[] envelopeData) {
         this.envelopeData = envelopeData;
     }
 
@@ -93,7 +93,7 @@ public class Data
      * @param inputStreamReader
      */
     public Data(InputStreamReader inputStreamReader) {
-        envelopeData = new char[0];
+        envelopeData = new int[0];
         setCharData(inputStreamReader);
     }
 
@@ -106,9 +106,9 @@ public class Data
             br = new BufferedReader(inputStreamReader);
             while ((line = br.readLine()) != null) {
                 String[] string_tmp_data = line.split(cvsSplitBy);
-                char[] char_tmp_data = new char[string_tmp_data.length];
+                int[] char_tmp_data = new int[string_tmp_data.length];
                 for (int index = 0; index < string_tmp_data.length; index++) {
-                    char_tmp_data[index] = (char) Integer.parseInt(string_tmp_data[index]);
+                    char_tmp_data[index] = (int) Integer.parseInt(string_tmp_data[index]);
                 }
                 envelopeData = Data.objArrayConcat(envelopeData, char_tmp_data);
             }
@@ -130,9 +130,9 @@ public class Data
     /**
      *  this method can be useful if we have data to be concatenated in horizontal way
      */
-    public static char[] objArrayConcat(char[] o1, char[] o2)
+    public static int[] objArrayConcat(int[] o1, int[] o2)
     {
-        char[] ret = new char[o1.length + o2.length];
+        int[] ret = new int[o1.length + o2.length];
 
         System.arraycopy(o1, 0, ret, 0, o1.length);
         System.arraycopy(o2, 0, ret, o1.length, o2.length);

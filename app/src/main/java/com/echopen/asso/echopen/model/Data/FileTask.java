@@ -26,8 +26,15 @@ public class FileTask extends AbstractDataTask {
 
     @Override
     protected Void doInBackground(Void... Voids) {
-        scanconversion.setData(data);
-        refreshUI(scanconversion);
-        return null;
+        while (true) {
+            //For fun : scanconversion.randomize();
+            scanconversion.setData(data);
+            refreshUI(scanconversion);
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//
+//            }
+        }
     }
 }

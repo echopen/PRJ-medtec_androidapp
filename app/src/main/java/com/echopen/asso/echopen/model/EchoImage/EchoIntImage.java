@@ -2,6 +2,8 @@ package com.echopen.asso.echopen.model.EchoImage;
 
 import android.graphics.Bitmap;
 
+import com.echopen.asso.echopen.utils.Constants;
+
 /**
  * Created by mehdibenchoufi on 21/10/15.
  */
@@ -28,7 +30,7 @@ public class EchoIntImage extends AbstractEchoImage {
     }
 
     public EchoIntImage(int[] pixelsArray) {
-        bitmap = Bitmap.createBitmap(256, 256, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(Constants.PreProcParam.N_z, Constants.PreProcParam.N_x, Bitmap.Config.ARGB_8888);
         this.pixelsArray = pixelsArray;
     }
 

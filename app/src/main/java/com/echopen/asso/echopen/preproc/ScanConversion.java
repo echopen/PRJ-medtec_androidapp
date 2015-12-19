@@ -5,6 +5,7 @@ import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 
 /**
  * ScanConversion is the class that processes the scan conversion which allows one to
@@ -56,6 +57,8 @@ public class ScanConversion {
     private static int N_samples;
     private static int[] num;
     private static int[] envelope_data;
+
+    private Random rnd = new Random();
 
     /**
      * @param numPixels
@@ -439,6 +442,11 @@ public class ScanConversion {
         if (envelope_data == null) {
             throw new IllegalArgumentException("The Envelope Data must not be null");
         }
+    }
+
+    public void randomize() {
+        int x = rnd.nextInt(envelope_data.length);
+        envelope_data[x] = rnd.nextInt(255);
     }
 
     public void setUdpData() {
