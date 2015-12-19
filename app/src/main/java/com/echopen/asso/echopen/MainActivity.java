@@ -3,6 +3,7 @@ package com.echopen.asso.echopen;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +15,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
 
-import com.echopen.asso.echopen.model.Data.UDPToBitmapDisplayer;
+import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
@@ -23,6 +24,7 @@ import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -75,7 +77,16 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         Config.getInstance(this);
 
         try {
-            UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
+            BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
+
+            if (false) {
+                bitmapDisplayer.readDataFromUDP();
+            } else {
+                AssetManager assetManager = getResources().getAssets();
+                InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
+                bitmapDisplayer.readDataFromFile(inputStream);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }

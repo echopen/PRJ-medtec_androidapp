@@ -165,6 +165,10 @@ public class ScanConversion {
         this.inputStreamReader = inputStreamReader;
     }
 
+    public ScanConversion(final Data data) {
+        setData(data);
+    }
+
     /**
      * ScanConversion constructor with udpDataArray argument
      * @param udpDataArray
@@ -341,6 +345,21 @@ public class ScanConversion {
 
                                      int image[]            /*  The resulting image                           */
     ) {
+        if (image == null) {
+            throw new IllegalArgumentException("image must not be null");
+        }
+        if (image_index == null) {
+            throw new IllegalArgumentException("image_index must not be null");
+        }
+        if (envelope_data == null) {
+            throw new IllegalArgumentException("envelope_data must not be null");
+        }
+        if (weight_coef == null) {
+            throw new IllegalArgumentException("weight_coef must not be null");
+        }
+        if (index_samp_line == null) {
+            throw new IllegalArgumentException("index_samp_line must not be null");
+        }
         int           i;                 /*  Integer loop counter                */
         int           ij_index_coef;     /*  Index into coefficient array        */
         int env_index;      /*  Pointer to the envelope data        */
@@ -412,13 +431,19 @@ public class ScanConversion {
     }
 
     public void setData(final Data value) {
-
         if (value == null) {
-            ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
-            envelope_data = echoData.getEnvelopeData();
-        } else {
-            envelope_data = value.getEnvelopeData();
+            throw new IllegalArgumentException("Data value must not be null");
         }
+        assert(value != null);
+        envelope_data = value.getEnvelopeData();
+        if (envelope_data == null) {
+            throw new IllegalArgumentException("The Envelope Data must not be null");
+        }
+    }
+
+    public void setUdpData() {
+        final ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
+        setData(echoData);
     }
 
     /**
@@ -430,6 +455,11 @@ public class ScanConversion {
      */
     private int[] compute_interpolation() throws IOException {
         assert(envelope_data != null);
+        if (image == null || num == null) {
+            compute_tables();
+        }
+        assert(num != null);
+        assert(image != null);
 
         // set data.getEnvelopeData in envelope_data for measure performance that begins here
 
