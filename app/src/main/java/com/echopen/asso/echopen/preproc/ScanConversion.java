@@ -1,5 +1,6 @@
 package com.echopen.asso.echopen.preproc;
 
+import com.echopen.asso.echopen.model.Data.Data;
 import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
 import java.io.IOException;
@@ -50,6 +51,11 @@ public class ScanConversion {
 
     /* the incoming data comes in UDP format. It is stored in udpDataArray */
     private static int[][] udpDataArray;
+
+    private static int[] image;
+    private static int N_samples;
+    private static int[] num;
+    private static int[] envelope_data;
 
     /**
      * @param numPixels
@@ -390,6 +396,10 @@ public class ScanConversion {
 
         make_tables(start_depth, image_size, start_of_data, delta_r, N_samples, theta_start, -delta_theta, N_lines, scaling, Nz, Nx, weight_coef, index_samp_line, image_index);
         // TODO convert arrays to fields.*/
+
+        image = new int[Nz * Nx];
+        N_samples =  (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES);
+        num = new int[Nz * Nx];
     }
 
     public int[] getDataFromInterpolation(){
@@ -401,6 +411,16 @@ public class ScanConversion {
         return null;
     }
 
+    public void setData(final Data value) {
+
+        if (value == null) {
+            ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
+            envelope_data = echoData.getEnvelopeData();
+        } else {
+            envelope_data = value.getEnvelopeData();
+        }
+    }
+
     /**
      * Fetches the UDP data stored in udpDataArray, and then passes it to make_interpolation()
      * in order to scan converts it.
@@ -409,20 +429,15 @@ public class ScanConversion {
      * @throws IOException
      */
     private int[] compute_interpolation() throws IOException {
-        ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
-        int[] envelope_data = echoData.getEnvelopeData();
+        assert(envelope_data != null);
 
         // set data.getEnvelopeData in envelope_data for measure performance that begins here
 
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
-        int[] image = new int[Nz * Nx];
-        int N_samples =  (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES);
 
         make_interpolation(envelope_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels, image);
         // end of performance measure
-
-        int[] num = new int[Nz * Nx];
 
         for (int i = 0; i < Nz; i++) {
             for (int j = 0; j < Nx ; j++) {

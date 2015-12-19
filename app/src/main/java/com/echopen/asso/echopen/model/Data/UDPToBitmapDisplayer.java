@@ -122,7 +122,9 @@ public class UDPToBitmapDisplayer extends Displayer {
                                 Log.d("this is the line number ", String.valueOf(udpDataCounterRow));
                             }
                             if (udpDataCounterRow >= Constants.PreProcParam.tmp_NUM_LINES) {
-                                int[] scannedArray = ScanConversion.getInstance(udpDataArray).getDataFromInterpolation();
+                                ScanConversion scnConv = ScanConversion.getInstance(udpDataArray);
+                                scnConv.setData(null);
+                                int[] scannedArray = scnConv.getDataFromInterpolation();
                                 EchoIntImage echoImage = new EchoIntImage(scannedArray);
                                 udpDataCounterRow = 0;
                                 final Bitmap bitmap = echoImage.createImage();
