@@ -191,13 +191,13 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_example_CameraPreview_runfi
     AndroidBitmap_unlockPixels(env, outBmp);
 }
 
-void runScanConverter(uint32_t* out, int size, uint8_t* in,
+void runScanConverter(uint32_t* out, int size, int* in,
 int length, int width, int height, int n_samples,
 jint* index_data_array, jint* img_data_array, jfloat* weight_array, int num_pixels)
 {
     try {
         cl::Buffer bufferIn = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
-                length*sizeof(cl_uchar), in, NULL);
+                length*sizeof(cl_uchar4), in, NULL);
         cl::Buffer bufferOut = cl::Buffer(gContext, CL_MEM_READ_WRITE, size*sizeof(cl_uchar4));
         cl::Buffer indexData = cl::Buffer(gContext, CL_MEM_READ_WRITE | CL_MEM_COPY_HOST_PTR,
                         length*sizeof(cl_int), index_data_array, NULL);
@@ -265,6 +265,11 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_scan
         return;
     }
     jint* arrayPointer = env->GetIntArrayElements(intArrayData, 0);
+
+    /*uint* no_arrayPointer = arrayPointer;
+    for(int index=0;index<10000;index++)
+        LOGI("@coanConverter: %d \n",no_arrayPointer[index]);*/
+
     if (arrayPointer == NULL) {
         throwJavaException(env,"scanConverter","Get byte data failed to NULL");
         return;
@@ -289,7 +294,7 @@ JNIEXPORT void JNICALL Java_com_echopen_asso_echopen_preproc_ScanConversion_scan
                 return;
     }
 
-    runScanConverter(bitmapContent, size, (uint8_t*)arrayPointer, length, width, height, n_samples, index_data_array, img_data_array, weight_array, num_pixels);
+    runScanConverter(bitmapContent, size, arrayPointer, length, width, height, n_samples, index_data_array, img_data_array, weight_array, num_pixels);
     env->ReleaseIntArrayElements(intArrayData,arrayPointer,0);
     AndroidBitmap_unlockPixels(env, bitmapOut);
 }

@@ -355,11 +355,15 @@ public class ScanConversion {
         int[] num_data = new int[len];
         //Random generator = new Random();
 
-        for (int i = 0; i < len; i++) {
-            /*if((int) envelope_data[i] > 0) index++;
-            Log.d("TAGGY", "grt !"+ index);*/
-            num_data[i] = 255 /*- (int) envelope_data[i]*/;
+        /*for (int i = 0; i < len; i++) {
+
+            num_data[i] = 255 *//*(int) envelope_data[i]*//*;
             //num_data[i] = generator.nextInt(255);
+        }*/
+        for (int i = 0; i < 128; i++) {
+            for (int j = 0; j < 1672; j++) {
+                num_data[j+i*1672] = (int) envelope_data[j*128+i];
+            }
         }
 
         //Bitmap bitmap = Bitmap.createBitmap(512, 512, Bitmap.Config.ARGB_8888);

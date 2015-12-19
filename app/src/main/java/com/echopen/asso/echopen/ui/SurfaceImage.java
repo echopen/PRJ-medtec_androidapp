@@ -46,8 +46,8 @@ public class SurfaceImage extends SurfaceView implements SurfaceHolder.Callback{
     public void surfaceCreated(SurfaceHolder pHolder) {
         try {
             mTrgtRect	= pHolder.getSurfaceFrame();
-            mBackBuffer = Bitmap.createBitmap(Constants.MAX_DISP_IMG_WIDTH,
-                    Constants.MAX_DISP_IMG_HEIGHT, Bitmap.Config.ARGB_8888);
+            mBackBuffer = Bitmap.createBitmap(512,
+                    512, Bitmap.Config.ARGB_8888);
             ScanConversion scanConversion = new ScanConversion(activity, mBackBuffer);
         }
         catch (Exception e) {
@@ -87,10 +87,10 @@ public class SurfaceImage extends SurfaceView implements SurfaceHolder.Callback{
     @Override
     protected void onDraw(Canvas pCanvas) {
         if( mBackBuffer!=null ) {
-            Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,0)));
+           /* Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,0)));
             Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,1)));
             Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,2)));
-            Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,3)));
+            Log.d("TAGGYS", String.valueOf(mBackBuffer.getPixel(0,3)));*/
             pCanvas.drawBitmap(mBackBuffer, mSrcRect, mTrgtRect, null);
         }
     }

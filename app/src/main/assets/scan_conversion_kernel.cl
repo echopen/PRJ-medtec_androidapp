@@ -2,7 +2,7 @@ uchar4 convertYtoRGBA(int y);
 
 __kernel void scanConverter( __global uchar4* out,
                             int size,
-                          __global uchar*  envelope_data,
+                          __global uchar4*  envelope_data,
                           int length,
                           int im_width,
                           int im_height,
@@ -21,14 +21,13 @@ __kernel void scanConverter( __global uchar4* out,
     int gy	= get_global_id(1);
     int inIdx= gy*im_width+gx;
 
-    ij_index_coef = 4 *inIdx;
+    ij_index_coef = 4 * index_samp_line[inIdx];
     weight_pointer = &(weight_coef[ij_index_coef]);
     env_pointer = &(envelope_data[index_samp_line[inIdx]]);
 
     int y  = (0xFF & ((int) (weight_pointer[0] * env_pointer[0]
                                                   + weight_pointer[1] * env_pointer[1]
                                                   + weight_pointer[2] * env_pointer[N_samples]
-
                                                   + weight_pointer[3] * env_pointer[N_samples+1] + ((uchar)0.5))));
     out[image_index[inIdx]]
             =         convertYtoRGBA(y);

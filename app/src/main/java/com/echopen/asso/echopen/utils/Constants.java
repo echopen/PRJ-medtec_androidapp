@@ -93,7 +93,6 @@ public class Constants {
 
         public static final int NUM_LINES = 128;
 
-
         public static final float IMAGE_SIZE = (float) 0.105F;
 
         /* image width in rad */
