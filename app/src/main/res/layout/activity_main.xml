@@ -24,8 +24,8 @@
             android:layout_weight="1">
             <ImageView
                 android:id="@+id/echo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="349dp"
+                android:layout_height="460dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/arrow_blue" />
         </FrameLayout>

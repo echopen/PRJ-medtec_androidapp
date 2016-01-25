@@ -2,8 +2,8 @@ package com.echopen.asso.echopen.preproc;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.util.Log;
 
+import com.echopen.asso.echopen.model.Data.Data;
 import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.model.Data.tmpData;
 import com.echopen.asso.echopen.utils.Constants;
@@ -66,6 +66,16 @@ public class ScanConversion {
 
     private static int[][] udpDataArray;
 
+    private static int[] image;
+
+    private static int N_samples;
+
+    private static int[] num;
+
+    private static int[] envelope_data;
+
+    private Random rnd = new Random();
+
     public void setNumPixels(int numPixels) {
         this.numPixels = numPixels;
     }
@@ -121,6 +131,10 @@ public class ScanConversion {
 
     public void setUdpDataArray(int[][] udpDataArray) {
         ScanConversion.udpDataArray = udpDataArray;
+    }
+
+    public ScanConversion(final Data data) {
+        setData(data);
     }
 
     public ScanConversion(InputStreamReader inputStreamReader) {
@@ -274,6 +288,21 @@ public class ScanConversion {
 
                                      int image[]            /*  The resulting image                           */
     ) {
+        if (image == null) {
+            throw new IllegalArgumentException("image must not be null");
+        }
+        if (image_index == null) {
+            throw new IllegalArgumentException("image_index must not be null");
+        }
+        if (envelope_data == null) {
+            throw new IllegalArgumentException("envelope_data must not be null");
+        }
+        if (weight_coef == null) {
+            throw new IllegalArgumentException("weight_coef must not be null");
+        }
+        if (index_samp_line == null) {
+            throw new IllegalArgumentException("index_samp_line must not be null");
+        }
         int           i;                 /*  Integer loop counter                */
         int           ij_index_coef;     /*  Index into coefficient array        */
         int env_index;      /*  Pointer to the envelope data        */
@@ -292,6 +321,31 @@ public class ScanConversion {
                             + 0.5);
             ij_index_coef = ij_index_coef + 4;
         }
+    }
+
+    public void setData(final Data value) {
+        if (value == null) {
+               /* ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
+                envelope_data = echoData.getEnvelopeData();
+            } else {
+                envelope_data = value.getEnvelopeData();*/
+            throw new IllegalArgumentException("Data value must not be null");
+        }
+        assert(value != null);
+        envelope_data = value.getEnvelopeData();
+        if (envelope_data == null) {
+            throw new IllegalArgumentException("The Envelope Data must not be null");
+        }
+    }
+
+    public void randomize() {
+        int x = rnd.nextInt(envelope_data.length);
+        envelope_data[x] = rnd.nextInt(255);
+    }
+    
+    public void setUdpData() {
+        final ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
+        setData(echoData);
     }
 
     public static void compute_tables() {
@@ -331,6 +385,13 @@ public class ScanConversion {
     }
 
     private int[] compute_interpolation() throws IOException {
+        assert(envelope_data != null);
+        if (image == null || num == null) {
+            compute_tables();
+        }
+        assert(num != null);
+        assert(image != null);
+
         ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
         int[] envelope_data = echoData.getEnvelopeData();
 
