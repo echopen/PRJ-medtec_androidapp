@@ -35,18 +35,34 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * MainActivity class handles the main screen of the app.
+ * Tools are called in the following order :
+ * - initSwipeViews() handles the gesture tricks via GestureDetector class
+ * - initViewComponents() mainly sets the clickable elements
+ * - initActionController() and setupContainer() : in order to separate concerns, View parts are handled by the initActionController()
+ * method which calls the MainActionController class that deals with MainActivity Views,
+ * especially handles the display of the main screen picture
+ * These two methods should be refactored into one
+ */
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
+    /* integer constant that switch wether the photo or the video is on */
     private int display;
 
     private SurfaceImage surfaceImage;
 
+   /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
 
     public GestureDetector gesture;
 
+    /* main UI constants of the app */
     public Constants.Settings setting;
 
+    /** locator of the screenshots or - the runcamera() method that processes it is currently unused
+     * for the moment - but it will be plugged again later in the developement
+     */
     protected Uri uri;
 
     static {
@@ -74,7 +90,11 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         }
     }
 
-
+    /** This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
+     * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
+     * and then displays them.
+     * Also, this method uses the Config singleton class that provides device-specific constants
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,9 +131,18 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         preview.addView(surfaceImage);
 
         Log.d("TAGG", "Hello");
-        //UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
+        try {
+            UDPToBitmapDisplayer udpData = new UDPToBitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /*
+    * initActionController() is used to separate concerns
+    * MainActionController sets the main UI elements and handles the display of the main screen picture
+    * @param no params
+    * */
     public void initActionController() {
         Activity activity = this;
         mainActionController = new MainActionController(activity);
@@ -142,6 +171,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         applyBgTheme(findViewById(R.id.vBottom));
     }
 
+    /**
+     * Sets a click listener on the LinearLayout that wraps the main screen picture
+     * @param mainframe, the LinearLayout's id that wraps the main screen picture
+     */
     private void setClickToFilter(int mainframe) {
         final View mainFrame = findViewById(mainframe);
         mainFrame.setOnClickListener(new View.OnClickListener() {
@@ -229,6 +262,11 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         //runCamera();
     }
 
+    /**
+     * Choose which camera to use with the help of clickable View
+     * Starts the Setting activity, if the setting button is clicked
+     * @param v, the clickable View
+     */
     private void chooseCamera(View v) {
         if (display != setting.DISPLAY_PHOTO
                 && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
@@ -295,6 +333,15 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         return true;
     }
 
+    /**
+     * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
+     * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
+     * the resultCode it returned, and any additional data from it.”,
+     * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
+     * @param requestCode
+     * @param resultCode
+     * @param data, Intent instance
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
