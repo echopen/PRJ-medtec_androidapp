@@ -9,6 +9,12 @@ import java.io.InputStreamReader;
 
 /**
  * Created by mehdibenchoufi on 21/10/15.
+ * This Class inherits form Displayer class. The latter connects with the UI of the MainActivity
+ * handled by the MainActionController class.
+ *
+ * Specifically
+ *
+ * @todo: implement a code pattern protocol-agnostic.
  */
 public class ReadableData extends Data {
 

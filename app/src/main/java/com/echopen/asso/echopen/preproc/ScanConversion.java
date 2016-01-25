@@ -14,6 +14,22 @@ import java.util.Random;
 
 /**
  * Created by mehdibenchoufi on 16/09/15.
+ * Created by mehdibenchoufi on 16/09/15.
+ * ScanConversion is the class that processes the scan conversion which allows one to
+ * recreate a clinical image from a set of data sent by a probe.
+ * The received image depends on the geometry of the probe. This process intends to recreate the ‘real’ image.
+ * An ultrasound beamformer generates coherently summed image data in polar format while the standard TV raster display is rectangular.
+ * Hence, polar to Cartesian scan conversion is necessary before display.
+ *
+ * Mainly, the scan conversion transform the incoming raw data in two steps
+ *  - maps polar coordinates to cartesian coordinates
+ *  - interpolates data : roughly speaking, steps between the spatial interval for data
+ *  will not match with the step of two contiguous pixels. This create the need for interpolation.
+ *
+ *  In order to interpolate, we use the function make_tables() : this methods affects weights to the each
+ *  4-uplets of pixels, that are as close to 1 as the the mismatch described above is weak
+ *
+ * @see more explantation : http://echopen.org/index.php?title=Challenge_scan_conversion, http://echopen.org/index.php?title=Scan_Conversion,
  */
 public class ScanConversion {
 
