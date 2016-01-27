@@ -342,7 +342,7 @@ public class ScanConversion {
         int x = rnd.nextInt(envelope_data.length);
         envelope_data[x] = rnd.nextInt(255);
     }
-    
+
     public void setUdpData() {
         final ReadableData echoData = new ReadableData(ScanConversion.udpDataArray, int.class);
         setData(echoData);
