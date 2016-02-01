@@ -7,6 +7,7 @@ import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
@@ -22,9 +24,12 @@ import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
+import com.echopen.asso.echopen.utils.UIParams;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.opencv.android.OpenCVLoader;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -38,6 +43,11 @@ import java.io.InputStream;
  */
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
+
+    static {
+        // If you use opencv 2.4, System.loadLibrary("opencv_java")
+        System.loadLibrary("opencv_java3");
+    }
 
     /* integer constant that switch wether the photo or the video is on */
     private int display;
@@ -65,22 +75,94 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        //findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.vMiddle);
-        linearLayout.setBackgroundColor(Color.TRANSPARENT);
+//        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.vMiddle);
+//        linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
         initSwipeViews();
-        initViewComponents();
+        //initViewComponents();
         initActionController();
         setupContainer();
         Config.getInstance(this);
 
+        final SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                UIParams.setParam1(progress);
+            }
+        });
+        final SeekBar seekbar2 = (SeekBar) findViewById(R.id.seekBar2);
+        seekbar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                UIParams.setParam2(progress);
+            }
+        });
+        final SeekBar seekbar3 = (SeekBar) findViewById(R.id.seekBar3);
+        seekbar3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                UIParams.setParam3(progress);
+            }
+        });
+        final SeekBar seekbar4 = (SeekBar) findViewById(R.id.seekBar4);
+        seekbar4.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                UIParams.setParam4(progress);
+            }
+        });
+        final SeekBar seekbar5 = (SeekBar) findViewById(R.id.seekBar5);
+        seekbar5.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+                UIParams.setParam5(progress);
+            }
+        });
+
+        OpenCVLoader.initDebug();
+
         try {
             BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
 
-            if (false) {
-                bitmapDisplayer.readDataFromUDP();
+            if (true) {
+                bitmapDisplayer.readDataFromTCP();
             } else {
                 AssetManager assetManager = getResources().getAssets();
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
@@ -108,25 +190,25 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     * @param no param
     * */
     private void initViewComponents() {
-        setTouchNClick(R.id.btnCapture);
-        setTouchNClick(R.id.btnEffect);
-        setTouchNClick(R.id.btnPic);
-        setTouchNClick(R.id.tabBrightness);
-        setTouchNClick(R.id.tabGrid);
-        setTouchNClick(R.id.tabSetting);
-        setTouchNClick(R.id.tabSuffle);
-        setTouchNClick(R.id.tabTime);
+//        setTouchNClick(R.id.btnCapture);
+//        setTouchNClick(R.id.btnEffect);
+//        setTouchNClick(R.id.btnPic);
+//        setTouchNClick(R.id.tabBrightness);
+//        setTouchNClick(R.id.tabGrid);
+//        setTouchNClick(R.id.tabSetting);
+//        setTouchNClick(R.id.tabSuffle);
+//        setTouchNClick(R.id.tabTime);
+//
+//        setClick(R.id.btn1);
+//        setClick(R.id.btn2);
+//        setClick(R.id.btn3);
+//        setClick(R.id.btn4);
+//        setClick(R.id.btn5);
 
-        setClick(R.id.btn1);
-        setClick(R.id.btn2);
-        setClick(R.id.btn3);
-        setClick(R.id.btn4);
-        setClick(R.id.btn5);
-
-        setClickToFilter(R.id.vMiddle);
-
-        applyBgTheme(findViewById(R.id.vTop));
-        applyBgTheme(findViewById(R.id.vBottom));
+//        setClickToFilter(R.id.vMiddle);
+//
+//        applyBgTheme(findViewById(R.id.vTop));
+//        applyBgTheme(findViewById(R.id.vBottom));
     }
 
 
@@ -149,6 +231,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
      * Initiates the swip view
      */
     private void initSwipeViews() {
+        /*
         gesture = new GestureDetector(this, gestureListner);
 
         OnTouchListener otl = new OnTouchListener() {
@@ -159,6 +242,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             }
         };
         findViewById(R.id.content_frame).setOnTouchListener(otl);
+        */
     }
 
     /**
@@ -234,7 +318,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        chooseCamera(v);
+        //chooseCamera(v);
     }
 
     /**
@@ -242,42 +326,42 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
      * Starts the Setting activity, if the setting button is clicked
      * @param v, the clickable View
      */
-    private void chooseCamera(View v) {
-        if (display != setting.DISPLAY_PHOTO
-                && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
-            display = setting.DISPLAY_PHOTO;
-            setupContainer();
-        } else if (v.getId() == R.id.btn2) {
-            if (display == setting.DISPLAY_VIDEO) {
-                display = setting.DISPLAY_FILTER;
-                setupContainer();
-            } else if (display == setting.DISPLAY_FILTER) {
-                display = setting.DISPLAY_PHOTO;
-                setupContainer();
-            }
-        } else if (v.getId() == R.id.btn4) {
-            if (display == setting.DISPLAY_PHOTO) {
-                display = setting.DISPLAY_FILTER;
-                setupContainer();
-            } else if (display == setting.DISPLAY_FILTER) {
-                display = setting.DISPLAY_VIDEO;
-                setupContainer();
-            }
-        } else if (v.getId() == R.id.btn5 && display == setting.DISPLAY_PHOTO) {
-            display = setting.DISPLAY_VIDEO;
-            setupContainer();
-        } else if (display != setting.DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
-            display = setting.DISPLAY_FILTER;
-            setupContainer();
-        } else if (v.getId() == R.id.btnCapture) {
-            if (display == setting.DISPLAY_FILTER) {
-                display = setting.DISPLAY_PHOTO;
-                setupContainer();
-            }
-        } else if (v.getId() == R.id.tabSetting) {
-            startActivity(new Intent(this, Settings.class));
-        }
-    }
+//    private void chooseCamera(View v) {
+//        if (display != setting.DISPLAY_PHOTO
+//                && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
+//            display = setting.DISPLAY_PHOTO;
+//            setupContainer();
+//        } else if (v.getId() == R.id.btn2) {
+//            if (display == setting.DISPLAY_VIDEO) {
+//                display = setting.DISPLAY_FILTER;
+//                setupContainer();
+//            } else if (display == setting.DISPLAY_FILTER) {
+//                display = setting.DISPLAY_PHOTO;
+//                setupContainer();
+//            }
+//        } else if (v.getId() == R.id.btn4) {
+//            if (display == setting.DISPLAY_PHOTO) {
+//                display = setting.DISPLAY_FILTER;
+//                setupContainer();
+//            } else if (display == setting.DISPLAY_FILTER) {
+//                display = setting.DISPLAY_VIDEO;
+//                setupContainer();
+//            }
+//        } else if (v.getId() == R.id.btn5 && display == setting.DISPLAY_PHOTO) {
+//            display = setting.DISPLAY_VIDEO;
+//            setupContainer();
+//        } else if (display != setting.DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
+//            display = setting.DISPLAY_FILTER;
+//            setupContainer();
+//        } else if (v.getId() == R.id.btnCapture) {
+//            if (display == setting.DISPLAY_FILTER) {
+//                display = setting.DISPLAY_PHOTO;
+//                setupContainer();
+//            }
+//        } else if (v.getId() == R.id.tabSetting) {
+//            startActivity(new Intent(this, Settings.class));
+//        }
+//    }
 
     /**
      * @param item, MenuItem instance
