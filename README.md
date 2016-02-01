@@ -1,3 +1,7 @@
+**Please see [README-OPENCV.md](README-OPENCV.md) for additional information on this branch.**
+
+---
+
 # Echopen Android App
 
 This android app aims to show medical image from an echopen (or other ?)
