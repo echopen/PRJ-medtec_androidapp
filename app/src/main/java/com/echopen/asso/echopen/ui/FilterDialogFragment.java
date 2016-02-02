@@ -68,13 +68,16 @@ public class FilterDialogFragment extends DialogFragment {
                         protected Bitmap doInBackground(Void... voids) {
                             Bitmap bitmap = null;
                             try {
-                                WaveletDenoise waveletDenoise = new WaveletDenoise(image);
-                                waveletDenoise.denoise();
-                                //ImageEnhancement imageEnhancement = new ImageEnhancement(image);
-                                //imageEnhancement.enhance();
-                                //bitmap = imageEnhancement.getBitmap();
-
-                                bitmap = waveletDenoise.getBitmap();
+                                if(filtersItems.contains(0)) {
+                                    WaveletDenoise waveletDenoise = new WaveletDenoise(image);
+                                    waveletDenoise.denoise();
+                                    bitmap = waveletDenoise.getBitmap();
+                                }
+                                else if(filtersItems.contains(1)) {
+                                    ImageEnhancement imageEnhancement = new ImageEnhancement(image);
+                                    imageEnhancement.enhance();
+                                    bitmap = imageEnhancement.getBitmap();
+                                }
                             } catch (Exception e) {
                                 Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT);
                                 toast.show();

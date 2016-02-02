@@ -29,6 +29,11 @@ public class BaseProcess {
         bitmap = ((BitmapDrawable) imageview.getDrawable()).getBitmap();
     }
 
+    /*
+     * Checking the type of the imageBase, and casting the instance accordingly
+     * To find the correct datatypes, the reader is referred to the Enum types detailed here
+     * http://boofcv.org/javadoc/boofcv/struct/image/ImageDataType.html
+     */
     protected void getBackBitmap(){
        if (imageDataType.equals("U8"))
             bitmap = ConvertBitmap.grayToBitmap((ImageUInt8) imageBase.getImage(), Bitmap.Config.ARGB_8888);
