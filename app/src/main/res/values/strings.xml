@@ -9,9 +9,9 @@
     <string-array
         name="filter_choice">
         <item>Convolution</item>
-        <item>Fake filter</item>
-        <item>Fake filter</item>
-        <item>Fake filter</item>
+        <item>Image enhancement</item>
+        <item>Other filter</item>
+        <item>Other filter</item>
     </string-array>
     <string-array
         name="choose_camera">
