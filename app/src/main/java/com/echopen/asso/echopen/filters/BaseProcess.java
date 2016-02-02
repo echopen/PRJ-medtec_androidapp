@@ -5,6 +5,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.widget.ImageView;
 
 import boofcv.android.ConvertBitmap;
+import boofcv.struct.image.ImageDataType;
 import boofcv.struct.image.ImageFloat32;
 import boofcv.struct.image.ImageSingleBand;
 import boofcv.struct.image.ImageUInt8;
@@ -18,6 +19,8 @@ public class BaseProcess {
 
     protected BaseImage imageBase;
 
+    protected ImageDataType imageDataType;
+
     public Bitmap getBitmap() {
         return bitmap;
     }
@@ -27,6 +30,9 @@ public class BaseProcess {
     }
 
     protected void getBackBitmap(){
-        bitmap = ConvertBitmap.grayToBitmap((ImageFloat32) imageBase.getImage(), Bitmap.Config.ARGB_8888);
+       if (imageDataType.equals("U8"))
+            bitmap = ConvertBitmap.grayToBitmap((ImageUInt8) imageBase.getImage(), Bitmap.Config.ARGB_8888);
+        else if (imageDataType.equals("F32"))
+           bitmap = ConvertBitmap.grayToBitmap((ImageFloat32) imageBase.getImage(), Bitmap.Config.ARGB_8888);
     }
 }

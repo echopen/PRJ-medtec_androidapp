@@ -8,11 +8,14 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.filters.ImageEnhancement;
 import com.echopen.asso.echopen.filters.WaveletDenoise;
 
 import java.util.ArrayList;
@@ -42,12 +45,12 @@ public class FilterDialogFragment extends DialogFragment {
                         })
                 .setPositiveButton(getResources().getString(R.string.ok_dialog), new DialogInterface.OnClickListener() {
 
-                    class ProceesImageTask extends AsyncTask<Void,Void,Bitmap>{
+                    class ProcessImageTask extends AsyncTask<Void,Void,Bitmap>{
                         private ProgressDialog dialog;
                         private Activity activity;
                         private ImageView image;
 
-                        public ProceesImageTask(Activity activity, ImageView image) {
+                        public ProcessImageTask(Activity activity, ImageView image) {
                             this.activity = activity;
                             this.image = image;
                             dialog = new ProgressDialog(activity, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
@@ -67,6 +70,10 @@ public class FilterDialogFragment extends DialogFragment {
                             try {
                                 WaveletDenoise waveletDenoise = new WaveletDenoise(image);
                                 waveletDenoise.denoise();
+                                //ImageEnhancement imageEnhancement = new ImageEnhancement(image);
+                                //imageEnhancement.enhance();
+                                //bitmap = imageEnhancement.getBitmap();
+
                                 bitmap = waveletDenoise.getBitmap();
                             } catch (Exception e) {
                                 Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT);
@@ -88,7 +95,12 @@ public class FilterDialogFragment extends DialogFragment {
                         // todo : to be completed filters in action
                         Activity activity = getActivity();
                         ImageView image = (ImageView) activity.findViewById(R.id.echo);
-                        new ProceesImageTask(activity,image).execute();
+                        ProcessImageTask processImageTask = new ProcessImageTask(activity,image);
+
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
+                            processImageTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
+                        else
+                            processImageTask.execute((Void[])null);
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.cancel_dialog), new DialogInterface.OnClickListener() {

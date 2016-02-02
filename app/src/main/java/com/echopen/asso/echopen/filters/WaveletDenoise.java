@@ -1,6 +1,5 @@
 package com.echopen.asso.echopen.filters;
 
-import android.graphics.Bitmap;
 import android.widget.ImageView;
 
 import java.util.Random;
@@ -9,6 +8,7 @@ import boofcv.abst.denoise.FactoryImageDenoise;
 import boofcv.abst.denoise.WaveletDenoiseFilter;
 import boofcv.alg.misc.GImageMiscOps;
 import boofcv.android.ConvertBitmap;
+import boofcv.core.image.ConvertBufferedImage;
 import boofcv.struct.image.ImageFloat32;
 
 /**
@@ -21,6 +21,7 @@ public class WaveletDenoise extends BaseProcess {
     public WaveletDenoise(ImageView imageview) {
         super(imageview);
         imageBase = new BaseImage(ConvertBitmap.bitmapToGray(bitmap, (ImageFloat32) null, null));
+        imageDataType = imageBase.getImage().getDataType();
         imageFloat32 = (ImageFloat32) imageBase.getImage();
     }
 
@@ -36,6 +37,7 @@ public class WaveletDenoise extends BaseProcess {
         WaveletDenoiseFilter<ImageFloat32> denoiser =
                 FactoryImageDenoise.waveletBayes(ImageFloat32.class, numLevels, 0, 255);
         // remove noise from the image
+        //ConvertBufferedImage.convertTo(denoised, null),"Denoised"
         denoiser.process(input, denoised);
         imageBase.setImage(denoised);
     }

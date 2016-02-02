@@ -9,9 +9,9 @@
     <string-array
         name="filter_choice">
         <item>Convolution</item>
-        <item>Gaussian Blur</item>
-        <item>Choose Picture</item>
-        <item>Choose Picture</item>
+        <item>Fake filter</item>
+        <item>Fake filter</item>
+        <item>Fake filter</item>
     </string-array>
     <string-array
         name="choose_camera">
