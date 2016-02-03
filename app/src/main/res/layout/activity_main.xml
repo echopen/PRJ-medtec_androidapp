@@ -22,13 +22,12 @@
             android:layout_width="349dp"
             android:layout_height="460dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/echo_image" />
+            android:src="@drawable/example_lena_denoise_noisy" />
         <RelativeLayout
             style="@style/GenericProgressBackground"
             android:id="@+id/loadingPanel"
             >
-            <ProgressBar
-                style="@style/GenericProgressIndicator"/>
+            <ProgressBar style="@style/GenericProgressIndicator"/>
         </RelativeLayout>
     </LinearLayout>
     <LinearLayout

@@ -1,5 +1,6 @@
 package com.echopen.asso.echopen.filters;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.Random;
@@ -27,6 +28,7 @@ public class WaveletDenoise extends BaseProcess {
 
     private void denoising() {
         Random rand = new Random(234);
+        ImageFloat32 input1 = imageFloat32.clone();
         ImageFloat32 input = imageFloat32.clone();
 
         GImageMiscOps.addGaussian(input, rand, 20, 0, 255);
@@ -37,7 +39,6 @@ public class WaveletDenoise extends BaseProcess {
         WaveletDenoiseFilter<ImageFloat32> denoiser =
                 FactoryImageDenoise.waveletBayes(ImageFloat32.class, numLevels, 0, 255);
         // remove noise from the image
-        //ConvertBufferedImage.convertTo(denoised, null),"Denoised"
         denoiser.process(input, denoised);
         imageBase.setImage(denoised);
     }

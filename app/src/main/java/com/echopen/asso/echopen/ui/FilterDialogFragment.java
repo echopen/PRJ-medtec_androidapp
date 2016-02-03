@@ -7,6 +7,7 @@ import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.filters.BaseProcess;
 import com.echopen.asso.echopen.filters.ImageEnhancement;
 import com.echopen.asso.echopen.filters.WaveletDenoise;
 
@@ -77,6 +79,10 @@ public class FilterDialogFragment extends DialogFragment {
                                     ImageEnhancement imageEnhancement = new ImageEnhancement(image);
                                     imageEnhancement.enhance();
                                     bitmap = imageEnhancement.getBitmap();
+                                }
+                                else{
+                                    BaseProcess baseProcess = new BaseProcess(image);
+                                    bitmap = baseProcess.getBitmap();
                                 }
                             } catch (Exception e) {
                                 Toast toast = Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT);

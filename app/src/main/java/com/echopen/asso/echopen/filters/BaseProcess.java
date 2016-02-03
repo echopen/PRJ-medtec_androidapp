@@ -2,6 +2,7 @@ package com.echopen.asso.echopen.filters;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.widget.ImageView;
 
 import boofcv.android.ConvertBitmap;
@@ -35,9 +36,10 @@ public class BaseProcess {
      * http://boofcv.org/javadoc/boofcv/struct/image/ImageDataType.html
      */
     protected void getBackBitmap(){
-       if (imageDataType.equals("U8"))
+       if (imageDataType.name().equals("U8"))
             bitmap = ConvertBitmap.grayToBitmap((ImageUInt8) imageBase.getImage(), Bitmap.Config.ARGB_8888);
-        else if (imageDataType.equals("F32"))
+        else if (imageDataType.name().equals("F32")) {
            bitmap = ConvertBitmap.grayToBitmap((ImageFloat32) imageBase.getImage(), Bitmap.Config.ARGB_8888);
+       }
     }
 }
