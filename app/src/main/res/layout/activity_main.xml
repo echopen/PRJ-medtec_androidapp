@@ -22,7 +22,7 @@
             android:layout_width="349dp"
             android:layout_height="460dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/example_lena_denoise_noisy" />
+            android:src="@drawable/echo_image" />
         <RelativeLayout
             style="@style/GenericProgressBackground"
             android:id="@+id/loadingPanel"

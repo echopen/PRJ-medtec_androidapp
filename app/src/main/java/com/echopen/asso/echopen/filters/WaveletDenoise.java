@@ -28,7 +28,6 @@ public class WaveletDenoise extends BaseProcess {
 
     private void denoising() {
         Random rand = new Random(234);
-        ImageFloat32 input1 = imageFloat32.clone();
         ImageFloat32 input = imageFloat32.clone();
 
         GImageMiscOps.addGaussian(input, rand, 20, 0, 255);

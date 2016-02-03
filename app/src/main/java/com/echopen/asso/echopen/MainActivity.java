@@ -76,7 +76,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setupContainer();
         Config.getInstance(this);
 
-        /*try {
+        try {
             BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
 
             if (false) {
@@ -89,7 +89,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
     }
 
     /*
