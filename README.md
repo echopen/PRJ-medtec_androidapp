@@ -99,6 +99,10 @@ try to read them quick as possible.
 
   `phantom/img_kydney.txt` and `phantom/img_obs.txt` corresponds to the raw signal that needs to be filtered. They serve as basis for the envelope detection from which pixels intensity are deduced. ** The resulting pixel file sits in `data_kydney.csv`**
 
+   In the phantom folder, there are some java classes that are meant to ran outside of android. This is useful for testing and improving the , without the hassle of running an android emulator.  
+   *remark* the `PostProcessing` class relies on `BoofCV` library. The `jars` can be found [here](http://sourceforge.net/projects/boofcv/?source=typ_redirect). 
+
+
 
 ### Image Processing *this is exploratory*
 
@@ -122,8 +126,8 @@ try to read them quick as possible.
   bitmap = waveletDenoise.getBitmap();
   ```
 
-  Processing can take a long time. It is recommended to wrap it in an `AsyncTask` !
-
+  Processing can take a long time. It is recommended to wrap it in an `AsyncTask` !  
+  
 ## Documentation and Issues
 
   Documentation and issue about echopen -- Perhaps some duplication with http://echopen.org/
