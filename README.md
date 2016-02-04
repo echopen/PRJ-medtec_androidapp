@@ -1,4 +1,4 @@
-All work in this repository is under the licence bsd available [here](https://github.com/echopen/android-app/blob/master/licence)
+All work in this repository is under the licence bsd available [here](https://github.com/echopen/android-app/blob/master/LICENSE.md)
 
 # Echopen Android App
 
