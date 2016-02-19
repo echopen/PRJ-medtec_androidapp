@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/greg/Desktop/echopen/repo-opencv3-1/android-app/openCVLibrary310/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/greg/Desktop/echopen/repo-opencv3-1/android-app/openCVLibrary310/src/debug/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/mehdibenchoufi/project/openCVLibrary310/src/main/assets"/></dataSet><dataSet config="debug"><source path="/Users/mehdibenchoufi/project/openCVLibrary310/src/debug/assets"/></dataSet></merger>

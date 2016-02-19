@@ -1,7 +1,6 @@
 package com.echopen.asso.echopen.preproc;
 
 import android.util.Log;
-import android.util.TimingLogger;
 
 import com.echopen.asso.echopen.model.Data.Data;
 import com.echopen.asso.echopen.model.Data.ReadableData;
