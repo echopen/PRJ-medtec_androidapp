@@ -14,6 +14,7 @@ import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
+import java.nio.IntBuffer;
 import java.util.Arrays;
 
 /**
@@ -47,6 +48,7 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         }
         //Arrays.fill(colors, 0, 4*scannedArray.length, Color.WHITE);
         final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_z, Constants.PreProcParam.N_x, Bitmap.Config.ARGB_8888);
+
         try {
             activity.runOnUiThread(new Runnable() {
                 @Override

@@ -39,9 +39,9 @@ public class Constants {
 
         public static final String CONTENT_TYPE_JSON = "application/json";
 
-        public static final String REDPITAYA_UDP_IP = "10.1.1.1";
+        public static final String REDPITAYA_UDP_IP = "192.168.128.5";
 
-        public static final int REDPITAYA_UDP_PORT = 1235;
+        public static final int REDPITAYA_UDP_PORT = 7538;
     }
 
     public static class Settings{
@@ -91,16 +91,16 @@ public class Constants {
 
         public static final int tmp_NUM_LINES = 60;
 
-        public static final int NUM_LINES = 120;
+        public static final int NUM_LINES = 128;
 
         public static final float IMAGE_SIZE = (float) 0.201;
 
         /* image width in rad */
         public static final double IMAGE_WIDTH = 0.5 * Math.PI;
 
-        public static final int NUM_SAMPLES = 511;
+        public static final int NUM_SAMPLES = 2048;
 
-        public static final int NUM_IMG_DATA = 120;
+        public static final int NUM_IMG_DATA = 128;
 
         public static final double RADIAL_IMG_INIT = 0.013;
 
