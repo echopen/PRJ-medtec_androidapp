@@ -42,8 +42,6 @@ public class ProcessTCPTask extends AbstractDataTask {
     }
 
     protected Void doInBackground(Void... Voids) {
-        int msgLen;
-        byte[] msgLenBytes;
         InputStream stream;
         byte[] message0 = new byte[128*1024];
 
@@ -61,27 +59,15 @@ public class ProcessTCPTask extends AbstractDataTask {
             stream = s.getInputStream();
             int num_lines = 128;
             int num_data = 2048;
-            int check_line =0;
             byte[] message = new byte[num_lines*num_data];
-            byte[] tmpBuffer = new byte[num_data];
 
             while (true) {
                 try {
-                    //msgLenBytes = readBytes(4, stream);
-                    //msgLen = java.nio.ByteBuffer.wrap(msgLenBytes).order(java.nio.ByteOrder.LITTLE_ENDIAN).getInt();
-                    //message = readBytes(msgLen, stream);
-
                     message = deepInsidePacket(2049, stream);
-                   /* while (check_line < 128) {
-                        tmpBuffer = getReadLineBytes(2049, stream);
-                        System.arraycopy(tmpBuffer, 0, message, check_line * num_data, num_data - 1);
-                        check_line++;
-                    }*/
+
                     ScanConversion scnConv = ScanConversion.getInstance(message);
                     scnConv.setTcpData();
                     refreshUI(scnConv);
-                    message = new byte[num_lines*num_data];
-                    //check_line = 0;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

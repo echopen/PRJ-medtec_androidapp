@@ -581,10 +581,6 @@ public class ScanConversion {
 
         int[] dest_out = new int[5096 * 5096];
         opencv_dest.get(0, 0, dest_out);
-        /*for (int i = 0; i < 2048 * 2048; i++) {
-            if(dest_out[i] !=0)
-                Log.d("this os ", String.valueOf(i));
-        }*/
         return dest_out;
     }
 }
