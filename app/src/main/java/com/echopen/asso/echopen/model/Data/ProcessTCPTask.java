@@ -43,11 +43,11 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     protected Void doInBackground(Void... Voids) {
         InputStream stream;
-        byte[] message0 = new byte[128*1024];
+        byte[] message0 = new byte[128*512];
 
         for (int i = 0; i < 128; i++) {
-            for (int j = 0; j < 1024; j++) {
-                    message0[i*1024 +j] = (byte) 250;
+            for (int j = 0; j < 512; j++) {
+                    message0[i*512 +j] = (byte) 250;
             }
         }
         ScanConversion scnConv0 = ScanConversion.getInstance(message0);
@@ -64,7 +64,6 @@ public class ProcessTCPTask extends AbstractDataTask {
             while (true) {
                 try {
                     message = deepInsidePacket(2049, stream);
-
                     ScanConversion scnConv = ScanConversion.getInstance(message);
                     scnConv.setTcpData();
                     refreshUI(scnConv);
