@@ -51,6 +51,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     /* main UI constants of the app */
     public Constants.Settings setting;
 
+    /* constant setting the process via UDP or TCP - @todo : the user should choose the desired way -
+     should implement a dedicated check button */
+
+    public static boolean TCP_ACQUISITION = false;
+
+    public static boolean UDP_ACQUISITION = false;
+
     /** locator of the screenshots or - the runcamera() method that processes it is currently unused
     * for the moment - but it will be plugged again later in the developement
     */
@@ -74,14 +81,20 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initViewComponents();
         initActionController();
         setupContainer();
+
+        TCP_ACQUISITION = true;
         Config.getInstance(this);
 
         try {
             BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
 
-            if (false) {
+            if (UDP_ACQUISITION) {
                 bitmapDisplayer.readDataFromUDP();
-            } else {
+            }
+            else if(TCP_ACQUISITION) {
+                bitmapDisplayer.readDataFromTCP();
+            }
+            else {
                 AssetManager assetManager = getResources().getAssets();
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
                 bitmapDisplayer.readDataFromFile(inputStream);

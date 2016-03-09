@@ -1,5 +1,7 @@
 package com.echopen.asso.echopen.preproc;
 
+import android.util.Log;
+
 import com.echopen.asso.echopen.model.Data.Data;
 import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
@@ -57,6 +59,8 @@ public class ScanConversion {
     private static int N_samples;
     private static int[] num;
     private static int[] envelope_data;
+    private static byte[] envelope_data_bytes;
+    private static byte[] tcpDataArray;
 
     private Random rnd = new Random();
 
@@ -181,6 +185,14 @@ public class ScanConversion {
     }
 
     /**
+     * ScanConversion constructor with udpDataArray argument
+     * @param tcpDataArray
+     */
+    public ScanConversion(byte[] tcpDataArray) {
+        ScanConversion.tcpDataArray = tcpDataArray;
+    }
+
+    /**
      * Singleton getInstance method, with InputStreamReader argument
      * inputStreamReader holds the simulated data stored in a csv format,
      * in a file stored in the assets folder
@@ -209,6 +221,15 @@ public class ScanConversion {
         ScanConversion.udpDataArray = udpDataArray;
         return singletonScanConversion;
     }
+
+    public static ScanConversion getInstance(byte[] tcpDataArray) {
+        if (singletonScanConversion == null) {
+            singletonScanConversion = new ScanConversion(tcpDataArray);
+        }
+        ScanConversion.tcpDataArray = tcpDataArray;
+        return singletonScanConversion;
+    }
+
 
     /**
      * make_tables() compute the weights affected to each 4-uplets of pixels.
@@ -454,6 +475,10 @@ public class ScanConversion {
         setData(echoData);
     }
 
+    public void setTcpData() {
+        envelope_data_bytes = ScanConversion.tcpDataArray;
+    }
+
     /**
      * Fetches the UDP data stored in udpDataArray, and then passes it to make_interpolation()
      * in order to scan converts it.
@@ -462,26 +487,40 @@ public class ScanConversion {
      * @throws IOException
      */
     private int[] compute_interpolation() throws IOException {
+        long time = System.nanoTime();
         assert(envelope_data != null);
         if (image == null || num == null) {
             compute_tables();
         }
+        long completedIn = System.nanoTime() - time;
+        //Log.d("this is critical time 3", String.valueOf(completedIn));
         assert(num != null);
         assert(image != null);
-
+        envelope_data = new int[128*2048];
         // set data.getEnvelopeData in envelope_data for measure performance that begins here
-
+        time = System.nanoTime();
+        for (int i = 0; i < 128*2048; i++) {
+            envelope_data[i] = (int) envelope_data_bytes[i];
+        }
+        completedIn = System.nanoTime() - time;
+        //Log.d("this is time 4 ", String.valueOf(completedIn));
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
 
+        time = System.nanoTime();
         make_interpolation(envelope_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels, image);
+        completedIn = System.nanoTime() - time;
+        //Log.d("this is time 5 ", String.valueOf(completedIn));
         // end of performance measure
 
+        time = System.nanoTime();
         for (int i = 0; i < Nz; i++) {
             for (int j = 0; j < Nx ; j++) {
                 num[j*Nz + i] = image[j + Nx*i];
             }
         }
+        completedIn = System.nanoTime() - time;
+        Log.d("this is time 6 ", String.valueOf(completedIn));
         return num;
     }
 }
