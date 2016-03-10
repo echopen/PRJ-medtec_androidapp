@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.BufferedReader;
 import java.io.DataInput;
@@ -43,18 +44,22 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     protected Void doInBackground(Void... Voids) {
         InputStream stream;
-        byte[] message0 = new byte[128*512];
+        int rows = Constants.PreProcParam.NUM_SAMPLES;
+        int cols = Constants.PreProcParam.NUM_IMG_DATA;
+        byte[] message0 = new byte[rows*cols];
 
-        for (int i = 0; i < 128; i++) {
-            for (int j = 0; j < 512; j++) {
-                    message0[i*512 +j] = (byte) 250;
+        while(true){
+            for (int i = 0; i < cols; i++) {
+                for (int j = 0; j < rows; j++) {
+                    message0[i*rows +j] = (byte) 250;
+                }
             }
+            ScanConversion scnConv0 = ScanConversion.getInstance(message0);
+            scnConv0.setTcpData();
+            refreshUI(scnConv0);
         }
-        ScanConversion scnConv0 = ScanConversion.getInstance(message0);
-        scnConv0.setTcpData();
-        refreshUI(scnConv0);
 
-        try {
+        /*try {
             s = new Socket(ip, port);
             stream = s.getInputStream();
             int num_lines = 128;
@@ -73,8 +78,8 @@ public class ProcessTCPTask extends AbstractDataTask {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        return null;
+        }*/
+        //return null;
     }
 
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {

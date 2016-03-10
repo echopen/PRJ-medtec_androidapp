@@ -39,7 +39,7 @@ public class Constants {
 
         public static final String CONTENT_TYPE_JSON = "application/json";
 
-        public static final String REDPITAYA_UDP_IP = "192.168.128.5";
+        public static final String REDPITAYA_UDP_IP = "192.168.128.3";
 
         public static final int REDPITAYA_UDP_PORT = 7538;
     }
@@ -98,7 +98,7 @@ public class Constants {
         /* image width in rad */
         public static final double IMAGE_WIDTH = 0.5 * Math.PI;
 
-        public static final int NUM_SAMPLES = 2048;
+        public static final int NUM_SAMPLES = 1024;
 
         public static final int NUM_IMG_DATA = 128;
 
@@ -120,6 +120,8 @@ public class Constants {
         public static final int tmp_SAMPLING_POINTS = 1052;
 
         public static final int tmp_NUM_UDP_PACKET_CHUNKS = 4;
+
+        public static final int opencv_RELATIVE_ANGLE = 512;
 
         public static int[] getLoadIntegerConstants() {
             int[] int_constants = new int[4];

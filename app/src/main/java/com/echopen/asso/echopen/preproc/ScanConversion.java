@@ -81,13 +81,14 @@ public class ScanConversion {
 
     {
         int rows = Constants.PreProcParam.NUM_IMG_DATA;
+        int larger_rows = Constants.PreProcParam.opencv_RELATIVE_ANGLE;
         int cols = Constants.PreProcParam.NUM_SAMPLES;
 
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
 
-        opencv_src = new Mat(rows, 512, CvType.CV_8U);
-        opencv_src_larger = new Mat(512, 512, CvType.CV_8U);
+        opencv_src = new Mat(2*rows, cols/2, CvType.CV_8U);
+        opencv_src_larger = new Mat(2*larger_rows, cols/2, CvType.CV_8U);
         opencv_dest = new Mat(512, 512, CvType.CV_32S);
 
         lastTime = System.nanoTime();
@@ -573,13 +574,19 @@ public class ScanConversion {
         opencv_src.put(0, 0, envelope_data_bytes);
         opencv_src_larger.setTo(Scalar.all(0));
         opencv_dest.setTo(Scalar.all(0));
-        opencv_src.copyTo(opencv_src_larger.submat(param2, rows + param2, 0, 512));
 
-        Point center = new Point(0, 0);
-        Imgproc.linearPolar(opencv_src_larger, opencv_dest, center, 100, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
+        if(rows + param2 >= 700) {
+            opencv_src.copyTo(opencv_src_larger.submat(0, 2*rows, 0, cols/2));
+        }
+        else{
+            opencv_src.copyTo(opencv_src_larger.submat(param2, 2*rows + param2, 0, cols/2));
+        }
+
+        Point center = new Point(128 + param3, 128 + param4);
+        Imgproc.linearPolar(opencv_src_larger, opencv_dest, center,  param1 * 500, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
         opencv_dest.convertTo(opencv_dest, CvType.CV_32S);
 
-        int[] dest_out = new int[512 * 512];
+        int[] dest_out = new int[Nz * Nx];
         opencv_dest.get(0, 0, dest_out);
         return dest_out;
     }

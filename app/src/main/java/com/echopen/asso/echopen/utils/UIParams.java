@@ -11,7 +11,7 @@ public final class UIParams {
     private static int param5;
     private UIParams() {
         param1 = 0;
-        param2 = 0;
+        param2 = 320;
         param3 = 0;
         param4 = 0;
         param5 = 0;
