@@ -48,7 +48,7 @@ public class ProcessTCPTask extends AbstractDataTask {
         int cols = Constants.PreProcParam.NUM_IMG_DATA;
         byte[] message0 = new byte[rows*cols];
 
-        while(true){
+        /*while(true){
             for (int i = 0; i < cols; i++) {
                 for (int j = 0; j < rows; j++) {
                     message0[i*rows +j] = (byte) 250;
@@ -58,8 +58,8 @@ public class ProcessTCPTask extends AbstractDataTask {
             scnConv0.setTcpData();
             refreshUI(scnConv0);
         }
-
-        /*try {
+*/
+        try {
             s = new Socket(ip, port);
             stream = s.getInputStream();
             int num_lines = 128;
@@ -78,8 +78,8 @@ public class ProcessTCPTask extends AbstractDataTask {
             }
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-        //return null;
+        }
+        return null;
     }
 
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {
