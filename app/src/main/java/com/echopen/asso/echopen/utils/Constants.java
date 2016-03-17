@@ -98,7 +98,7 @@ public class Constants {
         /* image width in rad */
         public static final double IMAGE_WIDTH = 0.5 * Math.PI;
 
-        public static final int NUM_SAMPLES = 1024;
+        public static final int NUM_SAMPLES = 2048;
 
         public static final int NUM_IMG_DATA = 128;
 
@@ -155,6 +155,13 @@ public class Constants {
             double_constants[6] = - PreProcParam.STEP_ANGLE_INIT;
             return double_constants;
         }
+    }
+
+    public static class SeekBarParam{
+        public static final int SEEK_BAR_SCALE = 184;
+        public static final int SEEK_BAR_ROTATE = 253;
+        public static final int SEEK_BAR_VERTICAL = 255;
+        public static final int SEEK_BAR_HORIZONTAL = 85;
     }
 
     public static class JNI_SETTINGS{

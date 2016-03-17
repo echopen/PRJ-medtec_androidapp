@@ -86,6 +86,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setupContainer();
         Config.getInstance(this);
 
+        UIParams.setParam1(Constants.SeekBarParam.SEEK_BAR_SCALE);
+        UIParams.setParam2(Constants.SeekBarParam.SEEK_BAR_ROTATE);
+        UIParams.setParam3(Constants.SeekBarParam.SEEK_BAR_VERTICAL);
+        UIParams.setParam4(Constants.SeekBarParam.SEEK_BAR_HORIZONTAL);
         final SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override

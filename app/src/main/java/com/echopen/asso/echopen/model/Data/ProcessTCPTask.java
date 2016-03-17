@@ -57,18 +57,17 @@ public class ProcessTCPTask extends AbstractDataTask {
             ScanConversion scnConv0 = ScanConversion.getInstance(message0);
             scnConv0.setTcpData();
             refreshUI(scnConv0);
-        }
-*/
+        }*/
         try {
             s = new Socket(ip, port);
             stream = s.getInputStream();
             int num_lines = 128;
-            int num_data = 2048;
+            int num_data = rows;
             byte[] message = new byte[num_lines*num_data];
 
             while (true) {
                 try {
-                    message = deepInsidePacket(2049, stream);
+                    message = deepInsidePacket(rows +1, stream);
                     ScanConversion scnConv = ScanConversion.getInstance(message);
                     scnConv.setTcpData();
                     refreshUI(scnConv);
@@ -84,21 +83,23 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {
         byte[] buffer = new byte[len];
+        int rows = Constants.PreProcParam.NUM_SAMPLES;
 
         while(buffer[0] !=1){
             stream.read(buffer);
         }
-        return getDeepInsidePacket(2049, buffer, stream);
+        return getDeepInsidePacket(rows+1, buffer, stream);
     }
 
     private byte[] getDeepInsidePacket(int len, byte[] buffer, InputStream stream) throws IOException {
-        byte[] tmpBuffer = new byte[2049];
-        byte[] finalBuffer = new byte[128 * 2048];
+        int rows = Constants.PreProcParam.NUM_SAMPLES;
+        byte[] tmpBuffer = new byte[rows+1];
+        byte[] finalBuffer = new byte[128 * rows];
 
-        System.arraycopy(buffer, 1, finalBuffer, 0, 2048);
+        System.arraycopy(buffer, 1, finalBuffer, 0, rows);
         for(int i = 0;i<127;i++) {
             stream.read(tmpBuffer);
-            System.arraycopy(tmpBuffer, 1, finalBuffer, i * 2048, 2048);
+            System.arraycopy(tmpBuffer, 1, finalBuffer, i * rows, rows);
         }
         return finalBuffer;
     }
