@@ -43,11 +43,11 @@ public class ProcessTCPTask extends AbstractDataTask {
 
         try {
 
-            byte[] message0 = new byte[128*2048];
+            /*byte[] message0 = new byte[128 * 1024];
 
-            /*for (int i = 0; i < 128; i++) {
-                for (int j = 0; j < 2048; j++) {
-                    message0[i*2048 +j] = (byte) 250;
+            for (int i = 0; i < 128; i++) {
+                for (int j = 0; j < 1024; j++) {
+                    message0[i * 1024 + j] = (byte) 250;
                 }
             }
             long time = System.nanoTime();
@@ -61,7 +61,7 @@ public class ProcessTCPTask extends AbstractDataTask {
             //Log.d("this is time 2 ", String.valueOf(completedIn));
 
             //time = System.currentTimeMillis();
-            for (int i = 0; i < 10; i++){
+            for (int i = 0; i < 50; i++) {
                 time = System.nanoTime();
                 refreshUI(scnConv0);
                 completedIn = System.nanoTime() - time;
@@ -73,30 +73,30 @@ public class ProcessTCPTask extends AbstractDataTask {
             s = new Socket(ip, port);
             stream = s.getInputStream();
             int num_lines = 128;
-            int num_data = 2048;
-            byte[] message = new byte[128 * 2048];
+            int num_data = 1024;
+            byte[] message = new byte[128 * 1024];
 
             while (true) {
                 try {
                     long time = System.nanoTime();
-                    message = deepInsidePacket(2049, stream);
+                    message = deepInsidePacket(1025, stream);
                     long completedIn = System.nanoTime() - time;
-                    Log.d("this is tcp time 1", String.valueOf(completedIn));
+                    //Log.d("this is tcp time 1", String.valueOf(completedIn));
 
                     time = System.nanoTime();
                     ScanConversion scnConv = ScanConversion.getInstance(message);
                     completedIn = System.nanoTime() - time;
-                    Log.d("this is tcp time 3", String.valueOf(completedIn));
+                    //Log.d("this is tcp time 3", String.valueOf(completedIn));
 
                     time = System.nanoTime();
                     scnConv.setTcpData();
                     completedIn = System.nanoTime() - time;
-                    Log.d("this is tcp time 4", String.valueOf(completedIn));
+                    //Log.d("this is tcp time 4", String.valueOf(completedIn));
 
                     time = System.nanoTime();
                     refreshUI(scnConv);
                     completedIn = System.nanoTime() - time;
-                    Log.d("this is tcp time 5", String.valueOf(completedIn));
+                    //Log.d("this is tcp time 5", String.valueOf(completedIn));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -113,17 +113,17 @@ public class ProcessTCPTask extends AbstractDataTask {
         while (buffer[0] != 1) {
             stream.read(buffer);
         }
-        return getDeepInsidePacket(2049, buffer, stream);
+        return getDeepInsidePacket(1025, buffer, stream);
     }
 
     private byte[] getDeepInsidePacket(int len, byte[] buffer, InputStream stream) throws IOException {
-        byte[] tmpBuffer = new byte[2049];
-        byte[] finalBuffer = new byte[128 * 2048];
+        byte[] tmpBuffer = new byte[1025];
+        byte[] finalBuffer = new byte[128 * 1024];
 
-        System.arraycopy(buffer, 1, finalBuffer, 0, 2048);
+        System.arraycopy(buffer, 1, finalBuffer, 0, 1024);
         for (int i = 0; i < 127; i++) {
             stream.read(tmpBuffer);
-            System.arraycopy(tmpBuffer, 1, finalBuffer, i * 2048, 2048);
+            System.arraycopy(tmpBuffer, 1, finalBuffer, i * 1024, 1024);
         }
         return finalBuffer;
     }

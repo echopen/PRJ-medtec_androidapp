@@ -496,10 +496,10 @@ public class ScanConversion {
         //Log.d("this is critical time 3", String.valueOf(completedIn));
         assert(num != null);
         assert(image != null);
-        envelope_data = new int[128*2048];
+        envelope_data = new int[128*1024];
         // set data.getEnvelopeData in envelope_data for measure performance that begins here
         time = System.nanoTime();
-        for (int i = 0; i < 128*2048; i++) {
+        for (int i = 0; i < 128*1024; i++) {
             envelope_data[i] = (int) envelope_data_bytes[i];
         }
         completedIn = System.nanoTime() - time;
