@@ -87,9 +87,9 @@ public class ScanConversion {
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
 
-        opencv_src = new Mat(4*rows, cols/4, CvType.CV_8U);
-        opencv_src_larger = new Mat(4*larger_rows, cols/4, CvType.CV_8U);
-        opencv_dest = new Mat(512, 512, CvType.CV_32S);
+        opencv_src = new Mat(rows, cols, CvType.CV_8U);
+        opencv_src_larger = new Mat(larger_rows, cols, CvType.CV_8U);
+        opencv_dest = new Mat(larger_rows, cols, CvType.CV_32S);
 
         lastTime = System.nanoTime();
     }
@@ -576,13 +576,13 @@ public class ScanConversion {
         opencv_dest.setTo(Scalar.all(0));
 
         if(rows + param2 >= 700) {
-            opencv_src.copyTo(opencv_src_larger.submat(0, 4*rows, 0, cols/4));
+            opencv_src.copyTo(opencv_src_larger.submat(0, rows, 0, cols));
         }
         else{
-            opencv_src.copyTo(opencv_src_larger.submat(param2, 4*rows + param2, 0, cols/4));
+            opencv_src.copyTo(opencv_src_larger.submat(param2, rows + param2, 0, cols));
         }
 
-        Point center = new Point(param3,param4);
+        Point center = new Point(param3, param4);
         Imgproc.linearPolar(opencv_src_larger, opencv_dest, center,  param1 * 500, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
         opencv_dest.convertTo(opencv_dest, CvType.CV_32S);
 

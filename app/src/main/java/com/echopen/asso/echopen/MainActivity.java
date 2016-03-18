@@ -103,6 +103,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 UIParams.setParam1(progress);
+                //Log.d("value of 1 ", String.valueOf(progress));
             }
         });
         final SeekBar seekbar2 = (SeekBar) findViewById(R.id.seekBar2);
@@ -118,6 +119,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 UIParams.setParam2(progress);
+                //Log.d("value of 2 ", String.valueOf(progress));
             }
         });
         final SeekBar seekbar3 = (SeekBar) findViewById(R.id.seekBar3);
@@ -131,6 +133,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 UIParams.setParam3(progress);
+                //Log.d("value of 3 ", String.valueOf(progress));
             }
         });
         final SeekBar seekbar4 = (SeekBar) findViewById(R.id.seekBar4);
@@ -144,6 +147,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 UIParams.setParam4(progress);
+                //Log.d("value of 4 ", String.valueOf(progress));
             }
         });
         final SeekBar seekbar5 = (SeekBar) findViewById(R.id.seekBar5);

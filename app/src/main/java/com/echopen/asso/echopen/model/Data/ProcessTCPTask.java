@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.EOFException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -51,7 +52,10 @@ public class ProcessTCPTask extends AbstractDataTask {
         /*while(true){
             for (int i = 0; i < cols; i++) {
                 for (int j = 0; j < rows; j++) {
-                    message0[i*rows +j] = (byte) 250;
+                    if (j < 512)
+                        message0[i*rows +j] = (byte) 255;
+                    else if (j>= 512)
+                        message0[i*rows +j] = (byte) 140;
                 }
             }
             ScanConversion scnConv0 = ScanConversion.getInstance(message0);
@@ -101,6 +105,9 @@ public class ProcessTCPTask extends AbstractDataTask {
             stream.read(tmpBuffer);
             System.arraycopy(tmpBuffer, 1, finalBuffer, i * rows, rows);
         }
+        //FileOutputStream out = new FileOutputStream("e/Users/mehdibenchoufi/echopen-file");
+        //out.write(finalBuffer);
+        //out.close();
         return finalBuffer;
     }
 
