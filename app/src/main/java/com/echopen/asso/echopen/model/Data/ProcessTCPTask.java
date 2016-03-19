@@ -1,6 +1,8 @@
 package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
+import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
@@ -11,6 +13,7 @@ import java.io.BufferedReader;
 import java.io.DataInput;
 import java.io.DataInputStream;
 import java.io.EOFException;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -28,6 +31,7 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     public ProcessTCPTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, String ip, int port) throws IOException {
         super(activity, mainActionController, scanConversion);
+
         this.ip = ip;
         this.port = port;
     }
@@ -89,8 +93,10 @@ public class ProcessTCPTask extends AbstractDataTask {
         byte[] buffer = new byte[len];
         int rows = Constants.PreProcParam.NUM_SAMPLES;
 
+        DataInputStream dis = new DataInputStream(stream);
+
         while(buffer[0] !=1){
-            stream.read(buffer);
+            dis.readFully(buffer);
         }
         return getDeepInsidePacket(rows+1, buffer, stream);
     }
@@ -98,16 +104,22 @@ public class ProcessTCPTask extends AbstractDataTask {
     private byte[] getDeepInsidePacket(int len, byte[] buffer, InputStream stream) throws IOException {
         int rows = Constants.PreProcParam.NUM_SAMPLES;
         byte[] tmpBuffer = new byte[rows+1];
-        byte[] finalBuffer = new byte[128 * rows];
+        byte[] finalBuffer = new byte[128 * (rows+1)];
+        int read;
+        int count_lines = 0;
 
         System.arraycopy(buffer, 1, finalBuffer, 0, rows);
-        for(int i = 0;i<127;i++) {
-            stream.read(tmpBuffer);
-            System.arraycopy(tmpBuffer, 1, finalBuffer, i * rows, rows);
+        DataInputStream dis = new DataInputStream(stream);
+
+        while(true){
+            dis.readFully(tmpBuffer);
+            System.arraycopy(tmpBuffer, 1, finalBuffer, (count_lines + 1) * rows, rows);
+            count_lines++;
+            if(count_lines == 127)
+                break;
         }
-        //FileOutputStream out = new FileOutputStream("e/Users/mehdibenchoufi/echopen-file");
-        //out.write(finalBuffer);
-        //out.close();
+
+        tmpBuffer = null;
         return finalBuffer;
     }
 
