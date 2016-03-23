@@ -92,12 +92,13 @@ public class ProcessTCPTask extends AbstractDataTask {
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {
         byte[] buffer = new byte[len];
         int rows = Constants.PreProcParam.NUM_SAMPLES;
+        int start_line = Constants.PreProcParam.NUM_LINES;
 
         DataInputStream dis = new DataInputStream(stream);
 
-        //while(buffer[0] !=1){
+        while(buffer[0] != start_line/2 + 1){
             dis.readFully(buffer);
-        //}
+        }
         return getDeepInsidePacket(rows+1, buffer, stream);
     }
 
@@ -106,21 +107,29 @@ public class ProcessTCPTask extends AbstractDataTask {
         int cols = Constants.PreProcParam.NUM_LINES;
         byte[] tmpBuffer = new byte[rows+1];
         byte[] finalBuffer = new byte[cols * (rows+1)];
-        int read;
         int count_lines = 0;
+        int half_count_lines = 0;
 
-        System.arraycopy(buffer, 1, finalBuffer, 0, rows);
+        System.arraycopy(buffer, 1, finalBuffer, cols/2, rows);
         DataInputStream dis = new DataInputStream(stream);
 
         while(true){
             dis.readFully(tmpBuffer);
-            System.arraycopy(tmpBuffer, 1, finalBuffer, (count_lines + 1) * rows, rows);
+            System.arraycopy(tmpBuffer, 1, finalBuffer, (cols/2 + count_lines + 1) * rows, rows);
             count_lines++;
-            if(count_lines == 63)
-                break;
+            if(count_lines == 31){
+                while(true){
+                    dis.readFully(tmpBuffer);
+                    System.arraycopy(tmpBuffer, 1, finalBuffer, half_count_lines * rows, rows);
+                    half_count_lines ++;
+                    if(half_count_lines == 32){
+                        break;
+                    }
+                }
+            }
+            break;
         }
 
-        tmpBuffer = null;
         return finalBuffer;
     }
 
