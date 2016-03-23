@@ -69,7 +69,7 @@ public class ProcessTCPTask extends AbstractDataTask {
         try {
             s = new Socket(ip, port);
             stream = s.getInputStream();
-            int num_lines = 128;
+            int num_lines = cols;
             int num_data = rows;
             byte[] message = new byte[num_lines*num_data];
 
@@ -95,16 +95,17 @@ public class ProcessTCPTask extends AbstractDataTask {
 
         DataInputStream dis = new DataInputStream(stream);
 
-        while(buffer[0] !=1){
+        //while(buffer[0] !=1){
             dis.readFully(buffer);
-        }
+        //}
         return getDeepInsidePacket(rows+1, buffer, stream);
     }
 
     private byte[] getDeepInsidePacket(int len, byte[] buffer, InputStream stream) throws IOException {
         int rows = Constants.PreProcParam.NUM_SAMPLES;
+        int cols = Constants.PreProcParam.NUM_LINES;
         byte[] tmpBuffer = new byte[rows+1];
-        byte[] finalBuffer = new byte[128 * (rows+1)];
+        byte[] finalBuffer = new byte[cols * (rows+1)];
         int read;
         int count_lines = 0;
 
@@ -115,7 +116,7 @@ public class ProcessTCPTask extends AbstractDataTask {
             dis.readFully(tmpBuffer);
             System.arraycopy(tmpBuffer, 1, finalBuffer, (count_lines + 1) * rows, rows);
             count_lines++;
-            if(count_lines == 127)
+            if(count_lines == 63)
                 break;
         }
 

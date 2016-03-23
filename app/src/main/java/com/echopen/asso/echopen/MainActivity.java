@@ -75,13 +75,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        //findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
-//        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.vMiddle);
-//        linearLayout.setBackgroundColor(Color.TRANSPARENT);
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.vMiddle);
+        linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
         initSwipeViews();
-        //initViewComponents();
+        initViewComponents();
         initActionController();
         setupContainer();
         Config.getInstance(this);
@@ -198,25 +198,25 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     * @param no param
     * */
     private void initViewComponents() {
-//        setTouchNClick(R.id.btnCapture);
-//        setTouchNClick(R.id.btnEffect);
-//        setTouchNClick(R.id.btnPic);
-//        setTouchNClick(R.id.tabBrightness);
-//        setTouchNClick(R.id.tabGrid);
-//        setTouchNClick(R.id.tabSetting);
-//        setTouchNClick(R.id.tabSuffle);
-//        setTouchNClick(R.id.tabTime);
-//
-//        setClick(R.id.btn1);
-//        setClick(R.id.btn2);
-//        setClick(R.id.btn3);
-//        setClick(R.id.btn4);
-//        setClick(R.id.btn5);
+        setTouchNClick(R.id.btnCapture);
+        setTouchNClick(R.id.btnEffect);
+        setTouchNClick(R.id.btnPic);
+        setTouchNClick(R.id.tabBrightness);
+        setTouchNClick(R.id.tabGrid);
+        setTouchNClick(R.id.tabSetting);
+        setTouchNClick(R.id.tabSuffle);
+        setTouchNClick(R.id.tabTime);
 
-//        setClickToFilter(R.id.vMiddle);
-//
-//        applyBgTheme(findViewById(R.id.vTop));
-//        applyBgTheme(findViewById(R.id.vBottom));
+        setClick(R.id.btn1);
+        setClick(R.id.btn2);
+        setClick(R.id.btn3);
+        setClick(R.id.btn4);
+        setClick(R.id.btn5);
+
+        setClickToFilter(R.id.vMiddle);
+
+        applyBgTheme(findViewById(R.id.vTop));
+        applyBgTheme(findViewById(R.id.vBottom));
     }
 
 
