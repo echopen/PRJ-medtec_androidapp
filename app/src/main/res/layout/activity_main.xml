@@ -36,6 +36,7 @@
             android:layout_alignParentEnd="true"
             android:max="256"
             android:progress="0"
+            android:progressDrawable="@drawable/progress"
             android:indeterminate="false" />
 
         <SeekBar
@@ -46,6 +47,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:max="500"
+            android:progressDrawable="@drawable/progress"
             android:indeterminate="false" />
 
         <SeekBar
@@ -55,10 +57,11 @@
             android:layout_below="@+id/seekBar2"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
+            android:progressDrawable="@drawable/progress"
             android:max="500"
             android:indeterminate="false" />
 
-        <SeekBar
+        <!--<SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/seekBar4"
@@ -66,6 +69,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:max="500"
+            android:progressDrawable="@drawable/progress"
             android:indeterminate="false" />
 
         <SeekBar
@@ -76,7 +80,8 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:max="500"
-            android:indeterminate="false" />
+            android:progressDrawable="@drawable/progress"
+            android:indeterminate="false" />-->
 
         <RelativeLayout
             style="@style/GenericProgressBackground"

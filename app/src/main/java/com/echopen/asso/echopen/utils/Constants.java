@@ -159,9 +159,9 @@ public class Constants {
 
     public static class SeekBarParam{
         public static final int SEEK_BAR_SCALE = 154;
-        public static final int SEEK_BAR_ROTATE = 59;
-        public static final int SEEK_BAR_VERTICAL = 471;
-        public static final int SEEK_BAR_HORIZONTAL = 7;
+        public static final int SEEK_BAR_ROTATE = 95;
+        public static final int SEEK_BAR_HORIZONTAL = 505;
+        public static final int SEEK_BAR_VERTICAL = 7;
     }
 
     public static class JNI_SETTINGS{

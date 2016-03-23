@@ -88,8 +88,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
         UIParams.setParam1(Constants.SeekBarParam.SEEK_BAR_SCALE);
         UIParams.setParam2(Constants.SeekBarParam.SEEK_BAR_ROTATE);
-        UIParams.setParam3(Constants.SeekBarParam.SEEK_BAR_VERTICAL);
-        UIParams.setParam4(Constants.SeekBarParam.SEEK_BAR_HORIZONTAL);
+        UIParams.setParam3(Constants.SeekBarParam.SEEK_BAR_HORIZONTAL);
+        UIParams.setParam4(Constants.SeekBarParam.SEEK_BAR_VERTICAL);
         final SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
         seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -103,7 +103,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 UIParams.setParam1(progress);
-                //Log.d("value of 1 ", String.valueOf(progress));
+                Log.d("value of 1 ", String.valueOf(progress));
             }
         });
         final SeekBar seekbar2 = (SeekBar) findViewById(R.id.seekBar2);
@@ -119,7 +119,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 UIParams.setParam2(progress);
-                //Log.d("value of 2 ", String.valueOf(progress));
+                Log.d("value of 2 ", String.valueOf(progress));
             }
         });
         final SeekBar seekbar3 = (SeekBar) findViewById(R.id.seekBar3);
@@ -133,10 +133,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 UIParams.setParam3(progress);
-                //Log.d("value of 3 ", String.valueOf(progress));
+                Log.d("value of 3 ", String.valueOf(progress));
             }
         });
-        final SeekBar seekbar4 = (SeekBar) findViewById(R.id.seekBar4);
+        /*final SeekBar seekbar4 = (SeekBar) findViewById(R.id.seekBar4);
         seekbar4.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -147,7 +147,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 UIParams.setParam4(progress);
-                //Log.d("value of 4 ", String.valueOf(progress));
+                Log.d("value of 4 ", String.valueOf(progress));
             }
         });
         final SeekBar seekbar5 = (SeekBar) findViewById(R.id.seekBar5);
@@ -162,7 +162,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                 UIParams.setParam5(progress);
             }
-        });
+        });*/
 
         OpenCVLoader.initDebug();
 
