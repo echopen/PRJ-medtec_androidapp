@@ -582,10 +582,8 @@ public class ScanConversion {
         }
 
         Point center = new Point(param3, param4);
-        Imgproc.linearPolar(opencv_src_larger, opencv_dest, center,  param1 * 500, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
+        Imgproc.linearPolar(opencv_src_larger, opencv_dest, center, param1 * 500, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
         opencv_dest.convertTo(opencv_dest, CvType.CV_32S);
-        
-        Imgproc.equalizeHist();
 
         int[] dest_out = new int[Nz * Nx];
         opencv_dest.get(0, 0, dest_out);
