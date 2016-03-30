@@ -83,6 +83,24 @@ try to read them quick as possible.
   @todo : create a developer mode, first screen app will then let you change the protocol and set up the rights hardware constants (number of lines, number of samples...).
   Constants are set in the `Constants` class in the `utils` package. The critical ones are : `PreProcParam.NUM_LINES` and `PreProcParam.NUM_SAMPLES`, that corresponds to the number of lines and the number of samples the hardware is acquiring.
   
+  If you want to simulate TCP data transfer, you can put in the `doInBackground` method of the `ProcessTCPTask` some lines as : 
+  
+  `while(true){
+	          int num_lines = Constants.PreProcParam.NUM_LINES;
+			  int num_samples = Constants.PreProcParam.NUM_SAMPLES;
+              byte[] message = new byte[num_lines * num_samples];
+              
+			  for (int i = 0; i < num_lines; i++) {
+                  for (int j = 0; j < num_samples; j++) {
+                          message[i*rows +j] = (byte) /* the pixel data you want from à to 255 */;
+                  }
+              }
+              ScanConversion scnConv = ScanConversion.getInstance(message);
+              scnConv0.setTcpData();
+              refreshUI(scnConv);
+          }` 
+	don't forget to comment the piece of code dealing with sockets ! 	  
+  
   *Simulating real data*
   
   You'll find in the [kit-soft](https://github.com/echopen/kit-soft/) repo, you'll find some real data file [raw_data.txt](https://github.com/echopen/kit-soft/tree/master/data) that was output by our hardware suite.
