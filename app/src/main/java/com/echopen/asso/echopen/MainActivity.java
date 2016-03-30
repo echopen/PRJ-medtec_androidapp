@@ -136,33 +136,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                 Log.d("value of 3 ", String.valueOf(progress));
             }
         });
-        /*final SeekBar seekbar4 = (SeekBar) findViewById(R.id.seekBar4);
-        seekbar4.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                UIParams.setParam4(progress);
-                Log.d("value of 4 ", String.valueOf(progress));
-            }
-        });
-        final SeekBar seekbar5 = (SeekBar) findViewById(R.id.seekBar5);
-        seekbar5.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
-                UIParams.setParam5(progress);
-            }
-        });*/
 
         OpenCVLoader.initDebug();
 
