@@ -487,40 +487,27 @@ public class ScanConversion {
      * @throws IOException
      */
     private int[] compute_interpolation() throws IOException {
-        long time = System.nanoTime();
         assert(envelope_data != null);
         if (image == null || num == null) {
             compute_tables();
         }
-        long completedIn = System.nanoTime() - time;
-        //Log.d("this is critical time 3", String.valueOf(completedIn));
         assert(num != null);
         assert(image != null);
         envelope_data = new int[128*1024];
         // set data.getEnvelopeData in envelope_data for measure performance that begins here
-        time = System.nanoTime();
         for (int i = 0; i < 128*1024; i++) {
             envelope_data[i] = (int) envelope_data_bytes[i];
         }
-        completedIn = System.nanoTime() - time;
-        //Log.d("this is time 4 ", String.valueOf(completedIn));
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
 
-        time = System.nanoTime();
         make_interpolation(envelope_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels, image);
-        completedIn = System.nanoTime() - time;
-        //Log.d("this is time 5 ", String.valueOf(completedIn));
-        // end of performance measure
 
-        time = System.nanoTime();
         for (int i = 0; i < Nz; i++) {
             for (int j = 0; j < Nx ; j++) {
                 num[j*Nz + i] = image[j + Nx*i];
             }
         }
-        completedIn = System.nanoTime() - time;
-        Log.d("this is time 6 ", String.valueOf(completedIn));
         return num;
     }
 }
