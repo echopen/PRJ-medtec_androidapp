@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
+import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Config;
@@ -141,7 +142,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));
     }
-
 
     /**
      * Sets a click listener on the LinearLayout that wraps the main screen picture

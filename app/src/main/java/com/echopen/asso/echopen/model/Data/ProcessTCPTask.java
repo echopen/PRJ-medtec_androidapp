@@ -9,6 +9,9 @@ import android.util.Log;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.utils.Constants;
+
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
@@ -19,6 +22,7 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private String ip;
     private int port;
+    private DataInputStream dataInputStream;
 
     public ProcessTCPTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, String ip, int port) throws IOException {
         super(activity, mainActionController, scanConversion);
@@ -40,63 +44,23 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     protected Void doInBackground(Void... Voids) {
         InputStream stream;
+        int rows = Constants.PreProcParam.NUM_SAMPLES;
+        int cols = Constants.PreProcParam.NUM_IMG_DATA;
+        byte[] message0 = new byte[rows*cols];
 
         try {
-
-            /*byte[] message0 = new byte[128 * 1024];
-
-            for (int i = 0; i < 128; i++) {
-                for (int j = 0; j < 1024; j++) {
-                    message0[i * 1024 + j] = (byte) 250;
-                }
-            }
-            long time = System.nanoTime();
-            ScanConversion scnConv0 = ScanConversion.getInstance(message0);
-            long completedIn = System.nanoTime() - time;
-            //Log.d("this is time 1 ", String.valueOf(completedIn));
-
-            time = System.nanoTime();
-            scnConv0.setTcpData();
-            completedIn = System.nanoTime() - time;
-            //Log.d("this is time 2 ", String.valueOf(completedIn));
-
-            //time = System.currentTimeMillis();
-            for (int i = 0; i < 50; i++) {
-                time = System.nanoTime();
-                refreshUI(scnConv0);
-                completedIn = System.nanoTime() - time;
-                Log.d("this is wouau time", String.valueOf(completedIn));
-            }*/
-            //completedIn = System.currentTimeMillis() - time;
-            //Log.d("this is time 3", String.valueOf(completedIn));
-
             s = new Socket(ip, port);
             stream = s.getInputStream();
-            int num_lines = 128;
-            int num_data = 1024;
-            byte[] message = new byte[128 * 1024];
+            int num_lines = cols;
+            int num_data = rows;
+            byte[] message = new byte[num_lines*num_data];
 
             while (true) {
                 try {
-                    long time = System.nanoTime();
-                    message = deepInsidePacket(1025, stream);
-                    long completedIn = System.nanoTime() - time;
-                    //Log.d("this is tcp time 1", String.valueOf(completedIn));
-
-                    time = System.nanoTime();
+                    message = deepInsidePacket(rows +1, stream);
                     ScanConversion scnConv = ScanConversion.getInstance(message);
-                    completedIn = System.nanoTime() - time;
-                    //Log.d("this is tcp time 3", String.valueOf(completedIn));
-
-                    time = System.nanoTime();
                     scnConv.setTcpData();
-                    completedIn = System.nanoTime() - time;
-                    //Log.d("this is tcp time 4", String.valueOf(completedIn));
-
-                    time = System.nanoTime();
                     refreshUI(scnConv);
-                    completedIn = System.nanoTime() - time;
-                    //Log.d("this is tcp time 5", String.valueOf(completedIn));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -109,22 +73,45 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {
         byte[] buffer = new byte[len];
+        int rows = Constants.PreProcParam.NUM_SAMPLES;
+        int start_line = Constants.PreProcParam.NUM_LINES;
 
-        while (buffer[0] != 1) {
-            stream.read(buffer);
+        DataInputStream dataInputStream = new DataInputStream(stream);
+
+        while(buffer[0] != start_line/2 + 1){
+            dataInputStream.readFully(buffer);
         }
-        return getDeepInsidePacket(1025, buffer, stream);
+        return getDeepInsidePacket(buffer, stream);
     }
 
-    private byte[] getDeepInsidePacket(int len, byte[] buffer, InputStream stream) throws IOException {
-        byte[] tmpBuffer = new byte[1025];
-        byte[] finalBuffer = new byte[128 * 1024];
+    private byte[] getDeepInsidePacket(byte[] buffer, InputStream stream) throws IOException {
+        int rows = Constants.PreProcParam.NUM_SAMPLES;
+        int cols = Constants.PreProcParam.NUM_LINES;
+        byte[] tmpBuffer = new byte[rows+1];
+        byte[] finalBuffer = new byte[cols * rows];
+        int count_lines = 0;
+        int half_count_lines = 0;
 
-        System.arraycopy(buffer, 1, finalBuffer, 0, 1024);
-        for (int i = 0; i < 127; i++) {
-            stream.read(tmpBuffer);
-            System.arraycopy(tmpBuffer, 1, finalBuffer, i * 1024, 1024);
+        System.arraycopy(buffer, 1, finalBuffer, cols/2 * rows, rows);
+        dataInputStream = new DataInputStream(stream);
+
+        while(true) {
+            dataInputStream.readFully(tmpBuffer);
+            System.arraycopy(tmpBuffer, 1, finalBuffer, (cols / 2 + 1 + count_lines) * rows, rows);
+            count_lines++;
+            if (count_lines == 31) {
+                while (true) {
+                    dataInputStream.readFully(tmpBuffer);
+                    System.arraycopy(tmpBuffer, 1, finalBuffer, (31 - half_count_lines) * rows, rows);
+                    half_count_lines++;
+                    if (half_count_lines == 32) {
+                        break;
+                    }
+                }
+                break;
+            }
         }
+        tmpBuffer = null;
         return finalBuffer;
     }
 
@@ -140,7 +127,7 @@ public class ProcessTCPTask extends AbstractDataTask {
         int totalLenRead = 0;
         int lenRead = 0;
 
-        while (totalLenRead < len) {
+        while(totalLenRead < len) {
             byte[] tmpBuffer = new byte[len - totalLenRead];
             lenRead = stream.read(tmpBuffer);
             System.arraycopy(tmpBuffer, 0, buffer, totalLenRead, lenRead);

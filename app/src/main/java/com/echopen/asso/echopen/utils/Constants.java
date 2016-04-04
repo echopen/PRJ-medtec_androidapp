@@ -39,9 +39,9 @@ public class Constants {
 
         public static final String CONTENT_TYPE_JSON = "application/json";
 
-        public static final String REDPITAYA_UDP_IP = "192.168.128.3";
+        public static final String REDPITAYA_UDP_IP = "192.168.1.12";
 
-        public static final int REDPITAYA_UDP_PORT = 7538;
+        public static final int REDPITAYA_UDP_PORT = 7536;
     }
 
     public static class Settings{
@@ -83,7 +83,7 @@ public class Constants {
         public static final int SPEED_OF_SOUND = 1540;
 
         /* sampling frequency in Hz */
-        public static final int SAMPLING_FREQUENCY = (int) 125 /16 * (int) Math.pow(10,6);
+        public static final int SAMPLING_FREQUENCY = (int) 125 /32 * (int) Math.pow(10,6);
 
         public static final int N_x = 512;
 
@@ -91,16 +91,24 @@ public class Constants {
 
         public static final int tmp_NUM_LINES = 60;
 
-        public static final int NUM_LINES = 128;
+        public static final int NUM_LINES = 120;
 
         public static final float IMAGE_SIZE = (float) 0.201;
 
         /* image width in rad */
         public static final double IMAGE_WIDTH = 0.5 * Math.PI;
 
-        public static final int NUM_SAMPLES = 1024;
+        public static final int NUM_SAMPLES = 511;
 
         public static final int NUM_IMG_DATA = 120;
+
+        public static final int LOCAL_NUM_SAMPLES = 511;
+
+        public static final int LOCAL_IMG_DATA = 120;
+
+        public static final int TCP_NUM_SAMPLES = 511;
+
+        public static final int TCP_IMG_DATA = 120;
 
         public static final double RADIAL_IMG_INIT = 0.013;
 
