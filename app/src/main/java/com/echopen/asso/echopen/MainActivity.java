@@ -55,6 +55,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     /* constant setting the process via UDP or TCP - @todo : the user should choose the desired way -
      should implement a dedicated check button */
 
+    public static boolean  LOCAL_ACQUISITION = true;
+
     public static boolean TCP_ACQUISITION = false;
 
     public static boolean UDP_ACQUISITION = false;
@@ -83,7 +85,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initActionController();
         setupContainer();
 
-        TCP_ACQUISITION = true;
         Config.getInstance(this);
 
         try {

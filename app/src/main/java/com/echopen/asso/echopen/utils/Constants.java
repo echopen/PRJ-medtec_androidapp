@@ -96,9 +96,9 @@ public class Constants {
         /* image width in rad */
         public static final double IMAGE_WIDTH = 0.5 * Math.PI;
 
-        public static final int NUM_SAMPLES = 511;
+        public static int NUM_SAMPLES = 511;
 
-        public static final int NUM_IMG_DATA = 120;
+        public static int NUM_IMG_DATA = 120;
 
         /* Settings for displaying a local pixel file : data/raw_data/data_phantom.csv*/
         public static final int LOCAL_NUM_SAMPLES = 511;
