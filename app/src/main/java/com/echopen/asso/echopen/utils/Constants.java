@@ -89,8 +89,6 @@ public class Constants {
 
         public static final int N_z = 512;
 
-        public static final int tmp_NUM_LINES = 60;
-
         public static final int NUM_LINES = 120;
 
         public static final float IMAGE_SIZE = (float) 0.201;
@@ -102,13 +100,22 @@ public class Constants {
 
         public static final int NUM_IMG_DATA = 120;
 
+        /* Settings for displaying a local pixel file : data/raw_data/data_phantom.csv*/
         public static final int LOCAL_NUM_SAMPLES = 511;
 
         public static final int LOCAL_IMG_DATA = 120;
 
-        public static final int TCP_NUM_SAMPLES = 511;
+        /* Settings for TCP protocol */
+        public static final int TCP_NUM_SAMPLES = 1024;
 
-        public static final int TCP_IMG_DATA = 120;
+        public static final int TCP_IMG_DATA = 64;
+
+        /* Settings for UDP protocol */
+        public static final int UDP_NUM_SAMPLES = 1052;
+
+        public static final int UDP_IMG_DATA = 60;
+
+        public static final int UDP_NUM_UDP_PACKET_CHUNKS = 4;
 
         public static final double RADIAL_IMG_INIT = 0.013;
 
@@ -124,10 +131,6 @@ public class Constants {
         public static final double STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/(double) SAMPLING_FREQUENCY;
 
         public static final int SCALE_FACTOR = 1;
-
-        public static final int tmp_SAMPLING_POINTS = 1052;
-
-        public static final int tmp_NUM_UDP_PACKET_CHUNKS = 4;
 
         public static int[] getLoadIntegerConstants() {
             int[] int_constants = new int[4];

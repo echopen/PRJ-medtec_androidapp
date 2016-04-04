@@ -137,11 +137,19 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setClick(R.id.btn4);
         setClick(R.id.btn5);
 
+        initProtocolChoice();
         setClickToFilter(R.id.vMiddle);
 
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));
     }
+
+    private void initProtocolChoice() {
+        FragmentManager manager = getFragmentManager();
+        ConstantDialogFragment constantDialogFragment = new ConstantDialogFragment();
+        constantDialogFragment.show(manager, "fragment_edit_name");
+    }
+
 
     /**
      * Sets a click listener on the LinearLayout that wraps the main screen picture

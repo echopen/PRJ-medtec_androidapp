@@ -41,7 +41,7 @@ public class ProcessUPDTask extends AbstractDataTask {
         int udpDataCounterColumn = 0;
         int udpDataCounterRow = 0;
 
-        int[][] udpDataArray = new int[Constants.PreProcParam.tmp_NUM_LINES][Constants.PreProcParam.tmp_SAMPLING_POINTS];
+        int[][] udpDataArray = new int[Constants.PreProcParam.UDP_IMG_DATA][Constants.PreProcParam.UDP_NUM_SAMPLES];
         try {
             try {
                 s = new DatagramSocket(port);
@@ -52,7 +52,7 @@ public class ProcessUPDTask extends AbstractDataTask {
 
             while (true) {
                 try {
-                    byte[] message = new byte[Constants.PreProcParam.tmp_SAMPLING_POINTS];
+                    byte[] message = new byte[Constants.PreProcParam.UDP_NUM_SAMPLES];
                     DatagramPacket p = new DatagramPacket(message, message.length);
                     try {
                         s.receive(p);
@@ -67,12 +67,12 @@ public class ProcessUPDTask extends AbstractDataTask {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 } finally {
-                    if (udpDataCounterColumn >= Constants.PreProcParam.tmp_NUM_UDP_PACKET_CHUNKS) {
+                    if (udpDataCounterColumn >= Constants.PreProcParam.UDP_NUM_UDP_PACKET_CHUNKS) {
                         udpDataCounterRow++;
                         udpDataCounterColumn = 0;
                         Log.d("this is the line number ", String.valueOf(udpDataCounterRow));
                     }
-                    if (udpDataCounterRow >= Constants.PreProcParam.tmp_NUM_LINES) {
+                    if (udpDataCounterRow >= Constants.PreProcParam.UDP_IMG_DATA) {
                         ScanConversion scnConv = ScanConversion.getInstance(udpDataArray);
                         scnConv.setUdpData();
                         refreshUI(scnConv);
