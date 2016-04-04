@@ -6,15 +6,17 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.os.AsyncTask;
-import android.os.Build;
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.utils.Constants;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
@@ -42,7 +44,7 @@ public class ConstantDialogFragment extends DialogFragment {
                         })
                 .setPositiveButton(getResources().getString(R.string.ok_dialog), new DialogInterface.OnClickListener() {
 
-                    class LoadConfigTask extends AsyncTask<Void,Void,Void>{
+                    class LoadConfigTask {
                         private ProgressDialog dialog;
                         private Activity activity;
 
@@ -51,28 +53,17 @@ public class ConstantDialogFragment extends DialogFragment {
                             dialog = new ProgressDialog(activity, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                         }
 
-                        @Override
-                        protected void onPreExecute() {
-                            super.onPreExecute();
-                            dialog.setTitle("Loading Configuration");
-                            dialog.setMessage("Please wait...");
-                            dialog.show();
-                        }
-
-                        @Override
-                        protected Void doInBackground(Void... voids) {
+                        public void execute() {
                             try {
-                                if(constantProtocol[0] == 0) {
+                                if (constantProtocol[0] == 0) {
                                     Constants.PreProcParam.NUM_SAMPLES = Constants.PreProcParam.LOCAL_NUM_SAMPLES;
                                     Constants.PreProcParam.NUM_IMG_DATA = Constants.PreProcParam.LOCAL_IMG_DATA;
                                     MainActivity.LOCAL_ACQUISITION = true;
-                                }
-                                else if( constantProtocol[0] == 1) {
+                                } else if (constantProtocol[0] == 1) {
                                     Constants.PreProcParam.NUM_SAMPLES = Constants.PreProcParam.TCP_NUM_SAMPLES;
                                     Constants.PreProcParam.NUM_IMG_DATA = Constants.PreProcParam.TCP_IMG_DATA;
                                     MainActivity.TCP_ACQUISITION = true;
-                                }
-                                else if(constantProtocol[0] == 2) {
+                                } else if (constantProtocol[0] == 2) {
                                     Constants.PreProcParam.NUM_SAMPLES = Constants.PreProcParam.UDP_NUM_SAMPLES;
                                     Constants.PreProcParam.NUM_IMG_DATA = Constants.PreProcParam.UDP_IMG_DATA;
                                     MainActivity.UDP_ACQUISITION = true;
@@ -83,25 +74,16 @@ public class ConstantDialogFragment extends DialogFragment {
                                 toast.show();
                                 System.out.println("loading configuration failed");
                             }
-                            return null;
-                        }
-
-                        @Override
-                        protected void onPostExecute(Void voids) {
-                            dialog.dismiss();
                         }
                     }
 
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         // todo : to be completed filters in action
-                        Activity activity = getActivity();
+                        MainActivity activity = (MainActivity) getActivity();
                         LoadConfigTask loadConfigTask = new LoadConfigTask(activity);
-
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-                            loadConfigTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void[])null);
-                        else
-                            loadConfigTask.execute((Void[])null);
+                        loadConfigTask.execute();
+                        activity.fetchData();
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.cancel_dialog), new DialogInterface.OnClickListener() {

@@ -493,11 +493,7 @@ public class ScanConversion {
         }
         assert(num != null);
         assert(image != null);
-        envelope_data = new int[128*1024];
-        // set data.getEnvelopeData in envelope_data for measure performance that begins here
-        for (int i = 0; i < 128*1024; i++) {
-            envelope_data[i] = (int) envelope_data_bytes[i];
-        }
+
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
 

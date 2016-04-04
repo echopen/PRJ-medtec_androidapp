@@ -86,7 +86,9 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setupContainer();
 
         Config.getInstance(this);
+    }
 
+    public void fetchData() {
         try {
             BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
 
