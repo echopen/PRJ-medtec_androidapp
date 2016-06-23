@@ -56,7 +56,6 @@ public class BitmapDisplayer extends Displayer {
     }
 
     public void readDataFromUDP() throws IOException {
-
         new ProcessUPDTask(activity, mainActionController, scanConversion, port).execute();
     }
 

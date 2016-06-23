@@ -11,10 +11,9 @@ import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
@@ -24,9 +23,12 @@ import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
+import com.echopen.asso.echopen.utils.UIParams;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import org.opencv.android.OpenCVLoader;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -40,6 +42,11 @@ import java.io.InputStream;
  */
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
+
+    static {
+        // If you use opencv 2.4, System.loadLibrary("opencv_java")
+        System.loadLibrary("opencv_java3");
+    }
 
     /* integer constant that switch wether the photo or the video is on */
     private int display;
@@ -55,29 +62,31 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     /* constant setting the process via UDP or TCP - @todo : the user should choose the desired way -
      should implement a dedicated check button */
 
-    public static boolean  LOCAL_ACQUISITION = true;
+    public static boolean LOCAL_ACQUISITION = true;
 
     public static boolean TCP_ACQUISITION = false;
 
     public static boolean UDP_ACQUISITION = false;
 
-    /** locator of the screenshots or - the runcamera() method that processes it is currently unused
-    * for the moment - but it will be plugged again later in the developement
-    */
+    /**
+     * locator of the screenshots or - the runcamera() method that processes it is currently unused
+     * for the moment - but it will be plugged again later in the developement
+     */
     protected Uri uri;
 
-    /** This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
-    * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
-    * and then displays them.
-    * Also, this method uses the Config singleton class that provides device-specific constants
-    */
+    /**
+     * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
+     * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
+     * and then displays them.
+     * Also, this method uses the Config singleton class that provides device-specific constants
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
 
-        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.vMiddle);
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.vMiddle);
         linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
         initSwipeViews();
@@ -86,19 +95,71 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setupContainer();
 
         Config.getInstance(this);
+
+        UIParams.setParam1(Constants.SeekBarParam.SEEK_BAR_SCALE);
+        UIParams.setParam2(Constants.SeekBarParam.SEEK_BAR_ROTATE);
+        UIParams.setParam3(Constants.SeekBarParam.SEEK_BAR_HORIZONTAL);
+        UIParams.setParam4(Constants.SeekBarParam.SEEK_BAR_VERTICAL);
+        final SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
+        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                UIParams.setParam1(progress);
+                Log.d("value of 1 ", String.valueOf(progress));
+            }
+        });
+        final SeekBar seekbar2 = (SeekBar) findViewById(R.id.seekBar2);
+        seekbar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                UIParams.setParam2(progress);
+                Log.d("value of 2 ", String.valueOf(progress));
+            }
+        });
+        final SeekBar seekbar3 = (SeekBar) findViewById(R.id.seekBar3);
+        seekbar3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                UIParams.setParam3(progress);
+                Log.d("value of 3 ", String.valueOf(progress));
+            }
+        });
     }
 
     public void fetchData() {
+        OpenCVLoader.initDebug();
         try {
-            BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_UDP_IP, Constants.Http.REDPITAYA_UDP_PORT);
+            BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
 
             if (UDP_ACQUISITION) {
                 bitmapDisplayer.readDataFromUDP();
-            }
-            else if(TCP_ACQUISITION) {
+            } else if (TCP_ACQUISITION) {
                 bitmapDisplayer.readDataFromTCP();
-            }
-            else {
+            } else {
                 AssetManager assetManager = getResources().getAssets();
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
                 bitmapDisplayer.readDataFromFile(inputStream);
@@ -108,6 +169,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             e.printStackTrace();
         }
     }
+
 
     /*
     * initActionController() is used to separate concerns
@@ -156,6 +218,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     /**
      * Sets a click listener on the LinearLayout that wraps the main screen picture
+     *
      * @param mainframe, the LinearLayout's id that wraps the main screen picture
      */
     private void setClickToFilter(int mainframe) {
@@ -173,6 +236,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
      * Initiates the swip view
      */
     private void initSwipeViews() {
+        /*
         gesture = new GestureDetector(this, gestureListner);
 
         OnTouchListener otl = new OnTouchListener() {
@@ -183,6 +247,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             }
         };
         findViewById(R.id.content_frame).setOnTouchListener(otl);
+        */
     }
 
     /**
@@ -221,9 +286,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     };
 
     /**
-    * Prepare the call to setupContainer() that switch fragments  wether the photo or the video is choosen by the user
-    * @param display, integer constant that switch wether the photo or the video is on
-    */
+     * Prepare the call to setupContainer() that switch fragments  wether the photo or the video is choosen by the user
+     *
+     * @param display, integer constant that switch wether the photo or the video is on
+     */
     public void goBackFromFragment(int display) {
         this.display = display;
         setupContainer();
@@ -253,12 +319,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     /**
      * Handles clickable View that enable to choose camera or to start a new intent
+     *
      * @param v, the clickable View
      */
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        chooseCamera(v);
+        //chooseCamera(v);
     }
 
     /**
@@ -266,42 +333,42 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
      * Starts the Setting activity, if the setting button is clicked
      * @param v, the clickable View
      */
-    private void chooseCamera(View v) {
-        if (display != setting.DISPLAY_PHOTO
-                && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
-            display = setting.DISPLAY_PHOTO;
-            setupContainer();
-        } else if (v.getId() == R.id.btn2) {
-            if (display == setting.DISPLAY_VIDEO) {
-                display = setting.DISPLAY_FILTER;
-                setupContainer();
-            } else if (display == setting.DISPLAY_FILTER) {
-                display = setting.DISPLAY_PHOTO;
-                setupContainer();
-            }
-        } else if (v.getId() == R.id.btn4) {
-            if (display == setting.DISPLAY_PHOTO) {
-                display = setting.DISPLAY_FILTER;
-                setupContainer();
-            } else if (display == setting.DISPLAY_FILTER) {
-                display = setting.DISPLAY_VIDEO;
-                setupContainer();
-            }
-        } else if (v.getId() == R.id.btn5 && display == setting.DISPLAY_PHOTO) {
-            display = setting.DISPLAY_VIDEO;
-            setupContainer();
-        } else if (display != setting.DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
-            display = setting.DISPLAY_FILTER;
-            setupContainer();
-        } else if (v.getId() == R.id.btnCapture) {
-            if (display == setting.DISPLAY_FILTER) {
-                display = setting.DISPLAY_PHOTO;
-                setupContainer();
-            }
-        } else if (v.getId() == R.id.tabSetting) {
-            startActivity(new Intent(this, Settings.class));
-        }
-    }
+//    private void chooseCamera(View v) {
+//        if (display != setting.DISPLAY_PHOTO
+//                && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
+//            display = setting.DISPLAY_PHOTO;
+//            setupContainer();
+//        } else if (v.getId() == R.id.btn2) {
+//            if (display == setting.DISPLAY_VIDEO) {
+//                display = setting.DISPLAY_FILTER;
+//                setupContainer();
+//            } else if (display == setting.DISPLAY_FILTER) {
+//                display = setting.DISPLAY_PHOTO;
+//                setupContainer();
+//            }
+//        } else if (v.getId() == R.id.btn4) {
+//            if (display == setting.DISPLAY_PHOTO) {
+//                display = setting.DISPLAY_FILTER;
+//                setupContainer();
+//            } else if (display == setting.DISPLAY_FILTER) {
+//                display = setting.DISPLAY_VIDEO;
+//                setupContainer();
+//            }
+//        } else if (v.getId() == R.id.btn5 && display == setting.DISPLAY_PHOTO) {
+//            display = setting.DISPLAY_VIDEO;
+//            setupContainer();
+//        } else if (display != setting.DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
+//            display = setting.DISPLAY_FILTER;
+//            setupContainer();
+//        } else if (v.getId() == R.id.btnCapture) {
+//            if (display == setting.DISPLAY_FILTER) {
+//                display = setting.DISPLAY_PHOTO;
+//                setupContainer();
+//            }
+//        } else if (v.getId() == R.id.tabSetting) {
+//            startActivity(new Intent(this, Settings.class));
+//        }
+//    }
 
     /**
      * @param item, MenuItem instance
@@ -317,9 +384,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
      * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
      * the resultCode it returned, and any additional data from it.”,
      * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
+     *
      * @param requestCode
      * @param resultCode
-     * @param data, Intent instance
+     * @param data,       Intent instance
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
