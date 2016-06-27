@@ -14,9 +14,14 @@ android {
             moduleName "EchOpen"
         }
     }
-    sourceSets.main {
-        jni.srcDirs = []
-        jniLibs.srcDir 'src/main/libs'
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDir 'src/main/libs'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
     }
     task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
         Properties properties = new Properties()
@@ -70,4 +75,5 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.3.1'
     compile 'com.google.android.gms:play-services-gcm:7.3.0'
     compile project(':openCVLibrary310')
+    testCompile 'junit:junit:4.12'
 }
