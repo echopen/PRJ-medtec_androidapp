@@ -1,16 +1,12 @@
 package com.echopen.asso.echopen;
 
 import android.app.Application;
-import android.app.Instrumentation;
 import android.app.KeyguardManager;
 import android.content.Context;
 import android.os.PowerManager;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.ActivityInstrumentationTestCase2;
-
-import com.robotium.solo.Solo;
 
 import org.junit.Rule;
 import org.junit.Test;
