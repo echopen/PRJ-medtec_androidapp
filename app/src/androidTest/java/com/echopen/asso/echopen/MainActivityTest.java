@@ -26,7 +26,9 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest extends android.support.test.runner.AndroidJUnitRunner {
-    
+
+    private PowerManager.WakeLock mWakeLock;
+
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
@@ -46,5 +48,25 @@ public class MainActivityTest extends android.support.test.runner.AndroidJUnitRu
         onView(withId(R.id.btn3)).check(doesNotExist());
         onView(withId(R.id.btn4)).check(doesNotExist());
         onView(withId(R.id.btn5)).check(doesNotExist());
+    }
+
+    @Override
+    public void callApplicationOnCreate(Application app) {
+        // Unlock the screen
+        KeyguardManager keyguard = (KeyguardManager) app.getSystemService(Context.KEYGUARD_SERVICE);
+        keyguard.newKeyguardLock(getClass().getSimpleName()).disableKeyguard();
+
+        // Start a wake lock
+        PowerManager power = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
+        mWakeLock = power.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, getClass().getSimpleName());
+        mWakeLock.acquire();
+
+        super.callApplicationOnCreate(app);
+    }
+
+    @Override
+    public void onDestroy() {
+        mWakeLock.release();
+        super.onDestroy();
     }
 }
