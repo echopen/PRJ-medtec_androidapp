@@ -10,6 +10,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             moduleName "EchOpen"
         }
@@ -57,6 +58,7 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
+        exclude 'LICENSE.txt'
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/license.txt'
@@ -76,4 +78,12 @@ dependencies {
     compile 'com.google.android.gms:play-services-gcm:7.3.0'
     compile project(':openCVLibrary310')
     testCompile 'junit:junit:4.12'
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2'){
+        // Necessary if your app targets Marshmallow (since Espresso
+        // hasn't moved to Marshmallow yet)
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test:runner:0.5'){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
 }
