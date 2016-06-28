@@ -5,7 +5,6 @@ package com.echopen.asso.echopen.model.Data;
  */
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
@@ -17,11 +16,25 @@ import java.io.InputStream;
 import java.net.Socket;
 import java.util.Arrays;
 
+import java.io.BufferedReader;
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.Socket;
+import java.util.Arrays;
+import java.util.concurrent.TimeUnit;
+
 public class ProcessTCPTask extends AbstractDataTask {
     private Socket s;
-
     private String ip;
     private int port;
+
     private DataInputStream dataInputStream;
 
     public ProcessTCPTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, String ip, int port) throws IOException {
@@ -34,7 +47,7 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
-        for (int j = 0; j < bytes.length; j++) {
+        for ( int j = 0; j < bytes.length; j++ ) {
             int v = bytes[j] & 0xFF;
             hexChars[j * 2] = hexArray[v >>> 4];
             hexChars[j * 2 + 1] = hexArray[v & 0x0F];

@@ -19,14 +19,73 @@
 
         <ImageView
             android:id="@+id/echo"
-            android:layout_width="349dp"
-            android:layout_height="460dp"
+            android:layout_width="369dp"
+            android:layout_height="300dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/echo_image" />
+            android:src="#77ff00"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar"
+            android:layout_below="@+id/echo"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:max="256"
+            android:progress="0"
+            android:progressDrawable="@drawable/progress"
+            android:indeterminate="false" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar2"
+            android:layout_below="@+id/seekBar"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:max="500"
+            android:progressDrawable="@drawable/progress"
+            android:indeterminate="false" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar3"
+            android:layout_below="@+id/seekBar2"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:progressDrawable="@drawable/progress"
+            android:max="500"
+            android:indeterminate="false" />
+
+        <!--<SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar4"
+            android:layout_below="@+id/seekBar3"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:max="500"
+            android:progressDrawable="@drawable/progress"
+            android:indeterminate="false" />
+
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBar5"
+            android:layout_below="@+id/seekBar4"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:max="500"
+            android:progressDrawable="@drawable/progress"
+            android:indeterminate="false" />-->
+
         <RelativeLayout
             style="@style/GenericProgressBackground"
-            android:id="@+id/loadingPanel"
-            >
+            android:id="@+id/loadingPanel">
             <ProgressBar style="@style/GenericProgressIndicator"/>
         </RelativeLayout>
     </LinearLayout>
@@ -181,5 +240,4 @@
                 android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
-
 </RelativeLayout>

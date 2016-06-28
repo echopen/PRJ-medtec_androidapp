@@ -39,9 +39,9 @@ public class Constants {
 
         public static final String CONTENT_TYPE_JSON = "application/json";
 
-        public static final String REDPITAYA_UDP_IP = "192.168.1.12";
+        public static final String REDPITAYA_IP = "192.168.128.3";
 
-        public static final int REDPITAYA_UDP_PORT = 7536;
+        public static final int REDPITAYA_PORT = 7538;
     }
 
     public static class Settings{
@@ -100,20 +100,30 @@ public class Constants {
 
         public static int NUM_IMG_DATA = 120;
 
+        /* this parameter takes in account the size of the image in order to wrap it properly in the OpenCV MAT */
+        public static int SCALE_IMG_FACTOR = 1;
+
         /* Settings for displaying a local pixel file : data/raw_data/data_phantom.csv*/
         public static final int LOCAL_NUM_SAMPLES = 511;
 
         public static final int LOCAL_IMG_DATA = 120;
+
+        public static final int LOCAL_SCALE_IMG_FACTOR = 1;
 
         /* Settings for TCP protocol */
         public static final int TCP_NUM_SAMPLES = 1024;
 
         public static final int TCP_IMG_DATA = 64;
 
+        public static final int TCP_SCALE_IMG_FACTOR = 2;
+
         /* Settings for UDP protocol */
         public static final int UDP_NUM_SAMPLES = 1052;
 
         public static final int UDP_IMG_DATA = 60;
+
+        public static final int UDP_SCALE_IMG_FACTOR = 1;
+
 
         public static final int UDP_NUM_UDP_PACKET_CHUNKS = 4;
 
@@ -131,6 +141,12 @@ public class Constants {
         public static final double STEP_RADIAL_INIT = SPEED_OF_SOUND/2*1/(double) SAMPLING_FREQUENCY;
 
         public static final int SCALE_FACTOR = 1;
+
+        public static final int tmp_SAMPLING_POINTS = 1052;
+
+        public static final int tmp_NUM_UDP_PACKET_CHUNKS = 4;
+
+        public static final int opencv_RELATIVE_ANGLE = 512;
 
         public static int[] getLoadIntegerConstants() {
             int[] int_constants = new int[4];
@@ -164,6 +180,13 @@ public class Constants {
             double_constants[6] = - PreProcParam.STEP_ANGLE_INIT;
             return double_constants;
         }
+    }
+
+    public static class SeekBarParam{
+        public static final int SEEK_BAR_SCALE = 154;
+        public static final int SEEK_BAR_ROTATE = 95;
+        public static final int SEEK_BAR_HORIZONTAL = 505;
+        public static final int SEEK_BAR_VERTICAL = 7;
     }
 
     public static class JNI_SETTINGS{

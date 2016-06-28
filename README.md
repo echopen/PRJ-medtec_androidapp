@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 All work in this repository is under the licence bsd available [here](https://github.com/echopen/android-app/blob/master/LICENSE.md)
+=======
+**Please see [README-OPENCV.md](README-OPENCV.md) for additional information on this branch.**
+
+---
+>>>>>>> opencv3.1-meca-tests
 
 # Echopen Android App
 

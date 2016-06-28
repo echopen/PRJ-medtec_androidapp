@@ -1,13 +1,16 @@
 package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by loic on 19/12/15.
@@ -30,7 +33,7 @@ public class FileTask extends AbstractDataTask {
             //For fun : scanconversion.randomize();
             scanconversion.setData(data);
             refreshUI(scanconversion);
-//            try {
+            //            try {
 //                Thread.sleep(100);
 //            } catch (InterruptedException e) {
 //

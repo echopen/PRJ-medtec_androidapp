@@ -2,12 +2,22 @@ package com.echopen.asso.echopen.preproc;
 
 import android.util.Log;
 
+import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.model.Data.Data;
 import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
+import com.echopen.asso.echopen.utils.UIParams;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
+
+import org.opencv.core.Mat;
+import org.opencv.core.CvType;
+import org.opencv.core.Point;
+import org.opencv.core.Scalar;
+import org.opencv.imgproc.Imgproc;
+
 
 /**
  * ScanConversion is the class that processes the scan conversion which allows one to
@@ -60,9 +70,30 @@ public class ScanConversion {
     private static int[] num;
     private static int[] envelope_data;
     private static byte[] envelope_data_bytes;
-    private static byte[] tcpDataArray;
 
     private Random rnd = new Random();
+
+    long lastTime;
+
+    private static byte[] tcpDataArray;
+    Mat opencv_src;
+    Mat opencv_src_larger;
+    Mat opencv_dest;
+
+    {
+        int rows = Constants.PreProcParam.NUM_IMG_DATA;
+        int larger_rows = Constants.PreProcParam.opencv_RELATIVE_ANGLE;
+        int cols = Constants.PreProcParam.NUM_SAMPLES;
+
+        int Nz = Constants.PreProcParam.N_z;
+        int Nx = Constants.PreProcParam.N_x;
+
+        opencv_src = new Mat(rows, cols, CvType.CV_8U);
+        opencv_src_larger = new Mat(larger_rows, cols, CvType.CV_8U);
+        opencv_dest = new Mat(larger_rows, cols, CvType.CV_32S);
+
+        lastTime = System.nanoTime();
+    }
 
     /**
      * @param numPixels
@@ -184,6 +215,16 @@ public class ScanConversion {
         ScanConversion.udpDataArray = udpDataArray;
     }
 
+    protected void finalize() throws Throwable {
+        try {
+            opencv_src.release();
+            opencv_src_larger.release();
+            opencv_dest.release();
+        } finally {
+            super.finalize();
+        }
+    }
+
     /**
      * ScanConversion constructor with udpDataArray argument
      * @param tcpDataArray
@@ -229,7 +270,6 @@ public class ScanConversion {
         ScanConversion.tcpDataArray = tcpDataArray;
         return singletonScanConversion;
     }
-
 
     /**
      * make_tables() compute the weights affected to each 4-uplets of pixels.
@@ -447,11 +487,20 @@ public class ScanConversion {
 
     public int[] getDataFromInterpolation(){
         try {
-            return compute_interpolation();
+            if(MainActivity.UDP_ACQUISITION || MainActivity.TCP_ACQUISITION)
+                return opencv_interpolation();
+            else
+                return compute_interpolation();
         } catch (IOException e) {
-            e.printStackTrace();
         }
         return null;
+
+//        try {
+//            return compute_interpolation();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
     }
 
     public void setData(final Data value) {
@@ -505,5 +554,49 @@ public class ScanConversion {
             }
         }
         return num;
+    }
+
+    private int[] opencv_interpolation() throws IOException {
+        int Nz = Constants.PreProcParam.N_z;
+        int Nx = Constants.PreProcParam.N_x;
+
+        if(envelope_data_bytes == null) {
+            Log.v("debug", "envelope_data_bytes is empty");
+            return new int[Nz * Nx];
+        }
+
+        double param1 = (double) UIParams.getParam1()/256.0 + 0.001;
+        int param2 = UIParams.getParam2();
+        int param3 = UIParams.getParam3();
+        int param4 = UIParams.getParam4();
+
+        int rows = Constants.PreProcParam.NUM_IMG_DATA;
+        int cols = Constants.PreProcParam.NUM_SAMPLES;
+
+
+        opencv_src.put(0, 0, envelope_data_bytes);
+        opencv_src_larger.setTo(Scalar.all(0));
+        opencv_dest.setTo(Scalar.all(0));
+
+        if(rows + param2 >= 700) {
+            opencv_src.copyTo(opencv_src_larger.submat(0, rows, 0, cols));
+        }
+        else{
+            opencv_src.copyTo(opencv_src_larger.submat(param2, rows + param2, 0, cols));
+        }
+
+        Point center = new Point(param3, param4);
+        Imgproc.linearPolar(opencv_src_larger, opencv_dest, center, param1 * 500, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
+        Mat opencv_dest2 = new Mat(opencv_dest.rows(), opencv_dest.cols(), opencv_dest.type());
+        //Imgproc.cvtColor(opencv_dest, opencv_dest, Imgproc.COLOR_RGB2GRAY);
+        Imgproc.equalizeHist(opencv_dest, opencv_dest2);
+
+        opencv_dest.convertTo(opencv_dest, CvType.CV_32S);
+        opencv_dest2.convertTo(opencv_dest2, CvType.CV_32S);
+
+        int[] dest_out = new int[Nz * Nx];
+        opencv_dest2.get(0, 0, dest_out);
+        int i = 0;
+        return dest_out;
     }
 }

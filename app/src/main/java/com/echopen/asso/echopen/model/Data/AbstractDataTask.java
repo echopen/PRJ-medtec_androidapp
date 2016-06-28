@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.echopen.asso.echopen.model.EchoImage.EchoIntImage;
 import com.echopen.asso.echopen.preproc.ScanConversion;
@@ -13,6 +14,7 @@ import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
+import java.nio.IntBuffer;
 import java.util.Arrays;
 
 /**
@@ -45,7 +47,8 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
             colors[i] = (pixel | (pixel << 8) | (pixel << 16)) | 0xFF000000;
         }
         //Arrays.fill(colors, 0, 4*scannedArray.length, Color.WHITE);
-        final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_z, Constants.PreProcParam.N_x, Bitmap.Config.ARGB_8888);
+        final Bitmap bitmap = Bitmap.createBitmap(colors, 512*Constants.PreProcParam.SCALE_IMG_FACTOR, 512/Constants.PreProcParam.SCALE_IMG_FACTOR, Bitmap.Config.ARGB_8888);
+
         try {
             activity.runOnUiThread(new Runnable() {
                 @Override
