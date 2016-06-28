@@ -12,7 +12,6 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
@@ -22,7 +21,7 @@ import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
-import com.echopen.asso.echopen.ui.Ruler;
+import com.echopen.asso.echopen.ui.RulerView;
 import com.echopen.asso.echopen.ui.onViewUpdateListener;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
@@ -217,7 +216,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         applyBgTheme(findViewById(R.id.vBottom));
 
         /* Ruler is used to show the centimetric scale of the ultrasound image */
-        final Ruler rulerView = (Ruler) findViewById(R.id.ruler);
+        final RulerView rulerView = (RulerView) findViewById(R.id.ruler);
         rulerView.setStartingPoint(70);
         rulerView.setUpdateListener(new onViewUpdateListener() {
             @Override

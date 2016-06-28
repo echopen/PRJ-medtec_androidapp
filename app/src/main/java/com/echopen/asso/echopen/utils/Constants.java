@@ -191,7 +191,7 @@ public class Constants {
 
     public static class RulerParam{
         public static final int width = Config.singletonConfig.getWidth();
-        public static final int height = Config.singletonConfig.getHeight();
+        public static final int height = 480 /*Config.singletonConfig.getHeight()*/;
         public static final float step_decimation = 67.f;
         public static final float step = width/step_decimation;
 
