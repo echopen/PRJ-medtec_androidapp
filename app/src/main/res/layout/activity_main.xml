@@ -74,28 +74,6 @@
             android:max="500"
             android:indeterminate="false" />
 
-        <!--<SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar4"
-            android:layout_below="@+id/seekBar3"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:max="500"
-            android:progressDrawable="@drawable/progress"
-            android:indeterminate="false" />
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBar5"
-            android:layout_below="@+id/seekBar4"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:max="500"
-            android:progressDrawable="@drawable/progress"
-            android:indeterminate="false" />-->
-
         <RelativeLayout
             style="@style/GenericProgressBackground"
             android:id="@+id/loadingPanel">

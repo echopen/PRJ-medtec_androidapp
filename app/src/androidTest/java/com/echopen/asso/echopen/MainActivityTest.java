@@ -1,12 +1,23 @@
 package com.echopen.asso.echopen;
 
+import android.app.AlertDialog;
 import android.app.Application;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.PowerManager;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.SmallTest;
+import android.widget.Button;
+
+import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,14 +32,32 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
  */
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest extends android.support.test.runner.AndroidJUnitRunner {
+@SmallTest
+public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
-    private PowerManager.WakeLock mWakeLock;
+    private ConstantDialogFragment constantDialogFragment;
+
+    private MainActivity mainActivity;
 
     @Rule
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
 
+    public MainActivityTest() {
+        super(MainActivity.class);
+    }
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+        mainActivity = getActivity();
+    }
+
+    /**
+     * Checking main UI buttons
+     *
+     * @throws NoMatchingViewException
+     */
     @Test
     public void checkIfMainViewsExists() throws NoMatchingViewException {
         onView(withId(R.id.btnCapture)).check(doesNotExist());
@@ -39,30 +68,15 @@ public class MainActivityTest extends android.support.test.runner.AndroidJUnitRu
         onView(withId(R.id.tabSetting)).check(doesNotExist());
         onView(withId(R.id.tabSuffle)).check(doesNotExist());
         onView(withId(R.id.tabTime)).check(doesNotExist());
+
         onView(withId(R.id.btn1)).check(doesNotExist());
         onView(withId(R.id.btn2)).check(doesNotExist());
         onView(withId(R.id.btn3)).check(doesNotExist());
         onView(withId(R.id.btn4)).check(doesNotExist());
         onView(withId(R.id.btn5)).check(doesNotExist());
-    }
 
-    @Override
-    public void callApplicationOnCreate(Application app) {
-        // Unlock the screen
-        KeyguardManager keyguard = (KeyguardManager) app.getSystemService(Context.KEYGUARD_SERVICE);
-        keyguard.newKeyguardLock(getClass().getSimpleName()).disableKeyguard();
-
-        // Start a wake lock
-        PowerManager power = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
-        mWakeLock = power.newWakeLock(PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE, getClass().getSimpleName());
-        mWakeLock.acquire();
-
-        super.callApplicationOnCreate(app);
-    }
-
-    @Override
-    public void onDestroy() {
-        mWakeLock.release();
-        super.onDestroy();
+        onView(withId(R.id.seekBar)).check(doesNotExist());
+        onView(withId(R.id.seekBar2)).check(doesNotExist());
+        onView(withId(R.id.seekBar3)).check(doesNotExist());
     }
 }
