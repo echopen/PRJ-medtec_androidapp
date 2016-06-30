@@ -39,32 +39,10 @@ public class DrawView extends ImageView {
     private Bitmap canvasBitmap;
     /* Brush size */
     private float brushSize;
-    /* Erase flag */
-    private boolean erase = false;
     /* Starting point easting of the line drawing*/
     private float startX;
     /* Starting point northing of the line drawing*/
     private float startY;
-
-    public Path getDrawPath() {
-        return drawPath;
-    }
-
-    public Canvas getDrawCanvas() {
-        return drawCanvas;
-    }
-
-    public void setDrawCanvas(Canvas drawCanvas) {
-        this.drawCanvas = drawCanvas;
-    }
-
-    public Bitmap getCanvasBitmap() {
-        return canvasBitmap;
-    }
-
-    public void setCanvasBitmap(Bitmap canvasBitmap) {
-        this.canvasBitmap = canvasBitmap;
-    }
 
     public DrawView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
