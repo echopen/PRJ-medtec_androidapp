@@ -4,13 +4,18 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Path;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -19,6 +24,7 @@ import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
+import com.echopen.asso.echopen.ui.DrawView;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RulerView;
@@ -52,15 +58,20 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     /* integer constant that switch wether the photo or the video is on */
     private int display;
-
     /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
+    /* View holding the touchevents triggering teh distance measure between 2 points */
+    private DrawView drawView;
+    /* to be completed */
+    private Path drawPath;
+    /* starting point easting of the line drawing*/
+    private float startX;
+    /* starting point northing of the line drawing*/
+    private float startY;
 
     public GestureDetector gesture;
-
     /* main UI constants of the app */
     public Constants.Settings setting;
-
     /* constant setting the process via UDP or TCP - @todo : the user should choose the desired way -
      should implement a dedicated check button */
 
@@ -210,7 +221,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setClick(R.id.btn5);
 
         initProtocolChoice();
-        setClickToFilter(R.id.vMiddle);
+        //setClickToFilter(R.id.vMiddle);
 
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));

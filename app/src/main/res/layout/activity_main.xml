@@ -22,7 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <ImageView
+            <com.echopen.asso.echopen.ui.DrawView
                 android:id="@+id/echo"
                 android:layout_width="369dp"
                 android:layout_height="300dp"
