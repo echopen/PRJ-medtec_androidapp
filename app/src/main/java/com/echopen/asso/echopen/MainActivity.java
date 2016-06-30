@@ -60,14 +60,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     private int display;
     /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
-    /* View holding the touchevents triggering teh distance measure between 2 points */
-    private DrawView drawView;
-    /* to be completed */
-    private Path drawPath;
-    /* starting point easting of the line drawing*/
-    private float startX;
-    /* starting point northing of the line drawing*/
-    private float startY;
 
     public GestureDetector gesture;
     /* main UI constants of the app */

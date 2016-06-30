@@ -5,19 +5,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
+import android.graphics.Path;;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.R;
-import com.echopen.asso.echopen.model.Data.AbstractDataTask;
 import com.echopen.asso.echopen.model.Painter.SelfPaint;
 
 /**
@@ -37,12 +30,22 @@ public class DrawView extends ImageView {
     private Canvas drawCanvas;
     /* Bitmap on which we draw lines */
     private Bitmap canvasBitmap;
-    /* Brush size */
-    private float brushSize;
+    /* Painter size */
+    private float painthSize;
     /* Starting point easting of the line drawing*/
     private float startX;
-    /* Starting point northing of the line drawing*/
+    /* Starting point northing of the line drawing */
     private float startY;
+    /* Starting point easting of the line drawing*/
+    private float endX;
+    /* Starting point northing of the line drawing */
+    private float endY;
+    /* Mark point of draw starting */
+    private boolean checkStartStatus;
+    /* Mark point of draw starting */
+    private boolean checkEndStatus;
+
+    private Paint markerPaint;
 
     public DrawView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -53,13 +56,14 @@ public class DrawView extends ImageView {
      * setUp the drawing painter properties
      */
     private void setupDrawing() {
-        brushSize = getResources().getInteger(R.integer.small_size);
+        painthSize = getResources().getInteger(R.integer.small_size);
         drawPath = new Path();
         drawPaint = new SelfPaint();
         drawPaint.getBareInstance();
         drawPaint.setSelfColor(paintColor).setSelfAntiAlias(true).
-                setSelfStrokeWidth((int) brushSize).setSelfStyle(Paint.Style.STROKE);
+                setSelfStrokeWidth((int) painthSize).setSelfStyle(Paint.Style.STROKE);
         canvasPaint = new Paint(Paint.DITHER_FLAG);
+        markerPaint = new Paint();
     }
 
     /**
@@ -81,9 +85,26 @@ public class DrawView extends ImageView {
      * @param canvas
      */
     @Override
-    protected void onDraw(Canvas canvas) {
+        protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        canvas.drawPath(drawPath, drawPaint);
+        if(checkStartStatus){
+            markerPaint.setColor(Color.RED);
+            markAndDraw(canvas, startX - 15, startY - 15, startX + 15, startY + 15,
+                    markerPaint, drawPath, drawPaint.getSelfPainter());
+        }
+        else if (checkEndStatus) {
+            drawPaint.setSelfColor(Color.RED);
+            markAndDraw(canvas, endX - 15, endY - 15, endX + 15, endY + 15,
+                    markerPaint, drawPath, drawPaint.getSelfPainter());
+            checkEndStatus = false;
+        }else {
+            canvas.drawPath(drawPath, drawPaint.getSelfPainter());
+        }
+    }
+
+    private void markAndDraw(Canvas canvas, float left, float top, float right, float bottom, Paint markerPaint, Path path, Paint paint ) {
+        canvas.drawRect(left, top, right, bottom, markerPaint);
+        canvas.drawPath(path, paint);
     }
 
     /**
@@ -98,18 +119,21 @@ public class DrawView extends ImageView {
         float touchY = event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                checkStartStatus = true;
                 startX = event.getRawX();
                 startY = event.getRawY();
-                drawPath.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
+                checkStartStatus = false;
+                drawPath.reset();
+                drawPath.moveTo(startX, startY);
                 drawPath.lineTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_UP:
-                Paint paint = new Paint();
-                paint.setStrokeWidth(15f);
-                paint.setColor(Color.BLACK);
-                this.drawCanvas.drawLine(startX, startY, event.getRawX(), event.getRawY(), paint);
+                checkStartStatus = true;
+                checkEndStatus = true;
+                endX = event.getRawX();
+                endY = event.getRawX();
                 this.invalidate();
                 break;
             default:

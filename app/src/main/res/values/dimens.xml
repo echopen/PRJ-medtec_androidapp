@@ -9,6 +9,6 @@
     <dimen name="scale_line_medium">25dp</dimen>
     <dimen name="scale_line_large">50dp</dimen>
 
-    <dimen name="small_brush">1dp</dimen>
-    <integer name="small_size">1</integer>
+    <dimen name="small_brush">5dp</dimen>
+    <integer name="small_size">5</integer>
 </resources>
