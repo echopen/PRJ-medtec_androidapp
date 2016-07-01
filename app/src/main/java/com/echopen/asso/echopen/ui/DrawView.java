@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -105,7 +106,6 @@ public class DrawView extends ImageView {
             drawPaint.setSelfColor(Color.RED);
             markAndDraw(canvas, endX - 15, endY - 15, endX + 15, endY + 15,
                     markerPaint, drawPath, drawPaint.getSelfPainter());
-            //checkEndStatus = false;
         }else {
             measureAndDisplayDistance(startX, currentX, startY, currentY);
             canvas.drawPath(drawPath, drawPaint.getSelfPainter());
@@ -120,6 +120,8 @@ public class DrawView extends ImageView {
     }
 
     private void markAndDraw(Canvas canvas, float left, float top, float right, float bottom, Paint markerPaint, Path path, Paint paint ) {
+        if(checkEndStatus)
+            canvas.drawRect(startX - 15, startY - 15, startX + 15, startY + 15, markerPaint);
         canvas.drawRect(left, top, right, bottom, markerPaint);
         canvas.drawPath(path, paint);
     }
@@ -137,6 +139,7 @@ public class DrawView extends ImageView {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 checkStartStatus = true;
+                checkEndStatus = false;
                 startX = event.getRawX();
                 startY = event.getRawY();
                 break;
@@ -149,10 +152,9 @@ public class DrawView extends ImageView {
                 drawPath.lineTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_UP:
-                checkStartStatus = true;
                 checkEndStatus = true;
-                endX = event.getRawX();
-                endY = event.getRawX();
+                endX = touchX;
+                endY = touchY;
                 this.invalidate();
                 break;
             default:
