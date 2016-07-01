@@ -7,11 +7,15 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;;
 import android.util.AttributeSet;
+import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.model.Painter.SelfPaint;
+import com.echopen.asso.echopen.model.Synchronizer;
+import com.echopen.asso.echopen.utils.MathOp;
 
 /**
  * Created by mehdibenchoufi on 30/06/16.
@@ -36,9 +40,13 @@ public class DrawView extends ImageView {
     private float startX;
     /* Starting point northing of the line drawing */
     private float startY;
-    /* Starting point easting of the line drawing*/
+    /* Current easting position when dragging the line */
+    private float currentX;
+    /* Current northing position when dragging the line */
+    private float currentY;
+    /* Ending point easting of the line drawing*/
     private float endX;
-    /* Starting point northing of the line drawing */
+    /* Ending point northing of the line drawing */
     private float endY;
     /* Mark point of draw starting */
     private boolean checkStartStatus;
@@ -88,6 +96,7 @@ public class DrawView extends ImageView {
         protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         if(checkStartStatus){
+            drawPaint.setSelfColor(Color.WHITE);
             markerPaint.setColor(Color.RED);
             markAndDraw(canvas, startX - 15, startY - 15, startX + 15, startY + 15,
                     markerPaint, drawPath, drawPaint.getSelfPainter());
@@ -96,10 +105,18 @@ public class DrawView extends ImageView {
             drawPaint.setSelfColor(Color.RED);
             markAndDraw(canvas, endX - 15, endY - 15, endX + 15, endY + 15,
                     markerPaint, drawPath, drawPaint.getSelfPainter());
-            checkEndStatus = false;
+            //checkEndStatus = false;
         }else {
+            measureAndDisplayDistance(startX, currentX, startY, currentY);
             canvas.drawPath(drawPath, drawPaint.getSelfPainter());
         }
+    }
+
+    private void measureAndDisplayDistance(float X1, float X2, float Y1, float Y2) {
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        float distance = MathOp.getRealMeasure((float) Math.hypot(X1 - X2, Y1 - Y2), displayMetrics);
+        String measure = String.format("%.2f", distance);
+        Synchronizer.singletonSynchronizer.synchronizeTextAndImage(R.id.measure, measure);
     }
 
     private void markAndDraw(Canvas canvas, float left, float top, float right, float bottom, Paint markerPaint, Path path, Paint paint ) {
@@ -125,6 +142,8 @@ public class DrawView extends ImageView {
                 break;
             case MotionEvent.ACTION_MOVE:
                 checkStartStatus = false;
+                currentX = event.getRawX();
+                currentY = event.getRawY();
                 drawPath.reset();
                 drawPath.moveTo(startX, startY);
                 drawPath.lineTo(touchX, touchY);

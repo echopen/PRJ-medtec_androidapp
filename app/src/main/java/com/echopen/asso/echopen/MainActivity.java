@@ -4,27 +4,22 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
+import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
-import com.echopen.asso.echopen.ui.DrawView;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RulerView;
@@ -88,8 +83,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* loading config constants in singleton Class */
         Config.getInstance(this);
         Config.singletonConfig.getWidth();
+
+        /* aiming to synchronize views : when dragging lines to measure distance between point,
+         the measure is synchronized in a textview */
+        Synchronizer.getInstance(this);
 
         setContentView(R.layout.activity_main);
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
