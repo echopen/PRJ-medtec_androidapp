@@ -113,8 +113,7 @@ public class RulerView extends View {
             int size = (i % 10 == 0) ? scaleLineLarge : (i % 5 == 0) ? scaleLineMedium : scaleLineSmall;
             canvas.drawLine(endPoint - size, startingPoint, endPoint, startingPoint, selfPaint.getSelfPainter());
             if (i % 10 == 0) {
-                canvas.drawText((i / 10) + " cm", endPoint - textStartPoint, startingPoint + 8, textPaint.getSelfPainter());
-                Log.d("what is the value of ", String.valueOf(i));
+                //canvas.drawText((i / 10) + " cm", endPoint - textStartPoint, startingPoint + 8, textPaint.getSelfPainter());
             }
         }
     }

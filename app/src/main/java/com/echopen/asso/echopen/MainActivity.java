@@ -102,8 +102,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         mainLayout.addView(child);*/
 
         initSwipeViews();
-        initViewComponents();
         initActionController();
+        initViewComponents();
         setupContainer();
 
         UIParams.setParam1(Constants.SeekBarParam.SEEK_BAR_SCALE);
@@ -199,7 +199,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     private void initViewComponents() {
         setTouchNClick(R.id.btnCapture);
         setTouchNClick(R.id.btnEffect);
-        setTouchNClick(R.id.btnPic);
         setTouchNClick(R.id.tabBrightness);
         setTouchNClick(R.id.tabGrid);
         setTouchNClick(R.id.tabSetting);
@@ -211,6 +210,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setClick(R.id.btn3);
         setClick(R.id.btn4);
         setClick(R.id.btn5);
+
+        mainActionController.setTransparentTextView();
 
         initProtocolChoice();
         //setClickToFilter(R.id.vMiddle);
