@@ -6,28 +6,26 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
-import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.utils.Constants;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
 
 /**
  * Created by mehdibenchoufi on 26/08/15.
  */
 public class ConstantDialogFragment extends DialogFragment {
 
+    private AlertDialog.Builder builder;
+
+    private AlertDialog alertDialog;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final int[] constantProtocol = {0};
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+        builder = new AlertDialog.Builder(getActivity(), AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 
         builder.setTitle(getResources().getString(R.string.protocol_message))
                 .setMultiChoiceItems(R.array.protocol_choice, null,
@@ -95,7 +93,13 @@ public class ConstantDialogFragment extends DialogFragment {
                         // todo : cancel dialog box
                     }
                 });
-        return builder.create();
+        builder.create();
+        alertDialog = builder.show();
+        return alertDialog;
+    }
+
+    public AlertDialog getAlertDialog(){
+        return alertDialog;
     }
 }
 
