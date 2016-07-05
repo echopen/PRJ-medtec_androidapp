@@ -59,20 +59,12 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     public GestureDetector gesture;
     /* main UI constants of the app */
     public Constants.Settings setting;
-    /* constant setting the process via UDP or TCP - @todo : the user should choose the desired way -
-     should implement a dedicated check button */
-
+    /* constant setting the process via local, UDP or TCP */
     public static boolean LOCAL_ACQUISITION = true;
 
     public static boolean TCP_ACQUISITION = false;
 
     public static boolean UDP_ACQUISITION = false;
-
-    /**
-     * locator of the screenshots or - the runcamera() method that processes it is currently unused
-     * for the moment - but it will be plugged again later in the developement
-     */
-    protected Uri uri;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -87,8 +79,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         Config.getInstance(this);
         Config.singletonConfig.getWidth();
 
-        /* aiming to synchronize views : when dragging lines to measure distance between point,
-         the measure is synchronized in a textview */
+        /* aiming to synchronize views : when operator draggs lines to measure distance between points,
+         the measure is synchronized with a textview */
         Synchronizer.getInstance(this);
 
         setContentView(R.layout.activity_main);

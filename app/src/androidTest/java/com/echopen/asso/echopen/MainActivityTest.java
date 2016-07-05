@@ -18,9 +18,11 @@ import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.Button;
 
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
+import com.echopen.asso.echopen.utils.Config;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -43,6 +45,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
             MainActivity.class);
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     public MainActivityTest() {
         super(MainActivity.class);
     }
@@ -54,6 +59,24 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     /**
+     * Check if the singleton class Config is loaded when the activity starts
+     */
+    @Test
+    public void checkIfConfigIsLoaded() {
+        assertNotNull(Config.singletonConfig);
+    }
+
+    /**
+     * Check height and width types served by the singleton class Config
+     */
+    @Test
+    public void checkConfigParams() {
+        int height = Config.singletonConfig.getHeight();
+        int width = Config.singletonConfig.getWidth();
+        assertEquals((height > 0) & (width > 0), true);
+    }
+
+    /**
      * Checking main UI buttons
      *
      * @throws NoMatchingViewException
@@ -62,7 +85,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void checkIfMainViewsExists() throws NoMatchingViewException {
         onView(withId(R.id.btnCapture)).check(doesNotExist());
         onView(withId(R.id.btnEffect)).check(doesNotExist());
-        onView(withId(R.id.btnPic)).check(doesNotExist());
         onView(withId(R.id.tabBrightness)).check(doesNotExist());
         onView(withId(R.id.tabGrid)).check(doesNotExist());
         onView(withId(R.id.tabSetting)).check(doesNotExist());
