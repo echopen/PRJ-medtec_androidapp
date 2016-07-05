@@ -22,7 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <ImageView
+            <com.echopen.asso.echopen.ui.DrawView
                 android:id="@+id/echo"
                 android:layout_width="369dp"
                 android:layout_height="300dp"
@@ -32,13 +32,19 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/txt_height"/>
-
             <com.echopen.asso.echopen.ui.RulerView
                 android:id="@+id/ruler"
                 android:layout_width="200dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="right"
                 android:background="@android:color/transparent"/>
+            <TextView
+                android:id="@+id/measure"
+                style="@style/text_setting"
+                android:layout_width="200dp"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="40dp"
+                android:text="High Resolution" />
         </FrameLayout>
         <SeekBar
             android:layout_width="match_parent"
@@ -202,19 +208,11 @@
                 android:text="VIDEO"
                 android:visibility="invisible" />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center">
-
-            <TextView
-                android:id="@+id/btnPic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_picture" />
-
             <TextView
                 android:id="@+id/btnCapture"
                 android:layout_width="wrap_content"

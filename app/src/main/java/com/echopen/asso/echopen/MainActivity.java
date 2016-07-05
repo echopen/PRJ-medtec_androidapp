@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
+import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
@@ -52,29 +53,18 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     /* integer constant that switch wether the photo or the video is on */
     private int display;
-
     /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
 
     public GestureDetector gesture;
-
     /* main UI constants of the app */
     public Constants.Settings setting;
-
-    /* constant setting the process via UDP or TCP - @todo : the user should choose the desired way -
-     should implement a dedicated check button */
-
+    /* constant setting the process via local, UDP or TCP */
     public static boolean LOCAL_ACQUISITION = true;
 
     public static boolean TCP_ACQUISITION = false;
 
     public static boolean UDP_ACQUISITION = false;
-
-    /**
-     * locator of the screenshots or - the runcamera() method that processes it is currently unused
-     * for the moment - but it will be plugged again later in the developement
-     */
-    protected Uri uri;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -85,8 +75,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* loading config constants in singleton Class */
         Config.getInstance(this);
         Config.singletonConfig.getWidth();
+
+        /* aiming to synchronize views : when operator draggs lines to measure distance between points,
+         the measure is synchronized with a textview */
+        Synchronizer.getInstance(this);
 
         setContentView(R.layout.activity_main);
         findViewById(R.id.loadingPanel).setVisibility(View.GONE);
@@ -99,8 +94,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         mainLayout.addView(child);*/
 
         initSwipeViews();
-        initViewComponents();
         initActionController();
+        initViewComponents();
         setupContainer();
 
         UIParams.setParam1(Constants.SeekBarParam.SEEK_BAR_SCALE);
@@ -196,7 +191,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     private void initViewComponents() {
         setTouchNClick(R.id.btnCapture);
         setTouchNClick(R.id.btnEffect);
-        setTouchNClick(R.id.btnPic);
         setTouchNClick(R.id.tabBrightness);
         setTouchNClick(R.id.tabGrid);
         setTouchNClick(R.id.tabSetting);
@@ -209,8 +203,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         setClick(R.id.btn4);
         setClick(R.id.btn5);
 
+        mainActionController.setTransparentTextView();
+
         initProtocolChoice();
-        setClickToFilter(R.id.vMiddle);
+        //setClickToFilter(R.id.vMiddle);
 
         applyBgTheme(findViewById(R.id.vTop));
         applyBgTheme(findViewById(R.id.vBottom));

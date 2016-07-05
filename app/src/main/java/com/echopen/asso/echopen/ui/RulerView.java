@@ -18,7 +18,7 @@ import android.view.View;
 
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.model.Ruler.Ruler;
-import com.echopen.asso.echopen.model.Ruler.RulerPaint;
+import com.echopen.asso.echopen.model.Painter.SelfPaint;
 import com.echopen.asso.echopen.utils.Constants;
 
 public class RulerView extends View {
@@ -42,9 +42,9 @@ public class RulerView extends View {
 
     private Paint gradientPaint;
 
-    private RulerPaint rulerPaint = new RulerPaint(),
-        textPaint = new RulerPaint(),
-        goldenPaint = new RulerPaint();
+    private SelfPaint selfPaint = new SelfPaint(),
+        textPaint = new SelfPaint(),
+        goldenPaint = new SelfPaint();
 
     boolean isSizeChanged = false;
 
@@ -67,14 +67,14 @@ public class RulerView extends View {
 
         Typeface typeface = Typeface.createFromAsset(context.getAssets(), "fonts/segoeuil.ttf");
 
-        rulerPaint.getBareInstance();
-        rulerPaint.setRulerStyle(Paint.Style.STROKE).setRulerStrokeWidth(0).
-                setRulerAntiAlias(false).setRulerColor(Color.WHITE);
+        selfPaint.getBareInstance();
+        selfPaint.setSelfStyle(Paint.Style.STROKE).setSelfStrokeWidth(0).
+                setSelfAntiAlias(false).setSelfColor(Color.WHITE);
 
         textPaint.getTextInstance();
-        textPaint.setRulerStyle(Paint.Style.STROKE).setRulerStrokeWidth(0).setRulerAntiAlias(true).
-                setRulerTextSize(getResources().getDimension(R.dimen.txt_size)).
-                setRulerColor(Color.WHITE).setTypeface(typeface);
+        textPaint.setSelfStyle(Paint.Style.STROKE).setSelfStrokeWidth(0).setSelfAntiAlias(true).
+                setSelfTextSize(getResources().getDimension(R.dimen.txt_size)).
+                setSelfColor(Color.WHITE).setTypeface(typeface);
     }
 
     public void setUpdateListener(onViewUpdateListener onViewUpdateListener) {
@@ -111,10 +111,9 @@ public class RulerView extends View {
             }
             startingPoint = startingPoint + ruler.pixelStep;
             int size = (i % 10 == 0) ? scaleLineLarge : (i % 5 == 0) ? scaleLineMedium : scaleLineSmall;
-            canvas.drawLine(endPoint - size, startingPoint, endPoint, startingPoint, rulerPaint.getRulerPainter());
+            canvas.drawLine(endPoint - size, startingPoint, endPoint, startingPoint, selfPaint.getSelfPainter());
             if (i % 10 == 0) {
-                canvas.drawText((i / 10) + " cm", endPoint - textStartPoint, startingPoint + 8, textPaint.getRulerPainter());
-                Log.d("what is the value of ", String.valueOf(i));
+                //canvas.drawText((i / 10) + " cm", endPoint - textStartPoint, startingPoint + 8, textPaint.getSelfPainter());
             }
         }
     }

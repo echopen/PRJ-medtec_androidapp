@@ -48,7 +48,6 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         }
         //Arrays.fill(colors, 0, 4*scannedArray.length, Color.WHITE);
         final Bitmap bitmap = Bitmap.createBitmap(colors, 512*Constants.PreProcParam.SCALE_IMG_FACTOR, 512/Constants.PreProcParam.SCALE_IMG_FACTOR, Bitmap.Config.ARGB_8888);
-
         try {
             activity.runOnUiThread(new Runnable() {
                 @Override

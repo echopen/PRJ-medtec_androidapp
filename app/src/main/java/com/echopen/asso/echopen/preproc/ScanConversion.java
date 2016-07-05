@@ -573,7 +573,6 @@ public class ScanConversion {
         int rows = Constants.PreProcParam.NUM_IMG_DATA;
         int cols = Constants.PreProcParam.NUM_SAMPLES;
 
-
         opencv_src.put(0, 0, envelope_data_bytes);
         opencv_src_larger.setTo(Scalar.all(0));
         opencv_dest.setTo(Scalar.all(0));

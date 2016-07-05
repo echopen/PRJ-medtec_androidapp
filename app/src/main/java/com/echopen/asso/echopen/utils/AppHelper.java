@@ -19,7 +19,7 @@ public class AppHelper {
     public static Constants.Settings setting;
 
     /**
-     * gets the URI of a file, depending on it media type, image or video
+     * Gets the URI of a file, depending on it media type, image or video
      * @param activity
      * @param mediaType
      * @return
