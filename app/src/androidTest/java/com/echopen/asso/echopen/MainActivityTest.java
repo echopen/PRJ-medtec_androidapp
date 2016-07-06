@@ -1,10 +1,14 @@
 package com.echopen.asso.echopen;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.internal.util.Checks;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -22,6 +26,7 @@ import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -55,7 +60,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check if the singleton class Config is loaded when the activity starts
      */
-    @Test
     public void testIfConfigIsLoadedTest() {
         assertNotNull(Config.singletonConfig);
     }
@@ -63,7 +67,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check height and width types served by the singleton class Config
      */
-    @Test
     public void testConfigParams() {
         int height = Config.singletonConfig.getHeight();
         int width = Config.singletonConfig.getWidth();
@@ -73,24 +76,35 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check if the background color is indeed transparent
      */
-    @Test
     public void testLayoutBackgroundColor() throws InterruptedException {
-        //onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor(Color.RED)));
-        //onView(withId(R.id.vMiddle)).check(matches(isDisplayed()));
+        dismissTheAlertDialogBox();
+        onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor(Color.TRANSPARENT)));
     }
+
+    private void dismissTheAlertDialogBox() {
+        onView(withText("Cancel")).
+                perform(click());
+    }
+
     /**
      * Checking main UI buttons
      *
      * @throws NoMatchingViewException
      */
-    @Test
-    public void testMainViewsExists() throws NoMatchingViewException {
+    public void testBareMainViewsExists() throws NoMatchingViewException {
         dumpUi(R.id.btnEffect, R.id.tabBrightness, R.id.tabGrid, R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
                 R.id.seekBar, R.id.seekBar2, R.id.seekBar3);
 
         TestHelper.checkUiDoNotExist(listUi);
-        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    }
+
+    public void testMainViewsExists() throws NoMatchingViewException {
+        dismissTheAlertDialogBox();
+        dumpUi(/*R.id.btnEffect,*/ R.id.tabBrightness, /*R.id.tabGrid,*/ R.id.tabSetting,
+                R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3/*, R.id.btn4, R.id.btn5*/);
+
+        TestHelper.checkUiIsDisplayed(listUi);
     }
 
     public static Matcher<View> withLayoutBackgroundColor(final int color) {
@@ -98,7 +112,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         return new BoundedMatcher<View, LinearLayout>(LinearLayout.class) {
             @Override
             protected boolean matchesSafely(LinearLayout linearLayout) {
-                return false;
+                Drawable background = linearLayout.getBackground();
+                int layout_color = ((ColorDrawable) background).getColor();
+                return  color == layout_color;
             }
 
             @Override
