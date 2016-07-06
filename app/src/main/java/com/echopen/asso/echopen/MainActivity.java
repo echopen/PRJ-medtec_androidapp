@@ -78,7 +78,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         /* loading config constants in singleton Class */
         Config.getInstance(this);
         Config.singletonConfig.getWidth();
-
         /* aiming to synchronize views : when operator draggs lines to measure distance between points,
          the measure is synchronized with a textview */
         Synchronizer.getInstance(this);

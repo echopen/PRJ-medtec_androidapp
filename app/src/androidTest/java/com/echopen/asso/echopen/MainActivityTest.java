@@ -1,39 +1,37 @@
 package com.echopen.asso.echopen;
 
-import android.app.AlertDialog;
-import android.app.Application;
-import android.app.DialogFragment;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.KeyguardManager;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.os.PowerManager;
 import android.support.test.espresso.NoMatchingViewException;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
+import android.support.test.espresso.matcher.BoundedMatcher;
+import android.support.test.internal.util.Checks;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.widget.Button;
+import android.view.View;
+import android.widget.LinearLayout;
 
+import com.echopen.asso.echopen.custom.utils.TestHelper;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 import com.echopen.asso.echopen.utils.Config;
 
-import org.junit.Rule;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
+import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.echopen.asso.echopen.custom.utils.TestHelper.checkUiDoNotExist;
 
 /**
  * Created by mehdibenchoufi on 27/07/15.
  */
 
-@RunWith(AndroidJUnit4.class)
 @SmallTest
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
 
@@ -41,28 +39,24 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
     private MainActivity mainActivity;
 
-    @Rule
-    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
-            MainActivity.class);
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    private List<Integer> listUi;
 
     public MainActivityTest() {
         super(MainActivity.class);
     }
 
-    @Override
+    @Before
     protected void setUp() throws Exception {
         super.setUp();
         mainActivity = getActivity();
+        listUi = new ArrayList<>();
     }
 
     /**
      * Check if the singleton class Config is loaded when the activity starts
      */
     @Test
-    public void checkIfConfigIsLoaded() {
+    public void testIfConfigIsLoadedTest() {
         assertNotNull(Config.singletonConfig);
     }
 
@@ -70,35 +64,53 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Check height and width types served by the singleton class Config
      */
     @Test
-    public void checkConfigParams() {
+    public void testConfigParams() {
         int height = Config.singletonConfig.getHeight();
         int width = Config.singletonConfig.getWidth();
         assertEquals((height > 0) & (width > 0), true);
     }
 
     /**
+     * Check if the background color is indeed transparent
+     */
+    @Test
+    public void testLayoutBackgroundColor() throws InterruptedException {
+        //onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor(Color.RED)));
+        //onView(withId(R.id.vMiddle)).check(matches(isDisplayed()));
+    }
+    /**
      * Checking main UI buttons
      *
      * @throws NoMatchingViewException
      */
     @Test
-    public void checkIfMainViewsExists() throws NoMatchingViewException {
-        onView(withId(R.id.btnCapture)).check(doesNotExist());
-        onView(withId(R.id.btnEffect)).check(doesNotExist());
-        onView(withId(R.id.tabBrightness)).check(doesNotExist());
-        onView(withId(R.id.tabGrid)).check(doesNotExist());
-        onView(withId(R.id.tabSetting)).check(doesNotExist());
-        onView(withId(R.id.tabSuffle)).check(doesNotExist());
-        onView(withId(R.id.tabTime)).check(doesNotExist());
+    public void testMainViewsExists() throws NoMatchingViewException {
+        dumpUi(R.id.btnEffect, R.id.tabBrightness, R.id.tabGrid, R.id.tabSetting,
+                R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
+                R.id.seekBar, R.id.seekBar2, R.id.seekBar3);
 
-        onView(withId(R.id.btn1)).check(doesNotExist());
-        onView(withId(R.id.btn2)).check(doesNotExist());
-        onView(withId(R.id.btn3)).check(doesNotExist());
-        onView(withId(R.id.btn4)).check(doesNotExist());
-        onView(withId(R.id.btn5)).check(doesNotExist());
+        TestHelper.checkUiDoNotExist(listUi);
+        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    }
 
-        onView(withId(R.id.seekBar)).check(doesNotExist());
-        onView(withId(R.id.seekBar2)).check(doesNotExist());
-        onView(withId(R.id.seekBar3)).check(doesNotExist());
+    public static Matcher<View> withLayoutBackgroundColor(final int color) {
+        Checks.checkNotNull(color);
+        return new BoundedMatcher<View, LinearLayout>(LinearLayout.class) {
+            @Override
+            protected boolean matchesSafely(LinearLayout linearLayout) {
+                return false;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with this color: ");
+            }
+        };
+    }
+
+    private void dumpUi(int... args) {
+        for(int elem : args){
+            listUi.add(elem);
+        }
     }
 }
