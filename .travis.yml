@@ -6,12 +6,17 @@ android:
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
+    - extra-android-support
     - addon-google_apis-google-19
     - sys-img-armeabi-v7a-android-19
     - sys-img-x86-android-17
   licenses: 
-    - "android-sdk-license-5be876d5"
+    - android-sdk-license-5be876d5
 before_script: 
+  - "echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null"
+  - "echo yes | android update sdk --filter android-23 --no-ui --force > /dev/null"
+  - "echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null"
+  - "echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null"
   - "export NDK_VERSION=r10e"
   - "curl -L http://dl.google.com/android/ndk/android-ndk-${NDK_VERSION}-linux-x86_64.bin -O"
   - "chmod u+x android-ndk-${NDK_VERSION}-linux-x86_64.bin"

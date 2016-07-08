@@ -10,10 +10,14 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             moduleName "EchOpen"
         }
+    }
+    lintOptions {
+        abortOnError false
     }
     sourceSets {
         main {
@@ -27,26 +31,24 @@ android {
     /* check if local.properties is in the , . Since this file is not under version control system, this is important
     when using continuous integration system
     */
-    if (project.rootProject.file('local.properties').exists()) {
         task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
-            Properties properties = new Properties()
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            def ndkDir = properties.getProperty('ndk.dir')
-            commandLine "$ndkDir/ndk-build",
+            //Properties properties = new Properties()
+            //properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            //def ndkDir = properties.getProperty('ndk.dir')
+            commandLine "ndk-build",
                     '-C', file('src/main/jni').absolutePath,
                     '-j', Runtime.runtime.availableProcessors(),
                     'all',
                     'NDK_DEBUG=1'
         }
         task cleanNative(type: Exec, description: 'Clean JNI object files') {
-            Properties properties = new Properties()
-            properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            def ndkDir = properties.getProperty('ndk.dir')
-            commandLine "$ndkDir/ndk-build",
+            //Properties properties = new Properties()
+            //properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            //def ndkDir = properties.getProperty('ndk.dir')
+            commandLine "ndk-build",
                     '-C', file('src/main/jni').absolutePath,
                     'clean'
         }
-    }
     clean.dependsOn 'cleanNative'
     tasks.withType(JavaCompile) {
         compileTask -> compileTask.dependsOn buildNative
@@ -77,10 +79,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.0.0'
     compile 'commons-io:commons-io:2.0.1'
     compile 'org.boofcv:android:0.18'
-    compile 'com.google.android.gms:play-services-ads:7.3.0'
-    compile 'com.google.android.gms:play-services-identity:7.3.0'
     compile 'com.firebase:firebase-client-android:2.3.1'
-    compile 'com.google.android.gms:play-services-gcm:7.3.0'
     compile project(':openCVLibrary310')
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
