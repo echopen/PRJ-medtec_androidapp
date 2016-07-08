@@ -8,7 +8,6 @@ import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.internal.util.Checks;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -19,19 +18,15 @@ import com.echopen.asso.echopen.utils.Config;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Before;
-import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static com.echopen.asso.echopen.custom.utils.TestHelper.checkUiDoNotExist;
 
 /**
  * Created by mehdibenchoufi on 27/07/15.
