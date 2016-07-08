@@ -1,38 +1,25 @@
-# travis doc to be automatically checked after each push on github
 language: android
-android:
-  components:
-    # Uncomment the lines below if you want to
-    # use the latest revision of Android SDK Tools
-    # - platform-tools
-    # - tools
-
-    # The BuildTools version used by your project
+android: 
+  components: 
+    - build-tools-19.0.1
     - build-tools-22.0.1
-
-    # The SDK version used to compile your project
     - android-23
-
-    # Additional components
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - addon-google_apis-google-19
-
-    # Specify at least one system image,
-    # if you need to run emulator(s) during your tests
     - sys-img-armeabi-v7a-android-19
     - sys-img-x86-android-17
-before_script:
-    - export NDK_VERSION=r10e
-    - curl -L http://dl.google.com/android/ndk/android-ndk-${NDK_VERSION}-linux-x86_64.bin -O
-    - chmod u+x android-ndk-${NDK_VERSION}-linux-x86_64.bin
-    - ./android-ndk-${NDK_VERSION}-linux-x86_64.bin > /dev/null
-    - rm android-ndk-${NDK_VERSION}-linux-x86_64.bin
-    - export ANDROID_NDK_HOME=`pwd`/android-ndk-${NDK_VERSION}
-    - export PATH=${ANDROID_NDK_HOME}:${PATH}
-
-# safelist
-branches:
-  only:
+  licenses: 
+    - "android-sdk-license-5be876d5"
+before_script: 
+  - "export NDK_VERSION=r10e"
+  - "curl -L http://dl.google.com/android/ndk/android-ndk-${NDK_VERSION}-linux-x86_64.bin -O"
+  - "chmod u+x android-ndk-${NDK_VERSION}-linux-x86_64.bin"
+  - "./android-ndk-${NDK_VERSION}-linux-x86_64.bin > /dev/null"
+  - "rm android-ndk-${NDK_VERSION}-linux-x86_64.bin"
+  - "export ANDROID_NDK_HOME=`pwd`/android-ndk-${NDK_VERSION}"
+  - "export PATH=${ANDROID_NDK_HOME}:${PATH}"
+branches: 
+  only: 
     - master
