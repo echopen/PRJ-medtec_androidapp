@@ -1,3 +1,4 @@
+# travis doc to be automatically checked after each push on github
 language: android
 android:
   components:
