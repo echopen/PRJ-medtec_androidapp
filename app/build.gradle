@@ -31,10 +31,28 @@ android {
     /* check if local.properties is in the , . Since this file is not under version control system, this is important
     when using continuous integration system
     */
+    if (project.rootProject.file('local.properties').exists()) {
         task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
-            //Properties properties = new Properties()
-            //properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            //def ndkDir = properties.getProperty('ndk.dir')
+           Properties properties = new Properties()
+           properties.load(project.rootProject.file('local.properties').newDataInputStream())
+           def ndkDir = properties.getProperty('ndk.dir')
+           commandLine "$ndkDir/ndk-build",
+                   '-C', file('src/main/jni').absolutePath,
+                   '-j', Runtime.runtime.availableProcessors(),
+                   'all',
+                   'NDK_DEBUG=1'
+        }
+        task cleanNative(type: Exec, description: 'Clean JNI object files') {
+           Properties properties = new Properties()
+           properties.load(project.rootProject.file('local.properties').newDataInputStream())
+           def ndkDir = properties.getProperty('ndk.dir')
+           commandLine "$ndkDir/ndk-build",
+                   '-C', file('src/main/jni').absolutePath,
+                   'clean'
+        }
+    }
+    if(!project.rootProject.file('local.properties').exists()) {
+        task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
             commandLine "ndk-build",
                     '-C', file('src/main/jni').absolutePath,
                     '-j', Runtime.runtime.availableProcessors(),
@@ -42,13 +60,11 @@ android {
                     'NDK_DEBUG=1'
         }
         task cleanNative(type: Exec, description: 'Clean JNI object files') {
-            //Properties properties = new Properties()
-            //properties.load(project.rootProject.file('local.properties').newDataInputStream())
-            //def ndkDir = properties.getProperty('ndk.dir')
             commandLine "ndk-build",
                     '-C', file('src/main/jni').absolutePath,
                     'clean'
         }
+    }
     clean.dependsOn 'cleanNative'
     tasks.withType(JavaCompile) {
         compileTask -> compileTask.dependsOn buildNative
