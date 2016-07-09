@@ -2,20 +2,13 @@ package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.os.AsyncTask;
-import android.util.Log;
 
-import com.echopen.asso.echopen.model.EchoImage.EchoIntImage;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Constants;
 
 import java.io.IOException;
-import java.net.DatagramSocket;
-import java.nio.IntBuffer;
-import java.util.Arrays;
 
 /**
  * Created by loic on 19/12/15.

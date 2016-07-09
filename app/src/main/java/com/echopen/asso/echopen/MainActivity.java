@@ -14,10 +14,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 
+import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
-import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
@@ -27,10 +27,10 @@ import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.UIParams;
 
+import org.opencv.android.OpenCVLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
-
-import org.opencv.android.OpenCVLoader;
 
 /**
  * MainActivity class handles the main screen of the app.

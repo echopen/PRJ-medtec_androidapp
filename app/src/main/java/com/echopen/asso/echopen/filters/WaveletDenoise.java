@@ -1,6 +1,5 @@
 package com.echopen.asso.echopen.filters;
 
-import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.Random;
@@ -9,7 +8,6 @@ import boofcv.abst.denoise.FactoryImageDenoise;
 import boofcv.abst.denoise.WaveletDenoiseFilter;
 import boofcv.alg.misc.GImageMiscOps;
 import boofcv.android.ConvertBitmap;
-import boofcv.core.image.ConvertBufferedImage;
 import boofcv.struct.image.ImageFloat32;
 
 /**

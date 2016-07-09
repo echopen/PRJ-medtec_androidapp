@@ -5,18 +5,18 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;;
+import android.graphics.Path;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.model.Painter.SelfPaint;
 import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.utils.MathOp;
+
+;
 
 /**
  * Created by mehdibenchoufi on 30/06/16.
