@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 android {
     compileSdkVersion 23
