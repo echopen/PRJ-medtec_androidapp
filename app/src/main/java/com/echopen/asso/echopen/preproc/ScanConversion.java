@@ -8,15 +8,15 @@ import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.UIParams;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Random;
-
-import org.opencv.core.Mat;
 import org.opencv.core.CvType;
+import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
+
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
 
 
 /**

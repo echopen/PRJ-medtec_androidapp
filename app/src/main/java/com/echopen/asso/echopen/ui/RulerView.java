@@ -6,19 +6,19 @@ package com.echopen.asso.echopen.ui;
  * Using and Refactoring code from
  * https://dhingrakimmi.wordpress.com/2015/09/17/android-measurment-scale-my-scale/?preview_id=2
  */
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.echopen.asso.echopen.R;
-import com.echopen.asso.echopen.model.Ruler.Ruler;
 import com.echopen.asso.echopen.model.Painter.SelfPaint;
+import com.echopen.asso.echopen.model.Ruler.Ruler;
 import com.echopen.asso.echopen.utils.Constants;
 
 public class RulerView extends View {

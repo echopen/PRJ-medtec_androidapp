@@ -3,9 +3,6 @@
  */
 package com.echopen.asso.echopen.ui;
 
-import java.io.IOException;
-import java.util.List;
-
 import android.content.Context;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
@@ -22,6 +19,9 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 
 import com.echopen.asso.echopen.MainActivity;
+
+import java.io.IOException;
+import java.util.List;
 
 public class CameraFragment extends Fragment
 {

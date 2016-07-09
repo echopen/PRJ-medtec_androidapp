@@ -10,10 +10,12 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import com.echopen.asso.echopen.ui.AbstractActionActivity;
+
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.model.Data.Data;
+import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.ui.SettingActionController;
+
 import java.util.ArrayList;
 
 /**
