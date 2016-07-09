@@ -6,7 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.0'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
+        classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.3.0'
     }
 }
 
