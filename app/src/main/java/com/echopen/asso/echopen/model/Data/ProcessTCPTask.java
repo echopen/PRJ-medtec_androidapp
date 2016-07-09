@@ -1,7 +1,9 @@
 package com.echopen.asso.echopen.model.Data;
 
 /**
- * Created by mehdibenchoufi on 07/03/16.
+ * This class takes as formal input the pixels data coming from hardware, and then, after processing it, refreshes the UI.
+ * More precisely, it gets the data from TCP protocol and send it to ScanConversion algorithm class.
+ * After the data is processed, it gets it back and displays the final image through the main UI thread.
  */
 
 import android.app.Activity;
@@ -14,21 +16,6 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.util.Arrays;
-
-import java.io.BufferedReader;
-import java.io.DataInput;
-import java.io.DataInputStream;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.Socket;
-import java.util.Arrays;
-import java.util.concurrent.TimeUnit;
 
 public class ProcessTCPTask extends AbstractDataTask {
     private Socket s;
@@ -43,37 +30,22 @@ public class ProcessTCPTask extends AbstractDataTask {
         this.port = port;
     }
 
-    final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
-
-    public static String bytesToHex(byte[] bytes) {
-        char[] hexChars = new char[bytes.length * 2];
-        for ( int j = 0; j < bytes.length; j++ ) {
-            int v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
-        }
-        return new String(hexChars);
-    }
-
     protected Void doInBackground(Void... Voids) {
         InputStream stream;
         int rows = Constants.PreProcParam.NUM_SAMPLES;
-        int cols = Constants.PreProcParam.NUM_IMG_DATA;
-        byte[] message0 = new byte[rows*cols];
+        //int cols = Constants.PreProcParam.NUM_IMG_DATA;
 
         try {
             s = new Socket(ip, port);
             stream = s.getInputStream();
-            int num_lines = cols;
-            int num_data = rows;
-            byte[] message = new byte[num_lines*num_data];
+            byte[] message;
 
             while (true) {
                 try {
                     message = deepInsidePacket(rows +1, stream);
-                    ScanConversion scnConv = ScanConversion.getInstance(message);
-                    scnConv.setTcpData();
-                    refreshUI(scnConv);
+                    ScanConversion scanConversion = ScanConversion.getInstance(message);
+                    scanConversion.setTcpData();
+                    refreshUI(scanConversion);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -86,7 +58,7 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {
         byte[] buffer = new byte[len];
-        int rows = Constants.PreProcParam.NUM_SAMPLES;
+        //int rows = Constants.PreProcParam.NUM_SAMPLES;
         int start_line = Constants.PreProcParam.NUM_LINES;
 
         DataInputStream dataInputStream = new DataInputStream(stream);
@@ -124,28 +96,6 @@ public class ProcessTCPTask extends AbstractDataTask {
                 break;
             }
         }
-        tmpBuffer = null;
         return finalBuffer;
-    }
-
-    private byte[] getReadLineBytes(int len, InputStream stream) throws IOException {
-        byte[] buffer = new byte[len];
-        stream.read(buffer);
-        byte[] filteredByteArray = Arrays.copyOfRange(buffer, 1, buffer.length - 1);
-        return filteredByteArray;
-    }
-
-    private byte[] readBytes(int len, InputStream stream) throws IOException {
-        byte[] buffer = new byte[len];
-        int totalLenRead = 0;
-        int lenRead = 0;
-
-        while(totalLenRead < len) {
-            byte[] tmpBuffer = new byte[len - totalLenRead];
-            lenRead = stream.read(tmpBuffer);
-            System.arraycopy(tmpBuffer, 0, buffer, totalLenRead, lenRead);
-            totalLenRead += lenRead;
-        }
-        return buffer;
     }
 }

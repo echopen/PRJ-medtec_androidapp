@@ -2,13 +2,11 @@ package com.echopen.asso.echopen.filters;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.widget.ImageView;
 
 import boofcv.android.ConvertBitmap;
 import boofcv.struct.image.ImageDataType;
 import boofcv.struct.image.ImageFloat32;
-import boofcv.struct.image.ImageSingleBand;
 import boofcv.struct.image.ImageUInt8;
 
 /**

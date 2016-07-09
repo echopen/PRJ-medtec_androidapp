@@ -5,7 +5,6 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -47,18 +46,16 @@ import org.opencv.android.OpenCVLoader;
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
 
     static {
-        // If you use opencv 2.4, System.loadLibrary("opencv_java")
+        // If you use OpenCV 2.4, System.loadLibrary("opencv_java")
         System.loadLibrary("opencv_java3");
     }
 
-    /* integer constant that switch wether the photo or the video is on */
+    /* integer constant that switch whether the photo or the video is on */
     private int display;
     /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
 
     public GestureDetector gesture;
-    /* main UI constants of the app */
-    public Constants.Settings setting;
     /* constant setting the process via local, UDP or TCP */
     public static boolean LOCAL_ACQUISITION = true;
 
@@ -78,8 +75,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         /* loading config constants in singleton Class */
         Config.getInstance(this);
         Config.singletonConfig.getWidth();
-        /* aiming to synchronize views : when operator draggs lines to measure distance between points,
-         the measure is synchronized with a textview */
+        /* aiming to synchronize views : when operator drags lines to measure distance between points,
+         the measure is synchronized with a TextView */
         Synchronizer.getInstance(this);
 
         setContentView(R.layout.activity_main);
@@ -101,8 +98,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         UIParams.setParam2(Constants.SeekBarParam.SEEK_BAR_ROTATE);
         UIParams.setParam3(Constants.SeekBarParam.SEEK_BAR_HORIZONTAL);
         UIParams.setParam4(Constants.SeekBarParam.SEEK_BAR_VERTICAL);
-        final SeekBar seekbar = (SeekBar) findViewById(R.id.seekBar);
-        seekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        final SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -117,8 +114,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                 Log.d("value of 1 ", String.valueOf(progress));
             }
         });
-        final SeekBar seekbar2 = (SeekBar) findViewById(R.id.seekBar2);
-        seekbar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        final SeekBar seekBar2 = (SeekBar) findViewById(R.id.seekBar2);
+        seekBar2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -133,8 +130,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                 Log.d("value of 2 ", String.valueOf(progress));
             }
         });
-        final SeekBar seekbar3 = (SeekBar) findViewById(R.id.seekBar3);
-        seekbar3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        final SeekBar seekBar3 = (SeekBar) findViewById(R.id.seekBar3);
+        seekBar3.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -246,11 +243,11 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     }
 
     /**
-     * Initiates the swip view
+     * Initiates the swipe view
      */
     private void initSwipeViews() {
         /*
-        gesture = new GestureDetector(this, gestureListner);
+        gesture = new GestureDetector(this, gestureListener);
 
         OnTouchListener otl = new OnTouchListener() {
 
@@ -264,33 +261,34 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     }
 
     /**
-     * Deals with the gesture switch wether the photo or the video is choosen by the user
+     * Deals with the gesture switch whether the photo or the video is chosen by the user
      * In each case, setupContainer() is called
      */
-    private SimpleOnGestureListener gestureListner = new SimpleOnGestureListener() {
+    private SimpleOnGestureListener gestureListener = new SimpleOnGestureListener() {
         @Override
         public boolean onFling(android.view.MotionEvent e1,
                                android.view.MotionEvent e2, float velocityX, float velocityY) {
 
-            if (Math.abs(e1.getY() - e2.getY()) > setting.SWIPE_MAX_OFF_PATH)
+            if (Math.abs(e1.getY() - e2.getY()) > Constants.Settings.SWIPE_MAX_OFF_PATH)
                 return false;
             else {
                 try {
-                    if (e1.getX() - e2.getX() > setting.SWIPE_MIN_DISTANCE
-                            && Math.abs(velocityX) > setting.SWIPE_THRESHOLD_VELOCITY) {
-                        if (display != setting.DISPLAY_VIDEO) {
+                    if (e1.getX() - e2.getX() > Constants.Settings.SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > Constants.Settings.SWIPE_THRESHOLD_VELOCITY) {
+                        if (display != Constants.Settings.DISPLAY_VIDEO) {
                             display++;
                             setupContainer();
                         }
 
-                    } else if (e2.getX() - e1.getX() > setting.SWIPE_MIN_DISTANCE
-                            && Math.abs(velocityX) > setting.SWIPE_THRESHOLD_VELOCITY) {
-                        if (display != setting.DISPLAY_PHOTO) {
+                    } else if (e2.getX() - e1.getX() > Constants.Settings.SWIPE_MIN_DISTANCE
+                            && Math.abs(velocityX) > Constants.Settings.SWIPE_THRESHOLD_VELOCITY) {
+                        if (display != Constants.Settings.DISPLAY_PHOTO) {
                             display--;
                             setupContainer();
                         }
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
                 return true;
             }
@@ -299,9 +297,9 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     };
 
     /**
-     * Prepare the call to setupContainer() that switch fragments  wether the photo or the video is choosen by the user
+     * Prepare the call to setupContainer() that switch fragments  whether the photo or the video is chosen by the user
      *
-     * @param display, integer constant that switch wether the photo or the video is on
+     * @param display, integer constant that switch whether the photo or the video is on
      */
     public void goBackFromFragment(int display) {
         this.display = display;
@@ -309,7 +307,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     }
 
     /**
-     * Switch fragments  wether the photo or the video is choosen by the user
+     * Switch fragments  whether the photo or the video is chosen by the user
      */
     private void setupContainer() {
         while (getSupportFragmentManager().getBackStackEntryCount() > 0) {
@@ -323,7 +321,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
         mainActionController.displayImages();
 
-        if (display == setting.DISPLAY_PHOTO) {
+        if (display == Constants.Settings.DISPLAY_PHOTO) {
             mainActionController.displayPhoto();
         } else {
             mainActionController.displayOtherImage();
@@ -385,7 +383,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     /**
      * @param item, MenuItem instance
-     * @return
+     * @return boolean
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -398,8 +396,8 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
      * the resultCode it returned, and any additional data from it.”,
      * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
      *
-     * @param requestCode
-     * @param resultCode
+     * @param requestCode, integer argument that identifies your request
+     * @param resultCode, to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
      * @param data,       Intent instance
      */
     @Override
