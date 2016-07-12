@@ -1,16 +1,9 @@
 package com.echopen.asso.echopen.model;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Color;
-import android.graphics.ColorMatrixColorFilter;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.TextView;
-
-import com.echopen.asso.echopen.utils.Strings;
 
 /**
  * Created by mehdibenchoufi on 30/06/16.

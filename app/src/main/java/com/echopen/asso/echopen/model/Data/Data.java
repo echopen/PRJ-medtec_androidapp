@@ -1,6 +1,9 @@
 package com.echopen.asso.echopen.model.Data;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 /**
  * This class holds the metadata of the images and the pixel int array data

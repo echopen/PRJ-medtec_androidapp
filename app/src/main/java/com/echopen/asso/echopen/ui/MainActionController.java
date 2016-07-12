@@ -2,25 +2,11 @@ package com.echopen.asso.echopen.ui;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.os.Environment;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.utils.Config;
-
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Driver;
 
 public class MainActionController extends AbstractActionController {
 

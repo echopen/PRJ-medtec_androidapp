@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.vanniktech.android.junit.jacoco'
 
 android {
     compileSdkVersion 23
@@ -70,6 +71,9 @@ android {
         compileTask -> compileTask.dependsOn buildNative
     }
     buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -87,6 +91,36 @@ android {
         exclude 'META-INF/license.txt'
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
+    }
+}
+
+def coverageSourceDirs = [
+        'src/main/java',
+]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "connectedDebugAndroidTest") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+    classDirectories = fileTree(
+            dir: './build/intermediates/classes/debug',
+            excludes: ['**/R*.class',
+                       '**/*$InjectAdapter.class',
+                       '**/*$ModuleAdapter.class',
+                       '**/*$ViewInjector*.class'
+            ])
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = files("$buildDir/jacoco/testDebug.exec")
+
+    doFirst {
+        new File("$buildDir/intermediates/classes/").eachFileRecurse { file ->
+            if (file.name.contains('$$')) {
+                file.renameTo(file.path.replace('$$', '$'))
+            }
+        }
     }
 }
 

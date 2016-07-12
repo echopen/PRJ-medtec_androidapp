@@ -1,11 +1,8 @@
 package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.util.Log;
 
-import com.echopen.asso.echopen.model.EchoImage.EchoIntImage;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Constants;

@@ -5,7 +5,6 @@ import android.widget.ImageView;
 import boofcv.alg.enhance.EnhanceImageOps;
 import boofcv.alg.misc.ImageStatistics;
 import boofcv.android.ConvertBitmap;
-import boofcv.struct.image.ImageFloat32;
 import boofcv.struct.image.ImageUInt8;
 
 /**

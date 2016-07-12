@@ -3,8 +3,6 @@ package com.echopen.asso.echopen.ui;
 import android.app.Activity;
 import android.view.View;
 
-import com.echopen.asso.echopen.R;
-import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.utils.TouchEffect;
 
 
