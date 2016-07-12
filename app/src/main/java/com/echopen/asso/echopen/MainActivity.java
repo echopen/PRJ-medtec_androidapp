@@ -52,6 +52,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
+
     /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
 

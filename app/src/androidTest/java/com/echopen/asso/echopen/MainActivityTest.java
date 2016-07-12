@@ -19,6 +19,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Before;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,6 +54,15 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     /**
+     * Check whether the boolean related protocol value are correctly set, namely
+     * LOCAL_ACQUISITION = true, TCP_ACQUISITION = false, UDP_ACQUISITION = false;
+     */
+    public void testBooleanProtocolValues(){
+        assertEquals((MainActivity.LOCAL_ACQUISITION) & (!MainActivity.TCP_ACQUISITION) & (!MainActivity.UDP_ACQUISITION), true);
+
+    }
+
+    /**
      * Check if the singleton class Config is loaded when the activity starts
      */
     public void testIfConfigIsLoadedTest() {
@@ -69,6 +79,17 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     /**
+     * Check wether mainActionController is instanciated
+     */
+    public void testMainActionController() throws NoSuchFieldException, IllegalAccessException {
+        Field field = mainActivity.getClass().getDeclaredField("mainActionController");
+        field.setAccessible(true);
+        Object value = field.get(mainActivity);
+        assertNotNull(value);
+    }
+
+
+    /**
      * Check if the background color is indeed transparent
      */
     public void testLayoutBackgroundColor() throws InterruptedException {
@@ -82,8 +103,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     /**
-     * Checking main UI buttons
-     *
+     * Checking main UI buttons without dismissing alert dialog box
      * @throws NoMatchingViewException
      */
     public void testBareMainViewsExists() throws NoMatchingViewException {
@@ -94,12 +114,26 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         TestHelper.checkUiDoNotExist(listUi);
     }
 
+    /**
+     * Checking main UI buttons after dismissing alert dialog box
+     * @throws NoMatchingViewException
+     */
     public void testMainViewsExists() throws NoMatchingViewException {
         dismissTheAlertDialogBox();
         dumpUi(/*R.id.btnEffect,*/ R.id.tabBrightness, /*R.id.tabGrid,*/ R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3/*, R.id.btn4, R.id.btn5*/);
 
         TestHelper.checkUiIsDisplayed(listUi);
+    }
+
+    /**
+     * This UI test is separated from others since tits visibilty is controlled
+     * by mainActionController instance
+     */
+    public void testMeasureTextViewIsVisible(){
+        dismissTheAlertDialogBox();
+        dumpUi(R.id.measure);
+        TestHelper.checkUiIsVisible(listUi);
     }
 
     public static Matcher<View> withLayoutBackgroundColor(final int color) {
