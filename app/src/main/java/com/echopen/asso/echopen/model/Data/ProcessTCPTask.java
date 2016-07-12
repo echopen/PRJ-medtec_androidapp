@@ -48,6 +48,7 @@ public class ProcessTCPTask extends AbstractDataTask {
                     refreshUI(scanConversion);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    return null;
                 }
             }
         } catch (IOException e) {

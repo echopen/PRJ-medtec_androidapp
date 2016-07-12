@@ -10,12 +10,15 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.UiThreadTest;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -39,6 +42,8 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
 
     private MainActivity mainActivity;
 
+    private AlertDialog alertDialog;
+
     public FragmentMainActivityTest() {
         super(MainActivity.class);
     }
@@ -48,6 +53,7 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
         super.setUp();
         mainActivity = getActivity();
         constantDialogFragment = (ConstantDialogFragment) getActivity().getFragmentManager().findFragmentByTag("fragment_edit_name");
+        alertDialog = constantDialogFragment.getAlertDialog();
     }
 
     public void testConstantDialogFragment() {
@@ -55,58 +61,55 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
         assertTrue(constantDialogFragment.getShowsDialog());
     }
 
-    public void testDataIsFetchedFromDialogAlertBox() throws Throwable {
-        AlertDialog alertDialog = constantDialogFragment.getAlertDialog();
-        doCancelClickAndTest();
-        doLocalClickAndTest();
-        doTCPClickAndTest();
-        doUDPClickAndTest();
-
-        if (alertDialog.isShowing()) {
-            try {
-                onView(withId(R.id.btnCapture)).check(doesNotExist());
-            } catch (Throwable e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * The UI is intended to be more extensively explored when
-     * the alert dialog is dismissed. The following tests are here just as examples
-     */
-    private void doCancelClickAndTest() {
-        onView(withText("Cancel")).
-                perform(click());
-        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
-    }
-
     /**
      * Clicking on local checkbox triggers ScanConversion on the data stored in a local CSV file
      */
-    private void doLocalClickAndTest() {
-        onView(withText("TCP")).
-                perform(click());
-        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    public void testDataIsFetchedFromLocal() throws Throwable {
+        ListView listView = alertDialog.getListView();
+        View child = listView.getChildAt(0);
+        clickAndValidate(child);
     }
 
     /**
      * Clicking on TCP checkbox triggers ScanConversion on the data stored sent
      * from the hardware through TCP protocol
      */
-    private void doTCPClickAndTest() {
-        onView(withText("TCP")).
-                perform(click());
-        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    public void testDataIsFetchedFromDialogTCP() throws Throwable {
+        ListView listView = alertDialog.getListView();
+        View child = listView.getChildAt(1);
+        clickAndValidate(child);
     }
 
     /**
      * Clicking on UDP checkbox triggers ScanConversion on the data stored sent
      * from the hardware through UDP protocol
      */
-    private void doUDPClickAndTest() {
-        onView(withText("UDP")).
+    public void testDatalIsFetchedFromUDP() throws Throwable {
+        ListView listView = alertDialog.getListView();
+        View child = listView.getChildAt(2);
+        clickAndValidate(child);
+    }
+
+    /**
+     * The UI is intended to be more extensively explored when
+     * the alert dialog is dismissed. The following tests are here just as examples
+     */
+    public void testCancelClick() {
+        onView(withText("Cancel")).
                 perform(click());
+        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    }
+
+    private void clickAndValidate(View child) {
+        boolean thrown = false;
+        child.performClick();
+        try {
+            onView(withText("Ok")).
+                    perform(click());
+        } catch (Exception e) {
+            thrown = true;
+        }
+        assertTrue(thrown);
     }
 }
 
