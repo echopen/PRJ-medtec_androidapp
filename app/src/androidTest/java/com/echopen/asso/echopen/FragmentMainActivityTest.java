@@ -57,7 +57,10 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
 
     public void testDataIsFetchedFromDialogAlertBox() throws Throwable {
         AlertDialog alertDialog = constantDialogFragment.getAlertDialog();
-        doClick();
+        doCancelClickAndTest();
+        doLocalClickAndTest();
+        doTCPClickAndTest();
+        doUDPClickAndTest();
 
         if (alertDialog.isShowing()) {
             try {
@@ -72,10 +75,38 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
      * The UI is intended to be more extensively explored when
      * the alert dialog is dismissed. The following tests are here just as examples
      */
-    private void doClick() {
+    private void doCancelClickAndTest() {
         onView(withText("Cancel")).
                 perform(click());
         onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Clicking on local checkbox triggers ScanConversion on the data stored in a local CSV file
+     */
+    private void doLocalClickAndTest() {
+        onView(withText("TCP")).
+                perform(click());
+        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Clicking on TCP checkbox triggers ScanConversion on the data stored sent
+     * from the hardware through TCP protocol
+     */
+    private void doTCPClickAndTest() {
+        onView(withText("TCP")).
+                perform(click());
+        onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));
+    }
+
+    /**
+     * Clicking on UDP checkbox triggers ScanConversion on the data stored sent
+     * from the hardware through UDP protocol
+     */
+    private void doUDPClickAndTest() {
+        onView(withText("UDP")).
+                perform(click());
     }
 }
 
