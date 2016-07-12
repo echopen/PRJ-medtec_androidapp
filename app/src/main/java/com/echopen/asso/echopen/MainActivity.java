@@ -205,9 +205,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initProtocolChoice();
         //setClickToFilter(R.id.vMiddle);
 
-        applyBgTheme(findViewById(R.id.vTop));
-        applyBgTheme(findViewById(R.id.vBottom));
-
         /* Ruler is used to show the centimetric scale of the ultrasound image */
         final RulerView rulerView = (RulerView) findViewById(R.id.ruler);
         rulerView.setStartingPoint(70);
