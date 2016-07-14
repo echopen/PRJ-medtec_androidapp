@@ -7,6 +7,7 @@ package com.echopen.asso.echopen.model.Data;
  */
 
 import android.app.Activity;
+import android.app.Application;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;

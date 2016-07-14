@@ -11,9 +11,11 @@ import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.echopen.asso.echopen.custom.utils.TestHelper;
+import com.echopen.asso.echopen.utils.TestHelper;
+import com.echopen.asso.echopen.utils.TestRunner;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 import com.echopen.asso.echopen.utils.Config;
+import com.robotium.solo.Solo;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
@@ -51,6 +53,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         super.setUp();
         mainActivity = getActivity();
         listUi = new ArrayList<>();
+        /* When emulator screen is not un locked, tests won't pass throwing
+        a message "RuntimeException: Waited for the root of the view hierarchy to have window focus
+        Had to install and use Robotium*/
+        Solo solo = new Solo(getInstrumentation(), getActivity());
+        solo.unlockScreen();
     }
 
     /**
