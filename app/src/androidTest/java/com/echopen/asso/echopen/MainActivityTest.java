@@ -5,15 +5,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.matcher.BoundedMatcher;
-import android.support.test.internal.util.Checks;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import com.echopen.asso.echopen.utils.TestHelper;
-import com.echopen.asso.echopen.utils.TestRunner;
-import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 import com.echopen.asso.echopen.utils.Config;
 import com.robotium.solo.Solo;
 
@@ -32,13 +29,12 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * Created by mehdibenchoufi on 27/07/15.
+ * main MainActivity Tests : test the UI and the ScanConversion algorithm, depending on the
+ * chosen protocol processing from Local data file or through UDP, TCP protocol.
  */
 
 @SmallTest
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
-
-    private ConstantDialogFragment constantDialogFragment;
 
     private MainActivity mainActivity;
 
@@ -86,7 +82,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     /**
-     * Check wether mainActionController is instanciated
+     * Check whether mainActionController is instantiated
      */
     public void testMainActionController() throws NoSuchFieldException, IllegalAccessException {
         Field field = mainActivity.getClass().getDeclaredField("mainActionController");
@@ -101,7 +97,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      */
     public void testLayoutBackgroundColor() throws InterruptedException {
         dismissTheAlertDialogBox();
-        onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor(Color.TRANSPARENT)));
+        onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor()));
     }
 
     private void dismissTheAlertDialogBox() {
@@ -134,7 +130,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     }
 
     /**
-     * This UI test is separated from others since tits visibilty is controlled
+     * This UI test is separated from others since tits visibility is controlled
      * by mainActionController instance
      */
     public void testMeasureTextViewIsVisible(){
@@ -143,14 +139,13 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         TestHelper.checkUiIsVisible(listUi);
     }
 
-    public static Matcher<View> withLayoutBackgroundColor(final int color) {
-        Checks.checkNotNull(color);
+    private static Matcher<View> withLayoutBackgroundColor() {
         return new BoundedMatcher<View, LinearLayout>(LinearLayout.class) {
             @Override
             protected boolean matchesSafely(LinearLayout linearLayout) {
                 Drawable background = linearLayout.getBackground();
                 int layout_color = ((ColorDrawable) background).getColor();
-                return  color == layout_color;
+                return  Color.TRANSPARENT == layout_color;
             }
 
             @Override

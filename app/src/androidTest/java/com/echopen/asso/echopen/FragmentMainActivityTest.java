@@ -1,29 +1,14 @@
 package com.echopen.asso.echopen;
 
 import android.app.AlertDialog;
-import android.app.DialogFragment;
-import android.content.DialogInterface;
-import android.support.test.espresso.ViewAssertion;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.UiThreadTest;
 import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
-
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -40,8 +25,6 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
 
     private ConstantDialogFragment constantDialogFragment;
 
-    private MainActivity mainActivity;
-
     private AlertDialog alertDialog;
 
     public FragmentMainActivityTest() {
@@ -57,7 +40,6 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
     }
 
     public void testConstantDialogFragment() {
-        assertTrue(constantDialogFragment instanceof ConstantDialogFragment);
         assertTrue(constantDialogFragment.getShowsDialog());
     }
 
@@ -84,7 +66,7 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
      * Clicking on UDP checkbox triggers ScanConversion on the data stored sent
      * from the hardware through UDP protocol
      */
-    public void testDatalIsFetchedFromUDP() throws Throwable {
+    public void testDataIsFetchedFromUDP() throws Throwable {
         ListView listView = alertDialog.getListView();
         View child = listView.getChildAt(2);
         clickAndValidate(child);

@@ -12,7 +12,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withEffectiveVi
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
- * Created by mehdibenchoufi on 06/07/16.
+ * Some help functions, refactoring and other utilities.
  */
 public class TestHelper {
 
