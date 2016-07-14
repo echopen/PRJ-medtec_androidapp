@@ -13,6 +13,7 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static com.echopen.asso.echopen.utils.TestHelper.clickOnDialog;
 
 /**
  * Created by mehdibenchoufi on 27/07/15.
@@ -82,15 +83,7 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
     }
 
     private void clickAndValidate(View child) {
-        boolean thrown = false;
-        child.performClick();
-        try {
-            onView(withText("Ok")).
-                    perform(click());
-        } catch (Exception e) {
-            thrown = true;
-        }
-        assertTrue(thrown);
+        assertTrue(clickOnDialog(child, "Ok"));
     }
 }
 
