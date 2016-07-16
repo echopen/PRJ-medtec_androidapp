@@ -9,7 +9,6 @@ import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.ui.MainActionController;
 
 import org.junit.Before;
-import org.mockito.Mock;
 
 import java.io.FileNotFoundException;
 
@@ -56,13 +55,20 @@ public class ProtocolTest extends ActivityInstrumentationTestCase2<MainActivity>
     }
 
     public void testFetchData() throws Exception {
+        boolean thrown = false;
         BitmapDisplayerFactory bitmapDisplayerFactory = mock(BitmapDisplayerFactory.class);
         BitmapDisplayer bitmapDisplayer= mock(BitmapDisplayer.class);
 
         doReturn(bitmapDisplayer).when(bitmapDisplayerFactory).populateBitmap(
                 any(MainActivity.class), any(MainActionController.class),
                 anyString(), anyInt());
-        mainActivity.fetchData(bitmapDisplayerFactory);
+        try {
+            mainActivity.fetchData(bitmapDisplayerFactory);
+        } catch (Exception e) {
+            thrown = true;
+            e.printStackTrace();
+        }
+        assertFalse(thrown);
         verify(bitmapDisplayerFactory,times(1)).populateBitmap(any(MainActivity.class), any(MainActionController.class),
                 anyString(), anyInt());
     }

@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
-import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.utils.Constants;
 
