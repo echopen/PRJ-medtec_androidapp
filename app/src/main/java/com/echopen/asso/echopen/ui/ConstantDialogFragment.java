@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
+import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.utils.Constants;
 
 /**
@@ -84,7 +86,8 @@ public class ConstantDialogFragment extends DialogFragment {
                         MainActivity activity = (MainActivity) getActivity();
                         LoadConfigTask loadConfigTask = new LoadConfigTask(activity);
                         loadConfigTask.execute();
-                        activity.fetchData();
+                        BitmapDisplayerFactory bitmapDisplayerFactory = new BitmapDisplayerFactory();
+                        activity.fetchData(bitmapDisplayerFactory);
                     }
                 })
                 .setNegativeButton(getResources().getString(R.string.cancel_dialog), new DialogInterface.OnClickListener() {

@@ -16,6 +16,7 @@ import android.widget.SeekBar;
 
 import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
+import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
@@ -86,10 +87,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.vMiddle);
         linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
-        /*FrameLayout mainLayout = (FrameLayout)findViewById(R.id.vFloater);
-        View child = getLayoutInflater().inflate(R.layout.ruler, null);
-        mainLayout.addView(child);*/
-
         initSwipeViews();
         initActionController();
         initViewComponents();
@@ -149,10 +146,11 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         });
     }
 
-    public void fetchData() {
+    public void fetchData(BitmapDisplayerFactory bitmapDisplayerFactory) {
         OpenCVLoader.initDebug();
         try {
-            BitmapDisplayer bitmapDisplayer = new BitmapDisplayer(this, mainActionController, Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
+            BitmapDisplayer bitmapDisplayer = bitmapDisplayerFactory.populateBitmap(
+            this, mainActionController, Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
 
             if (UDP_ACQUISITION) {
                 bitmapDisplayer.readDataFromUDP();
@@ -163,12 +161,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
                 bitmapDisplayer.readDataFromFile(inputStream);
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
 
     /*
     * initActionController() is used to separate concerns
@@ -312,11 +308,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             getSupportFragmentManager().popBackStackImmediate();
         }
 
-        /*Fragment f;
-        f = new FilterFragment();
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, f).commit();*/
-
         mainActionController.displayImages();
 
         if (display == Constants.Settings.DISPLAY_PHOTO) {
@@ -334,50 +325,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     @Override
     public void onClick(View v) {
         super.onClick(v);
-        //chooseCamera(v);
     }
-
-    /**
-     * Choose which camera to use with the help of clickable View
-     * Starts the Setting activity, if the setting button is clicked
-     * @param v, the clickable View
-     */
-//    private void chooseCamera(View v) {
-//        if (display != setting.DISPLAY_PHOTO
-//                && (v.getId() == R.id.btnPic || v.getId() == R.id.btn1)) {
-//            display = setting.DISPLAY_PHOTO;
-//            setupContainer();
-//        } else if (v.getId() == R.id.btn2) {
-//            if (display == setting.DISPLAY_VIDEO) {
-//                display = setting.DISPLAY_FILTER;
-//                setupContainer();
-//            } else if (display == setting.DISPLAY_FILTER) {
-//                display = setting.DISPLAY_PHOTO;
-//                setupContainer();
-//            }
-//        } else if (v.getId() == R.id.btn4) {
-//            if (display == setting.DISPLAY_PHOTO) {
-//                display = setting.DISPLAY_FILTER;
-//                setupContainer();
-//            } else if (display == setting.DISPLAY_FILTER) {
-//                display = setting.DISPLAY_VIDEO;
-//                setupContainer();
-//            }
-//        } else if (v.getId() == R.id.btn5 && display == setting.DISPLAY_PHOTO) {
-//            display = setting.DISPLAY_VIDEO;
-//            setupContainer();
-//        } else if (display != setting.DISPLAY_FILTER && v.getId() == R.id.btnEffect) {
-//            display = setting.DISPLAY_FILTER;
-//            setupContainer();
-//        } else if (v.getId() == R.id.btnCapture) {
-//            if (display == setting.DISPLAY_FILTER) {
-//                display = setting.DISPLAY_PHOTO;
-//                setupContainer();
-//            }
-//        } else if (v.getId() == R.id.tabSetting) {
-//            startActivity(new Intent(this, Settings.class));
-//        }
-//    }
 
     /**
      * @param item, MenuItem instance

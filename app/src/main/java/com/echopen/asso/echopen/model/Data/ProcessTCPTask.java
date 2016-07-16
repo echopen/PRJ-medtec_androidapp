@@ -7,7 +7,6 @@ package com.echopen.asso.echopen.model.Data;
  */
 
 import android.app.Activity;
-import android.app.Application;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
@@ -19,13 +18,16 @@ import java.io.InputStream;
 import java.net.Socket;
 
 public class ProcessTCPTask extends AbstractDataTask {
+
     private Socket s;
-    private String ip;
-    private int port;
+
+    private final String ip;
+
+    private final int port;
 
     private DataInputStream dataInputStream;
 
-    public ProcessTCPTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, String ip, int port) throws IOException {
+    public ProcessTCPTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, String ip, int port) {
         super(activity, mainActionController, scanConversion);
         this.ip = ip;
         this.port = port;
@@ -63,7 +65,7 @@ public class ProcessTCPTask extends AbstractDataTask {
         //int rows = Constants.PreProcParam.NUM_SAMPLES;
         int start_line = Constants.PreProcParam.NUM_LINES;
 
-        DataInputStream dataInputStream = new DataInputStream(stream);
+        dataInputStream = new DataInputStream(stream);
 
         while(buffer[0] != start_line/2 + 1){
             dataInputStream.readFully(buffer);

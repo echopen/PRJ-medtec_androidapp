@@ -5,18 +5,17 @@ import android.app.Activity;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 /**
- * Created by loic on 19/12/15.
+ * This class refreshes the main UI to display data from a local file
  */
 public class FileTask extends AbstractDataTask {
 
-    protected final Data data;
+    private final Data data;
 
-    public FileTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream) throws IOException {
+    public FileTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream) {
         super(activity, mainActionController, scanConversion);
         InputStreamReader isReader = new InputStreamReader(inputStream);
         data = new Data(isReader);

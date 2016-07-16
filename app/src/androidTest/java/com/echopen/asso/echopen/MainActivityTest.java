@@ -17,6 +17,7 @@ import com.robotium.solo.Solo;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.Before;
+import org.junit.Test;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

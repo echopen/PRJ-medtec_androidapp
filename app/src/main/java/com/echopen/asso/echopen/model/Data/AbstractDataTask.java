@@ -8,10 +8,9 @@ import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Constants;
 
-import java.io.IOException;
-
 /**
- * Created by loic on 19/12/15.
+ * Core class of data collecting routes. Whether the protocol is chosen to be TCP, UDP or fetching data from local,
+ * the dedicated classes inherits from @this
  */
 abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
@@ -21,14 +20,14 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
     protected MainActionController mainActionController;
 
-    public AbstractDataTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion) throws IOException {
+    public AbstractDataTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion) {
         this.scanconversion = scanConversion;
         this.activity = activity;
         this.mainActionController = mainActionController;
     }
 
-    protected void refreshUI(ScanConversion scnConv) {
-        int[] scannedArray = scnConv.getDataFromInterpolation();
+    protected void refreshUI(ScanConversion scanconversion) {
+        int[] scannedArray = scanconversion.getDataFromInterpolation();
 
         //EchoIntImage echoImage = new EchoIntImage(scannedArray);
         //
