@@ -63,7 +63,7 @@ public class ProtocolTest extends ActivityInstrumentationTestCase2<MainActivity>
                 any(MainActivity.class), any(MainActionController.class),
                 anyString(), anyInt());
         try {
-            mainActivity.fetchData(bitmapDisplayerFactory);
+
         } catch (Exception e) {
             thrown = true;
             e.printStackTrace();
