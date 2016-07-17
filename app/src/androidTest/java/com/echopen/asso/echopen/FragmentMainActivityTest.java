@@ -18,8 +18,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.echopen.asso.echopen.utils.TestHelper.clickOnDialog;
 
 /**
- * Created by mehdibenchoufi on 27/07/15.
- *
  * Dedicated to test AlertDialog Fragment logic
  */
 
@@ -70,7 +68,7 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
      * Clicking on UDP checkbox triggers ScanConversion on the data stored sent
      * from the hardware through UDP protocol
      */
-    public void testDataIsFetchedFromUDP() throws Throwable {
+    public void DataIsFetchedFromUDP() throws Throwable {
         ListView listView = alertDialog.getListView();
         View child = listView.getChildAt(2);
         clickAndValidate(child);
@@ -80,7 +78,7 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
      * The UI is intended to be more extensively explored when
      * the alert dialog is dismissed. The following tests are here just as examples
      */
-    public void testCancelClick() {
+    public void CancelClick() {
         onView(withText("Cancel")).
                 perform(click());
         onView(withId(R.id.btnCapture)).check(matches(isDisplayed()));

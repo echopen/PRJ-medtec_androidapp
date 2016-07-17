@@ -1,15 +1,22 @@
 language: android
+
+# Turn off caching to avoid any caching problems
+cache: false
+# Use the Travis Container-Based Infrastructure
+sudo: required
+
+dist: precise
  
 android: 
   components: 
-    - build-tools-22.0.1
+    - build-tools-23.0.2
     - android-23
     - extra-google-google_play_services
     - extra-google-m2repository
     - extra-android-m2repository
     - extra-android-support
     - addon-google_apis-google-19
-    - sys-img-armeabi-v7a-android-21
+    - sys-img-armeabi-v7a-android-22
   licenses: 
     - android-sdk-license-.+
 
@@ -20,6 +27,7 @@ env:
 before_script: 
   - "echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null"
   - "echo yes | android update sdk --filter android-23 --no-ui --force > /dev/null"
+  - echo yes | android update sdk --no-ui --all --filter build-tools-23.0.1
   - "echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null"
   - "echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null"
   - "export NDK_VERSION=r10e"
@@ -30,14 +38,14 @@ before_script:
   - "rm android-ndk-${NDK_VERSION}-linux-x86_64.bin"
   - "export ANDROID_NDK_HOME=`pwd`/android-ndk-${NDK_VERSION}"
   - "export PATH=${ANDROID_NDK_HOME}:${PATH}"
-    
-script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
+  
+  - "echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a"
+  - "emulator -avd test -no-skin -no-audio -no-window &"
   - android-wait-for-emulator
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  - ./gradlew connectedCheck
+  - adb shell input keyevent 82 &
+  
+script:
+  - ./gradlew clean build connectedCheck
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

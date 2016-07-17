@@ -68,14 +68,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check if the singleton class Config is loaded when the activity starts
      */
-    public void testIfConfigIsLoadedTest() {
+    public void IfConfigIsLoadedTest() {
         assertNotNull(Config.singletonConfig);
     }
 
     /**
      * Check height and width types served by the singleton class Config
      */
-    public void testConfigParams() {
+    public void ConfigParams() {
         int height = Config.singletonConfig.getHeight();
         int width = Config.singletonConfig.getWidth();
         assertEquals((height > 0) & (width > 0), true);
@@ -84,7 +84,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check whether mainActionController is instantiated
      */
-    public void testMainActionController() throws NoSuchFieldException, IllegalAccessException {
+    public void MainActionController() throws NoSuchFieldException, IllegalAccessException {
         Field field = mainActivity.getClass().getDeclaredField("mainActionController");
         field.setAccessible(true);
         Object value = field.get(mainActivity);
@@ -95,7 +95,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check if the background color is indeed transparent
      */
-    public void testLayoutBackgroundColor() throws InterruptedException {
+    public void LayoutBackgroundColor() throws InterruptedException {
         dismissTheAlertDialogBox();
         onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor()));
     }
@@ -109,7 +109,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Checking main UI buttons without dismissing alert dialog box
      * @throws NoMatchingViewException
      */
-    public void testBareMainViewsExists() throws NoMatchingViewException {
+    public void BareMainViewsExists() throws NoMatchingViewException {
         dumpUi(R.id.btnEffect, R.id.tabBrightness, R.id.tabGrid, R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
                 R.id.seekBar, R.id.seekBar2, R.id.seekBar3);
@@ -121,7 +121,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Checking main UI buttons after dismissing alert dialog box
      * @throws NoMatchingViewException
      */
-    public void testMainViewsExists() throws NoMatchingViewException {
+    public void MainViewsExists() throws NoMatchingViewException {
         dismissTheAlertDialogBox();
         dumpUi(/*R.id.btnEffect,*/ R.id.tabBrightness, /*R.id.tabGrid,*/ R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3/*, R.id.btn4, R.id.btn5*/);
@@ -133,7 +133,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * This UI test is separated from others since tits visibility is controlled
      * by mainActionController instance
      */
-    public void testMeasureTextViewIsVisible(){
+    public void MeasureTextViewIsVisible(){
         dismissTheAlertDialogBox();
         dumpUi(R.id.measure);
         TestHelper.checkUiIsVisible(listUi);

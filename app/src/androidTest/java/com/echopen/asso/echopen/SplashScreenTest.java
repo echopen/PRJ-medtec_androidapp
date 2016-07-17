@@ -19,7 +19,7 @@ public class SplashScreenTest extends ActivityInstrumentationTestCase2<SplashScr
         mSplashScreenTest = getActivity();
     }
 
-    public void testPreconditions() {
+    public void Preconditions() {
         assertNotNull("mSplashScreenTest is null", mSplashScreenTest);
     }
 }
