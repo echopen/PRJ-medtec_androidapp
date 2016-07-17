@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
+import com.robotium.solo.Solo;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -38,6 +39,8 @@ public class FragmentMainActivityTest extends ActivityInstrumentationTestCase2<M
         super.setUp();
         constantDialogFragment = (ConstantDialogFragment) getActivity().getFragmentManager().findFragmentByTag("fragment_edit_name");
         alertDialog = constantDialogFragment.getAlertDialog();
+        Solo solo = new Solo(getInstrumentation(), getActivity());
+        solo.unlockScreen();
     }
 
     public void testConstantDialogFragment() {

@@ -111,7 +111,7 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "connectedDebugAndroidTest"
                        '**/*$InjectAdapter.class',
                        '**/*$ModuleAdapter.class',
                        '**/*$ViewInjector*.class',
-                       'org/opencv/**'
+                       './org/opencv/**'
             ])
     sourceDirectories = files(coverageSourceDirs)
     executionData = files("$buildDir/jacoco/testDebug.exec")
