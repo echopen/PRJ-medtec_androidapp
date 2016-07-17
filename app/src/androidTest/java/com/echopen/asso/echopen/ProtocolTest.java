@@ -42,7 +42,7 @@ public class ProtocolTest extends ActivityInstrumentationTestCase2<MainActivity>
     /**
      * Clicking on local checkbox triggers ScanConversion on the data stored in a local CSV file
      */
-    public void FileIsFetchedFromLocal() throws Throwable {
+    public void testFileIsFetchedFromLocal() throws Throwable {
         boolean thrown = false;
         try {
             AssetManager assetManager = mainActivity.getResources().getAssets();
@@ -54,7 +54,7 @@ public class ProtocolTest extends ActivityInstrumentationTestCase2<MainActivity>
         assertFalse(thrown);
     }
 
-    public void FetchData() throws Exception {
+    public void testFetchData() throws Exception {
         boolean thrown = false;
         BitmapDisplayerFactory bitmapDisplayerFactory = mock(BitmapDisplayerFactory.class);
         BitmapDisplayer bitmapDisplayer= mock(BitmapDisplayer.class);

@@ -30,14 +30,13 @@ before_script:
   - "rm android-ndk-${NDK_VERSION}-linux-x86_64.bin"
   - "export ANDROID_NDK_HOME=`pwd`/android-ndk-${NDK_VERSION}"
   - "export PATH=${ANDROID_NDK_HOME}:${PATH}"
-  
-  - "echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a"
-  - "emulator -avd test -no-skin -no-audio -no-window &"
-  - android-wait-for-emulator
-  - "adb shell input keyevent 82 &"
-  
+    
 script:
   - ./gradlew build jacocoTestReport assembleAndroidTest
+  - echo no | android create avd --force -n test -t android-21 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
   - ./gradlew connectedCheck
 
 after_success:
