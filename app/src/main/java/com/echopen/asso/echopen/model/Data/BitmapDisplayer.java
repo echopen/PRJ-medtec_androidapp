@@ -13,28 +13,26 @@ import java.io.InputStream;
  *
  * Specifically
  *
- * @todo: implement a code pattern protocol-agnostic.
+ * todo: implement a code pattern protocol-agnostic.
  */
 public class BitmapDisplayer extends Displayer {
 
     /* The MainActivity variable */
-    private Activity activity;
+    private final Activity activity;
 
     /* The ip to get the incoming UDP data */
-    private String ip;
+    private final String ip;
 
     /* The port on which listening the incoming UDP data */
-    private int port;
+    private final int port;
 
     /**
-     *
      * @param activity, practically the MainActivity
      * @param mainActionController, holds the UI of the MainActivity
      * @param ip, ip to get the incoming UDP data
      * @param port, port on which listening the incoming UDP data
-     * @throws IOException
      */
-    public BitmapDisplayer(Activity activity, MainActionController mainActionController, String ip, int port) throws IOException {
+    public BitmapDisplayer(Activity activity, MainActionController mainActionController, String ip, int port) {
         super(activity, mainActionController);
         this.ip = ip;
         this.port = port;

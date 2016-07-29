@@ -7,5 +7,4 @@
     android:gravity="center_vertical"
     android:padding="10dp"
     android:text="Setting" >
-
 </TextView>

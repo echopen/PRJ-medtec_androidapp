@@ -2,38 +2,28 @@ package com.echopen.asso.echopen.custom;
 
 import android.app.ActionBar;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 
-import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.utils.TouchEffect;
 
 /**
  * Common class to all activities
  * setupActionBar() sets the action bar
- * There is an implementation of a color theme choice. The user theme choice is set and saved via getAppThme
- * and saveAppTheme() methods
  */
-public class CustomActivity extends FragmentActivity implements OnClickListener
-{
+public class CustomActivity extends FragmentActivity implements OnClickListener {
 
-    private static final String THEME = "appTheme";
 
-    public static final int THEME_BLUE = R.drawable.theme_blue;
-
-    protected int theme;
-
-    public static final TouchEffect TOUCH = new TouchEffect();
+    private static final TouchEffect TOUCH = new TouchEffect();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /* keep the activity awake is important for the medical operator */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        theme = getAppTheme();
         if (getActionBar() != null)
             setupActionBar();
     }
@@ -45,29 +35,13 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
-    public void applyBgTheme(View v)
-    {
-        v.setBackgroundResource(theme);
-    }
-
-    protected void setupActionBar() {
+    private void setupActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
-        actionBar.setBackgroundDrawable(getResources().getDrawable(theme));
-    }
-
-    protected void saveAppTheme(int theme) {
-        PreferenceManager.getDefaultSharedPreferences(this).edit()
-                .putInt(THEME, theme).commit();
-    }
-
-    protected int getAppTheme() {
-        return PreferenceManager.getDefaultSharedPreferences(this).getInt(
-                THEME, THEME_BLUE);
     }
 
     public View setTouchNClick(int id) {
@@ -76,13 +50,11 @@ public class CustomActivity extends FragmentActivity implements OnClickListener
         return v;
     }
 
-
     public View setClick(int id) {
         View v = findViewById(id);
         v.setOnClickListener(this);
         return v;
     }
-
 
     @Override
     public void onClick(View v) {
