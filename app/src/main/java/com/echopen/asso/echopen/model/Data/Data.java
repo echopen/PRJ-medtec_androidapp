@@ -91,7 +91,7 @@ public class Data
     }
 
     /**
-     * Constructor whcich takes as argument the incoming simulated data. Data are gathered from
+     * Constructor which takes as argument the incoming simulated data. Data are gathered from
      * a csv file stored in the assets folder
      * @param inputStreamReader
      */
@@ -102,7 +102,7 @@ public class Data
 
     private void setCharData(InputStreamReader inputStreamReader){
         BufferedReader br = null;
-        String line = "";
+        String line;
         String cvsSplitBy = ",";
 
         try {
@@ -111,7 +111,7 @@ public class Data
                 String[] string_tmp_data = line.split(cvsSplitBy);
                 int[] char_tmp_data = new int[string_tmp_data.length];
                 for (int index = 0; index < string_tmp_data.length; index++) {
-                    char_tmp_data[index] = (int) Integer.parseInt(string_tmp_data[index]);
+                    char_tmp_data[index] = Integer.parseInt(string_tmp_data[index]);
                 }
                 envelopeData = Data.objArrayConcat(envelopeData, char_tmp_data);
             }

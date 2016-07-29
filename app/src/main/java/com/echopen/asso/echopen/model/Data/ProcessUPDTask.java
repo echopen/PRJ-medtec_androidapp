@@ -1,7 +1,6 @@
 package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
-import android.util.Log;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
@@ -14,14 +13,16 @@ import java.net.DatagramSocket;
 
 /**
  * Created by loic on 19/12/15.
+ * This class catches the flow of data streaing through UDP protocol and then throws the data
+ * to AbstrctDataTask class to refresh UI.
  */
 public class ProcessUPDTask extends AbstractDataTask {
 
     private DatagramSocket s;
 
-    private int port;
+    private final int port;
 
-    public ProcessUPDTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, int port) throws IOException {
+    public ProcessUPDTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, int port) {
         super(activity, mainActionController, scanConversion);
         this.port = port;
     }
@@ -30,8 +31,8 @@ public class ProcessUPDTask extends AbstractDataTask {
      * A Socket is opened once for all
      * Get the UDP data, converts it via the ScanConversion class, create a bitmap
      * refreshes the UI with the data in a new thread with the help of runOnUiThread() method
-     * @param Voids
-     * @return
+     * @param Voids, void argument
+     * @return Void
      */
     @Override
     protected Void doInBackground(Void... Voids) {
@@ -67,7 +68,6 @@ public class ProcessUPDTask extends AbstractDataTask {
                     if (udpDataCounterColumn >= Constants.PreProcParam.UDP_NUM_UDP_PACKET_CHUNKS) {
                         udpDataCounterRow++;
                         udpDataCounterColumn = 0;
-                        Log.d("this is the line number ", String.valueOf(udpDataCounterRow));
                     }
                     if (udpDataCounterRow >= Constants.PreProcParam.UDP_IMG_DATA) {
                         ScanConversion scnConv = ScanConversion.getInstance(udpDataArray);
@@ -81,10 +81,5 @@ public class ProcessUPDTask extends AbstractDataTask {
             e.printStackTrace();
             return null;
         }
-    }
-
-    protected void onPostExecute() {
-        // TODO: check this.exception
-        // TODO: do something with the feed
     }
 }

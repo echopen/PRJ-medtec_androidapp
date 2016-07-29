@@ -44,6 +44,7 @@ public class Settings extends CustomActivity implements AbstractActionActivity
         setContentView(R.layout.settings);
         initActionController();
         initViewComponents();
+        MainActivity mainActivity = new MainActivity();
     }
 
     /*

@@ -3,7 +3,7 @@ package com.echopen.asso.echopen;
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
- * Created by mehdibenchoufi on 27/07/15.
+ * Basic activity test template @to be continued and documented here ;)
  */
 public class SettingsTest extends ActivityInstrumentationTestCase2<Settings> {
 
@@ -20,6 +20,6 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<Settings> {
     }
 
     public void testPreconditions() {
-        assertNotNull("mSettingsTest is null", mSettingsTest);
+        assertNotNull("mSettingsTest is not null", mSettingsTest);
     }
 }

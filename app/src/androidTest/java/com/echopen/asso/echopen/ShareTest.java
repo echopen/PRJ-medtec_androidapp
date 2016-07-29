@@ -3,7 +3,7 @@ package com.echopen.asso.echopen;
 import android.test.ActivityInstrumentationTestCase2;
 
 /**
- * Created by mehdibenchoufi on 27/07/15.
+ * Basic activity test template @to be continued and documented here ;)
  */
 public class ShareTest extends ActivityInstrumentationTestCase2<Share> {
 

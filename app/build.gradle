@@ -1,14 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.vanniktech.android.junit.jacoco'
+apply plugin: 'project-report'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "23.0.1"
 
     defaultConfig {
         applicationId "com.echopen.asso.echopen"
         minSdkVersion 17
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -28,6 +29,9 @@ android {
     }
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+    htmlDependencyReport {
+        projects = project.allprojects
     }
     /* check if local.properties is in the , . Since this file is not under version control system, this is important
     when using continuous integration system
@@ -110,7 +114,8 @@ task jacocoTestReport(type: JacocoReport, dependsOn: "connectedDebugAndroidTest"
             excludes: ['**/R*.class',
                        '**/*$InjectAdapter.class',
                        '**/*$ModuleAdapter.class',
-                       '**/*$ViewInjector*.class'
+                       '**/*$ViewInjector*.class',
+                       './org/opencv/**'
             ])
     sourceDirectories = files(coverageSourceDirs)
     executionData = files("$buildDir/jacoco/testDebug.exec")
@@ -132,13 +137,24 @@ dependencies {
     compile 'com.firebase:firebase-client-android:2.3.1'
     compile project(':openCVLibrary310')
     testCompile 'junit:junit:4.12'
-    testCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestCompile ('com.jayway.android.robotium:robotium-solo:5.5.4')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2'){
-        // Necessary if your app targets Marshmallow (since Espresso
-        // hasn't moved to Marshmallow yet)
+        /* Necessary if your app targets Marshmallow (since Espresso
+         hasn't moved to Marshmallow yet) */
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     androidTestCompile('com.android.support.test:runner:0.5'){
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+    androidTestCompile('org.mockito:mockito-core:1.10.19')
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
+    testCompile ('com.jayway.android.robotium:robotium-solo:5.5.4')
+    testCompile('com.android.support.test:runner:0.5'){
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    testCompile('org.mockito:mockito-core:1.10.19')
+    testCompile 'com.google.dexmaker:dexmaker:1.2'
+    testCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
 }
