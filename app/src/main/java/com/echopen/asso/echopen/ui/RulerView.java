@@ -22,6 +22,7 @@ import com.echopen.asso.echopen.model.Ruler.Ruler;
 import com.echopen.asso.echopen.utils.Constants;
 
 public class RulerView extends View {
+
     public Ruler ruler;
 
     public Ruler.Point point;
@@ -51,6 +52,10 @@ public class RulerView extends View {
     float userStartingPoint = 0f;
 
     boolean isFirstTime = true;
+
+    public SelfPaint getSelfPaint() {
+        return selfPaint;
+    }
 
     public RulerView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);

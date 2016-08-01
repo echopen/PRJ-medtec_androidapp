@@ -1,15 +1,19 @@
 package com.echopen.asso.echopen;
 
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.echopen.asso.echopen.model.Painter.SelfPaint;
+import com.echopen.asso.echopen.ui.RulerView;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.TestHelper;
 import com.robotium.solo.Solo;
@@ -68,14 +72,14 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check if the singleton class Config is loaded when the activity starts
      */
-    public void IfConfigIsLoadedTest() {
+    public void testIfConfigIsLoadedTest() {
         assertNotNull(Config.singletonConfig);
     }
 
     /**
      * Check height and width types served by the singleton class Config
      */
-    public void ConfigParams() {
+    public void testConfigParams() {
         int height = Config.singletonConfig.getHeight();
         int width = Config.singletonConfig.getWidth();
         assertEquals((height > 0) & (width > 0), true);
@@ -84,7 +88,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check whether mainActionController is instantiated
      */
-    public void MainActionController() throws NoSuchFieldException, IllegalAccessException {
+    public void testMainActionController() throws NoSuchFieldException, IllegalAccessException {
         Field field = mainActivity.getClass().getDeclaredField("mainActionController");
         field.setAccessible(true);
         Object value = field.get(mainActivity);
@@ -95,7 +99,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check if the background color is indeed transparent
      */
-    public void LayoutBackgroundColor() throws InterruptedException {
+    public void testLayoutBackgroundColor() throws InterruptedException {
         dismissTheAlertDialogBox();
         onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor()));
     }
@@ -109,7 +113,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Checking main UI buttons without dismissing alert dialog box
      * @throws NoMatchingViewException
      */
-    public void BareMainViewsExists() throws NoMatchingViewException {
+    public void testBareMainViewsExists() throws NoMatchingViewException {
         dumpUi(R.id.btnEffect, R.id.tabBrightness, R.id.tabGrid, R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
                 R.id.seekBar, R.id.seekBar2, R.id.seekBar3);
@@ -121,7 +125,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Checking main UI buttons after dismissing alert dialog box
      * @throws NoMatchingViewException
      */
-    public void MainViewsExists() throws NoMatchingViewException {
+    public void testMainViewsExists() throws NoMatchingViewException {
         dismissTheAlertDialogBox();
         dumpUi(/*R.id.btnEffect,*/ R.id.tabBrightness, /*R.id.tabGrid,*/ R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3/*, R.id.btn4, R.id.btn5*/);
@@ -133,12 +137,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * This UI test is separated from others since tits visibility is controlled
      * by mainActionController instance
      */
-    public void MeasureTextViewIsVisible(){
+    public void testMeasureTextViewIsVisible(){
         dismissTheAlertDialogBox();
         dumpUi(R.id.measure);
         TestHelper.checkUiIsVisible(listUi);
     }
 
+    /**
+     * Matcher to test the Background color
+     * @return
+     */
     private static Matcher<View> withLayoutBackgroundColor() {
         return new BoundedMatcher<View, LinearLayout>(LinearLayout.class) {
             @Override
@@ -159,5 +167,22 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         for(int elem : args){
             listUi.add(elem);
         }
+    }
+
+    /**
+     * test the Ruler View, here the SelfPainter is tested, to be continued...
+     */
+    public void testRulerView(){
+        RulerView rulerView = new RulerView(mainActivity, null);
+        Paint selfPaint = rulerView.getSelfPaint().getSelfPainter();
+        SelfPaint.Style style = selfPaint.getStyle();
+        float strokeWidth = selfPaint.getStrokeWidth();
+        int color = selfPaint.getColor();
+        boolean isAntiAlias = selfPaint.isAntiAlias();
+        
+        assertEquals(style, Paint.Style.STROKE);
+        assertEquals(strokeWidth, 0.0f);
+        assertEquals(color, Color.WHITE);
+        assertEquals(isAntiAlias, false);
     }
 }
