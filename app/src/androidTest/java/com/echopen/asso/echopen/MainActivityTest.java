@@ -168,21 +168,4 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
             listUi.add(elem);
         }
     }
-
-    /**
-     * test the Ruler View, here the SelfPainter is tested, to be continued...
-     */
-    public void testRulerView(){
-        RulerView rulerView = new RulerView(mainActivity, null);
-        Paint selfPaint = rulerView.getSelfPaint().getSelfPainter();
-        SelfPaint.Style style = selfPaint.getStyle();
-        float strokeWidth = selfPaint.getStrokeWidth();
-        int color = selfPaint.getColor();
-        boolean isAntiAlias = selfPaint.isAntiAlias();
-        
-        assertEquals(style, Paint.Style.STROKE);
-        assertEquals(strokeWidth, 0.0f);
-        assertEquals(color, Color.WHITE);
-        assertEquals(isAntiAlias, false);
-    }
 }
