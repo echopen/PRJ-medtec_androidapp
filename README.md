@@ -163,5 +163,13 @@ try to read them quick as possible.
   Documentation and issue about echopen -- Perhaps some duplication with http://echopen.org/
 
   See [issues](https://github.com/echopenorg/project/issues)
+  
+# DevBox 
+
+In order to ease the developement and to prevent the contributor from the hassle of smecindg days configuring. We set up a [Virtual Machine](https://drive.google.com/open?id=0B0V8htWBLPWBVEh6ZEJPcFpmTEU), with all the tools needed. You can find all the informations [here](https://echopen.gitbooks.io/android-app/content/echopens_virtual_machine.html).
+
+# More informations
+
+You can get more detailed information on our [GitBook](https://echopen.gitbooks.io/android-app/content/)
 
 

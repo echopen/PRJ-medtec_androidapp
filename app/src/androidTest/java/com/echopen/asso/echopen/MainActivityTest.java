@@ -100,13 +100,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Check if the background color is indeed transparent
      */
     public void testLayoutBackgroundColor() throws InterruptedException {
-        dismissTheAlertDialogBox();
+        TestHelper.dismissTheAlertDialogBox();
         onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor()));
-    }
-
-    private void dismissTheAlertDialogBox() {
-        onView(withText("Cancel")).
-                perform(click());
     }
 
     /**
@@ -126,7 +121,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * @throws NoMatchingViewException
      */
     public void testMainViewsExists() throws NoMatchingViewException {
-        dismissTheAlertDialogBox();
+        TestHelper.dismissTheAlertDialogBox();
         dumpUi(/*R.id.btnEffect,*/ R.id.tabBrightness, /*R.id.tabGrid,*/ R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3/*, R.id.btn4, R.id.btn5*/);
 
@@ -138,7 +133,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * by mainActionController instance
      */
     public void testMeasureTextViewIsVisible(){
-        dismissTheAlertDialogBox();
+        TestHelper.dismissTheAlertDialogBox();
         dumpUi(R.id.measure);
         TestHelper.checkUiIsVisible(listUi);
     }

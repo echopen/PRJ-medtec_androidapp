@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -144,19 +145,21 @@ public class RulerView extends View {
             case MotionEvent.ACTION_MOVE:
                 movablePoint = event.getY();
                 if (downPointClone > movablePoint) {
+                    Log.d("tagggy", "I am there in the first");
                     if (isUpward) {
                         downpoint = event.getY();
                         downPointClone = downpoint;
                     }
                     isDown = true;
                     isUpward = false;
-
+                    Log.d("tagggy","downPointClone" + downPointClone + "movablePoint" + movablePoint);
                     if (downPointClone - movablePoint > 1) {
                         point.setMainPoint(mainPoint + (-(downPointClone - movablePoint)));
                         downPointClone = movablePoint;
                         invalidate();
                     }
                 } else {
+                    Log.d("tagggy", "I am there in the second");
                     if (isMove) {
                         if (isDown) {
                             downpoint = event.getY();
@@ -164,6 +167,8 @@ public class RulerView extends View {
                         }
                         isDown = false;
                         isUpward = true;
+                        Log.d("tagggy","movablePoint" + movablePoint + "downpoint" + downpoint);
+
                         if (movablePoint - downpoint > 1) {
                             point.setMainPoint(mainPoint + ((movablePoint - downPointClone)));
                             downPointClone = movablePoint;
