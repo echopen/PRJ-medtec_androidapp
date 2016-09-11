@@ -586,16 +586,15 @@ public class ScanConversion {
 
         Point center = new Point(param3, param4);
         Imgproc.linearPolar(opencv_src_larger, opencv_dest, center, param1 * 500, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
-        Mat opencv_dest2 = new Mat(opencv_dest.rows(), opencv_dest.cols(), opencv_dest.type());
+        //Mat opencv_dest2 = new Mat(opencv_dest.rows(), opencv_dest.cols(), opencv_dest.type());
         //Imgproc.cvtColor(opencv_dest, opencv_dest, Imgproc.COLOR_RGB2GRAY);
-        Imgproc.equalizeHist(opencv_dest, opencv_dest2);
+        //Imgproc.equalizeHist(opencv_dest, opencv_dest2);
 
         opencv_dest.convertTo(opencv_dest, CvType.CV_32S);
-        opencv_dest2.convertTo(opencv_dest2, CvType.CV_32S);
+        //opencv_dest2.convertTo(opencv_dest2, CvType.CV_32S);
 
         int[] dest_out = new int[Nz * Nx];
-        opencv_dest2.get(0, 0, dest_out);
-        int i = 0;
+        opencv_dest.get(0, 0, dest_out);
         return dest_out;
     }
 }
