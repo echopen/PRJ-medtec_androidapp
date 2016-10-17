@@ -595,6 +595,13 @@ public class ScanConversion {
 
         int[] dest_out = new int[Nz * Nx];
         opencv_dest.get(0, 0, dest_out);
+        for (int i = 0; i < Nz * Nx; i++) {
+            if(dest_out[i] < 128)
+                dest_out[i] = dest_out[i] *2;
+            else {
+                dest_out[i] = 255;
+            }
+        }
         return dest_out;
     }
 }
