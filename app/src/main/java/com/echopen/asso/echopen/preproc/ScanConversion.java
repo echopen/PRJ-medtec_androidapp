@@ -481,7 +481,6 @@ public class ScanConversion {
         // TODO convert arrays to fields.*/
 
         image = new int[Nz * Nx];
-        N_samples =  (int) Math.floor(Constants.PreProcParam.NUM_SAMPLES);
         num = new int[Nz * Nx];
     }
 

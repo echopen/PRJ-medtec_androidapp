@@ -206,15 +206,15 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         //setClickToFilter(R.id.vMiddle);
 
         /* Ruler is used to show the centimetric scale of the ultrasound image */
-        rulerView = (RulerView) findViewById(R.id.ruler);
+        /*rulerView = (RulerView) findViewById(R.id.ruler);
         rulerView.setStartingPoint(70);
         rulerView.setUpdateListener(new onViewUpdateListener() {
             @Override
             public void onViewUpdate(float result) {
-                /* when needed, this function can update the View, for example to support scroll effect
-                updating the view */
+                *//* when needed, this function can update the View, for example to support scroll effect
+                updating the view *//*
             }
-        });
+        });*/
     }
 
     private void initProtocolChoice() {
