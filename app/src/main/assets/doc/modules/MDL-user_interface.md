@@ -8,7 +8,7 @@
 Android App User Interface
 
 ## Description
-This modules takes an
+This modules takes as inputs
 - `psd` templates
 and outputs
 - the ![layout](https://github.com/echopen/android-app/tree/master/app/src/main/res/layout) folder of integrated templates,
