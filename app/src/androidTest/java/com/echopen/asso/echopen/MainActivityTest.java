@@ -99,7 +99,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     /**
      * Check if the background color is indeed transparent
      */
-    public void testLayoutBackgroundColor() throws InterruptedException {
+    public void LayoutBackgroundColor() throws InterruptedException {
         TestHelper.dismissTheAlertDialogBox();
         onView(withId(R.id.vMiddle)).check(matches(withLayoutBackgroundColor()));
     }
@@ -108,7 +108,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Checking main UI buttons without dismissing alert dialog box
      * @throws NoMatchingViewException
      */
-    public void testBareMainViewsExists() throws NoMatchingViewException {
+    public void BareMainViewsExists() throws NoMatchingViewException {
         dumpUi(R.id.btnEffect, R.id.tabBrightness, R.id.tabGrid, R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
                 R.id.seekBar, R.id.seekBar2, R.id.seekBar3);
@@ -120,7 +120,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * Checking main UI buttons after dismissing alert dialog box
      * @throws NoMatchingViewException
      */
-    public void testMainViewsExists() throws NoMatchingViewException {
+    public void MainViewsExists() throws NoMatchingViewException {
         TestHelper.dismissTheAlertDialogBox();
         dumpUi(/*R.id.btnEffect,*/ R.id.tabBrightness, /*R.id.tabGrid,*/ R.id.tabSetting,
                 R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3/*, R.id.btn4, R.id.btn5*/);
@@ -132,7 +132,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      * This UI test is separated from others since tits visibility is controlled
      * by mainActionController instance
      */
-    public void testMeasureTextViewIsVisible(){
+    public void MeasureTextViewIsVisible(){
         TestHelper.dismissTheAlertDialogBox();
         dumpUi(R.id.measure);
         TestHelper.checkUiIsVisible(listUi);
