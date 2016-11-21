@@ -53,11 +53,15 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
-
     /* class that deals with the view of MainActivity */
     private MainActionController mainActionController;
-
     public GestureDetector gesture;
+    /* Ruler enables get the overview of body scales */
+    public RulerView rulerView;
+    /* Setter for rulerView */
+    public void setRulerView(RulerView rulerView) {
+        this.rulerView = rulerView;
+    }
     /* constant setting the process via local, UDP or TCP */
     public static boolean LOCAL_ACQUISITION = true;
 
@@ -181,7 +185,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     * For the moment, users can't set the theme
     * @param no param
     * */
-    private void initViewComponents() {
+    public void initViewComponents() {
         setTouchNClick(R.id.btnCapture);
         setTouchNClick(R.id.btnEffect);
         setTouchNClick(R.id.tabBrightness);
@@ -202,15 +206,15 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         //setClickToFilter(R.id.vMiddle);
 
         /* Ruler is used to show the centimetric scale of the ultrasound image */
-        final RulerView rulerView = (RulerView) findViewById(R.id.ruler);
+        /*rulerView = (RulerView) findViewById(R.id.ruler);
         rulerView.setStartingPoint(70);
         rulerView.setUpdateListener(new onViewUpdateListener() {
             @Override
             public void onViewUpdate(float result) {
-                /* when needed, this function can update the View, for example to support scroll effect
-                updating the view */
+                *//* when needed, this function can update the View, for example to support scroll effect
+                updating the view *//*
             }
-        });
+        });*/
     }
 
     private void initProtocolChoice() {

@@ -58,7 +58,6 @@ public class BitmapDisplayer extends Displayer {
     }
 
     public void readDataFromFile(final InputStream is) throws IOException {
-
         new FileTask(activity, mainActionController, scanConversion, is).execute();
     }
 }

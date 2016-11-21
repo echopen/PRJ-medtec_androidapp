@@ -48,4 +48,9 @@ public class TestHelper {
         }
         return thrown;
     }
+
+    public static void dismissTheAlertDialogBox() {
+        onView(withText("Cancel")).
+                perform(click());
+    }
 }

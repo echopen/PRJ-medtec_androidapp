@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -22,6 +23,7 @@ import com.echopen.asso.echopen.model.Ruler.Ruler;
 import com.echopen.asso.echopen.utils.Constants;
 
 public class RulerView extends View {
+
     public Ruler ruler;
 
     public Ruler.Point point;
@@ -51,6 +53,10 @@ public class RulerView extends View {
     float userStartingPoint = 0f;
 
     boolean isFirstTime = true;
+
+    public SelfPaint getSelfPaint() {
+        return selfPaint;
+    }
 
     public RulerView(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
@@ -139,19 +145,21 @@ public class RulerView extends View {
             case MotionEvent.ACTION_MOVE:
                 movablePoint = event.getY();
                 if (downPointClone > movablePoint) {
+                    Log.d("tagggy", "I am there in the first");
                     if (isUpward) {
                         downpoint = event.getY();
                         downPointClone = downpoint;
                     }
                     isDown = true;
                     isUpward = false;
-
+                    Log.d("tagggy","downPointClone" + downPointClone + "movablePoint" + movablePoint);
                     if (downPointClone - movablePoint > 1) {
                         point.setMainPoint(mainPoint + (-(downPointClone - movablePoint)));
                         downPointClone = movablePoint;
                         invalidate();
                     }
                 } else {
+                    Log.d("tagggy", "I am there in the second");
                     if (isMove) {
                         if (isDown) {
                             downpoint = event.getY();
@@ -159,6 +167,8 @@ public class RulerView extends View {
                         }
                         isDown = false;
                         isUpward = true;
+                        Log.d("tagggy","movablePoint" + movablePoint + "downpoint" + downpoint);
+
                         if (movablePoint - downpoint > 1) {
                             point.setMainPoint(mainPoint + ((movablePoint - downPointClone)));
                             downPointClone = movablePoint;

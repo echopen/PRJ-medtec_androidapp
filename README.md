@@ -74,9 +74,9 @@ try to read them quick as possible.
 ### Mockups 
   To drive your code, here's the MOCKUP that we have set with medical doctors, engineers and designers.  
 
-  ![alt tag](http://echopen.org/images/a/ab/Echopen_MockUp_1.png)
-  ![alt tag](http://echopen.org/images/0/07/Echopen_MockUp_1.2.png)
-  ![alt tag](http://echopen.org/images/e/e2/Echopen_MockUp_1_2.png)
+  ![alt tag](http://wiki.echopen.org/images/a/ab/Echopen_MockUp_1.png)
+  ![alt tag](http://wiki.echopen.org/images/0/07/Echopen_MockUp_1.2.png)
+  ![alt tag](http://wiki.echopen.org/images/e/e2/Echopen_MockUp_1_2.png)
 
 ### Testing Data
 
@@ -163,5 +163,13 @@ try to read them quick as possible.
   Documentation and issue about echopen -- Perhaps some duplication with http://echopen.org/
 
   See [issues](https://github.com/echopenorg/project/issues)
+  
+# DevBox 
+
+In order to ease the developement and to prevent the contributor from the hassle of smecindg days configuring. We set up a [Virtual Machine](https://drive.google.com/open?id=0B0V8htWBLPWBVEh6ZEJPcFpmTEU), with all the tools needed. You can find all the informations [here](https://echopen.gitbooks.io/android-app/content/echopens_virtual_machine.html).
+
+# More informations
+
+You can get more detailed information on our [GitBook](https://echopen.gitbooks.io/android-app/content/)
 
 
