@@ -32,12 +32,12 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_below="@+id/txt_height"/>
-            <com.echopen.asso.echopen.ui.RulerView
+            <!--<com.echopen.asso.echopen.ui.RulerView
                 android:id="@+id/ruler"
                 android:layout_width="200dp"
                 android:layout_height="fill_parent"
                 android:layout_gravity="right"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"/>-->
             <TextView
                 android:id="@+id/measure"
                 style="@style/text_setting"

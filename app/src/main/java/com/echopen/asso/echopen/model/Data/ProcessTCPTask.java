@@ -11,10 +11,12 @@ import android.app.Activity;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.utils.Constants;
+import com.parse.gdata.Preconditions;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PushbackInputStream;
 import java.net.Socket;
 
 public class ProcessTCPTask extends AbstractDataTask {
@@ -41,6 +43,8 @@ public class ProcessTCPTask extends AbstractDataTask {
         try {
             s = new Socket(ip, port);
             stream = s.getInputStream();
+            //checkStreamIsNotEmpty(stream);
+
             byte[] message;
 
             while (true) {
@@ -63,7 +67,7 @@ public class ProcessTCPTask extends AbstractDataTask {
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {
         byte[] buffer = new byte[len];
         //int rows = Constants.PreProcParam.NUM_SAMPLES;
-        int start_line = Constants.PreProcParam.NUM_LINES;
+        int start_line = Constants.PreProcParam.NUM_IMG_DATA;
 
         dataInputStream = new DataInputStream(stream);
 
@@ -75,7 +79,7 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private byte[] getDeepInsidePacket(byte[] buffer, InputStream stream) throws IOException {
         int rows = Constants.PreProcParam.NUM_SAMPLES;
-        int cols = Constants.PreProcParam.NUM_LINES;
+        int cols = Constants.PreProcParam.NUM_IMG_DATA;
         byte[] tmpBuffer = new byte[rows+1];
         byte[] finalBuffer = new byte[cols * rows];
         int count_lines = 0;
@@ -101,5 +105,28 @@ public class ProcessTCPTask extends AbstractDataTask {
             }
         }
         return finalBuffer;
+    }
+
+    /**
+     * Permits to check the InputStream is empty or not
+     * Please note that only the returned InputStream must be consummed.
+     *
+     * see:
+     * http://stackoverflow.com/questions/1524299/how-can-i-check-if-an-inputstream-is-empty-without-reading-from-it
+     *
+     * @param inputStream
+     * @return
+     */
+    private static InputStream checkStreamIsNotEmpty(InputStream inputStream) throws IOException {
+        Preconditions.checkArgument(inputStream != null, "The InputStream is mandatory");
+        PushbackInputStream pushbackInputStream = new PushbackInputStream(inputStream);
+        int b;
+        b = pushbackInputStream.read();
+        if ( b == -1 ) {
+            pushbackInputStream = null;
+            checkStreamIsNotEmpty(inputStream);
+        }
+        pushbackInputStream.unread(b);
+        return pushbackInputStream;
     }
 }
