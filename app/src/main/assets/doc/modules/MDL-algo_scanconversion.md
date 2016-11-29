@@ -1,5 +1,5 @@
 # Module
-![](viewme.jpg)
+![]()
 
 ## Name
 [`MDL-algo_scanconversion.md`]()
@@ -18,7 +18,7 @@ the main ScanConversion algorihtms are
 ScanConversion class exposes two algorithms whether
 
 - the data protocol is set to `UDP` or `CP`
- -- then `etDataFromInterpolation()` runs `opencv_interpolation()` method
+ -- then `getDataFromInterpolation()` runs `opencv_interpolation()` method
  -- then `getDataFromInterpolation()` runs `compute_interpolation()` method
 
 
