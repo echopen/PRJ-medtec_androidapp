@@ -29,7 +29,7 @@ and outputs
 All informations about BoofCV tyoe format are available here : http://boofcv.org/index.php?title=Tutorial_Images
 
 ## Uses
-[`ITF-mockups`](../interfaces/ITF-post_processing_images.md)
+`ITF-post_processing_images`
 
 ## Functions
 

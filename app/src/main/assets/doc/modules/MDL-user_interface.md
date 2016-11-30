@@ -16,8 +16,8 @@ and outputs
 - the ![front-end views](https://github.com/echopen/android-app/tree/master/app/src/main/java/com/echopen/asso/echopen/MainActivity.java) for the Android views
 
 ## Uses
-[`ITF-mockups`](../interfaces/ITF-mockups)
-[`ITF-psd_templates`](../interfaces/ITF-psd_templates)
+`ITF-mockups`
+`ITF-psd_templates`
 
 ## Functions
 

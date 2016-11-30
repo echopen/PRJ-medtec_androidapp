@@ -27,8 +27,8 @@ and outputs
 - a pixels int array -> thrown by opencv_interpolation() or by compute_interpolation()
 
 ## Uses
-[`ITF-mockups`](../interfaces/ITF-ultrasound_constants.md)
-[`ITF-psd_templates`](../interfaces/ITF-ultrasound_data.md)
+`ITF-ultrasound_constants
+`ITF-ultrasound_data`
 
 ## Functions
 

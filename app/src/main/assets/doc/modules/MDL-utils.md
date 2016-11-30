@@ -14,7 +14,7 @@ This modules is related to all utilities routines, that makes coder's living eas
 - any meta config files
 
 ## Uses
-[`ITF-mockups`](../interfaces/ITF-ultrasound_constants.md)
+`ITF-ultrasound_constants`
 
 ## Functions
 
