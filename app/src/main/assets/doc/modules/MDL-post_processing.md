@@ -2,12 +2,12 @@
 ![]()
 
 ## Name
-[`MDL-post_processing.md`]()
+[`MDL-post_processing`]()
 
 ## Title
 Post Processing Algorithm
 
-## Description
+## About
 BoofCV provides a family of algorithms.
 
 * These need a specific image format ImageType : ImageUInt8, ImageFloat32, ImageFloat32, each of
@@ -29,7 +29,7 @@ and outputs
 All informations about BoofCV tyoe format are available here : http://boofcv.org/index.php?title=Tutorial_Images
 
 ## Uses
-`ITF-post_processing_images`
+* [`ITF-post_processing_images`]()
 
 ## Functions
 

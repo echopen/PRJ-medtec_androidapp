@@ -2,12 +2,12 @@
 ![]()
 
 ## Name
-[`MDL-stream_data.md`]()
+[`MDL-stream_data`]()
 
 ## Title
 Streaming Data
 
-## Description
+## About
 The app receives data from the hardware through different protocol
 
 * TCP protocol
@@ -33,8 +33,8 @@ Then 3 operations take place
 
 ## Uses
 
-`TF-TCP_data.md`
-`ITF-UDP_data.md`
+* [`ITF-tcp_data`]()
+* [`ITF-udp_data`]()
 
 ## Functions
 
