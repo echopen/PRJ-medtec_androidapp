@@ -1,10 +1,20 @@
 # Interface
 
 ## Name
-[`ITF-ultrasound_data.md`]()
+[`ITF-ultrasound_data`]()
 
 ## Title
 Ultrasound Data format
+
+## About
+Data are available for the algorithm processes from 3 incoming ways
+
+- either they are transmitted through `TCP` protocol
+- either they are transmitted through `UDP` protocol
+- either they are transmitted from a `CSV` file from inside the app
+
+At the current state, data are transmitted image by image. So that, each time an int array of
+`number_of_pixels_of_an_image` is filled, then it is transmitted to the algorithms pipeline, here : [`MDL-algo_scanconversion.md`]()
 
 ## Format
 * First part is classical CSV __note that the first item contains the position of the line, in arbitrary unit__

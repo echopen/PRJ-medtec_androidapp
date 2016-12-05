@@ -1,13 +1,15 @@
 # Interface
 
 ## Name
-[`ITF-ultrasound_constants.md`]()
+[`ITF-ultrasound_constants`]()
 
 ## Title
 Ultrasound Constants
 
-## Format
+## About
+The reader should take care of the constants being different according to the ScanConversion algorithms in use.
 
+## Format
 Constants format are critical for the algorithms, mainly the [`MDL-algo_scanconversion.md`](), ScanConversion algorithm,
 
 * Either it is the native OpenCV ScanConversion implementation then the critical constants are
@@ -30,7 +32,3 @@ Constants format are critical for the algorithms, mainly the [`MDL-algo_scanconv
 ** angle drawn between two lines, in rad
 ** distance between two data sample on each line, in m (meters)
 ** depth for start of data in m
-
-## Description
-
-The reader should take care of the constants being different according to the ScanConversion algorithms in use.

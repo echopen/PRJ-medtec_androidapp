@@ -2,12 +2,12 @@
 ![](viewme.jpg)
 
 ## Name
-[`MDL-algo_scanconversion.md`]()
+[`MDL-algo_scanconversion`]()
 
 ## Title
 ScanConversion Algorithm
 
-## Description
+## About
 This modules is triggered through
 - the `getDataFromInterpolation()` method
 
@@ -31,4 +31,4 @@ and outputs
 [`ITF-psd_templates`](../interfaces/ITF-ultrasound_data.md)
 
 ## Functions
-
+* [`FCT-`]()

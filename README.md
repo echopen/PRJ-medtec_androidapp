@@ -1,20 +1,27 @@
 [![Build Status](https://travis-ci.org/benchoufi/android-app.svg?branch=master)](https://travis-ci.org/benchoufi/android-app)
 
-All work in this repository is under the licence bsd available [here](https://github.com/echopen/android-app/blob/master/LICENSE.md)
-**Please see [README-OPENCV.md](README-OPENCV.md) for additional information on this branch.**
+# Project
+![](viewme.jpg)
 
+## Name
+[`PRJ-medtec_androidapp`]()
 
-# Echopen Android App
+## Title
+echOpen Android application
 
+## About
 This android app aims to show medical image from an echopen (or other ?)
 ultrasound device. See more about this project on [echopen's
 wiki](http://echopen.org)
 
+## Topic @needed
+[`TPC-medtec`]()
 
 ## Licence
-
+All work in this repository is under the licence bsd available [here](https://github.com/echopen/android-app/blob/master/LICENSE.md)
 
 ## Documentation
+**Please see [README-OPENCV.md](README-OPENCV.md) for additional information on this branch.**
 
 
 ## Installation (for Developers)
