@@ -10,6 +10,49 @@
     tools:showIn="@layout/activity_echo">
 
     <Button
+        android:id="@+id/hommeBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="Homme"
+        />
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="Femme"
+        android:id="@+id/femmeBtn"
+        android:layout_toEndOf="@+id/hommeBtn"
+        />
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="Enfant"
+        android:id="@+id/enfantBtn"
+        android:layout_toEndOf="@id/femmeBtn"
+        />
+
+    <Button
+        android:id="@+id/prof1Btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:text="1"
+        />
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="2"
+        android:id="@+id/prof2Btn"
+        android:layout_toStartOf="@+id/prof1Btn"
+        />
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:text="3"
+        android:id="@+id/prof3Btn"
+        android:layout_toStartOf="@id/prof2Btn"
+        />
+
+    <Button
         android:id="@+id/record"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

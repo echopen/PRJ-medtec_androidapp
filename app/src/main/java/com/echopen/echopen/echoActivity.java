@@ -14,6 +14,7 @@ import android.media.MediaMuxer;
 import android.media.MediaRecorder;
 import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -53,6 +54,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static android.R.attr.screenDensity;
+import static android.R.attr.start;
 
 
 public class echoActivity extends AppCompatActivity{
@@ -66,6 +68,9 @@ public class echoActivity extends AppCompatActivity{
     private VirtualDisplay mVirtualDisplay;
     private MediaRecorder mMediaRecorder;
 
+    private Button galleryBtn;
+
+    private static final int SELECT_PICTURE = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,25 +80,40 @@ public class echoActivity extends AppCompatActivity{
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.content_echo);
 
+
+        galleryBtn = (Button) findViewById(R.id.galleryBtn);
+
+        galleryBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Uri uri = Uri.parse(Environment.getExternalStorageDirectory().getPath() + "/EchoPen/images/");
+                intent.setData(uri);
+                intent.setType("image/png");
+                startActivityForResult(Intent.createChooser(intent, "Open folder"), SELECT_PICTURE);
+            }
+        });
+
         Button record = (Button) findViewById(R.id.record);
 //
-//        record.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
-//
-//                    if (ActivityCompat.shouldShowRequestPermissionRationale(echoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-//
-//                    }
-//                    else {
-//                        ActivityCompat.requestPermissions(echoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
-//                    }
-//                }else{
-//                    Bitmap bitmap = takeScreenshot();
-//                    saveBitmap(bitmap);
-//                }
-//            }
-//        });
+        record.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(echoActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+
+                    }
+                    else {
+                        ActivityCompat.requestPermissions(echoActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_PERMISSION);
+                    }
+                }else{
+                    Bitmap bitmap = takeScreenshot();
+                    saveBitmap(bitmap);
+                }
+            }
+        });
 
 
         relativeLayout.setOnTouchListener(new OnSwipeTouchListener(echoActivity.this) {
@@ -120,13 +140,6 @@ public class echoActivity extends AppCompatActivity{
 //            }
 //        });
 
-
-        record.setOnClickListener(new View.OnClickListener() {
-              @Override
-              public void onClick(View view) {
-
-          }
-        });
 
     }
 
@@ -158,7 +171,7 @@ public class echoActivity extends AppCompatActivity{
 
     public void saveBitmap(Bitmap bitmap) {
 
-        File folder = new File(Environment.getExternalStorageDirectory()+File.separator+"EchoPen/images/");
+        File folder = new File(Environment.getExternalStorageDirectory()+File.separator+"Pictures/EchoPen/images/");
         try {
             if (!folder.exists()) {
                 if (!folder.mkdirs())
