@@ -20,6 +20,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
@@ -32,11 +33,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -61,14 +66,17 @@ public class echoActivity extends AppCompatActivity{
 
     final int WRITE_PERMISSION = 1;
 
-    private static final int CAST_PERMISSION_CODE = 22;
-    private DisplayMetrics mDisplayMetrics;
-    private MediaProjection mMediaProjection;
-    private MediaProjectionManager mProjectionManager;
-    private VirtualDisplay mVirtualDisplay;
-    private MediaRecorder mMediaRecorder;
-
     private Button galleryBtn;
+
+
+    Button degre1Btn ;
+    Button degre2Btn ;
+    Button degre3Btn ;
+
+    ImageButton hommeBtn;
+    ImageButton femmeBtn;
+    ImageButton enfantBtn;
+
 
     private static final int SELECT_PICTURE = 1;
     @Override
@@ -80,6 +88,23 @@ public class echoActivity extends AppCompatActivity{
 
         RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.content_echo);
 
+
+        Intent myIntent = getIntent();
+        String orientation = myIntent.getStringExtra("orientation");
+
+
+        CoordinatorLayout.LayoutParams params = new CoordinatorLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+
+
+        if(orientation.equals("Left")){
+            FloatingActionMenu fabMenu = (FloatingActionMenu) findViewById(R.id.fab_menu);
+            params.gravity = (Gravity.RIGHT |  Gravity.BOTTOM);
+            fabMenu.setLayoutParams(params);
+        }else if(orientation.equals("Right")){
+            FloatingActionMenu fabMenu = (FloatingActionMenu) findViewById(R.id.fab_menu);
+            params.gravity = (Gravity.LEFT |  Gravity.BOTTOM);
+            fabMenu.setLayoutParams(params);
+        }
 
         galleryBtn = (Button) findViewById(R.id.galleryBtn);
 
@@ -131,6 +156,8 @@ public class echoActivity extends AppCompatActivity{
             }
         });
 
+
+
 //        FloatingActionMenu fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -139,6 +166,105 @@ public class echoActivity extends AppCompatActivity{
 //                        .setAction("Action", null).show();
 //            }
 //        });
+
+        degre1Btn = (Button) findViewById(R.id.prof1Btn);
+        degre2Btn = (Button) findViewById(R.id.prof2Btn);
+        degre3Btn = (Button) findViewById(R.id.prof3Btn);
+
+        hommeBtn = (ImageButton) findViewById(R.id.hommeBtn);
+        femmeBtn = (ImageButton) findViewById(R.id.femmeBtn);
+        enfantBtn = (ImageButton) findViewById(R.id.enfantBtn);
+
+
+        degre1Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectProf(degre1Btn);
+            }
+        });
+
+        degre2Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectProf(degre2Btn);
+            }
+        });
+
+        degre3Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectProf(degre3Btn);
+            }
+        });
+
+
+        hommeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectSex(hommeBtn);
+            }
+        });
+
+        femmeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectSex(femmeBtn);
+            }
+        });
+
+        enfantBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectSex(enfantBtn);
+            }
+        });
+
+    }
+
+
+    public void selectProf(Button btn){
+
+
+        switch (btn.getId()){
+            case R.id.prof1Btn:
+                degre1Btn.setBackgroundResource(R.drawable.round_button_profondeur_selected);
+                degre2Btn.setBackgroundResource(R.drawable.round_button_profondeur);
+                degre3Btn.setBackgroundResource(R.drawable.round_button_profondeur);
+                break;
+            case R.id.prof2Btn:
+                degre1Btn.setBackgroundResource(R.drawable.round_button_profondeur);
+                degre2Btn.setBackgroundResource(R.drawable.round_button_profondeur_selected);
+                degre3Btn.setBackgroundResource(R.drawable.round_button_profondeur);
+                break;
+            case R.id.prof3Btn:
+                degre1Btn.setBackgroundResource(R.drawable.round_button_profondeur);
+                degre2Btn.setBackgroundResource(R.drawable.round_button_profondeur);
+                degre3Btn.setBackgroundResource(R.drawable.round_button_profondeur_selected);
+                break;
+        }
+
+    }
+
+    public void selectSex(ImageButton btn){
+
+
+        switch (btn.getId()){
+            case R.id.hommeBtn:
+                hommeBtn.setImageResource(R.drawable.ico_men_on_copy);
+                femmeBtn.setImageResource(R.drawable.ico_women_copy);
+                enfantBtn.setImageResource(R.drawable.ico_child_copy);
+                break;
+            case R.id.femmeBtn:
+                hommeBtn.setImageResource(R.drawable.ico_men_copy);
+                femmeBtn.setImageResource(R.drawable.ico_women_on_copy);
+                enfantBtn.setImageResource(R.drawable.ico_child_copy);
+                break;
+            case R.id.enfantBtn:
+                hommeBtn.setImageResource(R.drawable.ico_men_copy);
+                femmeBtn.setImageResource(R.drawable.ico_women_copy);
+                enfantBtn.setImageResource(R.drawable.ico_child_on_copy);
+                break;
+        }
 
 
     }
@@ -200,107 +326,6 @@ public class echoActivity extends AppCompatActivity{
     }
 
 
-
-
-
-    private void startRecording() {
-        // If mMediaProjection is null that means we didn't get a context, lets ask the user
-        if (mMediaProjection == null) {
-            // This asks for user permissions to capture the screen
-            startActivityForResult(mProjectionManager.createScreenCaptureIntent(), CAST_PERMISSION_CODE);
-            return;
-        }
-//        mVirtualDisplay = createVirtualDisplay();
-        mMediaRecorder.start();
-    }
-
-    private void stopRecording() {
-        if (mMediaRecorder != null) {
-            mMediaRecorder.stop();
-            mMediaRecorder.reset();
-        }
-        if (mVirtualDisplay != null) {
-            mVirtualDisplay.release();
-        }
-        if (mMediaProjection != null) {
-            mMediaProjection.stop();
-        }
-        prepareRecording();
-    }
-
-    public String getCurSysDate() {
-        return new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-    }
-
-    private void prepareRecording() {
-        try {
-            mMediaRecorder.prepare();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
-        }
-
-        final String directory = Environment.getExternalStorageDirectory() + File.separator + "Recordings";
-        if (!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-            Toast.makeText(this, "Failed to get External Storage", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        final File folder = new File(directory);
-        boolean success = true;
-        if (!folder.exists()) {
-            success = folder.mkdir();
-        }
-        String filePath;
-        if (success) {
-            String videoName = ("capture_" + getCurSysDate() + ".mp4");
-            filePath = directory + File.separator + videoName;
-        } else {
-            Toast.makeText(this, "Failed to create Recordings directory", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        int width = mDisplayMetrics.widthPixels;
-        int height = mDisplayMetrics.heightPixels;
-
-        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
-        mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
-        mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-        mMediaRecorder.setVideoEncodingBitRate(512 * 1000);
-        mMediaRecorder.setVideoFrameRate(30);
-        mMediaRecorder.setVideoSize(width, height);
-        mMediaRecorder.setOutputFile(filePath);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode != CAST_PERMISSION_CODE) {
-            // Where did we get this request from ? -_-
-            Log.w("ERRORRRRR : ", "Unknown request code: " + requestCode);
-            return;
-        }
-        if (resultCode != RESULT_OK) {
-            Toast.makeText(this, "Screen Cast Permission Denied :(", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        mMediaProjection = mProjectionManager.getMediaProjection(resultCode, data);
-        // TODO Register a callback that will listen onStop and release & prepare the recorder for next recording
-        // mMediaProjection.registerCallback(callback, null);
-        mVirtualDisplay = getVirtualDisplay();
-        mMediaRecorder.start();
-    }
-
-    private VirtualDisplay getVirtualDisplay() {
-//        screenDensity = mDisplayMetrics.densityDpi;
-        int width = mDisplayMetrics.widthPixels;
-        int height = mDisplayMetrics.heightPixels;
-
-        return mMediaProjection.createVirtualDisplay(this.getClass().getSimpleName(),
-                width, height, screenDensity,
-                DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
-                mMediaRecorder.getSurface(), null /*Callbacks*/, null /*Handler*/);
-    }
 
 
 }

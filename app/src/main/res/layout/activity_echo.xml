@@ -5,6 +5,7 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context="com.echopen.echopen.echoActivity">
 
     <android.support.design.widget.AppBarLayout
@@ -35,7 +36,7 @@
         android:id="@+id/fab_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
+
         android:layout_marginBottom="8dp"
         android:layout_marginRight="8dp"
         android:src="@drawable/fab_add"
@@ -46,44 +47,44 @@
             android:id="@+id/menu_item1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/pathologie_01_copy"
             fab:fab_size="mini"
-            fab:fab_label="Gastro" />
+             />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/pathologie_02copy"
             fab:fab_size="mini"
-            fab:fab_label="Cardio" />
+             />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/pathologie_03copy"
             fab:fab_size="mini"
-            fab:fab_label="Pulmo" />
+             />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/pathologie_04copy"
             fab:fab_size="mini"
-            fab:fab_label="Gastro" />
+             />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/pathologie_05copy"
             fab:fab_size="mini"
-            fab:fab_label="Cardio" />
+            />
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_item6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/fab_add"
+            android:src="@drawable/pathologie_06copy"
             fab:fab_size="mini"
-            fab:fab_label="Pulmo" />
+            />
 
 
     </com.github.clans.fab.FloatingActionMenu>

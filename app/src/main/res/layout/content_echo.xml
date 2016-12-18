@@ -15,23 +15,29 @@
         android:background="@drawable/echo"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/hommeBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="Homme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ico_men_copy"
+        android:layout_marginStart="10dp"
         />
-    <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="Femme"
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ico_women_copy"
         android:id="@+id/femmeBtn"
         android:layout_toEndOf="@+id/hommeBtn"
         />
-    <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="Enfant"
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ico_child_copy"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
         android:id="@+id/enfantBtn"
         android:layout_toEndOf="@id/femmeBtn"
         />
@@ -41,30 +47,44 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentEnd="true"
+        android:textColor="@android:color/white"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
         android:text="1"
+        android:background="@drawable/round_button_profondeur"
         />
     <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="5dp"
         android:text="2"
+        android:textColor="@android:color/white"
         android:id="@+id/prof2Btn"
+        android:background="@drawable/round_button_profondeur"
         android:layout_toStartOf="@+id/prof1Btn"
         />
     <Button
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_marginEnd="10dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/round_button_profondeur"
         android:text="3"
         android:id="@+id/prof3Btn"
+        android:textColor="@android:color/white"
         android:layout_toStartOf="@id/prof2Btn"
         />
 
     <Button
         android:id="@+id/record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_gravity="center_vertical|center_horizontal"
         android:text="Record"
+        android:textColor="@android:color/white"
         android:layout_alignParentBottom="true"
+        android:background="@drawable/round_button"
         android:layout_centerHorizontal="true"
         />
 
