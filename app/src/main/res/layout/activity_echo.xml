@@ -63,7 +63,27 @@
             android:src="@drawable/fab_add"
             fab:fab_size="mini"
             fab:fab_label="Pulmo" />
-
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            fab:fab_size="mini"
+            fab:fab_label="Gastro" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            fab:fab_size="mini"
+            fab:fab_label="Cardio" />
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/menu_item6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/fab_add"
+            fab:fab_size="mini"
+            fab:fab_label="Pulmo" />
 
 
     </com.github.clans.fab.FloatingActionMenu>

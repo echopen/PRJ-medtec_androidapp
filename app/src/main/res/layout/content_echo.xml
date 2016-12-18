@@ -9,6 +9,12 @@
     tools:context="com.echopen.echopen.echoActivity"
     tools:showIn="@layout/activity_echo">
 
+    <pl.droidsonroids.gif.GifTextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/echo"
+        />
+
     <Button
         android:id="@+id/hommeBtn"
         android:layout_width="40dp"
