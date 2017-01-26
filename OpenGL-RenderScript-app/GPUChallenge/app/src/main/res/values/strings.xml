@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   <string name="app_name">echopen</string>
+   <string name="challenge_name">GPU Challenge</string>
+   <string name="extenal_storage_error">External Storage Error</string>
+</resources>
