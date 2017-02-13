@@ -3,6 +3,7 @@ package com.echopen.asso.echopen.model.Data;
 import android.app.Activity;
 
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.RenderingContextController;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,8 +33,8 @@ public class BitmapDisplayer extends Displayer {
      * @param ip, ip to get the incoming UDP data
      * @param port, port on which listening the incoming UDP data
      */
-    public BitmapDisplayer(Activity activity, MainActionController mainActionController, String ip, int port) {
-        super(activity, mainActionController);
+    public BitmapDisplayer(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, String ip, int port) {
+        super(activity, mainActionController, iRenderingContextController);
         this.ip = ip;
         this.port = port;
         this.activity = activity;
@@ -50,14 +51,14 @@ public class BitmapDisplayer extends Displayer {
      * @throws IOException
      */
     public void readDataFromTCP() throws IOException {
-        new ProcessTCPTask(activity, mainActionController, scanConversion, ip, port).execute();
+        new ProcessTCPTask(activity, mainActionController, mRenderingContextController, scanConversion, ip, port).execute();
     }
 
     public void readDataFromUDP() throws IOException {
-        new ProcessUPDTask(activity, mainActionController, scanConversion, port).execute();
+        new ProcessUPDTask(activity, mainActionController, mRenderingContextController, scanConversion, port).execute();
     }
 
     public void readDataFromFile(final InputStream is) throws IOException {
-        new FileTask(activity, mainActionController, scanConversion, is).execute();
+        new FileTask(activity, mainActionController, scanConversion, is, mRenderingContextController).execute();
     }
 }

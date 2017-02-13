@@ -1,9 +1,12 @@
 package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
+import android.util.Log;
 
+import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.RenderingContextController;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,10 +16,11 @@ import java.io.InputStreamReader;
  */
 public class FileTask extends AbstractDataTask {
 
+    private final String TAG = this.getClass().getSimpleName();
     private final Data data;
 
-    public FileTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream) {
-        super(activity, mainActionController, scanConversion);
+    public FileTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream, RenderingContextController iRenderingContextController) {
+        super(activity, mainActionController, scanConversion, iRenderingContextController);
         InputStreamReader isReader = new InputStreamReader(inputStream);
         data = new Data(isReader);
         scanconversion = new ScanConversion(data);
@@ -26,9 +30,10 @@ public class FileTask extends AbstractDataTask {
     @Override
     protected Void doInBackground(Void... Voids) {
         while (true) {
-            //For fun : scanconversion.randomize();
+            RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();
             scanconversion.setData(data);
-            refreshUI(scanconversion);
+
+            refreshUI(scanconversion, lCurrentRenderingContext);
             //            try {
 //                Thread.sleep(100);
 //            } catch (InterruptedException e) {

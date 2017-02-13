@@ -7,6 +7,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.RenderingContextController;
 
 import org.junit.Before;
 
@@ -60,7 +61,7 @@ public class ProtocolTest extends ActivityInstrumentationTestCase2<MainActivity>
         BitmapDisplayer bitmapDisplayer= mock(BitmapDisplayer.class);
 
         doReturn(bitmapDisplayer).when(bitmapDisplayerFactory).populateBitmap(
-                any(MainActivity.class), any(MainActionController.class),
+                any(MainActivity.class), any(MainActionController.class), any(RenderingContextController.class),
                 anyString(), anyInt());
         try {
             mainActivity.fetchData(bitmapDisplayerFactory);
@@ -69,7 +70,7 @@ public class ProtocolTest extends ActivityInstrumentationTestCase2<MainActivity>
             e.printStackTrace();
         }
         assertFalse(thrown);
-        verify(bitmapDisplayerFactory,times(1)).populateBitmap(any(MainActivity.class), any(MainActionController.class),
+        verify(bitmapDisplayerFactory,times(1)).populateBitmap(any(MainActivity.class), any(MainActionController.class), any(RenderingContextController.class),
                 anyString(), anyInt());
     }
 }

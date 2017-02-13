@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.RenderingContextController;
 
 import java.io.InputStreamReader;
 
@@ -23,6 +24,7 @@ public class Displayer {
 
     /* Holds the main elements of UI of MainActivity */
     protected MainActionController mainActionController;
+    protected RenderingContextController mRenderingContextController;
 
     /* As for testing purpose, this is used when simulated data is taken from csv file */
     protected InputStreamReader inputStreamReader;
@@ -34,8 +36,9 @@ public class Displayer {
      * @param activity, practically the MainActivity
      * @param mainActionController, holds the UI of the MainActivity
      */
-    public Displayer(Activity activity, MainActionController mainActionController) {
+    public Displayer(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController) {
         this.activity = activity;
         this.mainActionController = mainActionController;
+        this.mRenderingContextController = iRenderingContextController;
     }
 }

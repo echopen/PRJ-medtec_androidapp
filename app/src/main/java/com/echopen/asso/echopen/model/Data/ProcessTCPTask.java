@@ -8,8 +8,10 @@ package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
 
+import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 import com.parse.gdata.Preconditions;
 
@@ -29,8 +31,8 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private DataInputStream dataInputStream;
 
-    public ProcessTCPTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, String ip, int port) {
-        super(activity, mainActionController, scanConversion);
+    public ProcessTCPTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, ScanConversion scanConversion, String ip, int port) {
+        super(activity, mainActionController, scanConversion, iRenderingContextController);
         this.ip = ip;
         this.port = port;
     }
@@ -49,10 +51,12 @@ public class ProcessTCPTask extends AbstractDataTask {
 
             while (true) {
                 try {
+                    RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();
                     message = deepInsidePacket(rows +1, stream);
                     ScanConversion scanConversion = ScanConversion.getInstance(message);
                     scanConversion.setTcpData();
-                    refreshUI(scanConversion);
+
+                    refreshUI(scanConversion, lCurrentRenderingContext);
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
