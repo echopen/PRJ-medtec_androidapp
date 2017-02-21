@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.echopen.asso.echopen.filters.IntensityUniformGainFilter;
+import com.echopen.asso.echopen.filters.IntensityToRGBFilter;
+import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 
 /**
@@ -14,30 +18,36 @@ import com.echopen.asso.echopen.utils.Constants;
  */
 abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
+    private final String TAG = this.getClass().getSimpleName();
     protected Activity activity;
 
     protected ScanConversion scanconversion;
 
     protected MainActionController mainActionController;
 
-    public AbstractDataTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion) {
+    protected RenderingContextController mRenderingContextController;
+
+    public AbstractDataTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, RenderingContextController iRenderingContextController) {
         this.scanconversion = scanConversion;
         this.activity = activity;
         this.mainActionController = mainActionController;
+
+        this.mRenderingContextController = iRenderingContextController;
     }
 
-    protected void refreshUI(ScanConversion scanconversion) {
+    protected void refreshUI(ScanConversion scanconversion, RenderingContext iCurrentRenderingContext) {
         int[] scannedArray = scanconversion.getDataFromInterpolation();
 
-        //EchoIntImage echoImage = new EchoIntImage(scannedArray);
-        //
-        // final Bitmap bitmap = echoImage.createImage();
-        int[] colors = new int[scannedArray.length];
-        int pixel;
-        for(int i = 0; i < scannedArray.length; i++) {
-            pixel = scannedArray[i];
-            colors[i] = (pixel | (pixel << 8) | (pixel << 16)) | 0xFF000000;
-        }
+        IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
+        lIntensityGainFilter.setImageInput(scannedArray, scannedArray.length);
+        lIntensityGainFilter.applyFilter(iCurrentRenderingContext.getIntensityGain());
+        int[] scannedGainArray = lIntensityGainFilter.getImageOutput();
+
+        IntensityToRGBFilter lIntensityToRGBFilter = new IntensityToRGBFilter();
+        lIntensityToRGBFilter.setImageInput(scannedGainArray, scannedGainArray.length);
+        lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
+        int colors[] =  lIntensityToRGBFilter.getImageOutput();
+
         //Arrays.fill(colors, 0, 4*scannedArray.length, Color.WHITE);
         final Bitmap bitmap = Bitmap.createBitmap(colors, 512*Constants.PreProcParam.SCALE_IMG_FACTOR, 512/Constants.PreProcParam.SCALE_IMG_FACTOR, Bitmap.Config.ARGB_8888);
         try {

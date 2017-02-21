@@ -7,6 +7,8 @@
     <string name="protocol_message">Choose your protocol</string>
     <string name="ok_dialog">Ok</string>
     <string name="cancel_dialog">Cancel</string>
+    <string name="lut_params">Lut Params:</string>
+    <string name="gain">Gain:</string>
     <string-array
         name="filter_choice">
         <item>Convolution</item>

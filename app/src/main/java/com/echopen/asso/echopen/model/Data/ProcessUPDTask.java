@@ -2,8 +2,10 @@ package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
 
+import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
+import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.ImageHelper;
 
@@ -22,8 +24,8 @@ public class ProcessUPDTask extends AbstractDataTask {
 
     private final int port;
 
-    public ProcessUPDTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, int port) {
-        super(activity, mainActionController, scanConversion);
+    public ProcessUPDTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, ScanConversion scanConversion, int port) {
+        super(activity, mainActionController, scanConversion, iRenderingContextController);
         this.port = port;
     }
 
@@ -70,9 +72,11 @@ public class ProcessUPDTask extends AbstractDataTask {
                         udpDataCounterColumn = 0;
                     }
                     if (udpDataCounterRow >= Constants.PreProcParam.UDP_IMG_DATA) {
+                        RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();
+
                         ScanConversion scnConv = ScanConversion.getInstance(udpDataArray);
                         scnConv.setUdpData();
-                        refreshUI(scnConv);
+                        refreshUI(scnConv, lCurrentRenderingContext);
                         udpDataCounterRow = 0;
                     }
                 }

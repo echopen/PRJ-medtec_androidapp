@@ -110,8 +110,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
      */
     public void BareMainViewsExists() throws NoMatchingViewException {
         dumpUi(R.id.btnEffect, R.id.tabBrightness, R.id.tabGrid, R.id.tabSetting,
-                R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5,
-                R.id.seekBar, R.id.seekBar2, R.id.seekBar3);
+                R.id.tabSuffle, R.id.tabTime, R.id.btn1);
 
         TestHelper.checkUiDoNotExist(listUi);
     }
@@ -123,7 +122,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void MainViewsExists() throws NoMatchingViewException {
         TestHelper.dismissTheAlertDialogBox();
         dumpUi(/*R.id.btnEffect,*/ R.id.tabBrightness, /*R.id.tabGrid,*/ R.id.tabSetting,
-                R.id.tabSuffle, R.id.tabTime, R.id.btn1, R.id.btn2, R.id.btn3/*, R.id.btn4, R.id.btn5*/);
+                R.id.tabSuffle, R.id.tabTime, R.id.btn1);
 
         TestHelper.checkUiIsDisplayed(listUi);
     }
