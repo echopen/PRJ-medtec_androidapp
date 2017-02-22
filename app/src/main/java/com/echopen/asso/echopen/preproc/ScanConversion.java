@@ -76,9 +76,12 @@ public class ScanConversion {
     long lastTime;
 
     private static byte[] tcpDataArray;
+
     Mat opencv_src;
     Mat opencv_src_larger;
     Mat opencv_dest;
+    private short[] mEnvelopData;
+    private Integer[] mTcpDataInt;
 
     {
         int rows = Constants.PreProcParam.NUM_IMG_DATA;
@@ -88,8 +91,8 @@ public class ScanConversion {
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
 
-        opencv_src = new Mat(rows, cols, CvType.CV_8U);
-        opencv_src_larger = new Mat(larger_rows, cols, CvType.CV_8U);
+        opencv_src = new Mat(rows, cols, CvType.CV_16S);
+        opencv_src_larger = new Mat(larger_rows, cols, CvType.CV_16S);
         opencv_dest = new Mat(larger_rows, cols, CvType.CV_32S);
 
         lastTime = System.nanoTime();
@@ -233,6 +236,9 @@ public class ScanConversion {
         ScanConversion.tcpDataArray = tcpDataArray;
     }
 
+    public ScanConversion(){
+
+    }
     /**
      * Singleton getInstance method, with InputStreamReader argument
      * inputStreamReader holds the simulated data stored in a csv format,
@@ -271,6 +277,15 @@ public class ScanConversion {
         return singletonScanConversion;
     }
 
+    public static ScanConversion getInstance(){
+        if(singletonScanConversion == null){
+            singletonScanConversion = new ScanConversion();
+            return singletonScanConversion;
+        }
+        else{
+            return singletonScanConversion;
+        }
+    }
     /**
      * make_tables() compute the weights affected to each 4-uplets of pixels.
      * This table is calculated only once in the whole process, since it onmy dependes of physical
@@ -527,6 +542,10 @@ public class ScanConversion {
         envelope_data_bytes = ScanConversion.tcpDataArray;
     }
 
+    public void setTcpDataInt(Integer[] iTcpData)
+    {
+        mTcpDataInt = iTcpData;
+    }
     /**
      * Fetches the UDP data stored in udpDataArray, and then passes it to make_interpolation()
      * in order to scan converts it.
@@ -559,7 +578,7 @@ public class ScanConversion {
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
 
-        if(envelope_data_bytes == null) {
+        if(mTcpDataInt == null) {
             Log.v("debug", "envelope_data_bytes is empty");
             return new int[Nz * Nx];
         }
@@ -572,7 +591,12 @@ public class ScanConversion {
         int rows = Constants.PreProcParam.NUM_IMG_DATA;
         int cols = Constants.PreProcParam.NUM_SAMPLES;
 
-        opencv_src.put(0, 0, envelope_data_bytes);
+        mEnvelopData = new short[mTcpDataInt.length];
+        for(Integer i = 0; i < mEnvelopData.length; i++){
+            mEnvelopData[i] = mTcpDataInt[i].shortValue();
+        }
+
+        opencv_src.put(0, 0, mEnvelopData);
         opencv_src_larger.setTo(Scalar.all(0));
         opencv_dest.setTo(Scalar.all(0));
 
@@ -594,13 +618,7 @@ public class ScanConversion {
 
         int[] dest_out = new int[Nz * Nx];
         opencv_dest.get(0, 0, dest_out);
-        for (int i = 0; i < Nz * Nx; i++) {
-            if(dest_out[i] < 128)
-                dest_out[i] = dest_out[i] *2;
-            else {
-                dest_out[i] = 255;
-            }
-        }
+
         return dest_out;
     }
 }

@@ -26,7 +26,7 @@
                 android:id="@+id/echo"
                 android:layout_width="369dp"
                 android:layout_height="300dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:src="#77ff00"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
+import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.IntensityUniformGainFilter;
 import com.echopen.asso.echopen.filters.IntensityToRGBFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
@@ -19,6 +20,7 @@ import com.echopen.asso.echopen.utils.Constants;
 abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
     private final String TAG = this.getClass().getSimpleName();
+
     protected Activity activity;
 
     protected ScanConversion scanconversion;
@@ -50,6 +52,42 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
         //Arrays.fill(colors, 0, 4*scannedArray.length, Color.WHITE);
         final Bitmap bitmap = Bitmap.createBitmap(colors, 512*Constants.PreProcParam.SCALE_IMG_FACTOR, 512/Constants.PreProcParam.SCALE_IMG_FACTOR, Bitmap.Config.ARGB_8888);
+        try {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mainActionController.displayMainFrame(bitmap);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void rawDataPipeline(ScanConversion scanconversion,RenderingContext iCurrentRenderingContext, Integer[] iRawImageData) {
+
+        // envelop detection filter
+        EnvelopDetectionFilter lEnvelopDetectionFilter = new EnvelopDetectionFilter();
+        lEnvelopDetectionFilter.setImageInput(iRawImageData, Constants.PreProcParam.NUM_SAMPLES_PER_LINE, Constants.PreProcParam.NUM_LINES_PER_IMAGE);
+        lEnvelopDetectionFilter.applyFilter();
+        Integer[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();
+
+        // apply scan conversion
+        scanconversion.setTcpDataInt(lEnvelopImageData);
+        int[] scannedArray = scanconversion.getDataFromInterpolation();
+
+        //TODO: filters has to be improve to support 16bit data values
+        IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
+        lIntensityGainFilter.setImageInput(scannedArray, scannedArray.length);
+        lIntensityGainFilter.applyFilter(iCurrentRenderingContext.getIntensityGain());
+        int[] scannedGainArray = lIntensityGainFilter.getImageOutput();
+
+        IntensityToRGBFilter lIntensityToRGBFilter = new IntensityToRGBFilter();
+        lIntensityToRGBFilter.setImageInput(scannedGainArray, scannedGainArray.length);
+        lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
+        int colors[] =  lIntensityToRGBFilter.getImageOutput();
+
+        final Bitmap bitmap = Bitmap.createBitmap(colors, 512, 512, Bitmap.Config.ARGB_8888);
         try {
             activity.runOnUiThread(new Runnable() {
                 @Override

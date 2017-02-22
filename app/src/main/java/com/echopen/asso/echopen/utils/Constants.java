@@ -100,6 +100,11 @@ public class Constants {
 
         public static int NUM_IMG_DATA = 120;
 
+        public static Integer NUM_SAMPLES_PER_LINE = 1478;
+
+        public static Integer NUM_LINES_PER_IMAGE = 64;
+
+        public static Integer NUM_BYTES_PER_SAMPLE = 2;
         /* this parameter takes in account the size of the image in order to wrap it properly in the OpenCV MAT */
         public static int SCALE_IMG_FACTOR = 1;
 

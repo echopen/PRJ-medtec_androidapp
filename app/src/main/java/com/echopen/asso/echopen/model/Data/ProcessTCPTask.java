@@ -21,8 +21,11 @@ import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.net.Socket;
 
+import java.util.Arrays;
+
 public class ProcessTCPTask extends AbstractDataTask {
 
+    private final String TAG = this.getClass().getSimpleName();
     private Socket s;
 
     private final String ip;
@@ -48,15 +51,18 @@ public class ProcessTCPTask extends AbstractDataTask {
             //checkStreamIsNotEmpty(stream);
 
             byte[] message;
+            Integer[] lRawImageData;
+
+            // get config - for the moment not implemented
+            getDeviceConfig(stream);
 
             while (true) {
                 try {
-                    RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();
-                    message = deepInsidePacket(rows +1, stream);
-                    ScanConversion scanConversion = ScanConversion.getInstance(message);
-                    scanConversion.setTcpData();
+                    RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();;
 
-                    refreshUI(scanConversion, lCurrentRenderingContext);
+                    lRawImageData = getRawImageData(stream);
+
+                    rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, lRawImageData);
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
@@ -67,6 +73,51 @@ public class ProcessTCPTask extends AbstractDataTask {
         }
         return null;
     }
+
+    private Integer[] getRawImageData(InputStream iStream) throws IOException{
+        // device config is temporary stored in the app
+        Integer lNbSamplesPerLine = Constants.PreProcParam.NUM_SAMPLES_PER_LINE;
+        Integer lNbLinesPerImage = Constants.PreProcParam.NUM_LINES_PER_IMAGE;
+        Integer lSampleSize = Constants.PreProcParam.NUM_BYTES_PER_SAMPLE;
+
+        Integer[] lRawImageData = new Integer[lNbLinesPerImage * lNbSamplesPerLine];
+        Arrays.fill(lRawImageData, 0, lNbLinesPerImage * lNbSamplesPerLine, 0);
+        // 2 bytes for line index + 2 bytes * nb of samples per line
+        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize + lSampleSize];
+        Integer[] lAliasedLineData;
+        Integer lLineOffset;
+
+        dataInputStream = new DataInputStream(iStream);
+
+
+        Integer lLineNumber = 0;
+
+        for(Integer i = 0; i < lNbLinesPerImage; i++){
+            dataInputStream.readFully(lLineData);
+
+            lLineNumber = (lLineData[1] << 8) | (lLineData[0] & 0x00ff);
+
+            lAliasedLineData = new Integer[lNbSamplesPerLine];
+            for(Integer j = 1; j <= lNbSamplesPerLine; j++)
+            {
+                lAliasedLineData[(j- 1)] = (lLineData[2*j + 1] << 8) | (lLineData[2*j] & 0x00ff);
+            }
+            lLineOffset = (lLineNumber - 1) * lNbSamplesPerLine;
+            System.arraycopy(lAliasedLineData, 0, lRawImageData, lLineOffset , lAliasedLineData.length);
+        }
+
+        return lRawImageData;
+    }
+
+    private void getDeviceConfig(InputStream iStream) throws IOException{
+        byte[] lConfig = new byte[6];
+
+        // TODO: implement Device configuration reading to replace app hard coded values
+        dataInputStream = new DataInputStream(iStream);
+        dataInputStream.readFully(lConfig);
+
+    }
+
 
     private byte[] deepInsidePacket(int len, InputStream stream) throws IOException {
         byte[] buffer = new byte[len];
