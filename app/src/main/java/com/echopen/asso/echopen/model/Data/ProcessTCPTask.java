@@ -8,6 +8,7 @@ package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
 
+import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
@@ -22,6 +23,9 @@ import java.io.PushbackInputStream;
 import java.net.Socket;
 
 import java.util.Arrays;
+
+import static com.echopen.asso.echopen.utils.Constants.PreProcParam.TCP_IMG_DATA;
+import static com.echopen.asso.echopen.utils.Constants.PreProcParam.TCP_NUM_SAMPLES;
 
 public class ProcessTCPTask extends AbstractDataTask {
 

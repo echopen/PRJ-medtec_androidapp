@@ -75,6 +75,12 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         // apply scan conversion
         scanconversion.setTcpDataInt(lEnvelopImageData);
         int[] scannedArray = scanconversion.getDataFromInterpolation();
+        for (int i = 0; i < lEnvelopImageData.length; i++) {
+            if(lEnvelopImageData[i]<=255)
+                scannedArray[i] = (int) lEnvelopImageData[i];
+            else
+                scannedArray[i] = 255;
+        }
 
         //TODO: filters has to be improve to support 16bit data values
         IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
@@ -87,7 +93,7 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
         int colors[] =  lIntensityToRGBFilter.getImageOutput();
 
-        final Bitmap bitmap = Bitmap.createBitmap(colors, 512, 512, Bitmap.Config.ARGB_8888);
+        final Bitmap bitmap = Bitmap.createBitmap(colors, 200, 200, Bitmap.Config.ARGB_8888);
         try {
             activity.runOnUiThread(new Runnable() {
                 @Override
