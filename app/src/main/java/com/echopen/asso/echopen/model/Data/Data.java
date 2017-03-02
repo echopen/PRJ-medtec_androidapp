@@ -25,6 +25,9 @@ public class Data
     /* int array holding the pixel array data */
     protected int[]  envelopeData;
 
+    /* Integer array holding the pixel array data */
+    protected Integer[]  envelopeIntegerData;
+
     /**
      *
      * @return title
@@ -79,11 +82,26 @@ public class Data
     }
 
     /**
-     * @param envelopeData
+     * @param envelopeData int array
      */
     public void setEnvelopeData(int[] envelopeData) {
         this.envelopeData = envelopeData;
     }
+
+    /**
+     * @return envelopeIntegerData, pixel array data in 16 bits Integer
+     */
+    public Integer[] getEnvelopeIntegerData() {
+        return envelopeIntegerData;
+    }
+
+    /**
+     * @param envelopeIntegerData Integer array
+     */
+    public void setEnvelopeIntegerData(Integer[] envelopeIntegerData) {
+        this.envelopeIntegerData = envelopeIntegerData;
+    }
+
 
     /**
      * Constructor with the incoming UDP data as an argument
@@ -99,7 +117,9 @@ public class Data
      */
     public Data(InputStreamReader inputStreamReader) {
         envelopeData = new int[0];
-        setCharData(inputStreamReader);
+        envelopeIntegerData = new Integer[0];
+        //setCharData(inputStreamReader);
+        setIntegerData(inputStreamReader);
     }
 
     private void setCharData(InputStreamReader inputStreamReader){
@@ -132,12 +152,55 @@ public class Data
         }
     }
 
+    private void setIntegerData(InputStreamReader inputStreamReader){
+        BufferedReader br = null;
+        String line;
+        String cvsSplitBy = ",";
+
+        try {
+            br = new BufferedReader(inputStreamReader);
+            while ((line = br.readLine()) != null) {
+                String[] string_tmp_data = line.split(cvsSplitBy);
+                Integer[] char_tmp_data = new Integer[string_tmp_data.length];
+                for (int index = 0; index < string_tmp_data.length; index++) {
+                    char_tmp_data[index] = Integer.parseInt(string_tmp_data[index]);
+                }
+                envelopeIntegerData = Data.objIntegerArrayConcat(envelopeIntegerData, char_tmp_data);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
     /**
      *  this method can be useful if we have data to be concatenated in horizontal way
      */
     public static int[] objArrayConcat(int[] o1, int[] o2)
     {
         int[] ret = new int[o1.length + o2.length];
+
+        System.arraycopy(o1, 0, ret, 0, o1.length);
+        System.arraycopy(o2, 0, ret, o1.length, o2.length);
+
+        return ret;
+    }
+
+    /**
+     *  this method can be useful if we have data to be concatenated in horizontal way
+     */
+    public static Integer[] objIntegerArrayConcat(Integer[] o1, Integer[] o2)
+    {
+        Integer[] ret = new Integer[o1.length + o2.length];
 
         System.arraycopy(o1, 0, ret, 0, o1.length);
         System.arraycopy(o2, 0, ret, o1.length, o2.length);

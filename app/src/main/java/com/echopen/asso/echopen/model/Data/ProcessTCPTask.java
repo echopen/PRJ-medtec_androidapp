@@ -7,6 +7,7 @@ package com.echopen.asso.echopen.model.Data;
  */
 
 import android.app.Activity;
+import android.content.res.AssetManager;
 
 import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
@@ -19,6 +20,7 @@ import com.parse.gdata.Preconditions;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PushbackInputStream;
 import java.net.Socket;
 
@@ -50,32 +52,48 @@ public class ProcessTCPTask extends AbstractDataTask {
         //int cols = Constants.PreProcParam.NUM_IMG_DATA;
 
         try {
-            s = new Socket(ip, port);
-            stream = s.getInputStream();
+            //unplugging the stream operation
+            //s = new Socket(ip, port);
+            //stream = s.getInputStream();
             //checkStreamIsNotEmpty(stream);
 
             byte[] message;
             Integer[] lRawImageData;
 
             // get config - for the moment not implemented
-            getDeviceConfig(stream);
+            //getDeviceConfig(stream);
 
             while (true) {
                 try {
                     RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();;
 
-                    lRawImageData = getRawImageData(stream);
+                    // getting data from local
+                    lRawImageData = getRawImageDataFromLocal();
+                    //lRawImageData = getRawImageData(stream);
 
                     rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, lRawImageData);
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     return null;
                 }
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private Integer[] getRawImageDataFromLocal() {
+        AssetManager assetManager = activity.getResources().getAssets();
+        InputStream inputStream = null;
+        try {
+            inputStream = assetManager.open("data/raw_data/data_simu.csv");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        InputStreamReader isReader = new InputStreamReader(inputStream);
+        Data data = new Data(isReader);
+        return data.getEnvelopeIntegerData();
     }
 
     private Integer[] getRawImageData(InputStream iStream) throws IOException{

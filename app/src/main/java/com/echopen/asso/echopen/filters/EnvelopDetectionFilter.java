@@ -55,8 +55,9 @@ public class EnvelopDetectionFilter {
                     mlineImageOutput[k] = Integer.valueOf((int)(sqrt(Math.pow(lComplexInput[k].re,2) + (int) Math.pow(lComplexInput[k].im,2)))/TCP_NUM_SAMPLES);
                 }
             System.arraycopy(mlineImageOutput, 0, mImageOutput, i*TCP_NUM_SAMPLES , TCP_NUM_SAMPLES);
-            Log.d("TAGGY","hello");
         }
+        Log.d("TAGGY","hello");
+        Log.d("TAGGY","hihi");
         return true;
     }
 

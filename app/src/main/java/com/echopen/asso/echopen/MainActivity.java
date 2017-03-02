@@ -1,10 +1,12 @@
 package com.echopen.asso.echopen;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -35,9 +37,17 @@ import com.echopen.asso.echopen.utils.UIParams;
 
 import org.opencv.android.OpenCVLoader;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.text.DecimalFormat;
+
+import static com.echopen.asso.echopen.utils.Constants.PreProcParam.NUM_SAMPLES_PER_LINE;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -98,6 +108,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
      * and then displays them.
      * Also, this method uses the Config singleton class that provides device-specific constants
      */
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
