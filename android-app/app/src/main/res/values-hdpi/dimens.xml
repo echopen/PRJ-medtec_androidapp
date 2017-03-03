@@ -1,0 +1,6 @@
+<resources>
+    <dimen name="txt_size">12dp</dimen>
+    <dimen name="scale_line_small">10dp</dimen>
+    <dimen name="scale_line_medium">22dp</dimen>
+    <dimen name="scale_line_large">30dp</dimen>
+</resources>

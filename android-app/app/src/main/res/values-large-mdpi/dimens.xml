@@ -1,0 +1,4 @@
+<resources>
+    <dimen name="filter_pad_top">100dp</dimen>
+    <dimen name="filter_pad_bottom">240dp</dimen>
+</resources>
