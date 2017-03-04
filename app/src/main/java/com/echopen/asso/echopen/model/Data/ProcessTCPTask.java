@@ -8,12 +8,15 @@ package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
 
+import com.echopen.asso.echopen.envelope_detection.FastFourierTransform;
+import com.echopen.asso.echopen.envelope_detection.jtransforms.fft.DoubleFFT_1D1TAlgorithm;
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 import com.parse.gdata.Preconditions;
+import com.echopen.asso.echopen.envelope_detection.jtransforms.fftw.*;
 
 import java.io.DataInputStream;
 import java.io.IOException;

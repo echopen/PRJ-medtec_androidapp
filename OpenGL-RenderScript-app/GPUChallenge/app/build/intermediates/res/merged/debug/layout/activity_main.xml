@@ -1,0 +1,34 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/transparent" >
+    <LinearLayout
+        android:id="@+id/vMiddle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/challenge_name" />
+
+        <RelativeLayout
+            android:id="@+id/glView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/echo"
+            android:layout_width="369dp"
+            android:layout_height="500dp"
+            android:layout_alignParentTop="true"
+            android:scaleType="centerCrop"/>
+    </LinearLayout>
+</RelativeLayout>
+

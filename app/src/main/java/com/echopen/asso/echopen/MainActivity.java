@@ -19,6 +19,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.custom.CustomActivity;
+import com.echopen.asso.echopen.envelope_detection.FastFourierTransform;
+import com.echopen.asso.echopen.envelope_detection.jtransforms.fft.DoubleFFT_1D1TAlgorithm;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.model.Synchronizer;
@@ -310,6 +312,36 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         mainActionController.setTransparentTextView();
 
         initProtocolChoice();
+
+        double[] input = new double[16];
+        for (int i = 0; i < 8; i++) {
+            input[2*i] = i;
+            input[2*i+1] = 0;
+        }
+
+        new DoubleFFT_1D1TAlgorithm(0,0).perform(input);
+
+        FastFourierTransform.Complex [] cinput = new FastFourierTransform.Complex[input.length];
+        for (int i = 0; i < input.length; i++)
+            cinput[i] = new FastFourierTransform.Complex(input[i], 0.0);
+
+        FastFourierTransform.fft(cinput);
+
+        FastFourierTransform.i_fft(cinput);
+
+        for (int i = 0; i < 8; i++) {
+            cinput[i].re = cinput[i].re/8;
+            cinput[i].im = cinput[i].im/8;
+        }
+
+        System.out.println("Results:");
+        for (FastFourierTransform.Complex c : cinput) {
+            System.out.println(c);
+        }
+
+        //EnvelopeDetection envelopeDetection =  new EnvelopeDetection(data);
+
+        //data = envelopeDetection.FFTransform();
         //setClickToFilter(R.id.vMiddle);
 
         /* Ruler is used to show the centimetric scale of the ultrasound image */
