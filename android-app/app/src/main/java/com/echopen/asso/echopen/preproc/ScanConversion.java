@@ -621,4 +621,38 @@ public class ScanConversion {
 
         return dest_out;
     }
+
+
+    public Integer[] applyScanConversionFilter(Integer[] iEnvelopImageData) {
+        // deviceOpeningAngle -> nbOfInputRays
+        // 360 degree          -> nbTotalRays
+        Integer sTransducterOpeningAngle = 60; //in degree
+        Integer lTotalRays = 360 * Constants.PreProcParam.TCP_IMG_DATA / sTransducterOpeningAngle;
+
+        Mat lEnvelopDataMat = new Mat(lTotalRays, Constants.PreProcParam.TCP_NUM_SAMPLES, CvType.CV_16S);
+        short[] lEnvelopImageDataOnShort = new short[iEnvelopImageData.length];
+        //convert Integer to short
+        for(Integer i = 0; i < iEnvelopImageData.length; i++){
+            lEnvelopImageDataOnShort[i] = iEnvelopImageData[i].shortValue();
+        }
+
+        Integer sInputRayAngle = 60; /*in degree*/
+        Integer lFirstInputRayOffset = lTotalRays * sInputRayAngle / 360;
+        lEnvelopDataMat.put(lFirstInputRayOffset,0,lEnvelopImageDataOnShort);
+
+        Point lPolarCoordinateCenter = new Point(Constants.PreProcParam.N_x / 2, 0);
+        Mat lResampledCartesianMat = new Mat(Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, CvType.CV_16S);
+
+        Imgproc.linearPolar(lEnvelopDataMat, lResampledCartesianMat, lPolarCoordinateCenter, Constants.PreProcParam.N_x/2, Imgproc.INTER_LINEAR + Imgproc.CV_WARP_INVERSE_MAP + Imgproc.WARP_FILL_OUTLIERS);
+        short[] lCartesianImageOnShort = new short[Constants.PreProcParam.N_x * Constants.PreProcParam.N_z];
+        Integer[] oCartesianImage = new Integer[lCartesianImageOnShort.length];
+        lResampledCartesianMat.get(0, 0, lCartesianImageOnShort);
+
+        for(Integer i = 0; i < lCartesianImageOnShort.length; i++){
+            oCartesianImage[i] = new Integer(lCartesianImageOnShort[i]);
+        }
+
+        return oCartesianImage;
+    }
+
 }

@@ -72,18 +72,8 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         lEnvelopDetectionFilter.applyFilter();
         Integer[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();
 
-        // apply scan conversion
-        scanconversion.setTcpDataInt(lEnvelopImageData);
-
-        // image filter
-        int[] scannedArray = scanconversion.getDataFromInterpolation();
-        for (int i = 0; i < lEnvelopImageData.length; i++) {
-            if(lEnvelopImageData[i]>255)
-                scannedArray[i] = 255;
-        }
-
         //TODO: filters has to be improve to support 16bit data values
-        IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
+        /*IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
         lIntensityGainFilter.setImageInput(scannedArray, scannedArray.length);
         lIntensityGainFilter.applyFilter(iCurrentRenderingContext.getIntensityGain());
         int[] scannedGainArray = lIntensityGainFilter.getImageOutput();
@@ -91,9 +81,23 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         IntensityToRGBFilter lIntensityToRGBFilter = new IntensityToRGBFilter();
         lIntensityToRGBFilter.setImageInput(scannedGainArray, scannedGainArray.length);
         lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
-        int colors[] =  lIntensityToRGBFilter.getImageOutput();
+        int colors[] =  lIntensityToRGBFilter.getImageOutput();*/
 
-        final Bitmap bitmap = Bitmap.createBitmap(colors, 64, 1024, Bitmap.Config.ARGB_8888);
+        // TODO: remove image threshold on 8 bits
+        Integer[] lresampledCartesianImage = scanconversion.applyScanConversionFilter(lEnvelopImageData);
+        for (int i = 0; i < lresampledCartesianImage.length; i++) {
+            if(lresampledCartesianImage[i]>255)
+                lresampledCartesianImage[i] = 255;
+        }
+
+        int colors[] = new int[Constants.PreProcParam.N_x * Constants.PreProcParam.N_z];
+        for(int i = 0; i < lresampledCartesianImage.length; i++){
+            colors[i] = lresampledCartesianImage[i] | lresampledCartesianImage[i] << 8 | lresampledCartesianImage[i] << 16 | 0xFF000000;
+        }
+        // end Remove
+ 
+
+        final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, Bitmap.Config.ARGB_8888);
         try {
             activity.runOnUiThread(new Runnable() {
                 @Override
