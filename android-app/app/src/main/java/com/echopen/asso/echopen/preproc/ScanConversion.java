@@ -94,8 +94,6 @@ public class ScanConversion {
         opencv_src = new Mat(rows, cols, CvType.CV_16S);
         opencv_src_larger = new Mat(larger_rows, cols, CvType.CV_16S);
         opencv_dest = new Mat(larger_rows, cols, CvType.CV_32S);
-
-        lastTime = System.nanoTime();
     }
 
     /**
@@ -632,9 +630,9 @@ public class ScanConversion {
         Mat lEnvelopDataMat = new Mat(lTotalRays, Constants.PreProcParam.TCP_NUM_SAMPLES, CvType.CV_16S);
         short[] lEnvelopImageDataOnShort = new short[iEnvelopImageData.length];
         //convert Integer to short
-        for(Integer i = 0; i < iEnvelopImageData.length; i++){
+        /*for(Integer i = 0; i < iEnvelopImageData.length; i++){
             lEnvelopImageDataOnShort[i] = iEnvelopImageData[i].shortValue();
-        }
+        }*/
 
         Integer sInputRayAngle = 60; /*in degree*/
         Integer lFirstInputRayOffset = lTotalRays * sInputRayAngle / 360;
@@ -654,5 +652,4 @@ public class ScanConversion {
 
         return oCartesianImage;
     }
-
 }

@@ -8,6 +8,7 @@ package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
+import android.os.Debug;
 
 import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
@@ -40,6 +41,8 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private DataInputStream dataInputStream;
 
+    private static int offset_header = 6;
+
     public ProcessTCPTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, ScanConversion scanConversion, String ip, int port) {
         super(activity, mainActionController, scanConversion, iRenderingContextController);
         this.ip = ip;
@@ -71,7 +74,9 @@ public class ProcessTCPTask extends AbstractDataTask {
                     lRawImageData = getRawImageDataFromLocal();
                     //lRawImageData = getRawImageData(stream);
 
+                    Debug.startMethodTracing("trace_app");
                     rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, lRawImageData);
+                    Debug.stopMethodTracing();
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;
@@ -105,7 +110,7 @@ public class ProcessTCPTask extends AbstractDataTask {
         Integer[] lRawImageData = new Integer[lNbLinesPerImage * lNbSamplesPerLine];
         Arrays.fill(lRawImageData, 0, lNbLinesPerImage * lNbSamplesPerLine, 0);
         // 2 bytes for line index + 2 bytes * nb of samples per line
-        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize + lSampleSize];
+        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize + lSampleSize + offset_header];
         Integer[] lAliasedLineData;
         Integer lLineOffset;
 
@@ -117,17 +122,17 @@ public class ProcessTCPTask extends AbstractDataTask {
         for(Integer i = 0; i < lNbLinesPerImage; i++){
             dataInputStream.readFully(lLineData);
 
-            lLineNumber = (lLineData[1] << 8) | (lLineData[0] & 0x00ff);
+            lLineNumber = (lLineData[1+offset_header] << 8) | (lLineData[0+offset_header] & 0x00ff);
 
             lAliasedLineData = new Integer[lNbSamplesPerLine];
             for(Integer j = 1; j <= lNbSamplesPerLine; j++)
             {
-                lAliasedLineData[(j- 1)] = (lLineData[2*j + 1] << 8) | (lLineData[2*j] & 0x00ff);
+                lAliasedLineData[(j- 1)] = (lLineData[2*j + 1+offset_header] << 8) | (lLineData[2*j+offset_header] & 0x00ff);
             }
             lLineOffset = (lLineNumber - 1) * lNbSamplesPerLine;
             System.arraycopy(lAliasedLineData, 0, lRawImageData, lLineOffset , lAliasedLineData.length);
+            offset_header = 0;
         }
-
         return lRawImageData;
     }
 
