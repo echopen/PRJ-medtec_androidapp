@@ -9,19 +9,25 @@ import android.util.Log;
  */
 public class Timer {
 
+    public static boolean timer_status = false;
     private static long time;
     private static String mark;
 
     public Timer() {
     }
 
-    public void init(String mark){
-        this.time = System.nanoTime();
-        this.mark = mark;
+    public static void init(String label){
+        if(timer_status) {
+            time = System.nanoTime();
+            mark = label;
+        }
     }
 
-    public void logResult(){
-        long completedIn = System.nanoTime() - time;
-        Log.d("this is time of computation for " + mark, String.valueOf(completedIn));
+    public static void logResult(){
+        if(timer_status) {
+            long completedIn = System.nanoTime() - time;
+            Log.d("time of computation for " + mark, String.valueOf(completedIn));
+            time = System.nanoTime() - time;
+        }
     }
 }
