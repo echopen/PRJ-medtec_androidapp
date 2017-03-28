@@ -8,12 +8,6 @@ import com.echopen.asso.echopen.model.Data.ReadableData;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.UIParams;
 
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Random;
@@ -77,9 +71,6 @@ public class ScanConversion {
 
     private static byte[] tcpDataArray;
 
-    Mat opencv_src;
-    Mat opencv_src_larger;
-    Mat opencv_dest;
     private short[] mEnvelopData;
     private Integer[] mTcpDataInt;
 
@@ -90,10 +81,6 @@ public class ScanConversion {
 
         int Nz = Constants.PreProcParam.N_z;
         int Nx = Constants.PreProcParam.N_x;
-
-        opencv_src = new Mat(rows, cols, CvType.CV_16S);
-        opencv_src_larger = new Mat(larger_rows, cols, CvType.CV_16S);
-        opencv_dest = new Mat(larger_rows, cols, CvType.CV_32S);
     }
 
     /**
@@ -217,13 +204,7 @@ public class ScanConversion {
     }
 
     protected void finalize() throws Throwable {
-        try {
-            opencv_src.release();
-            opencv_src_larger.release();
-            opencv_dest.release();
-        } finally {
-            super.finalize();
-        }
+        super.finalize();
     }
 
     /**
@@ -500,7 +481,8 @@ public class ScanConversion {
     public int[] getDataFromInterpolation(){
         try {
             if(MainActivity.UDP_ACQUISITION || MainActivity.TCP_ACQUISITION)
-                return opencv_interpolation();
+                //TODO:replace with scan conversion filter
+                return null;
             else
                 return compute_interpolation();
         } catch (IOException e) {
@@ -570,86 +552,5 @@ public class ScanConversion {
             }
         }
         return num;
-    }
-
-    private int[] opencv_interpolation() throws IOException {
-        int Nz = Constants.PreProcParam.N_z;
-        int Nx = Constants.PreProcParam.N_x;
-
-        if(mTcpDataInt == null) {
-            Log.v("debug", "envelope_data_bytes is empty");
-            return new int[Nz * Nx];
-        }
-
-        double param1 = (double) UIParams.getParam1()/256.0 + 0.001;
-        int param2 = UIParams.getParam2();
-        int param3 = UIParams.getParam3();
-        int param4 = UIParams.getParam4();
-
-        int rows = Constants.PreProcParam.NUM_IMG_DATA;
-        int cols = Constants.PreProcParam.NUM_SAMPLES;
-
-        mEnvelopData = new short[mTcpDataInt.length];
-        for(Integer i = 0; i < mEnvelopData.length; i++){
-            mEnvelopData[i] = mTcpDataInt[i].shortValue();
-        }
-
-        opencv_src.put(0, 0, mEnvelopData);
-        opencv_src_larger.setTo(Scalar.all(0));
-        opencv_dest.setTo(Scalar.all(0));
-
-        if(rows + param2 >= 700) {
-            opencv_src.copyTo(opencv_src_larger.submat(0, rows, 0, cols));
-        }
-        else{
-            opencv_src.copyTo(opencv_src_larger.submat(param2, rows + param2, 0, cols));
-        }
-
-        Point center = new Point(param3, param4);
-        Imgproc.linearPolar(opencv_src_larger, opencv_dest, center, param1 * 500, Imgproc.INTER_CUBIC + Imgproc.CV_WARP_INVERSE_MAP);
-        //Mat opencv_dest2 = new Mat(opencv_dest.rows(), opencv_dest.cols(), opencv_dest.type());
-        //Imgproc.cvtColor(opencv_dest, opencv_dest, Imgproc.COLOR_RGB2GRAY);
-        //Imgproc.equalizeHist(opencv_dest, opencv_dest2);
-
-        opencv_dest.convertTo(opencv_dest, CvType.CV_32S);
-        //opencv_dest2.convertTo(opencv_dest2, CvType.CV_32S);
-
-        int[] dest_out = new int[Nz * Nx];
-        opencv_dest.get(0, 0, dest_out);
-
-        return dest_out;
-    }
-
-
-    public Integer[] applyScanConversionFilter(Integer[] iEnvelopImageData) {
-        // deviceOpeningAngle -> nbOfInputRays
-        // 360 degree          -> nbTotalRays
-        Integer sTransducterOpeningAngle = 60; //in degree
-        Integer lTotalRays = 360 * Constants.PreProcParam.TCP_IMG_DATA / sTransducterOpeningAngle;
-
-        Mat lEnvelopDataMat = new Mat(lTotalRays, Constants.PreProcParam.TCP_NUM_SAMPLES, CvType.CV_16S);
-        short[] lEnvelopImageDataOnShort = new short[iEnvelopImageData.length];
-        //convert Integer to short
-        /*for(Integer i = 0; i < iEnvelopImageData.length; i++){
-            lEnvelopImageDataOnShort[i] = iEnvelopImageData[i].shortValue();
-        }*/
-
-        Integer sInputRayAngle = 60; /*in degree*/
-        Integer lFirstInputRayOffset = lTotalRays * sInputRayAngle / 360;
-        lEnvelopDataMat.put(lFirstInputRayOffset,0,lEnvelopImageDataOnShort);
-
-        Point lPolarCoordinateCenter = new Point(Constants.PreProcParam.N_x / 2, 0);
-        Mat lResampledCartesianMat = new Mat(Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, CvType.CV_16S);
-
-        Imgproc.linearPolar(lEnvelopDataMat, lResampledCartesianMat, lPolarCoordinateCenter, Constants.PreProcParam.N_x/2, Imgproc.INTER_LINEAR + Imgproc.CV_WARP_INVERSE_MAP + Imgproc.WARP_FILL_OUTLIERS);
-        short[] lCartesianImageOnShort = new short[Constants.PreProcParam.N_x * Constants.PreProcParam.N_z];
-        Integer[] oCartesianImage = new Integer[lCartesianImageOnShort.length];
-        lResampledCartesianMat.get(0, 0, lCartesianImageOnShort);
-
-        for(Integer i = 0; i < lCartesianImageOnShort.length; i++){
-            oCartesianImage[i] = new Integer(lCartesianImageOnShort[i]);
-        }
-
-        return oCartesianImage;
     }
 }

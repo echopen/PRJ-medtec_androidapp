@@ -89,16 +89,16 @@ public class Constants {
 
         public static final int N_z = 512;
 
-        public static final int NUM_LINES = 120;
+        public static final int NUM_LINES = 64;
 
         public static final float IMAGE_SIZE = (float) 0.201;
 
         /* image width in rad */
         public static final double IMAGE_WIDTH = 0.5 * Math.PI;
 
-        public static int NUM_SAMPLES = 511;
+        public static int NUM_SAMPLES = 1024;
 
-        public static int NUM_IMG_DATA = 120;
+        public static int NUM_IMG_DATA = 64;
 
         public static Integer NUM_SAMPLES_PER_LINE = 1478;
 

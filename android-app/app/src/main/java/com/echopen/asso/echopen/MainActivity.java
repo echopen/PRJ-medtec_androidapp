@@ -35,8 +35,6 @@ import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.UIParams;
 
-import org.opencv.android.OpenCVLoader;
-
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -61,11 +59,6 @@ import static com.echopen.asso.echopen.utils.Constants.PreProcParam.NUM_SAMPLES_
  */
 
 public class MainActivity extends CustomActivity implements AbstractActionActivity {
-
-    static {
-        // If you use OpenCV 2.4, System.loadLibrary("opencv_java")
-        System.loadLibrary("opencv_java3");
-    }
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -269,7 +262,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     }
 
     public void fetchData(BitmapDisplayerFactory bitmapDisplayerFactory) {
-        OpenCVLoader.initDebug();
         try {
             BitmapDisplayer bitmapDisplayer = bitmapDisplayerFactory.populateBitmap(
             this, mainActionController, mRenderingContextController, Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);

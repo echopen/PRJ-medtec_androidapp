@@ -3,11 +3,12 @@ package com.echopen.asso.echopen.model.Data;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.v8.renderscript.RenderScript;
 
-import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.IntensityUniformGainFilter;
 import com.echopen.asso.echopen.filters.IntensityToRGBFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
+import com.echopen.asso.echopen.filters.ScanConversionRenderscriptFilter;
 import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
@@ -67,10 +68,30 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
     protected void rawDataPipeline(ScanConversion scanconversion,RenderingContext iCurrentRenderingContext, Integer[] iRawImageData) {
 
         // envelop detection filter
-        EnvelopDetectionFilter lEnvelopDetectionFilter = new EnvelopDetectionFilter();
+        /*EnvelopDetectionFilter lEnvelopDetectionFilter = new EnvelopDetectionFilter();
         lEnvelopDetectionFilter.setImageInput(iRawImageData, Constants.PreProcParam.NUM_SAMPLES_PER_LINE, Constants.PreProcParam.NUM_LINES_PER_IMAGE);
         lEnvelopDetectionFilter.applyFilter();
-        Integer[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();
+        Integer[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();*/
+
+        //TODO: temporary fake image in scan conversion filter input
+        int[] lImageInput = new int[Constants.PreProcParam.TCP_NUM_SAMPLES * Constants.PreProcParam.NUM_LINES];
+
+        double r1 = Math.random();
+        double r2 = Math.random();
+        for (int i = 0; i < Constants.PreProcParam.NUM_LINES; i++) {
+            for (int j = 0; j < Constants.PreProcParam.TCP_NUM_SAMPLES; j++) {
+                if (j % 6 == 0 || j % 6 == 1 || j % 6 == 2) {
+                    lImageInput[i * Constants.PreProcParam.TCP_NUM_SAMPLES + j] = 100 + (int)(140 * r1);
+                } else {
+                    lImageInput[i * Constants.PreProcParam.TCP_NUM_SAMPLES + j] = (int)(100 * r2);
+                }
+            }
+        }
+
+        ScanConversionRenderscriptFilter lScanConversionFilter = new ScanConversionRenderscriptFilter();
+        lScanConversionFilter.setImageInput(lImageInput);
+        lScanConversionFilter.applyFilter(RenderScript.create(activity));
+        int[] lresampledCartesianImage = lScanConversionFilter.getImageOutput();
 
         //TODO: filters has to be improve to support 16bit data values
         /*IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
@@ -84,7 +105,6 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         int colors[] =  lIntensityToRGBFilter.getImageOutput();*/
 
         // TODO: remove image threshold on 8 bits
-        Integer[] lresampledCartesianImage = scanconversion.applyScanConversionFilter(lEnvelopImageData);
         for (int i = 0; i < lresampledCartesianImage.length; i++) {
             if(lresampledCartesianImage[i]>255)
                 lresampledCartesianImage[i] = 255;
@@ -95,7 +115,6 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
             colors[i] = lresampledCartesianImage[i] | lresampledCartesianImage[i] << 8 | lresampledCartesianImage[i] << 16 | 0xFF000000;
         }
         // end Remove
- 
 
         final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, Bitmap.Config.ARGB_8888);
         try {

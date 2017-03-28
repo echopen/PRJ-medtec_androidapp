@@ -9,25 +9,25 @@ import android.util.Log;
  */
 public class Timer {
 
-    public static boolean timer_status = false;
+    public static boolean timer_status = true;
     private static long time;
-    private static String mark;
+    private static String mTimerLabel;
 
     public Timer() {
     }
 
-    public static void init(String label){
+    public static void init(String iTimerLabel){
         if(timer_status) {
             time = System.nanoTime();
-            mark = label;
+            mTimerLabel = iTimerLabel;
         }
     }
 
-    public static void logResult(){
+    public static void logResult(String iTimerTag){
         if(timer_status) {
             long completedIn = System.nanoTime() - time;
-            Log.d("time of computation for " + mark, String.valueOf(completedIn));
-            time = System.nanoTime() - time;
+            Log.d("Timer: "+mTimerLabel, "time of computation for -" + iTimerTag +": " + String.valueOf(completedIn/1000000) + "ms");
+            //time = System.nanoTime() - time;
         }
     }
 }

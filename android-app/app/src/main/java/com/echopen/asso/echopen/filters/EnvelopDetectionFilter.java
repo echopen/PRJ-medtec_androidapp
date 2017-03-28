@@ -4,6 +4,7 @@ package com.echopen.asso.echopen.filters;
 import android.util.Log;
 
 import com.echopen.asso.echopen.preproc.envelope_detection.jtransforms.FastFourierTransform;
+import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;
 
 import static com.echopen.asso.echopen.utils.Constants.PreProcParam.TCP_IMG_DATA;
@@ -28,19 +29,15 @@ public class EnvelopDetectionFilter {
     }
 
     public Boolean applyFilter(){
-        Timer.timer_status = true;
-
         double[] lImageInputOnDouble = new double[mImageInput.length];
         //store 16 bits values on double
-        Timer.init("creating image array in double");
         for(Integer i = 0; i < mImageInput.length; i++){
             lImageInputOnDouble[i] = mImageInput[i].doubleValue();
         }
-        Timer.logResult();
 
         for(Integer i = 0; i< mLinesPerImage; i++){
                 //TODO: add correct import and process line by line
-                FastFourierTransform.Complex[] lComplexInput = new FastFourierTransform.Complex[TCP_NUM_SAMPLES];
+                /*FastFourierTransform.Complex[] lComplexInput = new FastFourierTransform.Complex[TCP_NUM_SAMPLES];
 
                 for (int j = 0; j < TCP_NUM_SAMPLES; j++)
                     lComplexInput[j] = new FastFourierTransform.Complex(lImageInputOnDouble[454+i*mSamplesPerLine+j], 0.0);
@@ -58,9 +55,9 @@ public class EnvelopDetectionFilter {
 
                 for (int k = 0; k < TCP_NUM_SAMPLES; k++) {
                     mlineImageOutput[k] = Integer.valueOf((int)(sqrt(Math.pow(lComplexInput[k].re,2) + (int) Math.pow(lComplexInput[k].im,2)))/TCP_NUM_SAMPLES);
-                }
+                }*/
 
-            System.arraycopy(mlineImageOutput, 0, mImageOutput, i*TCP_NUM_SAMPLES , TCP_NUM_SAMPLES);
+            System.arraycopy(lImageInputOnDouble, i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE, mImageOutput, i*TCP_NUM_SAMPLES , TCP_NUM_SAMPLES);
         }
         return true;
     }
