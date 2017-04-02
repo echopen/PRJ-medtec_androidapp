@@ -36,23 +36,17 @@ public class ScanConversionRenderscriptFilter {
     }
 
     public Boolean applyFilter(RenderScript iRenderscript){
-        Timer.logResult("ScanConversionFilterStart");
         mImageOutput = new int[Constants.PreProcParam.N_x * Constants.PreProcParam.N_z];
 
         this.prepareScanConversionContext();
-        Timer.logResult("ScanConversionPrepareScanConversionContext");
 
         this.prepareRenderscriptContext(iRenderscript);
-        Timer.logResult("ScanConversionPrepareRenderscriptContext");
 
         this.run();
-        Timer.logResult("ScanConversionFilterEnd");
         return true;
     }
 
     public void prepareScanConversionContext() {
-
-        Timer.logResult("ScanConversionPrepareScanConversionContext1");;
 
         if(!mIsScanConversionContextInitialized){
             mScanConversionContext = new ScanConversionContext();
@@ -86,13 +80,11 @@ public class ScanConversionRenderscriptFilter {
         private int[] mIndexCounter;
         private int mNbSamplesPerLines;
 
-        ScanConversionContext(){
+        public ScanConversionContext(){
             computeTables();
         }
 
         public void computeTables() {
-            Timer.logResult("ScanConversionPrepareScanConversionContext1");
-
             double start_depth = Constants.PreProcParam.RADIAL_IMG_INIT; /*  Depth for start of image in meters    */
             double image_size = Constants.PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
 
@@ -115,7 +107,6 @@ public class ScanConversionRenderscriptFilter {
             double weight_coef[] = new double[Nz * Nx * Ncoef_max];    //*  The weight table                      *//*
             int index_samp_line[] = new int[Nz * Nx];  //Index for the data sample number
             int image_index[] = new int[Nz * Nx];
-            Timer.logResult("ScanConversionPrepareScanConversionContext2");
 
             make_tables(start_depth, image_size, start_of_data, delta_r, N_samples, theta_start, -delta_theta, N_lines, scaling, Nz, Nx, weight_coef, index_samp_line, image_index);
             // TODO convert arrays to fields.*/
@@ -187,8 +178,6 @@ public class ScanConversionRenderscriptFilter {
             ij_index = 0;
             ij_index_coef = 0;
 
-            Timer.logResult("ScanConversionPrepareScanConversionContext3");
-
             for (i = 0; i < Nz; i++) {
                 x = -image_size / 2;
                 z2 = z * z;
@@ -227,7 +216,6 @@ public class ScanConversionRenderscriptFilter {
                 }
                 z = z + dz;
             }
-            Timer.logResult("ScanConversionPrepareScanConversionContext4");
 
             N_values = ij_index;
             //System.out.println("Table has now been set-up, %d x %d, %d %d values\n",Nz,Nx,ij_index, N_values);
@@ -239,7 +227,6 @@ public class ScanConversionRenderscriptFilter {
             for (i = 0; i < N_values;i++) {
                 this.mIndexCounter[i] = i;
             }
-            Timer.logResult("ScanConversionPrepareScanConversionContext5");
 
         }
 

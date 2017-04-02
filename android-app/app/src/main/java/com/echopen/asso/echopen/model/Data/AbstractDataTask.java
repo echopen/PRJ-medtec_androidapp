@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.support.v8.renderscript.RenderScript;
+import android.util.Log;
 
+import com.echopen.asso.echopen.filters.EnvelopeDetectionRenderscriptFilter;
 import com.echopen.asso.echopen.filters.IntensityUniformGainFilter;
 import com.echopen.asso.echopen.filters.IntensityToRGBFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
@@ -13,6 +15,7 @@ import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
+import com.echopen.asso.echopen.utils.Timer;
 
 /**
  * Core class of data collecting routes. Whether the protocol is chosen to be TCP, UDP or fetching data from local,
@@ -67,32 +70,37 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
     protected void rawDataPipeline(ScanConversion scanconversion,RenderingContext iCurrentRenderingContext, Integer[] iRawImageData) {
 
-        // envelop detection filter
-        /*EnvelopDetectionFilter lEnvelopDetectionFilter = new EnvelopDetectionFilter();
-        lEnvelopDetectionFilter.setImageInput(iRawImageData, Constants.PreProcParam.NUM_SAMPLES_PER_LINE, Constants.PreProcParam.NUM_LINES_PER_IMAGE);
-        lEnvelopDetectionFilter.applyFilter();
-        Integer[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();*/
-
         //TODO: temporary fake image in scan conversion filter input
-        int[] lImageInput = new int[Constants.PreProcParam.TCP_NUM_SAMPLES * Constants.PreProcParam.NUM_LINES];
+        int[] lImageInput = new int[Constants.PreProcParam.NUM_SAMPLES_PER_LINE * Constants.PreProcParam.NUM_LINES_PER_IMAGE];
 
         double r1 = Math.random();
         double r2 = Math.random();
-        for (int i = 0; i < Constants.PreProcParam.NUM_LINES; i++) {
-            for (int j = 0; j < Constants.PreProcParam.TCP_NUM_SAMPLES; j++) {
-                if (j % 6 == 0 || j % 6 == 1 || j % 6 == 2) {
-                    lImageInput[i * Constants.PreProcParam.TCP_NUM_SAMPLES + j] = 100 + (int)(140 * r1);
+        for (int i = 0; i < Constants.PreProcParam.NUM_LINES_PER_IMAGE; i++) {
+            for (int j = 0; j < Constants.PreProcParam.NUM_SAMPLES_PER_LINE; j++) {
+               /* if (j % 6 == 0 || j % 6 == 1 || j % 6 == 2) {
+                    lImageInput[i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE + j] = (int) (240 * Math.random());
                 } else {
-                    lImageInput[i * Constants.PreProcParam.TCP_NUM_SAMPLES + j] = (int)(100 * r2);
-                }
+                    lImageInput[i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE + j] = 0;
+                }*/
+                lImageInput[i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE + j ] = (int) (Math.random() * 250);
             }
         }
 
+        Timer.init("RenderingPipeline");
+        RenderScript lRenderscript = RenderScript.create(activity);
+        // envelop detection filter
+        EnvelopeDetectionRenderscriptFilter lEnvelopDetectionFilter = new EnvelopeDetectionRenderscriptFilter();
+        lEnvelopDetectionFilter.setImageInput(lImageInput, Constants.PreProcParam.NUM_SAMPLES_PER_LINE, Constants.PreProcParam.NUM_LINES_PER_IMAGE);
+        lEnvelopDetectionFilter.applyFilter(lRenderscript, Constants.PreProcParam.TCP_NUM_SAMPLES);
+        int[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();
+        Timer.logResult("EnvelopDetection");
+
         ScanConversionRenderscriptFilter lScanConversionFilter = new ScanConversionRenderscriptFilter();
-        lScanConversionFilter.setImageInput(lImageInput);
-        lScanConversionFilter.applyFilter(RenderScript.create(activity));
+        lScanConversionFilter.setImageInput(lEnvelopImageData);
+        lScanConversionFilter.applyFilter(lRenderscript);
         int[] lresampledCartesianImage = lScanConversionFilter.getImageOutput();
 
+        Timer.logResult("ScanConversion");
         //TODO: filters has to be improve to support 16bit data values
         /*IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
         lIntensityGainFilter.setImageInput(scannedArray, scannedArray.length);
@@ -115,6 +123,7 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
             colors[i] = lresampledCartesianImage[i] | lresampledCartesianImage[i] << 8 | lresampledCartesianImage[i] << 16 | 0xFF000000;
         }
         // end Remove
+        Timer.logResult("RGBToIntensity");
 
         final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, Bitmap.Config.ARGB_8888);
         try {
