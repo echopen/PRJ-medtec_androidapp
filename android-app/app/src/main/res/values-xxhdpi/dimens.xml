@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_small">12dp</dimen>
+    <dimen name="text_large">15dp</dimen>
+    <dimen name="bottom_padding_signup">16dp</dimen>
+    <dimen name="scale_line_small">15dp</dimen>
+    <dimen name="scale_line_medium">28dp</dimen>
+    <dimen name="scale_line_large">43dp</dimen>
+    <dimen name="text_start_point">80dp</dimen>
+</resources>
