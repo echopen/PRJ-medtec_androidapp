@@ -74,9 +74,9 @@ public class ProcessTCPTask extends AbstractDataTask {
                     lRawImageData = getRawImageDataFromLocal();
                     //lRawImageData = getRawImageData(stream);
 
-                    Debug.startMethodTracing("trace_app");
+                   // Debug.startMethodTracing("trace_app");
                     rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, lRawImageData);
-                    Debug.stopMethodTracing();
+                   // Debug.stopMethodTracing();
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;
