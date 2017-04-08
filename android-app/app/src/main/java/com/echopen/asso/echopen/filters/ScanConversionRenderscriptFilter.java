@@ -5,9 +5,7 @@ import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 
 import com.echopen.asso.echopen.gpuchallenge.ScriptC_scanConversion;
-import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.utils.Constants;
-import com.echopen.asso.echopen.utils.Timer;
 
 /**
  * Created by lecoucl on 28/03/17.

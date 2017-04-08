@@ -15,18 +15,13 @@ public class GreyLevelExponentialLookUpTable extends LookUpTable{
         this.mAlpha = alpha;
     }
 
-    public void computeLut(){
-        int lPixelIntensityRange = MAX_INTENSITY_VALUE + 1 - MIN_INTENSITY_VALUE;
-        mData = new int[lPixelIntensityRange];
+    public int applyLut(int iPixelIntensity){
+        int iExp = (int) (Math.exp(mAlpha * iPixelIntensity) - 1);
 
-        for(int i = 0; i < lPixelIntensityRange; i++){
-            int iExp = (int) (Math.exp(mAlpha * i) - 1);
-
-            if(iExp > MAX_PIXEL_VALUE){
-                iExp = MAX_PIXEL_VALUE;
-            }
-
-            mData[i] = iExp| iExp << 8 | iExp << 16 | 0xFF000000;
+        if(iExp > MAX_PIXEL_VALUE){
+            iExp = MAX_PIXEL_VALUE;
         }
+
+        return iExp| iExp << 8 | iExp << 16 | 0xFF000000;
     }
 }

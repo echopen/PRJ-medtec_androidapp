@@ -11,23 +11,18 @@ public class IntensityToRGBFilter {
 
     private final String TAG = this.getClass().getSimpleName();
     private int[] mImageInput;
-    private int mImageInputSize;
 
     private int[] mImageOutput;
 
-    public void setImageInput(int[] iImageInput, int iImageInputSize){
+    public void setImageInput(int[] iImageInput){
         mImageInput = iImageInput;
-        mImageInputSize = iImageInputSize;
     }
 
     public Boolean applyFilter( LookUpTable iLUT){
+        mImageOutput = new int[mImageInput.length];
 
-        iLUT.computeLut();
-        int[] lLUTData = iLUT.getLutData();
-
-        mImageOutput = new int[mImageInputSize];
-        for(int i = 0; i < mImageInputSize; i++){
-            mImageOutput[i] = lLUTData[mImageInput[i]];
+        for(int i = 0; i < mImageInput.length; i++){
+            mImageOutput[i] = iLUT.applyLut(mImageInput[i]);
         }
 
         return true;

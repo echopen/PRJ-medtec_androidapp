@@ -71,11 +71,11 @@ public class ProcessTCPTask extends AbstractDataTask {
                     RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();;
 
                     // getting data from local
-                    lRawImageData = getRawImageDataFromLocal();
+                    //lRawImageData = getRawImageDataFromLocal();
                     //lRawImageData = getRawImageData(stream);
 
                    // Debug.startMethodTracing("trace_app");
-                    rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, lRawImageData);
+                    rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, null/*RawImageData*/);
                    // Debug.stopMethodTracing();
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -15,21 +15,16 @@ public class GreyLevelLinearLookUpTable extends LookUpTable{
         this.mSlope = slope;
     }
 
-    public void computeLut(){
-        int lPixelIntensityRange = (MAX_INTENSITY_VALUE + 1) - MIN_INTENSITY_VALUE;
-        mData = new int[lPixelIntensityRange];
+    public int applyLut(int iPixelIntensity){
+        int iLin = (int) (iPixelIntensity * mSlope + mOffset);
 
-        for(int i = 0; i < lPixelIntensityRange; i++){
-            int iLin = (int) (i * mSlope + mOffset);
-
-            if(iLin < MIN_PIXEL_VALUE){
-                iLin = MIN_PIXEL_VALUE;
-            }
-            else if(iLin > MAX_PIXEL_VALUE){
-                iLin = MAX_PIXEL_VALUE;
-            }
-            mData[i] = iLin | iLin << 8 | iLin << 16 | 0xFF000000;
+        if(iLin < MIN_PIXEL_VALUE){
+            iLin = MIN_PIXEL_VALUE;
         }
+        else if(iLin > MAX_PIXEL_VALUE){
+            iLin = MAX_PIXEL_VALUE;
+        }
+        return iLin | iLin << 8 | iLin << 16 | 0xFF000000;
     }
 
     public double getOffset(){
