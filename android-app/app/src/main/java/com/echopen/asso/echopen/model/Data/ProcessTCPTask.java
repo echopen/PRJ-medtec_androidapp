@@ -9,6 +9,7 @@ package com.echopen.asso.echopen.model.Data;
 import android.app.Activity;
 import android.content.res.AssetManager;
 import android.os.Debug;
+import android.util.Log;
 
 import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
@@ -41,8 +42,6 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private DataInputStream dataInputStream;
 
-    private static int offset_header = 6;
-
     public ProcessTCPTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, ScanConversion scanConversion, String ip, int port) {
         super(activity, mainActionController, scanConversion, iRenderingContextController);
         this.ip = ip;
@@ -55,16 +54,13 @@ public class ProcessTCPTask extends AbstractDataTask {
         //int cols = Constants.PreProcParam.NUM_IMG_DATA;
 
         try {
-            //unplugging the stream operation
-            //s = new Socket(ip, port);
-            //stream = s.getInputStream();
-            //checkStreamIsNotEmpty(stream);
+            s = new Socket(ip, port);
+            stream = s.getInputStream();
 
             byte[] message;
             Integer[] lRawImageData;
 
-            // get config - for the moment not implemented
-            //getDeviceConfig(stream);
+            getDeviceConfig(stream);
 
             while (true) {
                 try {
@@ -72,11 +68,11 @@ public class ProcessTCPTask extends AbstractDataTask {
 
                     // getting data from local
                     //lRawImageData = getRawImageDataFromLocal();
-                    //lRawImageData = getRawImageData(stream);
 
-                   // Debug.startMethodTracing("trace_app");
-                    rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, null/*RawImageData*/);
-                   // Debug.stopMethodTracing();
+                    alignDataStream(stream);
+                    lRawImageData = getRawImageData(stream);
+
+                    rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, lRawImageData);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;
@@ -86,6 +82,27 @@ public class ProcessTCPTask extends AbstractDataTask {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void alignDataStream(InputStream iStream) throws IOException {
+        Integer lNbSamplesPerLine = Constants.PreProcParam.NUM_SAMPLES_PER_LINE;
+        Integer lSampleSize = Constants.PreProcParam.NUM_BYTES_PER_SAMPLE;
+
+        // 2 bytes for line index + 2 bytes * nb of samples per line
+        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize];
+
+        dataInputStream = new DataInputStream(iStream);
+
+        Integer lLineNumber = 0;
+        Integer lPreviousLineNumber = 0;
+
+        // wait for data stream to be aligned on an image start (first line in image)
+        while(!(lLineNumber ==  1 && lPreviousLineNumber == 2)) {
+            dataInputStream.readFully(lLineData);
+
+            lPreviousLineNumber = lLineNumber;
+            lLineNumber = (lLineData[1] << 8) | (lLineData[0] & 0x00ff);
+        }
     }
 
     private Integer[] getRawImageDataFromLocal() {
@@ -110,28 +127,25 @@ public class ProcessTCPTask extends AbstractDataTask {
         Integer[] lRawImageData = new Integer[lNbLinesPerImage * lNbSamplesPerLine];
         Arrays.fill(lRawImageData, 0, lNbLinesPerImage * lNbSamplesPerLine, 0);
         // 2 bytes for line index + 2 bytes * nb of samples per line
-        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize + lSampleSize + offset_header];
+        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize + lSampleSize];
         Integer[] lAliasedLineData;
         Integer lLineOffset;
 
         dataInputStream = new DataInputStream(iStream);
-
 
         Integer lLineNumber = 0;
 
         for(Integer i = 0; i < lNbLinesPerImage; i++){
             dataInputStream.readFully(lLineData);
 
-            lLineNumber = (lLineData[1+offset_header] << 8) | (lLineData[0+offset_header] & 0x00ff);
-
+            lLineNumber = (lLineData[1] << 8) | (lLineData[0] & 0x00ff);
             lAliasedLineData = new Integer[lNbSamplesPerLine];
             for(Integer j = 1; j <= lNbSamplesPerLine; j++)
             {
-                lAliasedLineData[(j- 1)] = (lLineData[2*j + 1+offset_header] << 8) | (lLineData[2*j+offset_header] & 0x00ff);
+                lAliasedLineData[(j- 1)] = (lLineData[2*j + 1] << 8) | (lLineData[2*j] & 0x00ff);
             }
             lLineOffset = (lLineNumber - 1) * lNbSamplesPerLine;
             System.arraycopy(lAliasedLineData, 0, lRawImageData, lLineOffset , lAliasedLineData.length);
-            offset_header = 0;
         }
         return lRawImageData;
     }
@@ -139,10 +153,23 @@ public class ProcessTCPTask extends AbstractDataTask {
     private void getDeviceConfig(InputStream iStream) throws IOException{
         byte[] lConfig = new byte[6];
 
-        // TODO: implement Device configuration reading to replace app hard coded values
         dataInputStream = new DataInputStream(iStream);
         dataInputStream.readFully(lConfig);
 
+        byte iR0 = lConfig[0]; // in mm
+        byte iRf = lConfig[1]; // in mm
+        byte iDecimation = lConfig[2]; //
+
+        double iSamplingFrequency = 125 / iDecimation; // in MHz  125MHz = ADC clock frenquency
+        byte iNbLinePerImage = lConfig[3];
+        byte iProbeSectorAngle = lConfig[4]; // in degree
+        byte iMode = lConfig[5]; // data format - 0- raw data value stored on 2 bytes
+                                 //               1- envelop data value stored on 1 byte
+
+        int iNbSamplesPerLine = 2 * (iRf - iR0) * 125 * 1000 / (Constants.PreProcParam.SPEED_OF_SOUND * iDecimation);
+
+        // TODO: inject Device Configuration in rendering pipeline instead of using constants
+        Log.d(TAG, "R0 " + iR0 + "Rf " + iRf + "Decimation " +iDecimation + "SamplingFrequency " + iSamplingFrequency + "NbLinePerImage "+iNbLinePerImage + "Probe Sector Angle " + iProbeSectorAngle + "Mode " + iMode + "NbSamplePerLine " + iNbSamplesPerLine);
     }
 
 

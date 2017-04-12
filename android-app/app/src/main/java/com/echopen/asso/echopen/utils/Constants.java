@@ -83,7 +83,10 @@ public class Constants {
         public static final int SPEED_OF_SOUND = 1540;
 
         /* sampling frequency in Hz */
-        public static final int SAMPLING_FREQUENCY = (int) 125 /32 * (int) Math.pow(10,6);
+        public static final int SAMPLING_FREQUENCY = (int) 125 /32 * (int) Math.pow(10,6); //deprecated sampling frequency
+
+        public static final int SAMPLING_FREQUENCY_BIS = (int) 125 /8 * (int) Math.pow(10,6); //real sampling frequency
+
 
         public static final int N_x = 512;
 
@@ -100,7 +103,7 @@ public class Constants {
 
         public static int NUM_IMG_DATA = 64;
 
-        public static Integer NUM_SAMPLES_PER_LINE = 1478;
+        public static Integer NUM_SAMPLES_PER_LINE = 1689;
 
         public static Integer NUM_LINES_PER_IMAGE = 64;
 
@@ -152,6 +155,10 @@ public class Constants {
         public static final int tmp_NUM_UDP_PACKET_CHUNKS = 4;
 
         public static final int opencv_RELATIVE_ANGLE = 512;
+
+        public static final double BAND_PASS_FILTER_LOWER_CUTOFF_FREQUENCY = 2 * Math.pow(10, 6);
+
+        public static final double BAND_PASS_FILTER_UPPER_CUTOFF_FREQUENCY = 5 * Math.pow(10, 6);
 
         public static int[] getLoadIntegerConstants() {
             int[] int_constants = new int[4];

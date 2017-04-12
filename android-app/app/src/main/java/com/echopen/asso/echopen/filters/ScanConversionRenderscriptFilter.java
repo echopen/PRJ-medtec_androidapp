@@ -87,7 +87,8 @@ public class ScanConversionRenderscriptFilter {
             double image_size = Constants.PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
 
             double start_of_data = Constants.PreProcParam.STEP_RADIAL_INIT;   /*  Depth for start of data in meters     */
-            double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT; /*  Sampling interval for data in meters  */
+            // TODO: divide by 2 factor is hacked to visualise the image - need to recompute real delta_r with new Sampling frequency
+            double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT/2; /*  Sampling interval for data in meters  */
             int N_samples  = (int) Math.floor(Constants.PreProcParam.TCP_NUM_SAMPLES);       /*  Number of data samples                */
 
             double delta_theta = Constants.PreProcParam.STEP_ANGLE_INIT; /*  Angle between individual lines        */

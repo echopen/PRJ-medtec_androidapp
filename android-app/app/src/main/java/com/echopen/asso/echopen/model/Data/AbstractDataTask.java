@@ -74,10 +74,8 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         int[] lImageInput = new int[Constants.PreProcParam.NUM_SAMPLES_PER_LINE * Constants.PreProcParam.NUM_LINES_PER_IMAGE];
         Timer.init("RenderingPipeline");
 
-        for (int i = 0; i < Constants.PreProcParam.NUM_LINES_PER_IMAGE; i++) {
-            for (int j = 0; j < Constants.PreProcParam.NUM_SAMPLES_PER_LINE; j++) {
-                lImageInput[i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE + j ] = (int) (Math.random() * 250);
-            }
+        for (int i = 0; i < Constants.PreProcParam.NUM_LINES_PER_IMAGE * Constants.PreProcParam.NUM_SAMPLES_PER_LINE; i++) {
+            lImageInput[i] = (int) iRawImageData[i];
         }
 
         Timer.logResult("Create Fake Images");
