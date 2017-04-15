@@ -82,11 +82,15 @@ public class Constants {
         /* speed of sound in m.s^{—1} */
         public static final int SPEED_OF_SOUND = 1540;
 
+        /* speed of acoustic wave in m. s^{-1} */
+        public static final int SPEED_OF_ACOUSTIC_WAVE = 1480;
+
         /* sampling frequency in Hz */
         public static final int SAMPLING_FREQUENCY = (int) 125 /32 * (int) Math.pow(10,6); //deprecated sampling frequency
 
         public static final int SAMPLING_FREQUENCY_BIS = (int) 125 /8 * (int) Math.pow(10,6); //real sampling frequency
 
+        public static final double ADC_FREQUENCY_CLOCK = 125 * Math.pow(10, 6);
 
         public static final int N_x = 512;
 

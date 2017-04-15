@@ -68,13 +68,15 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    protected void rawDataPipeline(ScanConversion scanconversion,RenderingContext iCurrentRenderingContext, Integer[] iRawImageData) {
+    protected void rawDataPipeline(RenderingContext iCurrentRenderingContext, DeviceConfiguration iDeviceConfiguration, Integer[] iRawImageData) {
 
+        int lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
+        int lNbLinesPerImage = iDeviceConfiguration.getNbLinesPerImage();
         //TODO: temporary fake image in scan conversion filter input
-        int[] lImageInput = new int[Constants.PreProcParam.NUM_SAMPLES_PER_LINE * Constants.PreProcParam.NUM_LINES_PER_IMAGE];
+        int[] lImageInput = new int[lNbSamplesPerLine * lNbLinesPerImage];
         Timer.init("RenderingPipeline");
 
-        for (int i = 0; i < Constants.PreProcParam.NUM_LINES_PER_IMAGE * Constants.PreProcParam.NUM_SAMPLES_PER_LINE; i++) {
+        for (int i = 0; i < lNbLinesPerImage * lNbSamplesPerLine; i++) {
             lImageInput[i] = (int) iRawImageData[i];
         }
 
@@ -82,14 +84,14 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         RenderScript lRenderscript = RenderScript.create(activity);
         // envelop detection filter
         EnvelopeDetectionRenderscriptFilter lEnvelopDetectionFilter = new EnvelopeDetectionRenderscriptFilter();
-        lEnvelopDetectionFilter.setImageInput(lImageInput, Constants.PreProcParam.NUM_SAMPLES_PER_LINE, Constants.PreProcParam.NUM_LINES_PER_IMAGE);
+        lEnvelopDetectionFilter.setImageInput(lImageInput, lNbSamplesPerLine, lNbLinesPerImage);
         lEnvelopDetectionFilter.applyFilter(lRenderscript, Constants.PreProcParam.TCP_NUM_SAMPLES);
         int[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();
         Timer.logResult("EnvelopDetection");
 
         ScanConversionRenderscriptFilter lScanConversionFilter = new ScanConversionRenderscriptFilter();
         lScanConversionFilter.setImageInput(lEnvelopImageData);
-        lScanConversionFilter.applyFilter(lRenderscript);
+        lScanConversionFilter.applyFilter(lRenderscript, iDeviceConfiguration);
         int[] lresampledCartesianImage = lScanConversionFilter.getImageOutput();
 
         Timer.logResult("ScanConversion");

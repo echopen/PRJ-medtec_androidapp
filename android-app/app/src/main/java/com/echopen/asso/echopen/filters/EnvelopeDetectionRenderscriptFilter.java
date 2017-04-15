@@ -3,7 +3,6 @@ package com.echopen.asso.echopen.filters;
 import android.support.v8.renderscript.Allocation;
 import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
-import android.util.Log;
 
 import com.android.rs.ScriptC_fft;
 import com.android.rs.ScriptC_ifft;

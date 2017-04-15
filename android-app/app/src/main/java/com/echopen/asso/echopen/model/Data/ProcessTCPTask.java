@@ -60,7 +60,7 @@ public class ProcessTCPTask extends AbstractDataTask {
             byte[] message;
             Integer[] lRawImageData;
 
-            getDeviceConfig(stream);
+            DeviceConfiguration lDeviceConfiguration = getDeviceConfiguration(stream);
 
             while (true) {
                 try {
@@ -69,10 +69,10 @@ public class ProcessTCPTask extends AbstractDataTask {
                     // getting data from local
                     //lRawImageData = getRawImageDataFromLocal();
 
-                    alignDataStream(stream);
+                    alignDataStream(stream, lDeviceConfiguration);
                     lRawImageData = getRawImageData(stream);
 
-                    rawDataPipeline(ScanConversion.getInstance(), lCurrentRenderingContext, lRawImageData);
+                    rawDataPipeline(lCurrentRenderingContext, lDeviceConfiguration, lRawImageData);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;
@@ -84,12 +84,12 @@ public class ProcessTCPTask extends AbstractDataTask {
         return null;
     }
 
-    private void alignDataStream(InputStream iStream) throws IOException {
-        Integer lNbSamplesPerLine = Constants.PreProcParam.NUM_SAMPLES_PER_LINE;
+    private void alignDataStream(InputStream iStream, DeviceConfiguration iDeviceConfiguration) throws IOException {
+        Integer lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
         Integer lSampleSize = Constants.PreProcParam.NUM_BYTES_PER_SAMPLE;
 
         // 2 bytes for line index + 2 bytes * nb of samples per line
-        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize];
+        byte[] lLineData = new byte[lNbSamplesPerLine * lSampleSize + lSampleSize];
 
         dataInputStream = new DataInputStream(iStream);
 
@@ -150,26 +150,27 @@ public class ProcessTCPTask extends AbstractDataTask {
         return lRawImageData;
     }
 
-    private void getDeviceConfig(InputStream iStream) throws IOException{
+    private DeviceConfiguration getDeviceConfiguration(InputStream iStream) throws IOException{
         byte[] lConfig = new byte[6];
 
         dataInputStream = new DataInputStream(iStream);
         dataInputStream.readFully(lConfig);
 
-        byte iR0 = lConfig[0]; // in mm
-        byte iRf = lConfig[1]; // in mm
-        byte iDecimation = lConfig[2]; //
+        double lR0 = ((lConfig[0] + 256) % 256) * 0.001; // in mm
+        double lRf = ((lConfig[1] + 256) % 256) * 0.001; // in mm
+        int lDecimation = (lConfig[2] + 256) % 256; //
 
-        double iSamplingFrequency = 125 / iDecimation; // in MHz  125MHz = ADC clock frenquency
-        byte iNbLinePerImage = lConfig[3];
-        byte iProbeSectorAngle = lConfig[4]; // in degree
-        byte iMode = lConfig[5]; // data format - 0- raw data value stored on 2 bytes
+        double lSamplingFrequency = Constants.PreProcParam.ADC_FREQUENCY_CLOCK / lDecimation; // in Hz
+        int lNbLinePerImage = (lConfig[3] + 256) % 256;
+        float lProbeSectorAngle = (lConfig[4] + 256) % 256; // in degree
+        byte lMode = lConfig[5]; // data format - 0- raw data value stored on 2 bytes
                                  //               1- envelop data value stored on 1 byte
 
-        int iNbSamplesPerLine = 2 * (iRf - iR0) * 125 * 1000 / (Constants.PreProcParam.SPEED_OF_SOUND * iDecimation);
+        int lNbSamplesPerLine = (int) (2 * (lRf - lR0) * Constants.PreProcParam.ADC_FREQUENCY_CLOCK / (Constants.PreProcParam.SPEED_OF_ACOUSTIC_WAVE * lDecimation));
 
         // TODO: inject Device Configuration in rendering pipeline instead of using constants
-        Log.d(TAG, "R0 " + iR0 + "Rf " + iRf + "Decimation " +iDecimation + "SamplingFrequency " + iSamplingFrequency + "NbLinePerImage "+iNbLinePerImage + "Probe Sector Angle " + iProbeSectorAngle + "Mode " + iMode + "NbSamplePerLine " + iNbSamplesPerLine);
+        Log.d(TAG, "R0 " + lR0 + "Rf " + lRf + "Decimation " + lDecimation + "SamplingFrequency " + lSamplingFrequency + "NbLinePerImage "+ lNbLinePerImage + "Probe Sector Angle " + lProbeSectorAngle + "Mode " + lMode + "NbSamplePerLine " + lNbSamplesPerLine);
+        return new DeviceConfiguration(lR0, lRf, lProbeSectorAngle, lSamplingFrequency, lNbLinePerImage, lNbSamplesPerLine);
     }
 
 

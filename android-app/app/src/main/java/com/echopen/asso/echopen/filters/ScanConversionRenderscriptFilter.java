@@ -5,6 +5,7 @@ import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 
 import com.echopen.asso.echopen.gpuchallenge.ScriptC_scanConversion;
+import com.echopen.asso.echopen.model.Data.DeviceConfiguration;
 import com.echopen.asso.echopen.utils.Constants;
 
 /**
@@ -33,10 +34,10 @@ public class ScanConversionRenderscriptFilter {
         return mImageOutput;
     }
 
-    public Boolean applyFilter(RenderScript iRenderscript){
+    public Boolean applyFilter(RenderScript iRenderscript, DeviceConfiguration iDeviceConfiguration){
         mImageOutput = new int[Constants.PreProcParam.N_x * Constants.PreProcParam.N_z];
 
-        this.prepareScanConversionContext();
+        this.prepareScanConversionContext(iDeviceConfiguration);
 
         this.prepareRenderscriptContext(iRenderscript);
 
@@ -44,10 +45,10 @@ public class ScanConversionRenderscriptFilter {
         return true;
     }
 
-    public void prepareScanConversionContext() {
+    public void prepareScanConversionContext(DeviceConfiguration iDeviceConfiguration) {
 
         if(!mIsScanConversionContextInitialized){
-            mScanConversionContext = new ScanConversionContext();
+            mScanConversionContext = new ScanConversionContext(iDeviceConfiguration);
             mIsScanConversionContextInitialized = true;
         }
 
@@ -78,24 +79,23 @@ public class ScanConversionRenderscriptFilter {
         private int[] mIndexCounter;
         private int mNbSamplesPerLines;
 
-        public ScanConversionContext(){
-            computeTables();
+        public ScanConversionContext(DeviceConfiguration iDeviceConfiguration){
+            computeTables(iDeviceConfiguration);
         }
 
-        public void computeTables() {
-            double start_depth = Constants.PreProcParam.RADIAL_IMG_INIT; /*  Depth for start of image in meters    */
-            double image_size = Constants.PreProcParam.IMAGE_SIZE;      /*  Size of image in meters               */
+        public void computeTables(DeviceConfiguration iDeviceConfiguration) {
+            double start_depth = iDeviceConfiguration.getR0(); /*  Depth for start of image in meters    */
+            double image_size = iDeviceConfiguration.getRf() - iDeviceConfiguration.getR0();  /*  Size of image in meters               */
 
             double start_of_data = Constants.PreProcParam.STEP_RADIAL_INIT;   /*  Depth for start of data in meters     */
             // TODO: divide by 2 factor is hacked to visualise the image - need to recompute real delta_r with new Sampling frequency
-            double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT/2; /*  Sampling interval for data in meters  */
+            double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT/2; /*( iDeviceConfiguration.getRf() - iDeviceConfiguration.getR0() ) / iDeviceConfiguration.getNbSamplesPerLine();*/ /*  Sampling interval for data in meters  */
             int N_samples  = (int) Math.floor(Constants.PreProcParam.TCP_NUM_SAMPLES);       /*  Number of data samples                */
 
-            double delta_theta = Constants.PreProcParam.STEP_ANGLE_INIT; /*  Angle between individual lines        */
-            double theta_start = Constants.PreProcParam.NUM_LINES/ 2 * delta_theta;     /*  Angle for first line in image         */
+            int N_lines = iDeviceConfiguration.getNbLinesPerImage();    /*  Number of acquired lines              */
 
-
-            int N_lines = Constants.PreProcParam.NUM_LINES;         /*  Number of acquired lines              */
+            double delta_theta = iDeviceConfiguration.getProbeSectorAngle() * Math.PI / (180.0 * N_lines) /*Constants.PreProcParam.STEP_ANGLE_INIT*/; /*  Angle between individual lines        */
+            double theta_start = N_lines / 2 * delta_theta;     /*  Angle for first line in image         */
 
             double scaling = Constants.PreProcParam.SCALE_FACTOR;         /*  Scaling factor form envelope to image */
             int Nz = Constants.PreProcParam.N_z;              /*  Size of image in pixels               */
