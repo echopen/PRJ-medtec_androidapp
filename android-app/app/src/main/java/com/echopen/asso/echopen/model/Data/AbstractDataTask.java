@@ -45,12 +45,12 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         int[] scannedArray = scanconversion.getDataFromInterpolation();
 
         IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
-        lIntensityGainFilter.setImageInput(scannedArray, scannedArray.length);
+        lIntensityGainFilter.setImageInput(scannedArray);
         lIntensityGainFilter.applyFilter(iCurrentRenderingContext.getIntensityGain());
         int[] scannedGainArray = lIntensityGainFilter.getImageOutput();
 
         IntensityToRGBFilter lIntensityToRGBFilter = new IntensityToRGBFilter();
-        lIntensityToRGBFilter.setImageInput(scannedGainArray, scannedGainArray.length);
+        lIntensityToRGBFilter.setImageInput(scannedGainArray);
         lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
         int colors[] =  lIntensityToRGBFilter.getImageOutput();
 
@@ -68,69 +68,56 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         }
     }
 
-    protected void rawDataPipeline(ScanConversion scanconversion,RenderingContext iCurrentRenderingContext, Integer[] iRawImageData) {
+    protected void rawDataPipeline(RenderingContext iCurrentRenderingContext, DeviceConfiguration iDeviceConfiguration, Integer[] iRawImageData) {
 
+        int lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
+        int lNbLinesPerImage = iDeviceConfiguration.getNbLinesPerImage();
         //TODO: temporary fake image in scan conversion filter input
-        int[] lImageInput = new int[Constants.PreProcParam.NUM_SAMPLES_PER_LINE * Constants.PreProcParam.NUM_LINES_PER_IMAGE];
+        int[] lImageInput = new int[lNbSamplesPerLine * lNbLinesPerImage];
+        Timer.init("RenderingPipeline");
 
-        double r1 = Math.random();
-        double r2 = Math.random();
-        for (int i = 0; i < Constants.PreProcParam.NUM_LINES_PER_IMAGE; i++) {
-            for (int j = 0; j < Constants.PreProcParam.NUM_SAMPLES_PER_LINE; j++) {
-               /* if (j % 6 == 0 || j % 6 == 1 || j % 6 == 2) {
-                    lImageInput[i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE + j] = (int) (240 * Math.random());
-                } else {
-                    lImageInput[i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE + j] = 0;
-                }*/
-                lImageInput[i * Constants.PreProcParam.NUM_SAMPLES_PER_LINE + j ] = (int) (Math.random() * 250);
-            }
+        for (int i = 0; i < lNbLinesPerImage * lNbSamplesPerLine; i++) {
+            lImageInput[i] = (int) iRawImageData[i];
         }
 
-        Timer.init("RenderingPipeline");
+        Timer.logResult("Create Fake Images");
         RenderScript lRenderscript = RenderScript.create(activity);
         // envelop detection filter
         EnvelopeDetectionRenderscriptFilter lEnvelopDetectionFilter = new EnvelopeDetectionRenderscriptFilter();
-        lEnvelopDetectionFilter.setImageInput(lImageInput, Constants.PreProcParam.NUM_SAMPLES_PER_LINE, Constants.PreProcParam.NUM_LINES_PER_IMAGE);
+        lEnvelopDetectionFilter.setImageInput(lImageInput, lNbSamplesPerLine, lNbLinesPerImage);
         lEnvelopDetectionFilter.applyFilter(lRenderscript, Constants.PreProcParam.TCP_NUM_SAMPLES);
         int[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();
         Timer.logResult("EnvelopDetection");
 
         ScanConversionRenderscriptFilter lScanConversionFilter = new ScanConversionRenderscriptFilter();
         lScanConversionFilter.setImageInput(lEnvelopImageData);
-        lScanConversionFilter.applyFilter(lRenderscript);
+        lScanConversionFilter.applyFilter(lRenderscript, iDeviceConfiguration);
         int[] lresampledCartesianImage = lScanConversionFilter.getImageOutput();
 
         Timer.logResult("ScanConversion");
-        //TODO: filters has to be improve to support 16bit data values
-        /*IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
-        lIntensityGainFilter.setImageInput(scannedArray, scannedArray.length);
+        IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
+        lIntensityGainFilter.setImageInput(lresampledCartesianImage);
         lIntensityGainFilter.applyFilter(iCurrentRenderingContext.getIntensityGain());
-        int[] scannedGainArray = lIntensityGainFilter.getImageOutput();
+        int[] lGainImage = lIntensityGainFilter.getImageOutput();
+
+        Timer.logResult("Uniform Gain");
 
         IntensityToRGBFilter lIntensityToRGBFilter = new IntensityToRGBFilter();
-        lIntensityToRGBFilter.setImageInput(scannedGainArray, scannedGainArray.length);
+        lIntensityToRGBFilter.setImageInput(lGainImage);
         lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
-        int colors[] =  lIntensityToRGBFilter.getImageOutput();*/
+        int colors[] =  lIntensityToRGBFilter.getImageOutput();
 
-        // TODO: remove image threshold on 8 bits
-        for (int i = 0; i < lresampledCartesianImage.length; i++) {
-            if(lresampledCartesianImage[i]>255)
-                lresampledCartesianImage[i] = 255;
-        }
-
-        int colors[] = new int[Constants.PreProcParam.N_x * Constants.PreProcParam.N_z];
-        for(int i = 0; i < lresampledCartesianImage.length; i++){
-            colors[i] = lresampledCartesianImage[i] | lresampledCartesianImage[i] << 8 | lresampledCartesianImage[i] << 16 | 0xFF000000;
-        }
-        // end Remove
-        Timer.logResult("RGBToIntensity");
+        Timer.logResult("Intensity to RGB");
 
         final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, Bitmap.Config.ARGB_8888);
+        Timer.logResult("Create Bitmap");
+
         try {
             activity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     mainActionController.displayMainFrame(bitmap);
+                    Timer.logResult("Display Main Frame");
                 }
             });
         } catch (Exception e) {

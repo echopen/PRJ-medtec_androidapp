@@ -2,8 +2,6 @@ package com.echopen.asso.echopen.filters;
 
 
 import android.util.Log;
-
-import com.echopen.asso.echopen.preproc.envelope_detection.jtransforms.FastFourierTransform;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;
 
