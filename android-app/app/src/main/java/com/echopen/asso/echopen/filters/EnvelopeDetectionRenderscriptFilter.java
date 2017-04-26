@@ -84,10 +84,13 @@ public class EnvelopeDetectionRenderscriptFilter {
 
         public int[] run(int[] iImageInput){
             int[] oImageOutput = new int[mNbOutputSamplesPerLine * mNbLinesPerImage];
-
+            int[] lLineData = new int[mNbOutputSamplesPerLine];
             for(int i = 0; i < mNbLinesPerImage; i++){
                 // Be careful a crop on data is done to fit "power of two" array size required by FFT algorithm
-                int[] lLineData = Arrays.copyOfRange(iImageInput, mNbSamplesPerLine * i, mNbSamplesPerLine * i+ mNbOutputSamplesPerLine);
+
+                Arrays.fill(lLineData, 0);
+                System.arraycopy(iImageInput, mNbSamplesPerLine * i, lLineData, 0, mNbSamplesPerLine);
+
                 int[] oLineData = runOnALine(lLineData);
                 System.arraycopy(oLineData, 0, oImageOutput, i * oLineData.length, oLineData.length);
             }
@@ -124,7 +127,7 @@ public class EnvelopeDetectionRenderscriptFilter {
             mTmp.copyFrom(lTmpLineData);
 
             mScriptCiFft.invoke_inverseRunRestricted(mScriptCiFft, mTmp, mRsLineOutput, iLineData.length);
-            mTmp.copyTo(lOutputData);
+            mRsLineOutput.copyTo(lOutputData);
 
             int[] oLineData = new int[iLineData.length];
 

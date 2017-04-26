@@ -64,13 +64,10 @@ public class ProcessTCPTask extends AbstractDataTask {
 
             while (true) {
                 try {
-                    RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();;
-
-                    // getting data from local
-                    //lRawImageData = getRawImageDataFromLocal();
+                    RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();
 
                     alignDataStream(stream, lDeviceConfiguration);
-                    lRawImageData = getRawImageData(stream);
+                    lRawImageData = getRawImageData(stream, lDeviceConfiguration);
 
                     rawDataPipeline(lCurrentRenderingContext, lDeviceConfiguration, lRawImageData);
                 } catch (Exception e) {
@@ -118,10 +115,10 @@ public class ProcessTCPTask extends AbstractDataTask {
         return data.getEnvelopeIntegerData();
     }
 
-    private Integer[] getRawImageData(InputStream iStream) throws IOException{
+    private Integer[] getRawImageData(InputStream iStream, DeviceConfiguration iDeviceConfiguration) throws IOException{
         // device config is temporary stored in the app
-        Integer lNbSamplesPerLine = Constants.PreProcParam.NUM_SAMPLES_PER_LINE;
-        Integer lNbLinesPerImage = Constants.PreProcParam.NUM_LINES_PER_IMAGE;
+        Integer lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
+        Integer lNbLinesPerImage = iDeviceConfiguration.getNbLinesPerImage();
         Integer lSampleSize = Constants.PreProcParam.NUM_BYTES_PER_SAMPLE;
 
         Integer[] lRawImageData = new Integer[lNbLinesPerImage * lNbSamplesPerLine];

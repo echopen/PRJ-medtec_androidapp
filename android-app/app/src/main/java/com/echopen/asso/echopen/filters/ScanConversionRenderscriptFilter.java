@@ -84,20 +84,21 @@ public class ScanConversionRenderscriptFilter {
         }
 
         public void computeTables(DeviceConfiguration iDeviceConfiguration) {
-            double start_depth = iDeviceConfiguration.getR0(); /*  Depth for start of image in meters    */
-            double image_size = iDeviceConfiguration.getRf() - iDeviceConfiguration.getR0();  /*  Size of image in meters               */
+            double lProbeAngleRad = iDeviceConfiguration.getProbeSectorAngle() * Math.PI /180;
 
-            double start_of_data = Constants.PreProcParam.STEP_RADIAL_INIT;   /*  Depth for start of data in meters     */
-            // TODO: divide by 2 factor is hacked to visualise the image - need to recompute real delta_r with new Sampling frequency
-            double delta_r = Constants.PreProcParam.RADIAL_DATA_INIT/2; /*( iDeviceConfiguration.getRf() - iDeviceConfiguration.getR0() ) / iDeviceConfiguration.getNbSamplesPerLine();*/ /*  Sampling interval for data in meters  */
+            double start_depth = iDeviceConfiguration.getR0() * Math.cos(lProbeAngleRad / 2.0); /*  Depth for start of image in meters    */
+            double image_size = (iDeviceConfiguration.getRf() - start_depth);  /*  Size of image in meters               */
+
+            double start_of_data = iDeviceConfiguration.getR0();   /*  Depth for start of data in meters     */
+
             int N_samples  = (int) Math.floor(Constants.PreProcParam.TCP_NUM_SAMPLES);       /*  Number of data samples                */
+            double delta_r = image_size / N_samples; /*  Sampling interval for data in meters  */
 
             int N_lines = iDeviceConfiguration.getNbLinesPerImage();    /*  Number of acquired lines              */
 
-            double delta_theta = iDeviceConfiguration.getProbeSectorAngle() * Math.PI / (180.0 * N_lines) /*Constants.PreProcParam.STEP_ANGLE_INIT*/; /*  Angle between individual lines        */
-            double theta_start = N_lines / 2 * delta_theta;     /*  Angle for first line in image         */
+            double delta_theta = lProbeAngleRad / N_lines ; /*  Angle between individual lines        */
+            double theta_start = lProbeAngleRad / 2;    /*  Angle for first line in image         */
 
-            double scaling = Constants.PreProcParam.SCALE_FACTOR;         /*  Scaling factor form envelope to image */
             int Nz = Constants.PreProcParam.N_z;              /*  Size of image in pixels               */
             int Nx = Constants.PreProcParam.N_x;              /*  Size of image in pixels               */
 
@@ -107,7 +108,7 @@ public class ScanConversionRenderscriptFilter {
             int index_samp_line[] = new int[Nz * Nx];  //Index for the data sample number
             int image_index[] = new int[Nz * Nx];
 
-            make_tables(start_depth, image_size, start_of_data, delta_r, N_samples, theta_start, -delta_theta, N_lines, scaling, Nz, Nx, weight_coef, index_samp_line, image_index);
+            make_tables(start_depth, image_size, start_of_data, delta_r, N_samples, theta_start, -delta_theta, N_lines, Nz, Nx, weight_coef, index_samp_line, image_index);
             // TODO convert arrays to fields.*/
         }
 
@@ -123,7 +124,6 @@ public class ScanConversionRenderscriptFilter {
          * @param theta_start
          * @param delta_theta
          * @param N_lines
-         * @param scaling
          * @param Nz
          * @param Nx
          * @param weight_coef
@@ -141,8 +141,6 @@ public class ScanConversionRenderscriptFilter {
                                  double theta_start,     /*  Angle for first line in image         */
                                  double delta_theta,     /*  Angle between individual lines        */
                                  int N_lines,         /*  Number of acquired lines              */
-
-                                 double scaling,         /*  Scaling factor form envelope to image */
                                  int Nz,              /*  Size of image in pixels               */
                                  int Nx,              /*  Size of image in pixels               */
 
@@ -200,10 +198,10 @@ public class ScanConversionRenderscriptFilter {
                         samp_val = samp - index_samp;
                         line_val = line - index_line;
                 /*  Calculate the coefficients if necessary   */
-                        weight_coef[ij_index_coef] = (1 - samp_val) * (1 - line_val) * scaling;
-                        weight_coef[ij_index_coef + 1] = samp_val * (1 - line_val) * scaling;
-                        weight_coef[ij_index_coef + 2] = (1 - samp_val) * line_val * scaling;
-                        weight_coef[ij_index_coef + 3] = samp_val * line_val * scaling;
+                        weight_coef[ij_index_coef] = (1 - samp_val) * (1 - line_val);
+                        weight_coef[ij_index_coef + 1] = samp_val * (1 - line_val);
+                        weight_coef[ij_index_coef + 2] = (1 - samp_val) * line_val;
+                        weight_coef[ij_index_coef + 3] = samp_val * line_val;
 
                         index_samp_line[ij_index] = index_samp + index_line * N_samples;
                         image_index[ij_index] = (Nx - j - 1) * Nz + i;

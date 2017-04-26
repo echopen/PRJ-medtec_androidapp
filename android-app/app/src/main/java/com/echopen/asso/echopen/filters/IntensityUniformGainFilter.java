@@ -7,10 +7,10 @@ package com.echopen.asso.echopen.filters;
   Non optimized implementation - to switch on ITK open source framework
  */
 
+import com.echopen.asso.echopen.utils.Constants;
+
 public class IntensityUniformGainFilter {
 
-    private final int MIN_INTENSITY_VALUE = 0;
-    private final int MAX_INTENSITY_VALUE = 65535;
     private int[] mImageInput;
 
     private int[] mImageOutput;
@@ -31,12 +31,12 @@ public class IntensityUniformGainFilter {
         for(int i = 0; i < mImageInput.length; i++){
             mImageOutput[i] = (int) (mImageInput[i] * lPowerRatio);
 
-            if(mImageOutput[i] < MIN_INTENSITY_VALUE){
-                mImageOutput[i] = MIN_INTENSITY_VALUE;
+            if(mImageOutput[i] < Constants.PreProcParam.MIN_INTENSITY_PIXEL_VALUE){
+                mImageOutput[i] = Constants.PreProcParam.MIN_INTENSITY_PIXEL_VALUE;
             }
 
-            if(mImageOutput[i] > MAX_INTENSITY_VALUE){
-                mImageOutput[i] = MAX_INTENSITY_VALUE;
+            if(mImageOutput[i] > Constants.PreProcParam.MAX_INTENSITY_PIXEL_VALUE){
+                mImageOutput[i] = Constants.PreProcParam.MAX_INTENSITY_PIXEL_VALUE;
             }
         }
 

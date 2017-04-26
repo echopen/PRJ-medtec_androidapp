@@ -123,7 +123,11 @@ public class Constants {
         public static final int LOCAL_SCALE_IMG_FACTOR = 1;
 
         /* Settings for TCP protocol */
-        public static final int TCP_NUM_SAMPLES = 1024;
+        public static final int TCP_NUM_SAMPLES = 2048;
+
+        /* Settings pixel intensity range */
+        public static final int MIN_INTENSITY_PIXEL_VALUE = 0;
+        public static final int MAX_INTENSITY_PIXEL_VALUE = 65535;
 
         public static final int TCP_IMG_DATA = 64;
 
