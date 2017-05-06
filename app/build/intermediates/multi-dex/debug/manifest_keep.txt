@@ -1,0 +1,5 @@
+-keep class com.echopen.asso.echopen.SplashScreen { <init>(); }
+-keep class com.echopen.asso.echopen.MainActivity { <init>(); }
+-keep class com.echopen.asso.echopen.custom.CustomActivity { <init>(); }
+-keep class com.echopen.asso.echopen.Share { <init>(); }
+-keep class com.echopen.asso.echopen.Settings { <init>(); }

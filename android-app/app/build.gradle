@@ -1,0 +1,164 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.vanniktech.android.junit.jacoco'
+apply plugin: 'project-report'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+
+    defaultConfig {
+        applicationId "com.echopen.asso.echopen"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        renderscriptTargetApi 18
+        renderscriptSupportModeEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        ndk {
+            moduleName "EchOpen"
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    sourceSets {
+        main {
+            jni.srcDirs = []
+            jniLibs.srcDir 'src/main/libs'
+        }
+    }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    htmlDependencyReport {
+        projects = project.allprojects
+    }
+    /* check if local.properties is in the , . Since this file is not under version control system, this is important
+    when using continuous integration system
+    */
+    if (project.rootProject.file('local.properties').exists()) {
+        task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            def ndkDir = properties.getProperty('ndk.dir')
+            commandLine "$ndkDir/ndk-build",
+                    '-C', file('src/main/jni').absolutePath,
+                    '-j', Runtime.runtime.availableProcessors(),
+                    'all',
+                    'NDK_DEBUG=1'
+        }
+        task cleanNative(type: Exec, description: 'Clean JNI object files') {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+            def ndkDir = properties.getProperty('ndk.dir')
+            commandLine "$ndkDir/ndk-build",
+                    '-C', file('src/main/jni').absolutePath,
+                    'clean'
+        }
+    }
+    if (!project.rootProject.file('local.properties').exists()) {
+        task buildNative(type: Exec, description: 'Compile JNI source via NDK') {
+            commandLine "ndk-build",
+                    '-C', file('src/main/jni').absolutePath,
+                    '-j', Runtime.runtime.availableProcessors(),
+                    'all',
+                    'NDK_DEBUG=1'
+        }
+        task cleanNative(type: Exec, description: 'Clean JNI object files') {
+            commandLine "ndk-build",
+                    '-C', file('src/main/jni').absolutePath,
+                    'clean'
+        }
+    }
+    clean.dependsOn 'cleanNative'
+    tasks.withType(JavaCompile) {
+        compileTask -> compileTask.dependsOn buildNative
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled true
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+    }
+}
+
+def coverageSourceDirs = [
+        'src/main/java',
+]
+
+task jacocoTestReport(type: JacocoReport, dependsOn: "connectedDebugAndroidTest") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+    classDirectories = fileTree(
+            dir: './build/intermediates/classes/debug',
+            excludes: ['**/R*.class',
+                       '**/*$InjectAdapter.class',
+                       '**/*$ModuleAdapter.class',
+                       '**/*$ViewInjector*.class',
+                       './org/opencv/**'
+            ])
+    sourceDirectories = files(coverageSourceDirs)
+    executionData = files("$buildDir/jacoco/testDebug.exec")
+
+    doFirst {
+        new File("$buildDir/intermediates/classes/").eachFileRecurse { file ->
+            if (file.name.contains('$$')) {
+                file.renameTo(file.path.replace('$$', '$'))
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    androidTestCompile('com.jayway.android.robotium:robotium-solo:5.5.4')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2') {
+        /* Necessary if your app targets Marshmallow (since Espresso
+         hasn't moved to Marshmallow yet) */
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('com.android.support.test:runner:0.5') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    androidTestCompile('org.mockito:mockito-core:1.10.19')
+    androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
+    androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+
+    testCompile('com.jayway.android.robotium:robotium-solo:5.5.4')
+    testCompile('com.android.support.test:runner:0.5') {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+    testCompile('org.mockito:mockito-core:1.10.19')
+    testCompile 'com.google.dexmaker:dexmaker:1.2'
+    testCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'commons-io:commons-io:2.0.1'
+    compile 'org.boofcv:android:0.18'
+    compile 'com.firebase:firebase-client-android:2.3.1'
+    compile 'com.google.android.gms:play-services-ads:10.2.1'
+    compile 'com.google.android.gms:play-services-auth:10.2.1'
+    compile 'com.google.android.gms:play-services-gcm:10.2.1'
+}

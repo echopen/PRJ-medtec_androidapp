@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/mehdibenchoufi/forked_project/android-app/app/build/intermediates/res/merged/debug/menu/setting.xml",
+        "source": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/menu/setting.xml"
+    },
+    {
+        "merged": "/Users/mehdibenchoufi/forked_project/android-app/app/build/intermediates/res/merged/debug/menu/timeline.xml",
+        "source": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/menu/timeline.xml"
+    }
+]

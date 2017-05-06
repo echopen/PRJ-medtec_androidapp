@@ -1,0 +1,45 @@
+[
+    {
+        "outputFile": "/Users/mehdibenchoufi/forked_project/android-app/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-large-mdpi-v4/values-large-mdpi-v4.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 49,
+                    "endOffset": 100
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-large-mdpi/dimens.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 65,
+                        "endColumn": 49,
+                        "endOffset": 110
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 105,
+                    "endColumn": 46,
+                    "endOffset": 147
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-large-mdpi/dimens.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 4,
+                        "startOffset": 17,
+                        "endColumn": 46,
+                        "endOffset": 59
+                    }
+                }
+            }
+        ]
+    }
+]

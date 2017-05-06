@@ -1,0 +1,159 @@
+[
+    {
+        "outputFile": "/Users/mehdibenchoufi/forked_project/android-app/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-xhdpi-v4/values-xhdpi-v4.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 55,
+                    "endOffset": 106
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 1,
+                        "startColumn": 4,
+                        "startOffset": 17,
+                        "endColumn": 55,
+                        "endOffset": 68
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 111,
+                    "endColumn": 52,
+                    "endOffset": 159
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 160,
+                        "endColumn": 52,
+                        "endOffset": 208
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 164,
+                    "endColumn": 47,
+                    "endOffset": 207
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 313,
+                        "endColumn": 47,
+                        "endOffset": 356
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 212,
+                    "endColumn": 48,
+                    "endOffset": 256
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 263,
+                        "endColumn": 48,
+                        "endOffset": 307
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 261,
+                    "endColumn": 47,
+                    "endOffset": 304
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 214,
+                        "endColumn": 47,
+                        "endOffset": 257
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 309,
+                    "endColumn": 41,
+                    "endOffset": 346
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 117,
+                        "endColumn": 41,
+                        "endOffset": 154
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 351,
+                    "endColumn": 41,
+                    "endOffset": 388
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 74,
+                        "endColumn": 41,
+                        "endOffset": 111
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 393,
+                    "endColumn": 47,
+                    "endOffset": 436
+                },
+                "from": {
+                    "file": "/Users/mehdibenchoufi/forked_project/android-app/app/src/main/res/values-xhdpi/dimens.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 362,
+                        "endColumn": 47,
+                        "endOffset": 405
+                    }
+                }
+            }
+        ]
+    }
+]
