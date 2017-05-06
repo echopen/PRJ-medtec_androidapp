@@ -1,3 +1,0 @@
-set solib-search-path /Users/mehdibenchoufi/forked_project/android-app/app/src/main/obj/local/mips
-source /Users/mehdibenchoufi/Downloads/android-ndk-r10e/prebuilt/common/gdb/common.setup
-directory /Users/mehdibenchoufi/Downloads/android-ndk-r10e/platforms/android-9/arch-mips/usr/include /Users/mehdibenchoufi/forked_project/android-app/app/src/main/jniLibs/fftw/android/androideabi.4.9/include/ /Users/mehdibenchoufi/Downloads/android-ndk-r10e/sources/cxx-stl/system
