@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="calibration-0.18">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.boofcv/calibration/0.18/9beb619549ef31c8f6a58d5a37756a485dca53c4/calibration-0.18.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.boofcv/calibration/0.18/72e487a03a3128a86afc05cc72bd22745a7ed2b5/calibration-0.18-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

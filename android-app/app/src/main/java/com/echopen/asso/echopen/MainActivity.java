@@ -21,8 +21,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.custom.CustomActivity;
-import com.echopen.asso.echopen.envelope_detection.FastFourierTransform;
-import com.echopen.asso.echopen.envelope_detection.jtransforms.fft.DoubleFFT_1D1TAlgorithm;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.model.Synchronizer;

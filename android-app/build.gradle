@@ -6,11 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-<<<<<<< HEAD:build.gradle
-        classpath 'com.android.tools.build:gradle:2.2.2'
-=======
         classpath 'com.android.tools.build:gradle:2.3.0'
->>>>>>> upstream/master:android-app/build.gradle
         classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.3.0'
     }
 }

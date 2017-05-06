@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.TextView;
 
-import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.utils.Config;
 
 public class MainActionController extends AbstractActionController {

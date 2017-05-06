@@ -14,7 +14,7 @@ import javax.inject.Inject;
  *
  * WARNING: CHECK OUT COMMON PITFALLS BELOW
  *
- * Unlike {@link Log}, Log provides sensible defaults.
+ * Unlike {@link https://developer.android.com/reference/android/util/Log.html}, Log provides sensible defaults.
  * Debug and Verbose logging is enabled for applications that
  * have "android:debuggable=true" in their AndroidManifest.xml.
  * For apps built using SDK Tools r8 or later, this means any debug
@@ -24,10 +24,10 @@ import javax.inject.Inject;
  * The default tag is automatically set to your app's packagename,
  * and the current context (eg. activity, service, application, etc)
  * is appended as well.  You can add an additional parameter to the
- * tag using {@link #Log(String)}.
+ * tag using {@link Log #Log(String)}.
  *
  * Log-levels can be programatically overridden for specific instances
- * using {@link #Log(String, boolean, boolean)}.
+ * using {@link Log #Log(String, boolean, boolean)}.
  *
  * Log messages may optionally use {@link String#format(String, Object...)}
  * formatting, which will not be evaluated unless the log statement is output.

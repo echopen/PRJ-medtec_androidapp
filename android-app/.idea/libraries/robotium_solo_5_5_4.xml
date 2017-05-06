@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="robotium-solo-5.5.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jayway.android.robotium/robotium-solo/5.5.4/f3ac369a98aff592f11866b73f92a74162d7a5fd/robotium-solo-5.5.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.jayway.android.robotium/robotium-solo/5.5.4/d8e2d029e21529259d7e6e7d4cc5d48369e9abc4/robotium-solo-5.5.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
