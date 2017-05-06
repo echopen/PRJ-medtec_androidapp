@@ -177,6 +177,6 @@ In order to ease the developement and to prevent the contributor from the hassle
 
 # More informations
 
-You can get more detailed information on our [GitBook](https://echopen.gitbooks.io/android-app/content/)
+You can get more detailed information on our GitBooks,[echOpen_prototyping](https://echopen.gitbooks.io/echopen_prototyping/content/),[Android App](https://echopen.gitbooks.io/android-app/content/)
 
 
