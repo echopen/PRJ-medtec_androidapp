@@ -1,7 +1,0 @@
-#Thu Jan 26 10:41:58 CET 2017
-base.0=/Users/mehdibenchoufi/Downloads/android-testing-checkpoints/OpenGLTestApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_96706f961e5eb8ff340f62168cd5365e3aaaba91
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/Users/mehdibenchoufi/Downloads/android-testing-checkpoints/OpenGLTestApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b708a1ea5df3ba33ce40158afd61895ff19b8d64/classes.dex
-base.1=/Users/mehdibenchoufi/Downloads/android-testing-checkpoints/OpenGLTestApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_b708a1ea5df3ba33ce40158afd61895ff19b8d64
-file.0=/Users/mehdibenchoufi/Downloads/android-testing-checkpoints/OpenGLTestApp/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_96706f961e5eb8ff340f62168cd5365e3aaaba91/classes.dex

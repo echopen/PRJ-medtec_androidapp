@@ -1,8 +1,9 @@
-**.iml
-.idea/
+*.iml
 .gradle
-/local.properties
+/android-app/local.properties
+/.idea/*
 .DS_Store
 /build
+/android-app/openCVLibrary310/build
 /captures
-app/app.iml
+.externalNativeBuild

@@ -1,7 +1,0 @@
-#Thu Jan 26 12:17:00 CET 2017
-base.0=/Users/mehdibenchoufi/Desktop/Sites/echopen/tools/GPUChallenge/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f9e35d3885ccbfc7832c34464b0be5b324d36a52
-renamed.1=classes2.dex
-renamed.0=classes.dex
-file.1=/Users/mehdibenchoufi/Desktop/Sites/echopen/tools/GPUChallenge/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_3ccdc11656bb56cc630ad1bb0f3a456d74600b85/classes.dex
-base.1=/Users/mehdibenchoufi/Desktop/Sites/echopen/tools/GPUChallenge/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_3ccdc11656bb56cc630ad1bb0f3a456d74600b85
-file.0=/Users/mehdibenchoufi/Desktop/Sites/echopen/tools/GPUChallenge/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_f9e35d3885ccbfc7832c34464b0be5b324d36a52/classes.dex
