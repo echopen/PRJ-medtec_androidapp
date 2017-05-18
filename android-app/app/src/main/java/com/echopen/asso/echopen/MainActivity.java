@@ -314,47 +314,6 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
         initProtocolChoice();
 
-        double[] input = new double[16];
-        for (int i = 0; i < 8; i++) {
-            input[2*i] = i;
-            input[2*i+1] = 0;
-        }
-
-        new DoubleFFT_1D1TAlgorithm(0,0).perform(input);
-
-        FastFourierTransform.Complex [] cinput = new FastFourierTransform.Complex[input.length];
-        for (int i = 0; i < input.length; i++)
-            cinput[i] = new FastFourierTransform.Complex(input[i], 0.0);
-
-        FastFourierTransform.fft(cinput);
-
-        FastFourierTransform.i_fft(cinput);
-
-        for (int i = 0; i < 8; i++) {
-            cinput[i].re = cinput[i].re/8;
-            cinput[i].im = cinput[i].im/8;
-        }
-
-        System.out.println("Results:");
-        for (FastFourierTransform.Complex c : cinput) {
-            System.out.println(c);
-        }
-
-        //EnvelopeDetection envelopeDetection =  new EnvelopeDetection(data);
-
-        //data = envelopeDetection.FFTransform();
-        //setClickToFilter(R.id.vMiddle);
-
-        /* Ruler is used to show the centimetric scale of the ultrasound image */
-        /*rulerView = (RulerView) findViewById(R.id.ruler);
-        rulerView.setStartingPoint(70);
-        rulerView.setUpdateListener(new onViewUpdateListener() {
-            @Override
-            public void onViewUpdate(float result) {
-                *//* when needed, this function can update the View, for example to support scroll effect
-                updating the view *//*
-            }
-        });*/
     }
 
     private void initProtocolChoice() {
