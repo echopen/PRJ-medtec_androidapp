@@ -33,9 +33,9 @@ You can also report a bug or ask for new features on [Github issues](https://git
 We follow the described integration process:
 
 * fork the project on your local profile
-* implement the new feature 
+* implement the new feature
 * create a pull requests on *echopen/master* branch
-* pull request is reviewed by contributors 
+* pull request is reviewed by contributors
 * commit is integrated to echOpen project !
 
 ###Authors
@@ -74,8 +74,7 @@ Before being able to build the app, you have to configure your local android pro
 	sdk.dir=/Path/To/Your/.../Android/sdk
 	ndk.dir=/Path/To/Your/.../android-ndk-r10e
 ```
-Then you can build the project via **Android Studio**, or 
-
+Then you can build the project via **Android Studio**, or
 you can build the project by executing the Gradle wrapper from the project directory, example:
 
 Mac/Linux
