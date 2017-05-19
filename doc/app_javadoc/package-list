@@ -1,0 +1,11 @@
+com.echopen.asso.echopen
+com.echopen.asso.echopen.custom
+com.echopen.asso.echopen.filters
+com.echopen.asso.echopen.model
+com.echopen.asso.echopen.model.Data
+com.echopen.asso.echopen.model.EchoImage
+com.echopen.asso.echopen.model.Painter
+com.echopen.asso.echopen.model.Ruler
+com.echopen.asso.echopen.preproc
+com.echopen.asso.echopen.ui
+com.echopen.asso.echopen.utils

@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.echopen.asso.echopen.R;
-
 public class FilterActionController extends AbstractActionController {
 
     private Activity activity;

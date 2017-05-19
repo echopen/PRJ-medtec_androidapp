@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="android-0.18">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.boofcv/android/0.18/4ffd4f96b92518c58d73518188cc244444e5209c/android-0.18.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.boofcv/android/0.18/4760056d85431e241e91ba626ea93eca812059ad/android-0.18-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.model.Painter.SelfPaint;
 import com.echopen.asso.echopen.model.Ruler.Ruler;
 import com.echopen.asso.echopen.utils.Constants;
