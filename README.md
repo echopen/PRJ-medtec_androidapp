@@ -22,7 +22,7 @@ All work in this repository is under the licence bsd available [here](https://gi
 
 ## How to contribute
 
-First you have to follow [Installation Guide](## Installation (for Developers)) to build the project.
+First you have to follow [Installation Guide](##Installation-(for-Developers)) to build the project.
 
 We references all in-progress or future developpements on cards in [Github Project](https://github.com/echopen/PRJ-medtec_androidapp/projects/1).
 
@@ -38,7 +38,7 @@ We follow the described integration process:
 * pull request is reviewed by contributors
 * commit is integrated to echOpen project !
 
-###Authors
+### Authors
 
 * [@nowami](http://github.com/benchoufi)
 * [Loïc Fejoz](http://github.com/loic-fejoz)
@@ -66,7 +66,7 @@ As an android app, you need to install the following dependencies:
 
 
 
-### Setup echOpen mobile application android
+### Setup echOpen mobile application
 First you need to clone echOpen android mobile application project.
 
 Before being able to build the app, you have to configure your local android project settings, in *local.properties* file: 
@@ -99,7 +99,7 @@ To debug the mobile application on a device:
 
 You can get high-level documentation on our [GitBook](https://echopen.gitbooks.io/android-app/content/) mobile application section.
 
-You have also access to a detailed documentation in the *projectRootDirectory/doc* folder and to a [doxygen](www.doxygen.org/) documentation in *projectRootDirectory/doc/javadoc_app*
+You have also access to a detailed documentation in the *projectRootDirectory/doc* folder and to a [doxygen](https://en.wikipedia.org/wiki/Doxygen) documentation in *projectRootDirectory/doc/javadoc_app*
 
 ## Challenges and To Dos
 
