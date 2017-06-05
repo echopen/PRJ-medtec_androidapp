@@ -33,8 +33,7 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
     protected RenderingContextController mRenderingContextController;
 
-    public AbstractDataTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, RenderingContextController iRenderingContextController) {
-        this.scanconversion = scanConversion;
+    public AbstractDataTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController) {
         this.activity = activity;
         this.mainActionController = mainActionController;
 
@@ -80,7 +79,6 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
             lImageInput[i] = (int) iRawImageData[i];
         }
 
-        Timer.logResult("Create Fake Images");
         RenderScript lRenderscript = RenderScript.create(activity);
         // envelop detection filter
         EnvelopeDetectionRenderscriptFilter lEnvelopDetectionFilter = new EnvelopeDetectionRenderscriptFilter();

@@ -51,7 +51,7 @@ public class BitmapDisplayer extends Displayer {
      * @throws IOException
      */
     public void readDataFromTCP() throws IOException {
-        new ProcessTCPTask(activity, mainActionController, mRenderingContextController, scanConversion, ip, port).execute();
+        new ProcessTCPTask(activity, mainActionController, mRenderingContextController, ip, port).execute();
     }
 
     public void readDataFromUDP() throws IOException {

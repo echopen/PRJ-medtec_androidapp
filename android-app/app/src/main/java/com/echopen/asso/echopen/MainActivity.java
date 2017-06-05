@@ -21,6 +21,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.custom.CustomActivity;
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.model.Synchronizer;
@@ -122,7 +123,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         initActionController();
         initViewComponents();
 
-        mRenderingContextController = new RenderingContextController();
+        mRenderingContextController = ((EchOpenApplication) this.getApplication()).getEchographyImageStreaming().getRenderingContextController();
         initImageManipulationViewComponents();
         
         setupContainer();
@@ -269,7 +270,9 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             if (UDP_ACQUISITION) {
                 bitmapDisplayer.readDataFromUDP();
             } else if (TCP_ACQUISITION) {
-                bitmapDisplayer.readDataFromTCP();
+                //bitmapDisplayer.readDataFromTCP();
+                EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
+                ((EchOpenApplication) this.getApplication()).getEchographyImageStreaming().connect(lTCPMode, (Activity) (this.getApplicationContext()), mainActionController);
             } else {
                 AssetManager assetManager = getResources().getAssets();
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");

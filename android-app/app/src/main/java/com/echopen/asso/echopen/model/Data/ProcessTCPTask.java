@@ -42,8 +42,8 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private DataInputStream dataInputStream;
 
-    public ProcessTCPTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, ScanConversion scanConversion, String ip, int port) {
-        super(activity, mainActionController, scanConversion, iRenderingContextController);
+    public ProcessTCPTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, String ip, int port) {
+        super(activity, mainActionController, iRenderingContextController);
         this.ip = ip;
         this.port = port;
     }

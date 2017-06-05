@@ -20,7 +20,7 @@ public class FileTask extends AbstractDataTask {
     private final Data data;
 
     public FileTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream, RenderingContextController iRenderingContextController) {
-        super(activity, mainActionController, scanConversion, iRenderingContextController);
+        super(activity, mainActionController, iRenderingContextController);
         InputStreamReader isReader = new InputStreamReader(inputStream);
         data = new Data(isReader);
         scanconversion = new ScanConversion(data);
