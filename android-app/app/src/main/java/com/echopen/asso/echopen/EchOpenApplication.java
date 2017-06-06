@@ -30,5 +30,5 @@ public class EchOpenApplication extends Application {
      */
     public EchographyImageStreamingService getEchographyImageStreamingService(){
         return mEchographyImageStreaming;
-    };
+    }
 }

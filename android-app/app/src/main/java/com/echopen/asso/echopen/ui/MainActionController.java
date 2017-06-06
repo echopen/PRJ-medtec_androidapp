@@ -18,46 +18,13 @@ public class MainActionController extends AbstractActionController {
     private final String TAG = this.getClass().getSimpleName();
 
     private Activity activity;
-    private class ImageStreamingDisplayer extends EchographyImageStreamingObserver{
-        public ImageStreamingDisplayer(){
-
-        }
-
-        @Override
-        public void onEchographyImageStreamingNotification(final EchographyImageStreamingNotification iEchographyImageStreamingNotification)
-        {
-            try {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    displayMainFrame(iEchographyImageStreamingNotification.getImage());
-                    Timer.logResult("Display Bitmap");
-
-                }
-            });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private ImageStreamingDisplayer mImageStreamingDisplayer;
-
-    private EchographyImageStreamingService mEchographyImageStreamingService;
 
     public MainActionController() {
         displayAction();
     }
 
-    public MainActionController(Activity activity, EchographyImageStreamingService iEchographyImageStreamingService) {
+    public MainActionController(Activity activity) {
         this.activity = activity;
-        mImageStreamingDisplayer = new ImageStreamingDisplayer();
-        mEchographyImageStreamingService = iEchographyImageStreamingService;
-
-        Log.d(TAG, " EchographyImageStreamingService " + mEchographyImageStreamingService.toString());
-        Log.d(TAG, " mImageStreamingDisplayer " + mImageStreamingDisplayer.toString());
-
-        mEchographyImageStreamingService.addObserver(mImageStreamingDisplayer);
 
         displayAction();
     }
