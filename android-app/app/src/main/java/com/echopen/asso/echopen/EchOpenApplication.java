@@ -7,20 +7,28 @@ import com.echopen.asso.echopen.ui.RenderingContextController;
 
 /**
  * Created by lecoucl on 05/06/17.
+ *
+ * @class echOpen application
  */
 public class EchOpenApplication extends Application {
 
-    EchographyImageStreamingService mEchographyImageStreaming;
+    private final String TAG = this.getClass().getSimpleName();
+
+    private EchographyImageStreamingService mEchographyImageStreaming; /* image streaming service */
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         mEchographyImageStreaming = new EchographyImageStreamingService(new RenderingContextController());
-
     }
 
-    public EchographyImageStreamingService getEchographyImageStreaming(){
+    /**
+     * @brief getter - image streaming service
+     *
+     * @return image streaming service
+     */
+    public EchographyImageStreamingService getEchographyImageStreamingService(){
         return mEchographyImageStreaming;
     };
 }

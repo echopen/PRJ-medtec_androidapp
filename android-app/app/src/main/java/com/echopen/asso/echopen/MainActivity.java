@@ -8,7 +8,6 @@ import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
@@ -21,7 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.custom.CustomActivity;
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingTCPMode;
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.model.Synchronizer;
@@ -31,22 +31,13 @@ import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.ui.RulerView;
-import com.echopen.asso.echopen.ui.onViewUpdateListener;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.UIParams;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.text.DecimalFormat;
-
-import static com.echopen.asso.echopen.utils.Constants.PreProcParam.NUM_SAMPLES_PER_LINE;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -79,6 +70,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     public static boolean UDP_ACQUISITION = false;
 
+    private EchographyImageStreamingService mEchographyImageStreamingService;
     private RenderingContextController mRenderingContextController;
 
     private SeekBar mSeekBarLinearLutOffset;
@@ -119,11 +111,13 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.vMiddle);
         linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
+        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication() ).getEchographyImageStreamingService();
+        mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
+
         initSwipeViews();
         initActionController();
         initViewComponents();
 
-        mRenderingContextController = ((EchOpenApplication) this.getApplication()).getEchographyImageStreaming().getRenderingContextController();
         initImageManipulationViewComponents();
         
         setupContainer();
@@ -272,7 +266,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             } else if (TCP_ACQUISITION) {
                 //bitmapDisplayer.readDataFromTCP();
                 EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
-                ((EchOpenApplication) this.getApplication()).getEchographyImageStreaming().connect(lTCPMode, (Activity) (this.getApplicationContext()), mainActionController);
+                mEchographyImageStreamingService.connect(lTCPMode, this);
             } else {
                 AssetManager assetManager = getResources().getAssets();
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
@@ -290,7 +284,7 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     * */
     public void initActionController() {
         Activity activity = this;
-        mainActionController = new MainActionController(activity);
+        mainActionController = new MainActionController(activity, mEchographyImageStreamingService);
     }
 
     /*

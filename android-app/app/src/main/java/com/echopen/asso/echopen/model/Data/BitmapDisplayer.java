@@ -50,12 +50,9 @@ public class BitmapDisplayer extends Displayer {
      *  This is done via an AsyncTask because you can't play with UDP in the main thread
      * @throws IOException
      */
-    public void readDataFromTCP() throws IOException {
-        new ProcessTCPTask(activity, mainActionController, mRenderingContextController, ip, port).execute();
-    }
 
     public void readDataFromUDP() throws IOException {
-        new ProcessUPDTask(activity, mainActionController, mRenderingContextController, scanConversion, port).execute();
+        new ProcessUPDTask(activity, mRenderingContextController, port).execute();
     }
 
     public void readDataFromFile(final InputStream is) throws IOException {

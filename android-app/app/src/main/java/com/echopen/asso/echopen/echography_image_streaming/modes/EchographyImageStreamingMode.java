@@ -1,4 +1,4 @@
-package com.echopen.asso.echopen.echography_image_streaming;
+package com.echopen.asso.echopen.echography_image_streaming.modes;
 
 /**
  * Created by clecoued on 05/06/17.
@@ -7,7 +7,7 @@ package com.echopen.asso.echopen.echography_image_streaming;
  */
 
 public abstract class EchographyImageStreamingMode {
-    private EchographyImageStreamingConnectionType mConnectionType; /* device connection type */
+    protected EchographyImageStreamingConnectionType mConnectionType; /* device connection type */
 
     /**
      * @brief getter for connection type

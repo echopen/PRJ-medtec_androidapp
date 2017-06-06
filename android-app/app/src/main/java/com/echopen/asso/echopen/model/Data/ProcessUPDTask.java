@@ -24,8 +24,8 @@ public class ProcessUPDTask extends AbstractDataTask {
 
     private final int port;
 
-    public ProcessUPDTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, ScanConversion scanConversion, int port) {
-        super(activity, mainActionController, iRenderingContextController);
+    public ProcessUPDTask(Activity activity, RenderingContextController iRenderingContextController, int port) {
+        super(activity, iRenderingContextController, null);
         this.port = port;
     }
 
@@ -76,7 +76,7 @@ public class ProcessUPDTask extends AbstractDataTask {
 
                         ScanConversion scnConv = ScanConversion.getInstance(udpDataArray);
                         scnConv.setUdpData();
-                        refreshUI(scnConv, lCurrentRenderingContext);
+                        //refreshUI(scnConv, lCurrentRenderingContext);
                         udpDataCounterRow = 0;
                     }
                 }

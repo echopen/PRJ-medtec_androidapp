@@ -2,22 +2,63 @@ package com.echopen.asso.echopen.ui;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
+import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingObserver;
 import com.echopen.asso.echopen.utils.Config;
+import com.echopen.asso.echopen.utils.Timer;
 
 public class MainActionController extends AbstractActionController {
 
+    private final String TAG = this.getClass().getSimpleName();
+
     private Activity activity;
+    private class ImageStreamingDisplayer extends EchographyImageStreamingObserver{
+        public ImageStreamingDisplayer(){
+
+        }
+
+        @Override
+        public void onEchographyImageStreamingNotification(final EchographyImageStreamingNotification iEchographyImageStreamingNotification)
+        {
+            try {
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    displayMainFrame(iEchographyImageStreamingNotification.getImage());
+                    Timer.logResult("Display Bitmap");
+
+                }
+            });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private ImageStreamingDisplayer mImageStreamingDisplayer;
+
+    private EchographyImageStreamingService mEchographyImageStreamingService;
 
     public MainActionController() {
         displayAction();
     }
 
-    public MainActionController(Activity activity) {
+    public MainActionController(Activity activity, EchographyImageStreamingService iEchographyImageStreamingService) {
         this.activity = activity;
+        mImageStreamingDisplayer = new ImageStreamingDisplayer();
+        mEchographyImageStreamingService = iEchographyImageStreamingService;
+
+        Log.d(TAG, " EchographyImageStreamingService " + mEchographyImageStreamingService.toString());
+        Log.d(TAG, " mImageStreamingDisplayer " + mImageStreamingDisplayer.toString());
+
+        mEchographyImageStreamingService.addObserver(mImageStreamingDisplayer);
+
         displayAction();
     }
 

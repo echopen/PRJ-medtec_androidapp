@@ -1,4 +1,7 @@
-package com.echopen.asso.echopen.echography_image_streaming;
+package com.echopen.asso.echopen.echography_image_streaming.modes;
+
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingConnectionType;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
 
 /**
  * Created by lecoucl on 05/06/17.
@@ -16,8 +19,11 @@ public class EchographyImageStreamingTCPMode extends EchographyImageStreamingMod
      * @param iDevicePort to be connected device port
      */
     public EchographyImageStreamingTCPMode(String iDeviceIp, int iDevicePort){
+
         mDeviceIp = iDeviceIp;
         mDevicePort = iDevicePort;
+
+        mConnectionType = EchographyImageStreamingConnectionType.Connected_to_device_TCP_protocol;
     }
 
     /**
