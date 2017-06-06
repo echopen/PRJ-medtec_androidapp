@@ -8,3 +8,11 @@ Protocol:
 - connect to the RedPitaya (command line: ssh root@192.168.128.3, pass: root);
 - if you don't have the right to execute plate_emulator or hand emulator do a chmod 777 on the file then execute it
 - enjoy
+
+The source code ./srcbin/emul.c can be compiled also for linux, so the emulator can run on your computer. To change the image to send change the file to load on line 84:
+
+    load(buffer_length, Nline, data0, "hand.txt");
+
+to compile write command line:
+
+    gcc -g emul.c -o toto_emulator -lpthread

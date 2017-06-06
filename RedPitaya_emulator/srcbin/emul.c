@@ -4,7 +4,7 @@
 #include<time.h>
 #include<signal.h>
 
-#include "echopenRP.h"
+#include "TCP_API.h"
 
 #define PORT 7538
 
@@ -16,12 +16,17 @@ double sector=80.0;
 int mode_RP=0;
 int step=1;
 
-data data_RP={.buffer_length=0, .delay=0, .sock=0, .client_list=NULL, .stepper=NULL, .stepper_mode=full, .angle=0.0, .buffer_char=NULL, .buffer_float=NULL, .buffer_int16=NULL};
+uint32_t buffer_length=0;
+SOCKET sock=0;
+client *client_list=NULL;
+int16_t** data0=NULL;
 
 void signal_callback_handler()
 {
 	printf("signal callback handler\n");
-	clear_data(&data_RP);
+        close_TCP_server(&sock, client_list);
+        free(client_list);
+	free(data0);
 	exit(0);//must exit whereas it return into main
 }
 
@@ -57,26 +62,26 @@ int main (int agrc, char **argv)
 	//close server and RedPitaya if CTRL+C
 	signal(SIGINT, signal_callback_handler);
 
-	//double speed=1.0; //1 for dec8 3 for dec1
+	float scale=2.0*125.0/1.48/((float)dec); //factor 2.0 for back and forth
+        buffer_length=(uint32_t)(scale*(xf-x0));
+        if (buffer_length>16384){buffer_length=16384;}
 
-	//data data_RP;
-	float level0=0.6;
-	float levelf=1.0;
-	init_data(&data_RP, 5, PORT, level0, levelf, full_16);  //full_16
-	data_RP.angle=sector/((double)Nline);
-	printf("buffer length = %i\n", (int)data_RP.buffer_length);
-	//enable_stepper(&(data_RP.stepper));
+	//TCP server
+	unsigned int Nmax=5;
+	client_list=(client *)malloc(sizeof(client));
+        init_TCP_server(&sock, PORT, client_list, Nmax);
+        launch_server(&sock, client_list);
+
 
 	int i=0;
-	int16_t** data0=NULL;
 	data0=(int16_t**)malloc(Nline*sizeof(int16_t*));
 	for (i=0 ; i<Nline ; i++)
 	{
-		data0[i]=(int16_t*)malloc((data_RP.buffer_length+1)*sizeof(int16_t));
+		data0[i]=(int16_t*)malloc((buffer_length+1)*sizeof(int16_t));
 		data0[i][0]=(int16_t)(i+1);
 	}
 
-	load(data_RP.buffer_length, Nline, data0, "plate.txt");
+	load(buffer_length, Nline, data0, "hand.txt");
 
 
 	int t=5000;
@@ -85,19 +90,21 @@ int main (int agrc, char **argv)
 		for (i=0 ; i<Nline ; i++)
 		{
 			//printf("line: %i\n",(int)data0[i][0]);
-			send_int16_TCP_server((data_RP.client_list), data0[i], (int)data_RP.buffer_length+1, -1);
+			send_int16_TCP_server(client_list, data0[i], (int)buffer_length+1, -1);
 			usleep(t);
 		}
 		for (i=Nline ; i>0 ; i--)
 		{
 			//printf("line: %i\n",(int)data0[i-1][0]);
-			send_int16_TCP_server((data_RP.client_list), data0[i-1], (int)data_RP.buffer_length+1, -1);
+			send_int16_TCP_server(client_list, data0[i-1], (int)buffer_length+1, -1);
                         usleep(t);
 
 		}
 	}
 
 	printf("close all\n");
-	clear_data(&data_RP);
+	free(data0);
+	close_TCP_server(&sock, client_list);
+        free(client_list);
 	return 0;
 }
