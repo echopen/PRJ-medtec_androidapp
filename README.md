@@ -53,7 +53,7 @@ We follow the described integration process:
 ## Installation (for Developers)
 
 ### Setup environment
-In order to ease the developement and to prevent the contributor from the hassle of smecindg days configuring. We set up a [Virtual Machine](https://drive.google.com/open?id=0B0V8htWBLPWBVEh6ZEJPcFpmTEU), with all the tools needed. You can find all the informations [here](https://echopen.gitbooks.io/android-app/content/echopens_virtual_machine.html).
+In order to ease the developement and to prevent the contributor from the hassle of spending days configuring. We set up a [Virtual Machine](https://drive.google.com/open?id=0B0V8htWBLPWBVEh6ZEJPcFpmTEU), with all the tools needed. You can find all the informations [here](https://echopen.gitbooks.io/android-app/content/echopens_virtual_machine.html).
 
 You can also configure manually your development environement. 
 
