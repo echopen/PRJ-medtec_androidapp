@@ -16,8 +16,8 @@
 #define SOCKET_ERROR -1
 #define closesocket(s) close(s)
 
-extern float x0;
-extern float xf;
+extern float r0;
+extern float rf;
 extern int dec;
 extern int Nline;
 extern double sector;
@@ -91,8 +91,8 @@ void add_client(client* client_list, SOCKET sock_server)
 		int Nset=6;
 		char buffer[Nset];
 		
-		buffer[0]=(char)x0;
-		buffer[1]=(char)xf;
+		buffer[0]=(char)r0;
+		buffer[1]=(char)rf;
 		buffer[2]=(char)dec;
 		buffer[3]=(char)Nline;
 		buffer[4]=(char)sector;
@@ -198,8 +198,8 @@ void get_RP_settings(SOCKET *sock)
 	int Nset=6;
 	char tmp[Nset];
 	receive_TCP_client(sock, tmp, Nset);
-	x0=(float)int_converter(tmp[0]);
-	xf=(float)int_converter(tmp[1]);
+	r0=(float)int_converter(tmp[0]);
+	rf=(float)int_converter(tmp[1]);
 	dec=int_converter(tmp[2]);
 	Nline=int_converter(tmp[3]);
 	sector=(double)int_converter(tmp[4]);
@@ -270,10 +270,20 @@ void launch_server(SOCKET* sock, client* client_list)
 void close_TCP_server(SOCKET* sock, client* client_list)
 {
 	int i=0;
+	int j=24;
 
 	pthread_cancel(TCP_server_thread);//close thread
 
-	for(i=0 ; i<client_list->NbClient ; i++){close(client_list->sock_client[i]);}
+	//for(i=0 ; i<client_list->NbClient ; i++){close(client_list->sock_client[i]);}
+	for(i=0 ; i<client_list->NbClient ; i++)
+        {
+	printf("i=%i\n",i);
+	printf("socket=%i\n",client_list->sock_client[i]);
+        j=shutdown(client_list->sock_client[i],SHUT_RDWR);
+	printf("j=%i\n",j);
+        close(client_list->sock_client[i]);
+        }
+
 	close((*sock));
 	clear_struct_client(client_list);
 }
