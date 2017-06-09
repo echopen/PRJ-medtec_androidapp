@@ -11,6 +11,7 @@ import android.content.res.AssetManager;
 import android.os.Debug;
 import android.util.Log;
 
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.preproc.ScanConversion;
@@ -27,6 +28,7 @@ import java.io.PushbackInputStream;
 import java.net.Socket;
 
 import java.util.Arrays;
+import java.util.Observable;
 
 import static com.echopen.asso.echopen.utils.Constants.PreProcParam.TCP_IMG_DATA;
 import static com.echopen.asso.echopen.utils.Constants.PreProcParam.TCP_NUM_SAMPLES;
@@ -42,8 +44,8 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private DataInputStream dataInputStream;
 
-    public ProcessTCPTask(Activity activity, MainActionController mainActionController, RenderingContextController iRenderingContextController, ScanConversion scanConversion, String ip, int port) {
-        super(activity, mainActionController, scanConversion, iRenderingContextController);
+    public ProcessTCPTask(Activity activity, RenderingContextController iRenderingContextController, EchographyImageStreamingService iEchographyImageStreamingService, String ip, int port) {
+        super(activity, iRenderingContextController, iEchographyImageStreamingService);
         this.ip = ip;
         this.port = port;
     }
@@ -165,7 +167,6 @@ public class ProcessTCPTask extends AbstractDataTask {
 
         int lNbSamplesPerLine = (int) (2 * (lRf - lR0) * Constants.PreProcParam.ADC_FREQUENCY_CLOCK / (Constants.PreProcParam.SPEED_OF_ACOUSTIC_WAVE * lDecimation));
 
-        // TODO: inject Device Configuration in rendering pipeline instead of using constants
         Log.d(TAG, "R0 " + lR0 + "Rf " + lRf + "Decimation " + lDecimation + "SamplingFrequency " + lSamplingFrequency + "NbLinePerImage "+ lNbLinePerImage + "Probe Sector Angle " + lProbeSectorAngle + "Mode " + lMode + "NbSamplePerLine " + lNbSamplesPerLine);
         return new DeviceConfiguration(lR0, lRf, lProbeSectorAngle, lSamplingFrequency, lNbLinePerImage, lNbSamplesPerLine);
     }

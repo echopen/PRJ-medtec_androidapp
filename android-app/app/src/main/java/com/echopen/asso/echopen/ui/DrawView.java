@@ -11,6 +11,7 @@ import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.widget.ImageView;
 
+import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.model.Painter.SelfPaint;
 import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.utils.MathOp;

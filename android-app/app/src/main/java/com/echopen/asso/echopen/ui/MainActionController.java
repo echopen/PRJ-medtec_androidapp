@@ -2,12 +2,20 @@ package com.echopen.asso.echopen.ui;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
+import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingObserver;
 import com.echopen.asso.echopen.utils.Config;
+import com.echopen.asso.echopen.utils.Timer;
 
 public class MainActionController extends AbstractActionController {
+
+    private final String TAG = this.getClass().getSimpleName();
 
     private Activity activity;
 
@@ -17,6 +25,7 @@ public class MainActionController extends AbstractActionController {
 
     public MainActionController(Activity activity) {
         this.activity = activity;
+
         displayAction();
     }
 

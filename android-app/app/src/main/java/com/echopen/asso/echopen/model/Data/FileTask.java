@@ -20,20 +20,17 @@ public class FileTask extends AbstractDataTask {
     private final Data data;
 
     public FileTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream, RenderingContextController iRenderingContextController) {
-        super(activity, mainActionController, scanConversion, iRenderingContextController);
+        super(activity, iRenderingContextController, null);
         InputStreamReader isReader = new InputStreamReader(inputStream);
         data = new Data(isReader);
-        scanconversion = new ScanConversion(data);
-        ScanConversion.compute_tables();
     }
 
     @Override
     protected Void doInBackground(Void... Voids) {
         while (true) {
             RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();
-            scanconversion.setData(data);
 
-            refreshUI(scanconversion, lCurrentRenderingContext);
+            //refreshUI(lCurrentRenderingContext);
             //            try {
 //                Thread.sleep(100);
 //            } catch (InterruptedException e) {
