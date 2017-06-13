@@ -1,18 +1,21 @@
-In this folder one can find file for emulating the echopen kit on a RedPitaya with two differents images. The first image is a simple plate, and the second is a hand. Both images raw data (data with the phase, not the envelope of the image) are written in the files hand.txt and plate.txt. "raw" images and scan-converted images that must be obtained are shown on the png files. 
+In this folder, one can find tool for compiling a program that will emul an echopen probe. This emulator can run on a PC or on a RedPitaya (to be close to a real kit).
 
-The sources of the codes are in srcbin folder.
+For compiling the C code (./srcbin/probe_emulator.c), use the bash file probe_emulator.sh provide here. Option for choosing the device on which the program will run use -m option, RP for RedPitaya and PC for your PC such as:
 
-Protocol:
-- turn on the RedPitaya the RedPitaya and connect to RedPitaya wifi (pass:redpitaya)
-- copy files (plate.txt, plate_emulator, hand.txt, hand_emulator) in a folder of the RedPitaya (command line: scp ./name root@192.168.128.3:/root/)
-- connect to the RedPitaya (command line: ssh root@192.168.128.3, pass: root);
-- if you don't have the right to execute plate_emulator or hand emulator do a chmod 777 on the file then execute it
-- enjoy
+	sh probe_emulator.sh -m RP
 
-The source code ./srcbin/emul.c can be compiled also for linux, so the emulator can run on your computer. To change the image to send change the file to load on line 84:
+If you chose PC option, the executable file will be located in this folder. If you chose RP option, the executable will be send in the RedPitaya. This executable need an option in: void, plate, hand and film:
 
-    load(buffer_length, Nline, data0, "hand.txt");
+	./probe_emulator plate
 
-to compile write command line:
+* void option will send on a loop an image fill with only value 8192
+* plate option will send on a loop an image of a plate
+* hand option will send on a loop an image of the cross-section of a hand
+* film will send on a loop an echographic film of the cross-sections of a hand an harm
 
-    gcc -g emul.c -o toto_emulator -lpthread
+To execute the program on the RedPitaya you first need to connect to the RedPitaya *via* ssh:
+
+	ssh root@192.168.128.3
+
+pass is root. At connection you will be situated in /root folder where is located the program. Now you can just lanch it (with correct option).
+

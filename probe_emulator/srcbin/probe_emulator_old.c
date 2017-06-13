@@ -3,7 +3,7 @@
 #include<stdint.h>
 #include<time.h>
 #include<signal.h>
-#include<string.h>
+//#include<string.h>
 //#include<errno.h>
 
 #include "TCP_API.h"
@@ -143,17 +143,8 @@ void send_image(int16_t** data, int sens)
 	}
 }
 
-int main (int argc, char **argv)
+int main (int agrc, char **argv)
 {
-	if (argc==1||argc>2)
-	{
-		printf("error, probe emulator must be launch with an option (void, plate, hand or film\n");
-		printf("try ./probe_emulator plate\n");
-	        free(client_list);
-	        free(data0);
-		exit(1);
-	}
-
 	//close server and RedPitaya if CTRL+C
 	signal(SIGINT, signal_callback_handler);
 
@@ -164,91 +155,59 @@ int main (int argc, char **argv)
         init_TCP_server(&sock, PORT, client_list, Nmax);
         launch_server(&sock, client_list);
 
-	if (strcmp(argv[1],"void")==0)
+
+/*	//empty image
+	init_data();
+	int i=0, j=0;
+	for (i=0 ; i<Nline ; i++)
 	{
-		printf("void image\n");
-		//empty image
-		init_data();
-		int i=0, j=0;
-		for (i=0 ; i<Nline ; i++)
+		for (j=1 ; j<(int)buffer_length+1 ; j++) {data0[i][j]=8192;}
+	}
+	while(1)
+	{
+		send_image(data0, 1);
+		send_image(data0, 2);
+	}
+
+	//one fixed image
+
+        char *path;
+        path="./data/plate";
+        load_settings(path);
+	init_data();
+
+	char name[50];
+	sprintf(name,"%s/plate.txt",path);
+	load_image(buffer_length, Nline, data0, name);
+	while(1)
+        {
+                send_image(data0, 1);
+                send_image(data0, 2);
+        }
+
+*/
+	//one "film"
+
+	int i=0, tmp=0;
+	int Nimage=100;
+
+	char *path;
+        path="./data/film";
+        load_settings(path);
+        init_data();
+
+	char name[50];
+
+	while(1)
+	{
+		for (i=0 ; i<=Nimage ; i++)
 		{
-			for (j=1 ; j<(int)buffer_length+1 ; j++) {data0[i][j]=8192;}
+			tmp=i/2;
+			sprintf(name,"%s/int%i.txt",path,i);
+		        load_image(buffer_length, Nline, data0, name);
+			if (tmp*2==i) {send_image(data0,1);}
+			else {send_image(data0,2);}
 		}
-		while(1)
-		{
-			send_image(data0, 1);
-			send_image(data0, 2);
-		}
-	}
-	else if(strcmp(argv[1],"plate")==0)
-	{
-		printf("plage image\n");
-		//one fixed image
-	        char *path;
-	        path="./data/plate";
-	        load_settings(path);
-		init_data();
-
-		char name[50];
-		sprintf(name,"%s/plate.txt",path);
-		load_image(buffer_length, Nline, data0, name);
-		while(1)
-	        {
-	                send_image(data0, 1);
-	                send_image(data0, 2);
-	        }
-	}
-	else if(strcmp(argv[1],"hand")==0)
-	{
-		printf("hand image\n");
-                //one fixed image
-                char *path;
-                path="./data/hand";
-                load_settings(path);
-                init_data();
-
-                char name[50];
-                sprintf(name,"%s/hand.txt",path);
-                load_image(buffer_length, Nline, data0, name);
-                while(1)
-                {
-                        send_image(data0, 1);
-                        send_image(data0, 2);
-		}
-	}
-	else if(strcmp(argv[1],"film")==0)
-	{
-		printf("film\n");		
-		//one "film"
-		int i=0, tmp=0;
-		int Nimage=100;
-
-		char *path;
-	        path="./data/film";
-	        load_settings(path);
-	        init_data();
-
-		char name[50];
-			while(1)
-		{
-			for (i=0 ; i<=Nimage ; i++)
-			{
-				tmp=i/2;
-				sprintf(name,"%s/int%i.txt",path,i);
-			        load_image(buffer_length, Nline, data0, name);
-				if (tmp*2==i) {send_image(data0,1);}
-				else {send_image(data0,2);}
-			}
-		}
-	}
-	else 
-	{
-		printf("you write option: %s\n",argv[1]);
-		printf("Error wrong argument for probe_emulator. Option must be in:\n");
-		printf("void for a image with only 8192 value\n");
-		printf("plate for a static image of a plate\n");
-		printf("hand for a static image of hand\n");
-		printf("film for an echography film of hand and arm\n");
 	}
 
 
