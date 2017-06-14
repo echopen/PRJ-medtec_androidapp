@@ -52,11 +52,16 @@ void load_settings(char *directory)
 		}
 	}
 
-	r0=(float)set[0];
-	rf=(float)set[1];
-	dec=set[2];
-	Nline=set[3];
-	sector=(double)set[4];
+	float *pr0=&r0;
+	(*pr0)=(float)set[0];
+	float *prf=&rf;
+	(*prf)=(float)set[1];
+	int *pdec=&dec;
+	(*pdec)=set[2];
+	int *pNline=&Nline;
+	(*pNline)=set[3];
+	double *psector=&sector;
+	(*psector)=(double)set[4];
 	mode_RP=set[5];
 }
 
