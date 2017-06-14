@@ -285,18 +285,22 @@ void launch_server(SOCKET* sock, client* client_list)
 void close_TCP_server(SOCKET* sock, client* client_list)
 {
 	int i=0;
-	int j=24;
 
 	pthread_cancel(TCP_server_thread);//close thread
 
 	//for(i=0 ; i<client_list->NbClient ; i++){close(client_list->sock_client[i]);}
 	for(i=0 ; i<client_list->NbClient ; i++)
         {
-	printf("i=%i\n",i);
-	printf("socket=%i\n",client_list->sock_client[i]);
-        j=shutdown(client_list->sock_client[i],SHUT_RDWR);
-	printf("j=%i\n",j);
-        close(client_list->sock_client[i]);
+        	if (shutdown(client_list->sock_client[i],SHUT_RDWR)!=0)
+		{
+			perror("shutdown server");
+			exit(1);
+		}
+        	if (close(client_list->sock_client[i])!=0)
+		{
+			perror("close");
+			exit(1);
+		}
         }
 
 	close((*sock));
@@ -305,7 +309,16 @@ void close_TCP_server(SOCKET* sock, client* client_list)
 
 void close_TCP_client(SOCKET* sock)
 {
-	close((*sock));
+	if (shutdown((*sock), SHUT_RDWR)!=0)
+	{
+		perror("shutdown client");
+		exit(1);
+	}
+	if (close((*sock))!=0)
+	{
+		perror("close");
+		exit(1);
+	}
 }
 
 int send_TCP_server(client* client_list, char* buffer, int buff_length, int target)
