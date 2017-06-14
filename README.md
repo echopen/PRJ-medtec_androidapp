@@ -56,6 +56,30 @@ To install on a device:
 Note: It seems that we use android-sdk 19 but current android-sdk version is 24
     now...
 
+### Probe emulator
+
+In the file ./probe_emulator, one can find source code and executable of a programe that send data such as the echopen prototype. This program can run on a RedPitaya or on your computer (for linux OS).
+
+For compiling the C code, use the bash file probe_emulator.sh provided. To choose the device on which the program will run, use -m option, where option is RP for RedPitaya and PC for your PC such as:
+
+	sh probe_emulator.sh -m RP
+
+If you chose PC option, the executable file will be located in the ./probe_emulator folder. If you chose RP option, the executable will be send in the RedPitaya (you must connect to Red Pitaya wireless network first). This executable need an option in: void, plate, hand and film:
+
+	./probe_emulator plate
+
+* void option will send on a loop an image fill with only value 8192
+* plate option will send on a loop an image of a plate
+* hand option will send on a loop an image of the cross-section of a hand
+* film will send on a loop an echographic film of the cross-sections of a hand an harm
+
+To execute the program on the RedPitaya you first need to connect to the RedPitaya *via* ssh:
+
+	ssh root@192.168.128.3
+
+pass is root. At connection you will be situated in /root folder where is located the program. Now you can just lanch it (with correct option).
+
+
 ## How to contribute
 
 Report a bug, ask for features, for all of this, we use [Github issues](https://github.com/echopen/android-app/issues)
