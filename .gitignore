@@ -1,7 +1,8 @@
 *.iml
 .gradle
 /android-app/local.properties
-/.idea/*
+/android-app/.idea
+/android-app/build
 .DS_Store
 /build
 /android-app/openCVLibrary310/build

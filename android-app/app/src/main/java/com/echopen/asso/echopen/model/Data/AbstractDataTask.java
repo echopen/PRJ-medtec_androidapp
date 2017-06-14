@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.support.v8.renderscript.RenderScript;
 import android.util.Log;
 
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.filters.EnvelopeDetectionRenderscriptFilter;
 import com.echopen.asso.echopen.filters.IntensityUniformGainFilter;
 import com.echopen.asso.echopen.filters.IntensityToRGBFilter;
@@ -27,45 +28,16 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
     protected Activity activity;
 
-    protected ScanConversion scanconversion;
-
-    protected MainActionController mainActionController;
-
     protected RenderingContextController mRenderingContextController;
 
-    public AbstractDataTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, RenderingContextController iRenderingContextController) {
-        this.scanconversion = scanConversion;
+    protected EchographyImageStreamingService mEchographyImageStreamingService; //TODO should remove dependency
+
+    public AbstractDataTask(Activity activity, RenderingContextController iRenderingContextController, EchographyImageStreamingService iEchographyImageStreamingService) {
         this.activity = activity;
-        this.mainActionController = mainActionController;
 
         this.mRenderingContextController = iRenderingContextController;
-    }
 
-    protected void refreshUI(ScanConversion scanconversion, RenderingContext iCurrentRenderingContext) {
-        int[] scannedArray = scanconversion.getDataFromInterpolation();
-
-        IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
-        lIntensityGainFilter.setImageInput(scannedArray);
-        lIntensityGainFilter.applyFilter(iCurrentRenderingContext.getIntensityGain());
-        int[] scannedGainArray = lIntensityGainFilter.getImageOutput();
-
-        IntensityToRGBFilter lIntensityToRGBFilter = new IntensityToRGBFilter();
-        lIntensityToRGBFilter.setImageInput(scannedGainArray);
-        lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
-        int colors[] =  lIntensityToRGBFilter.getImageOutput();
-
-        //Arrays.fill(colors, 0, 4*scannedArray.length, Color.WHITE);
-        final Bitmap bitmap = Bitmap.createBitmap(colors, 512*Constants.PreProcParam.SCALE_IMG_FACTOR, 512/Constants.PreProcParam.SCALE_IMG_FACTOR, Bitmap.Config.ARGB_8888);
-        try {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mainActionController.displayMainFrame(bitmap);
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        this.mEchographyImageStreamingService = iEchographyImageStreamingService;
     }
 
     protected void rawDataPipeline(RenderingContext iCurrentRenderingContext, DeviceConfiguration iDeviceConfiguration, Integer[] iRawImageData) {
@@ -80,7 +52,6 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
             lImageInput[i] = (int) iRawImageData[i];
         }
 
-        Timer.logResult("Create Fake Images");
         RenderScript lRenderscript = RenderScript.create(activity);
         // envelop detection filter
         EnvelopeDetectionRenderscriptFilter lEnvelopDetectionFilter = new EnvelopeDetectionRenderscriptFilter();
@@ -112,16 +83,6 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, Bitmap.Config.ARGB_8888);
         Timer.logResult("Create Bitmap");
 
-        try {
-            activity.runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mainActionController.displayMainFrame(bitmap);
-                    Timer.logResult("Display Main Frame");
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        mEchographyImageStreamingService.emitNewImage(bitmap);
     }
 }

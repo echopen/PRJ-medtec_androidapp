@@ -5,10 +5,10 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
@@ -21,31 +21,28 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.custom.CustomActivity;
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
 import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
 import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
 import com.echopen.asso.echopen.ui.ConstantDialogFragment;
+import com.echopen.asso.echopen.ui.DrawView;
 import com.echopen.asso.echopen.ui.FilterDialogFragment;
 import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.ui.RulerView;
-import com.echopen.asso.echopen.ui.onViewUpdateListener;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
+import com.echopen.asso.echopen.utils.Timer;
 import com.echopen.asso.echopen.utils.UIParams;
 
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.text.DecimalFormat;
-
-import static com.echopen.asso.echopen.utils.Constants.PreProcParam.NUM_SAMPLES_PER_LINE;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -58,7 +55,7 @@ import static com.echopen.asso.echopen.utils.Constants.PreProcParam.NUM_SAMPLES_
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends CustomActivity implements AbstractActionActivity {
+public class MainActivity extends CustomActivity implements AbstractActionActivity, EchographyImageVisualisationContract.View {
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -78,7 +75,10 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
 
     public static boolean UDP_ACQUISITION = false;
 
+    private EchographyImageStreamingService mEchographyImageStreamingService;
     private RenderingContextController mRenderingContextController;
+
+    private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
 
     private SeekBar mSeekBarLinearLutOffset;
     private TextView mTextViewLinearLutOffset;
@@ -118,11 +118,16 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.vMiddle);
         linearLayout.setBackgroundColor(Color.TRANSPARENT);
 
+        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication() ).getEchographyImageStreamingService();
+        mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
+
+        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
+        this.setPresenter(mEchographyImageVisualisationPresenter);
+
         initSwipeViews();
         initActionController();
         initViewComponents();
 
-        mRenderingContextController = new RenderingContextController();
         initImageManipulationViewComponents();
         
         setupContainer();
@@ -150,6 +155,12 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
                 mRenderingContextController.setIntensityGain(lGain);
             }
         });
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        mEchographyImageVisualisationPresenter.start();
     }
 
     private void initImageManipulationViewComponents() {
@@ -269,7 +280,9 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
             if (UDP_ACQUISITION) {
                 bitmapDisplayer.readDataFromUDP();
             } else if (TCP_ACQUISITION) {
-                bitmapDisplayer.readDataFromTCP();
+                //bitmapDisplayer.readDataFromTCP();
+                EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
+                mEchographyImageStreamingService.connect(lTCPMode, this);
             } else {
                 AssetManager assetManager = getResources().getAssets();
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
@@ -453,5 +466,29 @@ public class MainActivity extends CustomActivity implements AbstractActionActivi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         startActivity(new Intent(this, MainActivity.class));
+    }
+
+    @Override
+    public void refreshImage(final Bitmap iBitmap) {
+        try{
+            this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    DrawView echoImage = (DrawView) findViewById(R.id.echo);
+                    echoImage.setImageBitmap(iBitmap);
+                    echoImage.setColorFilter(Config.colorMatrixColorFilter);
+                    Timer.logResult("Display Bitmap");
+                }
+            });
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void setPresenter(EchographyImageVisualisationContract.Presenter iPresenter) {
+        mEchographyImageVisualisationPresenter = iPresenter;
     }
 }

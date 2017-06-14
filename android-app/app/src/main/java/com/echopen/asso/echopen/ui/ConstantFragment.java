@@ -13,6 +13,7 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 
 import com.echopen.asso.echopen.MainActivity;
+import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.utils.Constants;
 
 public class ConstantFragment extends Fragment

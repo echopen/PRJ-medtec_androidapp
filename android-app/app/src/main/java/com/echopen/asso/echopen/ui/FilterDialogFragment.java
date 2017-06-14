@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.filters.BaseProcess;
 import com.echopen.asso.echopen.filters.ImageEnhancement;
 import com.echopen.asso.echopen.filters.WaveletDenoise;
