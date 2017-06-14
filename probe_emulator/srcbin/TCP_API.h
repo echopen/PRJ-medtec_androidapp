@@ -91,13 +91,6 @@ void add_client(client* client_list, SOCKET sock_server)
 		int Nset=6;
 		char buffer[Nset];
 		
-		/*buffer[0]=(char)r0;
-		buffer[1]=(char)rf;
-		buffer[2]=(char)dec;
-		buffer[3]=(char)Nline;
-		buffer[4]=(char)sector;
-		buffer[5]=(char)mode_RP;*/
-
 		if (client_list->NbClient<=client_list->Nmax)
 		{
 			tmp=accept(sock_server,(SOCKADDR *)&client_list->sin_client[client_list->NbClient],&socklen);
