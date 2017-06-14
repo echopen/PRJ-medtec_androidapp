@@ -91,12 +91,12 @@ void add_client(client* client_list, SOCKET sock_server)
 		int Nset=6;
 		char buffer[Nset];
 		
-		buffer[0]=(char)r0;
+		/*buffer[0]=(char)r0;
 		buffer[1]=(char)rf;
 		buffer[2]=(char)dec;
 		buffer[3]=(char)Nline;
 		buffer[4]=(char)sector;
-		buffer[5]=(char)mode_RP;
+		buffer[5]=(char)mode_RP;*/
 
 		if (client_list->NbClient<=client_list->Nmax)
 		{
@@ -109,6 +109,13 @@ void add_client(client* client_list, SOCKET sock_server)
 			}
 			else
 			{
+				buffer[0]=(char)r0;
+		                buffer[1]=(char)rf;
+		                buffer[2]=(char)dec;
+		                buffer[3]=(char)Nline;
+		                buffer[4]=(char)sector;
+		                buffer[5]=(char)mode_RP;
+
 				send_TCP_server(client_list, buffer, Nset, client_list->NbClient);
 				client_list->NbClient+=1;
 				printf("Client number %i on %i, connected on socket = %i\n",client_list->NbClient,client_list->Nmax,client_list->sock_client[client_list->NbClient-1]);
@@ -222,6 +229,14 @@ void init_TCP_server(SOCKET* sock, int Port,client* client_list, unsigned int Ma
 	server.sin_family=AF_INET;
 	server.sin_port=htons(Port);
 	server.sin_addr.s_addr=INADDR_ANY; //allow all IP to access to the server
+
+	//Allow other sockets to bind() to this port, use to avoid Address already in use
+	int tr=1;
+	if (setsockopt((*sock),SOL_SOCKET,SO_REUSEADDR,&tr,sizeof(int)) == -1) 
+	{
+		perror("setsockopt");
+		exit(1);
+	}
 
 	//Link communication point
 	if (bind((*sock), (SOCKADDR *)&server, sizeof(SOCKADDR))==SOCKET_ERROR)
