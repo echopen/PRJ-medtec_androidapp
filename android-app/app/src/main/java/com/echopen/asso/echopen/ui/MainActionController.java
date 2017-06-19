@@ -116,13 +116,10 @@ public class MainActionController extends AbstractActionController {
     }
 
     public void setTransparentTextView(){
-        TextView textView = (TextView) findViewById(R.id.measure);
-        textView.setVisibility(View.GONE);
+
     }
 
     public void displayMainFrame(Bitmap bitmap){
-        DrawView echoImage = (DrawView) findViewById(R.id.echo);
-        echoImage.setImageBitmap(bitmap);
-        echoImage.setColorFilter(Config.colorMatrixColorFilter);
+
     }
 }

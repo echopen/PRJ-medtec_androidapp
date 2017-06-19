@@ -13,7 +13,6 @@ import com.echopen.asso.echopen.filters.IntensityToRGBFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.filters.ScanConversionRenderscriptFilter;
 import com.echopen.asso.echopen.preproc.ScanConversion;
-import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;

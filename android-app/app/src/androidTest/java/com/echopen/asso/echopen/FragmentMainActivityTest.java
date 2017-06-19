@@ -6,7 +6,6 @@ import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
 import android.widget.ListView;
 
-import com.echopen.asso.echopen.ui.ConstantDialogFragment;
 import com.robotium.solo.Solo;
 
 import static android.support.test.espresso.Espresso.onView;
