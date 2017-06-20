@@ -479,14 +479,14 @@ public class ScanConversion {
     }
 
     public int[] getDataFromInterpolation(){
-        try {
+       /* try {
             if(MainActivity.UDP_ACQUISITION || MainActivity.TCP_ACQUISITION)
                 //TODO:replace with scan conversion filter
                 return null;
             else
                 return compute_interpolation();
         } catch (IOException e) {
-        }
+        }*/
         return null;
 
 //        try {
