@@ -5,7 +5,11 @@
 #include<signal.h>
 #include<string.h>
 //#include<errno.h>
-
+#if defined(__APPLE__) || define(__MACH__)
+      #ifndef MSG_NOSIGNAL
+         #define MSG_NOSIGNAL SO_NOSIGPIPE
+      #endif
+#endif
 #include "TCP_API.h"
 
 #define PORT 7538

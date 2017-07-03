@@ -3,8 +3,18 @@ package com.echopen.asso.echopen;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+
+import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -30,6 +40,30 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //-----------------------------------------------------------------
+
+        EchOpenApplication app = (EchOpenApplication) getApplication(); // A caster en EchOpenApplication
+        EchographyImageStreamingService stream = app.getEchographyImageStreamingService();
+
+        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(stream, new EchographyImageVisualisationContract.View() {
+            @Override
+            public void refreshImage(Bitmap iBitmap) {
+                Log.d("IMG",iBitmap+"");
+            }
+
+            @Override
+            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
+
+            }
+        });
+
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.72.157.5",REDPITAYA_PORT);
+
+        stream.connect(mode,this);
+
+
+        //-----------------------------------------------------------------
+
     }
 
     @Override

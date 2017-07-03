@@ -15,6 +15,7 @@ public class RenderingContextController {
 
     public RenderingContextController() {
             this.mRenderingContext = new RenderingContext();
+
     }
 
     public synchronized RenderingContext getCurrentRenderingContext(){
