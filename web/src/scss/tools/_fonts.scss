@@ -1,0 +1,33 @@
+$base-path-font: '/dist/fonts/';
+
+@mixin registerFont($name) {
+  $fontpath: "#{$base-path-font}#{$name}/#{$name}";
+  @font-face {
+    font-family: "#{$name}";
+    src: url('#{$fontpath}.eot');
+    src: url('#{$fontpath}.eot?#iefix') format('embedded-opentype'),
+    url('#{$fontpath}.woff') format('woff'),
+    url('#{$fontpath}.ttf') format('truetype'),
+    url('#{$fontpath}.svg') format('svg');
+  }
+}
+
+$font-NHaasGroteskDSPro-65Md: 'NHaasGroteskDSPro-65Md';
+$font-Helvetica-LT-Condensed-Black: 'Helvetica LT Condensed Black';
+$font-NHaasGroteskDSPro-45Lt: "NHaasGroteskDSPro-45Lt";
+$font-NHaasGroteskDSPro-95Blk: "NHaasGroteskDSPro-95Blk";
+$font-NHaasGroteskDSPro-75Bd: "NHaasGroteskDSPro-75Bd";
+$font-Helvetica-LT-Bold: "Helvetica LT Bold";
+$font-NHaasGroteskDSPro-55Rg: "NHaasGroteskDSPro-55Rg";
+$font-NHaasGroteskTXPro-56It: "NHaasGroteskTXPro-56It";
+$font-NHaasGroteskTXPro-66MdIt: "NHaasGroteskTXPro-66MdIt";
+
+@include registerFont($font-NHaasGroteskDSPro-55Rg);
+@include registerFont($font-Helvetica-LT-Bold);
+@include registerFont($font-NHaasGroteskDSPro-75Bd);
+@include registerFont($font-NHaasGroteskDSPro-65Md);
+@include registerFont($font-Helvetica-LT-Condensed-Black);
+@include registerFont($font-NHaasGroteskDSPro-45Lt);
+@include registerFont($font-NHaasGroteskDSPro-95Blk);
+@include registerFont($font-NHaasGroteskTXPro-56It);
+@include registerFont($font-NHaasGroteskTXPro-66MdIt);

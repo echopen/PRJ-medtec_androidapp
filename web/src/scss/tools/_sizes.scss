@@ -1,0 +1,109 @@
+//
+// Sizes
+//
+
+// Extra small screen / phone
+$screen-xsCustom: 480px !default;
+$screen-xsCustom-min: $screen-xsCustom !default;
+$screen-phone: $screen-xsCustom-min !default;
+// Small screen / tablet
+$screen-smCustom: 768px !default;
+$screen-smCustom-min: $screen-smCustom !default;
+$screen-tablet: $screen-smCustom-min !default;
+// Medium screen / desktop
+$screen-mdCustom: 1024px !default;
+$screen-mdCustom-min: $screen-mdCustom !default;
+$screen-desktop: $screen-mdCustom-min !default;
+// Large screen / wide desktop
+$screen-lgCustom: 1280px !default;
+$screen-lgCustom-min: $screen-lgCustom !default;
+$screen-lgCustom-desktop: $screen-lgCustom-min !default;
+
+//
+// Media queries mixins
+//
+
+@mixin desktop-soir-algerie {
+  @media (max-width: (1200px - 1)) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: ($screen-smCustom-min - 1)) {
+    @content;
+  }
+}
+
+@mixin tablet-portrait {
+  @media (min-width: $screen-smCustom-min) and (max-width: ($screen-mdCustom-min - 1)) {
+    @content;
+  }
+}
+
+@mixin mobile-to-tablet-portrait {
+  @media (max-width: ($screen-mdCustom-min - 1)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: $screen-mdCustom-min) and (max-width: ($screen-lgCustom-min - 1)) {
+    @content;
+  }
+}
+
+@mixin large-desktop {
+  @media (min-width: $screen-lgCustom-min) {
+    @content;
+  }
+}
+
+// Mix of tablet-landscape AND tablet-portrait
+@mixin tablet {
+  @media (min-width: $screen-smCustom-min) and (max-width: ($screen-lgCustom-min - 1)) {
+    @content;
+  }
+}
+
+// Mix tablet-portrait AND mobile
+@mixin very-small-device {
+  @media (max-width: ($screen-xsCustom-min - 1)) {
+    @content;
+  }
+}
+
+// Mix of tablet-portrait AND mobile
+@mixin small-device {
+  @media (max-width: ($screen-mdCustom-min - 1)) {
+    @content;
+  }
+}
+
+// Mix of upper tablet-portrait
+@mixin main-device {
+  @media (min-width: ($screen-mdCustom-min)) {
+    @content;
+  }
+}
+
+// Mix of tablet-landscape AND desktop
+@mixin big-device {
+  @media (min-width: $screen-mdCustom-min) {
+    @content;
+  }
+}
+
+// Only phone
+@mixin phone {
+  @media (max-width: ($screen-smCustom-min - 1)) {
+    @content;
+  }
+}
+
+// Not phone
+@mixin not-phone {
+  @media (min-width: $screen-smCustom-min) {
+    @content;
+  }
+}
