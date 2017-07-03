@@ -8,13 +8,13 @@ android {
 
     defaultConfig {
         applicationId "com.echopen.asso.echopen"
-        minSdkVersion 19
-        targetSdkVersion 25
+        minSdkVersion 18
+                targetSdkVersion 18
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
         renderscriptTargetApi 18
-        renderscriptSupportModeEnabled true
+                renderscriptSupportModeEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             moduleName "EchOpen"
