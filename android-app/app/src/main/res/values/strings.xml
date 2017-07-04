@@ -3,4 +3,5 @@
     <string name="app_name">echopen</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="hello_world">Hello_world</string>
+    <string name="intro_text">L\'echographie accessible</string>
 </resources>
