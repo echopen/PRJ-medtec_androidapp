@@ -23,4 +23,8 @@
     <color name="yellow">#F0CF43</color>
     <color name="green">#24c4b6</color>
     <color name="transparent_white">#60ffffff</color>
+
+    <!--MAIN ACTIVITY -->
+
+    <color name="eastern_blue">#2195BD</color>
 </resources>

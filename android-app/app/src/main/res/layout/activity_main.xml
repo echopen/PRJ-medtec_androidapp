@@ -1,16 +1,54 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/main_activity_bg"
+    android:weightSum="1">
 
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name"
-        />
+    <RelativeLayout
+        android:layout_width="304dp"
+        android:layout_height="263dp"
+        android:layout_weight="0.97">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            app:srcCompat="@drawable/echopen"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="80dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="match_parent"
+        android:layout_height="274dp"
+        android:layout_gravity="center">
+
+        <Button
+            android:id="@+id/new_patient"
+            android:layout_width="219dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="94dp"
+            android:text="@string/main_activity_bt_new_patient"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:id="@+id/patient_folders"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="@string/main_activity_bt_old_patient"
+            android:layout_marginTop="21dp"
+            android:layout_below="@+id/new_patient"
+            android:layout_alignStart="@+id/new_patient"
+            android:layout_alignEnd="@+id/new_patient" />
+
+    </RelativeLayout>
 
 </LinearLayout>
 
