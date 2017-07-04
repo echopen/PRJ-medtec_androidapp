@@ -4,11 +4,16 @@
 
 // Variables
 @import "variables";
-
+@import "./tools/sizes";
+@import "./tools/fonts";
 
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+@import "./components/footer";
+@import "./components/header";
 
 body{
   background-color: #f0ad4e;

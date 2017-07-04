@@ -2,6 +2,6 @@
 
 @section('content')
     <section class="welcome">
-        <p>Home</p>
+        @include('components.home_presentation')
     </section>
 @endsection
