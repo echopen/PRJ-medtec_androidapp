@@ -22,13 +22,6 @@ import com.echopen.asso.echopen.utils.Constants;
  */
 
 public class MainActivity extends Activity implements EchographyImageVisualisationContract.View, View.OnClickListener {
-
-    public static boolean LOCAL_ACQUISITION = true;
-
-    public static boolean TCP_ACQUISITION = false;
-
-    public static boolean UDP_ACQUISITION = false;
-
     private EchographyImageStreamingService mEchographyImageStreamingService;
     //private RenderingContextController mRenderingContextController;
 
@@ -87,9 +80,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ImageView echoImage = (ImageView) findViewById(R.id.echo);
-                    echoImage.setImageBitmap(iBitmap);
-                    echoImage.setColorFilter(Config.colorMatrixColorFilter);
+                    doFinish(iBitmap);
                 }
             });
         } catch (Exception e) {
@@ -106,6 +97,12 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     public void onClick(View view) {
         // Add the id of element clicked
         onBtnCLick(view.getId());
+    }
+
+    public synchronized void doFinish(Bitmap img) {
+        ImageView echoImage = (ImageView) findViewById(R.id.echo);
+        echoImage.setImageBitmap(img);
+        echoImage.setColorFilter(Config.colorMatrixColorFilter);
     }
 
     public void onBtnCLick(int id) {

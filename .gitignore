@@ -8,3 +8,4 @@ build
 android-app/openCVLibrary310/build
 captures
 .externalNativeBuild
+probe-emulator
