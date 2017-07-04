@@ -1,4 +1,10 @@
-header{
+header {
     background-color: blue;
     height: 10px;
+    @include phone() {
+        background-color: red;
+    }
+    @include very-small-device() {
+        background-color: green;
+    }
 }
