@@ -59,19 +59,9 @@ public class MainActivity extends Activity {
                        public void run() {
                            ImageView echoImage = (ImageView) findViewById(R.id.imageView);
 
-                           Display display = getWindowManager().getDefaultDisplay();
-                           Point size = new Point();
-                           display.getSize(size);
-                           int width = size.x;
-                           int height = size.y;
-
 
                            echoImage.setImageBitmap(iBitmap);
                            echoImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                           System.out.println("Bitmap received");
-                           Log.d("Debug",iBitmap.getHeight() + "");
-                           Log.d("Debug",iBitmap.getWidth() + "");
                        }
                    });
                }
