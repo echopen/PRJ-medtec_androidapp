@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -62,6 +63,17 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         serviceEcho.connect(mode, this);
 
         presenter.listenEchographyImageStreaming();
+
+        Button btn_capture = (Button) findViewById(R.id.btn_capture);
+
+        btn_capture.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                Log.d("CLICK", "coucou fdp");
+
+            }
+        });
+
     }
 
     @Override
