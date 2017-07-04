@@ -14,6 +14,7 @@ import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImage
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 
+import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_IP;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
@@ -48,7 +49,7 @@ public class MainActivity extends Activity {
         EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(stream, new EchographyImageVisualisationContract.View() {
             @Override
             public void refreshImage(Bitmap iBitmap) {
-                Log.d("IMG",iBitmap+"");
+                Log.d("IMG", "Got image");
             }
 
             @Override
@@ -57,9 +58,11 @@ public class MainActivity extends Activity {
             }
         });
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.72.157.5",REDPITAYA_PORT);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("172.20.10.2",REDPITAYA_PORT);
 
         stream.connect(mode,this);
+        presenter.start();
+        
 
 
         //-----------------------------------------------------------------
