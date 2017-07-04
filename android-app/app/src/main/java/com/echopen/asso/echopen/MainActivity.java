@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
         /* aiming to synchronize views : when operator drags lines to measure distance between points,
          the measure is synchronized with a TextView */
-        Synchronizer.getInstance(this);
+        //Synchronizer.getInstance(this);
 
         setContentView(R.layout.activity_main);
 
