@@ -4,15 +4,21 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+import com.echopen.asso.echopen.utils.Config;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -44,8 +50,34 @@ public class MainActivity extends Activity {
 
         EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(stream, new EchographyImageVisualisationContract.View(){
            @Override
-           public void refreshImage(Bitmap iBitmap){
-               Log.d("IMG", iBitmap+"");
+           public void refreshImage(final Bitmap iBitmap){
+
+
+               try{
+                   runOnUiThread(new Runnable() {
+                       @Override
+                       public void run() {
+                           ImageView echoImage = (ImageView) findViewById(R.id.imageView);
+
+                           Display display = getWindowManager().getDefaultDisplay();
+                           Point size = new Point();
+                           display.getSize(size);
+                           int width = size.x;
+                           int height = size.y;
+
+
+                           echoImage.setImageBitmap(iBitmap);
+                           echoImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+
+                           System.out.println("Bitmap received");
+                           Log.d("Debug",iBitmap.getHeight() + "");
+                           Log.d("Debug",iBitmap.getWidth() + "");
+                       }
+                   });
+               }
+               catch (Exception e){
+                   e.printStackTrace();
+               }
            }
 
            @Override
