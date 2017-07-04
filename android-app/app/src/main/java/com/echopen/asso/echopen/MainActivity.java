@@ -6,31 +6,19 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-import com.echopen.asso.echopen.model.Data.BitmapDisplayer;
-import com.echopen.asso.echopen.model.Data.BitmapDisplayerFactory;
-import com.echopen.asso.echopen.model.Synchronizer;
-import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 
 /**
  * MainActivity class handles the main screen of the app.
- * Tools are called in the following order :
- * - initSwipeViews() handles the gesture tricks via GestureDetector class
- * - initViewComponents() mainly sets the clickable elements
- * - initActionController() and setupContainer() : in order to separate concerns, View parts are handled by the initActionController()
- * method which calls the MainActionController class that deals with MainActivity Views,
- * especially handles the display of the main screen picture
- * These two methods should be refactored into one
  */
 
 public class MainActivity extends Activity implements EchographyImageVisualisationContract.View, View.OnClickListener {
@@ -42,7 +30,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     public static boolean UDP_ACQUISITION = false;
 
     private EchographyImageStreamingService mEchographyImageStreamingService;
-    private RenderingContextController mRenderingContextController;
+    //private RenderingContextController mRenderingContextController;
 
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
 
@@ -56,25 +44,20 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        /* aiming to synchronize views : when operator drags lines to measure distance between points,
-         the measure is synchronized with a TextView */
-        //Synchronizer.getInstance(this);
-
         setContentView(R.layout.activity_main);
 
-        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication() ).getEchographyImageStreamingService();
-        mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
+        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
+        //mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
 
         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
         this.setPresenter(mEchographyImageVisualisationPresenter);
 
-        Button btn = (Button) findViewById(R.id.buttonGalerry);
+        ImageButton btn = (ImageButton) findViewById(R.id.btnGallery);
         btn.setOnClickListener(this);
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         mEchographyImageVisualisationPresenter.start();
         EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
@@ -89,8 +72,8 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
      * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
      *
      * @param requestCode, integer argument that identifies your request
-     * @param resultCode, to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
-     * @param data,       Intent instance
+     * @param resultCode,  to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
+     * @param data,        Intent instance
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -100,7 +83,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
     @Override
     public void refreshImage(final Bitmap iBitmap) {
-        try{
+        try {
             this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -109,8 +92,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                     echoImage.setColorFilter(Config.colorMatrixColorFilter);
                 }
             });
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -122,11 +104,19 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
     @Override
     public void onClick(View view) {
-        myFancyMethod();
+        // Add the id of element clicked
+        onBtnCLick(view.getId());
     }
 
-    public void myFancyMethod() {
-        Log.d("wazza","bjrjdhfjezkfjkekflejfehrfjzkmdzjdfgeikfoefhyezgdiuezh");
-        startActivity(new Intent(this,ListImagesActivity.class));
+    public void onBtnCLick(int id) {
+        switch (id) {
+            // If click on gallery button, we change the activity to the image gallery
+            case R.id.btnGallery:
+                startActivity(new Intent(this, ListImagesActivity.class));
+                break;
+            // If click on filter button, we display the filter modal
+            case R.id.btnFilter:
+                break;
+        }
     }
 }
