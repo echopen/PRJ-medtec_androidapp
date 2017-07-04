@@ -1,0 +1,56 @@
+language: android
+
+# Turn off caching to avoid any caching problems
+cache: false
+# Use the Travis Container-Based Infrastructure
+sudo: required
+
+dist: precise
+ 
+android: 
+  components: 
+    - build-tools-23.0.2
+    - android-22
+    - android-23
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - extra-android-support
+    - addon-google_apis-google-19
+    - sys-img-armeabi-v7a-android-22
+  licenses: 
+    - android-sdk-license-.+
+
+env:
+  global:
+    - ADB_INSTALL_TIMEOUT=8
+    
+before_script: 
+  - "echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null"
+  - "echo yes | android update sdk --filter android-23 --no-ui --force > /dev/null"
+  - echo yes | android update sdk --no-ui --all --filter build-tools-23.0.1
+  - "echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null"
+  - "echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null"
+  - "export NDK_VERSION=r10e"
+  
+  - curl -L http://dl.google.com/android/ndk/android-ndk-${NDK_VERSION}-linux-x86_64.bin -O
+  - chmod u+x android-ndk-${NDK_VERSION}-linux-x86_64.bin
+  - ./android-ndk-${NDK_VERSION}-linux-x86_64.bin > /dev/null
+  - rm android-ndk-${NDK_VERSION}-linux-x86_64.bin
+  - export ANDROID_NDK_HOME=`pwd`/android-ndk-${NDK_VERSION}
+  - export PATH=${ANDROID_NDK_HOME}:${PATH}
+  
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+  
+script:
+  - ./gradlew clean build connectedCheck
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+branches: 
+  only: 
+    - master
