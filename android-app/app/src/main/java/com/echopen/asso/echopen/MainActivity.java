@@ -55,25 +55,13 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         setContentView(R.layout.activity_main);
 
         RenderingContextController rdController = new RenderingContextController();
-
-
-       // EchOpenApplication echOpenApplication = (EchOpenApplication) getApplication();
-
         EchographyImageStreamingService serviceEcho =  new EchographyImageStreamingService(rdController);
-
         EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
 
         EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.191.4.59", REDPITAYA_PORT);
         serviceEcho.connect(mode, this);
 
         presenter.listenEchographyImageStreaming();
-
-
-
-
-
-
-
     }
 
     @Override
@@ -117,9 +105,6 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         catch (Exception e){
             e.printStackTrace();
         }
-
-
-
     }
 
 

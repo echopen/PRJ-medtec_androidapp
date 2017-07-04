@@ -10,8 +10,6 @@
     <ImageView
         android:layout_width="368dp"
         android:layout_height="503dp"
-        android:src="@drawable/Logo"
-
         tools:layout_editor_absoluteX="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,5 +17,10 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
 
 </android.support.constraint.ConstraintLayout>
