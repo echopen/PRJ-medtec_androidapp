@@ -7,6 +7,8 @@ import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -31,7 +33,7 @@ import com.echopen.asso.echopen.utils.Constants;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements EchographyImageVisualisationContract.View {
+public class MainActivity extends Activity implements EchographyImageVisualisationContract.View, View.OnClickListener {
 
     public static boolean LOCAL_ACQUISITION = true;
 
@@ -66,6 +68,9 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
         this.setPresenter(mEchographyImageVisualisationPresenter);
+
+        Button btn = (Button) findViewById(R.id.buttonGalerry);
+        btn.setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +80,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
         mEchographyImageStreamingService.connect(lTCPMode, this);
     }
+
 
     /**
      * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
@@ -100,6 +106,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                 public void run() {
                     ImageView echoImage = (ImageView) findViewById(R.id.echo);
                     echoImage.setImageBitmap(iBitmap);
+                    echoImage.setColorFilter(Config.colorMatrixColorFilter);
                 }
             });
         }
@@ -111,5 +118,15 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     @Override
     public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
         mEchographyImageVisualisationPresenter = presenter;
+    }
+
+    @Override
+    public void onClick(View view) {
+        myFancyMethod();
+    }
+
+    public void myFancyMethod() {
+        Log.d("wazza","bjrjdhfjezkfjkekflejfehrfjzkmdzjdfgeikfoefhyezgdiuezh");
+        startActivity(new Intent(this,ListImagesActivity.class));
     }
 }

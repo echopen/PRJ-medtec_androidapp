@@ -20,6 +20,13 @@
             android:layout_below="@+id/txt_height"/>
 
     </LinearLayout>
+    <Button
+        android:id="@+id/buttonGalerry"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/galeries"
+        android:onClick=""
+        />
 
 </RelativeLayout>
 
