@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -14,6 +15,7 @@ import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImage
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 
+import static com.echopen.asso.echopen.utils.Constants.Http.LOCAL_IP;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
@@ -68,7 +70,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.236.115.40", REDPITAYA_PORT);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(LOCAL_IP, REDPITAYA_PORT);
 
         stream.connect(mode,this);
         presenter.start();
