@@ -13,9 +13,13 @@
 
 
 Route::prefix('api')->group(function () {
-	Route::get('scans', 'ApiController@getScans');
-});
+	Route::get('users', 'ApiController@getUsers');
+	Route::get('users/{id}', 'ApiController@getUser');
 
+
+	Route::get('scans', 'ApiController@getScans');
+	Route::get('scans/{id}', 'ApiController@getScan');
+});
 
 Route::get('/', 'PagesController@home');
 Route::get('/contact', 'PagesController@contact');
