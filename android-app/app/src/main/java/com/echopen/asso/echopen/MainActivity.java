@@ -3,8 +3,21 @@ package com.echopen.asso.echopen;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.ImageView;
+
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+import com.echopen.asso.echopen.ui.RenderingContextController;
+
+import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_IP;
+import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -25,11 +38,40 @@ public class MainActivity extends Activity {
      * and then displays them.
      * Also, this method uses the Config singleton class that provides device-specific constants
      */
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //launch probe
+        EchOpenApplication echOpenApplication = ( EchOpenApplication ) getApplication();
+
+        final EchographyImageStreamingService serviceEcho = echOpenApplication.getEchographyImageStreamingService();
+
+        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, new EchographyImageVisualisationContract.View() {
+            @Override
+            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
+                Log.e("wowowowowowow", "une image woiwowoow");
+            }
+
+            @Override
+            public void refreshImage(final Bitmap iBitmap) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ImageView picture = (ImageView) findViewById(R.id.picture);
+                        picture.setImageBitmap(iBitmap);
+                        Log.e("Rendu Bitmap", "yooyoyoyoy");
+                    }
+                });
+            }
+        });
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(REDPITAYA_IP, REDPITAYA_PORT);
+        serviceEcho.connect(mode, this);
+
+        presenter.start();
+
     }
 
     @Override
