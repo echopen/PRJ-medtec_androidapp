@@ -8,15 +8,16 @@
 </head>
 <body>
 
-<header>Header</header>
+<header>
+    
+</header>
 
 <div class="container">
     @yield('content')
 </div>
 
-
-<div class="footer">
-Footer
-</div>
+<footer>
+    
+</footer>
 </body>
 </html>
