@@ -7,7 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
 
+=======
+>>>>>>> Adding NewPatientActivity
 /**
  * MainActivity class handles the main screen of the app.
  * Tools are called in the following order :
@@ -27,11 +30,13 @@ public class MainActivity extends Activity {
      * and then displays them.
      * Also, this method uses the Config singleton class that provides device-specific constants
      */
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         Button mondayEdit= (Button)findViewById(R.id.new_patient);
         mondayEdit.setOnClickListener(new View.OnClickListener()
@@ -65,4 +70,5 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }
