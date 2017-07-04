@@ -11,8 +11,11 @@
 |
 */
 
+
+Route::prefix('api')->group(function () {
+	Route::get('scans', 'ApiController@getScans');
+});
+
+
 Route::get('/', 'PagesController@home');
-
-
-
 Route::get('/contact', 'PagesController@contact');

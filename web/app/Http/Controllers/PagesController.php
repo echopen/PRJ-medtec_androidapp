@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class PagesController extends Controller
 {
     public function home(){
-    	$scans = Scan::all();
 		return view('home');
 	}
 
