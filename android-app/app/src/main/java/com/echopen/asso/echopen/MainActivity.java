@@ -86,8 +86,9 @@ public class MainActivity extends Activity {
            }
         });
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.6.200.128", 7538);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.154.172.142", 7538);
 
+        // yo
         stream.connect(mode,this);
         presenter.start();
     }
