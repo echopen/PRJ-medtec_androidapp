@@ -8,7 +8,7 @@
 <RelativeLayout
     android:layout_width="368dp"
     android:layout_height="503dp"
-
+    android:layout_centerHorizontal="true"
     tools:layout_editor_absoluteY="8dp"
     tools:layout_editor_absoluteX="8dp">
     <ImageView
@@ -23,6 +23,7 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
+        android:id="@+id/txt_v_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/intro_text"
@@ -36,11 +37,31 @@
         android:id="@+id/btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:width="200dp"
         tools:layout_editor_absoluteY="0dp"
         tools:layout_editor_absoluteX="0dp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/border_radius"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:text="Démarrer un examen"/>
 
+    <Button
+        android:id="@+id/btn_login"
+        android:width="200dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:padding="10dp"
+        android:textColor="@color/blue_sky"
+        android:background="@drawable/btn_border_color"
+        android:text="Se connecter"/>
 </RelativeLayout>
 
 
