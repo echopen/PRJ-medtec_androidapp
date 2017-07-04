@@ -1,7 +1,7 @@
 @extends('layout.app')
 
 @section('content')
-    <section class="welcome">
-        <p>Home</p>
+    <section class="contact">
+        <p>Contact</p>
     </section>
 @endsection
