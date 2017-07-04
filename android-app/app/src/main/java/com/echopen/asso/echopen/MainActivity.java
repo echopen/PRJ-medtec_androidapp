@@ -5,7 +5,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-
+import android.view.View;
+import android.widget.Button;
 /**
  * MainActivity class handles the main screen of the app.
  * Tools are called in the following order :
@@ -25,11 +26,28 @@ public class MainActivity extends Activity {
      * and then displays them.
      * Also, this method uses the Config singleton class that provides device-specific constants
      */
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Remove this under the button listener before merge, button for Alex testing
+        Button button;
+        // Locate the button in activity_main.xml
+        button = (Button) findViewById(R.id.goNewPatient);
+
+        // Capture button clicks
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+
+                // Start NewActivity.class
+                Intent myIntent = new Intent(MainActivity.this,
+                        NewPatientActivity.class);
+                startActivity(myIntent);
+            }
+        });
     }
 
     @Override
@@ -52,4 +70,5 @@ public class MainActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }
