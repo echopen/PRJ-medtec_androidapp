@@ -38,4 +38,9 @@ class ApiController extends Controller
 		$data['scans'] = $scans;
 		return json_encode($data);
 	}
+
+	public function getPublicScans(){
+		$scans = Scan::where('public', 1)->first();
+		return json_encode($scans);
+	}
 }
