@@ -2,6 +2,7 @@ package com.echopen.asso.echopen;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -65,23 +66,36 @@ public class HomeScreenActivity extends AppCompatActivity{
                 if ((x1 < x2) && ( Math.abs(x2-x1) > Math.abs(y2-y1))) {
                     Log.d("Swipe", "RIGHT");
                     HelpFragment helpFragment = new HelpFragment();
-                    fragmentManager.beginTransaction().replace(R.id.pager, helpFragment).addToBackStack(null).commit();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                    fragmentTransaction.replace(R.id.pager, helpFragment).addToBackStack(null).commit();
+                    break;
                 }
                 if ((x2 < x1) && ( Math.abs(x2-x1) > Math.abs(y2-y1))) {
                     Log.d("Swipe", "LEFT");
                     DocumentFragment documentFragment = new DocumentFragment();
-                    fragmentManager.beginTransaction().replace(R.id.pager, documentFragment).addToBackStack(null).commit();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
+                    fragmentTransaction.replace(R.id.pager, documentFragment).addToBackStack(null).commit();
+                    break;
                 }
                 if ((y1 < y2) && ( Math.abs(y2-y1) > Math.abs(x2-x1))) {
                     Log.d("Swipe", "DOWN");
                     EchoFragment echoFragment = new EchoFragment();
-                    fragmentManager.beginTransaction().replace(R.id.pager, echoFragment).addToBackStack(null).commit();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
+                    fragmentTransaction.replace(R.id.pager, echoFragment).addToBackStack(null).commit();
+                    break;
                 }
                 if ((y2 < y1) && ( Math.abs(y2-y1) > Math.abs(x2-x1))) {
                     Log.d("Swipe", "UP");
                     SettingsFragment settingsFragment = new SettingsFragment();
-                    fragmentManager.beginTransaction().replace(R.id.pager, settingsFragment).addToBackStack(null).commit();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.setCustomAnimations(R.anim.slide_in_up, R.anim.slide_out_down);
+                    fragmentTransaction.replace(R.id.pager, settingsFragment).addToBackStack(null).commit();
+                    break;
                 }
+
             }
         }
         return true;
