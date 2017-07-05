@@ -1,20 +1,15 @@
-
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-
 // Variables
 @import "variables";
 @import "./tools/sizes";
 @import "./tools/fonts";
-
-
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
-
-
 @import "./components/footer";
 @import "./components/header";
 @import "./components/global";
 @import "./components/faq";
 @import "./components/slider";
 @import "./components/community";
+@import "./components/howitworks";
