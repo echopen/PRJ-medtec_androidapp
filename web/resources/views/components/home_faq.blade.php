@@ -14,9 +14,9 @@
            <p class="entry_sub_desc">
                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.
            </p>
-           <div class="entry_more">
-               <a href="See the faq"></a>
-           </div>
+            <div class="base_btn">
+                <a href="#">super cta</a>
+            </div>
         </div>
     </div>
     <div class="alignright">

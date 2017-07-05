@@ -13,7 +13,7 @@
                 cupiditate non providen.</p>
         </div>
         <div class="base_btn">
-            <a href="#"><p class="super_cta">super cta</p></a>
+            <a href="#">super cta</a>
         </div>
         <div class="share">
             <ul>

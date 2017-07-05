@@ -33,17 +33,17 @@ body{
 }
 .base_btn{
 	margin-top: 129px;
-	width: 205px;
-	height: 52px;
-	border-radius: 4px;
-	background-color: #6078ea;
-	box-shadow: 0 9px 16px 0 rgba(0, 0, 0, 0.07);
-	.super_cta{
-		padding: 5%;
+	
+	a{
+        box-shadow: 0 9px 16px 0 rgba(0, 0, 0, 0.07);
 		font-size:em(16);
-		font-weight: 500;
 		text-align: center;
-		color: #ffffff;
+        background-color: $maincolor;
+        font-weight: 500;
+        color: $lightcolor;
+        text-transform: uppercase;
+        padding: 18px 63px;
+        border: transparent;
 	}
 }
 .base_item-shadow{

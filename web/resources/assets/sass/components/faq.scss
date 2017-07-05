@@ -1,26 +1,28 @@
-.base_section-faq{
-    .entry_wrapper-small{
+.base_section-faq {
+    .entry_wrapper-small {
         width: 100%;
         height: 100%;
         margin: 0 auto;
-        .alignleft{
+        .alignleft {
             width: 26%;
             margin-left: 8.429em;
             top: 50%;
+            transform: translateY(-50%);
             position: relative;
         }
-        .alignright{
+        .alignright {
             width: 62%;
         }
     }
-    .slick-slide{
+    .slick-slide {
         width: 24.429em;
         height: 20.643em;
+        border: 1px solid $lightgrey;
     }
-    .slick_background{
+    .slick_background {
         background-image: linear-gradient(126deg, #17ead9, #6078ea);
         padding: 7.929em 0;
-        width:77%;
+        width: 77%;
         height: 566px;
         background-image: linear-gradient(126deg, #17ead9, #6078ea);
         position: relative;
@@ -29,16 +31,16 @@
         z-index: -1;
         float: right;
     }
-    entry_title{
+    entry_title {
         top: initial;
         transform: none;
     }
-    .entry_more{
-        a{
+    .entry_more {
+        a {
             text-transform: uppercase;
         }
     }
-    .entry_slick{
+    .entry_slick {
         top: -50%;
         position: relative;
         transform: translateY(50%);
