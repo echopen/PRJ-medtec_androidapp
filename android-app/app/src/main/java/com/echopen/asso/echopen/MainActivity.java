@@ -2,12 +2,15 @@ package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.view.MotionEvent;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
@@ -74,9 +77,6 @@ public class MainActivity extends Activity {
 
         stream.connect(mode,this);
         presenter.start();
-        
-
-
         //-----------------------------------------------------------------
 
     }
@@ -86,6 +86,27 @@ public class MainActivity extends Activity {
         super.onResume();
     }
 
+    boolean firstTouch = false;
+    long time = System.currentTimeMillis();
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if(firstTouch && (System.currentTimeMillis() - time) <= 400) {
+                //set action to write annotations
+                Log.e("** DOUBLE TAP**"," second tap ");
+                firstTouch = false;
+
+            } else {
+                firstTouch = true;
+                time = System.currentTimeMillis();
+                Log.e("** SINGLE  TAP**"," First Tap time  "+time);
+
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
