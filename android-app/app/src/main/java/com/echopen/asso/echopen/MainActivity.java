@@ -3,24 +3,10 @@ package com.echopen.asso.echopen;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-import com.echopen.asso.echopen.utils.Config;
 
 /**
  * MainActivity class handles the main screen of the app.
