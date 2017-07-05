@@ -15,7 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/theme_blue"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
         <FrameLayout
             android:id="@+id/vFloater"
             android:orientation="vertical"
@@ -24,10 +26,10 @@
 
             <com.echopen.asso.echopen.ui.DrawView
                 android:id="@+id/echo"
-                android:layout_width="369dp"
-                android:layout_height="300dp"
+                android:layout_width="match_parent"
+                android:layout_height="340dp"
                 android:scaleType="fitCenter"
-                android:src="#77ff00"
+                android:src="#0077ff"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
@@ -177,73 +179,73 @@
             <ProgressBar style="@style/GenericProgressIndicator"/>
         </RelativeLayout>
     </LinearLayout>
-    <LinearLayout
-        android:id="@+id/vTop"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/theme_blue"
-        android:orientation="horizontal">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/vTop"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@drawable/theme_blue"-->
+        <!--android:orientation="horizontal">-->
 
-        <ImageButton
-            android:id="@+id/tabSetting"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_tab"
-            android:src="@drawable/ic_gear" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/tabSetting"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/btn_tab"-->
+            <!--android:src="@drawable/ic_gear" />-->
 
-        <View
-            android:id="@+id/view1"
-            style="@style/divider_blue"
-            android:layout_width="1dp"
-            android:layout_height="match_parent" />
+        <!--<View-->
+            <!--android:id="@+id/view1"-->
+            <!--style="@style/divider_blue"-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <ImageButton
-            android:id="@+id/tabBrightness"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_tab"
-            android:src="@drawable/ic_brightness" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/tabBrightness"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/btn_tab"-->
+            <!--android:src="@drawable/ic_brightness" />-->
 
-        <View
-            android:id="@+id/view2"
-            style="@style/divider_blue"
-            android:layout_width="1dp"
-            android:layout_height="match_parent" />
+        <!--<View-->
+            <!--android:id="@+id/view2"-->
+            <!--style="@style/divider_blue"-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <TextView
-            android:id="@+id/tabTime"
-            style="@style/tab_btn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="00:00" />
+        <!--<TextView-->
+            <!--android:id="@+id/tabTime"-->
+            <!--style="@style/tab_btn"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="00:00" />-->
 
-        <ImageButton
-            android:id="@+id/tabGrid"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_tab"
-            android:src="@drawable/ic_grid"
-            android:visibility="gone" />
+        <!--<ImageButton-->
+            <!--android:id="@+id/tabGrid"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/btn_tab"-->
+            <!--android:src="@drawable/ic_grid"-->
+            <!--android:visibility="gone" />-->
 
-        <View
-            android:id="@+id/view3"
-            style="@style/divider_blue"
-            android:layout_width="1dp"
-            android:layout_height="match_parent" />
+        <!--<View-->
+            <!--android:id="@+id/view3"-->
+            <!--style="@style/divider_blue"-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <ImageButton
-            android:id="@+id/tabSuffle"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/btn_tab"
-            android:src="@drawable/ic_suffle" />
-    </LinearLayout>
-
+        <!--<ImageButton-->
+            <!--android:id="@+id/tabSuffle"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@drawable/btn_tab"-->
+            <!--android:src="@drawable/ic_suffle" />-->
+    <!--</LinearLayout>-->
+<!--
     <LinearLayout
         android:id="@+id/vBottom"
         android:layout_width="match_parent"
@@ -298,8 +300,8 @@
                 android:layout_height="wrap_content"
                 android:text="VIDEO"
                 android:visibility="invisible" />
-        </LinearLayout>
-        <LinearLayout
+        </LinearLayout>-->
+<!--        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -318,6 +320,6 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_effect"
                 android:visibility="invisible" />
-        </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>-->
+    <!--</LinearLayout>-->
 </RelativeLayout>

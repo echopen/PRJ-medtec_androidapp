@@ -309,19 +309,19 @@ public class ScannerActivity extends CustomActivity implements AbstractActionAct
     * @param no param
     * */
     public void initViewComponents() {
-        setTouchNClick(R.id.btnCapture);
-        setTouchNClick(R.id.btnEffect);
-        setTouchNClick(R.id.tabBrightness);
-        setTouchNClick(R.id.tabGrid);
-        setTouchNClick(R.id.tabSetting);
-        setTouchNClick(R.id.tabSuffle);
-        setTouchNClick(R.id.tabTime);
-
-        setClick(R.id.btn1);
-        setClick(R.id.btn2);
-        setClick(R.id.btn3);
-        setClick(R.id.btn4);
-        setClick(R.id.btn5);
+//        setTouchNClick(R.id.btnCapture);
+//        setTouchNClick(R.id.btnEffect);
+//        setTouchNClick(R.id.tabBrightness);
+//        setTouchNClick(R.id.tabGrid);
+//        setTouchNClick(R.id.tabSetting);
+//        setTouchNClick(R.id.tabSuffle);
+//        setTouchNClick(R.id.tabTime);
+//
+//        setClick(R.id.btn1);
+//        setClick(R.id.btn2);
+//        setClick(R.id.btn3);
+//        setClick(R.id.btn4);
+//        setClick(R.id.btn5);
 
         mainActionController.setTransparentTextView();
 
