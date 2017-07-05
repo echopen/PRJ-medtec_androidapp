@@ -1,14 +1,12 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
@@ -22,8 +20,9 @@ import com.echopen.asso.echopen.utils.Constants;
 
 public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View {
 
-    FragmentManager mFragmentManager;
-    //private RenderingContextController mRenderingContextController;
+    private FragmentManager mFragmentManager;
+    private ImageHandler ImageHandler;
+
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
     private HomeFragment homeFragment;
@@ -40,19 +39,16 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setEchoImage();
+        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
+        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
+        this.setPresenter(mEchographyImageVisualisationPresenter);
+
+        // create file handler to save images
+        ImageHandler = new ImageHandler(getFilesDir());
 
         mFragmentManager = getSupportFragmentManager();
         SplashFragment splashFragment = new SplashFragment();
         mFragmentManager.beginTransaction().add(R.id.main, splashFragment).commit();
-    }
-
-    public void setEchoImage() {
-        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
-        //mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
-
-        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
-        this.setPresenter(mEchographyImageVisualisationPresenter);
     }
 
     @Override
@@ -99,21 +95,20 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     }
 
     public void doFinish(Bitmap img) {
-        changeFragment(img);
-    }
-
-    public void changeFragment(Bitmap img) {
-        if(homeFragment==null) {
+        if (homeFragment == null) {
             homeFragment = new HomeFragment(img);
             mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit();
         } else {
             homeFragment.refreshImage(img);
         }
-
     }
 
     public void switchActivity() {
         Intent intent = new Intent(this, ListImagesActivity.class);
         startActivity(intent);
+    }
+
+    public ImageHandler getImageHandler() {
+        return this.ImageHandler;
     }
 }

@@ -24,11 +24,10 @@ public class EchOpenApplication extends Application {
     }
 
     /**
-     * @brief getter - image streaming service
-     *
      * @return image streaming service
+     * @brief getter - image streaming service
      */
-    public EchographyImageStreamingService getEchographyImageStreamingService(){
+    public EchographyImageStreamingService getEchographyImageStreamingService() {
         return mEchographyImageStreaming;
     }
 }

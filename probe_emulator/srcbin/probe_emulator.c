@@ -5,13 +5,11 @@
 #include<signal.h>
 #include<string.h>
 //#include<errno.h>
-
 #if defined(__APPLE__) || defined(__MACH__)
      #ifndef MSG_NOSIGNAL
         #define MSG_NOSIGNAL SO_NOSIGPIPE
     #endif
 #endif
-
 #include "TCP_API.h"
 
 #define PORT 7538
@@ -44,7 +42,7 @@ void load_settings(char *directory)
 	char name[50];
 	int set[6];
 	sprintf(name,"%s/settings.txt", directory);
-	
+
 	h=fopen(name,"r");
 	if (h==NULL) {printf("file not found\n");}
 	else
@@ -74,20 +72,20 @@ void load_settings(char *directory)
 void load_image(int line, int row, int16_t** data, char* name)
 {
         FILE *h=NULL;
-	
+
         char *linef = NULL;
         size_t len = 0;
 
         int tmp=0;
 	int err=0;
-        
+
         h=fopen(name,"r");
         if (h==NULL)
-        {       
+        {
                 printf("file not found\n");
         }
         else
-        {       
+        {
                 int i=0, j=0;
 
 	        for (i=0 ; i<8 ; i++)//skipping header of files
@@ -101,16 +99,16 @@ void load_image(int line, int row, int16_t** data, char* name)
         	}
 
                 for (i=0 ; i<row ; i++)
-                {       
+                {
                         for (j=1 ; j<=line ; j++)
-                        {       
+                        {
                                 if ((err=fscanf(h,"%i",&tmp))!=2) {data[i][j]=(int16_t)tmp;}
 				else {printf("error while fscanf\n");}
 				/*err=fscanf(h, "%i", &tmp);
 				if (err==42){printf("err=1...\n");}
                         	data[i][j]=(int16_t)tmp;*/
                         }
-                }       
+                }
                 fclose(h);
         }
 }
@@ -229,7 +227,7 @@ int main (int argc, char **argv)
 	}
 	else if(strcmp(argv[1],"film")==0)
 	{
-		printf("film\n");		
+		printf("film\n");
 		//one "film"
 		int i=0, tmp=0;
 		int Nimage=100;
@@ -252,7 +250,7 @@ int main (int argc, char **argv)
 			}
 		}
 	}
-	else 
+	else
 	{
 		printf("you write option: %s\n",argv[1]);
 		printf("Error wrong argument for probe_emulator. Option must be in:\n");
