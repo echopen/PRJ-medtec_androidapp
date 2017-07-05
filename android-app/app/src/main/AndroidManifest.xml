@@ -43,13 +43,11 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
-            android:name=".NewPatientActivity"
-            android:label="@string/new_patient_activity_label"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeLight" />
-        <activity
             android:name=".AddPatientActivity"
-            android:label="@string/title_activity_add_patient"></activity>
+            android:label="@string/title_activity_add_patient"
+            android:theme="@style/AppThemeLight">
+
+        </activity>
     </application>
 
 </manifest>

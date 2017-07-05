@@ -107,10 +107,10 @@ public class AddPatientActivity extends Activity {
                      rootView = inflater.inflate(R.layout.fragment_add_patient, container, false);
                     break;
                 case 2:
-                     rootView = inflater.inflate(R.layout.fragment_add_patient, container, false);
+                     rootView = inflater.inflate(R.layout.fragment_add_patient_two, container, false);
                     break;
                 case 3:
-                     rootView = inflater.inflate(R.layout.fragment_add_patient, container, false);
+                     rootView = inflater.inflate(R.layout.fragment_add_patient_three, container, false);
                     break;
                 default:
                     rootView = inflater.inflate(R.layout.fragment_add_patient, container, false);
