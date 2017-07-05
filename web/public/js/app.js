@@ -1700,8 +1700,6 @@ if (token) {
 /* 29 */
 /***/ (function(module, exports) {
 
-console.log("here");
-
 $(document).ready(function () {
   $('.entry_slick-multiple').slick({
     slidesToShow: 2,
@@ -1712,10 +1710,11 @@ $(document).ready(function () {
     slidesToShow: 1,
     slidesToScroll: 1,
     speed: 400,
-    dots: true
+    dots: true,
+    arrows: true,
+    variableWidth: true
   });
 });
-console.log("hereeee");
 
 /***/ }),
 /* 30 */
