@@ -62,6 +62,17 @@ body{
     }  
     .entry_desc{
         font-size: 3.125em;
+        display: inline-block;
+        position: relative;
+            &:after{
+                content: "";
+                background: url(../../../../public/img/vague.png) no-repeat;
+        width: 122px;
+        height: 10px;
+        position: absolute;
+                right: -10px;
+    top: 65px;
+                }
     }
     .entry_meta{
         font-size: 0.813em;
