@@ -1,6 +1,7 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -22,10 +23,8 @@ import com.echopen.asso.echopen.utils.Constants;
 public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View {
 
     FragmentManager mFragmentManager;
-
-    private EchographyImageStreamingService mEchographyImageStreamingService;
     //private RenderingContextController mRenderingContextController;
-
+    private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
 
     /**

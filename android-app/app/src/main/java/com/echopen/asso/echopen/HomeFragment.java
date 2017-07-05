@@ -1,8 +1,10 @@
 package com.echopen.asso.echopen;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
@@ -10,6 +12,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -43,6 +46,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ImageButton btn = (ImageButton) view.findViewById(R.id.btnGallery);
         btn.setOnClickListener(this);
 
+        ImageButton btnFilters = (ImageButton) view.findViewById(R.id.btnFilter);
+        btnFilters.setOnClickListener(this);
+
         return view;
     }
 
@@ -59,7 +65,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 break;
             // If click on filter button, we display the filter modal
             case R.id.btnFilter:
+                displayFilterModal();
                 break;
         }
+    }
+
+    public void displayFilterModal() {
+        final Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.filters_modal);
+        dialog.show();
     }
 }
