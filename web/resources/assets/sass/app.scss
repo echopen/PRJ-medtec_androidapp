@@ -19,3 +19,10 @@
 @import "./components/faq";
 @import "./components/slider";
 @import "./components/community";
+
+
+body>.container{
+  max-width: 1440px;
+  padding: 0;
+  width: 100%;
+}
