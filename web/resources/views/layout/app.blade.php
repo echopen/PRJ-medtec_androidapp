@@ -17,7 +17,16 @@
 <body>
 
 <header>
-    
+    <ul class="links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Product</a></li>
+        <li><a href="#">Faq</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="logo"></div>
+    <ul class="right-cta">
+        <li class="join-us">Join us</li>
+    </ul>
 </header>
 
 <div class="container">
