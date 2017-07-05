@@ -8,8 +8,10 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
 
 import com.echopen.asso.echopen.fragments.onboarding.Step01Fragment;
+import com.echopen.asso.echopen.fragments.onboarding.Step02Fragment;
 
 import java.util.List;
 import java.util.Vector;
@@ -29,11 +31,13 @@ public class OnBoardingActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_on_boarding);
 
         List fragments = new Vector<>();
 
         fragments.add(Fragment.instantiate(this, Step01Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Step02Fragment.class.getName()));
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new MainPageAdapter(getSupportFragmentManager(), fragments);
