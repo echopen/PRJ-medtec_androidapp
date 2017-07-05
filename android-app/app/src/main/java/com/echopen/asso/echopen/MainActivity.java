@@ -103,6 +103,10 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
+        startActivity(chooseProfile);
+
         super.onCreate(savedInstanceState);
         /* loading config constants in singleton Class */
         Config.getInstance(this);
