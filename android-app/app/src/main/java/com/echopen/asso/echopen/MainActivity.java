@@ -15,6 +15,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.view.MotionEvent;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.View;
+import android.widget.ImageView;
+import android.view.MotionEvent;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
@@ -111,12 +114,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         presenter.start();
         //-----------------------------------------------------------------
 
-
-    }
-
-    public static class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
-
-
     }
 
     @Override
@@ -137,6 +134,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
     public boolean doubleTapEvent(int ev) {
         if (ev == MotionEvent.ACTION_DOWN) {
+
             if(firstTouch && (System.currentTimeMillis() - time) <= 400) {
                 //set action to write annotations
                 Log.e("** DOUBLE TAP**"," second tap ");
