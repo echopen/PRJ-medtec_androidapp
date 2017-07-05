@@ -1,0 +1,57 @@
+.base_section-history{
+    height: 48.750em;
+    background-color: $lightgrey;
+    padding-top: 0;
+    .entry_wrapper{
+        height: 48.750em;
+        width: 68.750em;
+        margin: 0 auto;
+        .alignleft{
+            display: block;
+            top: -50%;
+            position: relative;
+        }
+        .alignright{
+            width: 50.487em;
+        }
+    }
+    .entry_title{
+        
+    }
+    .entry_slick-solo{
+        .base_item-content{
+            min-height: 28.125em;     
+        }
+        .base_item-title{
+            font-size: 2.188em;
+            text-align: left;
+            color: $greyfirst;
+        }
+        .slick-dots{
+            position: absolute;
+            bottom: 0;
+            width: 50%;
+            top: 2em;
+            button:before{
+                color: $mainblue;
+                font-size: 15px;
+            }
+        }
+        .slick-arrow{
+            &:before{
+                color: $maingreen;
+            }
+        }
+        .base_item-wrapper{
+            width: 18.125em;
+            float: right;
+            margin-right: 80px;
+        }
+    }
+    .entry_highlight{
+        width: 45.625em;
+        height: 27.313em;
+        background: url(../../../../public/img/visuel-storytelling.png) no-repeat;
+        background-size: cover;
+    }
+}
