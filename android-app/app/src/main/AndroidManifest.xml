@@ -46,7 +46,7 @@
             android:name=".NewPatientActivity"
             android:label="@string/new_patient_activity_label"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppThemeLight" />
     </application>
 
 </manifest>

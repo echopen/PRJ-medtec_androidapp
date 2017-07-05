@@ -34,12 +34,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button mondayEdit= (Button)findViewById(R.id.new_patient);
-        mondayEdit.setOnClickListener(new View.OnClickListener()
+        // Press "New Patient" button, change the activity.
+        Button newPatientButton= (Button)findViewById(R.id.new_patient);
+        newPatientButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainActivity.this, ScannerActivity.class);
+
+                Intent intent = new Intent(MainActivity.this, NewPatientActivity.class);
                 startActivity(intent);
                 finish();
             }

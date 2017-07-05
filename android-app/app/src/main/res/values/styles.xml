@@ -10,6 +10,14 @@
     <style name="AppTheme" parent="AppBaseTheme">
     </style>
 
+    <style name="AppThemeLight" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:buttonStyle">@style/ButtonText</item>
+    </style>
+
+
     <style name="ButtonText" parent="@android:style/Widget.Button">
         <item name="android:textColor">@color/green</item>
         <item name="android:background">@android:drawable/btn_default</item><!-- only way to change this is to change the src image -->
