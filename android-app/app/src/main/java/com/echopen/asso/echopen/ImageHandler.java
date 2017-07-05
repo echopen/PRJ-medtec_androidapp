@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,10 +45,12 @@ public class ImageHandler {
         try {
             OutputStream stream = new FileOutputStream(this.galleryDirectory.toString() + "/"+ this.clientId + "/" + System.currentTimeMillis() + ".png");
             currentBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            stream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        Log.d("imageSaved","true");
         return true;
     }
 

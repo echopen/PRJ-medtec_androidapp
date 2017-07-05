@@ -10,6 +10,8 @@ import android.widget.GridView;
 
 public class ListImagesActivity extends Activity {
 
+    private int clientId;
+
     public ListImagesActivity() {
 
     }
@@ -19,8 +21,12 @@ public class ListImagesActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+        Bundle b = getIntent().getExtras();
+        if(b != null)
+            this.clientId = b.getInt("clientId");
+
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        gridview.setAdapter(new ImageAdapter(this,this.clientId,getFilesDir()));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
