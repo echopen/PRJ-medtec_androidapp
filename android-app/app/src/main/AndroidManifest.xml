@@ -45,7 +45,10 @@
         <activity
             android:name=".ChoiceActivity"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-        <activity android:name=".ProfilActivity"></activity>
+        <activity
+            android:name=".ProfilActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
     </application>
 
 </manifest>

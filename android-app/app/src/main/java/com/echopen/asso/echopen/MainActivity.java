@@ -1,23 +1,13 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.Button;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-import com.echopen.asso.echopen.ui.RenderingContextController;
-
-import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
+import android.widget.Button;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -30,7 +20,9 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    FragmentManager fragmentmanager;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -45,44 +37,56 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         setContentView(R.layout.activity_main);
 
-        Button topBt = (Button) findViewById(R.id.enter_bt);
-        topBt.setOnClickListener(this);
+        fragmentmanager = getSupportFragmentManager();
 
-        Button rightBt = (Button) findViewById(R.id.signin_bt);
-        rightBt.setOnClickListener(this);
+        Button enterBt = (Button) findViewById(R.id.enter_bt);
+        enterBt.setOnClickListener(this);
 
-        Button leftBt = (Button) findViewById(R.id.signout_bt);
-        leftBt.setOnClickListener(this);
+        Button signupBt = (Button) findViewById(R.id.signup_bt);
+        signupBt.setOnClickListener(this);
+
+        Button signintBt = (Button) findViewById(R.id.signin_bt);
+        signintBt.setOnClickListener(this);
+
+        Button emergencyBt = (Button) findViewById(R.id.emergency_bt);
+        emergencyBt.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.enter_bt :
-                btEnterClicked();
+            case R.id.signup_bt :
+                btSignUpClicked();
                 break;
             case R.id.signin_bt :
-                btSignInClicked();
+                btSignUpClicked();
                 break;
-
-            case R.id.signout_bt :
-                btSignOutClicked();
+            case R.id.emergency_bt :
+                btEmergencyClicked();
+                break;
+            case R.id.enter_bt :
+                btEnterClicked();
                 break;
         }
     }
 
-    private void btEnterClicked(){
-        Intent intent = new Intent(this, ChoiceActivity.class);
-        startActivity(intent);
+    private void btSignUpClicked(){
+        SignUpFragment signUpFragment = new SignUpFragment();
+        fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
     }
 
     private void btSignInClicked(){
+        SignUpFragment signUpFragment = new SignUpFragment();
+        fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
+    }
+
+    private void btEmergencyClicked(){
         Intent intent = new Intent(this, ChoiceActivity.class);
         startActivity(intent);
     }
 
-    private void btSignOutClicked(){
+    private void btEnterClicked(){
         Intent intent = new Intent(this, ChoiceActivity.class);
         startActivity(intent);
     }
