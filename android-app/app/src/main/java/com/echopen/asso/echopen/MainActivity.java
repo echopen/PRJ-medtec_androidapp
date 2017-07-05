@@ -47,6 +47,7 @@ public class MainActivity extends Activity {
                         NewPatientActivity.class);
                 startActivity(myIntent);
             }
+
         });
     }
 
