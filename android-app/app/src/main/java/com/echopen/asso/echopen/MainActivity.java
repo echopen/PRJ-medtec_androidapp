@@ -53,8 +53,25 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //-----------------------------------------------------------------
+        final imagesHandler imagesHandler = new imagesHandler(getFilesDir());
 
-        EchOpenApplication app = (EchOpenApplication) getApplication(); // A caster en EchOpenApplication
+        final Button btnStart = (Button) findViewById(R.id.btnStart);
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                imagesHandler.startRecording();
+            }
+        });
+
+        final Button btnEnd = (Button) findViewById(R.id.btnEnd);
+        btnEnd.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                imagesHandler.endRecording(1);
+            }
+        });
+
+        final ImageView image = (ImageView) findViewById(R.id.imageView);
+
+        EchOpenApplication app = (EchOpenApplication) getApplication();
         EchographyImageStreamingService stream = app.getEchographyImageStreamingService();
 
         EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(stream, new EchographyImageVisualisationContract.View() {
@@ -64,8 +81,8 @@ public class MainActivity extends Activity implements View.OnTouchListener {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ImageView echoImage = (ImageView) findViewById(R.id.imageView);
-                            echoImage.setImageBitmap(iBitmap);
+                            imagesHandler.saveCacheImage(iBitmap);
+                            image.setImageBitmap(iBitmap);
                         }
                     });
                 }
