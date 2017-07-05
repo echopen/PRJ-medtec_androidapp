@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -54,8 +53,13 @@ public class MainActivity extends Activity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ImageView echoImage = (ImageView) findViewById(R.id.imageView);
-                            echoImage.setImageBitmap(iBitmap);
+                            ImageView image = (ImageView) findViewById(R.id.imageView);
+                            filesHandler fileHandler = new filesHandler(getFilesDir());
+
+                            fileHandler.saveCacheImage(iBitmap);
+                            image.setImageBitmap(iBitmap);
+
+                            //fileHandler.saveImage(1);
                         }
                     });
                 }
