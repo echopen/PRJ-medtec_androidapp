@@ -2,6 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#8B8B8B"
+    android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.EchoFragment">
 
     <!-- TODO: Update blank fragment layout -->

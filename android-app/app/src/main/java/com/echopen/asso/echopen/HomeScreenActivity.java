@@ -45,6 +45,12 @@ public class HomeScreenActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public void onBackPressed(){
+        DashboardFragment dashboardFragment = new DashboardFragment();
+        fragmentManager.beginTransaction().replace(R.id.pager, dashboardFragment).commit();
+    }
+
     public boolean onTouchEvent(MotionEvent touchevent) {
         switch (touchevent.getAction()) {
             case MotionEvent.ACTION_DOWN: {
