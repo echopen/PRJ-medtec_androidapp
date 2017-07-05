@@ -11,8 +11,6 @@
            <p class="entry_desc">
                Lorem blabla
            </p>
-           <div class="entry_img">
-           </div> 
         </div>
     </div>
     <div class="alignright">
