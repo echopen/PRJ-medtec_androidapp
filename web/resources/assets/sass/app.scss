@@ -6,6 +6,7 @@
 @import "variables";
 @import "./tools/sizes";
 @import "./tools/fonts";
+@import "./tools/mixins";
 
 
 // Bootstrap
@@ -18,3 +19,11 @@
 @import "./components/faq";
 @import "./components/slider";
 @import "./components/community";
+@import "./components/value";
+
+
+body>.container{
+  max-width: 1440px;
+  padding: 0;
+  width: 100%;
+}

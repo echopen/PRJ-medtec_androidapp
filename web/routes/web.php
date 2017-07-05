@@ -14,6 +14,8 @@
 
 Route::prefix('api')->group(function () {
 	Route::get('users', 'ApiController@getUsers');
+	Route::get('users/connect', 'ApiController@connectUser');
+	Route::get('users/register', 'ApiController@registerUser');
 	Route::get('users/{id}', 'ApiController@getUser');
 	Route::get('scans', 'ApiController@getScans');
 	Route::get('scans/public', 'ApiController@getPublicScans');
@@ -22,3 +24,7 @@ Route::prefix('api')->group(function () {
 
 Route::get('/', 'PagesController@home');
 Route::get('/contact', 'PagesController@contact');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
