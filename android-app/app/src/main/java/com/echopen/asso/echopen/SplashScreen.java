@@ -63,7 +63,7 @@ public class SplashScreen extends Activity
         if (isRunning)
         {
             isRunning = false;
-            Intent i = new Intent(SplashScreen.this, MainActivity.class);
+            Intent i = new Intent(SplashScreen.this, HomeScreenActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
             finish();
