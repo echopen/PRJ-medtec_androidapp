@@ -2,13 +2,22 @@ package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.view.MotionEvent;
+import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.View;
+import android.widget.ImageView;
+import android.view.MotionEvent;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
@@ -30,7 +39,7 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnTouchListener {
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -88,13 +97,38 @@ public class MainActivity extends Activity {
             }
         });
 
+        final GestureDetector gd = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
+
+            @Override
+            public boolean onDoubleTapEvent(MotionEvent e) {
+                Log.d("OnDoubleTap","OnDoubleTap"+e);
+
+                return true;
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                Log.d("onSingleTapConfirmed","onSingleTapConfirmed"+e);
+
+                return true;
+            }
+
+
+        });
+
+        Button mainButton = (Button) findViewById(R.id.button2);
+        mainButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                return gd.onTouchEvent(event);
+            }
+        });
+
         EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(LOCAL_IP, REDPITAYA_PORT);
 
         stream.connect(mode,this);
         presenter.start();
-        
-
-
         //-----------------------------------------------------------------
 
     }
@@ -104,19 +138,56 @@ public class MainActivity extends Activity {
         super.onResume();
     }
 
+    boolean firstTouch = false;
+    long time = System.currentTimeMillis();
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        //Log.d("touch", ""+event.getAction());
+        this.doubleTapEvent(event.getAction());
+        return true;
+    }
+
+
+
+    public boolean doubleTapEvent(int ev) {
+        if (ev == MotionEvent.ACTION_DOWN) {
+
+            if(firstTouch && (System.currentTimeMillis() - time) <= 400) {
+                //set action to write annotations
+                Log.e("** DOUBLE TAP**"," second tap ");
+                firstTouch = false;
+
+                return false;
+
+            } else {
+                firstTouch = true;
+                time = System.currentTimeMillis();
+                Log.e("** SINGLE  TAP**"," First Tap time  "+time);
+
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
-     * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
-     * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
-     * the resultCode it returned, and any additional data from it.”,
-     * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
-     *
-     * @param requestCode, integer argument that identifies your request
-     * @param resultCode, to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
-     * @param data,       Intent instance
-     */
+         * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
+         * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
+         * the resultCode it returned, and any additional data from it.”,
+         * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
+         *
+         * @param requestCode, integer argument that identifies your request
+         * @param resultCode, to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
+         * @param data,       Intent instance
+         */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        this.doubleTapEvent(motionEvent.getAction());
+        return false;
     }
 }
