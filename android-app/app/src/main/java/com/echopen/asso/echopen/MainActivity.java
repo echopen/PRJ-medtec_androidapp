@@ -2,8 +2,11 @@ package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -16,12 +19,17 @@ import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVi
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 import com.echopen.asso.echopen.utils.Constants;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 /**
  * MainActivity class handles the main screen of the app.
  */
 
 public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View {
 
+    private ImageHandler ImageHandler;
     FragmentManager mFragmentManager;
     //private RenderingContextController mRenderingContextController;
     private EchographyImageStreamingService mEchographyImageStreamingService;
@@ -40,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         setContentView(R.layout.activity_main);
 
         setEchoImage();
+
+        // create file handler to save images
+        ImageHandler = new ImageHandler(getFilesDir());
 
         mFragmentManager = getSupportFragmentManager();
         SplashFragment splashFragment = new SplashFragment();
@@ -107,8 +118,11 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     }
 
     public void switchActivity() {
-        Log.d("alex", "aex");
         Intent intent = new Intent(this, ListImagesActivity.class);
         startActivity(intent);
+    }
+
+    public ImageHandler getImageHandler() {
+        return this.ImageHandler;
     }
 }
