@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
 
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
+
     private HomeFragment homeFragment;
 
     /**
@@ -97,7 +98,8 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     public void doFinish(Bitmap img) {
         if (homeFragment == null) {
             homeFragment = new HomeFragment(img);
-            mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit();
+            /*mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit()*/;
+            mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).commit();
         } else {
             homeFragment.refreshImage(img);
         }
