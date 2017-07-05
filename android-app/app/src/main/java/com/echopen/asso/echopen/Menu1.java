@@ -77,13 +77,13 @@ import com.echopen.asso.echopen.utils.Timer;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Menu1 extends Fragment  implements AbstractActionActivity, EchographyImageVisualisationContract.View {
+public  class Menu1 extends Fragment implements AbstractActionActivity, EchographyImageVisualisationContract.View {
 
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
     /* class that deals with the view of MainActivity */
-    private MainActionController mainActionController;
+    //private MainActionController mainActionController;
     public GestureDetector gesture;
     /* Ruler enables get the overview of body scales */
     public RulerView rulerView;
@@ -138,11 +138,11 @@ public class Menu1 extends Fragment  implements AbstractActionActivity, Echograp
         mEchographyImageStreamingService.connect(tcpMode, getActivity());
     }
 
-    @Override
-    public void initActionController() {
-        Menu1 activity = this;
-        mainActionController = new MainActionController(activity);
-    }
+//    @Override
+//    public void initActionController() {
+//        Menu1 activity = this;
+//        mainActionController = new MainActionController(activity);
+//    }
 
     /**
      * @param item, MenuItem instance
@@ -190,5 +190,10 @@ public class Menu1 extends Fragment  implements AbstractActionActivity, Echograp
     @Override
     public void setPresenter(EchographyImageVisualisationContract.Presenter iPresenter) {
         mEchographyImageVisualisationPresenter = iPresenter;
+    }
+
+    @Override
+    public void initActionController() {
+
     }
 }
