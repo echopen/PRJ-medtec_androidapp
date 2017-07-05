@@ -3,10 +3,9 @@ package com.echopen.asso.echopen;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +21,10 @@ import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVi
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+
 /**
  * MainActivity class handles the main screen of the app.
  */
@@ -31,9 +34,9 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     //private RenderingContextController mRenderingContextController;
 
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
-
+    private Bitmap currentBitmap;
+    private ImageHandler ImageHandler;
     final Context context = this;
-
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -45,6 +48,9 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // create file handler to save images
+        ImageHandler ImageHandler = new ImageHandler(getFilesDir());
 
         mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
         //mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
@@ -89,6 +95,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
     @Override
     public void refreshImage(final Bitmap iBitmap) {
+        currentBitmap = iBitmap;
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
@@ -127,6 +134,10 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
             // If click on filter button, we display the filter modal
             case R.id.btnFilter:
                 displayFilterModal();
+                break;
+            // Call the save Handler to save the current bitmap
+            case R.id.btnSaveImage:
+                ImageHandler.saveImage(currentBitmap);
                 break;
         }
     }

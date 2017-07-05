@@ -3,6 +3,7 @@ package com.echopen.asso.echopen;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -23,7 +24,8 @@ public class ListImagesActivity extends Activity {
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // TODO: 04/07/17 create links to img view 
+                // TODO: 04/07/17 create links to img view
+                Log.d("galleryImageclck","WAZZZZZA");
             }
         });
     }
