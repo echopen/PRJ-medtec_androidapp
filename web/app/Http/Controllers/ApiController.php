@@ -84,4 +84,34 @@ class ApiController extends Controller
 			]);
 		}
 	}
+
+	public function registerUser(Request $request){
+		$email = $request['email'];
+		$name = $request['name'];
+		$password = $request['password'];
+
+		if(isset($email) && isset($name) && isset($password)){
+			if(empty(User::where('email', $email)->first())){
+				$user = new User;
+				$user->name = $name;
+				$user->email = $email;
+				$user->password = bcrypt($password);
+				$user->save();
+
+				$data['error'] = false;
+				$data['user'] = $user;
+				return json_encode($data);
+			}
+			else{
+				$data['error'] = true;
+				$data['errorMessage'] = "Email already exists";
+				return json_encode($data);
+			}
+		}
+		else{
+			$data['error'] = true;
+			$data['errorMessage'] = "Email or name or password is missing";
+			return json_encode($data);
+		}
+	}
 }
