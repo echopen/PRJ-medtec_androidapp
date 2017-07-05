@@ -1,16 +1,162 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/black"
+    android:gravity="center">
 
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name"
-        />
+    <LinearLayout
+        android:id="@+id/preset1"
+        android:background="#66ffffff"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignTop="@+id/preset2"
+        android:layout_alignEnd="@+id/preset3">
 
-</LinearLayout>
+        <ImageView
+            android:id="@+id/preset1_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/splash"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/preset1_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:text="Uro digestif"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/preset2"
+        android:background="#66ffffff"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginStart="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/preset1">
+
+        <ImageView
+            android:id="@+id/preset2_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/splash"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/preset2_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Obstétrique"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/preset3"
+        android:background="#66ffffff"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/preset1"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/preset3_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/splash"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/preset3_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Cardiaque"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/preset4"
+        android:background="#66ffffff"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_alignTop="@+id/preset3"
+        android:layout_alignStart="@+id/preset2">
+
+        <ImageView
+            android:id="@+id/preset4_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/splash"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/preset4_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Thoracique"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/preset5"
+        android:background="#66ffffff"
+        android:layout_width="250dp"
+        android:layout_height="125dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@+id/preset3"
+        android:layout_alignStart="@+id/preset3"
+        android:layout_marginTop="10dp"
+        android:layout_alignEnd="@+id/preset4">
+
+        <ImageView
+            android:id="@+id/preset5_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/splash"
+            android:layout_marginBottom="10dp"/>
+
+        <TextView
+            android:id="@+id/preset5_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Ostéo-articulaire"
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
 
