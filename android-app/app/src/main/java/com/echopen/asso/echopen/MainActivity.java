@@ -1,22 +1,14 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.widget.Button;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-import com.echopen.asso.echopen.ui.RenderingContextController;
-
+import android.widget.Button;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -29,7 +21,9 @@ import com.echopen.asso.echopen.ui.RenderingContextController;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    FragmentManager fragmentmanager;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -44,13 +38,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         setContentView(R.layout.activity_main);
 
+        fragmentmanager = getSupportFragmentManager();
+
         Button topBt = (Button) findViewById(R.id.enter_bt);
         topBt.setOnClickListener(this);
 
-        Button rightBt = (Button) findViewById(R.id.signin_bt);
+        Button rightBt = (Button) findViewById(R.id.signup_bt);
         rightBt.setOnClickListener(this);
 
-        Button leftBt = (Button) findViewById(R.id.signout_bt);
+        Button leftBt = (Button) findViewById(R.id.emergency_bt);
         leftBt.setOnClickListener(this);
     }
 
@@ -58,30 +54,34 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View view) {
 
         switch (view.getId()){
+            case R.id.signup_bt :
+                btSignUpClicked();
+                break;
+            case R.id.emergency_bt :
+                btEmergencyClicked();
+                break;
             case R.id.enter_bt :
                 btEnterClicked();
-                break;
-            case R.id.signin_bt :
-                btSignInClicked();
-                break;
-
-            case R.id.signout_bt :
-                btSignOutClicked();
                 break;
         }
     }
 
-    private void btEnterClicked(){
+    private void btSignUpClicked(){
+
+        SignUpFragment signUpFragment = new SignUpFragment();
+        fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
+
+        //Intent intent = new Intent(this, SignupActivity.class);
+        //startActivity(intent);
+    }
+
+
+    private void btEmergencyClicked(){
         Intent intent = new Intent(this, ChoiceActivity.class);
         startActivity(intent);
     }
 
-    private void btSignInClicked(){
-        Intent intent = new Intent(this, EchoActivity.class);
-        startActivity(intent);
-    }
-
-    private void btSignOutClicked(){
+    private void btEnterClicked(){
         Intent intent = new Intent(this, ChoiceActivity.class);
         startActivity(intent);
     }

@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <RelativeLayout
+        android:id="@+id/fragmentlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/mainText"
         android:layout_width="wrap_content"
@@ -19,16 +26,10 @@
         android:text="Enter"/>
 
     <Button
-        android:id="@+id/signin_bt"
+        android:id="@+id/signup_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="sign in"/>
-
-    <Button
-        android:id="@+id/signout_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sign out"/>
 
     <Button
         android:id="@+id/emergency_bt"
