@@ -11,10 +11,15 @@
            <p class="entry_desc">
                Lorem blabla
            </p>
+           <p class="entry_sub_desc">
+               At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.
+           </p>
+           <div class="entry_more">
+               <a href="See the faq"></a>
+           </div>
         </div>
     </div>
     <div class="alignright">
-
     <div class="entry_slick entry_slick-multiple">
     
         <!--Slick slide-->
@@ -58,6 +63,7 @@
         </div>     
            
     </div>
+        <div class="slick_background"></div>
        </div>    
 </div>
 </section>
