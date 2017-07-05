@@ -3,10 +3,13 @@
     <string name="app_name">echopen</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="hello_world">Hello_world</string>
-    <string name="intro_text_home">L\' échographie accessible</string>
-    <string name="btn_start_home">Démarrer un examen</string>
-    <string name="btn_login_home">Se connecter</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="intro_text">L\'echographie accessible</string>
+    <string name="title_activity_settings">Paramètres</string>
+    <string name="settings_parametre">Personne</string>
+    <string name="settings_parametre_personne">Personne</string>
+    <string name="settings_parametre_morpho">Morphologie</string>
+    <string name="settings_parametre_organe">Organes</string>
+    <string name="option_s">S</string>
+    <string name="option_m">M</string>
+    <string name="option_l">L</string>
 </resources>

@@ -73,6 +73,12 @@ public class MainActivity extends FragmentActivity {
         mPager.setCurrentItem(1);
     }
 
+    private void goSettingsActivity(){
+        Intent intent = new Intent(MainActivity.this,SettingsActivity.class);
+        startActivity(intent);
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();

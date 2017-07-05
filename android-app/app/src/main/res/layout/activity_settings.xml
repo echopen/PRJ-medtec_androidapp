@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.echopen.asso.echopen.SettingsActivity">
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="347dp"
+        android:layout_height="130dp"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.089">
+
+
+        <TextView
+            android:id="@+id/settings_parametre_personne"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bottom"
+            android:paddingBottom="30dp"
+            android:text="@string/settings_parametre_personne" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settings_parametre_personne"
+            android:layout_centerInParent="true">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/woman_icon"
+                android:id="@+id/choice_woman"
+
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/man_icon"
+                android:id="@+id/choice_man"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baby_icon"
+                android:id="@+id/choice_baby"
+                />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="347dp"
+        android:layout_height="130dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.78">
+
+        <TextView
+            android:id="@+id/settings_parametre_organe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/border_bottom"
+            android:paddingBottom="30dp"
+            android:text="@string/settings_parametre_organe" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/settings_parametre_organe"
+            android:layout_centerInParent="true"
+
+            >
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/organe1_icon"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/organe2_icon"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/organe3_icon"
+
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:src="@drawable/organe4_icon"
+
+                />
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+
+        android:id="@+id/relativeLayout2"
+        android:layout_width="347dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.429">
+
+        <TextView
+            android:id="@+id/settings_parametre_morpho"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border_bottom"
+            android:paddingBottom="30dp"
+            android:text="@string/settings_parametre_morpho" />
+
+        <LinearLayout
+            android:layout_below="@+id/settings_parametre_morpho"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginLeft="70dp"
+                >
+
+                />
+                <RadioButton
+                    android:layout_width="50dp"
+
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    android:button="@null"
+                    android:drawableBottom="@drawable/btn_radio_off"
+                    android:gravity="center"
+                    android:text="@string/option_s"
+                    />
+                <RadioButton
+                    android:layout_width="50dp"
+
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    android:button="@null"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:drawableBottom="@drawable/btn_radio_on"
+                    android:gravity="center"
+                    android:text="@string/option_m" />
+                <RadioButton
+                    android:layout_width="50dp"
+
+                    android:layout_height="wrap_content"
+                    android:scaleX="1.3"
+                    android:scaleY="1.3"
+                    android:button="@null"
+                    android:drawableBottom="@drawable/btn_radio_off"
+                    android:gravity="center"
+                    android:text="@string/option_l"
+
+                    />
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@null"
+        android:src="@drawable/btn_floating"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.898"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
