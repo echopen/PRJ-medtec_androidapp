@@ -19,6 +19,8 @@
         android:label="@string/app_name"
         android:name=".EchOpenApplication"
         android:theme="@style/AppTheme">
+
+        <!-- Splash screen is launched after opening the app -->
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
@@ -31,11 +33,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Main activity have login / connexion or skip buttons -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar"/>
+
+        <!-- Home screen with the probe, centered in swipe screen -->
+        <activity
+            android:name=".HomeScreenActivity"
+            android:label="homescreen"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+
     </application>
 
 </manifest>
