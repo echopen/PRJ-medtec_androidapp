@@ -13,30 +13,36 @@ import java.util.Collections;
 
 public class ImageHandler {
 
+    private int clientId;
     private File galleryDirectory;
 
-    public ImageHandler( File filesDir){
+    public ImageHandler( File filesDir, int clientId){
         this.galleryDirectory = filesDir;
+        this.clientId = clientId;
     }
 
     public boolean saveImage(Bitmap currentBitmap) {
 
-        File galleryDirectory = new File(this.galleryDirectory.toString() + "/");
-        if (!galleryDirectory.exists() || !galleryDirectory.isDirectory()) {
-            galleryDirectory.mkdir();
+        File clientDirectory = new File(this.galleryDirectory.toString() +"/"+ this.clientId +"/");
+        if (!clientDirectory.exists() || !clientDirectory.isDirectory()) {
+            clientDirectory.mkdir();
         }
 
-        File[] filesInPath = galleryDirectory.listFiles();
-        while (this.galleryDirectory.listFiles().length >= 5) {
+        File[] filesInPath = clientDirectory.listFiles();
+
+        while (clientDirectory.listFiles().length >= 5) {
+
             String[] filesNames = new String[filesInPath.length];
             for (int i = 0; i < filesInPath.length; i++) {
                 filesNames[i] = filesInPath[i].getName();
             }
+
             String lastFileName = Collections.min(new ArrayList<>(Arrays.asList(filesNames)));
             new File(this.galleryDirectory.toString() + "/" + lastFileName).delete();
         }
+
         try {
-            OutputStream stream = new FileOutputStream(this.galleryDirectory.toString() + "/" + System.currentTimeMillis() + ".png");
+            OutputStream stream = new FileOutputStream(this.galleryDirectory.toString() + "/"+ this.clientId + "/" + System.currentTimeMillis() + ".png");
             currentBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

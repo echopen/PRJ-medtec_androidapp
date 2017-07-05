@@ -21,6 +21,13 @@ public class EchOpenApplication extends Application {
         super.onCreate();
 
         mEchographyImageStreaming = new EchographyImageStreamingService(new RenderingContextController());
+
+/**        String[] Files =  this.fileList();
+
+        for(String file : Files){
+            Log.d("Fichier Savedddddd","fichier"+file);
+        }
+*/
     }
 
     /**
