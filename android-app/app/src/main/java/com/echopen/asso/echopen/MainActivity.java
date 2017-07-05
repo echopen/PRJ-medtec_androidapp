@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     //private RenderingContextController mRenderingContextController;
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
+    private HomeFragment homeFragment;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -102,12 +103,16 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     }
 
     public void changeFragment(Bitmap img) {
-        HomeFragment homeFragment = new HomeFragment(img);
-        mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit();
+        if(homeFragment==null) {
+            homeFragment = new HomeFragment(img);
+            mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit();
+        } else {
+            homeFragment.refreshImage(img);
+        }
+
     }
 
     public void switchActivity() {
-        Log.d("alex", "aex");
         Intent intent = new Intent(this, ListImagesActivity.class);
         startActivity(intent);
     }
