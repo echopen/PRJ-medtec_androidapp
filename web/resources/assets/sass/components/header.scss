@@ -1,10 +1,67 @@
 header {
-//    background-color: blue;
-//    height: 10px;
-//    @include phone() {
-//        background-color: red;
-//    }
-//    @include very-small-device() {
-//        background-color: green;
-//    }
+  font-family: $font-Roboto-Regular;
+  height: 100px;
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  .links, .logo, .right-cta{
+    display: inline-block;
+    float: left;
+  }
+  li{
+    list-style: none;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+
+  .links{
+    margin-top: 3em;
+    padding-left: em(60);
+    li{
+      margin-left: em(35);
+      &:first-child{
+        margin-left: 0;
+      }
+      a{
+        color: #545454;
+        font-size: em(16);
+        text-decoration: none;
+        transition: color 0.5s;
+        &:hover{
+          color: $echopen-blue;
+        }
+      }
+    }
+  }
+
+  .logo{
+    width: 13.75%;
+    background-image: url('/img/echopen-gradient.png');
+    background-size: cover;
+    @include aspect-ratio(198,56);
+    position: absolute;
+    left: 43.125%;
+    top: 25%;
+  }
+
+  .right-cta{
+    margin-top: 1.7em;
+    float: right;
+    padding-right: em(60);
+    .join-us{
+      cursor: pointer;
+      width: em(180);
+      border: 2px solid $echopen-blue;
+      padding: em(15) em(55);
+      background-color: #fff;
+      color: $echopen-blue;
+      border-radius: 4px;
+      transition: background-color 1s, color 1s;
+      &:hover{
+        color: #fff;
+        background-color: $echopen-blue;
+      }
+    }
+  }
+
 }

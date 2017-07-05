@@ -1,4 +1,4 @@
-$base-path-font: '/assets/frontend/fonts/';
+$base-path-font: '/fonts/';
 
 @mixin registerFont($name) {
   $fontpath: "#{$base-path-font}#{$name}/#{$name}";
@@ -26,30 +26,5 @@ $base-path-font: '/assets/frontend/fonts/';
   }
 }
 
-$font-SourceSansPro-Black: 'SourceSansPro-Black';
-//@include registerFont($font-SourceSansPro-Black);
-@include registerFontAlter($font-SourceSansPro-Black, 'OpenSans-ExtraBold');
-
-$font-SourceSansPro-Bold: 'SourceSansPro-Bold';
-@include registerFont($font-SourceSansPro-Bold);
-//@include registerFontAlter($font-SourceSansPro-Bold, 'OpenSans-Bold');
-
-/*
-$font-SourceSansPro-ExtraLight: 'SourceSansPro-ExtraLight';
-@include registerFont($font-SourceSansPro-ExtraLight);
-//@include registerFontAlter($font-SourceSansPro-ExtraLight, 'OpenSans-Light');
-
-$font-SourceSansPro-Light: 'SourceSansPro-Light';
-@include registerFont($font-SourceSansPro-Light);
-//@include registerFontAlter($font-SourceSansPro-Light, 'OpenSans-Light');
-*/
-
-$font-SourceSansPro-Regular: 'SourceSansPro-Regular';
-@include registerFont($font-SourceSansPro-Regular);
-//@include registerFontAlter($font-SourceSansPro-Regular, 'OpenSans-Regular');
-
-$font-SourceSansPro-SemiBold: 'SourceSansPro-Semibold';
-@include registerFont($font-SourceSansPro-SemiBold);
-//@include registerFontAlter($font-SourceSansPro-SemiBold, 'OpenSans-SemiBold');
-
-$font-icon: 'fontello';
+$font-Roboto-Regular: 'Roboto-Regular';
+@include registerFont($font-Roboto-Regular);
