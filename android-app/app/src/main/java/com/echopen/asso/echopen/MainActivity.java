@@ -55,6 +55,20 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         //-----------------------------------------------------------------
         final imagesHandler imagesHandler = new imagesHandler(getFilesDir());
 
+        final Button btnStart = (Button) findViewById(R.id.btnStart);
+        btnStart.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                imagesHandler.startRecording();
+            }
+        });
+
+        final Button btnEnd = (Button) findViewById(R.id.btnEnd);
+        btnEnd.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                imagesHandler.endRecording(1);
+            }
+        });
+
         final ImageView image = (ImageView) findViewById(R.id.imageView);
 
         EchOpenApplication app = (EchOpenApplication) getApplication();
@@ -87,21 +101,16 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
             @Override
             public boolean onDoubleTapEvent(MotionEvent e) {
-                Log.d("tap","OnDoubleTap"+e);
+                Log.d("OnDoubleTap","OnDoubleTap"+e);
 
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                Log.d("tap","onSingleTapConfirmed"+e);
+                Log.d("onSingleTapConfirmed","onSingleTapConfirmed"+e);
 
                 return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-                Log.d("tap","onLongPress"+e);
             }
 
 
@@ -133,18 +142,19 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     long time = System.currentTimeMillis();
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        this.tapOnView(event.getAction());
+        //Log.d("touch", ""+event.getAction());
+        this.doubleTapEvent(event.getAction());
         return true;
     }
 
 
 
-    public boolean tapOnView(int ev) {
+    public boolean doubleTapEvent(int ev) {
         if (ev == MotionEvent.ACTION_DOWN) {
 
             if(firstTouch && (System.currentTimeMillis() - time) <= 400) {
                 //set action to write annotations
-                Log.d("tap on view"," second tap ");
+                Log.e("** DOUBLE TAP**"," second tap ");
                 firstTouch = false;
 
                 return false;
@@ -152,7 +162,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
             } else {
                 firstTouch = true;
                 time = System.currentTimeMillis();
-                Log.d("tap on view"," First Tap time  "+time);
+                Log.e("** SINGLE  TAP**"," First Tap time  "+time);
 
                 return false;
             }
@@ -177,7 +187,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        this.tapOnViewgit (motionEvent.getAction());
+        this.doubleTapEvent(motionEvent.getAction());
         return false;
     }
 }
