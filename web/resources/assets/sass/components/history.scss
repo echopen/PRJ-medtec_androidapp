@@ -1,4 +1,4 @@
-.base_section-community{
+.base_section-history{
     height: 48.750em;
     background-color: $lightgrey;
     padding-top: 0;
@@ -16,7 +16,7 @@
         }
     }
     .entry_title{
-        width: 27%;
+        
     }
     .entry_slick-solo{
         .base_item-content{
@@ -53,11 +53,5 @@
         height: 27.313em;
         background: url(../../../../public/img/visuel-storytelling.png) no-repeat;
         background-size: cover;
-    }
-    .entry_img{
-        background: url(../../../../public/img/vague.png) no-repeat;
-        width: 122px;
-        height: 10px;
-        float: right;
     }
 }

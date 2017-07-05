@@ -1,4 +1,5 @@
-<div class="entry_wrapper">
+<section class="base_section base_section-history">
+   <div class="entry_wrapper">
     <div class="entry_title">
        <span class="entry_meta">
             impacting figures
@@ -68,3 +69,4 @@
     <div class="entry_highlight alignleft">
     </div>
 </div>
+</section>
