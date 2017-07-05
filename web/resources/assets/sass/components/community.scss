@@ -7,8 +7,9 @@
         width: 68.750em;
         margin: 0 auto;
         .alignleft{
-            position: absolute;
-            top: 30em;
+            display: block;
+            top: -50%;
+            position: relative;
         }
         .alignright{
             width: 50.487em;
