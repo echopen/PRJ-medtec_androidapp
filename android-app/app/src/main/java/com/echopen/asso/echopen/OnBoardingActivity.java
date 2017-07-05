@@ -12,6 +12,7 @@ import android.view.Window;
 
 import com.echopen.asso.echopen.fragments.onboarding.Step01Fragment;
 import com.echopen.asso.echopen.fragments.onboarding.Step02Fragment;
+import com.echopen.asso.echopen.fragments.onboarding.Step03Fragment;
 
 import java.util.List;
 import java.util.Vector;
@@ -38,6 +39,7 @@ public class OnBoardingActivity extends FragmentActivity {
 
         fragments.add(Fragment.instantiate(this, Step01Fragment.class.getName()));
         fragments.add(Fragment.instantiate(this, Step02Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Step03Fragment.class.getName()));
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new MainPageAdapter(getSupportFragmentManager(), fragments);
