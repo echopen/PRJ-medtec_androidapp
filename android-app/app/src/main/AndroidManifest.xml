@@ -46,9 +46,14 @@
             android:name=".ChoiceActivity"
             android:theme="@style/AppCompatTheme" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".ProfilActivity"
             android:theme="@style/AppCompatTheme" />
-
+        <activity
+            android:name=".SignUpActivity"
+            android:theme="@style/AppCompatTheme" />
+        <activity
+            android:name=".SignInActivity"
+            android:theme="@style/AppCompatTheme" />
     </application>
 
 </manifest>

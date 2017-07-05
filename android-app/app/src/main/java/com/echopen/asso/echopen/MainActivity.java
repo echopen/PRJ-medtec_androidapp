@@ -1,7 +1,6 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,14 +39,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fragmentmanager = getSupportFragmentManager();
 
-        Button topBt = (Button) findViewById(R.id.enter_bt);
-        topBt.setOnClickListener(this);
+        Button enterBt = (Button) findViewById(R.id.enter_bt);
+        enterBt.setOnClickListener(this);
 
-        Button rightBt = (Button) findViewById(R.id.signup_bt);
-        rightBt.setOnClickListener(this);
+        Button signupBt = (Button) findViewById(R.id.signup_bt);
+        signupBt.setOnClickListener(this);
 
-        Button leftBt = (Button) findViewById(R.id.emergency_bt);
-        leftBt.setOnClickListener(this);
+        Button signintBt = (Button) findViewById(R.id.signin_bt);
+        signintBt.setOnClickListener(this);
+
+        Button emergencyBt = (Button) findViewById(R.id.emergency_bt);
+        emergencyBt.setOnClickListener(this);
     }
 
     @Override
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()){
             case R.id.signup_bt :
                 btSignUpClicked();
+                break;
+            case R.id.signin_bt :
+                btSignInClicked();
                 break;
             case R.id.emergency_bt :
                 btEmergencyClicked();
@@ -67,12 +72,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void btSignUpClicked(){
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
 
-        SignUpFragment signUpFragment = new SignUpFragment();
-        fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
+        //SignUpFragment signUpFragment = new SignUpFragment();
+        //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
+    }
 
-        //Intent intent = new Intent(this, SignupActivity.class);
-        //startActivity(intent);
+    private void btSignInClicked(){
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+        //SignUpFragment signUpFragment = new SignInFragment();
+        //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signInFragment).commit();
     }
 
     private void btEmergencyClicked(){
