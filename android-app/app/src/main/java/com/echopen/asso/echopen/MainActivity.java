@@ -17,7 +17,6 @@ import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVi
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 
-import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -78,7 +77,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private void btSignInClicked(){
-        Intent intent = new Intent(this, ChoiceActivity.class);
+        Intent intent = new Intent(this, EchoActivity.class);
         startActivity(intent);
     }
 

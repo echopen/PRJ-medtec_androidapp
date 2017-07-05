@@ -1,13 +1,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/echo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id = '@+id/img'
-        />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/archives" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="100dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Male, 36 years old, 76kg, lunjs"
+            android:textAlignment="center"
+            android:textColor="#FFF"
+            android:layout_centerInParent="true"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id='@+id/img'
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
