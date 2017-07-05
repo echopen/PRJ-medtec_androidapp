@@ -13,5 +13,7 @@
     
     @include('components.home_faq')
     
+    @include('components.home_community')
+    
     
 @endsection
