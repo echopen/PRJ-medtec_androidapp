@@ -8,15 +8,39 @@
             margin-left: 8.429em;
         }
         .alignright{
-            width: 69%;
+            width: 62%;
         }
     }
     .slick-slide{
         width: 24.429em;
         height: 20.643em;
+        border: 1px solid $lightgrey;
     }
-    entry_title{
+    .slick_background{
+        background-image: linear-gradient(126deg, #17ead9, #6078ea);
+        padding: 7.929em 0;
+        width:77%;
+        height: 566px;
+        background-image: linear-gradient(126deg, #17ead9, #6078ea);
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: -1;
+        float: right;
+    }
+    .entry_title{
         top: initial;
         transform: none;
+        margin-top: 150px;
+    }
+    .entry_more{
+        a{
+            text-transform: uppercase;
+        }
+    }
+    .entry_slick{
+        top: -50%;
+        position: relative;
+        transform: translateY(50%);
     }
 }
