@@ -22,3 +22,18 @@ html {
     clear: both;
     padding: 5em 0;
 }
+
+.base_btn{
+	width: 205px;
+	height: 52px;
+	border-radius: 4px;
+	background-color: #6078ea;
+	box-shadow: 0 9px 16px 0 rgba(0, 0, 0, 0.07);
+	.super_cta{
+		padding: 3%;
+		font-size: 16px;
+		font-weight: 500;
+		text-align: center;
+		color: #ffffff;
+	}
+}
