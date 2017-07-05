@@ -6,4 +6,7 @@
     <string name="intro_text_home">L\' échographie accessible</string>
     <string name="btn_start_home">Démarrer un examen</string>
     <string name="btn_login_home">Se connecter</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
