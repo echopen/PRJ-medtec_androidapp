@@ -51,23 +51,21 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
             this.clientId = 1;
         }
 
-
-        setEchoImage();
-
         // create file handler to save images
         ImageHandler = new ImageHandler(getFilesDir(),this.clientId);
 
         mFragmentManager = getSupportFragmentManager();
         SplashFragment splashFragment = new SplashFragment();
         mFragmentManager.beginTransaction().add(R.id.main, splashFragment).commit();
+
+        mEchographyImageVisualisationPresenter.start();
+        EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
+        mEchographyImageStreamingService.connect(lTCPMode, this);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mEchographyImageVisualisationPresenter.start();
-        EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
-        mEchographyImageStreamingService.connect(lTCPMode, this);
     }
 
     /**
@@ -83,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        startActivity(new Intent(this, MainActivity.class));
     }
 
     @Override
@@ -117,7 +114,12 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
 
     public void switchActivity() {
         Intent intent = new Intent(this, ListImagesActivity.class);
+        // pass Client Id to listImagesActivity
+        Bundle b = new Bundle();
+        b.putInt("clientId", this.clientId); //Your id
+        intent.putExtras(b); //Put your id to your next Intent
         startActivity(intent);
+
     }
 
     public ImageHandler getImageHandler() {
