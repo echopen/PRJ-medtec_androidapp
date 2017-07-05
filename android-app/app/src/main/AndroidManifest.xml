@@ -32,7 +32,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-        <activity android:name=".Gallery" />
+        <activity android:name=".OnBoardingActivity"></activity>
     </application>
 
 </manifest>
