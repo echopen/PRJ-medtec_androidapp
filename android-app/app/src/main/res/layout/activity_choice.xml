@@ -17,7 +17,7 @@
         android:background="@drawable/archives" />
 
     <TextView
-        android:id="@+id/choice_content"
+        android:id="@+id/archive"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_gravity="center"
@@ -39,7 +39,7 @@
         />
 
     <TextView
-        android:id="@+id/choice_content"
+        android:id="@+id/echography"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_gravity="center"

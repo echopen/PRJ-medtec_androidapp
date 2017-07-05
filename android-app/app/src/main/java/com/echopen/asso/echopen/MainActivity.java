@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btSignUpClicked();
                 break;
             case R.id.signin_bt :
-                btSignUpClicked();
+                btSignInClicked();
                 break;
             case R.id.emergency_bt :
                 btEmergencyClicked();
@@ -72,13 +72,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void btSignUpClicked(){
-        SignUpFragment signUpFragment = new SignUpFragment();
-        fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+
+        //SignUpFragment signUpFragment = new SignUpFragment();
+        //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
     }
 
     private void btSignInClicked(){
-        SignUpFragment signUpFragment = new SignUpFragment();
-        fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+        //SignUpFragment signUpFragment = new SignInFragment();
+        //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signInFragment).commit();
     }
 
     private void btEmergencyClicked(){
