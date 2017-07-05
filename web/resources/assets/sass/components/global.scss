@@ -73,16 +73,66 @@ body{
             &:after{
                 content: "";
                 background: url(../../../../public/img/vague.png) no-repeat;
-        width: 122px;
-        height: 10px;
-        position: absolute;
+                width: 122px;
+                height: 10px;
+                position: absolute;
                 right: -10px;
-    top: 65px;
+                top: 65px;
                 }
     }
     .entry_meta{
         font-size: 0.813em;
         font-weight: 500;
         text-transform: uppercase;
+    }
+}
+.base_section-nl{
+    .entry_wrapper{
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .entry_desc{
+        padding-bottom: 50px;
+    }
+    .input_form{
+        width: 100%;
+        height: 70px;
+        background-color: $lightcolor;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        &::-webkit-input-placeholder {padding-left: 25px;}
+        &:-moz-placeholder {padding-left: 25px;}
+    }
+    .base_btn-subscribe{
+        background-color: #6078ea;
+        color: #fff;
+        text-transform: uppercase;
+        font-size: 14px;
+        line-height: 21px;
+        border: 1px solid #6078ea;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+        height: 70px;
+        width: 100%;
+        margin-top: 0;
+    }
+    .form_input{
+        width: 80%;
+    }
+    .form_submit{
+        width: 20%;
+    }
+    .input_shadow{
+        position: relative;
+        z-index: -1;
+        height: 30px;
+        margin-top: 25px;
+        margin-left: 7px;
+        width: 77%;
+        opacity: 0.8;
+        -webkit-filter: blur(20px);
+        filter: blur(20px);
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.5)), linear-gradient(95deg, #17ead9, #6078ea);
     }
 }
