@@ -12,21 +12,18 @@
     <string name="cancel_dialog">Cancel</string>
     <string name="lut_params">Lut Params:</string>
     <string name="gain">Gain:</string>
-    <string-array
-        name="filter_choice">
+    <string-array name="filter_choice">
         <item>Convolution</item>
         <item>Image enhancement</item>
         <item>Other filter</item>
         <item>Other filter</item>
     </string-array>
-    <string-array
-        name="protocol_choice">
+    <string-array name="protocol_choice">
         <item>local</item>
         <item>TCP</item>
         <item>UDP</item>
     </string-array>
-    <string-array
-        name="choose_camera">
+    <string-array name="choose_camera">
         <item>Take Picture</item>
         <item>Take Picture</item>
         <item>Choose Picture</item>
@@ -36,4 +33,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

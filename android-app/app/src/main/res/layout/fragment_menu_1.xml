@@ -1,0 +1,68 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/echo"
+    />
+
+<LinearLayout
+    android:id="@+id/vBottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:padding="5dp"
+    android:weightSum="1"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentStart="true">
+
+
+    <RelativeLayout
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:weightSum="1">
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView2"-->
+            <!--android:layout_width="32dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_marginStart="12dp"-->
+            <!--android:src="@drawable/settings"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignParentStart="true" />-->
+
+        <TextView
+            android:id="@+id/btnCapture"
+            android:layout_width="43dp"
+            android:layout_height="46dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_weight="0.01"
+            android:background="@drawable/capture_vid_btn"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView6"-->
+            <!--android:layout_width="36dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:src="@drawable/gallery"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_alignTop="@+id/imageView2"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_marginEnd="15dp" />-->
+
+    </RelativeLayout>
+
+</LinearLayout>
+</RelativeLayout>

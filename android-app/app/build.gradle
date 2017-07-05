@@ -145,9 +145,9 @@ dependencies {
     testCompile('com.android.support.test:runner:0.5') {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
-    compile 'com.android.support:appcompat-v7:25+'
-//    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support:design:25.+'
+    //    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support:design:25.3.1'
     compile 'commons-io:commons-io:2.0.1'
     compile 'org.boofcv:android:0.18'
     compile 'com.firebase:firebase-client-android:2.3.1'
@@ -155,6 +155,7 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:10.2.1'
     compile 'com.google.android.gms:play-services-gcm:10.2.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-v4:25.3.1'
     testCompile 'junit:junit:4.12'
     testCompile 'com.jayway.android.robotium:robotium-solo:5.5.4'
     testCompile 'org.mockito:mockito-core:1.10.19'

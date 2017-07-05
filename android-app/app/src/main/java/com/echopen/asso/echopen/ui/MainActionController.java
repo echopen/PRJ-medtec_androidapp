@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.ScannerFragment;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingObserver;
@@ -19,7 +20,7 @@ public class MainActionController extends AbstractActionController {
 
     private Activity activity;
 
-    public MainActionController() {
+    public MainActionController(ScannerFragment activity) {
         displayAction();
     }
 
