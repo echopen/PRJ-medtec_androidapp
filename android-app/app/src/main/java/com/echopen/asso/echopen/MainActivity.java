@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingConnectionType;
@@ -56,28 +57,43 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         setContentView(R.layout.activity_main);
 
         RenderingContextController rdController = new RenderingContextController();
-        EchographyImageStreamingService serviceEcho =  new EchographyImageStreamingService(rdController);
-        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
+        final EchographyImageStreamingService serviceEcho = new EchographyImageStreamingService(rdController);
+        final EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.191.4.59", REDPITAYA_PORT);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("192.168.10.1", REDPITAYA_PORT);
         serviceEcho.connect(mode, this);
+        presenter.start();
 
-        presenter.listenEchographyImageStreaming();
-
-        Button btn_capture = (Button) findViewById(R.id.btn_capture);
+        final Button btn_capture = (Button) findViewById(R.id.btn_capture);
+        final Button btn_save = (Button) findViewById(R.id.btn_save);
+        btn_save.setVisibility(View.INVISIBLE);
 
         btn_capture.setOnClickListener(new View.OnClickListener() {
+            //Freeze picture & hide take button
             public void onClick(View v) {
-
-                Log.d("CLICK", "coucou fdp");
-
+                serviceEcho.deleteObservers();
+                btn_capture.setVisibility(View.INVISIBLE);
+                btn_save.setVisibility(View.VISIBLE);
             }
         });
+
+        btn_save.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Picture Saved" ,Toast.LENGTH_SHORT );
+                toast.show();
+                presenter.start();
+                btn_capture.setVisibility(View.VISIBLE);
+                btn_save.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
+
 
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
     }
 
@@ -89,8 +105,8 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
      * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
      *
      * @param requestCode, integer argument that identifies your request
-     * @param resultCode, to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
-     * @param data,       Intent instance
+     * @param resultCode,  to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
+     * @param data,        Intent instance
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -99,10 +115,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
     @Override
     public void refreshImage(final Bitmap iBitmap) {
-
-        Log.d("IMGJIBEEEEE", iBitmap+"");
-
-        try{
+        try {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -113,12 +126,10 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
             });
 
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
 
     @Override
