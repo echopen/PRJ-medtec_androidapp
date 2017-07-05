@@ -1,40 +1,48 @@
 package com.echopen.asso.echopen;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 public class ImageHandler {
 
-public File filesDir;
+    private File galleryDirectory;
 
     public ImageHandler( File filesDir){
-        this.filesDir = filesDir;
+        this.galleryDirectory = filesDir;
     }
 
-    public File saveImage(Bitmap currentBitmap) {
+    public boolean saveImage(Bitmap currentBitmap) {
 
-        File clientDirectory = new File(this.clientsDirectory.toString() + "/" + clientId + "/");
-        if (!clientDirectory.exists() || !clientDirectory.isDirectory()) {
-            clientDirectory.mkdir();
+        File galleryDirectory = new File(this.galleryDirectory.toString() + "/");
+        if (!galleryDirectory.exists() || !galleryDirectory.isDirectory()) {
+            galleryDirectory.mkdir();
         }
 
-        File[] filesInPath = clientDirectory.listFiles();
-        String[] cachedFilesNames = new String[filesInPath.length];
-        for (int i = 0; i < filesInPath.length; i++) {
-            cachedFilesNames[i] = filesInPath[i].getName();
+        File[] filesInPath = galleryDirectory.listFiles();
+        while (this.galleryDirectory.listFiles().length >= 5) {
+            String[] filesNames = new String[filesInPath.length];
+            for (int i = 0; i < filesInPath.length; i++) {
+                filesNames[i] = filesInPath[i].getName();
+            }
+            String lastFileName = Collections.min(new ArrayList<>(Arrays.asList(filesNames)));
+            new File(this.galleryDirectory.toString() + "/" + lastFileName).delete();
         }
-
-        File lastCachedFile = new File(clientDirectory + Collections.max(new ArrayList<>(Arrays.asList(cachedFilesNames))));
-        File savedFile = new File(clientDirectory.toString() + System.currentTimeMillis() + ".png");
-
         try {
-            FileUtils.copyFile(lastCachedFile, savedFile);
-        } catch (IOException e) {
+            OutputStream stream = new FileOutputStream(this.galleryDirectory.toString() + "/" + System.currentTimeMillis() + ".png");
+            currentBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
-        return savedFile;
+        Log.d("imageSaved","true");
+        return true;
     }
 
 }

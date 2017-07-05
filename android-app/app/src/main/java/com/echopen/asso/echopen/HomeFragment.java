@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,10 +18,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.utils.Config;
-
-/**
- * Created by alex on 05/07/17.
- */
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private Bitmap mImage;
@@ -34,8 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -48,6 +44,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         ImageButton btnFilters = (ImageButton) view.findViewById(R.id.btnFilter);
         btnFilters.setOnClickListener(this);
+
+        ImageButton btncapture = (ImageButton) view.findViewById(R.id.btnCapture);
+        btncapture.setOnClickListener(this);
 
         return view;
     }
@@ -66,6 +65,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             // If click on filter button, we display the filter modal
             case R.id.btnFilter:
                 displayFilterModal();
+                break;
+            case R.id.btnCapture:
+                ((MainActivity)getActivity()).getImageHandler().saveImage(mImage);
                 break;
         }
     }

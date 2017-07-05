@@ -29,13 +29,12 @@ import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View {
 
+    private ImageHandler ImageHandler;
     FragmentManager mFragmentManager;
     //private RenderingContextController mRenderingContextController;
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
-    private Bitmap currentBitmap;
-    private ImageHandler ImageHandler;
-    final Context context = this;
+
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -48,10 +47,10 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // create file handler to save images
-        ImageHandler ImageHandler = new ImageHandler(getFilesDir());
-
         setEchoImage();
+
+        // create file handler to save images
+        ImageHandler = new ImageHandler(getFilesDir());
 
         mFragmentManager = getSupportFragmentManager();
         SplashFragment splashFragment = new SplashFragment();
@@ -92,7 +91,6 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
 
     @Override
     public void refreshImage(final Bitmap iBitmap) {
-        currentBitmap = iBitmap;
         try {
             this.runOnUiThread(new Runnable() {
                 @Override
@@ -120,23 +118,11 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     }
 
     public void switchActivity() {
-        Log.d("alex", "aex");
         Intent intent = new Intent(this, ListImagesActivity.class);
         startActivity(intent);
-    public void onBtnCLick(int id) {
-        switch (id) {
-            // If click on gallery button, we change the activity to the image gallery
-            case R.id.btnGallery:
-                startActivity(new Intent(this, ListImagesActivity.class));
-                break;
-            // If click on filter button, we display the filter modal
-            case R.id.btnFilter:
-                displayFilterModal();
-                break;
-            // Call the save Handler to save the current bitmap
-            case R.id.btnSaveImage:
-                ImageHandler.saveImage(currentBitmap);
-                break;
-        }
+    }
+
+    public ImageHandler getImageHandler() {
+        return this.ImageHandler;
     }
 }
