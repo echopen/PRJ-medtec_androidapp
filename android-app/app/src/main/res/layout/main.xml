@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="#039bef"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/containerHandChoice"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:paddingTop="80px"
+        android:layout_centerInParent="true"
+        android:background="@null"
+        android:layout_below="@+id/imageView"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Choisissez votre main dominante"
+            android:layout_width="200dp"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColor="#FFF"
+            android:layout_gravity="center"
+            android:layout_marginBottom="80px"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bSearch"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Gauche"
+            android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/bSearch2"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="Droitier"
+            android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
+            android:textSize="16sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/containerHandChoice"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <Button
+            android:text="Passer les étapes"
+            android:id="@+id/button5"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="145dp"
+        android:background="#039bef" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:background="#FFF"
+        android:layout_below="@+id/imageView"
+        android:orientation="vertical">
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-50dp"
+        android:paddingTop="80px"
+        android:layout_centerInParent="true"
+        android:background="#FFF"
+        android:layout_below="@+id/imageView"
+        android:orientation="vertical">
+
+        <TextView
+            android:text="Connexion"
+            android:layout_width="200dp"
+            android:gravity="center"
+            android:textSize="32sp"
+            android:textColor="#039bef"
+            android:layout_gravity="center"
+            android:layout_marginBottom="80px"
+            android:layout_height="50dp" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="25px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50px"
+            android:ems="10"
+            android:hint="Adresse mail"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/editText4"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:paddingLeft="25px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50px"
+            android:ems="10"
+            android:hint="Mot de passe"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"/>
+
+        <Button
+            android:text="Connexion"
+            android:id="@+id/button5"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</RelativeLayout>
