@@ -8,6 +8,7 @@
        @include('components.home_faq')
     
        @include('components.home_history')
-    
+
+        @include('components.home.community')
     
 @endsection
