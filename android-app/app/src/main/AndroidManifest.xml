@@ -33,7 +33,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="TEST"
+            android:label="test"
             android:screenOrientation="portrait"
             android:theme="@style/AppCompatTheme" />
         <activity
