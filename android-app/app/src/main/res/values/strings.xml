@@ -13,24 +13,24 @@
     <string name="lut_params">Lut Params:</string>
     <string name="gain">Gain:</string>
     <string name="new_patient_activity_label">Add new patient</string>
-    <string-array
-        name="filter_choice">
+    <string-array name="filter_choice">
         <item>Convolution</item>
         <item>Image enhancement</item>
         <item>Other filter</item>
         <item>Other filter</item>
     </string-array>
-    <string-array
-        name="protocol_choice">
+    <string-array name="protocol_choice">
         <item>local</item>
         <item>TCP</item>
         <item>UDP</item>
     </string-array>
-    <string-array
-        name="choose_camera">
+    <string-array name="choose_camera">
         <item>Take Picture</item>
         <item>Take Picture</item>
         <item>Choose Picture</item>
         <item>Choose Picture</item>
     </string-array>
+    <string name="title_activity_add_patient">New patient</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

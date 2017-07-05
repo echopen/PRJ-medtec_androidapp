@@ -41,7 +41,7 @@ public class MainActivity extends Activity {
             public void onClick(View v)
             {
 
-                Intent intent = new Intent(MainActivity.this, NewPatientActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddPatientActivity.class);
                 startActivity(intent);
                 finish();
             }
