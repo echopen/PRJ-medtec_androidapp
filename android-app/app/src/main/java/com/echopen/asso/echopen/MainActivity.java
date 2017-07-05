@@ -7,10 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-<<<<<<< HEAD
 
-=======
->>>>>>> Adding NewPatientActivity
 /**
  * MainActivity class handles the main screen of the app.
  * Tools are called in the following order :
