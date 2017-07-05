@@ -46,7 +46,7 @@
             android:name=".HomeScreenActivity"
             android:label="homescreen"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar" />
+            android:theme="@style/Theme.AppCompat" />
         <activity android:name=".EchoActivity"></activity>
     </application>
 
