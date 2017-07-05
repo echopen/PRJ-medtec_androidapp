@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
     private HomeFragment homeFragment;
+    private int clientId;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -42,9 +43,18 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
         this.setPresenter(mEchographyImageVisualisationPresenter);
+        if(getFilesDir().listFiles().length>0){
+            // set client ID ( number of client folders +1 )
+            this.clientId = getFilesDir().listFiles().length+1;
+        } else {
+            this.clientId = 1;
+        }
+
+
+        setEchoImage();
 
         // create file handler to save images
-        ImageHandler = new ImageHandler(getFilesDir());
+        ImageHandler = new ImageHandler(getFilesDir(),this.clientId);
 
         mFragmentManager = getSupportFragmentManager();
         SplashFragment splashFragment = new SplashFragment();
