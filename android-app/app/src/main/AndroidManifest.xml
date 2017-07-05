@@ -14,10 +14,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
+        android:name=".EchOpenApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".EchOpenApplication"
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashScreen"
@@ -35,16 +35,17 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar"/>
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".ArchiveActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar"/>
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".EchoActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar"/>
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
         <activity
             android:name=".ChoiceActivity"
-            android:theme="@android:style/Theme.Black.NoTitleBar"/>
+            android:theme="@android:style/Theme.Black.NoTitleBar" />
+        <activity android:name=".ProfilActivity"></activity>
     </application>
 
 </manifest>

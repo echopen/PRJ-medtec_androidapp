@@ -1,40 +1,50 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name"
-        />
 
-    <Button
-        android:id="@+id/enter_bt"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Enter"/>
+        app:srcCompat="@drawable/logo_echopen" />
 
     <Button
         android:id="@+id/signin_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sign in"/>
+        android:text="sign in" />
 
     <Button
         android:id="@+id/signout_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="sign out"/>
+        android:text="sign out" />
 
     <Button
         android:id="@+id/emergency_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Emergency"/>
+        android:text="Emergency" />
+
+    <Button
+        android:id="@+id/enter_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blue_dark"
+        android:text="Enter"/>
+
+    <Button
+        android:id="@+id/forgotpassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left|right"
+
+
+        android:text="Forgot your password ?" />
 
 </LinearLayout>
 
