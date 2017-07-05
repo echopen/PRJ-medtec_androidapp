@@ -1,15 +1,10 @@
 package com.echopen.asso.echopen;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +16,7 @@ import com.echopen.asso.echopen.utils.Config;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private Bitmap mImage;
+    private ImageView echoImage;
 
     public HomeFragment() {
 
@@ -35,7 +31,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        ImageView echoImage = (ImageView) view.findViewById(R.id.echo);
+        echoImage = (ImageView) view.findViewById(R.id.echo);
         echoImage.setImageBitmap(mImage);
         echoImage.setColorFilter(Config.colorMatrixColorFilter);
 
@@ -45,8 +41,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         ImageButton btnFilters = (ImageButton) view.findViewById(R.id.btnFilter);
         btnFilters.setOnClickListener(this);
 
-        ImageButton btncapture = (ImageButton) view.findViewById(R.id.btnCapture);
-        btncapture.setOnClickListener(this);
+        ImageButton btnCapture = (ImageButton) view.findViewById(R.id.btnCapture);
+        btnCapture.setOnClickListener(this);
 
         return view;
     }
@@ -60,14 +56,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         switch (id) {
             // If click on gallery button, we change the activity to the image gallery
             case R.id.btnGallery:
-                ((MainActivity)getActivity()).switchActivity();
+                ((MainActivity) getActivity()).switchActivity();
                 break;
             // If click on filter button, we display the filter modal
             case R.id.btnFilter:
                 displayFilterModal();
                 break;
+            // If click on capture button, we save the last image received
             case R.id.btnCapture:
-                ((MainActivity)getActivity()).getImageHandler().saveImage(mImage);
+                ((MainActivity) getActivity()).getImageHandler().saveImage(mImage);
                 break;
         }
     }
@@ -78,5 +75,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.filters_modal);
         dialog.show();
+    }
+
+    public void refreshImage(Bitmap img) {
+        echoImage.setImageBitmap(img);
     }
 }

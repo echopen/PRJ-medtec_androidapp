@@ -1,17 +1,12 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.content.Context;
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
@@ -19,21 +14,18 @@ import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVi
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 import com.echopen.asso.echopen.utils.Constants;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
 /**
  * MainActivity class handles the main screen of the app.
  */
 
 public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View {
 
+    private FragmentManager mFragmentManager;
     private ImageHandler ImageHandler;
-    FragmentManager mFragmentManager;
-    //private RenderingContextController mRenderingContextController;
+
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
+    private HomeFragment homeFragment;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -47,7 +39,9 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setEchoImage();
+        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
+        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
+        this.setPresenter(mEchographyImageVisualisationPresenter);
 
         // create file handler to save images
         ImageHandler = new ImageHandler(getFilesDir());
@@ -55,14 +49,6 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         mFragmentManager = getSupportFragmentManager();
         SplashFragment splashFragment = new SplashFragment();
         mFragmentManager.beginTransaction().add(R.id.main, splashFragment).commit();
-    }
-
-    public void setEchoImage() {
-        mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
-        //mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
-
-        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
-        this.setPresenter(mEchographyImageVisualisationPresenter);
     }
 
     @Override
@@ -109,12 +95,12 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     }
 
     public void doFinish(Bitmap img) {
-        changeFragment(img);
-    }
-
-    public void changeFragment(Bitmap img) {
-        HomeFragment homeFragment = new HomeFragment(img);
-        mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit();
+        if (homeFragment == null) {
+            homeFragment = new HomeFragment(img);
+            mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit();
+        } else {
+            homeFragment.refreshImage(img);
+        }
     }
 
     public void switchActivity() {
