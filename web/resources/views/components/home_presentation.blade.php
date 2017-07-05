@@ -1,1 +1,0 @@
-<p>Yo Home Presentation Component</p>
