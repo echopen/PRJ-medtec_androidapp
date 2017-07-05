@@ -18,19 +18,27 @@ public class HomeActivity extends Activity implements View.OnClickListener {
 
         Button btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(HomeActivity.this);
+
+        Button btn_login = (Button) findViewById(R.id.btn_login);
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this, OnBoardingActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.btn:
                 goDetailsActivity();
                 break;
         }
     }
 
-    private void goDetailsActivity(){
-        Intent intent = new Intent(HomeActivity.this,MainActivity.class);
+    private void goDetailsActivity() {
+        Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         startActivity(intent);
     }
 }

@@ -1,0 +1,49 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.echopen.asso.echopen.fragments.onboarding.Step01Fragment">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/address1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="17dp"
+            android:gravity="center"
+            android:text="Étape 1: Parametrez"
+            android:textColor="#3571E6"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/address1"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:lines="4"
+            android:maxLines="4"
+            android:text="Sélectionner vos paramètres de façon intuitive en choisissant le genre, la morphologie et l'organe concerné."
+            android:textColor="#6C6C6C"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/step02" />
+
+    </RelativeLayout>
+</FrameLayout>

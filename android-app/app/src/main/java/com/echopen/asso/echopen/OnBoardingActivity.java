@@ -1,38 +1,25 @@
 package com.echopen.asso.echopen;
 
-import android.annotation.TargetApi;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.Window;
 
-import com.echopen.asso.echopen.fragments.CaptureFragment;
-import com.echopen.asso.echopen.fragments.GalleryFragment;
-import com.echopen.asso.echopen.fragments.SettingsFragment;
+import com.echopen.asso.echopen.fragments.onboarding.Step01Fragment;
+import com.echopen.asso.echopen.fragments.onboarding.Step02Fragment;
+import com.echopen.asso.echopen.fragments.onboarding.Step03Fragment;
+import com.echopen.asso.echopen.fragments.onboarding.Step04Fragment;
+import com.echopen.asso.echopen.fragments.onboarding.Step05Fragment;
 
 import java.util.List;
 import java.util.Vector;
 
-
-/**
- * MainActivity class handles the main screen of the app.
- * Tools are called in the following order :
- * - initSwipeViews() handles the gesture tricks via GestureDetector class
- * - initViewComponents() mainly sets the clickable elements
- * - initActionController() and setupContainer() : in order to separate concerns, View parts are handled by the initActionController()
- * method which calls the MainActionController class that deals with MainActivity Views,
- * especially handles the display of the main screen picture
- * These two methods should be refactored into one
- */
-
-public class MainActivity extends FragmentActivity {
-
+public class OnBoardingActivity extends FragmentActivity {
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
@@ -44,31 +31,23 @@ public class MainActivity extends FragmentActivity {
      */
     private PagerAdapter mPagerAdapter;
 
-
-    /**
-     * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
-     * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
-     * and then displays them.
-     * Also, this method uses the Config singleton class that provides device-specific constants
-     */
-    @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        setContentView(R.layout.activity_on_boarding);
 
         List fragments = new Vector<>();
 
-        fragments.add(Fragment.instantiate(this, SettingsFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, CaptureFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, GalleryFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Step01Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Step02Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Step03Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Step04Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Step05Fragment.class.getName()));
 
-        // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new MainPageAdapter(getSupportFragmentManager(), fragments);
         mPager.setAdapter(mPagerAdapter);
-
-        //mPager.setCurrentItem(1);
     }
 
     @Override
