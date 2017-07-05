@@ -1,41 +1,24 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingConnectionType;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-import com.echopen.asso.echopen.model.EchoImage.EchoCharImage;
-import com.echopen.asso.echopen.ui.RenderingContextController;
-import com.echopen.asso.echopen.utils.Ln;
-import com.echopen.asso.echopen.utils.Timer;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.security.Timestamp;
+import com.echopen.asso.echopen.fragments.CaptureFragment;
+import com.echopen.asso.echopen.fragments.GalleryFragment;
+import com.echopen.asso.echopen.fragments.SettingsFragment;
 
-import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
+import java.util.List;
+import java.util.Vector;
+
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -48,13 +31,21 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements EchographyImageVisualisationContract.View {
-
-
-    ImageView echo_image;
-
+public class MainActivity extends FragmentActivity {
 
     private static final String TAG = "MyActivity";
+
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
+
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -68,42 +59,18 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RenderingContextController rdController = new RenderingContextController();
-        final EchographyImageStreamingService serviceEcho = new EchographyImageStreamingService(rdController);
-        final EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
+        List fragments = new Vector<>();
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.37.214.123", REDPITAYA_PORT);
-        serviceEcho.connect(mode, this);
-        presenter.start();
+        fragments.add(Fragment.instantiate(this, SettingsFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, CaptureFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, GalleryFragment.class.getName()));
 
-        final Button btn_capture = (Button) findViewById(R.id.btn_capture);
-        final Button btn_save = (Button) findViewById(R.id.btn_save);
-        final LinearLayout layout_screenshot = (LinearLayout) findViewById(R.id.layout_screenshot);
-        layout_screenshot.setVisibility(View.INVISIBLE);
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new MainPageAdapter(getSupportFragmentManager(), fragments);
+        mPager.setAdapter(mPagerAdapter);
 
-        btn_capture.setOnClickListener(new View.OnClickListener() {
-            //Freeze picture & hide take button
-            public void onClick(View v) {
-                serviceEcho.deleteObservers();
-                btn_capture.setVisibility(View.INVISIBLE);
-                layout_screenshot.setVisibility(View.VISIBLE);
-            }
-        });
-
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                ImageView image = (ImageView) findViewById(R.id.echo_view);
-                Bitmap iBitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
-                Log.d("SAVED", saveToInternalStorage(iBitmap));
-                Toast toast = Toast.makeText(getApplicationContext(), "Picture Saved", Toast.LENGTH_SHORT);
-                toast.show();
-                presenter.start();
-                btn_capture.setVisibility(View.VISIBLE);
-                layout_screenshot.setVisibility(View.INVISIBLE);
-            }
-        });
-
-
+        mPager.setCurrentItem(1);
     }
 
     @Override
@@ -111,80 +78,27 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         super.onResume();
     }
 
+
     /**
-     * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
-     * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
-     * the resultCode it returned, and any additional data from it.”,
-     * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
-     *
-     * @param requestCode, integer argument that identifies your request
-     * @param resultCode,  to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
-     * @param data,        Intent instance
+     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * sequence.
      */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+    private class MainPageAdapter extends FragmentStatePagerAdapter {
+        private final List fragments;
 
-    @Override
-    public void refreshImage(final Bitmap iBitmap) {
-        try {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ImageView echoImage = (ImageView) findViewById(R.id.echo_view);
-                    echoImage.setImageBitmap(iBitmap);
-                    Timer.logResult("Display Bitmap");
-                }
-
-            });
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
-        presenter.start();
-    }
-
-    private String saveToInternalStorage(Bitmap iBitmap) {
-        ContextWrapper cw = new ContextWrapper(getApplicationContext());
-        // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
-        Long tsLong = System.currentTimeMillis() / 1000;
-        String imgName = tsLong.toString() + ".jpg";
-        // Create imageDir
-        File mypath = new File(directory, imgName);
-
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
-            iBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                fos.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return directory.getAbsolutePath() + "/" + imgName;
-    }
-
-    private void loadImageFromStorage(String path) {
-        try {
-            File f = new File(path, "profile.jpg");
-            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
-            ImageView img = (ImageView) findViewById(R.id.echo_view);
-            img.setImageBitmap(b);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        public MainPageAdapter(FragmentManager fm, List fragments) {
+            super(fm);
+            this.fragments = fragments;
         }
 
+        @Override
+        public Fragment getItem(int position) {
+            return (Fragment) this.fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return this.fragments.size();
+        }
     }
 }
