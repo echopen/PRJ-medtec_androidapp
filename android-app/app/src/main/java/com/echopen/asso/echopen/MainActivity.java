@@ -2,14 +2,19 @@ package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -22,6 +27,13 @@ import com.echopen.asso.echopen.model.EchoImage.EchoCharImage;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Ln;
 import com.echopen.asso.echopen.utils.Timer;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.security.Timestamp;
 
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
@@ -60,34 +72,36 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         final EchographyImageStreamingService serviceEcho = new EchographyImageStreamingService(rdController);
         final EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("192.168.10.1", REDPITAYA_PORT);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.37.214.123", REDPITAYA_PORT);
         serviceEcho.connect(mode, this);
         presenter.start();
 
         final Button btn_capture = (Button) findViewById(R.id.btn_capture);
         final Button btn_save = (Button) findViewById(R.id.btn_save);
-        btn_save.setVisibility(View.INVISIBLE);
+        final LinearLayout layout_screenshot = (LinearLayout) findViewById(R.id.layout_screenshot);
+        layout_screenshot.setVisibility(View.INVISIBLE);
 
         btn_capture.setOnClickListener(new View.OnClickListener() {
             //Freeze picture & hide take button
             public void onClick(View v) {
                 serviceEcho.deleteObservers();
                 btn_capture.setVisibility(View.INVISIBLE);
-                btn_save.setVisibility(View.VISIBLE);
+                layout_screenshot.setVisibility(View.VISIBLE);
             }
         });
 
         btn_save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "Picture Saved" ,Toast.LENGTH_SHORT );
+                ImageView image = (ImageView) findViewById(R.id.echo_view);
+                Bitmap iBitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
+                Log.d("SAVED", saveToInternalStorage(iBitmap));
+                Toast toast = Toast.makeText(getApplicationContext(), "Picture Saved", Toast.LENGTH_SHORT);
                 toast.show();
                 presenter.start();
                 btn_capture.setVisibility(View.VISIBLE);
-                btn_save.setVisibility(View.INVISIBLE);
+                layout_screenshot.setVisibility(View.INVISIBLE);
             }
         });
-
-
 
 
     }
@@ -96,7 +110,6 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     protected void onResume() {
         super.onResume();
     }
-
 
     /**
      * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
@@ -131,9 +144,47 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         }
     }
 
-
     @Override
     public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
         presenter.start();
+    }
+
+    private String saveToInternalStorage(Bitmap iBitmap) {
+        ContextWrapper cw = new ContextWrapper(getApplicationContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        Long tsLong = System.currentTimeMillis() / 1000;
+        String imgName = tsLong.toString() + ".jpg";
+        // Create imageDir
+        File mypath = new File(directory, imgName);
+
+        FileOutputStream fos = null;
+        try {
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            iBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fos.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath() + "/" + imgName;
+    }
+
+    private void loadImageFromStorage(String path) {
+        try {
+            File f = new File(path, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            ImageView img = (ImageView) findViewById(R.id.echo_view);
+            img.setImageBitmap(b);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 }
