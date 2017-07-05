@@ -30,7 +30,7 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements EchographyImageVisualisationContract.View, View.OnClickListener {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -44,21 +44,14 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        RenderingContextController rdController = new RenderingContextController();
-        final EchographyImageStreamingService serviceEcho = new EchographyImageStreamingService(rdController);
-        final EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.254.151.132", REDPITAYA_PORT);
-        serviceEcho.connect(mode, this);
-        presenter.start();
-
-        Button topBt = (Button) findViewById(R.id.archive_bt);
+        Button topBt = (Button) findViewById(R.id.enter_bt);
         topBt.setOnClickListener(this);
 
-        Button rightBt = (Button) findViewById(R.id.echo_bt);
+        Button rightBt = (Button) findViewById(R.id.signin_bt);
         rightBt.setOnClickListener(this);
 
-        Button leftBt = (Button) findViewById(R.id._bt);
+        Button leftBt = (Button) findViewById(R.id.signout_bt);
         leftBt.setOnClickListener(this);
     }
 
@@ -66,21 +59,31 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.main_top_bt :
-                btTopClicked();
+            case R.id.enter_bt :
+                btEnterClicked();
                 break;
-            case R.id.main_left_bt :
-                btLeftClicked();
+            case R.id.signin_bt :
+                btSignInClicked();
                 break;
 
-            case R.id.main_right_bt :
-                btRightClicked();
+            case R.id.signout_bt :
+                btSignOutClicked();
                 break;
         }
     }
 
-    private void btTopClicked(){
-        Intent intent = new Intent(this, DetailActivity.class);
+    private void btEnterClicked(){
+        Intent intent = new Intent(this, ChoiceActivity.class);
+        startActivity(intent);
+    }
+
+    private void btSignInClicked(){
+        Intent intent = new Intent(this, ChoiceActivity.class);
+        startActivity(intent);
+    }
+
+    private void btSignOutClicked(){
+        Intent intent = new Intent(this, ChoiceActivity.class);
         startActivity(intent);
     }
 
@@ -103,26 +106,5 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public void refreshImage(final Bitmap iBitmap) {
-        try {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ImageView echoImage = (ImageView) findViewById(R.id.img);
-                    echoImage.setImageBitmap(iBitmap);
-
-                }
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
-        presenter.start();
     }
 }
