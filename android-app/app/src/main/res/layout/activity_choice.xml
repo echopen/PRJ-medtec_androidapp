@@ -3,14 +3,52 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/archives" />
 
     <TextView
         android:id="@+id/choice_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="20dp"
         android:layout_gravity="center"
-        android:text="Choice"
+        android:text="See your archives"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/gray_light"
+        android:textSize="20dp"
+        android:layout_weight="0.07"
         />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/echography"
+
+        />
+
+    <TextView
+        android:id="@+id/choice_content"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Echography"
+        android:textColor="@color/gray_light"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
 </LinearLayout>
 
