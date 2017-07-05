@@ -12,14 +12,19 @@ import com.echopen.asso.echopen.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScreenSlidePageFragment extends Fragment {
+public class DocumentFragment extends Fragment {
+
+
+    public DocumentFragment() {
+        // Required empty public constructor
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_screen_slide_page, container, false);
-
-        return rootView;
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_document, container, false);
     }
-}
 
+}
