@@ -14,16 +14,7 @@
 
 @import "./components/footer";
 @import "./components/header";
-
-body{
-  background-color: #f0ad4e;
-}
-
-
-section.contact{
-  color: #4cae4c;
-}
-
-section.welcome{
-  color: #2a88bd;
-}
+@import "./components/global";
+@import "./components/faq";
+@import "./components/slider";
+@import "./components/community";

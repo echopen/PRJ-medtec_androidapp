@@ -1,0 +1,16 @@
+ .entry_slick{
+        .base_item-content{
+            padding: 2.1875em 2.5em 3.125em 2.3125em;
+            border: 1px solid $laravel-border-color;
+            height: 25em;
+            margin-right: 2em;
+            background-color: $lightcolor;
+        }
+        .base_item-title{
+            margin: 0 0 0.9375em;
+            line-height: 1.375em;
+            font-size: 1.125em;
+            font-weight: 500;
+            overflow: hidden;
+        }
+    }
