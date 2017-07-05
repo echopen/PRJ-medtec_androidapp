@@ -1,27 +1,28 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 
 /**
  * MainActivity class handles the main screen of the app.
  */
 
-public class MainActivity extends Activity implements EchographyImageVisualisationContract.View, View.OnClickListener {
+public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View {
+
+    FragmentManager mFragmentManager;
+
     private EchographyImageStreamingService mEchographyImageStreamingService;
     //private RenderingContextController mRenderingContextController;
 
@@ -39,14 +40,19 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setEchoImage();
+
+        mFragmentManager = getSupportFragmentManager();
+        SplashFragment splashFragment = new SplashFragment();
+        mFragmentManager.beginTransaction().add(R.id.main, splashFragment).commit();
+    }
+
+    public void setEchoImage() {
         mEchographyImageStreamingService = ((EchOpenApplication) this.getApplication()).getEchographyImageStreamingService();
         //mRenderingContextController = mEchographyImageStreamingService.getRenderingContextController();
 
         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
         this.setPresenter(mEchographyImageVisualisationPresenter);
-
-        ImageButton btn = (ImageButton) findViewById(R.id.btnGallery);
-        btn.setOnClickListener(this);
     }
 
     @Override
@@ -56,7 +62,6 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
         mEchographyImageStreamingService.connect(lTCPMode, this);
     }
-
 
     /**
      * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
@@ -93,27 +98,18 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         mEchographyImageVisualisationPresenter = presenter;
     }
 
-    @Override
-    public void onClick(View view) {
-        // Add the id of element clicked
-        onBtnCLick(view.getId());
+    public void doFinish(Bitmap img) {
+        changeFragment(img);
     }
 
-    public synchronized void doFinish(Bitmap img) {
-        ImageView echoImage = (ImageView) findViewById(R.id.echo);
-        echoImage.setImageBitmap(img);
-        echoImage.setColorFilter(Config.colorMatrixColorFilter);
+    public void changeFragment(Bitmap img) {
+        HomeFragment homeFragment = new HomeFragment(img);
+        mFragmentManager.beginTransaction().replace(R.id.main, homeFragment).addToBackStack(homeFragment.getClass().getName()).commit();
     }
 
-    public void onBtnCLick(int id) {
-        switch (id) {
-            // If click on gallery button, we change the activity to the image gallery
-            case R.id.btnGallery:
-                startActivity(new Intent(this, ListImagesActivity.class));
-                break;
-            // If click on filter button, we display the filter modal
-            case R.id.btnFilter:
-                break;
-        }
+    public void switchActivity() {
+        Log.d("alex", "aex");
+        Intent intent = new Intent(this, ListImagesActivity.class);
+        startActivity(intent);
     }
 }
