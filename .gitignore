@@ -8,3 +8,5 @@
 /android-app/openCVLibrary310/build
 /captures
 .externalNativeBuild
+android-app/.idea/
+probe_emulator
