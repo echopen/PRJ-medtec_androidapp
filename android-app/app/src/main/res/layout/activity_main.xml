@@ -20,25 +20,28 @@
         android:layout_height="wrap_content"
         android:minHeight="50dp"
         android:id="@+id/topRelativeLayout"
+        android:layout_marginTop="22dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="20dp">
+        android:layout_alignParentStart="true">
 
         <ImageButton
             android:id="@+id/btnClose"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
+            android:scaleType="fitCenter"
             android:background="@color/transparent"
-            android:src="@drawable/gallery" />
+            android:src="@drawable/close" />
 
         <ImageButton
             android:id="@+id/btnParameters"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginRight="20dp"
             android:background="@color/transparent"
-            android:src="@drawable/obstetrique"
+            android:scaleType="fitCenter"
+            android:src="@drawable/parameters"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="20dp" />
@@ -58,28 +61,32 @@
             android:id="@+id/btnGallery"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="20dp"
             android:background="@color/transparent"
-            android:src="@drawable/gallery" />
+            android:scaleType="fitCenter"
+            android:src="@drawable/gallery"
+            android:layout_marginStart="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true" />
 
         <ImageButton
             android:id="@+id/btnCapture"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerInParent="true"
-            android:background="@color/black"
-            android:src="@drawable/btncapture" />
+            android:background="@color/black" />
 
         <ImageButton
             android:id="@+id/btnFilter"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentRight="true"
             android:layout_marginRight="20dp"
             android:background="@color/transparent"
             android:scaleType="fitCenter"
-            android:src="@drawable/obstetrique" />
+            android:src="@drawable/obstetrique"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp" />
 
     </RelativeLayout>
 
