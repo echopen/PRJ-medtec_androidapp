@@ -177,7 +177,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        this.tapOnViewgit (motionEvent.getAction());
+        this.tapOnView (motionEvent.getAction());
         return false;
     }
 }
