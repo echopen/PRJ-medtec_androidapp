@@ -6,7 +6,7 @@
     </section>
     
     <section class="base_section base_section-faq">
-       @include('components.home_faq')
+<!--       @include('components.home_faq')-->
     </section>
     
      
