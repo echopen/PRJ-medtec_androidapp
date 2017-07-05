@@ -3,5 +3,7 @@
     <string name="app_name">echopen</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="hello_world">Hello_world</string>
-    <string name="intro_text">L\'echographie accessible</string>
+    <string name="intro_text_home">L\' échographie accessible</string>
+    <string name="btn_start_home">Démarrer un examen</string>
+    <string name="btn_login_home">Se connecter</string>
 </resources>
