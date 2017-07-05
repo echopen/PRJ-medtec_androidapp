@@ -2,11 +2,16 @@ package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
@@ -26,6 +31,8 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     //private RenderingContextController mRenderingContextController;
 
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
+
+    final Context context = this;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -47,6 +54,12 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
         ImageButton btn = (ImageButton) findViewById(R.id.btnGallery);
         btn.setOnClickListener(this);
+
+        ImageButton btnFilters = (ImageButton) findViewById(R.id.btnFilter);
+
+        // add button listener
+        btnFilters.setOnClickListener(this);
+
     }
 
     @Override
@@ -113,7 +126,19 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                 break;
             // If click on filter button, we display the filter modal
             case R.id.btnFilter:
+                displayFilterModal();
                 break;
         }
+    }
+
+    public void displayFilterModal() {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setContentView(R.layout.filters_modal);
+
+
+
+        dialog.show();
     }
 }
