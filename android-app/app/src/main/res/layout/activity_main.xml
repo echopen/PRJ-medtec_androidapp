@@ -3,20 +3,27 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name" />
+    <Button
+        android:id="@+id/button_login"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:text="Connexion" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/splash" />
+    <Button
+        android:id="@+id/button_signup"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:text="Inscription" />
+
+    <!-- Button to switch activity -->
+    <Button
+        android:id="@+id/button_home"
+        android:layout_width="200px"
+        android:layout_height="100px"
+        android:text="Skip" />
+
 
 </LinearLayout>
 

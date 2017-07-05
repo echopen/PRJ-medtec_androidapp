@@ -9,6 +9,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,51 +47,14 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        EchOpenApplication app = (EchOpenApplication) getApplication();
-        EchographyImageStreamingService stream = app.getEchographyImageStreamingService();
+        Button btn = (Button)findViewById(R.id.button_home);
 
-        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(stream, new EchographyImageVisualisationContract.View(){
-           @Override
-           public void refreshImage(final Bitmap iBitmap){
-
-
-               try{
-                   runOnUiThread(new Runnable() {
-                       @Override
-                       public void run() {
-                           ImageView echoImage = (ImageView) findViewById(R.id.imageView);
-
-                           Display display = getWindowManager().getDefaultDisplay();
-                           Point size = new Point();
-                           display.getSize(size);
-                           int width = size.x;
-                           int height = size.y;
-
-
-                           echoImage.setImageBitmap(iBitmap);
-                           echoImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
-
-                           System.out.println("Bitmap received");
-                           Log.d("Debug",iBitmap.getHeight() + "");
-                           Log.d("Debug",iBitmap.getWidth() + "");
-                       }
-                   });
-               }
-               catch (Exception e){
-                   e.printStackTrace();
-               }
-           }
-
-           @Override
-            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter){
-
-           }
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, HomeScreenActivity.class));
+            }
         });
-
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.6.200.128", 7538);
-
-        stream.connect(mode,this);
-        presenter.start();
     }
 
     @Override
