@@ -3,8 +3,21 @@ package com.echopen.asso.echopen;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+import android.widget.ImageView;
+
+import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+import com.echopen.asso.echopen.ui.RenderingContextController;
+
+import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -17,7 +30,7 @@ import android.os.Bundle;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements EchographyImageVisualisationContract.View, View.OnClickListener {
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -29,7 +42,46 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        RenderingContextController rdController = new RenderingContextController();
+        final EchographyImageStreamingService serviceEcho = new EchographyImageStreamingService(rdController);
+        final EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
+
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.254.151.132", REDPITAYA_PORT);
+        serviceEcho.connect(mode, this);
+        presenter.start();
+
+        Button topBt = (Button) findViewById(R.id.archive_bt);
+        topBt.setOnClickListener(this);
+
+        Button rightBt = (Button) findViewById(R.id.echo_bt);
+        rightBt.setOnClickListener(this);
+
+        Button leftBt = (Button) findViewById(R.id._bt);
+        leftBt.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+            case R.id.main_top_bt :
+                btTopClicked();
+                break;
+            case R.id.main_left_bt :
+                btLeftClicked();
+                break;
+
+            case R.id.main_right_bt :
+                btRightClicked();
+                break;
+        }
+    }
+
+    private void btTopClicked(){
+        Intent intent = new Intent(this, DetailActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -51,5 +103,26 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void refreshImage(final Bitmap iBitmap) {
+        try {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ImageView echoImage = (ImageView) findViewById(R.id.img);
+                    echoImage.setImageBitmap(iBitmap);
+
+                }
+            });
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
+        presenter.start();
     }
 }
