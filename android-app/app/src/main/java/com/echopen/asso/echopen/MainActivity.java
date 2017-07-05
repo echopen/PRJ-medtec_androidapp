@@ -6,7 +6,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -30,7 +35,7 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -44,39 +49,45 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //launch probe
-        EchOpenApplication echOpenApplication = ( EchOpenApplication ) getApplication();
 
-        final EchographyImageStreamingService serviceEcho = echOpenApplication.getEchographyImageStreamingService();
+        LoginFragment loginFragment = new LoginFragment();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).addToBackStack(null).commit();
 
-        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, new EchographyImageVisualisationContract.View() {
-            @Override
-            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
-                Log.e("wowowowowowow", "une image woiwowoow");
-            }
-
-            @Override
-            public void refreshImage(final Bitmap iBitmap) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ImageView picture = (ImageView) findViewById(R.id.picture);
-                        picture.setImageBitmap(iBitmap);
-                        Log.e("Rendu Bitmap", "yooyoyoyoy");
-                    }
-                });
-            }
-        });
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(REDPITAYA_IP, REDPITAYA_PORT);
-        serviceEcho.connect(mode, this);
-
-        presenter.start();
+//        //launch probe
+//        EchOpenApplication echOpenApplication = ( EchOpenApplication ) getApplication();
+//
+//        final EchographyImageStreamingService serviceEcho = echOpenApplication.getEchographyImageStreamingService();
+//
+//        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, new EchographyImageVisualisationContract.View() {
+//            @Override
+//            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
+//                Log.e("wowowowowowow", "une image woiwowoow");
+//            }
+//
+//            @Override
+//            public void refreshImage(final Bitmap iBitmap) {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        ImageView picture = (ImageView) findViewById(R.id.picture);
+//                        picture.setImageBitmap(iBitmap);
+//                        Log.e("Rendu Bitmap", "yooyoyoyoy");
+//                    }
+//                });
+//            }
+//        });
+//        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(REDPITAYA_IP, REDPITAYA_PORT);
+//        serviceEcho.connect(mode, this);
+//
+//        presenter.start();
 
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+
+        findViewById(R.id.button_scan).setOnClickListener(MainActivity.this);
     }
 
 
@@ -90,8 +101,30 @@ public class MainActivity extends Activity {
      * @param resultCode, to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
      * @param data,       Intent instance
      */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.button_scan :
+                buttonScan();
+                break;
+        }
+    }
+
+    private void buttonScan(){
+        ScanFragment scanFragment = new ScanFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, scanFragment).addToBackStack(null).commit();
+    }
+
+    @Override
+    public void onBackPressed(){
+            super.onBackPressed();
+            LoginFragment loginFragment = new LoginFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, loginFragment).addToBackStack(null).commit();
     }
 }
