@@ -9,17 +9,16 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
-import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.devadvance.circularseekbar.CircularSeekBar;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
@@ -41,7 +40,6 @@ import com.echopen.asso.echopen.utils.UIParams;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DecimalFormat;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -94,6 +92,9 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
     private SeekBar mSeekBarGain;
     private TextView mTextViewGain;
 
+    private TextView mTextViewGain1;
+    private TextView mTextViewGain2;
+
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -136,7 +137,7 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
         UIParams.setParam3(Constants.SeekBarParam.SEEK_BAR_HORIZONTAL);
         UIParams.setParam4(Constants.SeekBarParam.SEEK_BAR_VERTICAL);
 
-        mTextViewGain = (TextView) findViewById(R.id.textGain);
+        /* mTextViewGain = (TextView) findViewById(R.id.textGain);
         mSeekBarGain = (SeekBar) findViewById(R.id.seekBarGain);
         mSeekBarGain.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -153,9 +154,57 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
                 mTextViewGain.setText(lGain + " dB");
                 mRenderingContextController.setIntensityGain(lGain);
             }
-        });
-    }
+        }); */
 
+        CircularSeekBar seekbar = (CircularSeekBar) findViewById(R.id.circularSeekBar1);
+        CircularSeekBar seekbar2 = (CircularSeekBar) findViewById(R.id.circularSeekBar2);
+
+        mTextViewGain1 = (TextView) findViewById(R.id.gainText1);
+        mTextViewGain2 = (TextView) findViewById(R.id.gainText2);
+
+        seekbar.setOnSeekBarChangeListener( new CircularSeekBar.OnCircularSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
+                Log.d("tag" , "ok");
+                double lGainCustom = progress * 3.0 / 100;
+                mTextViewGain1.setText(lGainCustom + " dB");
+                mRenderingContextController.setIntensityGain(lGainCustom);
+            }
+
+            @Override
+            public void onStopTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+        });
+
+        seekbar2.setOnSeekBarChangeListener( new CircularSeekBar.OnCircularSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
+                Log.d("tag" , "ok");
+                double lGainCustom = progress * 3.0 / 100;
+                mTextViewGain2.setText(lGainCustom + " dB");
+                mRenderingContextController.setIntensityGain(lGainCustom);
+            }
+
+            @Override
+            public void onStopTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(CircularSeekBar seekBar) {
+
+            }
+        });
+
+    }
     @Override
     protected void onResume(){
         super.onResume();
@@ -163,7 +212,7 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
     }
 
     private void initImageManipulationViewComponents() {
-        mLayoutLinearLutOffset = (LinearLayout) findViewById(R.id.layoutLinearLutOffset);
+        /* mLayoutLinearLutOffset = (LinearLayout) findViewById(R.id.layoutLinearLutOffset);
         mTextViewLinearLutOffset = (TextView) findViewById(R.id.textLinearLutOffset);
         mSeekBarLinearLutOffset = (SeekBar) findViewById(R.id.seekBarLinearLutOffset);
         mSeekBarLinearLutOffset.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -181,9 +230,9 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
                 mTextViewLinearLutOffset.setText(new DecimalFormat("#.00").format(lOffset));
                 mRenderingContextController.setLinearLutOffset(lOffset);
             }
-        });
+        }); */
 
-        mLayoutLinearLutSlope = (LinearLayout) findViewById(R.id.layoutLinearLutSlope);
+        /* mLayoutLinearLutSlope = (LinearLayout) findViewById(R.id.layoutLinearLutSlope);
         mTextViewLinearLutSlope = (TextView) findViewById(R.id.textLinearLutSlope);
         mSeekBarLinearLutSlope = (SeekBar) findViewById(R.id.seekBarLinearLutSlope);
 
@@ -202,9 +251,9 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
                 mTextViewLinearLutSlope.setText(new DecimalFormat("#.00").format(lSlope));
                 mRenderingContextController.setLinearLutSlope(lSlope);
             }
-        });
+        }); */
 
-        mLayoutExponentialLutAlpha = (LinearLayout) findViewById(R.id.layoutExponentialLutAlpha);
+        /* mLayoutExponentialLutAlpha = (LinearLayout) findViewById(R.id.layoutExponentialLutAlpha);
         mTextViewExponentialLutAlpha = (TextView) findViewById(R.id.textExponentialLutAlpha);
         mSeekBarExponentialLutAlpha = (SeekBar) findViewById(R.id.seekBarExponentialLutAlpha);
         mSeekBarExponentialLutAlpha.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -222,9 +271,9 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
                 mTextViewExponentialLutAlpha.setText(new DecimalFormat("#.00").format(lAlpha));
                 mRenderingContextController.setExponentialLutAlpha(lAlpha);
             }
-        });
+        }); */
 
-        Spinner lDropdownLut = (Spinner)findViewById(R.id.dropdownLut);
+        /* Spinner lDropdownLut = (Spinner)findViewById(R.id.dropdownLut);
         String[] lLutItems = new String[]{"Linear Lut", "Exponential Lut"};
         ArrayAdapter<String> lLutItemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, lLutItems);
         lDropdownLut.setAdapter(lLutItemsAdapter);
@@ -250,7 +299,7 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
             }
         });
 
-        lDropdownLut.setSelection(0);
+        lDropdownLut.setSelection(0); */
     }
 
     private void selectLinearLut(){
