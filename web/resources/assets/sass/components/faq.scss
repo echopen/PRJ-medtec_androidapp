@@ -1,12 +1,12 @@
 .base_section-faq {
     .entry_wrapper-small {
-        @include phone() {
+        @media screen and(max-width: 990px){
             padding: 0 15px;
         }
         .alignleft {
             width: 26%;
             margin-left: 8.429em;
-            @include phone() {
+            @media screen and(max-width: 990px){
                 width: 100%;
                 margin: 0 auto;
                 display: block;
@@ -15,18 +15,20 @@
         .alignright {
             width: 62%;
             height: 0;
-            @include phone() {
+            @media screen and(max-width: 990px){
                 width: 100%;
-    margin: 0 auto;
-    display: initial;
+                margin: 0 auto;
+                display: initial;
                 height: auto;
             }
         }
     }
     .slick-slide {
-        width: 24.429em;
+        width: 308px;
         height: 20.643em;
         border: 1px solid $lightgrey;
+        margin: 10px;
+        box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.1);
     }
     .slick_background {
         background-image: linear-gradient(126deg, #17ead9, #6078ea);
@@ -39,7 +41,7 @@
         transform: translateY(-50%);
         z-index: -1;
         float: right;
-        @include phone() {
+        @media screen and(max-width: 990px){
             display: none;
         }
     }
@@ -47,6 +49,9 @@
         top: initial;
         transform: none;
         margin-top: 150px;
+        @include tablet {
+            margin-top: 0;
+        }
     }
     .entry_more {
         a {
@@ -57,7 +62,7 @@
         top: -50%;
         position: relative;
         transform: translateY(50%);
-        @include phone() {
+        @media screen and(max-width: 990px){
             transform: none;
             top: initial;
             margin: 50px 0;
@@ -65,5 +70,22 @@
     }
     .base_btn {
         margin-top: 80px;
+    }
+    .base_item-content {
+        .base_item-title a {
+            color: #545454;
+            font-size: 25px;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 14px;
+        }
+        .base_item-more {
+            color: #17EAD9;
+            &:after {
+                content: ">";
+                margin-left: 10px;
+            }
+        }
     }
 }

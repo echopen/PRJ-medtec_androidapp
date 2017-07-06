@@ -3,19 +3,20 @@
     <div class="alignleft">
        <div class="entry_title">
            <span class="entry_meta">
-                impacting figures
+                Une question ?
            </span>
            <h3 class="entry_strong">
-                Our history
+                Consultez
            </h3>
            <p class="entry_desc">
-               Lorem blabla
+la F.A.Q.
            </p>
            <p class="entry_sub_desc">
-               At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.
+               Trouvez la réponse à votre problème et participez à la communauté.
+
            </p>
             <div class="base_btn">
-                <a href="#">super cta</a>
+                <a href="#">Voir la F.A.Q.</a>
             </div>
         </div>
     </div>
@@ -24,44 +25,44 @@
     
         <!--Slick slide-->
         <div class="slick_slide base_item-content">
-            <h3 class="base_item-title"><a href="#">Item title1</a></h3>
-            <div class="base__item__metas">Item metas</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, nam placeat voluptatem, earum ut at quas eligendi cumque consectetur dicta itaque! Rem praesentium officiis tempora reprehenderit architecto voluptates expedita vel.</p>
+            <h3 class="base_item-title"><a href="#">Comment enregistrer mes images ?</a></h3>
+         
+                    <p>sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.</p>
             <a href="#" class="base_item-more">
-                See more
+                En savoir plus
             </a>
         </div>
         
         <!--Slick slide-->
         <div class="slick_slide base_item-content">
-            <h3 class="base_item-title"><a href="#">Item title1</a></h3>
-            <div class="base__item__metas">Item metas</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, nam placeat voluptatem, earum ut at quas eligendi cumque consectetur dicta itaque! Rem praesentium officiis tempora reprehenderit architecto voluptates expedita vel.</p>
+            <h3 class="base_item-title"><a href="#">Comptabilité<br> iOS ?</a></h3>
+            <div class="base__item__metas"></div>
+                    <p>sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt.</p>
             <a href="#" class="base_item-more">
-                See more
+                En savoir plus
             </a>
         </div>  
           
         <!--Slick slide-->
         <div class="slick_slide base_item-content">
-            <h3 class="base_item-title"><a href="#">Item title1</a></h3>
-            <div class="base__item__metas">Item metas</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, nam placeat voluptatem, earum ut at quas eligendi cumque consectetur dicta itaque! Rem praesentium officiis tempora reprehenderit architecto voluptates expedita vel.</p>
+            <h3 class="base_item-title"><a href="#">Problème de connexion entre la sonde et le smartphone ?</a></h3>
+            <div class="base__item__metas"></div>
+                    <p>sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt</p>
             <a href="#" class="base_item-more">
-                See more
+                En savoir plus
+            </a>
+        </div>
+         
+         <!--Slick slide-->
+        <div class="slick_slide base_item-content">
+            <h3 class="base_item-title"><a href="#">Problème de connexion ?</a></h3>
+            <div class="base__item__metas"></div>
+                    <p>sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt</p>
+            <a href="#" class="base_item-more">
+                En savoir plus
             </a>
         </div>
           
-        <!--Slick slide-->
-        <div class="slick_slide base_item-content">
-            <h3 class="base_item-title"><a href="#">Item title1</a></h3>
-            <div class="base__item__metas">Item metas</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, nam placeat voluptatem, earum ut at quas eligendi cumque consectetur dicta itaque! Rem praesentium officiis tempora reprehenderit architecto voluptates expedita vel.</p>
-            <a href="#" class="base_item-more">
-                See more
-            </a>
-        </div>     
-           
     </div>
         <div class="slick_background"></div>
        </div>    

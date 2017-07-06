@@ -1,22 +1,22 @@
 <div class="welcome-container">
     <div class="groupeleft">
         <div class="img_left">
-            <img class="sonde" src="/img/img_hero.png">
+            <img class="sonde" src="/img/mockup-header.png">
         </div>
     </div>
     <div class="grouperight">
-        <h1><img src="/img/echopen-gradient-big.png"></h1>
+        <h1><img class="img_logo_title" src="/img/echopen-gradient-big.png"></h1>
         <div class="paragraphe">
             <span class="title">Un projet open source basé sur l’innovation communautaire.</span>
             <p>Pour créer un écho-stéthoscope à un prix abordable (sonde à ultrasons), de manière sûre et simple de façon mobile.
             </p>
         </div>
-        <div class="base_btn">
-            <a href="#">Rejoignez le projet !</a>
-        </div>
+        <button class="button-base-btn">
+            Rejoignez le projet
+        </button>
         <div class="share">
             <ul>
-                <li><p>Share on</p></li>
+                <li><p>Nous suivre:</p></li>
                 <li><a href="#"><img src="/img/facebook.svg"></a></li>
                 <li><a href="#"><img src="/img/twitter.svg"></a></li>
                 <li><a href="#"><img src="/img/linkedin.svg"></a></li>

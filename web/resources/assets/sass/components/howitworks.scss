@@ -4,6 +4,7 @@ $txtColor: #545454;
 }
 
 .s__hiw {
+    font-family: $font-Roboto-Regular;
     &__title {
         margin-bottom: 100px;
         padding-top: 50px;
@@ -195,8 +196,7 @@ $txtColor: #545454;
                         margin-left: em(40);
                         text-decoration: none;
                         &--title {
-                            font-family: 'Roboto';
-                            font-weight: 400;
+                            font-family: $font-Roboto-Regular;
                             font-size: em(25);
                             color: $txtColor;
                             text-transform: uppercase;
@@ -233,7 +233,7 @@ $txtColor: #545454;
                     border: none;
                     color: white;
                     border-radius: em(4);
-                    font-family: 'Roboto';
+                    font-family: $font-Roboto-Regular;
                     font-size: em(16);
                 }
             }
