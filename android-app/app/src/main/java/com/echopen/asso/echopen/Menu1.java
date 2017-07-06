@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -15,7 +16,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,7 +32,6 @@ import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -70,6 +69,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
 
     private View takePicture;
     private View imageViewBitmap;
+    private ImageView goToGallery;
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -116,7 +116,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
         this.setPresenter(mEchographyImageVisualisationPresenter);
 
-        View rootView = inflater.inflate(R.layout.fragment_menu_1, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_menu_1, container, false);
 
         ImageView organ = (ImageView) rootView.findViewById(R.id.organ);
         organ.setOnClickListener(new View.OnClickListener() {
@@ -144,13 +144,40 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
             }
         });
 
+        goToGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.w("myApp", "take pictures");
+
+                displayGallery(rootView);
+            }
+        });
+
         // Inflate the layout for this fragment
         return rootView;
     }
 
+
+    private void displayGallery(View rootView) {
+
+        //initializing the fragment object which is selected
+        Fragment fragment = new Gallery();
+
+        //replacing the fragment
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, fragment);
+        ft.commit();
+    }
+
+    /**
+     * @param inflater
+     * @param container
+     * @param rootView
+     */
     public void init(LayoutInflater inflater, ViewGroup container, View rootView) {
         imageViewBitmap = rootView.findViewById(R.id.echo);
         takePicture = rootView.findViewById(R.id.btnCapture);
+        goToGallery = (ImageView) rootView.findViewById(R.id.gallery);
     }
 
     public static Bitmap viewToBitmap(View view, int width, int height) {

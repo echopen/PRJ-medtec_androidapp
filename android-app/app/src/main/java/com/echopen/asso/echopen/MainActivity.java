@@ -1,11 +1,8 @@
 package com.echopen.asso.echopen;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -97,7 +94,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new Menu1();
                 break;
             case R.id.nav_menu2:
-                fragment = new Menu2();
+                fragment = new Gallery();
                 break;
             case R.id.nav_menu3:
                 fragment = new Menu3();
