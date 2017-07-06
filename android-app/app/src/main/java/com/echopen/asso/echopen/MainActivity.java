@@ -6,9 +6,12 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -16,10 +19,12 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.devadvance.circularseekbar.CircularSeekBar;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -41,8 +46,13 @@ import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;
 import com.echopen.asso.echopen.utils.UIParams;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -99,7 +109,9 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
     private TextView mTextViewGain2;
     private FragmentTransaction mFragmentTransaction;
     private FragmentManager mFragmentManager;
+    private Button btnCapture;
 
+    LinearLayout L;
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -161,7 +173,21 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
             }
         }); */
 
+        Button btnCapture = (Button) findViewById(R.id.capture_btn);
         ImageView organImage = (ImageView) findViewById(R.id.organ_frame);
+        final ImageView galeryImage = (ImageView) findViewById(R.id.galery_frame);
+        final DrawView echoImage = (DrawView) findViewById(R.id.echo);
+
+        galeryImage.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("tag" , "aie click galery!!");
+                // call fragment
+                GaleryFragment galeryFragment = new GaleryFragment();
+                galeryFragment.setArguments(getIntent().getExtras());
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, galeryFragment).addToBackStack("true").commit();
+            }
+        });
 
         organImage.setOnClickListener( new View.OnClickListener() {
             @Override
@@ -171,8 +197,73 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
                 OrganFragment organFragment = new OrganFragment();
                 organFragment.setArguments(getIntent().getExtras());
                 getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, organFragment).addToBackStack("true").commit();
+
+                /*if(organFragment.isVisible()){
+                    RelativeLayout commonCardContainer = (RelativeLayout) findViewById(R.id.content_frame);
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) commonCardContainer.getLayoutParams();
+
+                    params.height = 600 * 5;
+                    commonCardContainer.setLayoutParams(params);
+                    Log.d("vis" , "ok");
+                }else{
+                    Log.d("vis" , "no");
+                    RelativeLayout commonCardContainer = (RelativeLayout) findViewById(R.id.content_frame);
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) commonCardContainer.getLayoutParams();
+
+                    params.height = 120;
+                    commonCardContainer.setLayoutParams(params);
+                }*/
             }
         });
+
+        btnCapture.setOnLongClickListener(new View.OnLongClickListener(){
+
+            @Override
+            public boolean onLongClick(View view) {
+                Toast.makeText(MainActivity.this, "Long click", Toast.LENGTH_SHORT).show();
+                return true;
+            }
+        });
+        btnCapture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("tag" , "Click");
+                int id = view.getId();
+                switch (id) {
+                    case R.id.capture_btn:
+                        FileOutputStream fileOutputStream = null;
+                        File file = getDisc();
+
+                        if(!file.exists() && !file.mkdirs()){
+                            Toast.makeText(MainActivity.this, "Can't create directory to save image", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyymmsshhmmss");
+                        String date = simpleDateFormat.format(new Date());
+                        String name = "Img"+date+".jpg";
+                        String file_name = file.getAbsolutePath()+"/"+name;
+                        File new_file = new File(file_name);
+
+                        try {
+                            fileOutputStream = new FileOutputStream(new_file);
+                            Bitmap bitmap = viewToBitmap(echoImage, echoImage.getWidth(), echoImage.getHeight());
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+                            Toast.makeText(MainActivity.this, "SAve success", Toast.LENGTH_SHORT).show();
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        refreshGallery(new_file);
+
+                        break;
+                }
+            }
+        });
+
         CircularSeekBar seekbar = (CircularSeekBar) findViewById(R.id.circularSeekBar1);
         CircularSeekBar seekbar2 = (CircularSeekBar) findViewById(R.id.circularSeekBar2);
 
@@ -356,6 +447,12 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void refreshGallery(File file) {
+        Intent intent = new Intent( Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(file));
+        sendBroadcast(intent);
     }
 
     /*
@@ -555,5 +652,17 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
     @Override
     public void setPresenter(EchographyImageVisualisationContract.Presenter iPresenter) {
         mEchographyImageVisualisationPresenter = iPresenter;
+    }
+
+    public static Bitmap viewToBitmap(View view, int width, int height){
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        return bitmap;
+    }
+    public File getDisc() {
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        return new File(file, "EchOpen");
     }
 }
