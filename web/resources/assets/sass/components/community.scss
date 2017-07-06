@@ -3,11 +3,19 @@
         width: 70%;
         margin: 0 auto;
         text-align: center;
+        @include phone(){
+            width: 100%;
+            padding: 0 15px;
+        }
     }
     .entry_wrapper-small{
         width: 50%;
         margin: 0 auto;
         text-align: left;
+        @include phone(){
+            width: 100%;
+            padding: 0 15px;
+        }
     }
     .entry_strong{
         display: inline-block;
