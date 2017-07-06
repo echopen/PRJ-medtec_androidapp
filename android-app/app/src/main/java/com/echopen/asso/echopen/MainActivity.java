@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
@@ -23,8 +22,6 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    FragmentManager fragmentmanager;
-
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -38,8 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
-
-        fragmentmanager = getSupportFragmentManager();
 
         Button enterBt = (Button) findViewById(R.id.enter_bt);
         enterBt.setOnClickListener(this);

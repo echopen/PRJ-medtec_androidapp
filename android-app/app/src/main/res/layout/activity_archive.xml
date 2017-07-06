@@ -24,4 +24,28 @@
         android:text="archive"
         />
 
+    <Button
+        android:id="@+id/archive_folder_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/archive"/>
+
+    <Button
+        android:id="@+id/archive_folder_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/archive"/>
+
+    <Button
+        android:id="@+id/archive_folder_3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/archive"/>
+
+    <Button
+        android:id="@+id/archive_folder_4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/archive"/>
+
 </LinearLayout>
