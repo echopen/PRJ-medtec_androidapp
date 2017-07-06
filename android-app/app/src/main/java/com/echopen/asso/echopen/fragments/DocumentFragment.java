@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -34,6 +36,8 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class DocumentFragment extends Fragment {
+
+    private FragmentManager fragmentManager;
 
     public DocumentFragment() {
         // Required empty public constructor
@@ -206,6 +210,7 @@ public class DocumentFragment extends Fragment {
 
         Button buttonReload = (Button) v.findViewById(R.id.reload);
         final Button buttonCloseZoom = (Button) v.findViewById(R.id.btn_closezoom);
+        Button buttonBackToDashboard = (Button) v.findViewById(R.id.btn_back);
 
         // Shows image
         AdapterView.OnItemClickListener myOnItemClickListener = new AdapterView.OnItemClickListener() {
@@ -232,6 +237,18 @@ public class DocumentFragment extends Fragment {
             }
         }) ;
 
+        fragmentManager = getActivity().getSupportFragmentManager();
+
+        // Back to dashboard
+        buttonBackToDashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                DashboardFragment dashboardFragment = new DashboardFragment();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                fragmentTransaction.replace(R.id.pager, dashboardFragment).commit();
+            }
+        });
 
         gallery.setOnItemClickListener(myOnItemClickListener);
 
