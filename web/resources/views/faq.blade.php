@@ -3,7 +3,14 @@
 @section('content')
 <div class="faq-page-container">
     <div class="top-faq">
-
+        <div class="content">
+            <h1 class="faq-title">Foire aux questions<br>Un problème ? Une solution</h1>
+            <div class="input-container">
+                <input type="text" placeholder="Echographie">
+                <button class="submit">RECHERCHER</button>
+                <div class="magnifier"></div>
+            </div>
+        </div>
     </div>
 
     <div class="questions">

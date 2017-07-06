@@ -2,6 +2,16 @@
 <section class="contact-page">
     <div class="contact-page-container">
         <div class="top-contact">
+         <div class="content">
+            <h1 class="contact-title">Contactez-nous<br>Rejoignez la communauté</h1>
+            <div class="input-container">
+                <p class="contact_desc">
+                    Vous aimez notre projet ? Vous souhaitez y contribuer ?  Lorem ipsum doler sit amet.
+Rejoignez nous et apportez votre savoir faire où que vous soyez dans le monde !
+
+                </p>
+            </div>
+        </div>
         </div>
         <div class="contact_wrapper">
             <div class="contact_form">

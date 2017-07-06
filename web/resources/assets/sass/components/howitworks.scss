@@ -4,6 +4,35 @@ $txtColor: #545454;
 }
 
 .s__hiw {
+    &__title{
+        margin-bottom: 100px;
+        padding-top: 50px;
+        padding-left: 10%;
+        &__category{
+            text-transform: uppercase;
+            font-size: em(13);
+            color: #545454;
+        }
+
+        &__title{
+            margin-top: 0;
+            font-size: em(50);
+            color: #424242;
+            position: relative;
+            display: inline-block;
+            &:after{
+                content: "";
+                position: absolute;
+                bottom: -20px;
+                right: 5px;
+                background-image: url("/img/vague.png");
+                width: 112px;
+                height: 10px;
+            }
+        }
+    }
+
+
     width: 100%;
     height: 3000px;
     background-color: #F7F7F7;
@@ -12,8 +41,37 @@ $txtColor: #545454;
         // height: 600px;
     }
     &__header {
-        height: em(93);
-        border-bottom: em(1) solid #eee;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        padding-left: 100px;
+        padding-right: 100px;
+        &--pretitle {
+            font-size: 0.813em;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 0px;
+        }
+        &--title {
+            font-size: 3.125em;
+            font-weight: bold;
+            color: #000;
+            margin: 4px 0 0 0;
+            line-height: 48px;
+            span {
+                color: #545454;
+                position: relative;
+                font-weight: 400;
+                &:after {
+                    content: "";
+                    background: url(/images/vague.png?f5feee2df1333583477bcaea1f980e82) no-repeat;
+                    width: 122px;
+                    height: 10px;
+                    position: absolute;
+                    right: -10px;
+                    top: 49px;
+                }
+            }
+        }
     }
     &__content {
         display: flex;

@@ -8,6 +8,24 @@ body {
         @include aspect-ratio(1440, 702);
         background-image: url("/img/courbes_header.png");
         background-size: cover;
+        .content {
+            .contact-title {
+                margin-top: 3em;
+                font-size: em(50);
+                color: #fff;
+                font-family: $font-Roboto-Regular;
+                text-align: center;
+            }
+            .input-container {
+                width: 55.5%;
+                height: 10%;
+                position: relative;
+                margin: 0 auto;
+                margin-top: 35px;
+                color: $lightcolor;
+                text-align: center;
+            }
+        }
     }
     .contact_wrapper {
         display: table;
@@ -101,6 +119,7 @@ body {
         padding: 20px 0;
     }
 }
+
 .contact_map-wrapper {
     position: absolute;
     bottom: 25px;

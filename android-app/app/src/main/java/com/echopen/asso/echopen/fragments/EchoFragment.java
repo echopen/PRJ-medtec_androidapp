@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.echopen.asso.echopen.EchOpenApplication;
 import com.echopen.asso.echopen.R;
@@ -41,6 +42,9 @@ public class EchoFragment extends Fragment {
     private Activity activity;
     Button btn_capture;
 
+    ImageView echoImage ;
+
+
     public EchoFragment() {
         // Required empty public constructor
         // Init probe
@@ -57,6 +61,7 @@ public class EchoFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_echo, container, false);
 
         btn_capture = (Button) v.findViewById(R.id.button_capture);
+        echoImage = (ImageView) v.findViewById(R.id.echography);
 
         initProbe();
 
@@ -92,13 +97,14 @@ public class EchoFragment extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         if (mHandler != null) return true;
                         mHandler = new android.os.Handler();
-                        mHandler.postDelayed(mAction, 500);
+                        mHandler.postDelayed(mAction, 250);
                         break;
                     case MotionEvent.ACTION_UP:
                         if (mHandler == null) return true;
                         mHandler.removeCallbacks(mAction);
                         mHandler = null;
                         burstFireFolderCreated = false;
+
                         break;
                 }
                 return false;
@@ -115,10 +121,13 @@ public class EchoFragment extends Fragment {
                         burstFireFolderDate = now;
 
                         createBurstFireFolder();
+
+                        String prompt = "Rafales de captures d'écran commencée" + "\nLâchez le bouton pour arrêter";
+                        Toast.makeText(getContext(), prompt, Toast.LENGTH_SHORT).show();
                     } else {
                         takeBurstFire();
                     }
-                    mHandler.postDelayed(this, 500);
+                    mHandler.postDelayed(this, 250);
                 }
             };
         });
@@ -138,8 +147,6 @@ public class EchoFragment extends Fragment {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ImageView echoImage = (ImageView) activity.findViewById(R.id.echography);
-
                             Display display = activity.getWindowManager().getDefaultDisplay();
                             Point size = new Point();
                             display.getSize(size);
@@ -166,7 +173,7 @@ public class EchoFragment extends Fragment {
 
             }
         });
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.6.200.128", 7538);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.6.36.77", 7538);
 
         stream.connect(mode,activity);
         presenter.start();
@@ -221,8 +228,8 @@ public class EchoFragment extends Fragment {
             outputStream.flush();
             outputStream.close();
 
-            openScreenshot(imageFile);
-
+            String prompt = "Capture d'écran sauvegardée";
+            Toast.makeText(getContext(), prompt, Toast.LENGTH_SHORT).show();
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -252,6 +259,7 @@ public class EchoFragment extends Fragment {
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, output);
             output.flush();
             output.close();
+
         } catch (Throwable e) {
             e.printStackTrace();
         }
