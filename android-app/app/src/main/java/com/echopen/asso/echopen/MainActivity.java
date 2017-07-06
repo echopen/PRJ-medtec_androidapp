@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
 import android.widget.Button;
 
 /**
@@ -85,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //SignUpFragment signUpFragment = new SignInFragment();
         //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signInFragment).commit();
     }
+
 
     private void btEmergencyClicked(){
         Intent intent = new Intent(this, ChoiceActivity.class);
