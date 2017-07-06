@@ -1,6 +1,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.echopen.asso.echopen.AddPatientActivity">
+    tools:context="com.echopen.asso.echopen.MainActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

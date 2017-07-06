@@ -60,21 +60,6 @@ public class MainActivity extends AppCompatActivity
 
         // add this line to display menu1 when the activity is loaded
         displaySelectedScreen(R.id.nav_menu1);
-
-        // Press "New Patient" button, change the activity.
-       /* Button newPatientButton= (Button)findViewById(R.id.nav_menu3);
-        newPatientButton.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-
-                Intent intent = new Intent(MainActivity.this, AddPatientActivity.class);
-                startActivity(intent);
-                finish();
-            }
-
-        });*/
-
     }
 
     @Override
