@@ -15,4 +15,5 @@
     <string name="option_l">L</string>
     <string name="btn_start_home">Démarrer un examen</string>
     <string name="btn_login_home">Se connecter</string>
+    <string name="gallery">Gallery</string>
 </resources>
