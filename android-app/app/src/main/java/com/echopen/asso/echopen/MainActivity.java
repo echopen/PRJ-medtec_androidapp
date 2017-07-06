@@ -104,8 +104,8 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
-        startActivity(chooseProfile);
+        //Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
+        //startActivity(chooseProfile);
 
         super.onCreate(savedInstanceState);
         /* loading config constants in singleton Class */
