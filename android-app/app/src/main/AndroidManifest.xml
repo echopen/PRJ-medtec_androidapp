@@ -60,6 +60,7 @@
             android:name=".FolderActivity"
             android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
+        <activity android:name=".SavedImageActivity"></activity>
     </application>
 
 </manifest>

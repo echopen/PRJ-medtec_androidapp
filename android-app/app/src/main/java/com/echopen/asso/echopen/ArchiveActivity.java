@@ -14,8 +14,17 @@ public class ArchiveActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_archive);
 
-        Button emergencyBt = (Button) findViewById(R.id.emergency_bt);
-        emergencyBt.setOnClickListener(this);
+        Button archivebutton1 = (Button) findViewById(R.id.archive_folder_1);
+        archivebutton1.setOnClickListener(this);
+
+        Button archivebutton2 = (Button) findViewById(R.id.archive_folder_2);
+        archivebutton1.setOnClickListener(this);
+
+        Button archivebutton3 = (Button) findViewById(R.id.archive_folder_3);
+        archivebutton1.setOnClickListener(this);
+
+        Button archivebutton4 = (Button) findViewById(R.id.archive_folder_4);
+        archivebutton1.setOnClickListener(this);
     }
 
     @Override
@@ -43,24 +52,20 @@ public class ArchiveActivity extends AppCompatActivity implements View.OnClickLi
     private void btArchiveFolder1Clicked(){
         Intent intent = new Intent(this, FolderActivity.class);
         startActivity(intent);
-
     }
 
     private void btArchiveFolder2Clicked(){
         Intent intent = new Intent(this, FolderActivity.class);
         startActivity(intent);
-
     }
 
     private void btArchiveFolder3Clicked(){
         Intent intent = new Intent(this, FolderActivity.class);
         startActivity(intent);
-
     }
 
     private void btArchiveFolder4Clicked(){
         Intent intent = new Intent(this, FolderActivity.class);
         startActivity(intent);
-
     }
 }
