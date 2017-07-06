@@ -16,7 +16,6 @@
     @include('components.home_faq')
     
     @include('components.home_community')
-
     <section class="base_section base_section-numbers">
         @include('components.home_numbers')
     </section>
@@ -26,5 +25,7 @@
        @include('components.home_howItWorks')
     </section>
 
-    
+
+    @include('components.home.partners')
+
 @endsection

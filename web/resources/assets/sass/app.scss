@@ -16,12 +16,14 @@
 
 @import "./components/history";
 @import "./components/value";
+@import "./components/faq/faq";
+@import "./components/home/partners";
+
 body>.container {
     max-width: 1440px;
     padding: 0;
     width: 100%;
 }
-
 @import "./components/numbers";
 
 @import "./components/howitworks";
