@@ -46,7 +46,7 @@
     </ul>
     <div class="logo"></div>
     <ul class="right-cta">
-        <li class="join-us">Rejoignez le projet !</li>
+        <li class="join-us">Agir</li>
     </ul>
 </header>
 
