@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -71,7 +72,7 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
         presenter.start();
 
         final Button btn_capture = (Button) getView().findViewById(R.id.btn_capture);
-        final Button btn_save = (Button) getView().findViewById(R.id.btn_save);
+        final ImageButton btn_save = (ImageButton) getView().findViewById(R.id.btn_save);
         final LinearLayout layout_screenshot = (LinearLayout) getView().findViewById(R.id.layout_screenshot);
         layout_screenshot.setVisibility(View.INVISIBLE);
 
