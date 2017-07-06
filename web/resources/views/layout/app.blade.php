@@ -39,7 +39,7 @@
 
 <header>
     <ul class="links">
-        <li><a href="#">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="/product">Product</a></li>
         <li><a href="/faq">Faq</a></li>
         <li><a href="/contact">Contact</a></li>
