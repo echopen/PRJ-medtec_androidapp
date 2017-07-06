@@ -39,7 +39,7 @@ public class EchoActivity extends AppCompatActivity implements EchographyImageVi
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ImageView echoImage = (ImageView) findViewById(R.id.img);
+                    ImageView echoImage = (ImageView) findViewById(R.id.emergency_iv);
                     echoImage.setImageBitmap(iBitmap);
 
                 }

@@ -55,6 +55,10 @@
             android:name=".SignUpActivity"
             android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
+        <activity
+            android:name=".ProbSelectActivity"
+            android:icon="@drawable/logo_echopen"
+            android:theme="@style/AppCompatTheme" />
     </application>
 
 </manifest>

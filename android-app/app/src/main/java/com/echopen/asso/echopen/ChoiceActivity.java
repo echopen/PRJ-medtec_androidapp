@@ -36,7 +36,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void btEchoClicked(){
-        Intent intent = new Intent(this, EchoActivity.class);
+        Intent intent = new Intent(this, ProbSelectActivity.class);
 
         startActivity(intent);
     }
