@@ -106,7 +106,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-
     private void displaySelectedScreen(int itemId) {
 
         //creating fragment object

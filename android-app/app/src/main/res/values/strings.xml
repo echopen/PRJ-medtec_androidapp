@@ -43,5 +43,7 @@
     <string name="ulterus">Ulterus</string>
     <string name="poumon">Poumon</string>
     <string name="coeur">Coeur</string>
+    <string name="uro_digestif">Uro digestif</string>
+    <string name="osteo_articulaire">Osteo</string>
     <string name="title_activity_add_patient">New patient</string>
 </resources>

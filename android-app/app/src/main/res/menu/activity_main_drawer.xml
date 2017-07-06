@@ -17,7 +17,6 @@
         <item
             android:id="@+id/nav_menu5"
             android:title="Aide" />
-
     </group>
 
 </menu>

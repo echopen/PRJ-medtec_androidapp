@@ -111,10 +111,10 @@ public class DrawView extends ImageView {
     private void measureAndDisplayDistance(float X1, float X2, float Y1, float Y2) {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float distance = MathOp.getRealMeasure((float) Math.hypot(X1 - X2, Y1 - Y2), displayMetrics);
-        if(distance !=0)
-            Synchronizer.singletonSynchronizer.synchronizeVisibility(R.id.measure);
-        String measure = String.format("%.2f", distance);
-        Synchronizer.singletonSynchronizer.synchronizeTextAndImage(R.id.measure, measure);
+//        if(distance !=0)
+//            Synchronizer.singletonSynchronizer.synchronizeVisibility(R.id.measure);
+//        String measure = String.format("%.2f", distance);
+//        Synchronizer.singletonSynchronizer.synchronizeTextAndImage(R.id.measure, measure);
     }
 
     private void markAndDraw(Canvas canvas, float left, float top, float right, float bottom, Paint markerPaint, Path path, Paint paint ) {

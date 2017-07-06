@@ -82,11 +82,15 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
     private View takePicture;
     private View imageViewBitmap;
     private ImageView goToGallery;
-
     private SeekBar mSeekBarLinearLutOffset;
 
     private SeekBar mSeekBarGain;
 
+    private ImageView heartImage;
+    private ImageView obstetriqueImage;
+    private ImageView poumonImage;
+    private ImageView uroImage;
+    private ImageView osteoImage;
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -205,7 +209,62 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
                 wmlp.y = -100;   //y position
                 wmlp.width = WindowManager.LayoutParams.MATCH_PARENT;
 
+
+                initOrgan(mView);
+
+                heartImage.setOnClickListener(this);
+                obstetriqueImage.setOnClickListener(this);
+                uroImage.setOnClickListener(this);
+                poumonImage.setOnClickListener(this);
+                osteoImage.setOnClickListener(this);
+
+                heartImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.w("myApp", "click on heartImage");
+
+                        changeHeartButton();
+                    }
+                });
+
+                obstetriqueImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.w("myApp", "click on obstetriqueImage");
+
+                        changeObstetriqueButton();
+                    }
+                });
+
+                uroImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.w("myApp", "click on uroImage");
+
+                        changeUroButton();
+                    }
+                });
+
+                poumonImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.w("myApp", "click on poumonImage");
+
+                        changePoumonButton();
+                    }
+                });
+
+                osteoImage.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Log.w("myApp", "click on osteoImage");
+
+                        changeOsteoButton();
+                    }
+                });
+
                 dialog.show();
+
             }
         });
         ImageView showSettings = (ImageView) rootView.findViewById(R.id.settings);
@@ -240,8 +299,6 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.w("myApp", "take pictures");
-
                 saveImage();
             }
         });
@@ -262,6 +319,49 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         return rootView;
     }
 
+    private void changeHeartButton() {
+        heartImage.setImageResource(R.drawable.cardiaque_blue);
+        obstetriqueImage.setImageResource(R.drawable.obstetrique);
+        uroImage.setImageResource(R.drawable.uro_digestif);
+        poumonImage.setImageResource(R.drawable.poumon);
+        osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+    }
+
+    private void changeObstetriqueButton() {
+        heartImage.setImageResource(R.drawable.heart);
+        obstetriqueImage.setImageResource(R.drawable.obstetrique_blue);
+        uroImage.setImageResource(R.drawable.uro_digestif);
+        poumonImage.setImageResource(R.drawable.poumon);
+        osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+
+    }
+
+    private void changePoumonButton() {
+
+        heartImage.setImageResource(R.drawable.heart);
+        obstetriqueImage.setImageResource(R.drawable.obstetrique);
+        uroImage.setImageResource(R.drawable.uro_digestif);
+        poumonImage.setImageResource(R.drawable.poumon_blue);
+        osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+    }
+
+    private void changeUroButton() {
+
+        heartImage.setImageResource(R.drawable.heart);
+        obstetriqueImage.setImageResource(R.drawable.obstetrique);
+        uroImage.setImageResource(R.drawable.uro_digestif2_blue);
+        poumonImage.setImageResource(R.drawable.poumon);
+        osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+    }
+
+    private void changeOsteoButton() {
+
+        heartImage.setImageResource(R.drawable.heart);
+        obstetriqueImage.setImageResource(R.drawable.obstetrique);
+        uroImage.setImageResource(R.drawable.uro_digestif);
+        poumonImage.setImageResource(R.drawable.poumon);
+        osteoImage.setImageResource(R.drawable.osteo_articulaire_blue);
+    }
 
     private void displayGallery(View rootView) {
 
@@ -283,6 +383,14 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         imageViewBitmap = rootView.findViewById(R.id.echo);
         takePicture = rootView.findViewById(R.id.btnCapture);
         goToGallery = (ImageView) rootView.findViewById(R.id.gallery);
+    }
+
+    public void initOrgan(View mView) {
+        heartImage = (ImageView) mView.findViewById(R.id.heart);
+        obstetriqueImage = (ImageView) mView.findViewById(R.id.obstetrique);
+        poumonImage  = (ImageView) mView.findViewById(R.id.poumon);
+        uroImage  = (ImageView) mView.findViewById(R.id.uro_digestif);
+        osteoImage = (ImageView) mView.findViewById(R.id.osteo_articulaire);
     }
 
     public static Bitmap viewToBitmap(View view, int width, int height) {
