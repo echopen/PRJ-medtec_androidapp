@@ -3,7 +3,12 @@ package com.echopen.asso.echopen;
 import android.app.Application;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
+import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.ui.RenderingContextController;
+
+import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_IP;
+import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
  * Created by lecoucl on 05/06/17.

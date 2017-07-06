@@ -3,7 +3,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:gravity="center"
     android:orientation="vertical"
     android:weightSum="1"
     >
@@ -56,7 +56,7 @@
             android:layout_weight="1"
             android:background="@color/transparent"
             android:text="Emergency"
-            android:textColor="@color/gray_very_light"
+            android:textColor="@color/red_light"
             android:textStyle="bold" />
 
     </LinearLayout>

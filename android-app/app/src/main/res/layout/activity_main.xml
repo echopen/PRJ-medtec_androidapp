@@ -3,10 +3,11 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:gravity="center"
     android:orientation="vertical"
     android:weightSum="1"
     >
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
         android:layout_width="206dp"
@@ -69,6 +70,7 @@
     </LinearLayout>
 
     <Space
+        android:layout_marginTop="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -117,7 +119,8 @@
 
     <Space
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"/>
 
     <Button
         android:id="@+id/enter_bt"
