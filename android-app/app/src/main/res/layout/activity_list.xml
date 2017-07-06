@@ -7,4 +7,5 @@
     android:horizontalSpacing="10dp"
     android:numColumns="2"
     android:stretchMode="columnWidth"
-    android:verticalSpacing="10dp" />
+    android:verticalSpacing="10dp"
+    android:background="@color/white"/>

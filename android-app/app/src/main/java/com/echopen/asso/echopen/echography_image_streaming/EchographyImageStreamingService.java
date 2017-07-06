@@ -3,6 +3,7 @@ package com.echopen.asso.echopen.echography_image_streaming;
 import android.app.Activity;
 import android.graphics.Bitmap;
 
+import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingConnectionType;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
