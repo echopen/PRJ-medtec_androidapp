@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.echopen.asso.echopen.HomeActivity">
+
+
 <RelativeLayout
     android:layout_width="0dp"
     android:layout_height="0dp"
@@ -36,7 +38,7 @@
         android:id="@+id/txt_v_home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/intro_text_home"
+        android:text="@string/intro_text"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="19dp"

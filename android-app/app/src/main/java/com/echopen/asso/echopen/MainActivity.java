@@ -76,6 +76,7 @@ public class MainActivity extends FragmentActivity {
         //mPager.setCurrentItem(1);
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();

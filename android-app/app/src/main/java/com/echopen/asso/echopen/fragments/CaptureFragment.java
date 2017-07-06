@@ -65,7 +65,7 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
         final EchographyImageStreamingService serviceEcho = new EchographyImageStreamingService(rdController);
         final EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, this);
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.37.214.123", REDPITAYA_PORT);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.191.4.59", REDPITAYA_PORT);
         serviceEcho.connect(mode, getActivity());
         presenter.start();
 
