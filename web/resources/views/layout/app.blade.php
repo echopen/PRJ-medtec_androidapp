@@ -39,14 +39,14 @@
 
 <header>
     <ul class="links">
-        <li><a href="#">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="/product">Product</a></li>
         <li><a href="/faq">Faq</a></li>
         <li><a href="/contact">Contact</a></li>
     </ul>
     <div class="logo"></div>
     <ul class="right-cta">
-        <li class="join-us">Rejoignez le projet !</li>
+        <li class="join-us">Agir</li>
     </ul>
 </header>
 

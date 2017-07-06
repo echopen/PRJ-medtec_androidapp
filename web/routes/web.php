@@ -28,6 +28,9 @@ Route::get('/contact', 'PagesController@contact');
 
 Route::get('/community', 'PagesController@community');
 
+
+Route::get('/product', 'PagesController@product');
+
 Route::get('/faq', 'PagesController@faq');
 
 Auth::routes();

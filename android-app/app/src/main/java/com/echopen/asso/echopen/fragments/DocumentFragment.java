@@ -8,7 +8,12 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -27,6 +32,8 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class DocumentFragment extends Fragment {
+
+    private FragmentManager fragmentManager;
 
     public DocumentFragment() {
         // Required empty public constructor
@@ -60,7 +67,9 @@ public class DocumentFragment extends Fragment {
 
             File[] files = targetDirector.listFiles();
             for (File file : files) {
-                publishProgress(file.getAbsolutePath());
+                if(!file.isDirectory()) {
+                    publishProgress(file.getAbsolutePath());
+                }
                 if (isCancelled()) break;
             }
             return null;
@@ -122,8 +131,8 @@ public class DocumentFragment extends Fragment {
             if (convertView == null) { // if it's not recycled, initialize some
                 // attributes
                 imageView = new ImageView(mContext);
-                imageView.setLayoutParams(new GridView.LayoutParams(220, 220));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+                imageView.setScaleType(ImageView.ScaleType.CENTER);
                 imageView.setPadding(8, 8, 8, 8);
             } else {
                 imageView = (ImageView) convertView;
@@ -185,9 +194,10 @@ public class DocumentFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_document, container, false);
+        final View v = inflater.inflate(R.layout.fragment_document, container, false);
 
         final GridView gallery = (GridView) v.findViewById(R.id.gallery);
+        final ImageView imageView = (ImageView) v.findViewById(R.id.expanded_image);
         myImageAdapter = new ImageAdapter(getActivity());
         gallery.setAdapter(myImageAdapter);
 
@@ -195,23 +205,50 @@ public class DocumentFragment extends Fragment {
         myAsyncTaskLoadFiles.execute();
 
         Button buttonReload = (Button) v.findViewById(R.id.reload);
+        final Button buttonCloseZoom = (Button) v.findViewById(R.id.btn_closezoom);
+        Button buttonBackToDashboard = (Button) v.findViewById(R.id.btn_back);
 
+        // Shows image
         AdapterView.OnItemClickListener myOnItemClickListener = new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position,
                                     long id) {
-                String prompt = "remove " + (String) parent.getItemAtPosition(position);
-                Toast.makeText(getContext(), prompt, Toast.LENGTH_SHORT)
-                        .show();
+                String item = parent.getItemAtPosition(position).toString();
+                Log.d("Image path: ", item);
 
-                myImageAdapter.remove(position);
-                myImageAdapter.notifyDataSetChanged();
-
+                Bitmap itemBitmap = BitmapFactory.decodeFile(item);
+                imageView.setImageBitmap(itemBitmap);
+                imageView.setVisibility(v.VISIBLE);
+                buttonCloseZoom.setVisibility(v.VISIBLE);
             }
         };
 
+        // Close image zoom
+        buttonCloseZoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setVisibility(v.INVISIBLE);
+                buttonCloseZoom.setVisibility(v.INVISIBLE);
+            }
+        }) ;
 
+        fragmentManager = getActivity().getSupportFragmentManager();
+
+        // Back to dashboard
+        buttonBackToDashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                DashboardFragment dashboardFragment = new DashboardFragment();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                fragmentTransaction.replace(R.id.pager, dashboardFragment).commit();
+            }
+        });
+
+        gallery.setOnItemClickListener(myOnItemClickListener);
+      
+        // Reload images list
         buttonReload.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
@@ -229,4 +266,6 @@ public class DocumentFragment extends Fragment {
 
         return v;
     }
+
+
 }
