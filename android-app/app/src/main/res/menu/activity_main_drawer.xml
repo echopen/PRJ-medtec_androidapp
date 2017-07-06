@@ -9,10 +9,10 @@
             android:id="@+id/nav_menu3"
             android:title="Nouveau patient" />
         <item
-            android:id="@+id/nav_menu2"
+            android:id="@+id/nav_menu4"
             android:title="Dossier patient" />
         <item
-            android:id="@+id/nav_menu4"
+            android:id="@+id/nav_menu2"
             android:title="Galerie" />
         <item
             android:id="@+id/nav_menu5"

@@ -33,15 +33,15 @@
             android:orientation="vertical"
             android:layout_weight="0.5">
 
-            <ImageView
-                android:id="@+id/imageView"
+
+            <ImageButton
+                android:id="@+id/imageButtonWoman1"
                 android:layout_width="match_parent"
+                android:scaleType="centerInside"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"
-                android:src="@drawable/woman"
-                android:visibility="visible"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+                android:background="@null"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/woman" />
 
             <TextView
                 android:id="@+id/textView7"
@@ -58,16 +58,14 @@
             android:orientation="vertical"
             android:layout_weight="0.5">
 
-            <ImageView
-                android:id="@+id/imageView3"
+            <ImageButton
+                android:id="@+id/imageButtonMan1"
                 android:layout_width="match_parent"
+                android:scaleType="centerInside"
                 android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_weight="0.5"
-                android:src="@drawable/man"
-                android:visibility="visible"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+                android:background="@null"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/man" />
 
             <TextView
                 android:id="@+id/textView8"
