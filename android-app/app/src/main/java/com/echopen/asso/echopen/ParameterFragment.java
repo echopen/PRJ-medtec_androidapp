@@ -1,20 +1,18 @@
 package com.echopen.asso.echopen;
 
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ScanFragment extends Fragment {
+public class ParameterFragment extends Fragment {
 
 
-    public ScanFragment() {
+    public ParameterFragment() {
         // Required empty public constructor
     }
 
@@ -24,13 +22,10 @@ public class ScanFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.scan, container, false);
+        View v = inflater.inflate(R.layout.parameter, container, false);
 
-        if (v.findViewById(R.id.gallery)!= null){
-            v.findViewById(R.id.gallery).setOnClickListener((MainActivity) getActivity());
-        }
-        if (v.findViewById(R.id.button_seances)!= null){
-            v.findViewById(R.id.button_seances).setOnClickListener((MainActivity) getActivity());
+        if (v.findViewById(R.id.valid_param)!= null){
+            v.findViewById(R.id.valid_param).setOnClickListener((MainActivity) getActivity());
         }
 
         return v;

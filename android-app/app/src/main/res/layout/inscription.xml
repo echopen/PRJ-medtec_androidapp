@@ -97,8 +97,8 @@
             android:inputType="textPersonName"/>
 
         <Button
+            android:id="@+id/button_register"
             android:text="Je m'inscris"
-            android:id="@+id/button4"
             android:layout_gravity="center"
             android:layout_width="200dp"
             android:layout_height="wrap_content"/>

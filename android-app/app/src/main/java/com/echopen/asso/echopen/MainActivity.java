@@ -4,11 +4,13 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -50,44 +52,43 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Init first fragment
         LoginFragment loginFragment = new LoginFragment();
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).addToBackStack(null).commit();
 
 //        //launch probe
-//        EchOpenApplication echOpenApplication = ( EchOpenApplication ) getApplication();
-//
-//        final EchographyImageStreamingService serviceEcho = echOpenApplication.getEchographyImageStreamingService();
-//
-//        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, new EchographyImageVisualisationContract.View() {
-//            @Override
-//            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
-//                Log.e("wowowowowowow", "une image woiwowoow");
-//            }
-//
-//            @Override
-//            public void refreshImage(final Bitmap iBitmap) {
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        ImageView picture = (ImageView) findViewById(R.id.picture);
-//                        picture.setImageBitmap(iBitmap);
-//                        Log.e("Rendu Bitmap", "yooyoyoyoy");
-//                    }
-//                });
-//            }
-//        });
-//        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(REDPITAYA_IP, REDPITAYA_PORT);
-//        serviceEcho.connect(mode, this);
-//
-//        presenter.start();
+/*        EchOpenApplication echOpenApplication = ( EchOpenApplication ) getApplication();
 
+        final EchographyImageStreamingService serviceEcho = echOpenApplication.getEchographyImageStreamingService();
+
+        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(serviceEcho, new EchographyImageVisualisationContract.View() {
+            @Override
+            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
+                Log.e("wowowowowowow", "une image woiwowoow");
+            }
+
+            @Override
+            public void refreshImage(final Bitmap iBitmap) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ImageView picture = (ImageView) findViewById(R.id.echo);
+                        picture.setImageBitmap(iBitmap);
+                        Log.e("Rendu Bitmap", "yooyoyoyoy");
+                    }
+                });
+            }
+        });
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(REDPITAYA_IP, REDPITAYA_PORT);
+        serviceEcho.connect(mode, this);
+
+        presenter.start();*/
     }
 
     @Override
     protected void onResume(){
         super.onResume();
 
-        findViewById(R.id.button_scan).setOnClickListener(MainActivity.this);
     }
 
 
@@ -107,24 +108,155 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    // onClick management
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.button_scan :
                 buttonScan();
                 break;
+            case R.id.button_connexion :
+                buttonConnexion();
+                break;
+            case R.id.button_inscription :
+                buttonInscription();
+                break;
+            case R.id.button_connexion_form :
+                buttonConnexionForm();
+                break;
+            case R.id.button_register :
+                buttonRegister();
+                break;
+            case R.id.left_hand :
+                buttonLeftHand();
+                break;
+            case R.id.right_hand :
+                buttonRightHand();
+                break;
+            case R.id.valid_param :
+                buttonValidParam();
+                break;
+            case R.id.skip :
+                buttonScan();
+                break;
+            case R.id.gallery :
+                buttonGallery();
+                break;
+            case R.id.button_seances :
+                buttonSeances();
+                break;
+            case R.id.seances :
+                buttonSeances();
+                break;
+            case R.id.profil :
+                buttonProfil();
+                break;
+            case R.id.faq :
+                buttonFaq();
+                break;
+            case R.id.back :
+                onBackPressed();
+                break;
         }
     }
 
+    // fragment setup
     private void buttonScan(){
+        //set default parameter
+        //###
         ScanFragment scanFragment = new ScanFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, scanFragment).addToBackStack(null).commit();
     }
 
-    @Override
-    public void onBackPressed(){
-            super.onBackPressed();
-            LoginFragment loginFragment = new LoginFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, loginFragment).addToBackStack(null).commit();
+    private void buttonConnexion(){
+        ConnexionFragment connexionFragment = new ConnexionFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, connexionFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonInscription(){
+        InscriptionFragment inscriptionFragment = new InscriptionFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, inscriptionFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonRegister(){
+        //register
+        //###
+        //login
+        //###
+        HandFragment handFragment = new HandFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, handFragment).addToBackStack(null).commit();
+
+    }
+
+    private void buttonConnexionForm(){
+        //login
+        //###
+        HandFragment handFragment = new HandFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, handFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonLeftHand(){
+        //set left hand
+        //###
+        ParameterFragment parameterFragment = new ParameterFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, parameterFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonRightHand(){
+        //set right hand
+        //###
+        ParameterFragment parameterFragment = new ParameterFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, parameterFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonValidParam(){
+        //set parameter
+        //###
+        ScanFragment scanFragment = new ScanFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, scanFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonGallery(){
+        //get load stored seances
+        //###
+        setContentView(R.layout.activity_main_with_bar);
+        BarBackFragment barbackFragment = new BarBackFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barbackFragment).addToBackStack(null).commit();
+
+        GalleryFragment galleryFragment = new GalleryFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, galleryFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonSeances(){
+        //get load stored seances
+        //###
+        setContentView(R.layout.activity_main_with_bar);
+        BarFragment barFragment = new BarFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barFragment).addToBackStack(null).commit();
+
+        SeancesFragment seancesFragment = new SeancesFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, seancesFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonProfil(){
+        //get profil
+        //###
+        setContentView(R.layout.activity_main_with_bar);
+        BarFragment barFragment = new BarFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barFragment).addToBackStack(null).commit();
+
+        ProfilFragment profilFragment = new ProfilFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, profilFragment).addToBackStack(null).commit();
+    }
+
+    private void buttonFaq(){
+        //get faq
+        //###
+        setContentView(R.layout.activity_main_with_bar);
+        BarFragment barFragment = new BarFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barFragment).addToBackStack(null).commit();
+
+        FaqFragment faqFragment = new FaqFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, faqFragment).addToBackStack(null).commit();
     }
 }
