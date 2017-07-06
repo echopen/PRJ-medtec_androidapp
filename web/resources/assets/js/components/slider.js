@@ -11,6 +11,8 @@ $(document).ready(function(){
       speed: 400,
       dots: true,
       arrows: true,
-      variableWidth: true
+      variableWidth: true,
+      prevArrow:"<div class='slick_btn_wrap'><button type='button' class='slick-prev pull-left'></button></div>",
+      nextArrow:"<div class='slick_btn_wrap slick_btn_wrap-left'><button type='button' class='slick-next pull-right'></button></div>"
   });    
 });	
