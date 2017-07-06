@@ -299,6 +299,7 @@
                 android:background="@null"
                 android:id="@+id/switch_page_settings"
                 android:src="@drawable/btn_floating"
+                android:onClick="goToMainPage"
                 />
         </RelativeLayout>
 

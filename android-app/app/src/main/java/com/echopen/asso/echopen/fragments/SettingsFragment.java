@@ -3,7 +3,9 @@ package com.echopen.asso.echopen.fragments;
 
 import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,5 +34,18 @@ public class SettingsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_settings, container, false);
 
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        ImageButton btn_switch_to_main = (ImageButton) getView().findViewById(R.id.switch_page_settings);
+
+
+
+
+    }
+
+
 
 }
