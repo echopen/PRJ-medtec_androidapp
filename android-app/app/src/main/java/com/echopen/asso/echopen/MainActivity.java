@@ -4,16 +4,19 @@ import android.annotation.TargetApi;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
@@ -21,15 +24,10 @@ import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImage
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 
-import static android.widget.Toast.LENGTH_SHORT;
 import static com.echopen.asso.echopen.utils.Constants.Http.LOCAL_IP;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
-import static java.lang.Math.abs;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
-
-public class MainActivity extends Activity {
-
+public class MainActivity extends AppCompatActivity {
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -77,24 +75,18 @@ public class MainActivity extends Activity {
 
             @Override
             public boolean onDoubleTapEvent(MotionEvent e) {
-                Log.d("tap","OnDoubleTap"+e);
-
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                Log.d("tap","onSingleTapConfirmed"+e);
-
                 return true;
             }
 
             @Override
             public void onLongPress(MotionEvent e) {
-                Log.d("tap","onLongPress"+e);
+
             }
-
-
         });
 
         final GestureDetector gdOnView = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
@@ -111,74 +103,41 @@ public class MainActivity extends Activity {
                 Log.d("tap", "OnDoubleTap" + e);
                 if (e.getAction() == MotionEvent.ACTION_DOWN && !toClose) {
                     Log.d("tap", "toClose if " + toClose);
-                    View seekBarH = (View) findViewById(R.id.seekBarH);
+                    View seekBarH = findViewById(R.id.seekBarH);
                     seekBarH.setVisibility(View.VISIBLE);
-                    View freqText = (View) findViewById(R.id.frequence);
+                    View freqText = findViewById(R.id.frequence);
                     freqText.setVisibility(View.VISIBLE);
-
-                    View seekBarV = (View) findViewById(R.id.seekBarV);
+                    View seekBarV = findViewById(R.id.seekBarV);
                     seekBarV.setVisibility(View.VISIBLE);
-                    View gainText = (View) findViewById(R.id.gain);
+                    View gainText = findViewById(R.id.gain);
                     gainText.setVisibility(View.VISIBLE);
                     toClose = true;
                 } else if (e.getAction() == MotionEvent.ACTION_DOWN && toClose) {
                     Log.d("tap", "toClose else " + toClose);
-                    View seekBarH = (View) findViewById(R.id.seekBarH);
+                    View seekBarH = findViewById(R.id.seekBarH);
                     seekBarH.setVisibility(View.INVISIBLE);
-                    View freqText = (View) findViewById(R.id.frequence);
+                    View freqText = findViewById(R.id.frequence);
                     freqText.setVisibility(View.INVISIBLE);
-
-
-                    View seekBarV = (View) findViewById(R.id.seekBarV);
+                    View seekBarV = findViewById(R.id.seekBarV);
                     seekBarV.setVisibility(View.INVISIBLE);
-                    View gainText = (View) findViewById(R.id.gain);
+                    View gainText = findViewById(R.id.gain);
                     gainText.setVisibility(View.INVISIBLE);
 
                     toClose = false;
                 }
-
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                Log.d("tap","onSingleTapConfirmed"+e);
-
                 return true;
             }
-
-            @Override
-            public boolean onFling(MotionEvent e1,MotionEvent e2,float velocityX,float velocityY) {
-
-                float v = e1.getX() - e2.getX();
-                Log.d("tap", "onFling e2 "+ v );
-
-                //si taille de la barre + start event > taille window : barre stop border screen
-
-                if (abs(e1.getX() - e2.getX()) > 300 && abs(e1.getY() - e2.getY()) < 300) {
-                    //event horizontal
-                    Log.d("tap", "onFling horizontal ");
-                    //graduation 3, fréquence
-
-                }
-
-                if (abs(e1.getX() - e2.getX()) < 300 && abs(e1.getY() - e2.getY()) > 300) {
-                    //event vertical
-                    Log.d("tap", "onFling vertical ");
-                    //graduation 4, gain
-                }
-
-                return true;
-            }
-
-
         });
 
-        View mainView = (View) findViewById(R.id.main);
+        View mainView = findViewById(R.id.main);
         mainView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 return gdOnView.onTouchEvent(event);
             }
         });
@@ -188,7 +147,6 @@ public class MainActivity extends Activity {
         mainButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 return gd.onTouchEvent(event);
             }
         });
@@ -198,8 +156,7 @@ public class MainActivity extends Activity {
         stream.connect(mode,this);
         presenter.start();
         //-----------------------------------------------------------------
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.navigation);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
                 (new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -224,8 +181,7 @@ public class MainActivity extends Activity {
                         return true;
                     }
                 });
-
-        //Manually displaying the first fragment - one time only
+        
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, ScannerFragment.newInstance());
         transaction.commit();
@@ -236,29 +192,6 @@ public class MainActivity extends Activity {
         super.onResume();
     }
 
-    boolean firstTouch = false;
-    long time = System.currentTimeMillis();
-
-    public boolean tapOnView(int ev) {
-        if (ev == MotionEvent.ACTION_DOWN) {
-
-            if(firstTouch && (System.currentTimeMillis() - time) <= 400) {
-                //set action to write annotations
-                Log.d("tap on view"," second tap ");
-                firstTouch = false;
-
-                return false;
-
-            } else {
-                firstTouch = true;
-                time = System.currentTimeMillis();
-                Log.d("tap on view"," First Tap time  "+time);
-
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
          * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
