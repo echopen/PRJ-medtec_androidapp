@@ -20,6 +20,7 @@ public class EchoActivity extends AppCompatActivity implements EchographyImageVi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        getSupportActionBar().hide();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_echo);
 

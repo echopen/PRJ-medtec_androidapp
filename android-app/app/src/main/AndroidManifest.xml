@@ -17,13 +17,13 @@
         android:name=".EchOpenApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo_echopen"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:label=""
+        android:theme="@style/AppCompatTheme">
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
+
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -33,24 +33,31 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
+            android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
         <activity
             android:name=".ArchiveActivity"
+            android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
         <activity
             android:name=".EchoActivity"
+            android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
         <activity
             android:name=".ChoiceActivity"
+            android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
         <activity
             android:name=".ProfilActivity"
+            android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
         <activity
             android:name=".SignUpActivity"
+            android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
         <activity
             android:name=".SignInActivity"
+            android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
     </application>
 
