@@ -21,7 +21,7 @@
         }
         .alignright{
             width: 50.487em;
-            @include phone(){
+            @include tablet(){
                 width: 100%;
             }
         }
@@ -43,7 +43,7 @@
             bottom: 0;
             width: 50%;
             top: 3em;
-            @include phone(){
+            @include tablet(){
                 width: 100%;
                 top: initial;
             }
