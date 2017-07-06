@@ -255,7 +255,7 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
                             fileOutputStream = new FileOutputStream(new_file);
                             Bitmap bitmap = viewToBitmap(echoImage, echoImage.getWidth(), echoImage.getHeight());
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                            Toast.makeText(MainActivity.this, "SAve success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Save success", Toast.LENGTH_SHORT).show();
                             fileOutputStream.flush();
                             fileOutputStream.close();
                         } catch (FileNotFoundException e) {
@@ -265,7 +265,6 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
                         }
 
                         refreshGallery(new_file);
-
                         break;
                 }
             }
@@ -324,6 +323,27 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
     protected void onResume(){
         super.onResume();
         mEchographyImageVisualisationPresenter.start();
+
+        /*Credentials credentials = new Credentials();
+
+        APIServices apiInterface = APIClient.getClient().create(APIServices.class);
+        Call call = apiInterface.postDatas(credentials);
+
+
+        call.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                Log.d("api" , "OK");
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable throwable) {
+                Log.d("TAG", String.valueOf(throwable));
+            }
+        }); */
+
+
+
     }
 
     private void initImageManipulationViewComponents() {

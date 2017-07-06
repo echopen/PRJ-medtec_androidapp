@@ -344,13 +344,14 @@
     <RelativeLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         >
         <LinearLayout
             android:id="@+id/test"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="60dp"
             android:layout_marginTop="60dp"
             android:orientation="horizontal" >
 
@@ -398,14 +399,20 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/capture_btn"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/rec"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="35dp"
-            android:textColor="#fff" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_height="120dp"
+            android:gravity="center_horizontal"
+            >
+            <Button
+                android:id="@+id/capture_btn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/rec"
+                android:layout_marginTop="35dp"
+                android:textColor="#fff" />
+        </LinearLayout>
     </RelativeLayout>
 
 </RelativeLayout>
