@@ -1,9 +1,11 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:openDrawer="start">
 
     <!-- <FrameLayout
          android:id="@+id/content_frame"
@@ -268,50 +270,49 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="32dp"
         android:gravity="right"
-        android:orientation="vertical"
-        android:layout_marginRight="32dp">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="cadence d'image"
             android:textAllCaps="true"
-            android:textSize="13sp"
-            android:textColor="#8E9298"/>
+            android:textColor="#8E9298"
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/gainText1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dssdds"
-            android:textSize="13sp"
+            android:text="---"
             android:textColor="#fff"
-            />
+            android:textSize="22sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:text="profondeur"
             android:textAllCaps="true"
-            android:textSize="13sp"
             android:textColor="#8E9298"
-            android:layout_marginTop="10dp"
-            />
+            android:textSize="13sp" />
+
         <TextView
             android:id="@+id/gainText2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:text="---"
+            android:textSize="22sp" />
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        >
+        android:layout_marginBottom="60dp">
 
         <com.devadvance.circularseekbar.CircularSeekBar
             android:id="@+id/circularSeekBar1"
@@ -341,19 +342,20 @@
             app:use_custom_radii="true" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        >
+        android:layout_alignParentBottom="true">
+
         <LinearLayout
             android:id="@+id/test"
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
             android:layout_marginTop="60dp"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="0dp"
@@ -373,8 +375,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#fff"
-                    android:src="@drawable/brain"
-                    />
+                    android:padding="15dp"
+                    android:src="@drawable/organe" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -394,23 +396,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#fff"
-                    android:src="@drawable/brain"
-                    />
+                    android:padding="15dp"
+                    android:src="@drawable/galerie" />
             </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
             android:layout_height="120dp"
-            android:gravity="center_horizontal"
-            >
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal">
+
             <Button
                 android:id="@+id/capture_btn"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/rec"
-                android:layout_marginTop="35dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_circle_blue"
                 android:textColor="#fff" />
         </LinearLayout>
     </RelativeLayout>

@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.echopen.asso.echopen.MainActivity"
+    tools:context="com.echopen.asso.echopen.connectDevice"
     android:background="#FFFFFF"
+    tools:showIn="@layout/activity_main"
     >
-    <!--tools:showIn="@layout/activity_main"-->
 
 
     <LinearLayout
@@ -34,7 +34,7 @@
             android:paddingRight="25dip"
             android:text="@string/text_home"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="22dp" />
+            android:textSize="18dp" />
 
         <Button
             android:layout_width="wrap_content"
@@ -44,8 +44,8 @@
             android:background="@drawable/button_active"
             android:text="Login"
             android:minWidth="200dip"
-            android:paddingLeft="14dip"
-            android:paddingRight="14dip"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
             android:paddingTop="10dip"
             android:paddingBottom="10dip"
             android:textAllCaps="false"
@@ -53,6 +53,7 @@
             android:textSize="16dp" />
 
         <Button
+            android:id="@+id/closeConnectDeviceBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="200dip"
@@ -60,8 +61,8 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="Urgence"
-            android:paddingLeft="14dip"
-            android:paddingRight="14dip"
+            android:paddingLeft="12dip"
+            android:paddingRight="12dip"
             android:paddingTop="10dip"
             android:paddingBottom="10dip"
             android:textAllCaps="false"
