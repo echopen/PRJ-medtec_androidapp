@@ -3,6 +3,8 @@ footer{
   .links{
     margin-top: 3em;
     padding-left: em(60);
+    position: absolute;
+    bottom: 13%;
     li{
       margin-left: em(35);
       &:first-child{
@@ -13,12 +15,10 @@ footer{
         font-size: em(16);
         text-decoration: none;
       }
+        list-style: none;
+        display: inline-block;
+        text-transform: uppercase;
     }
-  }
-  li{
-    list-style: none;
-    display: inline-block;
-    text-transform: uppercase;
   }
   .bg{
     background-image: (url("/img/gradient.png"));
@@ -26,8 +26,10 @@ footer{
     width: 100%;
     height:400px;
   }
-  .bottom{
-
+  .logo_footer{
+    position: absolute;
+    bottom:28%;
+    left:4%;
   }
   .right-cta{
     margin-top: 1.7em;
@@ -41,6 +43,12 @@ footer{
       color: #fff;
       border-radius: 4px;
       transition: background-color 1s, color 1s;
+      position: absolute;
+      bottom: 13%;
+      right: 4%;
+    }
+    li{
+      list-style: none;
     }
   }
 }
