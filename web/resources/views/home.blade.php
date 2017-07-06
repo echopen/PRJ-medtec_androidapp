@@ -8,6 +8,8 @@
     @include('components.home_nl')
 
     @include('components.home_history')
+
+    @include('components.home.community')
   
     @include('components.home_nl')
 
