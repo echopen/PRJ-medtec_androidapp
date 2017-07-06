@@ -192,7 +192,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                 }
                 break;
             case R.id.btnDone:
-                int newId = this.clientId+1;
+                int newId = this.clientId + 1;
                 ImageHandler.setClientId(newId);
                 this.clientId = newId;
                 break;
@@ -205,9 +205,5 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.setContentView(R.layout.filters_modal);
         dialog.show();
-    }
-
-    public static void setClientID(int id) {
-        // clientId = id;
     }
 }

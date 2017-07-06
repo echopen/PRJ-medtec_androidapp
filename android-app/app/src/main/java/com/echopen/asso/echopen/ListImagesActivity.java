@@ -6,16 +6,12 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ListView;
-
-import java.util.List;
 
 public class ListImagesActivity extends Activity implements View.OnClickListener {
 
@@ -70,22 +66,23 @@ public class ListImagesActivity extends Activity implements View.OnClickListener
 
 
         ListView list = (ListView) dialog.findViewById(R.id.listview);
-        list.setAdapter(new ClientAdapter(this,getFilesDir()));
+        list.setAdapter(new ClientAdapter(this, getFilesDir()));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // changeClientId(position,dialog);
+                changeClientId(position, dialog);
             }
         });
         dialog.show();
     }
 
-    public void changeClientId(int id,Dialog dialog) {
-        this.clientId = id+1;
+    public void changeClientId(int id, Dialog dialog) {
+        //this.clientId = id + 1;
         dialog.dismiss();
         // TODO: 06/07/2017 Partager le client Id  parmis tout les fichiers
         // MainActivity.setClientID(this.clientId);
         // this.finish();
     }
+
     @Override
     public void onResume() {
         super.onResume();
