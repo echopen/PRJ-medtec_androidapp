@@ -432,7 +432,7 @@ public class ScannerActivity extends CustomActivity implements AbstractActionAct
     }
 
     /**
-     * Handles clickable View that enable to choose camera or to start a new intent
+     * Handles clickable View that enable to choose camera_layer or to start a new intent
      *
      * @param v, the clickable View
      */
