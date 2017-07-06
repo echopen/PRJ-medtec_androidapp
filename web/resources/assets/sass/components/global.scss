@@ -32,7 +32,7 @@ body{
   margin: 80px 0;
 }
 .base_btn{
-  margin-top: 129px;
+  margin-top: 50px;
 
   a{
     box-shadow: 0 9px 16px 0 rgba(0, 0, 0, 0.07);
@@ -89,7 +89,16 @@ body{
     text-transform: uppercase;
   }
 }
+.title_wrap{
+    height: 100px;
+    width: 100%;
+    background: $lightcolor;
+}
 .base_section-nl{
+     margin-top: 80px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+
   .entry_wrapper{
     width: 50%;
     margin: 0 auto;
