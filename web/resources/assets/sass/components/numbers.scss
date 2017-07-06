@@ -1,6 +1,7 @@
-.base_section-numbers{
+.base_section-numbers {
     margin-bottom: 0;
 }
+
 .s__nb {
     padding-left: em(70);
     padding-right: em(40);
@@ -121,6 +122,7 @@
                             font-family: 'Roboto';
                             font-weight: 400;
                             font-size: em(14);
+                            width: 70%;
                             @media screen and (max-width: em(1024)) {
                                 font-size: em(13);
                             }
