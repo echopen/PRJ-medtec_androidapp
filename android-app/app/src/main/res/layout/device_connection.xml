@@ -5,8 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.echopen.asso.echopen.MainActivity"
-    tools:showIn="@layout/activity_main"
+    android:background="#FFFFFF"
     >
+    <!--tools:showIn="@layout/activity_main"-->
 
 
     <LinearLayout
@@ -20,13 +21,14 @@
             android:layout_marginTop="20dp"
             android:layout_width="190dp"
             android:layout_height="190dp"
-            tools:background="#AAA" />
+            android:src="@drawable/illu_start"
+            />
 
         <TextView
             android:id="@+id/rich_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="47dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
             android:paddingLeft="25dip"
             android:paddingRight="25dip"
@@ -38,29 +40,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="87dp"
+            android:layout_marginTop="37dp"
             android:background="@drawable/button_active"
             android:text="Login"
             android:minWidth="200dip"
-            android:paddingLeft="20dip"
-            android:paddingRight="20dip"
+            android:paddingLeft="14dip"
+            android:paddingRight="14dip"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
             android:textAllCaps="false"
             android:textColor="@color/colorLight"
-            android:textSize="19dp" />
+            android:textSize="16dp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="200dip"
-            android:background="@drawable/button_inactive"
+            android:background="@drawable/button_active"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="Urgence"
-            android:paddingLeft="20dip"
-            android:paddingRight="20dip"
+            android:paddingLeft="14dip"
+            android:paddingRight="14dip"
+            android:paddingTop="10dip"
+            android:paddingBottom="10dip"
             android:textAllCaps="false"
             android:textColor="@color/colorMedium"
-            android:textSize="19dp" />
+            android:textSize="16dp" />
 
 
     </LinearLayout>
