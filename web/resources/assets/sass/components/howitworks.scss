@@ -4,23 +4,22 @@ $txtColor: #545454;
 }
 
 .s__hiw {
-    &__title{
+    &__title {
         margin-bottom: 100px;
         padding-top: 50px;
         padding-left: 10%;
-        &__category{
+        &__category {
             text-transform: uppercase;
             font-size: em(13);
             color: #545454;
         }
-
-        &__title{
+        &__title {
             margin-top: 0;
             font-size: em(50);
             color: #424242;
             position: relative;
             display: inline-block;
-            &:after{
+            &:after {
                 content: "";
                 position: absolute;
                 bottom: -20px;
@@ -31,8 +30,6 @@ $txtColor: #545454;
             }
         }
     }
-
-
     width: 100%;
     height: 3000px;
     background-color: #F7F7F7;
@@ -210,12 +207,13 @@ $txtColor: #545454;
                 margin-top: em(50);
                 &--button {
                     height: em(50);
-                    width: em(219);
+                    width: em(180);
                     background-color: #6078EA;
                     border: none;
-                    text-transform: uppercase;
                     color: white;
-                    border-radius: em(30);
+                    border-radius: em(4);
+                    font-family: 'Roboto';
+                    font-size: em(16);
                 }
             }
         }

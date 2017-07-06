@@ -154,7 +154,7 @@ var scrollMagicController = new ScrollMagic.Controller();
                     </li>
                 </ul>
                 <div class="s__hiw__content__text__cta">
-                    <button class="s__hiw__content__text__cta--button">Buy</button>
+                    <button class="s__hiw__content__text__cta--button">En savoir plus</button>
                 </div>
             </div>
         </div>
