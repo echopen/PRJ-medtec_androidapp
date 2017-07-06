@@ -3,6 +3,7 @@
     <string name="app_name">echopen</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="hello_world">Hello_world</string>
+    <string name="btn_settings">Paramètre</string>
     <string name="intro_text">L\'echographie accessible</string>
     <string name="title_activity_settings">Paramètres</string>
     <string name="settings_parametre">Personne</string>
