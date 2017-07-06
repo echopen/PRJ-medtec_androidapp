@@ -21,4 +21,10 @@
      .slick-prev:before{
          display: none;
      }
+     .slick-next,
+     .slick-prev{
+         @include tablet(){
+                display: none;
+            }
+     }
     }
