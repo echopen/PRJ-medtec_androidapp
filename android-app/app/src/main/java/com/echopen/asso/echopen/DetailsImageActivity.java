@@ -4,10 +4,12 @@ package com.echopen.asso.echopen;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class DetailsImageActivity extends Activity {
+public class DetailsImageActivity extends Activity implements View.OnClickListener {
 
     private int imageId;
     private int clientId;
@@ -41,5 +43,15 @@ public class DetailsImageActivity extends Activity {
         // set the toolbar title
         TextView toolbarTitle = (TextView) findViewById(R.id.galleryItem);
         toolbarTitle.setText(detailName);
+
+        ImageButton backBtn = (ImageButton) findViewById(R.id.backToGallery);
+        backBtn.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.backToGallery) {
+            this.finish();
+        }
     }
 }

@@ -5,6 +5,18 @@
     android:background="@color/black"
     android:orientation="vertical">
 
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/captureImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/echo"
         android:layout_width="match_parent"
@@ -12,8 +24,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:visibility="gone" />
 
     <ProgressBar
@@ -111,16 +122,30 @@
 
     </RelativeLayout>
 
-    <SeekBar
-        android:id="@+id/filterGain"
+    <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_above="@id/bottomRelativeLayout"
         android:layout_marginRight="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_height="wrap_content"
-        android:indeterminate="false"
-        android:scrollbarStyle="insideOverlay"
-        android:layout_above="@id/bottomRelativeLayout"/>
+        android:layout_marginBottom="20dp">
 
+        <SeekBar
+            android:id="@+id/filterGain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:indeterminate="false"
+            android:scrollbarStyle="insideOverlay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Frequence"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/filterGain"/>
+
+    </RelativeLayout>
 </RelativeLayout>
 

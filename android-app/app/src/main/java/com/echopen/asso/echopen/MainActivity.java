@@ -35,6 +35,8 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     private ImageView echoImage;
     private Bitmap mImage;
 
+    private Boolean canTakePicture = true;
+
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -56,7 +58,6 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         presenter.start();
 
         initViewListeners();
-
 
         if (getFilesDir().listFiles().length > 0) {
             // set client ID ( number of client folders +1 )
@@ -98,19 +99,18 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         return this.ImageHandler;
     }
 
-    public void onFailureConnect() {
+    public void cantTakePictureNow() {
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
         } else {
             builder = new AlertDialog.Builder(this);
         }
-        builder.setTitle("No probe detected")
-                .setMessage("The probe is not connected to your device, connect the probe and reload the app.")
+        builder.setTitle("Can't take picture now")
+                .setMessage("The probe is not correctly connected or you click too fast on capture button.")
                 .setNegativeButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
-                        System.exit(0);
+                        // TODO: 06/07/17 do something
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -180,11 +180,16 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                 break;
             // If click on capture button, we save the last image received
             case R.id.btnCapture:
-                if(mImage != null){
+                if (mImage != null & canTakePicture) {
+                    canTakePicture = false;
+                    findViewById(R.id.captureImg).setVisibility(View.VISIBLE);
                     mImage.toString();
                     getImageHandler().saveImage(mImage);
+                    findViewById(R.id.captureImg).setVisibility(View.GONE);
+                    canTakePicture = true;
+                } else {
+                    cantTakePictureNow();
                 }
-                // TODO: 06/07/2017 Ajouter une pop up si click sur l'image sans image !!
                 break;
             case R.id.btnDone:
                 int newId = this.clientId+1;

@@ -47,7 +47,7 @@ public class ListImagesActivity extends Activity implements View.OnClickListener
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                switchActivity((int) position);
+                switchActivity(position);
             }
         });
     }
@@ -94,7 +94,7 @@ public class ListImagesActivity extends Activity implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.backToHome) {
-            startActivity(new Intent(this, MainActivity.class));
+            this.finish();
         } else if (v.getId() == R.id.searchClient) {
             displayFilterModal();
         }
