@@ -3,12 +3,17 @@ package com.echopen.asso.echopen;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.parse.signpost.http.HttpResponse;
 
@@ -91,6 +96,13 @@ public class chooseProfile extends Activity
         checkBoxOsteoarthritis = (CheckBox) findViewById(R.id.checkbox_osteoarthritis);
 
         scrollView = (ScrollView) findViewById(R.id.scroll_view);
+
+        //textViewHome span color
+        TextView textViewHome = (TextView) findViewById(R.id.rich_text);
+        final SpannableStringBuilder sb = new SpannableStringBuilder("Select your patient informations to pre-set your settings");
+        final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(46,106,255));
+        sb.setSpan(fcs, 12, 32, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        textViewHome.setText(sb);
 
     }
 

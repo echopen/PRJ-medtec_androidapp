@@ -35,7 +35,6 @@
     <string name="action_settings">Settings</string>
 
     <string name="text">Start an exam</string>
-    <string name="organ">Organ</string>
     <string name="essai">Uro digestive</string>
     <string name="title_home">Connect</string>
     <string name="text_home">Connect your echo-stethoscope to start an exam.</string>
@@ -53,4 +52,22 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="gender">GENDER</string>
+    <string name="mal">Male</string>
+    <string name="female">Female</string>
+    <string name="age">AGE</string>
+    <string name="baby">Baby</string>
+    <string name="kid">Kid</string>
+    <string name="adult">Adult</string>
+    <string name="fatness">FATNESS</string>
+    <string name="small">Small</string>
+    <string name="medium">Medium</string>
+    <string name="large">Large</string>
+    <string name="organ">ORGAN</string>
+    <string name="uro_digestive">Uro digestive</string>
+    <string name="cardiac">Cardiac</string>
+    <string name="thoracic">Thoracic</string>
+    <string name="obstetrics">Obstetrics</string>
+    <string name="osteoarthritis">Osteoarthritis</string>
+    <string name="validate">Validate</string>
 </resources>
