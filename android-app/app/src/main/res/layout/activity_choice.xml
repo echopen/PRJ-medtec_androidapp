@@ -8,8 +8,8 @@
     android:weightSum="1">
 
 
-    <ImageView
-        android:id="@+id/imageView"
+    <ImageButton
+        android:id="@+id/archive_bt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,7 +17,7 @@
         android:background="@drawable/archives" />
 
     <TextView
-        android:id="@+id/archive"
+        android:id="@+id/archive_tv"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
         android:layout_gravity="center"
@@ -29,7 +29,8 @@
         android:layout_weight="0.07"
         />
 
-    <ImageView
+    <ImageButton
+        android:id="@+id/echo_bt"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
@@ -39,7 +40,7 @@
         />
 
     <TextView
-        android:id="@+id/echography"
+        android:id="@+id/echo_tv"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_gravity="center"
