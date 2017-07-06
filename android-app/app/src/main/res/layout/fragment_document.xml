@@ -6,6 +6,33 @@
     android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.DocumentFragment">
 
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="60dip"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical|left"
+            android:text="Sonde : 64% - Online"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:gravity="center_vertical|right"
+            android:text="Login"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
     <GridView
         android:id="@+id/gallery"
         android:layout_width="match_parent"
@@ -52,29 +79,29 @@
             android:fontFamily="sans-serif"
             android:text="Rafraîchir" />
 
-        <Button
-            android:id="@+id/btn_closezoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="40dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:text="X"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/expanded_image"
-            android:layout_width="400dp"
-            android:layout_height="500dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            android:visibility="invisible" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_closezoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:text="X"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_name"
+        android:visibility="invisible" />
 
 
 </FrameLayout>
