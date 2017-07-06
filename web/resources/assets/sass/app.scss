@@ -18,6 +18,8 @@
 @import "./components/value";
 @import "./components/faq/faq";
 @import "./components/home/partners";
+@import "./components/community/guest";
+@import "./components/community/logged";
 
 body>.container {
     max-width: 1440px;

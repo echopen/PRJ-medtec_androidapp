@@ -15,7 +15,14 @@ class PagesController extends Controller
 	public function contact(){
 		return view('contact');
 	}
+
+
 	public function faq(){
 		return view('faq');
 	}
+
+	public function community(){
+		return view('community');
+	}
+
 }
