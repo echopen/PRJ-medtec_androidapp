@@ -12,23 +12,45 @@
         android:background="@android:color/transparent"
         android:gravity="center">
 
-        <TextView
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|left"
-            android:text="Sonde : 64% - Online"
-            android:textColor="#fff"
-            android:textSize="15sp" />
+            android:layout_height="fill_parent">
+            <ImageView
+                android:id="@+id/sonde_status"
+                android:src="@drawable/sonde_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"/>
 
-        <TextView
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Sonde : 64% - Online"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|right"
-            android:text="Login"
-            android:textColor="#fff"
-            android:textSize="15sp" />
+            android:layout_height="fill_parent">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Login"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/user"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@drawable/user"
+                android:layout_weight="11" />
+        </LinearLayout>
+
     </RelativeLayout>
   
     <RelativeLayout
