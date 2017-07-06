@@ -11,6 +11,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="25dip"
+    android:paddingRight="25dip"
     android:orientation="vertical">
     <TextView
         android:id="@+id/rich_text"
@@ -22,15 +23,18 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18dp" />
     <TextView
+        android:layout_marginTop="24dp"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="10dp"
+        android:textStyle="bold"
         android:text="@string/gender" />
     <CheckBox android:id="@+id/checkbox_mal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="#5E6B9F"
         android:text="@string/mal"
+        android:background="#000000"
         android:onClick="onCheckboxClicked"/>
     <CheckBox android:id="@+id/checkbox_female"
         android:layout_width="wrap_content"
@@ -43,6 +47,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="10dp"
+        android:textStyle="bold"
         android:text="@string/age" />
     <CheckBox android:id="@+id/checkbox_baby"
         android:layout_width="wrap_content"
@@ -67,6 +72,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="10dp"
+        android:textStyle="bold"
         android:text="@string/fatness" />
     <CheckBox android:id="@+id/checkbox_small"
         android:layout_width="wrap_content"
@@ -92,6 +98,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="10dp"
+        android:textStyle="bold"
         android:text="@string/organ" />
     <CheckBox android:id="@+id/checkbox_uro_digestive"
         android:layout_width="wrap_content"
