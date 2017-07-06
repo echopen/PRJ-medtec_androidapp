@@ -5,10 +5,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -98,13 +100,14 @@ public class EchoFragment extends Fragment {
                         if (mHandler != null) return true;
                         mHandler = new android.os.Handler();
                         mHandler.postDelayed(mAction, 250);
+                        btn_capture.setBackgroundResource(R.drawable.capture_video);
                         break;
                     case MotionEvent.ACTION_UP:
                         if (mHandler == null) return true;
                         mHandler.removeCallbacks(mAction);
                         mHandler = null;
                         burstFireFolderCreated = false;
-
+                        btn_capture.setBackgroundResource(R.drawable.capture);
                         break;
                 }
                 return false;
@@ -173,7 +176,7 @@ public class EchoFragment extends Fragment {
 
             }
         });
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.6.36.77", 7538);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("192.168.1.41", 7538);
 
         stream.connect(mode,activity);
         presenter.start();

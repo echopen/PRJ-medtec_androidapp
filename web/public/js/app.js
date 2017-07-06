@@ -1720,6 +1720,11 @@ $(document).ready(function () {
     nextArrow: "<div class='slick_btn_wrap slick_btn_wrap-left'><button type='button' class='slick-next pull-right'><img src='/img/arrow.svg'></button></div>"
   });
 });
+$(window).ready(function () {
+  setTimeout(function () {
+    $(' .slick-current').css("margin-left", "30px");
+  }, 300); //pas le choix pour afficher shadow du premier enfant
+});
 
 /***/ }),
 /* 30 */

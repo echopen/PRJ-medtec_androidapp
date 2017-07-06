@@ -10,6 +10,7 @@
                 width: 100%;
                 margin: 0 auto;
                 display: block;
+                text-align: center;
             }
         }
         .alignright {
@@ -24,9 +25,11 @@
         }
     }
     .slick-slide {
-        width: 24.429em;
+        width: 308px;
         height: 20.643em;
         border: 1px solid $lightgrey;
+        margin: 10px;
+        box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.1);
     }
     .slick_background {
         background-image: linear-gradient(126deg, #17ead9, #6078ea);

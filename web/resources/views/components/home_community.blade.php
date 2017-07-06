@@ -3,7 +3,7 @@
         <div class="entry_title">
            <div class="entry_wrapper-small">
             <span class="entry_meta">
-            Suivez nous
+            Suivez nous<br>
        </span>
             <h3 class="entry_strong">
                 Rejoindre <span>la communauté</span>
