@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVi
 import com.echopen.asso.echopen.ui.RenderingContextController;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -28,7 +30,11 @@ import java.io.IOException;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_IP;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
+
+
 public class EchoActivity extends Activity implements EchographyImageVisualisationContract.View {
+
+    private String imageNameSave = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,14 @@ public class EchoActivity extends Activity implements EchographyImageVisualisati
                 ImageView image = (ImageView)findViewById(R.id.echo_iv);
                 Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
                 Log.e("SAVED", saveToInternalStorage(bitmap));
+            }
+        });
+
+        Button load_pics = (Button)findViewById(R.id.load_pics);
+        load_pics.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadImage();
             }
         });
     }
@@ -80,6 +94,8 @@ public class EchoActivity extends Activity implements EchographyImageVisualisati
         File directory = cw.getDir("images", Context.MODE_PRIVATE);
         Long tsLong = System.currentTimeMillis() / 1000;
         String imgName = tsLong.toString()+ ".jpg";
+        imageNameSave = imgName ;
+
         File mypath = new File(directory, imgName);
         FileOutputStream fos = null;
 
@@ -97,6 +113,21 @@ public class EchoActivity extends Activity implements EchographyImageVisualisati
             }
         }
         return directory.getAbsolutePath() + "/" +imgName;
+    }
+
+    private void loadImage (){
+        try {
+            ContextWrapper cw = new ContextWrapper(EchoActivity.this);
+            File directory = cw.getDir("images", Context.MODE_PRIVATE);
+            String mypath = directory.getAbsolutePath();
+            File f = new File(mypath, imageNameSave);
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            ImageView img = (ImageView) findViewById(R.id.echo_iv_load);
+            img.setImageBitmap(b);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 }

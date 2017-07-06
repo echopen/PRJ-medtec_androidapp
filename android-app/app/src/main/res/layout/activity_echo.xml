@@ -10,9 +10,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/echo_iv"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/echo_iv_load"
+        android:layout_below="@+id/echo_iv"
+        />
 
     <Button
         android:id="@+id/save_pics"
@@ -20,6 +27,16 @@
         android:layout_height="wrap_content"
         android:text="Enregistrer"
         android:layout_centerHorizontal="true"
+
+        />
+
+    <Button
+        android:id="@+id/load_pics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Load Image"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/save_pics"
 
         />
 </RelativeLayout>
