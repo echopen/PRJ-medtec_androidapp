@@ -3,7 +3,10 @@ package com.echopen.asso.echopen;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -12,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
@@ -25,6 +30,14 @@ import com.echopen.asso.echopen.ui.RulerView;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by admin on 05/07/2017.
@@ -55,6 +68,8 @@ import com.echopen.asso.echopen.utils.Timer;
  */
 public  class Menu1 extends Fragment implements AbstractActionActivity, EchographyImageVisualisationContract.View {
 
+    private View takePicture;
+    private View imageViewBitmap;
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -118,10 +133,84 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
             }
         });
 
+        init(inflater, container, rootView);
+
+        takePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.w("myApp", "take pictures");
+
+                saveImage();
+            }
+        });
+
         // Inflate the layout for this fragment
         return rootView;
     }
 
+    public void init(LayoutInflater inflater, ViewGroup container, View rootView) {
+        imageViewBitmap = rootView.findViewById(R.id.echo);
+        takePicture = rootView.findViewById(R.id.btnCapture);
+    }
+
+    public static Bitmap viewToBitmap(View view, int width, int height) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+        return bitmap;
+    }
+
+    /**
+     * save image in gallery
+     */
+    public void saveImage() {
+        FileOutputStream fileOutputStream = null;
+        File file = getDisc();
+
+        if (!file.exists() && !file.mkdirs()) {
+            Toast.makeText(getActivity(), "Can't create directory for image", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyymmsshhmmss", Locale.FRANCE);
+        String date = simpleDateFormat.format(new Date());
+        String name = "Echo" + date + ".jpg";
+        String file_name = file.getAbsolutePath() + "/" + name;
+        File new_file = new File(file_name);
+
+        try {
+            fileOutputStream = new FileOutputStream(new_file);
+            Bitmap bitmap = viewToBitmap(imageViewBitmap, imageViewBitmap.getWidth(), imageViewBitmap.getHeight());
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
+            Toast.makeText(getActivity(), "SAve image success", Toast.LENGTH_SHORT).show();
+            fileOutputStream.flush();
+            fileOutputStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        refreshGallery(new_file);
+    }
+
+    /**
+     * Refresh gallery
+     * @param file
+     */
+    public void refreshGallery(File file) {
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(file));
+        getActivity().sendBroadcast(intent);
+    }
+
+    /**
+     * get directory file
+     * @return
+     */
+    private File getDisc() {
+        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
+        return new File(file, "Image");
+    }
 
     @Override
     public void onResume(){
@@ -130,12 +219,6 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         EchographyImageStreamingTCPMode tcpMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
         mEchographyImageStreamingService.connect(tcpMode, getActivity());
     }
-
-//    @Override
-//    public void initActionController() {
-//        Menu1 activity = this;
-//        mainActionController = new MainActionController(activity);
-//    }
 
     /**
      * @param item, MenuItem instance

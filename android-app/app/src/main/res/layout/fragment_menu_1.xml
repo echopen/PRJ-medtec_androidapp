@@ -26,45 +26,6 @@ android:orientation="vertical">
     android:layout_alignParentEnd="true"
     android:layout_alignParentStart="true" />
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center"-->
-        <!--android:weightSum="1"-->
-
-        <!--android:layout_alignParentBottom="true">-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/imageView2"-->
-            <!--android:layout_width="32dp"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:layout_marginStart="12dp"-->
-            <!--android:src="@drawable/settings"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_alignParentStart="true" />-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/btnCapture"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:src="@drawable/camera_layer"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_marginTop="407dp"-->
-            <!--android:layout_marginBottom="10dp"-->
-            <!--android:layout_alignParentTop="true" />-->
-
-        <!--<ImageView-->
-            <!--android:id="@+id/imageView6"-->
-            <!--android:layout_width="36dp"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:src="@drawable/gallery"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:layout_alignTop="@+id/imageView2"-->
-            <!--android:layout_alignParentEnd="true"-->
-            <!--android:layout_marginEnd="15dp" />-->
-
-    <!--</LinearLayout>-->
-
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="60dip"
