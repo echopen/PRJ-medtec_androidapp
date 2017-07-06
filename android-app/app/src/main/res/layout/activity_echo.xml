@@ -4,15 +4,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#000000"
     >
+
+<ImageButton
+    android:layout_width="wrap_content"
+    android:layout_height="67dp"
+    android:id="@+id/arrow"
+    android:layout_marginLeft="30dp"
+    android:layout_marginRight="30dp"
+    android:layout_marginTop="10dp"
+    android:contentDescription="back page"
+    android:src="@drawable/arrow"
+    android:background="#000000"
+    />
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="36dp"
+       android:id="@+id/arrow_tv"
+       android:layout_marginLeft="70dp"
+       android:layout_marginRight="30dp"
+       android:layout_marginTop="33dp"
+       android:gravity="center"
+       android:text="Male, 36 years old, 76kg, lunjs"
+       android:textAlignment="center"
+       android:textColor="#000000"
+       android:textSize="18sp"
+       android:visibility="visible"
+       />
+
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/param_echo"
+      android:layout_marginLeft="20dp"
+      android:layout_marginTop="200dp"
+      android:orientation="vertical"
+      >
+
+      <ImageButton
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/param_1"
+          android:src="@drawable/param_1"
+          android:layout_marginBottom="20dp"
+          android:visibility="visible"
+          android:background="#000"
+          android:contentDescription="grain"
+          />
+
+      <ImageButton
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/param_2"
+          android:src="@drawable/param_2"
+          android:layout_marginBottom="20dp"
+          android:visibility="visible"
+          android:background="#000"
+          android:contentDescription="Organe"
+          />
+
+      <ImageButton
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:id="@+id/param_3"
+          android:src="@drawable/param_3"
+          android:layout_marginBottom="20dp"
+          android:visibility="visible"
+          android:background="#000"
+          android:contentDescription="Grid"
+          />
+
+  </LinearLayout>
 
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/echo_iv"/>
+        android:id="@+id/echo_iv" />
 
     <ImageView
         android:layout_width="wrap_content"
