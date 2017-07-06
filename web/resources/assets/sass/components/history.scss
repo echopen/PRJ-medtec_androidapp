@@ -68,17 +68,15 @@
             margin-right: 80px;
         }
         .slick-prev{
-            left: 20%;
+            left: 70%;
             top: 100%;
-            width: 100%;
             &:before{
                 color: $mainblue;
             }
         }
         .slick-next{
-            left: 30%;
+            left: 80%;
             top: 100%;
-            width: 100%;
             &:before{
                 color: $mainblue;
             }
