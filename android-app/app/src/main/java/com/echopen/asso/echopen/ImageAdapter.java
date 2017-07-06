@@ -6,7 +6,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.icu.text.LocaleDisplayNames;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -25,22 +24,23 @@ public class ImageAdapter extends BaseAdapter {
     private Context mContext;
     // references to our images
     private Drawable[] mThumbIds;
+    private File[] files;
 
     public ImageAdapter(Context c, int clientId, File galleryDirectory) {
         mContext = c;
         this.clientId = clientId;
         this.galleryDirectory = galleryDirectory;
-        setmThumbIds();
+        files = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
+        setmThumbIds(files);
+
     }
 
     // TODO: 06/07/2017 Refactoriser pour avoir la meme source de provenance de data ( tableau to list )
-    public Drawable[] getImages() {
-        File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
-        Drawable[] validImages = new Drawable[allImages.length];
-        int i = 0;
-        if (allImages != null) {
-                for (File as : allImages) {
-                    Log.d("nameFile",""+as.getName());
+    public Drawable[] getImages(File[] files) {
+            Drawable[] validImages = new Drawable[files.length];
+            int i = 0;
+            if (files != null) {
+                for (File as : files) {
                     //Convert bitmap to drawable
                     Drawable drawable = new BitmapDrawable(mContext.getResources(), BitmapFactory.decodeFile(as.getPath()));
                     try {
@@ -50,16 +50,21 @@ public class ImageAdapter extends BaseAdapter {
                         e.printStackTrace();
                     }
                 }
-        }
+            }
         return validImages;
     }
 
-    public void setmThumbIds() {
-        this.mThumbIds = getImages();
+    public void setmThumbIds(File[] files) {
+        if (files != null) {
+            this.mThumbIds = getImages(files);
+        }
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        if (files != null) {
+            return mThumbIds.length;
+        }
+        return 0;
     }
 
     public Object getItem(int position) {
