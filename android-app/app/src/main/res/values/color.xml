@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
     <color name="theme_yellow">#f3d73d</color>
     <drawable name="theme_yellow">#f3d73d</drawable>
     <color name="theme_red">#ff216a</color>
@@ -23,4 +28,9 @@
     <color name="yellow">#F0CF43</color>
     <color name="green">#24c4b6</color>
     <color name="transparent_white">#60ffffff</color>
+
+    <!--MAIN ACTIVITY -->
+
+    <color name="eastern_blue">#2195BD</color>
+    <color name="eastern_dark_blue">#2261FE</color>
 </resources>

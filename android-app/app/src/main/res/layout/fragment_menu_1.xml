@@ -1,0 +1,75 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/main"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical">
+
+<ImageView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:id="@+id/echo"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentStart="true" />
+
+<ImageView
+    android:id="@+id/organ"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/mode"
+    android:layout_marginBottom="14dp"
+    android:layout_above="@+id/linearLayout"
+    android:layout_marginTop="396dp"
+    android:layout_alignParentTop="true"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentStart="true" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="60dip"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:id="@+id/linearLayout"
+        android:paddingRight="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true">
+
+        <ImageView
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:id="@+id/btnCapture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/camera_layer"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/settings"
+        android:layout_width="36dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="13dp"
+        android:layout_marginStart="11dp"
+        android:src="@drawable/settings" />
+
+    <ImageView
+        android:id="@+id/gallery"
+        android:layout_width="36dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="25dp"
+        android:src="@drawable/gallery"
+        android:layout_alignTop="@+id/settings"
+        android:layout_alignParentEnd="true" />
+
+
+</RelativeLayout>
