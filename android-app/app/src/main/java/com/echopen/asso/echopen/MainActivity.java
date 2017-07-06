@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
@@ -165,11 +166,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
     @Override
     public void onClick(View v) {
-        onBtnCLick(v.getId());
-    }
-
-    public void onBtnCLick(int id) {
-        switch (id) {
+        switch (v.getId()) {
             // If click on gallery button, we change the activity to the image gallery
             case R.id.btnGallery:
                 switchActivity();
@@ -180,16 +177,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                 break;
             // If click on capture button, we save the last image received
             case R.id.btnCapture:
-                if (mImage != null & canTakePicture) {
-                    canTakePicture = false;
-                    findViewById(R.id.captureImg).setVisibility(View.VISIBLE);
-                    mImage.toString();
-                    getImageHandler().saveImage(mImage);
-                    findViewById(R.id.captureImg).setVisibility(View.GONE);
-                    canTakePicture = true;
-                } else {
-                    cantTakePictureNow();
-                }
+                onCapturePhoto();
                 break;
             case R.id.btnDone:
                 int newId = this.clientId + 1;
@@ -199,6 +187,26 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         }
     }
 
+    /**
+     * Function called when we clicked on the large button in center
+     */
+    public void onCapturePhoto() {
+        if (mImage != null & canTakePicture) {
+            canTakePicture = false;
+            Toast.makeText(this, "Photo taken !", Toast.LENGTH_SHORT).show();
+            findViewById(R.id.captureImg).setVisibility(View.VISIBLE);
+            mImage.toString();
+            getImageHandler().saveImage(mImage);
+            findViewById(R.id.captureImg).setVisibility(View.GONE);
+            canTakePicture = true;
+        } else {
+            cantTakePictureNow();
+        }
+    }
+
+    /**
+     * Function called when we clicked on the filter button (baby)
+     */
     public void displayFilterModal() {
         Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

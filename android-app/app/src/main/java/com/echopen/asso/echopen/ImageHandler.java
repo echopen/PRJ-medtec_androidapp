@@ -5,9 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,13 +23,13 @@ public class ImageHandler {
 
     private Context mContext;
 
-    public ImageHandler( File filesDir, int clientId){
+    public ImageHandler(File filesDir, int clientId) {
         this.galleryDirectory = filesDir;
         this.clientId = clientId;
     }
 
     public boolean saveImage(Bitmap currentBitmap) {
-        File clientDirectory = new File(this.galleryDirectory.toString() +"/"+ this.clientId +"/");
+        File clientDirectory = new File(this.galleryDirectory.toString() + "/" + this.clientId + "/");
         if (!clientDirectory.exists() || !clientDirectory.isDirectory()) {
             clientDirectory.mkdir();
         }
@@ -44,11 +41,11 @@ public class ImageHandler {
                 filesNames[i] = filesInPath[i].getName();
             }
             String lastFileName = Collections.min(new ArrayList<>(Arrays.asList(filesNames)));
-            new File(this.galleryDirectory.toString() + "/" +this.clientId+"/"+ lastFileName).delete();
+            new File(this.galleryDirectory.toString() + "/" + this.clientId + "/" + lastFileName).delete();
         }
 
         try {
-            OutputStream stream = new FileOutputStream(this.galleryDirectory.toString() + "/"+ this.clientId + "/" + System.currentTimeMillis() + ".png");
+            OutputStream stream = new FileOutputStream(this.galleryDirectory.toString() + "/" + this.clientId + "/" + System.currentTimeMillis() + ".png");
             currentBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             stream.close();
         } catch (FileNotFoundException e) {
@@ -59,8 +56,7 @@ public class ImageHandler {
         return true;
     }
 
-    protected Drawable getImageById(int imageId)
-    {
+    protected Drawable getImageById(int imageId) {
         File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
         Drawable drawable = new BitmapDrawable(this.mContext.getResources(), BitmapFactory.decodeFile(allImages[imageId].getPath()));
 
@@ -69,15 +65,13 @@ public class ImageHandler {
         return chosenImage;
     }
 
-    protected String getImageName(int imageId)
-    {
+    protected String getImageName(int imageId) {
         File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
         String name = allImages[imageId].getName();
         return name;
     }
 
-    public void setClientId(int clientId)
-    {
+    public void setClientId(int clientId) {
         this.clientId = clientId;
     }
 
