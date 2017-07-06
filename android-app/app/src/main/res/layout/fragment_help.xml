@@ -233,14 +233,6 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_weight="1"
-        android:scaleType="fitStart"
-        app:srcCompat="@drawable/ic_people_black_24px" />
-
     <TextView
         android:id="@+id/settings_title"
         android:layout_width="wrap_content"
