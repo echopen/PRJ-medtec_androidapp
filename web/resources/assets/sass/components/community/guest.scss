@@ -1,11 +1,53 @@
 section.community-guest-page{
-  .dektop_title{
 
+  .welcome{
+    font-size: 35px;
+    font-family: $font-Roboto-Regular;
+    color: #6078EA;
+    text-align: center;
+    span{
+      font-size: 55px;
+    }
   }
-  .desktop_txt{
 
-  }
-  .mobile_txt{
+  .input-container{
+    width: 55.5%;
+    height: 10%;
+    background-color: #fff;
+    border-radius: 6px;
+    position: relative;
+    margin: 0 auto;
+    margin-top: 35px;
+
+    input{
+      width: 75%;
+      height: 100%;
+      display: inline-block;
+      float: left;
+      border: none;
+      padding-left: 10%;
+    }
+
+    .magnifier{
+      width: 3.125%;
+      @include aspect-ratio(1,1);
+      position: absolute;
+      background-image: url("/img/magnifier-faq.png");
+      background-size: cover;
+      left: 3.75%;
+      top: 34.3%;
+    }
+
+    .submit{
+      width: 25%;
+      height: 100%;
+      display: inline-block;
+      float: left;
+      border: none;
+      background-color: #6078EA;
+      color: #fff;
+      font-family: $font-Roboto-Regular;
+    }
 
   }
 }

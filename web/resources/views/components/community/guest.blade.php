@@ -1,3 +1,3 @@
 <section class="community-guest-page">
-    @include('components.community.guest-header')
+    @include('components.community.community-header')
 </section>
