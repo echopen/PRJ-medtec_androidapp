@@ -18,4 +18,9 @@
         android:layout_gravity="bottom"
         android:text="Capture"/>
 
+    <ImageView
+        android:id="@+id/echography"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 </FrameLayout>

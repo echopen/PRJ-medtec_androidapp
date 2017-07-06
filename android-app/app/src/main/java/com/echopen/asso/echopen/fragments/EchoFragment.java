@@ -41,6 +41,9 @@ public class EchoFragment extends Fragment {
     private Activity activity;
     Button btn_capture;
 
+    ImageView echoImage ;
+
+
     public EchoFragment() {
         // Required empty public constructor
         // Init probe
@@ -57,6 +60,7 @@ public class EchoFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_echo, container, false);
 
         btn_capture = (Button) v.findViewById(R.id.button_capture);
+        echoImage = (ImageView) v.findViewById(R.id.echography);
 
         initProbe();
 
@@ -138,8 +142,6 @@ public class EchoFragment extends Fragment {
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ImageView echoImage = (ImageView) activity.findViewById(R.id.echography);
-
                             Display display = activity.getWindowManager().getDefaultDisplay();
                             Point size = new Point();
                             display.getSize(size);
@@ -166,7 +168,7 @@ public class EchoFragment extends Fragment {
 
             }
         });
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.6.200.128", 7538);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.6.36.77", 7538);
 
         stream.connect(mode,activity);
         presenter.start();
