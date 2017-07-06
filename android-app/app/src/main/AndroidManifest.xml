@@ -46,7 +46,7 @@
             android:name=".DetailsImageActivity"
             android:label="gallery details"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             />
     </application>
 

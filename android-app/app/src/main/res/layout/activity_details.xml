@@ -3,20 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:id="@+id/toolbarGalleryItem"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:background="#3c6eb5">
+
+        <ImageButton
+            android:id="@+id/backToGallery"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:layout_alignParentLeft="true"
+            android:scaleType="center"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:id="@+id/galleryItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gallery"
+            android:textSize="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"/>
+
+    </RelativeLayout>
+
     <ImageView
         android:id="@+id/detailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignEnd="@+id/details_title"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbarGalleryItem"
         android:scaleType="centerCrop"/>
-
-    <TextView
-        android:id="@+id/details_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text="@string/date" />
 
     <ImageButton
         android:id="@+id/downloadBtn"

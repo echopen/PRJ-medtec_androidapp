@@ -9,13 +9,10 @@ import android.widget.TextView;
 
 public class DetailsImageActivity extends Activity {
 
-
     private int imageId;
-    private ImageView detailsImage;
     private int clientId;
 
-    public DetailsImageActivity()
-    {
+    public DetailsImageActivity() {
 
     }
 
@@ -24,11 +21,8 @@ public class DetailsImageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        ImageView detailsImage = (ImageView) findViewById(R.id.detailImage);
-        TextView textImage  = (TextView) findViewById(R.id.details_title);
-
         Bundle b = getIntent().getExtras();
-        if(b != null) {
+        if (b != null) {
             this.imageId = b.getInt("imageId");
             this.clientId = b.getInt("clientId");
         }
@@ -41,9 +35,11 @@ public class DetailsImageActivity extends Activity {
         String detailName = ImageHandler.getImageName(imageId);
 
         // set data to the current image
+        ImageView detailsImage = (ImageView) findViewById(R.id.detailImage);
         detailsImage.setImageDrawable(detailImage);
-        textImage.setText(detailName);
 
+        // set the toolbar title
+        TextView toolbarTitle = (TextView) findViewById(R.id.galleryItem);
+        toolbarTitle.setText(detailName);
     }
-
 }

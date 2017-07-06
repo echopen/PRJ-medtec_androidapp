@@ -16,7 +16,6 @@
         android:scaleType="centerCrop"
         android:visibility="gone" />
 
-
     <ProgressBar
         android:id="@+id/loader"
         android:layout_width="wrap_content"
@@ -53,7 +52,6 @@
             android:background="@color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/done" />
-
 
         <ImageButton
             android:id="@+id/btnParameters"
