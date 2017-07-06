@@ -32,7 +32,7 @@ public class SplashScreen extends Activity {
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(3000);
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {

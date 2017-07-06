@@ -15,7 +15,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/launcher"
+        android:roundIcon="@drawable/launcher"
         android:label="@string/app_name"
         android:name=".EchOpenApplication"
         android:theme="@style/AppTheme">
@@ -23,8 +24,8 @@
             android:name=".SplashScreen"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,16 +36,15 @@
             android:name=".MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
         <activity
             android:name=".ListImagesActivity"
-            android:label="@string/listImageActivity"
             android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Black"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             />
         <activity
             android:name=".DetailsImageActivity"
-            android:label="@string/listImageActivity"
+            android:label="gallery details"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black"
             />

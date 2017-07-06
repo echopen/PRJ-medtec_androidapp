@@ -2,6 +2,5 @@
 <resources>
    <string name="app_name">echopen</string>
     <string name="date">12/12/2017--14h34</string>
-    <string name="galeries">galeryyy</string>
-    <string name="listImageActivity">listImageActivity</string>
+    <string name="gallery">gallery</string>
 </resources>
