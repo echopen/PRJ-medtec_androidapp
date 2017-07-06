@@ -125,6 +125,9 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         //Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
         //startActivity(chooseProfile);
 
+        Intent connectDevice = new Intent(MainActivity.this, connectDevice.class);
+        startActivity(connectDevice);
+
         super.onCreate(savedInstanceState);
         /* loading config constants in singleton Class */
         Config.getInstance(this);

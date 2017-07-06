@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.echopen.asso.echopen.MainActivity"
+    tools:showIn="@layout/activity_main"
+    >
+
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:isScrollContainer="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_marginTop="20dp"
+            android:layout_width="190dp"
+            android:layout_height="190dp"
+            tools:background="#AAA" />
+
+        <TextView
+            android:id="@+id/rich_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="47dp"
+            android:gravity="center"
+            android:paddingLeft="25dip"
+            android:paddingRight="25dip"
+            android:text="@string/text_home"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="22dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="87dp"
+            android:background="@drawable/button_active"
+            android:text="Login"
+            android:minWidth="200dip"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip"
+            android:textAllCaps="false"
+            android:textColor="@color/colorLight"
+            android:textSize="19dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="200dip"
+            android:background="@drawable/button_inactive"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="Urgence"
+            android:paddingLeft="20dip"
+            android:paddingRight="20dip"
+            android:textAllCaps="false"
+            android:textColor="@color/colorMedium"
+            android:textSize="19dp" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
