@@ -31,18 +31,17 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:background="@color/transparent"
+            android:fontFamily="sans-serif"
             android:text="&lt;"
-            android:textColor="@color/gray_dk"
-            android:fontFamily="sans-serif"/>
+            android:textColor="@color/gray_dk" />
 
         <TextView
             android:id="@+id/nb_pictures"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="16 pictures"
-            android:textColor="@color/gray_dk"
             android:fontFamily="sans-serif"
-            />
+            android:text="16 pictures"
+            android:textColor="@color/gray_dk" />
 
         <Button
             android:id="@+id/reload"
@@ -52,29 +51,29 @@
             android:fontFamily="sans-serif"
             android:text="Rafraîchir" />
 
-        <Button
-            android:id="@+id/btn_closezoom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="240dp"
-            android:layout_marginTop="40dp"
-            android:layout_weight="1"
-            android:background="@color/transparent"
-            android:text="X"
-            android:textColor="@color/white"
-            android:textSize="24dp"
-            android:visibility="invisible" />
-
-        <ImageView
-            android:id="@+id/expanded_image"
-            android:layout_width="400dp"
-            android:layout_height="500dp"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:contentDescription="@string/app_name"
-            android:visibility="invisible" />
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_closezoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:text="X"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_name"
+        android:visibility="invisible" />
 
 
 </FrameLayout>
