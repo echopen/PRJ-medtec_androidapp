@@ -1,5 +1,5 @@
 .base_section-history{
-    height: 48.750em;
+    height: 54.750em;
     background-color: $lightgrey;
     padding-top: 0;
     overflow: hidden;
@@ -42,7 +42,7 @@
             position: absolute;
             bottom: 0;
             width: 50%;
-            top: 2em;
+            top: 3em;
             @include phone(){
                 width: 100%;
                 top: initial;
@@ -61,6 +61,31 @@
             width: 18.125em;
             float: right;
             margin-right: 80px;
+        }
+        .slick-prev{
+            left: 20%;
+            top: 100%;
+            width: 100%;
+            &:before{
+                color: $mainblue;
+            }
+        }
+        .slick-next{
+            left: 30%;
+            top: 100%;
+            width: 100%;
+            &:before{
+                color: $mainblue;
+            }
+        }
+        .slick_btn_wrap{
+            width: 100%;
+            height: 90%;
+            position: absolute;
+            z-index: 1;
+            &-left{
+                top: 0;
+            }
         }
     }
     .entry_highlight{
