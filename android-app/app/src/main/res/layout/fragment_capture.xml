@@ -53,24 +53,36 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="16dp" />
+                android:layout_marginRight="16dp"
+                android:src="@drawable/pre_set_icon_grey"
+                android:background="@drawable/round_border"
+                />
 
-            <Button
+            <ImageButton
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="16dp" />
+                android:layout_marginRight="16dp"
+                android:src="@drawable/profondeur_icon"
+                android:background="@drawable/round_border"
+                />
 
-            <Button
+            <ImageButton
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="16dp" />
+                android:layout_marginRight="16dp"
+                android:src="@drawable/gain_icon"
+                android:background="@drawable/round_border"
+                />
 
-            <Button
+            <ImageButton
                 android:layout_width="48dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:src="@drawable/galerie_icon"
+                android:background="@drawable/round_border"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -82,16 +94,22 @@
             android:layout_marginBottom="64dp"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_cancelSave"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="16dp" />
+                android:layout_marginRight="16dp"
+                android:background="@drawable/round_border"
+                android:src="@drawable/cancel_icon_normal"
+                />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_save"
                 android:layout_width="48dp"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@drawable/round_border"
+                android:src="@drawable/save_icon_normal"
+                />
 
         </LinearLayout>
 
