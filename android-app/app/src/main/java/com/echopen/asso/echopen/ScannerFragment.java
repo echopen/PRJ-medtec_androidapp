@@ -68,18 +68,19 @@ public class ScannerFragment extends Fragment {
 
             @Override
             public boolean onDoubleTapEvent(MotionEvent e) {
-                //planned event : freeze on a frame to annotate, draw or zoom
+                //planned event : screenshot
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
+                //planned event : freeze on a frame to annotate, draw or zoom
                 return true;
             }
 
             @Override
             public void onLongPress(MotionEvent e) {
-
+                //planned event record video
             }
         });
 
