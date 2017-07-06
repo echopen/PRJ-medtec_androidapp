@@ -138,6 +138,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                 public void run() {
                     if (mImage == null) {
                         findViewById(R.id.loader).setVisibility(View.GONE);
+                        findViewById(R.id.loader_text).setVisibility(View.GONE);
                         findViewById(R.id.echo).setVisibility(View.VISIBLE);
                     }
                     mImage = iBitmap;

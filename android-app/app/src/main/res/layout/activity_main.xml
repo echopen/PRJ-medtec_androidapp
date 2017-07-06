@@ -13,7 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        android:scaleType="fitStart"
+        android:scaleType="centerCrop"
         android:visibility="gone" />
 
     <ProgressBar
@@ -21,6 +21,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+    <TextView
+        android:id="@+id/loader_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Awaiting for the probe signal..."
+        android:textColor="@color/white"
+        android:layout_below="@id/loader"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"/>
 
     <RelativeLayout
         android:id="@+id/topRelativeLayout"
@@ -30,18 +40,6 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="22dp"
         android:minHeight="50dp">
-
-        <ImageButton
-            android:id="@+id/btnDone"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="20dp"
-            android:layout_marginLeft="20dp"
-            android:background="@color/transparent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/done" />
 
         <ImageButton
             android:id="@+id/btnParameters"
