@@ -205,7 +205,8 @@ public class EchoFragment extends Fragment {
             // Storage path and file name
             String storagePath = Environment.getExternalStorageDirectory().toString() + "/Echopen/" + "echography - " + now + ".jpg";
 
-            View v1 = activity.getWindow().getDecorView().getRootView();
+            // Get root view
+            View v1 = activity.getWindow().getDecorView().findViewById(android.R.id.content).getRootView();
             v1.setDrawingCacheEnabled(true);
             Bitmap bitmap = Bitmap.createBitmap(v1.getDrawingCache());
             v1.setDrawingCacheEnabled(false);
