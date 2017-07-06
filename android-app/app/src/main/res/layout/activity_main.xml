@@ -3,8 +3,20 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:weightSum="1"
+    >
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_width="206dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:background="@drawable/logo_echopen"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/AppCompatTheme">
+
+    </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
         android:id="@+id/fragmentlayout"

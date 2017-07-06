@@ -5,25 +5,20 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_top"
         android:layout_width="206dp"
-        android:layout_height="wrap_content"
+        android:layout_height="63dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
         android:background="@drawable/logo_echopen"
         android:minHeight="?attr/actionBarSize"
-        android:layout_gravity="center"
         app:theme="@style/AppCompatTheme">
 
     </android.support.v7.widget.Toolbar>
-
-    <RelativeLayout
-        android:id="@+id/fragmentlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
