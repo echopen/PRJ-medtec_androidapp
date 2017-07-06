@@ -2,20 +2,16 @@
     <div class="s__nb__content">
         <div class="s__nb__content__header">
             <div class="entry_title">
-           <span class="entry_meta">
-                Les chiffres impactants
-           </span>
-           <h3 class="entry_strong">
-                Echopen
-           </h3>
-           <p class="entry_desc">
-               en quelques chiffres
-           </p>
-            <div class="base_btn">
-                <a href="#">super cta</a>
+                <span class="entry_meta">
+                        Les chiffres impactants
+                </span>
+                <h3 class="entry_strong">
+                        Echopen
+                </h3>
+                <p class="entry_desc">
+                    en quelques chiffres
+                </p>
             </div>
-        </div>
-            <span class="s__nb__content__header--decoration"></span>
         </div>
         <div class="s__nb__content__body">
             <ul class="s__nb__content__body__collection">

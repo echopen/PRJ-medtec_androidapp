@@ -1,12 +1,15 @@
 .s__nb {
+    padding-left: em(40);
+    padding-right: em(40);
     display: flex;
     flex-direction: row;
     &__content {
         background-color: white;
-        //background-color: #F7F7F7;
-        padding-left: 30px;
+        background-color: #F7F7F7;
         margin-top: 30px;
         width: 55%;
+        margin-left: -15px;
+        padding-left: 35px;
         &__header {
             &--preTitle {
                 text-transform: uppercase;
@@ -29,9 +32,9 @@
                     line-height: 0;
                 }
             }
-            &--decoration {}
         }
         &__body {
+            margin-top: -40px;
             &__collection {
                 display: flex;
                 flex-direction: row;
