@@ -64,7 +64,8 @@ var scrollMagicController = new ScrollMagic.Controller();
       offset: 525,
       duration: 2175
   })
-   .setPin(".s__hiw__content")
+   .setPin(".scrollVertical")
+   //.setPin(".s__hiw__content")
    .addTo(scrollMagicController);
 
   var sceneRight = new ScrollMagic.Scene({

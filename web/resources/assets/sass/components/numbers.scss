@@ -1,12 +1,15 @@
 .s__nb {
+    padding-left: em(70);
+    padding-right: em(40);
     display: flex;
     flex-direction: row;
     &__content {
         background-color: white;
-        //background-color: #F7F7F7;
-        padding-left: 30px;
+        background-color: #F7F7F7;
         margin-top: 30px;
         width: 55%;
+        margin-left: -15px;
+        padding-left: 35px;
         &__header {
             &--preTitle {
                 text-transform: uppercase;
@@ -29,9 +32,9 @@
                     line-height: 0;
                 }
             }
-            &--decoration {}
         }
         &__body {
+            margin-top: -40px;
             &__collection {
                 display: flex;
                 flex-direction: row;
@@ -40,12 +43,14 @@
                 list-style: none;
                 padding-left: 0px;
                 padding-right: 40px;
-                margin-top: em(60);
+                margin-top: em(40);
                 margin-bottom: em(70);
                 &__item {
                     position: relative;
                     transition: all .3s ease-in;
                     &--bigCircle {
+                        margin-top: 40px;
+                        box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.1);
                         transition: all .3s ease-in;
                         height: 120px;
                         width: 120px;
@@ -104,7 +109,7 @@
                             color: black;
                         }
                         .item__bigCircle {
-                            transform: scale(1.4);
+                            transform: scale(1.2);
                         }
                         .item__littleCircle {
                             opacity: 1;
@@ -137,23 +142,25 @@
         position: relative;
         &--img1 {
             position: absolute;
-            top: 0px;
-            left: 0px;
-            height: 366px;
+            top: -20px;
+            left: -2px;
+            width: 100%;
+            box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.1);
         }
         &--img2 {
-            height: 225px;
+            width: 340px;
             position: absolute;
             top: 275px;
             left: 80px;
+            box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.1);
         }
         &--div1 {
             background-color: #17EAD9;
             width: 230px;
             height: 167px;
             position: absolute;
-            top: 190px;
-            left: 0px;
+            top: 180px;
+            left: -20px;
         }
     }
 }
