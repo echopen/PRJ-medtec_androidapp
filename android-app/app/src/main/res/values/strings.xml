@@ -26,4 +26,7 @@
     <string name="btn_menu">Menu</string>
     <string name="title_activity_langues">LanguesActivity</string>
     <string name="txt_langues">Langues</string>
+    <string name="title_activity_signal_problem">SignalProblemActivity</string>
+    <string name="txt_signal_problem">Signalement</string>
+    <string name="btn_valid_signal">Valider</string>
 </resources>

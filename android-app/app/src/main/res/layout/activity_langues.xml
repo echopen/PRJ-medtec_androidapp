@@ -16,8 +16,10 @@
             >
             <Button
                 android:id="@+id/back_langues"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_marginLeft="20dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/arrow_icon"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -25,7 +27,8 @@
                 android:textSize="25dp"
                 android:textStyle="bold"
                 android:text="@string/txt_langues"
-                android:textColor="@color/blue_dark"/>
+                android:textColor="@color/blue_dark"
+                android:layout_marginLeft="50dp"/>
         </LinearLayout>
         <ListView
             android:id="@+id/langues"
