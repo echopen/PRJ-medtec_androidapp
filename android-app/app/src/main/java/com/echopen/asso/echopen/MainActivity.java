@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button signupBt = (Button) findViewById(R.id.signup_bt);
         signupBt.setOnClickListener(this);
 
-        Button signintBt = (Button) findViewById(R.id.signin_bt);
-        signintBt.setOnClickListener(this);
+//        Button signintBt = (Button) findViewById(R.id.signin_bt);
+//        signintBt.setOnClickListener(this);
 
         Button emergencyBt = (Button) findViewById(R.id.emergency_bt);
         emergencyBt.setOnClickListener(this);
@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.signup_bt :
                 btSignUpClicked();
                 break;
-            case R.id.signin_bt :
-                btSignInClicked();
-                break;
+//            case R.id.signin_bt :
+//                btSignInClicked();
+//                break;
             case R.id.emergency_bt :
                 btEmergencyClicked();
                 break;
@@ -80,12 +80,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signUpFragment).commit();
     }
 
-    private void btSignInClicked(){
-        Intent intent = new Intent(this, SignInActivity.class);
-        startActivity(intent);
+ //   private void btSignInClicked(){
+ //       Intent intent = new Intent(this, SignInActivity.class);
+ //       startActivity(intent);
         //SignUpFragment signUpFragment = new SignInFragment();
         //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signInFragment).commit();
-    }
+ //   }
 
 
     private void btEmergencyClicked(){

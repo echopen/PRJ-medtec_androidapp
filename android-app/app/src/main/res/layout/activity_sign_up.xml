@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/transparent"
             android:text="sign in"
             android:textColor="@color/gray_very_light"
             android:textStyle="bold" />
@@ -37,18 +37,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
+            android:background="@color/transparent"
             android:text="sign up"
             android:textColor="@color/blue_dark"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/offline_bt"
+            android:id="@+id/emergency_bt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/white"
-            android:text="Offline"
+            android:background="@color/transparent"
+            android:text="Emergency"
             android:textColor="@color/gray_very_light"
             android:textStyle="bold" />
 
