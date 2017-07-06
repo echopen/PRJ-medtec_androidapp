@@ -1,6 +1,5 @@
 package com.echopen.asso.echopen;
 
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -18,7 +17,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.SeekBar;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -36,9 +43,12 @@ import com.echopen.asso.echopen.utils.Timer;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+
 
 /**
  * Created by admin on 05/07/2017.
@@ -72,6 +82,19 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
     private View takePicture;
     private View imageViewBitmap;
     private ImageView goToGallery;
+
+    private SeekBar mSeekBarLinearLutOffset;
+    private TextView mTextViewLinearLutOffset;
+    private LinearLayout mLayoutLinearLutOffset;
+
+    private SeekBar mSeekBarLinearLutSlope;
+    private TextView mTextViewLinearLutSlope;
+    private LinearLayout mLayoutLinearLutSlope;
+
+    private SeekBar mSeekBarExponentialLutAlpha;
+    private TextView mTextViewExponentialLutAlpha;
+    private LinearLayout mLayoutExponentialLutAlpha;
+
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -120,6 +143,42 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
 
         final View rootView = inflater.inflate(R.layout.fragment_menu_1, container, false);
 
+        ImageView echoImage = (ImageView) rootView.findViewById(R.id.echo);
+
+        echoImage.setOnTouchListener(new OnSwipeTouchListener(getContext()){
+
+            @Override
+            public void onSwipeLeft(float distance){
+                mSeekBarLinearLutOffset.setAlpha(1);
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                mSeekBarLinearLutOffset.setAlpha(0);
+                            }
+                        },
+                        5000);
+                Integer loffset =  mSeekBarLinearLutOffset.getProgress();
+                mSeekBarLinearLutOffset.setProgress(loffset + (int)distance /10);
+            }
+
+            @Override
+            public void onSwipeRight(float distance){
+                mSeekBarLinearLutOffset.setAlpha(1);
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                mSeekBarLinearLutOffset.setAlpha(0);
+                            }
+                        },
+                        5000);
+                Integer loffset =  mSeekBarLinearLutOffset.getProgress();
+                mSeekBarLinearLutOffset.setProgress(loffset + (int)distance / 10);
+            }
+
+        });
+
         ImageView organ = (ImageView) rootView.findViewById(R.id.organ);
         organ.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,8 +201,32 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
                 dialog.show();
             }
         });
+        ImageView showSettings = (ImageView) rootView.findViewById(R.id.settings);
+        showSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mSeekBarLinearLutOffset.setAlpha(1);
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                mSeekBarLinearLutOffset.setAlpha(0);
+                            }
+                        },
+                        5000);
+//                Animation animation =
+//                        AnimationUtils.loadAnimation(getContext(),
+//                                R.anim.fade);
+//                mSeekBarLinearLutSlope.startAnimation(animation);
+
+            }
+
+
+        });
 
         init(inflater, container, rootView);
+
+        initImageManipulationViewComponents(rootView);
 
         takePicture.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +245,9 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
                 displayGallery(rootView);
             }
         });
+
+
+
 
         // Inflate the layout for this fragment
         return rootView;
@@ -257,6 +343,114 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         EchographyImageStreamingTCPMode tcpMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
         mEchographyImageStreamingService.connect(tcpMode, getActivity());
     }
+
+
+    private void initImageManipulationViewComponents(View rootView) {
+        mSeekBarLinearLutOffset = (SeekBar) rootView.findViewById(R.id.seekBarLinearLutOffset);
+        mSeekBarLinearLutOffset.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                double lOffset = progress * 256 / 100;
+//                mTextViewLinearLutOffset.setText(new DecimalFormat("#.00").format(lOffset));
+                mRenderingContextController.setLinearLutOffset(lOffset);
+            }
+        });
+
+
+
+        mSeekBarLinearLutSlope = (SeekBar) rootView.findViewById(R.id.seekBarExponentialLutAlpha);
+
+        mSeekBarLinearLutSlope.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                double lSlope = (progress - 50) * 1.0 / 10 + 1;
+                mTextViewLinearLutSlope.setText(new DecimalFormat("#.00").format(lSlope));
+                mRenderingContextController.setLinearLutSlope(lSlope);
+            }
+        });
+
+//        mLayoutExponentialLutAlpha = (LinearLayout) findViewById(R.id.layoutExponentialLutAlpha);
+//        mTextViewExponentialLutAlpha = (TextView) findViewById(R.id.textExponentialLutAlpha);
+//        mSeekBarExponentialLutAlpha = (SeekBar) findViewById(R.id.seekBarExponentialLutAlpha);
+//        mSeekBarExponentialLutAlpha.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+//            @Override
+//            public void onStopTrackingTouch(SeekBar seekBar) {
+//            }
+//
+//            @Override
+//            public void onStartTrackingTouch(SeekBar seekBar) {
+//            }
+//
+//            @Override
+//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+//                double lAlpha = 0.001 * progress;
+//                mTextViewExponentialLutAlpha.setText(new DecimalFormat("#.00").format(lAlpha));
+//                mRenderingContextController.setExponentialLutAlpha(lAlpha);
+//            }
+//        });
+
+//        Spinner lDropdownLut = (Spinner)findViewById(R.id.dropdownLut);
+//        String[] lLutItems = new String[]{"Linear Lut", "Exponential Lut"};
+//        ArrayAdapter<String> lLutItemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, lLutItems);
+//        lDropdownLut.setAdapter(lLutItemsAdapter);
+
+//        lDropdownLut.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//                switch(i){
+//                    case 0:
+//                        // linear lut
+//                        selectLinearLut();
+//                        break;
+//                    case 1:
+//                        // exponential lut
+//                        selectExponentialLut();
+//                        break;
+//                }
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+
+//        lDropdownLut.setSelection(0);
+    }
+
+//    private void selectLinearLut(){
+//        mSeekBarLinearLutOffset.setProgress(0);
+//        mSeekBarLinearLutSlope.setProgress(50);
+//        mLayoutLinearLutOffset.setVisibility(View.VISIBLE);
+//        mLayoutLinearLutSlope.setVisibility(View.VISIBLE);
+//
+//        mLayoutExponentialLutAlpha.setVisibility(View.GONE);
+//    }
+
+//    private void selectExponentialLut(){
+//
+//        mLayoutLinearLutOffset.setVisibility(View.GONE);
+//        mLayoutLinearLutSlope.setVisibility(View.GONE);
+//
+//        mSeekBarExponentialLutAlpha.setProgress(0);
+//        mLayoutExponentialLutAlpha.setVisibility(View.VISIBLE);
+//    }
 
     /**
      * @param item, MenuItem instance

@@ -7,10 +7,12 @@ android:layout_height="match_parent"
 android:orientation="vertical">
 
 <ImageView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@color/black"
     android:id="@+id/echo"
+    android:scaleY="1.5"
+    android:scaleX="1.5"
     android:layout_alignParentTop="true"
     android:layout_alignParentStart="true" />
 
@@ -18,7 +20,7 @@ android:orientation="vertical">
     android:id="@+id/organ"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:src="@drawable/mode"
+    android:src="@drawable/organe"
     android:layout_marginBottom="14dp"
     android:layout_above="@+id/linearLayout"
     android:layout_marginTop="396dp"
@@ -26,13 +28,37 @@ android:orientation="vertical">
     android:layout_alignParentEnd="true"
     android:layout_alignParentStart="true" />
 
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBarLinearLutOffset"
+        android:progress="0"
+        android:progressDrawable="@drawable/progress"
+        android:indeterminate="false"
+        android:alpha="0"
+        android:layout_marginTop="17dp"
+        android:layout_alignParentTop="true" />
+
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBarExponentialLutAlpha"
+        android:progressDrawable="@drawable/progress"
+        android:indeterminate="false"
+        android:alpha="0"
+        android:layout_alignBottom="@+id/organ"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="85dp" />
+
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="60dip"
         android:orientation="horizontal"
-        android:background="@color/white"
         android:id="@+id/linearLayout"
         android:paddingRight="20dp"
+        android:layout_marginBottom="5dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true">
@@ -43,9 +69,11 @@ android:orientation="vertical">
             android:id="@+id/btnCapture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/camera_layer"
+            android:src="@drawable/photo"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
+
+
 
     </RelativeLayout>
 
@@ -53,21 +81,19 @@ android:orientation="vertical">
         android:id="@+id/settings"
         android:layout_width="36dp"
         android:layout_height="30dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="42dp"
 
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
         android:layout_marginBottom="13dp"
-        android:layout_marginStart="11dp"
-        android:src="@drawable/settings" />
+        android:src="@drawable/config" />
 
     <ImageView
         android:id="@+id/gallery"
         android:layout_width="36dp"
         android:layout_height="30dp"
         android:layout_marginEnd="11dp"
-        android:layout_marginRight="25dp"
-        android:src="@drawable/gallery"
+        android:layout_marginRight="42dp"
+        android:src="@drawable/gallerie"
         android:layout_alignTop="@+id/settings"
         android:layout_alignParentEnd="true" />
 
