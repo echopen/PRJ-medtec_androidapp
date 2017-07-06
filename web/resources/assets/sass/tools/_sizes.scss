@@ -58,7 +58,7 @@ $screen-lgCustom-desktop: $screen-lgCustom-min !default;
 }
 
 @mixin desktop {
-    @media (min-width: $screen-mdCustom-min + 1) {
+    @media (min-width: ($screen-mdCustom-min + 1)) {
         @content;
     }
 }
@@ -71,7 +71,7 @@ $screen-lgCustom-desktop: $screen-lgCustom-min !default;
 
 // Mix of tablet-landscape AND tablet-portrait
 @mixin tablet {
-    @media (min-width: $screen-smCustom-min) and (max-width: ($screen-mdCustom-min)) {
+    @media (min-width: $screen-smCustom-min) {
         @content;
     }
 }

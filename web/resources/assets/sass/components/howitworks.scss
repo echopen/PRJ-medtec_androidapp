@@ -4,23 +4,25 @@ $txtColor: #545454;
 }
 
 .s__hiw {
-    &__title{
+    &__title {
         margin-bottom: 100px;
         padding-top: 50px;
         padding-left: 10%;
-        &__category{
+        @media screen and (max-width: em(1024)) {
+            margin-bottom: em(30);
+        }
+        &__category {
             text-transform: uppercase;
             font-size: em(13);
             color: #545454;
         }
-
-        &__title{
+        &__title {
             margin-top: 0;
             font-size: em(50);
             color: #424242;
             position: relative;
             display: inline-block;
-            &:after{
+            &:after {
                 content: "";
                 position: absolute;
                 bottom: -20px;
@@ -31,14 +33,11 @@ $txtColor: #545454;
             }
         }
     }
-
-
     width: 100%;
     height: 3000px;
     background-color: #F7F7F7;
-    //overflow-y: scroll;
-    .scrollVertical {
-        // height: 600px;
+    @media screen and (max-width: em(1024)) {
+        height: inherit;
     }
     &__header {
         padding-top: 40px;
@@ -79,6 +78,9 @@ $txtColor: #545454;
         &__anim {
             width: 45%;
             position: relative;
+            @media screen and (max-width: em(1024)) {
+                display: none;
+            }
             &__mockupLandmark {
                 position: absolute;
                 height: 530px;
@@ -147,6 +149,9 @@ $txtColor: #545454;
         }
         &__text {
             width: 50%;
+            @media screen and (max-width: em(1024)) {
+                width: 100%;
+            }
             &__collection {
                 margin-bottom: 0;
                 &__item {
@@ -155,12 +160,18 @@ $txtColor: #545454;
                     align-items: center;
                     flex-direction: row;
                     opacity: .3;
+                    @media screen and (max-width: em(1024)) {
+                        opacity: 1;
+                    }
                     span {
                         display: inline-block;
                         min-width: em(60);
                         min-height: em(60);
                         background-image: url('/img/mockup__icon/empty.svg');
                         background-size: cover;
+                        @media screen and (max-width: em(1024)) {
+                            background-image: url('/img/mockup__icon/check.svg');
+                        }
                     }
                     &:hover,
                     &:focus {
@@ -191,6 +202,9 @@ $txtColor: #545454;
                             text-transform: uppercase;
                             //line-height: em(29);
                             margin-bottom: em(0);
+                            @media screen and (max-width: em(1024)) {
+                                font-size: em(16);
+                            }
                         }
                         &--desc {
                             color: $txtColor;
@@ -208,14 +222,19 @@ $txtColor: #545454;
                 justify-content: center;
                 align-items: center;
                 margin-top: em(50);
+                margin-bottom: 0;
+                @media screen and (max-width: 1024px) {
+                    margin-bottom: em(30);
+                }
                 &--button {
                     height: em(50);
-                    width: em(219);
+                    width: em(180);
                     background-color: #6078EA;
                     border: none;
-                    text-transform: uppercase;
                     color: white;
-                    border-radius: em(30);
+                    border-radius: em(4);
+                    font-family: 'Roboto';
+                    font-size: em(16);
                 }
             }
         }

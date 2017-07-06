@@ -15,7 +15,7 @@
             display: block;
             top: -50%;
             position: relative;
-            @include phone(){
+            @include tablet(){
                 display: none;
             }
         }
