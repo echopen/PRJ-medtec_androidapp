@@ -166,29 +166,6 @@
         android:layout_alignTop="@+id/settings_title"
         android:layout_alignParentStart="true" />
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="60dip"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/transparent"
-        android:gravity="center">
+    <include layout="@layout/header"/>
 
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|left"
-            android:text="Sonde : 64% - Online"
-            android:textColor="#fff"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|right"
-            android:text="Login"
-            android:textColor="#fff"
-            android:textSize="15sp" />
-    </RelativeLayout>
+</RelativeLayout>
