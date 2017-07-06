@@ -5,25 +5,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:theme="@style/AppTheme">
-    android:orientation="vertical">
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/scan"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation"
         android:animateLayoutChanges="true">
-
     </FrameLayout>
 
     <android.support.design.widget.BottomNavigationView
@@ -36,59 +24,5 @@
         app:itemIconTint="@color/white_smoke"
         app:itemTextColor="@color/white_smoke"
         app:menu="@menu/bottom_navigation_items"/>
-
-    <SeekBar
-        android:id="@+id/seekBarV"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
-        android:text="Gain"
-        android:max="4"
-        android:progress="0"
-        android:rotation="270"
-        android:progressDrawable="@drawable/scrubber_progress"
-        android:thumb="@drawable/curseur_jauge"
-        android:visibility="invisible"
-        android:layout_marginBottom="176dp"
-        android:layout_marginRight="-100dp"
-        android:layout_above="@+id/button2"
-        android:layout_alignParentEnd="true" />
-
-    <SeekBar
-        android:id="@+id/seekBarH"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
-        android:layout_width="180dp"
-        android:text="Fréquence"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:progressDrawable="@drawable/scrubber_progress"
-        android:thumb="@drawable/curseur_jauge"
-        android:max="3"
-        android:progress="0"
-        android:layout_marginTop="36dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:id="@+id/frequence"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fréquence"
-        android:visibility="invisible"
-        android:layout_marginBottom="-25dp"
-        android:layout_above="@+id/seekBarH"
-        android:layout_alignEnd="@+id/button2" />
-
-    <TextView
-        android:id="@+id/gain"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="120dp"
-        android:text="Gain"
-        android:visibility="invisible"
-        android:layout_above="@+id/seekBarV"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="12dp" />
-
 </RelativeLayout>
 

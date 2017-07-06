@@ -4,7 +4,7 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
-    <string name="item_1">Archives</string>
-    <string name="item_2">Scanner</string>
-    <string name="item_3">Patient</string>
+    <string name="menu1">Archives</string>
+    <string name="menu2">Scanner</string>
+    <string name="menu3">Patient</string>
 </resources>

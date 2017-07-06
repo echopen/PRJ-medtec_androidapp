@@ -4,13 +4,13 @@
     <item
         android:id="@+id/action_item1"
         android:icon="@drawable/ic_archive"
-        android:title="@string/item_1"/>
+        android:title="@string/menu1"/>
     <item
         android:id="@+id/action_item2"
         android:icon="@drawable/ic_scanner"
-        android:title="@string/item_2"/>
+        android:title="@string/menu2"/>
     <item
         android:id="@+id/action_item3"
         android:icon="@drawable/ic_profile"
-        android:title="@string/item_3" />
+        android:title="@string/menu3"/>
 </menu>

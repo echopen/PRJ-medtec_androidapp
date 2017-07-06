@@ -27,9 +27,7 @@ public class ScannerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater,
-                             ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scanner, container, false);
         final ImageView image = (ImageView) view.findViewById(R.id.imageView);
         final imagesHandler imagesHandler = new imagesHandler(getActivity().getFilesDir());
@@ -62,6 +60,87 @@ public class ScannerFragment extends Fragment {
 
         stream.connect(mode, getActivity());
         presenter.start();
+
+
+        final GestureDetector gd = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener(){
+
+            @Override
+            public boolean onDoubleTapEvent(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                return true;
+            }
+
+            @Override
+            public void onLongPress(MotionEvent e) {
+
+            }
+        });
+
+        final GestureDetector gdOnView = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener(){
+
+            @Override
+            public boolean onDown(MotionEvent e) {
+                Log.d("log", "test"+ e);
+                return true;
+            }
+
+            boolean toClose = false;
+            @Override
+            public boolean onDoubleTapEvent(MotionEvent e) {
+                Log.d("tap", "OnDoubleTap" + e);
+                if (e.getAction() == MotionEvent.ACTION_DOWN && !toClose) {
+                    Log.d("tap", "toClose if " + toClose);
+                    View seekBarH = getActivity().findViewById(R.id.seekBarH);
+                    seekBarH.setVisibility(View.VISIBLE);
+                    View freqText = getActivity().findViewById(R.id.frequence);
+                    freqText.setVisibility(View.VISIBLE);
+                    View seekBarV = getActivity().findViewById(R.id.seekBarV);
+                    seekBarV.setVisibility(View.VISIBLE);
+                    View gainText = getActivity().findViewById(R.id.gain);
+                    gainText.setVisibility(View.VISIBLE);
+                    toClose = true;
+                } else if (e.getAction() == MotionEvent.ACTION_DOWN && toClose) {
+                    Log.d("tap", "toClose else " + toClose);
+                    View seekBarH = getActivity().findViewById(R.id.seekBarH);
+                    seekBarH.setVisibility(View.INVISIBLE);
+                    View freqText = getActivity().findViewById(R.id.frequence);
+                    freqText.setVisibility(View.INVISIBLE);
+                    View seekBarV = getActivity().findViewById(R.id.seekBarV);
+                    seekBarV.setVisibility(View.INVISIBLE);
+                    View gainText = getActivity().findViewById(R.id.gain);
+                    gainText.setVisibility(View.INVISIBLE);
+
+                    toClose = false;
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                return true;
+            }
+        });
+
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gdOnView.onTouchEvent(event);
+            }
+        });
+
+
+        Button mainButton = (Button) view.findViewById(R.id.button2);
+        mainButton.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return gd.onTouchEvent(event);
+            }
+        });
+
         return view;
     }
 
@@ -69,40 +148,7 @@ public class ScannerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        final GestureDetector gd = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener() {
 
-            @Override
-            public boolean onDoubleTapEvent(MotionEvent e) {
-                Log.d("tap", "OnDoubleTap" + e);
-
-                return true;
-            }
-
-            @Override
-            public boolean onSingleTapConfirmed(MotionEvent e) {
-                Log.d("tap", "onSingleTapConfirmed" + e);
-
-                return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-                Log.d("tap", "onLongPress" + e);
-            }
-
-
-        });
-
-        Button mainButton = (Button) getActivity().findViewById(R.id.button2);
-        mainButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return gd.onTouchEvent(event);
-            }
-        });
-
-        //-----------------------------------------------------------------
 
     }
 }
