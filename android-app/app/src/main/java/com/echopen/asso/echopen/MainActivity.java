@@ -1,127 +1,59 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.View;
-import android.widget.ImageView;
-import android.view.MotionEvent;
 
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
-import static com.echopen.asso.echopen.utils.Constants.Http.LOCAL_IP;
-import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
-
-/**
- * MainActivity class handles the main screen of the app.
- * Tools are called in the following order :
- * - initSwipeViews() handles the gesture tricks via GestureDetector class
- * - initViewComponents() mainly sets the clickable elements
- * - initActionController() and setupContainer() : in order to separate concerns, View parts are handled by the initActionController()
- * method which calls the MainActionController class that deals with MainActivity Views,
- * especially handles the display of the main screen picture
- * These two methods should be refactored into one
- */
-
-public class MainActivity extends Activity implements View.OnTouchListener {
-
-    /**
-     * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
-     * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
-     * and then displays them.
-     * Also, this method uses the Config singleton class that provides device-specific constants
-     */
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //-----------------------------------------------------------------
-        final imagesHandler imagesHandler = new imagesHandler(getFilesDir());
 
-        final ImageView image = (ImageView) findViewById(R.id.imageView);
+        BottomNavigationView bottomNavigationView = (BottomNavigationView)
+                findViewById(R.id.navigation);
 
-        EchOpenApplication app = (EchOpenApplication) getApplication();
-        EchographyImageStreamingService stream = app.getEchographyImageStreamingService();
-
-        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(stream, new EchographyImageVisualisationContract.View() {
-            @Override
-            public void refreshImage(final Bitmap iBitmap) {
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            imagesHandler.saveCacheImage(iBitmap);
-                            image.setImageBitmap(iBitmap);
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment selectedFragment = null;
+                        switch (item.getItemId()) {
+                            case R.id.action_item1:
+                                selectedFragment = ArchivesFragment.newInstance();
+                                break;
+                            case R.id.action_item2:
+                                selectedFragment = ScannerFragment.newInstance();
+                                break;
+                            case R.id.action_item3:
+                                selectedFragment = PatientFragment.newInstance();
+                                break;
                         }
-                    });
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
 
-            @Override
-            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.commit();
+                        return true;
+                    }
+                });
 
-            }
-        });
-
-        final GestureDetector gd = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
-
-            @Override
-            public boolean onDoubleTapEvent(MotionEvent e) {
-                Log.d("tap","OnDoubleTap"+e);
-
-                return true;
-            }
-
-            @Override
-            public boolean onSingleTapConfirmed(MotionEvent e) {
-                Log.d("tap","onSingleTapConfirmed"+e);
-
-                return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-                Log.d("tap","onLongPress"+e);
-            }
-
-
-        });
-
-        Button mainButton = (Button) findViewById(R.id.button2);
-        mainButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return gd.onTouchEvent(event);
-            }
-        });
-
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(LOCAL_IP, REDPITAYA_PORT);
-
-        stream.connect(mode,this);
-        presenter.start();
-        //-----------------------------------------------------------------
-
+        //Manually displaying the first fragment - one time only
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, ScannerFragment.newInstance());
+        transaction.commit();
     }
 
     @Override
@@ -136,8 +68,6 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         this.tapOnView(event.getAction());
         return true;
     }
-
-
 
     public boolean tapOnView(int ev) {
         if (ev == MotionEvent.ACTION_DOWN) {
