@@ -42,7 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Version de l'application - 3.0.2"
+                    android:text="Application version - 3.0.2"
                     android:textColor="?android:attr/colorPrimary" />
 
             </LinearLayout>
@@ -56,7 +56,7 @@
                 android:background="@drawable/dashboard_button"
                 android:gravity="center_vertical"
                 android:padding="10dp"
-                android:text="Vider le cache de l'application"
+                android:text="Clear application cache"
                 android:textAlignment="textStart"
                 android:textAllCaps="false"
                 android:textColor="?android:attr/colorPrimary" />
@@ -77,7 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Notifications, Sms, Alertes"
+                    android:text="Notifications, Sms, Alerts"
                     android:textColor="?android:attr/colorPrimary" />
 
                 <Switch
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="ID de la sonde - 87654DIO87"
+                    android:text="Probe ID - 87654DIO87"
                     android:textColor="?android:attr/colorPrimary" />
 
             </LinearLayout>
