@@ -12,10 +12,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -129,6 +131,14 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
 
                 mBuilder.setView(mView);
                 AlertDialog dialog = mBuilder.create();
+
+                WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
+
+                wmlp.gravity = Gravity.BOTTOM;
+//                wmlp.x = -50;   //x position
+                wmlp.y = -100;   //y position
+                wmlp.width = WindowManager.LayoutParams.MATCH_PARENT;
+
                 dialog.show();
             }
         });
@@ -161,7 +171,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
     private void displayGallery(View rootView) {
 
         //initializing the fragment object which is selected
-        Fragment fragment = new Gallery();
+        Fragment fragment = new GalleryFragment();
 
         //replacing the fragment
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -235,6 +245,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
      * @return
      */
     private File getDisc() {
+
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
         return new File(file, "Image");
     }
