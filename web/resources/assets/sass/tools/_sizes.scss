@@ -71,7 +71,7 @@ $screen-lgCustom-desktop: $screen-lgCustom-min !default;
 
 // Mix of tablet-landscape AND tablet-portrait
 @mixin tablet {
-    @media (min-width: $screen-smCustom-min) {
+    @media (max-width: $screen-smCustom-min) {
         @content;
     }
 }

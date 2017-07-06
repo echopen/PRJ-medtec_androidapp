@@ -25,6 +25,7 @@ body>.container {
     max-width: 1440px;
     padding: 0;
     width: 100%;
+    overflow: hidden;
 }
 
 @import "./components/numbers";
