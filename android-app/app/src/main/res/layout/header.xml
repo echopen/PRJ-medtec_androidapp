@@ -30,7 +30,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="Sonde : 64% - Online"
+            android:text="Probe : 64% - Online"
             android:textColor="@color/white"
             android:textSize="15sp" />
     </LinearLayout>
@@ -39,14 +39,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginLeft="50dp">
-        <TextView
+        android:layout_marginLeft="40dp">
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:text="Login"
+            android:textColor="@color/white"
+            android:textAllCaps="false" />
+
+        <!--<TextView
+            android:id="@+id/btn_login"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:text="Login"
             android:textColor="#fff"
-            android:textSize="15sp" />
+            android:textSize="15sp" />-->
 
         <ImageView
             android:id="@+id/user"
@@ -56,8 +67,8 @@
             android:src="@drawable/user"
             android:maxWidth="17dp"
             android:maxHeight="17dp"
-            android:layout_marginTop="7dp"
+            android:layout_marginTop="14dp"
             android:scaleType="fitCenter"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"/>-->
     </LinearLayout>
 </LinearLayout>

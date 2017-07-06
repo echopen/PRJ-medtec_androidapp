@@ -6,7 +6,7 @@
                     <h1 class="contact-title">Contactez-nous<br>Rejoignez la communauté</h1>
                     <div class="input-container">
                         <p class="contact_desc">
-                            Vous aimez notre projet ? Vous souhaitez y contribuer ?  Lorem ipsum doler sit amet.
+                            Vous aimez notre projet ? Vous souhaitez y contribuer ?
                             Rejoignez nous et apportez votre savoir faire où que vous soyez dans le monde !
 
                         </p>
@@ -33,7 +33,7 @@
                         Informations
                     </h3>
                     <p class="contact_info-desc">
-                        Our workshop is open to anyone interested in collaborate, contirbute and making things happen with the echOpen community. Feel free to pass by and/or contact us by email to get more information and involved.
+                       Notre  communauté est ouverte à toute personne intéressée à collaborer et contribuer au projet echOpen. N’hésitez pas à nous contacter pour avoir plus d’informations.
                     </p>
                     <div class="contact_info-sub">
                         <p class="info_title">Email</p>
