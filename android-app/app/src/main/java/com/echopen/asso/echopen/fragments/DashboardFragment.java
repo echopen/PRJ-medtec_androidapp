@@ -43,10 +43,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         Button btn_quick_scan = (Button) v.findViewById(R.id.quick_scan);
         Button btn_custom_scan = (Button) v.findViewById(R.id.custom_scan);
         Button btn_help = (Button) v .findViewById(R.id.help);
+        Button btn_gallery = (Button) v.findViewById(R.id.gallery);
 
         btn_quick_scan.setOnClickListener(this);
         btn_custom_scan.setOnClickListener(this);
         btn_help.setOnClickListener(this);
+        btn_gallery.setOnClickListener(this);
 
         return v;
     }
@@ -71,6 +73,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
             case R.id.help: {
                 HelpFragment helpFragment = new HelpFragment();
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                fragmentTransaction.replace(R.id.pager, helpFragment).commit();
+                break;
+            }
+            case R.id.gallery: {
+                DocumentFragment helpFragment = new DocumentFragment();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left);
                 fragmentTransaction.replace(R.id.pager, helpFragment).commit();
                 break;
             }
