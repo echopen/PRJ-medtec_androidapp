@@ -34,7 +34,28 @@
 </div>
 
 <footer>
-    
+    <ul class="partenaire">
+        <li><img src="/img/part1.png"></li>
+        <li><img src="/img/part2.png"></li>
+        <li><img src="/img/part3.png"></li>
+        <li><img src="/img/part4.png"></li>
+    </ul>
+    <div class="bottom">
+        <div class="bg">
+            <div class="logo_footer"><img src="/img/echopen-white.png"></div>
+            <ul class="links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Le produit</a></li>
+                <li><a href="#">Faq</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">wiki</a></li>
+                <li><a href="#">Documentation</a></li>
+            </ul>
+            <ul class="right-cta">
+                <li class="join-us">Rejoignez nous</li>
+            </ul>
+        </div>
+    </div>
 </footer>
 
 <script

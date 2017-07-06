@@ -1,0 +1,32 @@
+.community{
+  height:em(424.87);
+  background-color: #f7f7f7;
+}
+
+  .strong_title{
+    font-size: 3.125em;
+    font-weight: bold;
+    color: $darkcolor;
+    margin: 4px 0 0 0;
+    &:after{
+      content: "";
+      background: url(../../../../public/img/vague.png) no-repeat;
+      width: 122px;
+      height: 10px;
+      position: absolute;
+      right: -10px;
+      top: 65px;
+    }
+
+  .text{
+    font-size: 3.125em;
+    display: inline-block;
+    position: relative;
+
+  }
+  .span{
+    font-size: 0.813em;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+}

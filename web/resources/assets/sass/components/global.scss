@@ -10,7 +10,6 @@ html {
         }
 body{
     background-color: $lightcolor;
-  
 }
 .alignleft {
 	display: inline;
@@ -31,19 +30,22 @@ body{
     padding: 5em 0;
 }
 .base_btn{
-	margin-top: 129px;
+	margin-top: 25px;
 	width: 205px;
 	height: 52px;
 	border-radius: 4px;
 	background-color: #6078ea;
 	box-shadow: 0 9px 16px 0 rgba(0, 0, 0, 0.07);
 	.super_cta{
-		padding: 5%;
+		padding: 6%;
 		font-size:em(16);
 		font-weight: 500;
 		text-align: center;
 		color: #ffffff;
 	}
+  a{
+    text-decoration: none;
+  }
 }
 .base_item-shadow{
     position: absolute;
