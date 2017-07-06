@@ -55,6 +55,9 @@ body{
     -webkit-filter: blur(40px);
     filter: blur(40px);
     background-image: linear-gradient(118deg, #17ead9, #6078ea);
+     @include phone(){
+            display: none;
+        }
 }
 .entry_title{
     color: $greyfirst;
@@ -91,6 +94,10 @@ body{
         width: 50%;
         margin: 0 auto;
         text-align: center;
+        @include phone(){
+            width: 100%;
+            padding: 0 15px;
+        }
     }
     .entry_desc{
         padding-bottom: 50px;
