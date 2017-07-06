@@ -16,6 +16,7 @@
         android:scaleType="centerCrop"
         android:visibility="gone" />
 
+
     <ProgressBar
         android:id="@+id/loader"
         android:layout_width="wrap_content"
@@ -40,6 +41,19 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="22dp"
         android:minHeight="50dp">
+
+        <ImageButton
+            android:id="@+id/btnDone"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginLeft="20dp"
+            android:background="@color/transparent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/done" />
+
 
         <ImageButton
             android:id="@+id/btnParameters"

@@ -95,7 +95,7 @@ public class ImageAdapter extends BaseAdapter {
         galleryTitle = (TextView) item.findViewById(R.id.galleryTitle);
 
         galleryImage.setImageDrawable(mThumbIds[position]);
-        galleryTitle.setText("Hello");
+        galleryTitle.setText(files[position].getName());
 
         return item;
     }
