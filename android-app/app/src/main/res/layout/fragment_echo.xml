@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#8B8B8B"
+    android:background="@drawable/background"
     android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.EchoFragment">
 
@@ -11,5 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Echographie fragment" />
+    <Button
+        android:id="@+id/button_capture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Capture"/>
 
 </FrameLayout>

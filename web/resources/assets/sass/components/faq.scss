@@ -3,20 +3,66 @@
         width: 100%;
         height: 100%;
         margin: 0 auto;
+        @include phone(){
+            padding: 0 15px;
+        }
         .alignleft{
             width: 26%;
             margin-left: 8.429em;
+            @include phone(){
+                width: 100%;
+                margin: 0 auto;
+            }
         }
         .alignright{
-            width: 69%;
+            width: 62%;
+            @include phone(){
+                width: 100%;
+                margin: 0 auto;
+            }
         }
     }
     .slick-slide{
         width: 24.429em;
         height: 20.643em;
+        border: 1px solid $lightgrey;
     }
-    entry_title{
+    .slick_background{
+        background-image: linear-gradient(126deg, #17ead9, #6078ea);
+        padding: 7.929em 0;
+        width:77%;
+        height: 566px;
+        background-image: linear-gradient(126deg, #17ead9, #6078ea);
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: -1;
+        float: right;
+        @include phone(){
+            display: none;
+        }
+    }
+    .entry_title{
         top: initial;
         transform: none;
+        margin-top: 150px;
+    }
+    .entry_more{
+        a{
+            text-transform: uppercase;
+        }
+    }
+    .entry_slick{
+        top: -50%;
+        position: relative;
+        transform: translateY(50%);
+        @include phone(){
+                transform: none;
+                top: initial;
+                margin: 50px 0;
+        }
+    }
+    .base_btn{
+        margin-top: 80px;
     }
 }
