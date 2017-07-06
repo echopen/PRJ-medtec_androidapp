@@ -38,6 +38,10 @@ L’outil fonctionne hors réseaux ce qui vous permet de l’utiliser n’import
             </div>
         </div>
         <div class="s__pp__great">
+            <div class="s__product__title">
+                <p class="s__product__title--intro">Une communauté</p>
+                <p class="s__product__title--big">Nos points <span> forts</span></p>
+            </div>
             <ul class="s__pp__great__collection">
                 <li class="s__pp__great__collection__item">
                     <p class="s__pp__great__collection__item--title">Communauté médicale</p>
