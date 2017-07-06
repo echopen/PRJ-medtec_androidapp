@@ -40,9 +40,7 @@
             android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
         <activity
-            android:name=".EchoActivity"
-            android:icon="@drawable/logo_echopen"
-            android:theme="@style/AppCompatTheme" />
+            android:name=".EchoActivity" />
         <activity
             android:name=".ChoiceActivity"
             android:icon="@drawable/logo_echopen"

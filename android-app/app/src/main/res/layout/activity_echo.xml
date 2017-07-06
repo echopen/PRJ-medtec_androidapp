@@ -4,45 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@+id/echo"
-
     >
 
-    <LinearLayout
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/echo_iv"/>
+
+    <Button
+        android:id="@+id/save_pics"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:text="Enregistrer"
+        android:layout_centerHorizontal="true"
 
-        >
+        />
+</RelativeLayout>
 
-        <ImageView
-            android:id="@+id/arow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/arow"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
-            />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Male, 36 years old, 76kg, lunjs"
-            android:textAlignment="center"
-            android:textColor="#FF0000"
-            android:visibility="visible" />
-
-    </LinearLayout>
 
 
 </LinearLayout>
