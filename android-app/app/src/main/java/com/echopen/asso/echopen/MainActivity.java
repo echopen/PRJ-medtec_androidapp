@@ -1,6 +1,8 @@
 package com.echopen.asso.echopen;
 
+import android.content.Intent;
 import android.os.Bundle;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
@@ -11,10 +13,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+
+/**
+ * MainActivity class handles the main screen of the app.
+ * Tools are called in the following order :
+ * - initSwipeViews() handles the gesture tricks via GestureDetector class
+ * - initViewComponents() mainly sets the clickable elements
+ * - initActionController() and setupContainer() : in order to separate concerns, View parts are handled by the initActionController()
+ * method which calls the MainActionController class that deals with MainActivity Views,
+ * especially handles the display of the main screen picture
+ * These two methods should be refactored into one
+ */
+
+    /**
+     * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
+     * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
+     * and then displays them.
+     * Also, this method uses the Config singleton class that provides device-specific constants
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +56,23 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        //add this line to display menu1 when the activity is loaded
+        // add this line to display menu1 when the activity is loaded
         displaySelectedScreen(R.id.nav_menu1);
+
+        // Press "New Patient" button, change the activity.
+        Button newPatientButton= (Button)findViewById(R.id.new_patient);
+        newPatientButton.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+
+                Intent intent = new Intent(MainActivity.this, AddPatientActivity.class);
+                startActivity(intent);
+                finish();
+            }
+
+        });
+
     }
 
     @Override
@@ -111,4 +148,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
+
 }
