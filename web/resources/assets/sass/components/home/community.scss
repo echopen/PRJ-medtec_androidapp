@@ -143,6 +143,7 @@
                 position: absolute;
                 right: -10px;
                 top: 65px;
+                font-family: $font-Roboto-Regular;
                 @include phone(){
                     top: 100px;
                 }
