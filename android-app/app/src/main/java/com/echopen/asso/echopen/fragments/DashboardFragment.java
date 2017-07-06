@@ -33,9 +33,11 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
         Button btn_quick_scan = (Button) v.findViewById(R.id.quick_scan);
+        Button btn_custom_scan = (Button) v.findViewById(R.id.custom_scan);
         Button btn_help = (Button) v .findViewById(R.id.help);
 
         btn_quick_scan.setOnClickListener(this);
+        btn_custom_scan.setOnClickListener(this);
         btn_help.setOnClickListener(this);
 
         return v;
@@ -47,6 +49,12 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()) {
             case R.id.quick_scan: {
+                EchoFragment echoFragment = new EchoFragment();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
+                fragmentTransaction.replace(R.id.pager, echoFragment).commit();
+                break;
+            }
+            case R.id.custom_scan: {
                 EchoFragment echoFragment = new EchoFragment();
                 fragmentTransaction.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
                 fragmentTransaction.replace(R.id.pager, echoFragment).commit();
