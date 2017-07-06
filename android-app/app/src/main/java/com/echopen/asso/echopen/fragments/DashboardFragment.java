@@ -2,16 +2,21 @@ package com.echopen.asso.echopen.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.echopen.asso.echopen.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener{
+
+    private FragmentManager fragmentManager;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -22,6 +27,37 @@ public class DashboardFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View v =  inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        Button btn_quick_scan = (Button) v.findViewById(R.id.quick_scan);
+        Button btn_help = (Button) v .findViewById(R.id.help);
+
+        btn_quick_scan.setOnClickListener(this);
+        btn_help.setOnClickListener(this);
+
+        return v;
+    }
+
+    @Override
+    public void onClick(View v) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        switch (v.getId()) {
+            case R.id.quick_scan: {
+                EchoFragment echoFragment = new EchoFragment();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_down, R.anim.slide_out_up);
+                fragmentTransaction.replace(R.id.pager, echoFragment).commit();
+                break;
+            }
+            case R.id.help: {
+                HelpFragment helpFragment = new HelpFragment();
+                fragmentTransaction.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
+                fragmentTransaction.replace(R.id.pager, helpFragment).commit();
+                break;
+            }
+        }
     }
 }

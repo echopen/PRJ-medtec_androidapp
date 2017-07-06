@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
-import android.view.WindowManager;
 
 import com.echopen.asso.echopen.fragments.DashboardFragment;
 import com.echopen.asso.echopen.fragments.DocumentFragment;
@@ -37,13 +36,13 @@ public class HomeScreenActivity extends AppCompatActivity{
     {
         fragmentManager = getSupportFragmentManager();
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
 
         DashboardFragment dashboardFragment = new DashboardFragment();
         fragmentManager.beginTransaction().replace(R.id.pager, dashboardFragment).commit();
 
+        getSupportActionBar().hide();
     }
     
     @Override
