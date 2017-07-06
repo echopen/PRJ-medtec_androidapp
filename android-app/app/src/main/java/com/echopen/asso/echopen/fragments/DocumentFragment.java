@@ -17,20 +17,16 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.R;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -251,7 +247,7 @@ public class DocumentFragment extends Fragment {
         });
 
         gallery.setOnItemClickListener(myOnItemClickListener);
-
+      
         // Reload images list
         buttonReload.setOnClickListener(new View.OnClickListener(){
             @Override

@@ -25,4 +25,9 @@ class PagesController extends Controller
 		return view('community');
 	}
 
+
+	public function product(){
+		return view('product');
+	}
+
 }

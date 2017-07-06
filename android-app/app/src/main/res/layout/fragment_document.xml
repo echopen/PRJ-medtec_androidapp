@@ -5,32 +5,8 @@
     android:background="@drawable/background"
     android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.DocumentFragment">
-
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/transparent"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|left"
-            android:text="Sonde : 64% - Online"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|right"
-            android:text="Login"
-            android:textColor="@color/gray_light"
-            android:textSize="15sp" />
+  
+    <include layout="@layout/header"/>
 
     </RelativeLayout>
 
