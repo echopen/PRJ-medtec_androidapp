@@ -83,10 +83,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
  //   private void btSignInClicked(){
  //       Intent intent = new Intent(this, SignInActivity.class);
  //       startActivity(intent);
-        //SignUpFragment signUpFragment = new SignInFragment();
-        //fragmentmanager.beginTransaction().replace(R.id.fragmentlayout, signInFragment).commit();
- //   }
-
 
     private void btEmergencyClicked(){
         Intent intent = new Intent(this, ChoiceActivity.class);
