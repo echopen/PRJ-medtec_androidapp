@@ -3,12 +3,23 @@
         width: 100%;
         height: 100%;
         margin: 0 auto;
+        @include phone(){
+            padding: 0 15px;
+        }
         .alignleft{
             width: 26%;
             margin-left: 8.429em;
+            @include phone(){
+                width: 100%;
+                margin: 0 auto;
+            }
         }
         .alignright{
             width: 62%;
+            @include phone(){
+                width: 100%;
+                margin: 0 auto;
+            }
         }
     }
     .slick-slide{
@@ -27,6 +38,9 @@
         transform: translateY(-50%);
         z-index: -1;
         float: right;
+        @include phone(){
+            display: none;
+        }
     }
     .entry_title{
         top: initial;
@@ -42,5 +56,13 @@
         top: -50%;
         position: relative;
         transform: translateY(50%);
+        @include phone(){
+                transform: none;
+                top: initial;
+                margin: 50px 0;
+        }
+    }
+    .base_btn{
+        margin-top: 80px;
     }
 }

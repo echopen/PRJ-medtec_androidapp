@@ -6,13 +6,24 @@
         height: 48.750em;
         width: 68.750em;
         margin: 0 auto;
+        overflow: hidden;
+        @include phone(){
+            width: 100%;
+            padding: 0 15px;
+        }
         .alignleft{
             display: block;
             top: -50%;
             position: relative;
+            @include phone(){
+                display: none;
+            }
         }
         .alignright{
             width: 50.487em;
+            @include phone(){
+                width: 100%;
+            }
         }
     }
     .entry_title{
@@ -32,6 +43,10 @@
             bottom: 0;
             width: 50%;
             top: 2em;
+            @include phone(){
+                width: 100%;
+                top: initial;
+            }
             button:before{
                 color: $mainblue;
                 font-size: 15px;
