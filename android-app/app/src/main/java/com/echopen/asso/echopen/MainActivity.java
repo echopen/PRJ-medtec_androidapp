@@ -121,6 +121,10 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        //Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
+        //startActivity(chooseProfile);
+
         super.onCreate(savedInstanceState);
         /* loading config constants in singleton Class */
         Config.getInstance(this);

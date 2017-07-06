@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Genre" />
+    <CheckBox android:id="@+id/checkbox_mal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#5E6B9F"
+        android:text="Homme"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_female"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Femme"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Age" />
+    <CheckBox android:id="@+id/checkbox_baby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bébé"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_kid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enfant"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_adult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adulte"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Corpulence" />
+    <CheckBox android:id="@+id/checkbox_small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maigre"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Moyen"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_large"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="surpoids"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Organes" />
+    <CheckBox android:id="@+id/checkbox_uro_digestive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="uro-digestive"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_cardiac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cardiac"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_thoracic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="thorax"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_obstetrics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="obstétrique"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_osteoarthritis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="arthrose"
+        android:textColor="#5E6B9F"
+        android:onClick="onCheckboxClicked"/>
+    <Button
+        android:id="@+id/validChoice"
+        android:layout_height = "wrap_content"
+        android:layout_width ="wrap_content"
+        android:text = "lets do this"
+        android:onClick = "validChoice"
+        />
+</LinearLayout>
+</ScrollView>
