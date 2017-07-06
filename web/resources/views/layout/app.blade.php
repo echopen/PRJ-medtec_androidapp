@@ -29,25 +29,30 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
-
-
-
-
 </head>
 <body>
 
 <header>
-    <ul class="links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/product">Product</a></li>
-        <li><a href="/faq">Faq</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
-    <a href="/"><div class="logo"></div></a>
-    <ul class="right-cta">
-        <a href="/community"><li class="join-us">Communauté</li></a>
-    </ul>
+    <div class="header">
+        <a href="#" class="header__mobileHamburger">
+            <img src="/img/menu.png" alt="" class="header__mobileHamburger--img">
+        </a>
+        <ul class="header__nav">
+            <li class="header__nav__item"><a href="/" class="header__nav__item--link">Home</a></li>
+            <li class="header__nav__item"><a href="/product" class="header__nav__item--link">Le produit</a></li>
+            <li class="header__nav__item"><a href="/faq" class="header__nav__item--link">FAQ</a></li>
+            <li class="header__nav__item"><a href="/contact" class="header__nav__item--link">Contact</a></li>
+        </ul>
+        <a href="#" class="header__logo">
+            <img src="/img/echopen-gradient.png" alt="" class="header__logo--img">
+        </a>
+        <div class="header__mobileCta">
+            <a href="#" class="header__mobileCta--btn">Rejoindre</a>
+        </div>
+        <div class="header__cta">
+            <a href="/community" class="header__cta--btn">Rejoignez le projet</a>
+        </div>
+    </div>
 </header>
 
 <div class="container">
