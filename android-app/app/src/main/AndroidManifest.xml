@@ -55,10 +55,6 @@
             android:name=".SignUpActivity"
             android:icon="@drawable/logo_echopen"
             android:theme="@style/AppCompatTheme" />
-        <activity
-            android:name=".SignInActivity"
-            android:icon="@drawable/logo_echopen"
-            android:theme="@style/AppCompatTheme" />
     </application>
 
 </manifest>
