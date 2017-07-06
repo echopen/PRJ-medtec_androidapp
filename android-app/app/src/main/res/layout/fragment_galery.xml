@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.echopen.asso.echopen.GaleryFragment">
+    tools:context="com.echopen.asso.echopen.GaleryFragment"
+    android:background="#fff">
 
     <Button
         android:id="@+id/close_fragment_galery"
