@@ -130,17 +130,7 @@ public class GalleryFragment extends Fragment {
                 holder = (ViewHolder) convertView.getTag();
             }
             holder.imageview.setId(position);
-//            holder.imageview.setOnClickListener(new View.OnClickListener() {
-//
-//                public void onClick(View v) {
-//                    // TODO Auto-generated method stub
-//                    int id = v.getId();
-//                    Intent intent = new Intent();
-//                    intent.setAction(Intent.ACTION_VIEW);
-//                    intent.setDataAndType(Uri.parse("file://" + arrPath.get(id)), "image/*");
-//                    startActivity(intent);
-//                }
-//            });
+
             holder.imageview.setImageBitmap(filteredThumbnails.get(position));
             holder.id = position;
             return convertView;
