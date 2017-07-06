@@ -5,30 +5,30 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-   <!-- <FrameLayout
-        android:id="@+id/content_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true" /> -->
+    <!-- <FrameLayout
+         android:id="@+id/content_frame"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         android:clickable="true" /> -->
     <FrameLayout
         android:id="@+id/vFloater"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.echopen.asso.echopen.ui.DrawView
             android:id="@+id/echo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
-            android:src="#77ff00"/>
+            android:src="#000" />
+
         <LinearLayout
             android:id="@+id/vMiddle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/theme_blue"
             android:orientation="vertical">
-
 
 
             <!-- <Spinner
@@ -167,9 +167,10 @@
 
             <RelativeLayout
 
-                style="@style/GenericProgressBackground"
-                android:id="@+id/loadingPanel">
-                <ProgressBar style="@style/GenericProgressIndicator"/>
+                android:id="@+id/loadingPanel"
+                style="@style/GenericProgressBackground">
+
+                <ProgressBar style="@style/GenericProgressIndicator" />
             </RelativeLayout>
         </LinearLayout>
         <!--<com.echopen.asso.echopen.ui.RulerView
@@ -264,60 +265,146 @@
         </LinearLayout>
     </LinearLayout> -->
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:gravity="right">
-       
-       <TextView
-           android:id="@+id/gainText1"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="ds,sd"
-           android:textSize="36sp"
-           />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        android:orientation="vertical"
+        android:layout_marginRight="32dp">
 
-       <TextView
-           android:id="@+id/gainText2"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="hdsks"
-           android:textSize="36sp"
-           />
-   </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cadence d'image"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="#8E9298"/>
+
+        <TextView
+            android:id="@+id/gainText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="dssdds"
+            android:textSize="13sp"
+            android:textColor="#fff"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="profondeur"
+            android:textAllCaps="true"
+            android:textSize="13sp"
+            android:textColor="#8E9298"
+            android:layout_marginTop="10dp"
+            />
+        <TextView
+            android:id="@+id/gainText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        >
 
         <com.devadvance.circularseekbar.CircularSeekBar
             android:id="@+id/circularSeekBar1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:progress="1"
-            app:circle_x_radius="170dp"
-            app:circle_y_radius="170dp"
-            app:use_custom_radii="true"
             android:max="100"
-            app:start_angle="180"
+            android:progress="1"
+            app:circle_x_radius="180dp"
+            app:circle_y_radius="180dp"
             app:end_angle="180"
-            android:layout_alignParentBottom="true"
             app:pointer_alpha_ontouch="100"
-            app:pointer_color="#975252"
-            app:pointer_halo_color="#880174DF"
-            />
+            app:start_angle="180"
+            app:use_custom_radii="true" />
 
 
-    <com.devadvance.circularseekbar.CircularSeekBar
-        android:id="@+id/circularSeekBar2"
+        <com.devadvance.circularseekbar.CircularSeekBar
+            android:id="@+id/circularSeekBar2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:max="100"
+            android:progress="1"
+            app:circle_x_radius="110dp"
+            app:circle_y_radius="110dp"
+            app:end_angle="180"
+            app:pointer_alpha_ontouch="100"
+            app:start_angle="180"
+            app:use_custom_radii="true" />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/content_frame"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:progress="1"
-        app:circle_x_radius="100dp"
-        app:circle_y_radius="100dp"
-        app:use_custom_radii="true"
-        android:max="100"
-        app:start_angle="180"
-        app:end_angle="180"
+        android:layout_height="120dp"
         android:layout_alignParentBottom="true"
-        app:pointer_alpha_ontouch="100"
-        app:pointer_color="#975252"
-        app:pointer_halo_color="#880174DF"
-        />
+        >
+        <LinearLayout
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <!-- <Button
+                    android:id="@+id/button_bottom_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:layout_marginTop="50dp"
+                    android:textColor="#000"/> -->
+
+                <ImageView
+                    android:id="@+id/organ_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:src="@drawable/brain"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <!-- <Button
+                    android:id="@+id/button_bottom_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:layout_marginTop="50dp"
+                    android:textColor="#000" /> -->
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:src="@drawable/brain"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_bottom"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/rec"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="35dp"
+            android:textColor="#fff" />
+    </RelativeLayout>
+
 </RelativeLayout>

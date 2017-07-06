@@ -9,11 +9,14 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -52,7 +55,7 @@ import java.io.InputStream;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements AbstractActionActivity, EchographyImageVisualisationContract.View {
+public class MainActivity extends FragmentActivity implements AbstractActionActivity, EchographyImageVisualisationContract.View {
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -94,6 +97,8 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
 
     private TextView mTextViewGain1;
     private TextView mTextViewGain2;
+    private FragmentTransaction mFragmentTransaction;
+    private FragmentManager mFragmentManager;
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -156,6 +161,18 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
             }
         }); */
 
+        ImageView organImage = (ImageView) findViewById(R.id.organ_frame);
+
+        organImage.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("tag" , "aie click !!");
+                // call fragment
+                OrganFragment organFragment = new OrganFragment();
+                organFragment.setArguments(getIntent().getExtras());
+                getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, organFragment).addToBackStack("true").commit();
+            }
+        });
         CircularSeekBar seekbar = (CircularSeekBar) findViewById(R.id.circularSeekBar1);
         CircularSeekBar seekbar2 = (CircularSeekBar) findViewById(R.id.circularSeekBar2);
 
@@ -168,7 +185,7 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
             public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
                 Log.d("tag" , "ok");
                 double lGainCustom = progress * 3.0 / 100;
-                mTextViewGain1.setText(lGainCustom + " dB");
+                mTextViewGain1.setText(lGainCustom + "Hz");
                 mRenderingContextController.setIntensityGain(lGainCustom);
             }
 
@@ -188,9 +205,9 @@ public class MainActivity extends Activity implements AbstractActionActivity, Ec
             @Override
             public void onProgressChanged(CircularSeekBar circularSeekBar, int progress, boolean fromUser) {
                 Log.d("tag" , "ok");
-                double lGainCustom = progress * 3.0 / 100;
-                mTextViewGain2.setText(lGainCustom + " dB");
-                mRenderingContextController.setIntensityGain(lGainCustom);
+                double lGainCustom2 = progress * 256 / 100;
+                mTextViewGain2.setText(lGainCustom2 + "cm");
+                mRenderingContextController.setIntensityGain(lGainCustom2);
             }
 
             @Override
