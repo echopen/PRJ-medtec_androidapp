@@ -1,6 +1,10 @@
 package com.echopen.asso.echopen;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import java.io.File;
@@ -15,7 +19,10 @@ import java.util.Collections;
 public class ImageHandler {
 
     private int clientId;
+    private int imageId;
     private File galleryDirectory;
+
+    private Context mContext;
 
     public ImageHandler( File filesDir, int clientId){
         this.galleryDirectory = filesDir;
@@ -31,15 +38,14 @@ public class ImageHandler {
 
         File[] filesInPath = clientDirectory.listFiles();
 
-        while (clientDirectory.listFiles().length >= 5) {
+        while (clientDirectory.listFiles().length > 6) {
 
             String[] filesNames = new String[filesInPath.length];
             for (int i = 0; i < filesInPath.length; i++) {
                 filesNames[i] = filesInPath[i].getName();
             }
-
             String lastFileName = Collections.min(new ArrayList<>(Arrays.asList(filesNames)));
-            new File(this.galleryDirectory.toString() + "/" + lastFileName).delete();
+            new File(this.galleryDirectory.toString() + "/" +this.clientId+"/"+ lastFileName).delete();
         }
 
         try {
@@ -52,6 +58,20 @@ public class ImageHandler {
             e.printStackTrace();
         }
         return true;
+    }
+
+    protected Drawable getImageById(int imageId)
+    {
+        File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
+        Drawable drawable = new BitmapDrawable(this.mContext.getResources(), BitmapFactory.decodeFile(allImages[imageId].getPath()));
+
+        Drawable chosenImage = drawable;
+
+        return chosenImage;
+    }
+
+    public void setContext(Context context) {
+        this.mContext = context;
     }
 
 }

@@ -42,6 +42,12 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black"
             />
+        <activity
+            android:name=".DetailsImageActivity"
+            android:label="@string/listImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Black"
+            />
     </application>
 
 

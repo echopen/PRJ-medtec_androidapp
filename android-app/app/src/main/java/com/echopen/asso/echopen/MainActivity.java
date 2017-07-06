@@ -177,7 +177,10 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                 break;
             // If click on capture button, we save the last image received
             case R.id.btnCapture:
-                getImageHandler().saveImage(mImage);
+                if(mImage != null){
+                    getImageHandler().saveImage(mImage);
+                }
+                // TODO: 06/07/2017 Ajouter une pop up si click surl'image sans image !!
                 break;
         }
     }

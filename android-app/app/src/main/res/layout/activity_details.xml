@@ -10,8 +10,8 @@
         android:layout_alignParentTop="true"
         android:text="@string/date" />
 
-    <Button
-        android:id="@+id/frag_btn"
+    <ImageView
+        android:id="@+id/detailImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignEnd="@+id/details_title"

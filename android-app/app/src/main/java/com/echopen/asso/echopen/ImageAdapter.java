@@ -28,19 +28,18 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public Drawable[] getImages() {
-        File[] a = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
-        Drawable[] images = new Drawable[5];
+        File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
+        Drawable[] validImages = new Drawable[6];
         int i = 0;
-        if (a != null) {
-            for (File as : a) {
+        if (allImages != null) {
+            for (File as : allImages) {
                 //Convert bitmap to drawable
                 Drawable drawable = new BitmapDrawable(mContext.getResources(), BitmapFactory.decodeFile(as.getPath()));
-                images[i] = drawable;
+                validImages[i] = drawable;
                 i++;
             }
         }
-
-        return images;
+        return validImages;
     }
 
     public void setmThumbIds() {

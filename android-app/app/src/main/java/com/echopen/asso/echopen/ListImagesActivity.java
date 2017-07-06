@@ -2,6 +2,7 @@ package com.echopen.asso.echopen;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -30,10 +31,21 @@ public class ListImagesActivity extends Activity {
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                // TODO: 04/07/17 create links to img view
-                Log.d("galleryImageclck","WAZZZZZA");
+                Log.d("galleryImageclck",""+id);
+                switchActivity((int)id);
+
+
             }
         });
+    }
+    public void switchActivity(int id) {
+        Intent intent = new Intent(this, DetailsImageActivity.class);
+        // pass image id to DetailsImageActivity
+        Bundle b = new Bundle();
+        b.putInt("imageId", id);
+        b.putInt("clientId", this.clientId);
+        intent.putExtras(b);
+        startActivity(intent);
     }
 
     @Override
