@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.echopen.asso.echopen.EchOpenApplication;
 import com.echopen.asso.echopen.R;
@@ -92,13 +93,14 @@ public class EchoFragment extends Fragment {
                     case MotionEvent.ACTION_DOWN:
                         if (mHandler != null) return true;
                         mHandler = new android.os.Handler();
-                        mHandler.postDelayed(mAction, 500);
+                        mHandler.postDelayed(mAction, 250);
                         break;
                     case MotionEvent.ACTION_UP:
                         if (mHandler == null) return true;
                         mHandler.removeCallbacks(mAction);
                         mHandler = null;
                         burstFireFolderCreated = false;
+
                         break;
                 }
                 return false;
@@ -115,10 +117,13 @@ public class EchoFragment extends Fragment {
                         burstFireFolderDate = now;
 
                         createBurstFireFolder();
+
+                        String prompt = "Rafales de captures d'écran commencée" + "\nLâchez le bouton pour arrêter";
+                        Toast.makeText(getContext(), prompt, Toast.LENGTH_SHORT).show();
                     } else {
                         takeBurstFire();
                     }
-                    mHandler.postDelayed(this, 500);
+                    mHandler.postDelayed(this, 250);
                 }
             };
         });
@@ -221,8 +226,8 @@ public class EchoFragment extends Fragment {
             outputStream.flush();
             outputStream.close();
 
-            openScreenshot(imageFile);
-
+            String prompt = "Capture d'écran sauvegardée";
+            Toast.makeText(getContext(), prompt, Toast.LENGTH_SHORT).show();
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -252,6 +257,7 @@ public class EchoFragment extends Fragment {
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, output);
             output.flush();
             output.close();
+
         } catch (Throwable e) {
             e.printStackTrace();
         }
