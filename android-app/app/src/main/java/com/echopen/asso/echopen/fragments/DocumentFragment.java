@@ -21,6 +21,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.R;
@@ -32,6 +33,8 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class DocumentFragment extends Fragment {
+
+    private boolean modaleVisible = false;
 
     private FragmentManager fragmentManager;
 
@@ -207,6 +210,22 @@ public class DocumentFragment extends Fragment {
         Button buttonReload = (Button) v.findViewById(R.id.reload);
         final Button buttonCloseZoom = (Button) v.findViewById(R.id.btn_closezoom);
         Button buttonBackToDashboard = (Button) v.findViewById(R.id.btn_back);
+        Button btn_login = (Button) v.findViewById(R.id.btn_login);
+        final RelativeLayout modale_login = (RelativeLayout) v.findViewById(R.id.modale_connexion);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toggle connexion modale
+                if (modaleVisible) {
+                    modale_login.setVisibility(View.INVISIBLE);
+                    modaleVisible = false;
+                } else {
+                    modale_login.setVisibility(View.VISIBLE);
+                    modaleVisible = true;
+                }
+            }
+        });
 
         // Shows image
         AdapterView.OnItemClickListener myOnItemClickListener = new AdapterView.OnItemClickListener() {

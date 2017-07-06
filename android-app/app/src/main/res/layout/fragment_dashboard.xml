@@ -154,4 +154,7 @@
         android:layout_alignStart="@+id/imageView6"
         android:layout_below="@+id/imageView6"
         />
+
+    <include layout="@layout/modal_login"/>
+
 </RelativeLayout>

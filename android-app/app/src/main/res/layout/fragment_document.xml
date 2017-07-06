@@ -92,4 +92,5 @@
         android:visibility="invisible" />
 
 
+    <include layout="@layout/modal_login"/>
 </FrameLayout>

@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.EchOpenApplication;
@@ -46,6 +47,7 @@ public class EchoFragment extends Fragment {
 
     ImageView echoImage ;
 
+    private boolean modaleVisible = false;
 
     public EchoFragment() {
         // Required empty public constructor
@@ -64,6 +66,23 @@ public class EchoFragment extends Fragment {
 
         btn_capture = (Button) v.findViewById(R.id.button_capture);
         echoImage = (ImageView) v.findViewById(R.id.echography);
+
+        Button btn_login = (Button) v.findViewById(R.id.btn_login);
+        final RelativeLayout modale_login = (RelativeLayout) v.findViewById(R.id.modale_connexion);
+
+        btn_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Toggle connexion modale
+                if (modaleVisible) {
+                    modale_login.setVisibility(View.INVISIBLE);
+                    modaleVisible = false;
+                } else {
+                    modale_login.setVisibility(View.VISIBLE);
+                    modaleVisible = true;
+                }
+            }
+        });
 
         initProbe();
 
