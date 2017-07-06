@@ -1,10 +1,17 @@
 <div class="s__nb">
     <div class="s__nb__content">
         <div class="s__nb__content__header">
-            le header
-            <!--<span class="s__nb__content__header--preTitle">Les chiffres impactants</span>
-            <p class="s__nb__content__header--title">Echopen </br> <span>en quelques chiffres</span></p>-->
-            <span class="s__nb__content__header--decoration"></span>
+            <div class="entry_title">
+                <span class="entry_meta">
+                        Les chiffres impactants
+                </span>
+                <h3 class="entry_strong">
+                        Echopen
+                </h3>
+                <p class="entry_desc">
+                    en quelques chiffres
+                </p>
+            </div>
         </div>
         <div class="s__nb__content__body">
             <ul class="s__nb__content__body__collection">

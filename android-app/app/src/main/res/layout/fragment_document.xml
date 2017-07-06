@@ -2,35 +2,78 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/white"
     android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.DocumentFragment">
 
     <GridView
         android:id="@+id/gallery"
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        android:numColumns="auto_fit"
-        android:columnWidth="100dp"
+        android:layout_height="405dp"
+        android:layout_gravity="bottom"
+        android:columnWidth="170dp"
         android:horizontalSpacing="10dp"
-        android:verticalSpacing="10dp"
-        android:paddingTop="10dp"
+        android:numColumns="auto_fit"
         android:paddingBottom="10dp"
-    />
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:verticalSpacing="10dp" />
 
-    <Button
-        android:id="@+id/reload"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:text="Reload" />
+        android:layout_marginTop="60dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:background="@color/transparent"
+            android:fontFamily="sans-serif"
+            android:text="&lt;"
+            android:textColor="@color/gray_dk" />
+
+        <TextView
+            android:id="@+id/nb_pictures"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="16 pictures"
+            android:textColor="@color/gray_dk" />
+
+        <Button
+            android:id="@+id/reload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:fontFamily="sans-serif"
+            android:text="Rafraîchir" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_closezoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:text="X"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:visibility="invisible" />
 
     <ImageView
         android:id="@+id/expanded_image"
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:contentDescription="@string/app_name"
+        android:layout_width="400dp"
+        android:layout_height="500dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_name"
         android:visibility="invisible" />
+
 
 </FrameLayout>
