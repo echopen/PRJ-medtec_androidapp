@@ -64,7 +64,8 @@ var scrollMagicController = new ScrollMagic.Controller();
       offset: 350,
       duration: 2300
   })
-   .setPin(".s__hiw__content")
+   .setPin(".scrollVertical")
+   //.setPin(".s__hiw__content")
    .addTo(scrollMagicController);
 
   var sceneRight = new ScrollMagic.Scene({
@@ -102,7 +103,8 @@ var scrollMagicController = new ScrollMagic.Controller();
 <div class="s__hiw" id="scene">
     <div class="scrollVertical">
         <div class="s__hiw__header">
-            header
+           <p class="s__hiw__header--pretitle">La sonde</p>
+           <p class="s__hiw__header--title">Fonctionnements <span>et atouts</span></p>
         </div>
         <div class="s__hiw__content">
             <div class="s__hiw__content__anim">
