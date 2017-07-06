@@ -8,10 +8,8 @@ section.product-page {
             text-transform: uppercase;
             color: #545454;
             margin-bottom: 0;
-            font-family: 'Roboto';
         }
         &--big {
-            font-family: 'Roboto';
             line-height: 48px;
             font-size: 3.125em;
             font-weight: bold;
@@ -120,7 +118,7 @@ section.product-page {
                     width: 100%;
                 }
                 &--title {
-                    font-family: 'Roboto';
+                    font-family: $font-Roboto-Regular;
                     font-size: em(35);
                     line-height: 41px;
                     font-weight: 400;
@@ -131,7 +129,7 @@ section.product-page {
                     }
                 }
                 &--desc {
-                    font-family: 'Roboto';
+                    font-family: $font-Roboto-Regular;
                     font-size: 16px;
                     line-height: 24px;
                     font-weight: 300;
@@ -185,7 +183,7 @@ section.product-page {
                 }
                 &--title {
                     font-size: 25px;
-                    font-family: 'Roboto';
+                    font-family: $font-Roboto-Regular;
                     text-transform: uppercase;
                     color: #545454;
                     font-weight: 500;
@@ -193,7 +191,7 @@ section.product-page {
                 }
                 &--desc {
                     text-align: center;
-                    font-family: 'Roboto';
+                    font-family: $font-Roboto-Regular;
                     font-weight: 300;
                     font-size: 16px;
                     color: #545454;
@@ -212,7 +210,7 @@ section.product-page {
             width: 50%;
             margin-left: auto;
             margin-right: auto;
-            font-family: 'Roboto';
+            font-family: $font-Roboto-Regular;
             font-weight: 300;
             font-size: 20px;
             line-height: 30px;
@@ -231,7 +229,7 @@ section.product-page {
                 width: 219px;
                 height: 52px;
                 color: white;
-                font-family: 'Roboto';
+                font-family: $font-Roboto-Regular;
                 font-size: 16px;
                 border-radius: 4px;
                 font-weight: 400;
