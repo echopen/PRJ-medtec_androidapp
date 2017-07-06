@@ -1,4 +1,5 @@
 <section class="base_section base_section-history">
+  <div class="title_wrap"></div>
    <div class="entry_wrapper">
     <div class="entry_title">
        <span class="entry_meta">

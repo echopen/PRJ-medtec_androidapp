@@ -2,11 +2,11 @@
     height: 48.750em;
     background-color: $lightgrey;
     padding-top: 0;
+    overflow: hidden;
     .entry_wrapper{
         height: 48.750em;
         width: 68.750em;
         margin: 0 auto;
-        overflow: hidden;
         @include phone(){
             width: 100%;
             padding: 0 15px;
