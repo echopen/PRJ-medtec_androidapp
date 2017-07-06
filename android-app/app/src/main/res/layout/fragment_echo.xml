@@ -44,4 +44,6 @@
 
     </LinearLayout>
 
+    <include layout="@layout/modal_login"/>
+
 </FrameLayout>

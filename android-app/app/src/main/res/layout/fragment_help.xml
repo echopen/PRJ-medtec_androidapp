@@ -274,4 +274,6 @@
         android:layout_alignTop="@+id/settings_title"
         android:layout_marginStart="25dp"
         app:srcCompat="@drawable/ic_help_outline_black_24px" />
+
+    <include layout="@layout/modal_login"/>
 </RelativeLayout>
