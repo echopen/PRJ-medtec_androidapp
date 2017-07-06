@@ -1,15 +1,17 @@
 div.faq-page-container{
   .top-faq{
-
+    width: 100%;
+    @include aspect-ratio(1440,702);
+    background-image: url("/img/courbes_header.png");
+    background-size: cover;
   }
 
   .questions{
     margin: 100px 0;
     .question{
-      margin-bottom: 20px;
       background-color: #fff;
       width: 82%;
-      margin: 0 auto;
+      margin: 0 auto 70px auto;
       padding: 55px 40px 45px 40px;
       border-radius: 4px;
       -webkit-box-shadow: 0px 11px 64px -16px rgba(189,189,189,0.72);
