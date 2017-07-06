@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import org.w3c.dom.Text;
 
@@ -31,14 +32,12 @@ public class ImageHandler {
     }
 
     public boolean saveImage(Bitmap currentBitmap) {
-
         File clientDirectory = new File(this.galleryDirectory.toString() +"/"+ this.clientId +"/");
         if (!clientDirectory.exists() || !clientDirectory.isDirectory()) {
             clientDirectory.mkdir();
         }
-
         File[] filesInPath = clientDirectory.listFiles();
-        while (clientDirectory.listFiles().length > 6) {
+        while (clientDirectory.listFiles().length > 5) {
 
             String[] filesNames = new String[filesInPath.length];
             for (int i = 0; i < filesInPath.length; i++) {

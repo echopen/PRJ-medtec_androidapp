@@ -8,20 +8,24 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by alex on 06/07/17.
- */
+import java.io.File;
+
 
 public class ClientAdapter extends BaseAdapter {
+    private  File[] files;
     private Context mContext;
 
-    public ClientAdapter(Context c) {
+    public ClientAdapter(Context c,File files) {
         mContext = c;
+        this.files =(new File(files.toString() + "/" )).listFiles();
     }
 
     @Override
     public int getCount() {
-        return 0;
+            if (files != null) {
+                return files.length;
+            }
+            return 0;
     }
 
     @Override
@@ -37,6 +41,7 @@ public class ClientAdapter extends BaseAdapter {
     @Override
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View item = convertView;
 
         if (convertView == null) {
@@ -45,6 +50,10 @@ public class ClientAdapter extends BaseAdapter {
         } else {
             item = (View) convertView;
         }
+
+        TextView clientItem = (TextView) item.findViewById(R.id.cliendItem);
+        clientItem.setText(files[position].getName());
+
 
         return item;
     }
