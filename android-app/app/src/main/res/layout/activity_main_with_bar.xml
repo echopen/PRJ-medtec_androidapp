@@ -1,12 +1,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/fragment_container_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/fragment_container"
+        android:layout_below="@+id/fragment_container_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray_light"
@@ -27,7 +25,7 @@
                 android:id="@+id/bSearch"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
                 android:background="@drawable/button_bg_rounded_corners"
                 android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
                 android:textSize="0sp" />
@@ -37,7 +35,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
                 android:textSize="0sp"
                 android:background="@drawable/button_bg_rounded_corners"/>
 
@@ -46,7 +44,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
                 android:textSize="0sp"
                 android:background="@drawable/button_bg_rounded_corners"/>
 
@@ -55,7 +53,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
-                android:layout_marginRight="5dp"
+                android:layout_marginStart="5dp"
                 android:textSize="0sp"
                 android:background="@drawable/button_bg_rounded_corners"/>
         </LinearLayout>
@@ -79,7 +77,7 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/Gallery"
+                android:id="@+id/gallery"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
@@ -87,7 +85,7 @@
                 android:background="@drawable/button_bg_rounded_corners"/>
 
             <Button
-                android:id="@+id/CapturePhoto"
+                android:id="@+id/capturePhoto"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginRight="30dp"
@@ -97,7 +95,7 @@
                 android:background="@drawable/button_bg_rounded_corners"/>
 
             <Button
-                android:id="@+id/Mesure"
+                android:id="@+id/button_seances"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:drawableTop="@drawable/common_google_signin_btn_icon_dark"

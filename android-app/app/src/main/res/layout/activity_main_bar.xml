@@ -1,0 +1,38 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    style="?android:attr/buttonBarStyle">
+
+    <Button
+        style="?android:attr/buttonBarButtonStyle"
+        android:id="@+id/seances"
+        android:text="@string/seances"
+        android:layout_weight="0.33"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/blue_bar"
+        android:textColor="@color/white"/>
+
+    <Button
+        style="?android:attr/buttonBarButtonStyle"
+        android:id="@+id/profil"
+        android:text="@string/profil"
+        android:layout_weight="0.33"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/blue_bar"
+        android:textColor="@color/white"/>
+
+    <Button
+        style="?android:attr/buttonBarButtonStyle"
+        android:id="@+id/faq"
+        android:text="@string/faq"
+        android:layout_weight="0.33"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:textColor="@color/blue_bar"/>
+
+</LinearLayout>
+

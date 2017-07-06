@@ -1,0 +1,29 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@color/blue_bar">
+
+    <Button
+        android:id="@+id/back"
+        android:text="back"
+        android:layout_weight="0.20"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/transparent"
+        android:textColor="@color/white"/>
+    <TextView
+        android:text="@string/gallery"
+        android:textAlignment="center"
+        android:layout_weight="0.60"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+    <TextView
+        android:text="@string/select"
+        android:layout_weight="0.20"
+        android:layout_width="0dp"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>
+

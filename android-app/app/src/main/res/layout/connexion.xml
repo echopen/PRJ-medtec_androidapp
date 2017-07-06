@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -34,7 +32,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Connexion"
+            android:text="@string/connexion"
             android:layout_width="200dp"
             android:gravity="center"
             android:textSize="32sp"
@@ -44,7 +42,7 @@
             android:layout_height="50dp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="25px"
@@ -57,7 +55,7 @@
             android:inputType="textPersonName"/>
 
         <EditText
-            android:id="@+id/editText4"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:paddingLeft="25px"
@@ -70,8 +68,8 @@
             android:inputType="textPersonName"/>
 
         <Button
-            android:text="Connexion"
-            android:id="@+id/button5"
+            android:text="@string/connexion"
+            android:id="@+id/button_connexion_form"
             android:layout_gravity="center"
             android:layout_width="200dp"
             android:layout_height="wrap_content"/>

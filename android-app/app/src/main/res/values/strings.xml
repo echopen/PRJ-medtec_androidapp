@@ -2,6 +2,15 @@
 <resources>
     <string name="app_name">echopen</string>
 
+    <string name="connexion">Connexion</string>
+    <string name="inscription">Inscription</string>
+    <string name="scan">Scan</string>
+    <string name="seances">Seances</string>
+    <string name="profil">Profil</string>
+    <string name="faq">Faq</string>
+    <string name="gallery">Gallery</string>
+    <string name="select">Select</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
