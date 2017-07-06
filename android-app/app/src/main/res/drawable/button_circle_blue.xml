@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="oval">
+            <solid android:color="#35EFD1" />
+            <stroke
+                android:width="25px"
+                android:color="#4635efd1" />
+        </shape>
+    </item>
+    <item
+        android:bottom="30dp"
+        android:drawable="@drawable/capture"
+        android:left="30dp"
+        android:right="30dp"
+        android:top="30dp" />
+</layer-list>

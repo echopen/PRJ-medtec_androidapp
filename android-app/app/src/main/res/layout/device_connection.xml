@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.echopen.asso.echopen.MainActivity"
-    tools:showIn="@layout/activity_main"
+    tools:context="com.echopen.asso.echopen.connectDevice"
     >
 
 
@@ -41,14 +40,17 @@
             android:layout_marginTop="87dp"
             android:background="@drawable/button_active"
             android:text="Login"
-            android:minWidth="200dip"
-            android:paddingLeft="20dip"
-            android:paddingRight="20dip"
+            android:minWidth="200dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:textAllCaps="false"
             android:textColor="@color/colorLight"
-            android:textSize="19dp" />
+            android:textSize="19sp" />
 
         <Button
+            android:id="@+id/closeConnectDeviceBt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:minWidth="200dip"
@@ -56,11 +58,13 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="Urgence"
-            android:paddingLeft="20dip"
-            android:paddingRight="20dip"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:textAllCaps="false"
             android:textColor="@color/colorMedium"
-            android:textSize="19dp" />
+            android:textSize="19sp" />
 
 
     </LinearLayout>
