@@ -3,7 +3,9 @@ package com.echopen.asso.echopen;
 import android.content.Intent;
 import android.os.Bundle;
 
+
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,7 +19,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, NewPatientOneFragment.OnFragmentInteractionListener, NewPatientTwoFragment.OnFragmentInteractionListener, NewPatientThreeFragment.OnFragmentInteractionListener {
 
 
 /**
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         displaySelectedScreen(R.id.nav_menu1);
 
         // Press "New Patient" button, change the activity.
-        Button newPatientButton= (Button)findViewById(R.id.new_patient);
+       /* Button newPatientButton= (Button)findViewById(R.id.nav_menu3);
         newPatientButton.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -71,7 +73,7 @@ public class MainActivity extends AppCompatActivity
                 finish();
             }
 
-        });
+        });*/
 
     }
 
@@ -124,7 +126,7 @@ public class MainActivity extends AppCompatActivity
 
         //creating fragment object
         Fragment fragment = null;
-
+        FragmentActivity fragmentActivity = null;
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_menu1:
@@ -134,7 +136,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new Gallery();
                 break;
             case R.id.nav_menu3:
-                fragment = new Menu3();
+                fragment = new NewPatientOneFragment();
                 break;
         }
 
@@ -145,8 +147,29 @@ public class MainActivity extends AppCompatActivity
             ft.commit();
         }
 
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
     }
 
+    @Override
+    public void goStep2() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, new NewPatientTwoFragment());
+        ft.commit();
+    }
+
+    @Override
+    public void goStep3() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, new NewPatientThreeFragment());
+        ft.commit();
+    }
+
+    @Override
+    public void finishForm() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_frame, new Menu1());
+        ft.commit();
+    }
 }

@@ -1,6 +1,7 @@
 package com.echopen.asso.echopen;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
  */
 public class NewPatientTwoFragment extends Fragment {
 
+    private NewPatientOneFragment.OnFragmentInteractionListener mListener;
 
     public NewPatientTwoFragment() {
         // Required empty public constructor
@@ -29,5 +31,27 @@ public class NewPatientTwoFragment extends Fragment {
     public static NewPatientTwoFragment newInstance () {
         NewPatientTwoFragment f = new NewPatientTwoFragment();
         return f;
+    }
+
+    public interface OnFragmentInteractionListener {
+        void goStep3();
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof NewPatientOneFragment.OnFragmentInteractionListener) {
+            mListener = (NewPatientOneFragment.OnFragmentInteractionListener) context;
+        }
+        else {
+            throw new RuntimeException(context.toString());
+        }
+
+    }
+
+    @Override
+    public void onDetach(){
+        super.onDetach();
+        mListener = null;
     }
 }

@@ -152,8 +152,8 @@
             android:gravity="center"
             android:text=".  .  ." />
 
-        <TextView
-            android:id="@+id/textView6"
+        <Button
+            android:id="@+id/finishForm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
