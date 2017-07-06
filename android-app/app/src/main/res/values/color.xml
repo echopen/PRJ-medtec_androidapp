@@ -32,4 +32,5 @@
     <!--MAIN ACTIVITY -->
 
     <color name="eastern_blue">#2195BD</color>
+    <color name="eastern_dark_blue">#2261FE</color>
 </resources>

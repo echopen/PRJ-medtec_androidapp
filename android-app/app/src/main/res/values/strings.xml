@@ -36,4 +36,8 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose">CHOISIR</string>
+    <string name="ulterus">Ulterus</string>
+    <string name="poumon">Poumon</string>
+    <string name="coeur">Coeur</string>
 </resources>

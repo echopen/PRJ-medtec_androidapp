@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,14 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.echopen.asso.echopen.custom.CustomActivity;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 import com.echopen.asso.echopen.model.Synchronizer;
 import com.echopen.asso.echopen.ui.AbstractActionActivity;
-import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.ui.RulerView;
 import com.echopen.asso.echopen.utils.Config;
@@ -48,30 +48,6 @@ import com.echopen.asso.echopen.utils.Timer;
 //        getActivity().setTitle("Menu 1");
 //    }
 //}
-
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.view.GestureDetector;
-import android.view.LayoutInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-import com.echopen.asso.echopen.model.Synchronizer;
-import com.echopen.asso.echopen.ui.AbstractActionActivity;
-import com.echopen.asso.echopen.ui.MainActionController;
-import com.echopen.asso.echopen.ui.RenderingContextController;
-import com.echopen.asso.echopen.ui.RulerView;
-import com.echopen.asso.echopen.utils.Config;
-import com.echopen.asso.echopen.utils.Constants;
-import com.echopen.asso.echopen.utils.Timer;
 
 
 /**
@@ -125,8 +101,25 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
         this.setPresenter(mEchographyImageVisualisationPresenter);
 
+        View rootView = inflater.inflate(R.layout.fragment_menu_1, container, false);
+
+        ImageView organ = (ImageView) rootView.findViewById(R.id.organ);
+        organ.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.w("myApp", "click on imageview");
+
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+                View mView = getActivity().getLayoutInflater().inflate(R.layout.organ_modal, null);
+
+                mBuilder.setView(mView);
+                AlertDialog dialog = mBuilder.create();
+                dialog.show();
+            }
+        });
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu_1, container, false);
+        return rootView;
     }
 
 
