@@ -100,3 +100,47 @@
 
   }
 }
+.base_section-community{
+    margin: 0;
+    padding: 0;
+    .entry_wrapper{
+        width: 70%;
+        margin: 0 auto;
+        text-align: center;
+        @include phone(){
+            width: 100%;
+            padding: 0 15px;
+        }
+    }
+    .entry_wrapper-small{
+        width: 50%;
+        margin: 0 auto;
+        text-align: left;
+        @include phone(){
+            width: 100%;
+            padding: 0 15px;
+        }
+    }
+    .entry_strong{
+        display: inline-block;
+        position: relative;
+            &:after{
+                content: "";
+                background: url(../../../../public/img/vague.png) no-repeat;
+                width: 122px;
+                height: 10px;
+                position: absolute;
+                right: -10px;
+                top: 65px;
+                }
+        span{
+            color: $greyfirst;
+        }
+    }
+    .entry_sub_desc{
+        margin-top: 80px;
+    }
+    .base_btn{
+        margin-top: 80px;
+    }
+}

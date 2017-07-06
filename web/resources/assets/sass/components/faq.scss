@@ -16,6 +16,7 @@
         }
         .alignright{
             width: 62%;
+            height: 0;
             @include phone(){
                 width: 100%;
                 margin: 0 auto;
