@@ -36,7 +36,6 @@ public class HomeScreenActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState)
     {
         fragmentManager = getSupportFragmentManager();
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen);
