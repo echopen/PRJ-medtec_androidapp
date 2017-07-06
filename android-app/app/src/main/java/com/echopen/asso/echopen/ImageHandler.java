@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.util.Log;
 
 import org.w3c.dom.Text;
 
@@ -39,7 +38,6 @@ public class ImageHandler {
         }
 
         File[] filesInPath = clientDirectory.listFiles();
-
         while (clientDirectory.listFiles().length > 6) {
 
             String[] filesNames = new String[filesInPath.length];
@@ -77,6 +75,11 @@ public class ImageHandler {
         File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
         String name = allImages[imageId].getName();
         return name;
+    }
+
+    public void setClientId(int clientId)
+    {
+        this.clientId = clientId;
     }
 
     public void setContext(Context context) {

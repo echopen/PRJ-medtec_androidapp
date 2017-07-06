@@ -10,7 +10,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageButton;
@@ -81,6 +80,9 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
         ImageButton btnCapture = (ImageButton) findViewById(R.id.btnCapture);
         btnCapture.setOnClickListener(this);
+
+        ImageButton btnDone = (ImageButton) findViewById(R.id.btnDone);
+        btnDone.setOnClickListener(this);
     }
 
     public void switchActivity() {
@@ -182,7 +184,12 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                     mImage.toString();
                     getImageHandler().saveImage(mImage);
                 }
-                // TODO: 06/07/2017 Ajouter une pop up si click surl'image sans image !!
+                // TODO: 06/07/2017 Ajouter une pop up si click sur l'image sans image !!
+                break;
+            case R.id.btnDone:
+                int newId = clientId+1;
+                ImageHandler.setClientId(newId);
+                this.clientId = newId;
                 break;
         }
     }

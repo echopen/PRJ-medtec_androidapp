@@ -1,11 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<GridView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/gridview"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:horizontalSpacing="10dp"
-    android:numColumns="2"
-    android:stretchMode="columnWidth"
-    android:verticalSpacing="10dp"
-    android:background="@color/white"/>
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/toolbarGallery"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="vertical"
+        android:background="@color/black">
+
+        <ImageButton
+            android:id="@+id/backToHome"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:layout_alignParentLeft="true"
+            android:scaleType="center"
+            android:src="@drawable/back"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gallery"
+            android:textSize="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"/>
+
+        <ImageButton
+            android:id="@+id/searchClient"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/search"
+            android:scaleType="center"
+            android:background="@color/transparent"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="2"
+        android:layout_below="@id/toolbarGallery"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" />
+</RelativeLayout>
