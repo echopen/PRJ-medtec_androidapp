@@ -3,6 +3,7 @@ package com.echopen.asso.echopen;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -15,7 +16,7 @@ import com.echopen.asso.echopen.ui.RenderingContextController;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_IP;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
-public class EchoActivity extends Activity implements EchographyImageVisualisationContract.View {
+public class EchoActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

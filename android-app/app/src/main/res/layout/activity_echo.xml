@@ -39,7 +39,7 @@
             android:gravity="center"
             android:text="Male, 36 years old, 76kg, lunjs"
             android:textAlignment="center"
-            android:textColor="#FFF"
+            android:textColor="#FF0000"
             android:visibility="visible" />
 
     </LinearLayout>
