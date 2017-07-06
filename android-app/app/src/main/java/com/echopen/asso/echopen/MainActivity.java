@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //-----------------------------------------------------------------
 
+        //bottom nav for main menu
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         Fragment selectedFragment = null;
+                        //action for each button on menu redirects to another fragment
                         switch (item.getItemId()) {
                             case R.id.action_item1:
                                 selectedFragment = ArchivesFragment.newInstance();
