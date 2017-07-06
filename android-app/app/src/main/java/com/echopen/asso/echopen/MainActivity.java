@@ -126,7 +126,6 @@ public class MainActivity extends AppCompatActivity
 
         //creating fragment object
         Fragment fragment = null;
-        FragmentActivity fragmentActivity = null;
         //initializing the fragment object which is selected
         switch (itemId) {
             case R.id.nav_menu1:
@@ -146,7 +145,6 @@ public class MainActivity extends AppCompatActivity
             ft.replace(R.id.content_frame, fragment);
             ft.commit();
         }
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 
 /**
@@ -14,12 +15,23 @@ import android.view.ViewGroup;
  */
 public class NewPatientThreeFragment extends Fragment {
 
-    private NewPatientOneFragment.OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
+    private Button finishButton;
     public NewPatientThreeFragment() {
         // Required empty public constructor
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        finishButton = (Button) getView().findViewById(R.id.finishForm);
+        finishButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.finishForm();
+            }
+        });
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,8 +50,8 @@ public class NewPatientThreeFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof NewPatientOneFragment.OnFragmentInteractionListener) {
-            mListener = (NewPatientOneFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
         }
         else {
             throw new RuntimeException(context.toString());
