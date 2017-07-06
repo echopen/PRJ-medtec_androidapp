@@ -16,7 +16,7 @@
     <application
         android:name=".EchOpenApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo_echopen"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
@@ -27,13 +27,11 @@
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="TEST"
             android:screenOrientation="portrait"
             android:theme="@style/AppCompatTheme" />
         <activity

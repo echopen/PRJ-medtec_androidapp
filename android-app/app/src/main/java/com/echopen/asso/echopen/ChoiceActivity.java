@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class ChoiceActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -36,6 +36,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
 
     private void btEchoClicked(){
         Intent intent = new Intent(this, EchoActivity.class);
+
         startActivity(intent);
     }
 
