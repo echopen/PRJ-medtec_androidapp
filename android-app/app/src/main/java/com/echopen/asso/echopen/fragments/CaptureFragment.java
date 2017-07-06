@@ -19,26 +19,30 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.bdd.Image;
+import com.echopen.asso.echopen.bdd.ImageDAO;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+import com.echopen.asso.echopen.filters.BaseProcess;
+import com.echopen.asso.echopen.filters.ImageEnhancement;
 import com.echopen.asso.echopen.ui.RenderingContextController;
-import com.echopen.asso.echopen.utils.Timer;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CaptureFragment extends Fragment implements EchographyImageVisualisationContract.View{
+public class CaptureFragment extends Fragment implements EchographyImageVisualisationContract.View {
 
 
     public CaptureFragment() {
@@ -102,7 +106,7 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
                 public void run() {
                     ImageView echoImage = (ImageView) getView().findViewById(R.id.echo_view);
                     echoImage.setImageBitmap(iBitmap);
-                    Timer.logResult("Display Bitmap");
+                    //Timer.logResult("Display Bitmap");
                 }
 
             });
@@ -119,6 +123,11 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
     }
 
     private String saveToInternalStorage(Bitmap iBitmap) {
+
+        //Open Database and Load ImageDAO
+        ImageDAO imageDAO = new ImageDAO(getContext());
+        imageDAO.open();
+
         ContextWrapper cw = new ContextWrapper(getActivity().getApplicationContext());
         // path to /data/data/yourapp/app_data/imageDir
         File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
@@ -132,6 +141,13 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
             fos = new FileOutputStream(mypath);
             // Use the compress method on the BitMap object to write image to the OutputStream
             iBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            // Save the directory path with name Image
+            Image img = new Image();
+            img.setImgName(directory.getAbsolutePath() + "/" + imgName);
+            imageDAO.add(img);
+
+            List imgs = imageDAO.getAll();
+            Log.d("LIST", imgs.toString());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

@@ -1,6 +1,7 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 
+import com.echopen.asso.echopen.bdd.DAOBase;
+import com.echopen.asso.echopen.bdd.DatabaseHandler;
+import com.echopen.asso.echopen.bdd.Image;
+import com.echopen.asso.echopen.bdd.ImageDAO;
 import com.echopen.asso.echopen.fragments.CaptureFragment;
 import com.echopen.asso.echopen.fragments.GalleryFragment;
 import com.echopen.asso.echopen.fragments.SettingsFragment;
@@ -32,8 +37,6 @@ import java.util.Vector;
  */
 
 public class MainActivity extends FragmentActivity {
-
-    private static final String TAG = "MyActivity";
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -70,7 +73,7 @@ public class MainActivity extends FragmentActivity {
         mPagerAdapter = new MainPageAdapter(getSupportFragmentManager(), fragments);
         mPager.setAdapter(mPagerAdapter);
 
-        mPager.setCurrentItem(1);
+        //mPager.setCurrentItem(1);
     }
 
 
