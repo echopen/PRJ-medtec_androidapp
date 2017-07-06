@@ -25,6 +25,11 @@ Route::prefix('api')->group(function () {
 Route::get('/', 'PagesController@home');
 Route::get('/contact', 'PagesController@contact');
 
+
+Route::get('/community', 'PagesController@community');
+
+Route::get('/faq', 'PagesController@faq');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

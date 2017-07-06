@@ -2,14 +2,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1CCFF7"
+    android:background="@drawable/background"
     android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.DocumentFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <GridView
+        android:id="@+id/gallery"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Document fragment" />
+        android:layout_height="550dp"
+        android:numColumns="auto_fit"
+        android:columnWidth="100dp"
+        android:horizontalSpacing="10dp"
+        android:verticalSpacing="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+    />
+
+    <Button
+        android:id="@+id/reload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:text="Reload" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:contentDescription="@string/app_name"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
 
 </FrameLayout>

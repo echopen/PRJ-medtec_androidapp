@@ -1,5 +1,6 @@
 package com.echopen.asso.echopen.fragments;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,8 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
 
     private FragmentManager fragmentManager;
 
+    private Activity activity;
+
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -26,6 +29,10 @@ public class DashboardFragment extends Fragment implements View.OnClickListener{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        activity = getActivity();
+
+        ((AppCompatActivity)activity).getSupportActionBar().hide();
+
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_dashboard, container, false);
 

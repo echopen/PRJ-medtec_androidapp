@@ -1,14 +1,28 @@
-<div class="entry_wrapper">
+<section class="base_section base_section-faq">
+   <div class="entry_wrapper-small">
     <div class="alignleft">
-        <h3 class="entry_title">
-            FAQ
-        </h3>
-        <p class="entry_content">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut maxime assumenda quas natus beatae non molestias, eius nostrum quam eos, eveniet atque aliquid illum, hic soluta in consequuntur nam vel.
-        </p>
+       <div class="entry_title">
+           <span class="entry_meta">
+                impacting figures
+           </span>
+           <h3 class="entry_strong">
+                Our history
+           </h3>
+           <p class="entry_desc">
+               Lorem blabla
+           </p>
+           <p class="entry_sub_desc">
+               At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti.
+           </p>
+            <div class="base_btn">
+                <a href="#">super cta</a>
+            </div>
+        </div>
     </div>
-    <div class="entry_slick entry_slick-multiple alignright">
+    <div class="alignright">
+    <div class="entry_slick entry_slick-multiple">
     
+        <!--Slick slide-->
         <div class="slick_slide base_item-content">
             <h3 class="base_item-title"><a href="#">Item title1</a></h3>
             <div class="base__item__metas">Item metas</div>
@@ -17,22 +31,39 @@
                 See more
             </a>
         </div>
+        
+        <!--Slick slide-->
         <div class="slick_slide base_item-content">
-            <h3 class="base_item-title"><a href="#">Item title2</a></h3>
+            <h3 class="base_item-title"><a href="#">Item title1</a></h3>
             <div class="base__item__metas">Item metas</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit eaque, explicabo dolor veritatis exercitationem, quae inventore asperiores odit libero. Quia ipsum, natus cum voluptate! Iure vitae, consequatur ratione corporis unde.</p>
-            <a href="#" class="base_item-more">
-                See more
-            </a>
-        </div>
-        <div class="slick_slide base_item-content">
-            <h3 class="base_item-title"><a href="#">Item title3</a></h3>
-            <div class="base__item__metas">Item metas</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit eaque, explicabo dolor veritatis exercitationem, quae inventore asperiores odit libero. Quia ipsum, natus cum voluptate! Iure vitae, consequatur ratione corporis unde.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, nam placeat voluptatem, earum ut at quas eligendi cumque consectetur dicta itaque! Rem praesentium officiis tempora reprehenderit architecto voluptates expedita vel.</p>
             <a href="#" class="base_item-more">
                 See more
             </a>
         </div>  
-    
+          
+        <!--Slick slide-->
+        <div class="slick_slide base_item-content">
+            <h3 class="base_item-title"><a href="#">Item title1</a></h3>
+            <div class="base__item__metas">Item metas</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, nam placeat voluptatem, earum ut at quas eligendi cumque consectetur dicta itaque! Rem praesentium officiis tempora reprehenderit architecto voluptates expedita vel.</p>
+            <a href="#" class="base_item-more">
+                See more
+            </a>
+        </div>
+          
+        <!--Slick slide-->
+        <div class="slick_slide base_item-content">
+            <h3 class="base_item-title"><a href="#">Item title1</a></h3>
+            <div class="base__item__metas">Item metas</div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellat, nam placeat voluptatem, earum ut at quas eligendi cumque consectetur dicta itaque! Rem praesentium officiis tempora reprehenderit architecto voluptates expedita vel.</p>
+            <a href="#" class="base_item-more">
+                See more
+            </a>
+        </div>     
+           
     </div>
+        <div class="slick_background"></div>
+       </div>    
 </div>
+</section>
