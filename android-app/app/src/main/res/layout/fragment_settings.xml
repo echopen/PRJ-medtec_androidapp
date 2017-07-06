@@ -12,10 +12,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#fff"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="64dp"
+        android:background="@drawable/dashboard_bottom"
         android:id="@+id/relativeLayout4">
 
         <LinearLayout
