@@ -15,6 +15,9 @@ body {
                 color: #fff;
                 font-family: $font-Roboto-Regular;
                 text-align: center;
+                @include phone() {
+                    margin-top: 0;
+                }
             }
             .input-container {
                 width: 55.5%;
@@ -24,6 +27,9 @@ body {
                 margin-top: 35px;
                 color: $lightcolor;
                 text-align: center;
+                @include phone() {
+                    display: none;
+                }
             }
         }
     }
@@ -33,8 +39,17 @@ body {
         width: 80%;
         margin: 0 auto;
         margin-bottom: 350px;
+        @include phone() {
+            display: block;
+            width: 100%;
+        }
     }
     .contact_form {
+        @include phone() {
+            width: 100%;
+            display: inline-table;
+            margin: 20px 0;
+        }
         .left {
             margin-bottom: 20px;
         }
@@ -42,6 +57,10 @@ body {
         width: 50%;
         width: 45%;
         height: 70px;
+        form {
+            width: 90%;
+            margin: 0 auto;
+        }
         .input-name {
             width: 48%;
             height: 70px;
@@ -53,6 +72,11 @@ body {
             &:-moz-placeholder {
                 padding-left: 25px;
             }
+            @include phone() {
+                width: 100%;
+                border: 1px solid $greyfirst;
+                margin-bottom: 2px;
+            }
         }
         .input-email {
             width: 48%;
@@ -63,6 +87,11 @@ body {
             }
             &:-moz-placeholder {
                 padding-left: 25px;
+            }
+            @include phone() {
+                width: 100%;
+                border: 1px solid $greyfirst;
+                margin-bottom: 2px;
             }
         }
         textarea {
@@ -76,6 +105,11 @@ body {
             &:-moz-placeholder {
                 padding-left: 25px;
             }
+            @include phone() {
+                width: 100%;
+                border: 1px solid $greyfirst;
+                margin-bottom: 2px;
+            }
         }
         .input-submit {
             float: right;
@@ -87,6 +121,10 @@ body {
         width: 45%;
         height: 70px;
         padding-left: 50px;
+        @include phone() {
+            width: 100%;
+            display: block;
+        }
     }
     .input-shadow {
         position: absolute;
