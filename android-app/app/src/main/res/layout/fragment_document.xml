@@ -2,81 +2,72 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@drawable/background"
     android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.DocumentFragment">
+  
+    <include layout="@layout/header"/>
 
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="60dip"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/transparent"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|left"
-            android:text="Sonde : 64% - Online"
-            android:textColor="#fff"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|right"
-            android:text="Login"
-            android:textColor="#fff"
-            android:textSize="15sp" />
     </RelativeLayout>
-
-    <GridView
-        android:id="@+id/gallery"
-        android:layout_width="match_parent"
-        android:layout_height="405dp"
-        android:layout_gravity="bottom"
-        android:columnWidth="170dp"
-        android:horizontalSpacing="10dp"
-        android:numColumns="auto_fit"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingTop="10dp"
-        android:verticalSpacing="10dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="60dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:weightSum="1">
 
-        <Button
-            android:id="@+id/btn_back"
-            android:layout_width="20dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:background="@color/transparent"
-            android:fontFamily="sans-serif"
-            android:text="&lt;"
-            android:textColor="@color/gray_dk" />
-
-        <TextView
-            android:id="@+id/nb_pictures"
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="16 pictures"
-            android:textColor="@color/gray_dk" />
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@color/transparent"
+                android:fontFamily="sans-serif"
+                android:text="&lt;"
+                android:textColor="@color/gray_dk" />
 
-        <Button
-            android:id="@+id/reload"
+            <TextView
+                android:id="@+id/nb_pictures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="16 pictures"
+                android:textColor="@color/gray_dk" />
+
+            <Button
+                android:id="@+id/reload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:fontFamily="sans-serif"
+                android:text="Rafraîchir"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:fontFamily="sans-serif"
-            android:text="Rafraîchir" />
+            android:layout_height="wrap_content">
+
+            <GridView android:id="@+id/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="108.17"
+            android:background="@color/white"
+            android:columnWidth="170dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:verticalSpacing="10dp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

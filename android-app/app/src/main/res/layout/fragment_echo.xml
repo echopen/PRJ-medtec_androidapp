@@ -6,35 +6,19 @@
     android:visibility="visible"
     tools:context="com.echopen.asso.echopen.fragments.EchoFragment">
 
+    <include layout="@layout/header"/>
+
     <!-- TODO: Update blank fragment layout -->
     <Button
         android:id="@+id/button_capture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|center"
         android:text="Capture"/>
 
     <ImageView
         android:id="@+id/echography"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-    <RelativeLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
-        android:layout_height="60dip"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/transparent"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:gravity="center_vertical|left"
-            android:text="Sonde : 64% - Online"
-            android:textColor="#fff"
-            android:textSize="15sp" />
-    </RelativeLayout>
 
 </FrameLayout>

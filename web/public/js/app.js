@@ -1716,8 +1716,8 @@ $(document).ready(function () {
     dots: true,
     arrows: true,
     variableWidth: true,
-    prevArrow: "<div class='slick_btn_wrap'><button type='button' class='slick-prev pull-left'></button></div>",
-    nextArrow: "<div class='slick_btn_wrap slick_btn_wrap-left'><button type='button' class='slick-next pull-right'></button></div>"
+    prevArrow: "<div class='slick_btn_wrap'><button type='button' class='slick-prev pull-left'><img src='/img/arrow.svg'></button></div>",
+    nextArrow: "<div class='slick_btn_wrap slick_btn_wrap-left'><button type='button' class='slick-next pull-right'><img src='/img/arrow.svg'></button></div>"
   });
 });
 
