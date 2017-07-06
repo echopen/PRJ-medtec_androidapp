@@ -10,7 +10,21 @@
     </div>
 
 
-    <div class="filter">
+    <div class="filters">
+        <div class="filters-container">
+            <div class="filter-by">
+                <span class="filter-by-text">Filtrer par :</span>
+                <span class="filter-type">Echographie</span>
+            </div>
+            <div class="tabs">
+                <div class="tab active">Populaires</div>
+                <div class="tab">Récents</div>
+            </div>
+            <div class="filter-pictures">
+                <img src="/img/community/filter_1.png" alt="">
+                <img src="/img/community/filter_2.png" alt="">
+            </div>
+        </div>
     </div>
 
 

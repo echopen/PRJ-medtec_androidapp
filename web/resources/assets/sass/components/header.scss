@@ -48,6 +48,9 @@ header {
     margin-top: 1.7em;
     float: right;
     padding-right: em(60);
+    a{
+      text-decoration: none;
+    }
     .join-us{
       text-transform: none;
       cursor: pointer;

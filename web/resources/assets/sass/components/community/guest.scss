@@ -16,7 +16,7 @@ section.community-guest-page{
     -moz-box-shadow: -3px 0px 82px 11px rgba(245,250,255,1);
     box-shadow: -3px 0px 82px 11px rgba(245,250,255,1);
     width: 55.5%;
-    height: 10%;
+    height: 70px;
     background-color: #fff;
     border-radius: 6px;
     position: relative;
@@ -56,12 +56,73 @@ section.community-guest-page{
       font-family: $font-Roboto-Regular;
     }
   }
-  .filter{
+  .filters{
     width: 92%;
     margin: 0 auto;
     background-color: #F7F7F7;
     padding: 30px;
     border-radius: 5px;
+
+    .filters-container{
+      width: 100%;
+      font-family: $font-Roboto-Regular;
+      display: inline-block;
+      .filter-by{
+        display: inline-block;
+        float: left;
+        .filter-by-text{
+          font-size: 18px;
+          color: #545454;
+        }
+        .filter-type{
+          margin-left: 10px;
+          color: #6078EA;
+          font-size: 22px;
+        }
+      }
+
+      .tabs{
+        margin-left: 15%;
+        display: inline-block;
+        float: left;
+        .tab{
+          cursor: pointer;
+          padding: 0 20px;
+          display: inline-block;
+          float: left;
+          font-size: 22px;
+          position: relative;
+          color: #6078EA;
+          &.active
+          {
+            &:after{
+              content: "";
+              position: absolute;
+              width: 80%;
+              left: 10%;
+              height: 4px;
+              background-color: #17EAD9;
+              bottom: -30px;
+            }
+          }
+        }
+      }
+
+      .filter-pictures{
+        display: inline-block;
+        float: right;
+        img:first-child{
+          width: 27px;
+          margin-right: 20px;
+        }
+        img:nth-child(2){
+          width: 35px;
+        }
+      }
+
+    }
+
+
   }
 
   .scans{
@@ -82,11 +143,26 @@ section.community-guest-page{
     width: 30%;
     float: left;
     position: relative;
-    &:nth-child(3n+2){
+    &:nth-child(3n+2), &:nth-child(3n+3){
       margin-left: 5%;
     }
-    &:nth-child(3n+3){
-      margin-left: 5%;
+    @include tablet-portrait(){
+      width: 48%;
+      &:nth-child(3n+2), &:nth-child(3n+3){
+        margin-left: 0%;
+      }
+      &:nth-child(2n+2){
+        margin-left:4%;
+      }
+    }
+    @include phone(){
+      width: 100%;
+      &:nth-child(3n+2), &:nth-child(3n+3){
+        margin-left: 0%;
+      }
+      &:nth-child(2n+2){
+        margin-left:0%;
+      }
     }
     &:after{
       content: "";

@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('layout.community')
 
 @section('content')
     @if(Auth::guest())

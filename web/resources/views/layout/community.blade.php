@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <script type="text/javascript" src="{!! mix('/js/app.js') !!}"></script>
-    
+
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
     <!-- Add the slick-theme.css if you want default styling -->
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick-theme.css"/>
@@ -37,16 +37,13 @@
 </head>
 <body>
 
-<header>
+<header class="community-header">
     <ul class="links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/product">Product</a></li>
-        <li><a href="/faq">Faq</a></li>
-        <li><a href="/contact">Contact</a></li>
+        <li><a href="/">Découvrir Echopen</a></li>
     </ul>
     <a href="/"><div class="logo"></div></a>
     <ul class="right-cta">
-        <a href="/community"><li class="join-us">Communauté</li></a>
+        <li class="join-us">Me connecter</li>
     </ul>
 </header>
 
