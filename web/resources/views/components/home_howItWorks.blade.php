@@ -11,6 +11,16 @@
 // When the DOM is ready
 $(function() {
   
+  var lessThan1024 = function(){
+       windowWidth = window.innerWidth;
+       return windowWidth < 1024;
+   }
+    var isMobile = lessThan1024();
+
+    $(window).resize(function() {
+        isMobile = lessThan1024();
+    })
+
 $('.js-link').on('click', function(e){
     e.preventDefault();
     const top = $(this).data('section');
@@ -64,9 +74,25 @@ var scrollMagicController = new ScrollMagic.Controller();
       offset: 525,
       duration: 2175
   })
-   .setPin(".scrollVertical")
-   //.setPin(".s__hiw__content")
-   .addTo(scrollMagicController);
+  
+   sceneGlobal.addTo(scrollMagicController);
+
+    var needToRemoveScrollPin = function(){
+        if (!isMobile){
+            sceneGlobal.setPin('.scrollVertical');
+        } else {
+            sceneGlobal.removePin(true);
+        };
+    }
+
+    sceneGlobal.on("start", function (event) {
+        needToRemoveScrollPin();
+    });
+    sceneGlobal.on("leave", function (event) {
+        needToRemoveScrollPin();
+    });
+
+
 
   var sceneRight = new ScrollMagic.Scene({
       triggerElement: '#scene',
@@ -154,7 +180,7 @@ var scrollMagicController = new ScrollMagic.Controller();
                     </li>
                 </ul>
                 <div class="s__hiw__content__text__cta">
-                    <button class="s__hiw__content__text__cta--button">Buy</button>
+                    <button class="s__hiw__content__text__cta--button">En savoir plus</button>
                 </div>
             </div>
         </div>

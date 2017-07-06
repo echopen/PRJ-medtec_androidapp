@@ -3,6 +3,10 @@
     padding-right: em(40);
     display: flex;
     flex-direction: row;
+    @media screen and (max-width: em(1024)) {
+        padding-left: em(30);
+        padding-right: em(30);
+    }
     &__content {
         background-color: white;
         background-color: #F7F7F7;
@@ -10,6 +14,10 @@
         width: 55%;
         margin-left: -15px;
         padding-left: 35px;
+        @media screen and (max-width: em(1024)) {
+            width: 100%;
+            margin-left: 0px;
+        }
         &__header {
             &--preTitle {
                 text-transform: uppercase;
@@ -45,6 +53,11 @@
                 padding-right: 40px;
                 margin-top: em(40);
                 margin-bottom: em(70);
+                @media screen and (max-width: em(1024)) {
+                    flex-wrap: wrap;
+                    align-items: flex-start;
+                    margin-top: 0px;
+                }
                 &__item {
                     position: relative;
                     transition: all .3s ease-in;
@@ -89,6 +102,9 @@
                             line-height: em(10);
                             font-family: 'Roboto';
                             font-weight: 700;
+                            @media screen and (max-width: em(1024)) {
+                                font-size: em(30);
+                            }
                         }
                         &--deco {
                             margin: 6px 0px;
@@ -101,6 +117,10 @@
                             text-transform: uppercase;
                             font-family: 'Roboto';
                             font-weight: 400;
+                            font-size: em(14);
+                            @media screen and (max-width: em(1024)) {
+                                font-size: em(13);
+                            }
                         }
                     }
                     &:hover {
@@ -140,6 +160,10 @@
         width: 45%;
         height: em(400);
         position: relative;
+        display: flex;
+        @media screen and (max-width: em(1024)) {
+            display: none;
+        }
         &--img1 {
             position: absolute;
             top: -20px;
