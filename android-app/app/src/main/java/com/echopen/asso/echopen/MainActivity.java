@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new Menu1();
                 break;
             case R.id.nav_menu2:
-                fragment = new Gallery();
+                fragment = new GalleryFragment();
                 break;
             case R.id.nav_menu3:
                 fragment = new NewPatientOneFragment();

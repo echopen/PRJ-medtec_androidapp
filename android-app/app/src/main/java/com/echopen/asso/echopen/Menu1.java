@@ -161,7 +161,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
     private void displayGallery(View rootView) {
 
         //initializing the fragment object which is selected
-        Fragment fragment = new Gallery();
+        Fragment fragment = new GalleryFragment();
 
         //replacing the fragment
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
@@ -235,6 +235,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
      * @return
      */
     private File getDisc() {
+
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
         return new File(file, "Image");
     }
