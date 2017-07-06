@@ -2,23 +2,19 @@ package com.echopen.asso.echopen;
 
 
 import android.app.Activity;
-import android.app.ActionBar;
-import android.app.FragmentTransaction;
-
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v13.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import android.widget.TextView;
-
-public class AddPatientActivity extends Activity {
+public class AddPatientActivity extends FragmentActivity{
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -41,12 +37,11 @@ public class AddPatientActivity extends Activity {
         setContentView(R.layout.activity_add_patient);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getFragmentManager());
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
-
 
     }
 
@@ -84,6 +79,7 @@ public class AddPatientActivity extends Activity {
         private static final String ARG_SECTION_NUMBER = "section_number";
 
         public PlaceholderFragment() {
+
         }
 
         /**
@@ -96,26 +92,6 @@ public class AddPatientActivity extends Activity {
             args.putInt(ARG_SECTION_NUMBER, sectionNumber);
             fragment.setArguments(args);
             return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView;
-            switch (getArguments().getInt(ARG_SECTION_NUMBER)) {
-                case 1:
-                     rootView = inflater.inflate(R.layout.fragment_add_patient, container, false);
-                    break;
-                case 2:
-                     rootView = inflater.inflate(R.layout.fragment_add_patient_two, container, false);
-                    break;
-                case 3:
-                     rootView = inflater.inflate(R.layout.fragment_add_patient_three, container, false);
-                    break;
-                default:
-                    rootView = inflater.inflate(R.layout.fragment_add_patient, container, false);
-            }
-            return rootView;
         }
 
     }
@@ -134,7 +110,17 @@ public class AddPatientActivity extends Activity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return NewPatientOneFragment.newInstance();
+                case 1:
+                    return NewPatientTwoFragment.newInstance();
+                case 2:
+                    return NewPatientThreeFragment.newInstance();
+                default:
+                    return NewPatientOneFragment.newInstance();
+            }
+          //  return PlaceholderFragment.newInstance(position + 1);
         }
 
         @Override
