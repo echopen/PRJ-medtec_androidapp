@@ -103,14 +103,24 @@
 }
 .base_section-community{
     margin: 0;
-    padding: 0;
+    padding: 250px 0 0 0;
+    @include phone(){
+        padding: 0;
+    }
     .entry_wrapper{
-        width: 70%;
-        margin: 0 auto;
+        background-color: $lightgrey;
+    padding: 40px 0;
+
         text-align: center;
         @include phone(){
             width: 100%;
-            padding: 0 15px;
+            padding: 30px 0;
+        }
+        .entry_title{
+            top: 0;
+            transform: none;
+                width: 70%;
+    margin: 0 auto;
         }
     }
     .entry_wrapper-small{
@@ -133,6 +143,9 @@
                 position: absolute;
                 right: -10px;
                 top: 65px;
+                @include phone(){
+                    top: 100px;
+                }
                 }
         span{
             color: $greyfirst;

@@ -14,4 +14,11 @@
             font-weight: 500;
             overflow: hidden;
         }
+     .slick-prev img{
+         transform: rotate(180deg);
+     }
+     .slick-next:before,
+     .slick-prev:before{
+         display: none;
+     }
     }
