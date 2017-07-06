@@ -12,7 +12,7 @@
             </p>
         </div>
         <div class="base_btn">
-            <a href="#"><p class="super_cta">Rejoignez le projet !</p></a>
+            <a href="#">Rejoignez le projet !</a>
         </div>
         <div class="share">
             <ul>
