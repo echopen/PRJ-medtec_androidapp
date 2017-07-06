@@ -1,11 +1,16 @@
 package com.echopen.asso.echopen;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.TextView;
 
 /**
  * This class holds for a custom SplashScreen
@@ -24,12 +29,19 @@ public class connectDevice extends Activity
         setContentView(R.layout.device_connection);
 
         Button closeConnectDevice = (Button) findViewById(R.id.closeConnectDeviceBt);
+        TextView textViewHome = (TextView) findViewById(R.id.rich_text);
         closeConnectDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
+        //textViewHome span color
+        final SpannableStringBuilder sb = new SpannableStringBuilder("Connect your echo-stethoscope to start an exam.");
+        final ForegroundColorSpan fcs = new ForegroundColorSpan(Color.rgb(46,106,255));
+        sb.setSpan(fcs, 13, 29, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        textViewHome.setText(sb);
     }
 
     /*
