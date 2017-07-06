@@ -1,4 +1,5 @@
 <section class="base_section base_section-history">
+  <div class="title_wrap"></div>
    <div class="entry_wrapper">
     <div class="entry_title">
        <span class="entry_meta">
@@ -31,7 +32,7 @@
             <div class="slick_slide base_item-content">
                <div class="alignright">
                    <div class="base_item-wrapper">
-                     <h3 class="base_item-title"><a href="#">The beginning</a></h3>
+                     <h3 class="base_item-title">The beginning</h3>
                     <div class="base_item_metas">Item metas</div>
                     <p class="base_item_desc">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non providenat vero eos. Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>  
                    </div>  
@@ -42,7 +43,7 @@
             <div class="slick_slide base_item-content">
                <div class="alignright">
                    <div class="base_item-wrapper">
-                     <h3 class="base_item-title"><a href="#">The beginning</a></h3>
+                     <h3 class="base_item-title">The beginning</h3>
                     <div class="base_item_metas">Item metas</div>
                     <p class="base_item_desc">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non providenat vero eos. Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>  
                    </div>  
@@ -53,7 +54,7 @@
             <div class="slick_slide base_item-content">
                <div class="alignright">
                    <div class="base_item-wrapper">
-                     <h3 class="base_item-title"><a href="#">The beginning</a></h3>
+                     <h3 class="base_item-title">The beginning</h3>
                     <div class="base_item_metas">Item metas</div>
                     <p class="base_item_desc">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non providenat vero eos. Accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</p>  
                    </div>  

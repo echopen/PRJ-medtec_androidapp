@@ -7,13 +7,12 @@
     <div class="grouperight">
         <h1><img src="/img/echopen-gradient-big.png"></h1>
         <div class="paragraphe">
-            <span class="title">At vero eos et accusamus et iusto odio dignissimos ducimus.</span>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
-                deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati
-                cupiditate non providen.</p>
+            <span class="title">Un projet open source basé sur l’innovation communautaire.</span>
+            <p>Pour créer un écho-stéthoscope à un prix abordable (sonde à ultrasons), de manière sûre et simple de façon mobile.
+            </p>
         </div>
         <div class="base_btn">
-            <a href="#">super cta</a>
+            <a href="#">Rejoignez le projet !</a>
         </div>
         <div class="share">
             <ul>
@@ -28,20 +27,22 @@
     <div class="rectangle">
         <ul>
             <li>
-                <div class="title_value"><p>valorisation</p></div>
-                <div class="value"><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p></div>
+                <div class="title_value"><p>Une Communauté </p></div>
+                <div class="value"><p>Le projet, disponible en Open source est en constante amélioration grâce à la contribution de la communauté qui ne cesse de s’agrandir.
+                    </p></div>
             </li>
             <li>
-                <div class="title_value"><p>valorisation</p></div>
-                <div class="value"><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p></div>
+                <div class="title_value"><p>48 Heures </p></div>
+                <div class="value"><p>Suivez une formation et apprenez à maîtriser l’echo-stéthoscope en seulement 48h. Un temps record pour faire des examens cliniques plus poussés.</p></div>
             </li>
             <li>
-                <div class="title_value"><p>valorisation</p></div>
-                <div class="value"><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p></div>
+                <div class="title_value"><p>Le prix</p></div>
+                <div class="value"><p>Un point fort de notre produit, étant le prix, cela nous permet de rendre accessible le diagnostic par l’image à tout le monde.
+                    </p></div>
             </li>
             <li>
-                <div class="title_value"><p>valorisation</p></div>
-                <div class="value"><p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p></div>
+                <div class="title_value"><p>Atoxic</p></div>
+                <div class="value"><p>Notre solution ne dégage pas de radiations et n’utilise pas de doppler couleur, les risques allergéniques et sanitaires en sont donc réduits.</p></div>
             </li>
         </ul>
     </div>
