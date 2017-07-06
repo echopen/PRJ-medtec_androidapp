@@ -33,6 +33,7 @@ import java.util.List;
 public class GalleryFragment extends Fragment {
 
     List<Image> list;
+
     public GalleryFragment() {
         // Required empty public constructor
     }
@@ -59,8 +60,10 @@ public class GalleryFragment extends Fragment {
         ImageDAO imageDAO = new ImageDAO(getContext());
         imageDAO.open();
         Image image = imageDAO.getLastImg();
-        Bitmap bitmap = ImageService.loadImageFromStorage(image.getImgName());
-        firstImg.setImageBitmap(bitmap);
+        if (image.getImgName() != null) {
+            Bitmap bitmap = ImageService.loadImageFromStorage(image.getImgName());
+            firstImg.setImageBitmap(bitmap);
+        }
 
         List<Image> images = imageDAO.getAll();
         GridView gridView = (GridView) getActivity().findViewById(R.id.gridview);
@@ -101,7 +104,9 @@ public class GalleryFragment extends Fragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ImageView imageView = new ImageView(mContext);
-            imageView.setImageBitmap(ImageService.loadImageFromStorage(imageList.get(position).getImgName()));
+            if (!imageList.isEmpty()) {
+                imageView.setImageBitmap(ImageService.loadImageFromStorage(imageList.get(position).getImgName()));
+            }
             return imageView;
         }
     }
