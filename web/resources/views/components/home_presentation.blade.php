@@ -16,7 +16,7 @@
         </div>
         <div class="share">
             <ul>
-                <li><p>Share on</p></li>
+                <li><p>Nous suivre:</p></li>
                 <li><a href="#"><img src="/img/facebook.svg"></a></li>
                 <li><a href="#"><img src="/img/twitter.svg"></a></li>
                 <li><a href="#"><img src="/img/linkedin.svg"></a></li>
