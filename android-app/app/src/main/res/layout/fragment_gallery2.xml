@@ -51,8 +51,20 @@
                     android:id="@+id/imgView_first"
                     android:layout_width="match_parent"
                     android:layout_height="400dp"
-                    app:srcCompat="@color/blue_sky"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@color/blue_sky" />
+
+                <GridView
+                    android:id="@+id/gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:stretchMode="columnWidth"
+                    android:numColumns="3"
+                    android:verticalSpacing="1dp"
+                    android:horizontalSpacing="1dp"
+                    android:gravity="center"
+                    >
+                </GridView>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
