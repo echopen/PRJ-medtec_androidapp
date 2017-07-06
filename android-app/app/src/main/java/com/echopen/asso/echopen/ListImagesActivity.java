@@ -31,10 +31,7 @@ public class ListImagesActivity extends Activity {
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Log.d("galleryImageclck",""+id);
-                switchActivity((int)id);
-
-
+                switchActivity((int)position);
             }
         });
     }

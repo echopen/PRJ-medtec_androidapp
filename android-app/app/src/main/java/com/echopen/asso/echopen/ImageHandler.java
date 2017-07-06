@@ -7,6 +7,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -68,6 +70,13 @@ public class ImageHandler {
         Drawable chosenImage = drawable;
 
         return chosenImage;
+    }
+
+    protected String getImageName(int imageId)
+    {
+        File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
+        String name = allImages[imageId].getName();
+        return name;
     }
 
     public void setContext(Context context) {

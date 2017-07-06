@@ -1,9 +1,12 @@
 package com.echopen.asso.echopen;
 
 import android.app.Application;
+import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.ui.RenderingContextController;
+
+import java.io.File;
 
 /**
  * Created by lecoucl on 05/06/17.
@@ -22,12 +25,14 @@ public class EchOpenApplication extends Application {
 
         mEchographyImageStreaming = new EchographyImageStreamingService(new RenderingContextController());
 
-/**        String[] Files =  this.fileList();
+          String[] Files =  this.fileList();
 
-        for(String file : Files){
-            Log.d("Fichier Savedddddd","fichier"+file);
+
+   /**     for(String file : Files){
+             File test =new File(this.getFilesDir()+"/"+file+"/"+);
+            Log.d("Fichier Savedddddd","fichier"+);
         }
-*/
+    */
     }
 
     /**
