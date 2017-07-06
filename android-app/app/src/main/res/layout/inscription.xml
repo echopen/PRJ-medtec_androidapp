@@ -9,14 +9,31 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:background="#039bef" />
+        android:layout_height="170dp"
+        android:background="@drawable/gradient" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/LogoEcho"
+            android:layout_width="130dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/logo"
+            android:layout_marginBottom="40dp" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:background="#FFF"
+        android:background="@color/white"
         android:layout_below="@+id/imageView"
         android:orientation="vertical">
     </LinearLayout>
@@ -27,81 +44,84 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="-50dp"
-        android:paddingTop="80px"
+        android:paddingTop="15dp"
         android:layout_centerInParent="true"
-        android:background="#FFF"
         android:layout_below="@+id/imageView"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/radius_linearlayout">
 
         <TextView
-            android:text="Inscription"
+            android:text="@string/inscription"
+            android:textAllCaps="true"
             android:layout_width="200dp"
             android:gravity="center"
-            android:textSize="32sp"
-            android:textColor="#039bef"
+            android:textSize="20sp"
+            android:textColor="@color/blue_dark"
             android:layout_gravity="center"
-            android:layout_marginBottom="80px"
+            android:layout_marginBottom="20dp"
             android:layout_height="50dp" />
 
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="50px"
+            android:layout_height="55dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="#f2fcf9"
             android:ems="10"
-            android:hint="Nom"
+            android:hint="@string/nom"
             android:inputType="textPersonName"
-            android:paddingLeft="25px" />
+            android:paddingLeft="13dp" />
 
         <EditText
             android:id="@+id/editText2"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:paddingLeft="25px"
+            android:layout_height="55dp"
+            android:paddingLeft="13dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="50px"
+            android:layout_marginBottom="10dp"
             android:ems="10"
-            android:hint="Prénom"
+            android:hint="@string/prenom"
             android:background="#f2fcf9"
             android:inputType="textPersonName"/>
 
         <EditText
             android:id="@+id/editText3"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:paddingLeft="25px"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="50px"
+            android:layout_marginBottom="10dp"
             android:ems="10"
-            android:hint="Adresse mail"
+            android:hint="@string/mail"
             android:background="#f2fcf9"
             android:inputType="textPersonName"/>
 
         <EditText
             android:id="@+id/editText4"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:paddingLeft="25px"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="50px"
+            android:layout_marginBottom="40dp"
             android:ems="10"
-            android:hint="Mot de passe"
+            android:hint="@string/mdp"
             android:background="#f2fcf9"
             android:inputType="textPersonName"/>
 
         <Button
             android:id="@+id/button_register"
-            android:text="Je m'inscris"
+            android:text="@string/inscris"
             android:layout_gravity="center"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"/>
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:textColor="@color/white"
+            android:background="@drawable/button_bg_rounded_corners_blue"/>
 
     </LinearLayout>
 

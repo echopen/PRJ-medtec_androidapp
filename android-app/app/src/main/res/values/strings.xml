@@ -11,6 +11,41 @@
     <string name="gallery">Gallery</string>
     <string name="select">Select</string>
 
+    <string name="nom">Nom</string>
+    <string name="prenom">Prenom</string>
+    <string name="mail">Adresse mail</string>
+    <string name="mdp">Mot de passe</string>
+    <string name="inscris">Je m\'inscris</string>
+
+
+    <string name="choix">Choisissez votre main dominante</string>
+    <string name="passerEtapes">Passer les étapes</string>
+    <string name="valider">Valider</string>
+
+    <string name="gauche">Gaucher</string>
+    <string name="droite">Droite</string>
+
+    <string name="favoris">Choisissez vos paramètres favoris</string>
+
+    <string name="sexe">Sexe</string>
+    <string name="trancheage">Tranche d\'âge</string>
+    <string name="corpulence">Corpulence</string>
+    <string name="organe">Organe</string>
+
+    <string name="frequence">Frequence</string>
+    <string name="gain">Gain</string>
+
+    <string name="identifiant">Identifiant</string>
+    <string name="notes">Notes</string>
+
+    <string name="nomChange">Kelly</string>
+    <string name="prenomChange">Mark</string>
+    <string name="profession">Médecin généraliste</string>
+    <string name="parametreFavoris">Notes</string>
+
+
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
