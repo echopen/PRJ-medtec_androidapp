@@ -3,6 +3,10 @@
     background-color: $lightgrey;
     padding-top: 0;
     overflow: hidden;
+    margin-top: 0;
+    .entry_desc{
+            padding-bottom: 0;
+    }
     .entry_wrapper{
         height: 48.750em;
         width: 68.750em;
@@ -29,6 +33,7 @@
     .entry_title{
         
     }
+    
     .entry_slick-solo{
         .base_item-content{
             min-height: 28.125em;     
