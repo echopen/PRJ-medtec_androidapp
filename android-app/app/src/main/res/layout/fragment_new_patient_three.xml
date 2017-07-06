@@ -15,9 +15,9 @@
         android:layout_weight="1"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="Patient's informations"
+        android:text="@string/new_patient_title"
         android:textAlignment="center"
-        android:textColor="@drawable/theme_blue"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -38,8 +38,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
+                android:paddingTop="35dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="0.5"
-                android:src="@drawable/man"
+                android:src="@drawable/maigre"
                 android:visibility="visible"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
@@ -49,7 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Adult"
+                android:text="Maigre"
                 android:textColor="@color/gray_light" />
         </LinearLayout>
 
@@ -64,7 +66,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:src="@drawable/man"
+                android:paddingTop="15dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/normal"
                 android:visibility="visible"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
@@ -74,7 +78,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Pragnant"
+                android:text="Normal"
                 android:textColor="@color/gray_light" />
         </LinearLayout>
 
@@ -90,7 +94,8 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentBottom="true"
                 android:layout_weight="0.5"
-                android:src="@drawable/man"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/gros"
                 android:visibility="visible"
                 tools:layout_editor_absoluteX="0dp"
                 tools:layout_editor_absoluteY="0dp" />
@@ -100,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Child"
+                android:text="Corpulent"
                 android:textColor="@color/gray_light" />
         </LinearLayout>
 
@@ -131,7 +136,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+            android:text="@string/select_instruction_label"
             android:textColor="@color/gray_light"
             android:textSize="16sp" />
 
@@ -160,7 +165,7 @@
             android:background="@drawable/theme_blue"
             android:clickable="true"
             android:gravity="center"
-            android:text="Finish"
+            android:text="Terminer"
             android:textColor="#ffffff"
             android:textSize="20sp" />
 

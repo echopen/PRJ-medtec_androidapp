@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
     android:background="@color/colorPrimaryDark"
@@ -12,11 +13,10 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
-    <TextView
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="164dp"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Navigation Drawer Example"
-        android:textAppearance="?android:textAppearanceLarge" />
+        app:srcCompat="@drawable/logo" />
 
 </LinearLayout>

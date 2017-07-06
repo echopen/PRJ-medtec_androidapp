@@ -209,7 +209,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
             fileOutputStream = new FileOutputStream(new_file);
             Bitmap bitmap = viewToBitmap(imageViewBitmap, imageViewBitmap.getWidth(), imageViewBitmap.getHeight());
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-            Toast.makeText(getActivity(), "SAve image success", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Save image success", Toast.LENGTH_SHORT).show();
             fileOutputStream.flush();
             fileOutputStream.close();
 

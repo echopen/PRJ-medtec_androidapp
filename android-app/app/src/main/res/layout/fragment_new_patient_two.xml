@@ -15,9 +15,9 @@
         android:layout_weight="1"
         android:fontFamily="sans-serif"
         android:gravity="center"
-        android:text="Patient's informations"
+        android:text="@string/new_patient_title"
         android:textAlignment="center"
-        android:textColor="@drawable/theme_blue"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -49,7 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Adult"
+                android:text="Adulte"
                 android:textColor="@color/gray_light" />
         </LinearLayout>
 
@@ -74,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Pregnant"
+                android:text="Enceinte"
                 android:textColor="@color/gray_light" />
         </LinearLayout>
 
@@ -100,7 +100,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Child"
+                android:text="Enfant"
                 android:textColor="@color/gray_light" />
         </LinearLayout>
 
@@ -131,7 +131,7 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+            android:text="@string/select_instruction_label"
             android:textColor="@color/gray_light"
             android:textSize="16sp" />
 
@@ -160,7 +160,7 @@
             android:background="@drawable/theme_blue"
             android:clickable="true"
             android:gravity="center"
-            android:text="Next"
+            android:text="Suivant"
             android:textColor="#ffffff"
             android:textSize="20sp" />
 

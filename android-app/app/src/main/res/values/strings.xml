@@ -13,6 +13,8 @@
     <string name="lut_params">Lut Params:</string>
     <string name="gain">Gain:</string>
     <string name="new_patient_activity_label">Add new patient</string>
+    <string name="new_patient_title">Informations Patient</string>
+    <string name="select_instruction_label">Selectionnez un élément de la liste</string>
     <string-array name="filter_choice">
         <item>Convolution</item>
         <item>Image enhancement</item>
