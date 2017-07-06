@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
+    android:background="@drawable/background_settings"
     android:visibility="visible"
     android:id="@+id/settings_layer"
     tools:context="com.echopen.asso.echopen.fragments.SettingsFragment">
