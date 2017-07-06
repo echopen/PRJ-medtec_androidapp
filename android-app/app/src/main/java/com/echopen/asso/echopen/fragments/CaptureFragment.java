@@ -26,8 +26,9 @@ import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImage
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+import com.echopen.asso.echopen.filters.BaseProcess;
+import com.echopen.asso.echopen.filters.ImageEnhancement;
 import com.echopen.asso.echopen.ui.RenderingContextController;
-import com.echopen.asso.echopen.utils.Timer;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -105,7 +106,7 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
                 public void run() {
                     ImageView echoImage = (ImageView) getView().findViewById(R.id.echo_view);
                     echoImage.setImageBitmap(iBitmap);
-                    Timer.logResult("Display Bitmap");
+                    //Timer.logResult("Display Bitmap");
                 }
 
             });
