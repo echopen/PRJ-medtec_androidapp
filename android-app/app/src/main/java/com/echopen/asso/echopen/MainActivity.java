@@ -1,23 +1,18 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.FragmentManager;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.view.MotionEvent;
-import android.view.GestureDetector.SimpleOnGestureListener;
-import android.view.View;
-import android.widget.ImageView;
-import android.view.MotionEvent;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
@@ -39,7 +34,7 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements View.OnTouchListener {
+public class MainActivity extends FragmentActivity implements View.OnTouchListener {
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -50,6 +45,7 @@ public class MainActivity extends Activity implements View.OnTouchListener {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //-----------------------------------------------------------------
@@ -107,6 +103,26 @@ public class MainActivity extends Activity implements View.OnTouchListener {
 
         });
 
+        final GestureDetector pu = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
+
+
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                Log.d("tap","popup "+e);
+               //------
+                FragmentManager fm = getFragmentManager();
+                PopupFragment dialogFragment = new PopupFragment();
+
+                dialogFragment.show(fm, "Sample Fragment");
+
+
+                return true;
+            }
+
+
+
+        });
         Button mainButton = (Button) findViewById(R.id.button2);
         mainButton.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -121,7 +137,15 @@ public class MainActivity extends Activity implements View.OnTouchListener {
         stream.connect(mode,this);
         presenter.start();
         //-----------------------------------------------------------------
+        Button popupbtn = (Button) findViewById(R.id.popupbutton);
 
+        popupbtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                return pu.onTouchEvent(event);
+            }
+        });
     }
 
     @Override

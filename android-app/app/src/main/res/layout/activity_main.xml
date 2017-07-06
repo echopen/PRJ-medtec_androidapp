@@ -3,7 +3,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
 
     <EditText
         android:id="@+id/editText"
@@ -18,7 +19,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/common_google_signin_btn_text_dark_default"
-        app:srcCompat="@drawable/common_full_open_on_phone"/>
+        app:srcCompat="@drawable/common_full_open_on_phone"
+        android:layout_below="@+id/popupbutton"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="207dp" />
 
     <Button
         android:id="@+id/button2"
@@ -27,6 +31,14 @@
         android:background="@drawable/scan"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
+    <Button
+        android:id="@+id/popupbutton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="@color/red_light"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toEndOf="@+id/button2"
+        android:layout_marginStart="42dp" />
 
 </RelativeLayout>
 
