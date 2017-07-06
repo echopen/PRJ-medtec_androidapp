@@ -13,22 +13,19 @@
 @import "./components/faq";
 @import "./components/slider";
 @import "./components/home/community";
-
 @import "./components/history";
 @import "./components/value";
 @import "./components/faq/faq";
 @import "./components/home/partners";
 @import "./components/community/guest";
 @import "./components/community/logged";
-
-
 @import "./components/contact/contact";
-
+@import "./components/product/product";
 body>.container {
     max-width: 1440px;
     padding: 0;
     width: 100%;
 }
-@import "./components/numbers";
 
+@import "./components/numbers";
 @import "./components/howitworks";

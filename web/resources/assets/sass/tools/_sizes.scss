@@ -58,7 +58,7 @@ $screen-lgCustom-desktop: $screen-lgCustom-min !default;
 }
 
 @mixin desktop {
-    @media (min-width: $screen-mdCustom-min + 1) {
+    @media (min-width: ($screen-mdCustom-min + 1)) {
         @content;
     }
 }
