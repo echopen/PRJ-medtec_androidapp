@@ -3,7 +3,8 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:gravity="center">
 
     <RelativeLayout
         android:id="@+id/fragmentlayout"
@@ -12,45 +13,125 @@
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/imageView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/logo_echopen" />
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:id="@+id/linearLayout">
 
-    <Button
-        android:id="@+id/signin_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sign in" />
+        <Button
+            android:id="@+id/signin_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:text="sign in"
+            android:textColor="@color/blue_dark"
+            android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/signup_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sign up" />
+        <Button
+            android:id="@+id/signup_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/gray_very_light"
+            android:background="@color/white"
+            android:text="sign up"
+            android:layout_weight="1"
+            android:textStyle="bold"/>
 
-    <Button
-        android:id="@+id/emergency_bt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Emergency" />
+        <Button
+            android:id="@+id/emergency_bt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red_light"
+            android:background="@color/white"
+            android:text="Emergency"
+            android:layout_weight="1"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableStart="@drawable/email_icon"
+        android:drawablePadding="20dp"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:background="@drawable/whiteroundedbutton"
+        android:elevation="2dp"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:drawableStart="@drawable/password_icon"
+        android:drawablePadding="20dp"
+        android:paddingLeft="30dip"
+        android:paddingRight="26dip"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/enter_bt"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/blue_dark"
-        android:text="Enter"/>
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/blueroundedbutton"
+        android:elevation="12dp"
+        android:text="Enter"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
     <Button
         android:id="@+id/forgotpassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left|right"
-
-
-        android:text="Forgot your password ?" />
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@color/white"
+        android:text="Forgot your password ?"
+        android:textColor="@color/gray_light" />
 
 </LinearLayout>
 
