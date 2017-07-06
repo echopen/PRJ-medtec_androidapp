@@ -3,17 +3,19 @@
         <div class="entry_title">
            <div class="entry_wrapper-small">
             <span class="entry_meta">
-            impacting figures
+            Suivez nous
        </span>
             <h3 class="entry_strong">
-                Join <span>the community</span>
+                Rejoindre <span>la communauté</span>
             </h3>
             </div>
             <p class="entry_sub_desc">
-                At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non providen.
+                Vous aimez notre projet ? Vous souhaitez y contribuer ?<br>
+Rejoignez nous et apportez votre savoir faire où que vous soyez dans le monde !
+
             </p>
             <div class="base_btn">
-                <a href="#">super cta</a>
+                <a href="#">Rejoignez nous !</a>
             </div>
         </div>
     </div>
