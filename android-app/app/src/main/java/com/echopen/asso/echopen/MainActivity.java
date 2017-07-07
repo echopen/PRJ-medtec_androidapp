@@ -67,7 +67,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, loginFragment).addToBackStack(null).commit();
 
 //        //launch probe
-/*        EchOpenApplication echOpenApplication = ( EchOpenApplication ) getApplication();
+        EchOpenApplication echOpenApplication = ( EchOpenApplication ) getApplication();
 
         final EchographyImageStreamingService serviceEcho = echOpenApplication.getEchographyImageStreamingService();
 
@@ -92,7 +92,7 @@ public class MainActivity extends FragmentActivity implements View.OnClickListen
         EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(REDPITAYA_IP, REDPITAYA_PORT);
         serviceEcho.connect(mode, this);
 
-        presenter.start();*/
+        presenter.start();
     }
 
     @Override
