@@ -11,21 +11,12 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.parse.signpost.http.HttpResponse;
-
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Arrays;
-
-import javax.net.ssl.HttpsURLConnection;
 
 /**
  * This class holds for a custom SplashScreen
@@ -362,6 +353,17 @@ public class chooseProfile extends Activity
         System.out.println(Arrays.toString(choices));
         if (!choiceGender.equals("") && !choiceAge.equals("") && !choiceFatness.equals("") && !choiceOrgan.equals("")){
             Log.d("test", "redirect to device camera");
+
+            Button returnMainActivity = (Button) findViewById(R.id.validChoice);
+
+            returnMainActivity.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent returnHome = new Intent(chooseProfile.this, MainActivity.class);
+                    startActivity(returnHome);
+                }
+            });
+
         } else {
             Log.d("test", "profile not complete");
         }
