@@ -2,10 +2,8 @@ package com.echopen.asso.echopen;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
@@ -14,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -30,7 +27,6 @@ public class GaleryFragment extends Fragment {
     private boolean[] thumbnailsselection;
     private String[] arrPath;
     private ImageAdapter imageAdapter;
-
 
     public GaleryFragment() {
         // Required empty public constructor
@@ -81,8 +77,8 @@ public class GaleryFragment extends Fragment {
         imagecursor.close();
 
 
-        final Button selectBtn = (Button) view.findViewById(R.id.selectBtn);
-        selectBtn.setOnClickListener(new View.OnClickListener() {
+        final ImageView removeBtn = (ImageView) view.findViewById(R.id.remove);
+        removeBtn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -134,6 +130,7 @@ public class GaleryFragment extends Fragment {
         }
 
         public View getView(int position, View convertView, ViewGroup parent) {
+
             ViewHolder holder;
             if (convertView == null) {
                 holder = new ViewHolder();
@@ -149,30 +146,41 @@ public class GaleryFragment extends Fragment {
             }
             holder.checkbox.setId(position);
             holder.imageview.setId(position);
+
             holder.checkbox.setOnClickListener(new View.OnClickListener() {
+
+                View b = getActivity().findViewById(R.id.set_visible);
+
 
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
                     CheckBox cb = (CheckBox) v;
+
                     int id = cb.getId();
                     if (thumbnailsselection[id]){
                         cb.setChecked(false);
                         thumbnailsselection[id] = false;
+                        Log.d("TAG" , "false");
+                        b.setVisibility(View.INVISIBLE);
                     } else {
                         cb.setChecked(true);
                         thumbnailsselection[id] = true;
+                        Log.d("TAG", "true");
+                        b.setVisibility(View.VISIBLE);
                     }
                 }
+
             });
             holder.imageview.setOnClickListener(new View.OnClickListener() {
 
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
-                    int id = v.getId();
-                    Intent intent = new Intent();
-                    intent.setAction(Intent.ACTION_VIEW);
-                    intent.setDataAndType(Uri.parse("file://" + arrPath[id]), "image/*");
-                    startActivity(intent);
+                    //int id = v.getId();
+                    //Intent intent = new Intent();
+                    //intent.setAction(Intent.ACTION_VIEW);
+                    //intent.setDataAndType(Uri.parse("file://" + arrPath[id]), "image/*");
+                    //startActivity(intent);
+                    //Log.d("TAG" , "click");
                 }
             });
             holder.imageview.setImageBitmap(thumbnails[position]);
