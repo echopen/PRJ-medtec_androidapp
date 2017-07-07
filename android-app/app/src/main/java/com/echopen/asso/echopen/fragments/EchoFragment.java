@@ -70,6 +70,8 @@ public class EchoFragment extends Fragment {
         Button btn_login = (Button) v.findViewById(R.id.btn_login);
         final RelativeLayout modale_login = (RelativeLayout) v.findViewById(R.id.modale_connexion);
 
+        Button btn_reconnect = (Button) v.findViewById(R.id.btn_reconnect);
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,6 +83,13 @@ public class EchoFragment extends Fragment {
                     modale_login.setVisibility(View.VISIBLE);
                     modaleVisible = true;
                 }
+            }
+        });
+
+        btn_reconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initProbe();
             }
         });
 
