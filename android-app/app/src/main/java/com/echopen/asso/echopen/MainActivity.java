@@ -12,6 +12,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
 
 import com.echopen.asso.echopen.bdd.DAOBase;
 import com.echopen.asso.echopen.bdd.DatabaseHandler;
@@ -82,6 +84,11 @@ public class MainActivity extends FragmentActivity {
         super.onResume();
     }
 
+    public void goToMainPage(View view) {
+
+        mPager.setCurrentItem(1);
+    }
+
 
     /**
      * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
@@ -105,4 +112,7 @@ public class MainActivity extends FragmentActivity {
             return this.fragments.size();
         }
     }
+
+
+
 }

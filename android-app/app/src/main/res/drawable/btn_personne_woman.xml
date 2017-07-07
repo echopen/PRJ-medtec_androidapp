@@ -4,10 +4,10 @@
 
     <item
         android:drawable="@drawable/woman_icon"
-        android:state_checked="true"
+        android:state_checked="false"
 
         />
     <item
         android:drawable="@drawable/woman_icon_selected"
-        android:state_checked="false" />
+        android:state_checked="true" />
 </selector>

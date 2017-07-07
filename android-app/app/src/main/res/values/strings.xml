@@ -31,4 +31,6 @@
     <string name="btn_valid_signal">Valider</string>
     <string name="title_activity_faq">FAQActivity</string>
     <string name="txt_FAQ">FAQ</string>
+    <string name="gallery">Gallery</string>
+
 </resources>

@@ -21,11 +21,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        tools:layout_constraintBottom_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintRight_creator="1"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_editor_absoluteX="6dp">
+     >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,6 +35,7 @@
                android:layout_height="match_parent">
 
                <TextView
+                   android:id="@+id/param"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="@string/btn_settings"
@@ -56,16 +53,10 @@
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.999"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.513"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.089"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp">
 
@@ -82,7 +73,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="30dp">
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:paddingTop="15dp">
+
 
 
                 <RadioGroup
@@ -135,15 +129,10 @@
             android:layout_weight="1"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="18dp"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="18dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="28dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.429">
+            android:layout_marginTop="28dp">
 
             <TextView
                 android:id="@+id/settings_parametre_morpho"
@@ -172,6 +161,7 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:button="@null"
+                        android:textColor="@color/black"
                         android:drawableBottom="@drawable/btn_morpho"
                         android:gravity="center"
                         android:scaleX="1.3"
@@ -186,6 +176,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginRight="30dp"
                         android:button="@null"
+                        android:textColor="@color/black"
                         android:drawableBottom="@drawable/btn_morpho"
                         android:gravity="center"
                         android:scaleX="1.3"
@@ -194,7 +185,7 @@
 
                     <RadioButton
                         android:id="@+id/btn_morpho_l"
-
+                        android:textColor="@color/black"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:button="@null"
@@ -216,19 +207,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1."
+            android:layout_weight="1.3"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.523"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.78">
+
+          >
 
             <TextView
                 android:id="@+id/settings_parametre_organe"
@@ -243,55 +229,57 @@
             <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingTop="60dp">
+                android:paddingTop="40dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:src="@drawable/organe1_icon"
+                        android:src="@drawable/preset_organe_1"
+                        android:background="@null"
+
 
                         />
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:src="@drawable/organe2_icon"
-
+                        android:src="@drawable/preset_organ_2"
+                        android:background="@null"
                         />
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:src="@drawable/organe3_icon"
-
+                        android:src="@drawable/preset_organ_3"
+                        android:background="@null"
                         />
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:src="@drawable/organe4_icon"
-
+                        android:src="@drawable/preset_organ_4"
+                        android:background="@null"
                         />
 
-                    <ImageView
+                    <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:src="@drawable/organe4_icon"
-
+                        android:src="@drawable/preset_organ_4"
+                        android:background="@null"
                         />
                 </LinearLayout>
             </HorizontalScrollView>
@@ -310,7 +298,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:background="@null"
+                android:id="@+id/switch_page_settings"
                 android:src="@drawable/btn_floating"
+                android:onClick="goToMainPage"
                 />
         </RelativeLayout>
 

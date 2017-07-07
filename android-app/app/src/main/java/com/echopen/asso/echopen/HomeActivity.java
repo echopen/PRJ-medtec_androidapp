@@ -37,7 +37,7 @@ public class HomeActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private void goDetailsActivity() {
+    public void goDetailsActivity() {
         Intent intent = new Intent(HomeActivity.this, MainActivity.class);
         startActivity(intent);
     }
