@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_weight="0.03"
+        android:gravity="center"
+        android:text="@string/choose"
+        android:textColor="@color/blue_sky"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <HorizontalScrollView
+        android:id="@+id/hsv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/innerLay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/heart"
+                    android:layout_width="59dp"
+                    android:layout_height="43dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/heart" />
+
+                <TextView
+                    android:id="@+id/heart_text"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/coeur" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/obstetrique"
+                    android:layout_width="59dp"
+                    android:layout_height="43dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/obstetrique" />
+
+                <TextView
+                    android:id="@+id/obstetrique_text"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ulterus" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/poumon"
+                    android:layout_width="59dp"
+                    android:layout_height="43dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/poumon" />
+
+                <TextView
+                    android:id="@+id/poumon_text"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/poumon" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/uro_digestif"
+                    android:layout_width="59dp"
+                    android:layout_height="43dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/uro_digestif" />
+
+                <TextView
+                    android:id="@+id/uro_digestif_text"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/uro_digestif" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/osteo_articulaire"
+                    android:layout_width="59dp"
+                    android:layout_height="43dp"
+                    android:layout_marginBottom="10dp"
+                    android:src="@drawable/osteo_articulaire2" />
+
+                <TextView
+                    android:id="@+id/osteo_articulaire_text"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/osteo_articulaire" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/chooseOrgan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_weight="0.03"
+        android:background="@color/eastern_dark_blue"
+        android:text="@string/choose"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

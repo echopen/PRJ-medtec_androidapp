@@ -1,4 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <string name="app_name">echopen</string>
+    <string name="app_name">echopen</string>
+    <string name="main_activity_bt_new_patient">Nouveau patient</string>
+    <string name="main_activity_bt_old_patient">Dossier patient</string>
+
+    <string name="refresh">Refresh</string>
+    <string name="external_storage_error">Extenal Storage Error</string>
+    <string name="filter_message">Choose your filters</string>
+    <string name="protocol_message">Choose your protocol</string>
+    <string name="ok_dialog">Ok</string>
+    <string name="cancel_dialog">Cancel</string>
+    <string name="lut_params">Lut Params:</string>
+    <string name="gain">Gain:</string>
+    <string name="new_patient_activity_label">Add new patient</string>
+    <string name="new_patient_title">Informations Patient</string>
+    <string name="select_instruction_label">Sélectionnez les caractéristiques correspondantes à votre patient.</string>
+    <string-array name="filter_choice">
+        <item>Convolution</item>
+        <item>Image enhancement</item>
+        <item>Other filter</item>
+        <item>Other filter</item>
+    </string-array>
+    <string-array name="protocol_choice">
+        <item>local</item>
+        <item>TCP</item>
+        <item>UDP</item>
+    </string-array>
+    <string-array name="choose_camera">
+        <item>Take Picture</item>
+        <item>Take Picture</item>
+        <item>Choose Picture</item>
+        <item>Choose Picture</item>
+    </string-array>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="choose">CHOISIR</string>
+    <string name="ulterus">Ulterus</string>
+    <string name="poumon">Poumon</string>
+    <string name="coeur">Coeur</string>
+    <string name="uro_digestif">Uro digestif</string>
+    <string name="osteo_articulaire">Osteo</string>
+    <string name="title_activity_add_patient">New patient</string>
 </resources>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.echopen.asso.echopen.MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="@string/new_patient_title"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/imageButtonMaigre"
+                android:layout_width="match_parent"
+                android:scaleType="centerInside"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:paddingTop="40dp"
+                android:background="@null"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/maigre" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Maigre"
+                android:textColor="@color/gray_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.5">
+
+            <ImageButton
+                android:id="@+id/imageButtonNormal"
+                android:layout_width="match_parent"
+                android:scaleType="centerInside"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:paddingTop="18dp"
+                android:background="@null"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/normal" />
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Normal"
+                android:textColor="@color/gray_light" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="0.5">
+
+            <ImageButton
+                android:id="@+id/imageButtonGros"
+                android:layout_width="match_parent"
+                android:scaleType="centerInside"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="12dp"
+                android:background="@null"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/gros" />
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Corpulent"
+                android:textColor="@color/gray_light" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Corpulence"
+            android:textAlignment="center"
+            android:textColor="@drawable/theme_blue"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="@string/select_instruction_label"
+            android:textColor="@color/gray_light"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="3 / 3"
+            android:textColor="@color/gray_light" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=".  .  ." />
+
+        <Button
+            android:id="@+id/finishForm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/theme_blue"
+            android:clickable="true"
+            android:gravity="center"
+            android:text="Terminer"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
