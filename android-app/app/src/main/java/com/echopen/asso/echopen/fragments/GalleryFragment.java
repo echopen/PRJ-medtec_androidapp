@@ -13,8 +13,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,22 +59,40 @@ public class GalleryFragment extends Fragment {
         TextView textView = (TextView) getActivity().findViewById(R.id.gallery);
         Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Lato-Bold.ttf");
         textView.setTypeface(typeface);
+
+        final Button btn_close = (Button) getActivity().findViewById(R.id.btn_closeImg);
+
+        final RelativeLayout showImage = (RelativeLayout) getActivity().findViewById(R.id.layout_showImg);
+        showImage.setVisibility(View.INVISIBLE);
+
+        final ImageView imageView = (ImageView) getActivity().findViewById(R.id.showImage) ;
+
         ImageDAO imageDAO = new ImageDAO(getContext());
         imageDAO.open();
         Image image = imageDAO.getLastImg();
+
         if (image.getImgName() != null) {
             Bitmap bitmap = ImageService.loadImageFromStorage(image.getImgName());
             firstImg.setImageBitmap(bitmap);
+            imageView.setImageBitmap(bitmap);
         }
 
-        List<Image> images = imageDAO.getAll();
+        final List<Image> images = imageDAO.getAll();
         GridView gridView = (GridView) getActivity().findViewById(R.id.gridview);
         gridView.setAdapter(new ImageAdapter(getContext(), images));
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                showImage.setVisibility(View.VISIBLE);
+                Bitmap bitmap = ImageService.loadImageFromStorage(images.get(position).getImgName());
+                imageView.setImageBitmap(bitmap);
+            }
+        });
+
+        btn_close.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showImage.setVisibility(View.INVISIBLE);
             }
         });
     }

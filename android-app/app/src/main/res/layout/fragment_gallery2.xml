@@ -67,5 +67,27 @@
                 </GridView>
             </LinearLayout>
         </ScrollView>
+
+        <RelativeLayout
+            android:id="@+id/layout_showImg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/showImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:srcCompat="@color/black"
+                android:background="@color/black"/>
+            <Button
+                android:id="@+id/btn_closeImg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Close"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
     </RelativeLayout>
+
 </LinearLayout>
