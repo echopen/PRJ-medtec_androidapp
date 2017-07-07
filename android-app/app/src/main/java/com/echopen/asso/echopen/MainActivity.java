@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    // UI is ready for signIn but not connected to backend since it doesn't exist yet
+
     private void btSignUpClicked(){
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
