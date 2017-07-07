@@ -1,6 +1,7 @@
 package com.echopen.asso.echopen;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -68,19 +69,21 @@ public class ScannerFragment extends Fragment {
 
             @Override
             public boolean onDoubleTapEvent(MotionEvent e) {
-                //planned event : screenshot
                 return true;
             }
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
-                //planned event : freeze on a frame to annotate, draw or zoom
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                transaction.replace(R.id.frame_layout, ScreenshotFragment.newInstance());
+                transaction.commit();
                 return true;
             }
 
             @Override
             public void onLongPress(MotionEvent e) {
-                //planned event record video
+                // planned event: end recording
             }
         });
 
@@ -159,8 +162,6 @@ public class ScannerFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
 
     }
 }
