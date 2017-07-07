@@ -69,7 +69,8 @@ public class ListImagesActivity extends Activity implements View.OnClickListener
         list.setAdapter(new ClientAdapter(this, getFilesDir()));
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                changeClientId(position, dialog);
+                // TODO: 07/07/2017 needs work around to change client ID  
+                // changeClientId(position,dialog);
             }
         });
         dialog.show();
