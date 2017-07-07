@@ -38,6 +38,7 @@ import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.ui.RulerView;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Constants;
+import com.echopen.asso.echopen.utils.Strings;
 import com.echopen.asso.echopen.utils.Timer;
 
 import java.io.File;
@@ -91,6 +92,8 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
     private ImageView poumonImage;
     private ImageView uroImage;
     private ImageView osteoImage;
+
+    private String shootButton;
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -325,6 +328,8 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         uroImage.setImageResource(R.drawable.uro_digestif);
         poumonImage.setImageResource(R.drawable.poumon);
         osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+
+        shootButton = (String) "cardiaque";
     }
 
     private void changeObstetriqueButton() {
@@ -333,6 +338,8 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         uroImage.setImageResource(R.drawable.uro_digestif);
         poumonImage.setImageResource(R.drawable.poumon);
         osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+
+        shootButton = (String) "obstetrique";
 
     }
 
@@ -343,6 +350,8 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         uroImage.setImageResource(R.drawable.uro_digestif);
         poumonImage.setImageResource(R.drawable.poumon_blue);
         osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+
+        shootButton = (String) "poumon";
     }
 
     private void changeUroButton() {
@@ -352,6 +361,8 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         uroImage.setImageResource(R.drawable.uro_digestif2_blue);
         poumonImage.setImageResource(R.drawable.poumon);
         osteoImage.setImageResource(R.drawable.osteo_articulaire2);
+
+        shootButton = (String) "uro_digestif";
     }
 
     private void changeOsteoButton() {
@@ -361,6 +372,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
         uroImage.setImageResource(R.drawable.uro_digestif);
         poumonImage.setImageResource(R.drawable.poumon);
         osteoImage.setImageResource(R.drawable.osteo_articulaire_blue);
+        shootButton = (String) "osteo_articulaire";
     }
 
     private void displayGallery(View rootView) {
