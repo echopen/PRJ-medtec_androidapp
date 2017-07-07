@@ -3,54 +3,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#039bef"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
     <LinearLayout
         android:id="@+id/containerHandChoice"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:paddingTop="80px"
-        android:layout_centerInParent="true"
         android:background="@null"
-        android:layout_below="@+id/imageView"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="53dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="Choisissez votre main dominante"
+            android:text="@string/choix"
             android:layout_width="200dp"
             android:gravity="center"
-            android:textSize="14sp"
-            android:textColor="#FFF"
+            android:textSize="17sp"
+            android:textColor="@color/white"
             android:layout_gravity="center"
-            android:layout_marginBottom="80px"
+            android:layout_marginBottom="30dp"
             android:layout_height="50dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="600px"
             android:gravity="center"
             android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/left_hand"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Gauche"
-            android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
-            android:textSize="16sp"/>
+            <Button
+                android:id="@+id/left_hand"
+                android:layout_width="150dp"
+                android:layout_height="300dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/white"
+                android:paddingTop="100dp"
+                android:paddingBottom="90dp"
+                android:text="@string/gauche"
+                android:background="@color/transparent_white"
+                android:drawableTop="@drawable/lefthand"
+                android:textSize="16sp"/>
 
-        <Button
-            android:id="@+id/right_hand"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Droitier"
-            android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
-            android:textSize="16sp"/>
+            <Button
+                android:id="@+id/right_hand"
+                android:layout_width="150dp"
+                android:layout_height="300dp"
+                android:paddingTop="100dp"
+                android:paddingBottom="90dp"
+                android:textColor="@color/white"
+                android:text="@string/droite"
+                android:drawableTop="@drawable/righthand"
+                android:background="@color/transparent_white"
+                android:textSize="16sp"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -62,14 +69,18 @@
         android:layout_gravity="center"
         android:gravity="center">
 
-        <Button
-            android:id="@+id/skip"
-            android:text="Passer les étapes"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_dark"/>
-
     </LinearLayout>
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_bg_rounded_corners_green"
+        android:text="Passer les étapes"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
 
 </RelativeLayout>

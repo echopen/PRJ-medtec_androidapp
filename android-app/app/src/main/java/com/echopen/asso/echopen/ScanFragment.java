@@ -19,6 +19,7 @@ public class ScanFragment extends Fragment {
     }
 
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,14 +27,12 @@ public class ScanFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.scan, container, false);
 
-        if (v.findViewById(R.id.gallery)!= null){
+        if (v.findViewById(R.id.gallery) != null) {
             v.findViewById(R.id.gallery).setOnClickListener((MainActivity) getActivity());
         }
-        if (v.findViewById(R.id.button_seances)!= null){
+        if (v.findViewById(R.id.button_seances) != null) {
             v.findViewById(R.id.button_seances).setOnClickListener((MainActivity) getActivity());
         }
-
         return v;
     }
-
 }
