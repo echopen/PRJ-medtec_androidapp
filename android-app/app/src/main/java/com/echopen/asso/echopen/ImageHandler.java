@@ -18,7 +18,6 @@ import java.util.Collections;
 public class ImageHandler {
 
     private int clientId;
-    private int imageId;
     private File galleryDirectory;
 
     private Context mContext;
@@ -69,12 +68,6 @@ public class ImageHandler {
         File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
         String name = allImages[imageId].getName();
         return name;
-    }
-
-    protected File getFileByImageId(int imageId) {
-        File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
-
-        return allImages[imageId];
     }
 
     public void setClientId(int clientId) {
