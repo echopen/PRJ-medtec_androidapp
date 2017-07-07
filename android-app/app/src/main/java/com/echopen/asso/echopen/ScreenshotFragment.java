@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class ScreenshotFragment extends Fragment {
+    private int position;
+    private Bitmap[] images;
+
     public static ScreenshotFragment newInstance() {
         ScreenshotFragment fragment = new ScreenshotFragment();
         return fragment;
@@ -29,7 +32,10 @@ public class ScreenshotFragment extends Fragment {
         final ImageView image = (ImageView) view.findViewById(R.id.imageView2);
 
         final imagesHandler imagesHandler = new imagesHandler(getActivity().getFilesDir());
-        image.setImageBitmap(imagesHandler.getLastCachedImage());
+
+        this.images = imagesHandler.getImagesForFreeze();
+
+        image.setImageBitmap(imagesHandler.getImagesForFreeze()[0]);
 
         ImageButton back = (ImageButton) view.findViewById(R.id.imageBack);
         back.setOnTouchListener(new View.OnTouchListener() {
@@ -51,6 +57,47 @@ public class ScreenshotFragment extends Fragment {
                     Bitmap imageBitmap = imagesHandler.drawableToBitmap(image.getDrawable());
                     imagesHandler.saveImage(imageBitmap);
                     Toast.makeText(getActivity(), "Image enregistrée", Toast.LENGTH_LONG).show();
+                }
+                return true;
+            }
+        });
+
+        this.position = 0;
+
+        final ImageButton previous = (ImageButton) view.findViewById(R.id.previous);
+        final ImageButton next = (ImageButton) view.findViewById(R.id.next);
+
+
+        previous.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    next.setVisibility(View.VISIBLE);
+                    position++;
+                    if (position < 5) {
+                        image.setImageBitmap(images[position]);
+                    }
+
+                    if (position >= 5) {
+                        previous.setVisibility(View.INVISIBLE);
+                    }
+                }
+                return true;
+            }
+        });
+
+        next.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                previous.setVisibility(View.VISIBLE);
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    position--;
+                    if (position > 0) {
+                        image.setImageBitmap(images[position]);
+                    }
+                    if (position < 0) {
+                        next.setVisibility(View.INVISIBLE);
+                    }
                 }
                 return true;
             }

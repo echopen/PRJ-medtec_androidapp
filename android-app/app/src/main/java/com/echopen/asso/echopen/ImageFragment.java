@@ -64,6 +64,8 @@ public class ImageFragment extends Fragment {
             }
         });
 
+
+
         return view;
     }
 
