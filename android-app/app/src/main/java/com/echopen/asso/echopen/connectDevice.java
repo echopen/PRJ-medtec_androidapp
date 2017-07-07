@@ -1,6 +1,7 @@
 package com.echopen.asso.echopen;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -33,7 +34,9 @@ public class connectDevice extends Activity
         closeConnectDevice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                //finish();
+                Intent Login = new Intent(connectDevice.this, Login.class);
+                startActivity(Login);
             }
         });
 

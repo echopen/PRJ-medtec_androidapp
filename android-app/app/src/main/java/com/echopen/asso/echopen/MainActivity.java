@@ -122,8 +122,11 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        //Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
-        //startActivity(chooseProfile);
+        Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
+        startActivity(chooseProfile);
+
+        //Intent Login = new Intent(MainActivity.this, Login.class);
+        //startActivity(Login);
 
         Intent connectDevice = new Intent(MainActivity.this, connectDevice.class);
         startActivity(connectDevice);

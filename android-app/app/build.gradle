@@ -168,4 +168,5 @@ dependencies {
     androidTestCompile 'com.google.dexmaker:dexmaker:1.2'
     androidTestCompile 'com.google.dexmaker:dexmaker-mockito:1.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:22.2.0'
 }

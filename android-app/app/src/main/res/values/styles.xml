@@ -86,4 +86,10 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="underline">
+        <!-- Used for the bottom line when not selected / focused -->
+        <item name="colorControlNormal">#8ECECA</item>
+        <!-- colorControlActivated & colorControlHighlight use the colorAccent color by default -->
+    </style>
 </resources>
