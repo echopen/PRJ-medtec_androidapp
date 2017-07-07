@@ -8,6 +8,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
+    android:textColor="@color/new_blue"
     android:text="@string/infosPatient"
     android:textSize="30sp"></TextView>
 
@@ -27,15 +28,16 @@
                 android:id="@+id/InfoSexe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="@color/new_blue"
                 android:text="@string/sex"
                 android:layout_centerHorizontal="true"
-                android:textSize="36sp"
+                android:textSize="26sp"
                 android:gravity="center"
                 />
 
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/Sexebtn"
+                android:id="@+id/female"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
@@ -46,7 +48,7 @@
                 android:layout_alignParentStart="true" />
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/Sexebtn1"
+                android:id="@+id/male"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
@@ -77,7 +79,8 @@
             android:layout_height="wrap_content"
             android:text="@string/age"
             android:layout_centerHorizontal="true"
-            android:textSize="36sp"
+            android:textColor="@color/new_blue"
+            android:textSize="26sp"
             android:gravity="center"
 
             />
@@ -87,7 +90,7 @@
             android:layout_centerHorizontal="true">
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/ageebtn"
+                android:id="@+id/child"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
@@ -98,7 +101,7 @@
                 android:layout_alignParentStart="true" />
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/agebtn1"
+                android:id="@+id/baby"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
@@ -108,7 +111,7 @@
                 android:layout_alignParentStart="true" />
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/agebtn2"
+                android:id="@+id/adult"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
@@ -131,7 +134,8 @@
             android:layout_height="wrap_content"
             android:text="@string/weight"
             android:layout_centerHorizontal="true"
-            android:textSize="36sp"
+            android:textSize="26sp"
+            android:textColor="@color/new_blue"
             android:gravity="center"
 
             />
@@ -141,7 +145,7 @@
             android:layout_centerHorizontal="true">
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/corpbtn"
+                android:id="@+id/thin"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
@@ -152,7 +156,7 @@
                 android:layout_alignParentStart="true" />
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/corpbtn1"
+                android:id="@+id/normal"
                 android:layout_marginStart="160dp"
 
                 android:layout_width="70dp"
@@ -164,7 +168,7 @@
                 android:layout_alignParentStart="true" />
             <ImageButton
                 android:background="@color/new_white_button"
-                android:id="@+id/corpbtn4"
+                android:id="@+id/big"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:adjustViewBounds="true"
