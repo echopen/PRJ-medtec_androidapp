@@ -15,6 +15,12 @@
     <string name="option_l">L</string>
     <string name="btn_start_home">Démarrer un examen</string>
     <string name="btn_login_home">Se connecter</string>
+
+    <string name="preference_personne">preference_personne</string>
+    <string name="morpho_m">M</string>
+    <string name="morpho_s">S</string>
+    <string name="morpho_l">L</string>
+
     <string name="title_activity_menu">MenuActivity</string>
     <string name="btn_edit_profil">Editer mon profil</string>
     <string name="btn_echographies">Echographies</string>

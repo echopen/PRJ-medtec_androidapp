@@ -21,6 +21,43 @@
             android:background="@color/transparent"
             android:text="@string/btn_menu"/>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:layout_marginLeft="24dp"
+                android:id="@+id/preference_capture_personne"
+                />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="18dp"
+               android:textColor="@color/black"
+               android:textSize="25dp"
+               android:id="@+id/preference_capture_morpho"
+               />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:layout_marginLeft="24dp"
+                android:id="@+id/preference_capture_organe"
+                />
+
+        </LinearLayout>
+        
+        
         <ImageView
             android:id="@+id/echo_view"
             android:layout_width="match_parent"
