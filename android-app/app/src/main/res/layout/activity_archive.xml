@@ -26,26 +26,74 @@
 
     <Button
         android:id="@+id/archive_folder_1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/archive"/>
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright1"
+        android:drawableStart="@drawable/archiveleft1"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°2630178" />
 
     <Button
         android:id="@+id/archive_folder_2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/archive"/>
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright2"
+        android:drawableStart="@drawable/archiveleft2"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°1827930" />
 
     <Button
         android:id="@+id/archive_folder_3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/archive"/>
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright3"
+        android:drawableStart="@drawable/archiveleft3"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°2904879" />
 
     <Button
         android:id="@+id/archive_folder_4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/archive"/>
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright4"
+        android:drawableStart="@drawable/archiveleft4"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°8273012" />
 
 </LinearLayout>

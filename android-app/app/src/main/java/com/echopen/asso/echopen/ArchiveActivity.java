@@ -18,13 +18,13 @@ public class ArchiveActivity extends AppCompatActivity implements View.OnClickLi
         archivebutton1.setOnClickListener(this);
 
         Button archivebutton2 = (Button) findViewById(R.id.archive_folder_2);
-        archivebutton1.setOnClickListener(this);
+        archivebutton2.setOnClickListener(this);
 
         Button archivebutton3 = (Button) findViewById(R.id.archive_folder_3);
-        archivebutton1.setOnClickListener(this);
+        archivebutton3.setOnClickListener(this);
 
         Button archivebutton4 = (Button) findViewById(R.id.archive_folder_4);
-        archivebutton1.setOnClickListener(this);
+        archivebutton4.setOnClickListener(this);
     }
 
     @Override

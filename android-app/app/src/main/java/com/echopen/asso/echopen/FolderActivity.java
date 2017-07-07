@@ -18,6 +18,18 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
 
         Button saved_image2 = (Button) findViewById(R.id.saved_image2_bt);
         saved_image2.setOnClickListener(this);
+
+        Button saved_image3 = (Button) findViewById(R.id.saved_image3_bt);
+        saved_image3.setOnClickListener(this);
+
+        Button saved_image4 = (Button) findViewById(R.id.saved_image4_bt);
+        saved_image4.setOnClickListener(this);
+
+        Button saved_image5 = (Button) findViewById(R.id.saved_image5_bt);
+        saved_image5.setOnClickListener(this);
+
+        Button saved_image6 = (Button) findViewById(R.id.saved_image6_bt);
+        saved_image6.setOnClickListener(this);
     }
 
     @Override
@@ -33,6 +45,18 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.saved_image2_bt :
                 btSavedImage2Clicked();
                 break;
+            case R.id.saved_image3_bt :
+                btSavedImage3Clicked();
+                break;
+            case R.id.saved_image4_bt :
+                btSavedImage4Clicked();
+                break;
+            case R.id.saved_image5_bt :
+                btSavedImage5Clicked();
+                break;
+            case R.id.saved_image6_bt :
+                btSavedImage6Clicked();
+                break;
         }
     }
 
@@ -42,6 +66,26 @@ public class FolderActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void btSavedImage2Clicked(){
+        Intent intent = new Intent(this, SavedImageActivity.class);
+        startActivity(intent);
+    }
+
+    private void btSavedImage3Clicked(){
+        Intent intent = new Intent(this, SavedImageActivity.class);
+        startActivity(intent);
+    }
+
+    private void btSavedImage4Clicked(){
+        Intent intent = new Intent(this, SavedImageActivity.class);
+        startActivity(intent);
+    }
+
+    private void btSavedImage5Clicked(){
+        Intent intent = new Intent(this, SavedImageActivity.class);
+        startActivity(intent);
+    }
+
+    private void btSavedImage6Clicked(){
         Intent intent = new Intent(this, SavedImageActivity.class);
         startActivity(intent);
     }
