@@ -27,14 +27,14 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:text="@string/btn_edit_profil"
-            android:background="@drawable/border_bottom_menu"/>
+            android:background="@drawable/border_bottom_menu_disable"/>
         <Button
             android:id="@+id/btn_echographies"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@+id/btn_edit_profil"
             android:text="@string/btn_echographies"
-            android:background="@drawable/border_bottom_menu"/>
+            android:background="@drawable/border_bottom_menu_disable"/>
         <Button
             android:id="@+id/btn_signal"
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
             android:layout_height="70dp"
             android:layout_below="@+id/btn_langues"
             android:text="@string/btn_logout"
-            android:background="@drawable/border_bottom_menu"/>
+            android:background="@drawable/border_bottom_menu_disable"/>
         <Button
             android:id="@+id/btn_close_menu"
             android:layout_width="match_parent"

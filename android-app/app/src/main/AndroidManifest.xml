@@ -41,7 +41,10 @@
             android:label="@string/title_activity_langues" />
         <activity
             android:name=".menu.SignalProblemActivity"
-            android:label="@string/title_activity_signal_problem"></activity>
+            android:label="@string/title_activity_signal_problem" />
+        <activity
+            android:name=".menu.FAQActivity"
+            android:label="@string/title_activity_faq"></activity>
     </application>
 
 </manifest>

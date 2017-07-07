@@ -1,58 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.echopen.asso.echopen.menu.SignalProblemActivity">
-    <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="503dp"
-        android:orientation="vertical"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintLeft_creator="1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <LinearLayout
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <Button
+            android:id="@+id/back_signal"
+            android:layout_marginLeft="20dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/arrow_icon"
+            android:layout_marginTop="10dp"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            >
-            <Button
-                android:id="@+id/back_signal"
-                android:layout_marginLeft="20dp"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/arrow_icon"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txt_langues"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                android:text="@string/txt_signal_problem"
-                android:textColor="@color/blue_dark"
-                android:layout_marginLeft="50dp"/>
-        </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_constraintTop_creator="1"
-            tools:layout_constraintLeft_creator="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-            <EditText
-                android:id="@+id/text_signal"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_centerHorizontal="true"/>
-            <Button
-                android:layout_below="@+id/text_signal"
-                android:layout_width="100sp"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="@string/btn_valid_signal"
-                android:background="@drawable/border_radius"
-                android:textColor="@color/white"/>
-        </RelativeLayout>
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+            android:id="@+id/txt_signal"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text="@string/txt_signal_problem"
+            android:textColor="@color/blue_dark"
+            android:layout_marginLeft="75dp"
+            android:layout_marginTop="10dp"/>
+        <EditText
+            android:id="@+id/edit_signal"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_below="@+id/txt_signal"
+            android:layout_centerHorizontal="true"
+            />
+        <Button
+            android:id="@+id/btn_valid_signal"
+            android:layout_width="100sp"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_valid_signal"
+            android:background="@drawable/border_radius"
+            android:textColor="@color/white"
+            android:layout_marginTop="20dp"
+            android:layout_below="@+id/edit_signal"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+</LinearLayout>

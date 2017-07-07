@@ -29,4 +29,6 @@
     <string name="title_activity_signal_problem">SignalProblemActivity</string>
     <string name="txt_signal_problem">Signalement</string>
     <string name="btn_valid_signal">Valider</string>
+    <string name="title_activity_faq">FAQActivity</string>
+    <string name="txt_FAQ">FAQ</string>
 </resources>
