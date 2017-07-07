@@ -51,6 +51,9 @@ body {
         padding: 18px 63px;
         border: transparent;
         border-radius: 4px;
+        &:hover{
+            text-decoration: none;
+        }
     }
 }
 

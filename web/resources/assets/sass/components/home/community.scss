@@ -1,3 +1,10 @@
+header{
+  -webkit-box-shadow: 1px 15px 79px 0px rgba(232,250,255,1);
+  -moz-box-shadow: 1px 15px 79px 0px rgba(232,250,255,1);
+  box-shadow: 1px 15px 79px 0px rgba(232,250,255,1);
+}
+
+
 .container section.home-community{
   .home-title-community{
     padding-left: 10%;
@@ -39,6 +46,14 @@
       background-color: #fff;
       border-radius: 4px;
       position: absolute;
+        @media screen and (min-width: 1024){
+            height: auto;
+            width: 100%;
+            left: 50%;
+            z-index: 2;
+            transform: translateX(-50%);
+            background-color: transparent;
+        }
 
       .content{
         padding: 6% 10% 0 10%;

@@ -89,4 +89,19 @@
             }
         }
     }
+     .slick_controls {
+         width: 25%;
+         display: block;
+         margin: 0 auto;
+         padding-top: 15px;
+         .slick_left {
+             float: left;
+             transform: rotate(180deg);
+             cursor: pointer;
+         }
+         .slick_right {
+             float: right;
+             cursor: pointer;
+         }
+     }
 }

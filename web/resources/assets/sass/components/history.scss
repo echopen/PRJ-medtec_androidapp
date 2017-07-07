@@ -1,5 +1,5 @@
 .base_section-history{
-    height: 54.750em;
+    height: 55.75em;
     background-color: $lightgrey;
     padding-top: 0;
     overflow: hidden;
@@ -96,5 +96,24 @@
         height: 27.313em;
         background: url(../../../../public/img/visuel-storytelling.png) no-repeat;
         background-size: cover;
+    }
+    .slick_controls {
+        width: 30%;
+        display: table;
+        margin: 0 auto;
+        padding: 10px 0;
+        float: right;
+        .slick_left {
+            transform: rotate(180deg);
+            float: left;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .slick_right{
+            cursor: pointer;
+        }
+        @include tablet(){
+            display: none;
+        }
     }
 }
