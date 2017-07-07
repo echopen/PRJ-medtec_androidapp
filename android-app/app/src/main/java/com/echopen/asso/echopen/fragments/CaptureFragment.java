@@ -3,6 +3,7 @@ package com.echopen.asso.echopen.fragments;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -20,6 +21,7 @@ import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.echopen.asso.echopen.MenuActivity;
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.bdd.Image;
 import com.echopen.asso.echopen.bdd.ImageDAO;
@@ -74,8 +76,8 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
         presenter.start();
 
         final Button btn_capture = (Button) getView().findViewById(R.id.btn_capture);
-        final ImageButton btn_save = (ImageButton) getView().findViewById(R.id.btn_save);
-        final ImageButton btn_gain = (ImageButton) getView().findViewById(R.id.btn_gain);
+        final Button btn_save = (Button) getView().findViewById(R.id.btn_save);
+        final Button btn_menu = (Button) getView().findViewById(R.id.btn_menu_main);
         final LinearLayout layout_screenshot = (LinearLayout) getView().findViewById(R.id.layout_screenshot);
         layout_screenshot.setVisibility(View.INVISIBLE);
 
@@ -107,6 +109,16 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
                 presenter.start();
                 btn_capture.setVisibility(View.VISIBLE);
                 layout_screenshot.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        btn_menu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(), MenuActivity.class);
+                startActivity(intent);
+
             }
         });
 

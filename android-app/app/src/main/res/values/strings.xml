@@ -3,7 +3,7 @@
     <string name="app_name">echopen</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="hello_world">Hello_world</string>
-    <string name="btn_settings">Paramètre</string>
+    <string name="btn_settings">Paramètres</string>
     <string name="intro_text">L\'echographie accessible</string>
     <string name="title_activity_settings">Paramètres</string>
     <string name="settings_parametre">Personne</string>
@@ -15,5 +15,22 @@
     <string name="option_l">L</string>
     <string name="btn_start_home">Démarrer un examen</string>
     <string name="btn_login_home">Se connecter</string>
+    <string name="title_activity_menu">MenuActivity</string>
+    <string name="btn_edit_profil">Editer mon profil</string>
+    <string name="btn_echographies">Echographies</string>
+    <string name="btn_signal">Signaler un problème</string>
+    <string name="btn_faq">FAQ</string>
+    <string name="btn_langues">Langues</string>
+    <string name="btn_logout">Se déconnecter</string>
+    <string name="btn_close">Fermer</string>
+    <string name="btn_menu">Menu</string>
+    <string name="title_activity_langues">LanguesActivity</string>
+    <string name="txt_langues">Langues</string>
+    <string name="title_activity_signal_problem">SignalProblemActivity</string>
+    <string name="txt_signal_problem">Signalement</string>
+    <string name="btn_valid_signal">Valider</string>
+    <string name="title_activity_faq">FAQActivity</string>
+    <string name="txt_FAQ">FAQ</string>
     <string name="gallery">Gallery</string>
+
 </resources>

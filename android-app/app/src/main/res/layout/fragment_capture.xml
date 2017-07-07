@@ -8,7 +8,18 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <Button
+            android:id="@+id/btn_menu_main"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:background="@color/transparent"
+            android:text="@string/btn_menu"/>
 
         <ImageView
             android:id="@+id/echo_view"

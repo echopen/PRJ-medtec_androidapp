@@ -32,7 +32,19 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-        <activity android:name=".OnBoardingActivity"></activity>
+        <activity android:name=".OnBoardingActivity" />
+        <activity
+            android:name=".MenuActivity"
+            android:label="@string/title_activity_menu" />
+        <activity
+            android:name=".menu.LanguesActivity"
+            android:label="@string/title_activity_langues" />
+        <activity
+            android:name=".menu.SignalProblemActivity"
+            android:label="@string/title_activity_signal_problem" />
+        <activity
+            android:name=".menu.FAQActivity"
+            android:label="@string/title_activity_faq"></activity>
     </application>
 
 </manifest>
