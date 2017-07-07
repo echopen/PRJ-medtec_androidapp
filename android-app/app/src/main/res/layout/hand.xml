@@ -34,30 +34,31 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/left_hand"
-            android:layout_width="150dp"
-            android:layout_height="300dp"
-            android:layout_marginRight="5dp"
-            android:textColor="@color/white"
-            android:paddingTop="100dp"
-            android:paddingBottom="90dp"
-            android:text="@string/gauche"
-            android:background="@color/transparent_white"
-            android:drawableTop="@drawable/lefthand"
-            android:textSize="16sp"/>
+            <Button
+                android:id="@+id/left_hand"
+                android:layout_width="150dp"
+                android:layout_height="300dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/white"
+                android:paddingTop="100dp"
+                android:paddingBottom="90dp"
+                android:text="@string/gauche"
+                android:background="@color/transparent_white"
+                android:drawableTop="@drawable/lefthand"
+                android:textSize="16sp"/>
 
-        <Button
-            android:id="@+id/right_hand"
-            android:layout_width="150dp"
-            android:layout_height="300dp"
-            android:paddingTop="100dp"
-            android:paddingBottom="90dp"
-            android:textColor="@color/white"
-            android:text="@string/droite"
-            android:drawableTop="@drawable/righthand"
-            android:background="@color/transparent_white"
-            android:textSize="16sp"/>
+            <Button
+                android:id="@+id/right_hand"
+                android:layout_width="150dp"
+                android:layout_height="300dp"
+                android:paddingTop="100dp"
+                android:paddingBottom="90dp"
+                android:textColor="@color/white"
+                android:text="@string/droite"
+                android:drawableTop="@drawable/righthand"
+                android:background="@color/transparent_white"
+                android:textSize="16sp"/>
+>>>>>>> ee33ca56eaa5a2ea53a935eb65b6dfe42054f80c
         </LinearLayout>
 
     </LinearLayout>

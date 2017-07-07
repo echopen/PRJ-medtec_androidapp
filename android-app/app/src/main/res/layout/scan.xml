@@ -5,6 +5,7 @@
     android:background="@color/gray_light"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:id="@+id/ScanPage"
         android:layout_width="match_parent"

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="-50dp"
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp"
+        android:paddingTop="120dp"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/imageView"
+        android:orientation="vertical"
+        android:background="@drawable/radius_linearlayout">
+
+        <EditText
+            android:id="@+id/identifiant"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/identifiant"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/notes"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:ems="10"
+            android:hint="@string/notes"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="40dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/addPicture"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@color/transparent_green"
+                android:drawableTop="@drawable/add"
+                android:paddingTop="8dp"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_connexion"
+            android:text="@string/connexion"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/button_bg_rounded_corners_blue"/>
+
+
+        <Button
+            android:id="@+id/button_inscription"
+            android:text="@string/inscription"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/button_bg_rounded_corners_blue"/>
+
+
+        <Button
+            android:id="@+id/button_valid_seance"
+            android:text="@string/scan"
+            android:layout_gravity="center"
+            android:textColor="@color/white"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:background="@drawable/button_bg_rounded_corners_red"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

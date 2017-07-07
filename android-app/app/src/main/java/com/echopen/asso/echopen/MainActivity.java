@@ -2,18 +2,25 @@ package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -22,6 +29,9 @@ import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImage
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 import com.echopen.asso.echopen.ui.RenderingContextController;
+
+import java.util.List;
+import java.util.Vector;
 
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_IP;
 import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
@@ -37,7 +47,7 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends FragmentActivity implements View.OnClickListener {
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -131,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttonLeftHand();
                 break;
             case R.id.right_hand :
-                buttonRightHand();
+                buttonValidSeances();
                 break;
             case R.id.valid_param :
                 buttonValidParam();
@@ -143,6 +153,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 buttonGallery();
                 break;
             case R.id.button_seances :
+                buttonSeances();
+                break;
+            case R.id.button_valid_seance :
                 buttonSeances();
                 break;
             case R.id.seances :
@@ -164,8 +177,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void buttonScan(){
         //set default parameter
         //###
-        ScanFragment scanFragment = new ScanFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, scanFragment).addToBackStack(null).commit();
+        PagerFragment pagerFragment = new PagerFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pagerFragment).addToBackStack(null).commit();
     }
 
     private void buttonConnexion(){
@@ -185,7 +198,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //###
         HandFragment handFragment = new HandFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, handFragment).addToBackStack(null).commit();
-
     }
 
     private void buttonConnexionForm(){
@@ -212,17 +224,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void buttonValidParam(){
         //set parameter
         //###
-        ScanFragment scanFragment = new ScanFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, scanFragment).addToBackStack(null).commit();
+        PagerFragment pagerFragment = new PagerFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pagerFragment).addToBackStack(null).commit();
     }
 
     private void buttonGallery(){
         //get load stored seances
         //###
-        setContentView(R.layout.activity_main_with_bar);
-        BarBackFragment barbackFragment = new BarBackFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barbackFragment).addToBackStack(null).commit();
-
         GalleryFragment galleryFragment = new GalleryFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, galleryFragment).addToBackStack(null).commit();
     }
@@ -230,33 +238,59 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void buttonSeances(){
         //get load stored seances
         //###
-        setContentView(R.layout.activity_main_with_bar);
-        BarFragment barFragment = new BarFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barFragment).addToBackStack(null).commit();
+        Pager2Fragment pager2Fragment = new Pager2Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("button_selected", "seances");
+        pager2Fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pager2Fragment).addToBackStack(null).commit();
+    }
 
-        SeancesFragment seancesFragment = new SeancesFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, seancesFragment).addToBackStack(null).commit();
+    private void buttonValidSeances(){
+        //get load stored seances
+        //###
+        Pager2Fragment pager2Fragment = new Pager2Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("button_selected", "seances");
+        pager2Fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pager2Fragment).addToBackStack(null).commit();
     }
 
     private void buttonProfil(){
         //get profil
         //###
-        setContentView(R.layout.activity_main_with_bar);
-        BarFragment barFragment = new BarFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barFragment).addToBackStack(null).commit();
+        Pager2Fragment pager2Fragment = new Pager2Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("button_selected", "profil");
+        pager2Fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pager2Fragment).addToBackStack(null).commit();
 
-        ProfilFragment profilFragment = new ProfilFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, profilFragment).addToBackStack(null).commit();
     }
 
     private void buttonFaq(){
         //get faq
         //###
-        setContentView(R.layout.activity_main_with_bar);
-        BarFragment barFragment = new BarFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_bar, barFragment).addToBackStack(null).commit();
+        Pager2Fragment pager2Fragment = new Pager2Fragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("button_selected", "faq");
+        pager2Fragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pager2Fragment).addToBackStack(null).commit();
+    }
 
-        FaqFragment faqFragment = new FaqFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, faqFragment).addToBackStack(null).commit();
+/*    @Override
+    public View onCreateView(String name, Context context, AttributeSet attrs) {
+
+        Log.e("###view name ?", name);
+
+        return super.onCreateView(name, context, attrs);
+    }*/
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (findViewById(R.id.pager)!= null || findViewById(R.id.pager2) != null){
+            PagerFragment pagerFragment = new PagerFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, pagerFragment).addToBackStack(null).commit();
+        }
     }
 }

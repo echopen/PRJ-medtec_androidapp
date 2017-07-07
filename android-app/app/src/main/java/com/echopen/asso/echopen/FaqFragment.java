@@ -28,6 +28,15 @@ public class FaqFragment extends Fragment {
         if (v.findViewById(R.id.button_register)!= null){
             v.findViewById(R.id.button_register).setOnClickListener((MainActivity) getActivity());
         }
+        if (v.findViewById(R.id.seances)!= null){
+            v.findViewById(R.id.seances).setOnClickListener((MainActivity) getActivity());
+        }
+        if (v.findViewById(R.id.profil)!= null){
+            v.findViewById(R.id.profil).setOnClickListener((MainActivity) getActivity());
+        }
+        if (v.findViewById(R.id.faq)!= null){
+            v.findViewById(R.id.faq).setOnClickListener((MainActivity) getActivity());
+        }
 
         return v;
     }
