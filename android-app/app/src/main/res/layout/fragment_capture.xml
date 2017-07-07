@@ -25,7 +25,7 @@
             android:layout_alignParentStart="true">
 
             <com.triggertrap.seekarc.SeekArc
-                android:id="@+id/seekArc"
+                android:id="@+id/seekArc_gain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -70,12 +70,12 @@
                 />
 
             <ImageButton
+                android:id="@+id/btn_gain"
                 android:layout_width="48dp"
                 android:layout_height="match_parent"
                 android:layout_marginRight="16dp"
-                android:src="@drawable/gain_icon"
                 android:background="@drawable/round_border"
-                />
+                android:src="@drawable/gain_icon" />
 
             <ImageButton
                 android:layout_width="48dp"
