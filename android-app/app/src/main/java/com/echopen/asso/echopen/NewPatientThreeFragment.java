@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
 /**
@@ -17,6 +18,9 @@ public class NewPatientThreeFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
     private Button finishButton;
+    private ImageButton maigre_button;
+    private ImageButton normal_button;
+    private ImageButton gros_button;
     public NewPatientThreeFragment() {
         // Required empty public constructor
     }
@@ -31,6 +35,12 @@ public class NewPatientThreeFragment extends Fragment {
                 mListener.finishForm();
             }
         });
+
+        maigre_button = (ImageButton) getView().findViewById(R.id.imageButtonMaigre);
+        normal_button = (ImageButton) getView().findViewById(R.id.imageButtonNormal);
+        gros_button = (ImageButton) getView().findViewById(R.id.imageButtonGros);
+        // when you click on the Adult Button
+        // ...
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -103,6 +103,8 @@
             android:layout_weight="1"
             android:fontFamily="sans-serif"
             android:gravity="center"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:text="@string/select_instruction_label"
             android:textColor="@color/gray_light"
             android:textSize="16sp" />
