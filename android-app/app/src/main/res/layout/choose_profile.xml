@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="#FFFFFF">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="25dip"
+    android:paddingRight="25dip"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/rich_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:paddingRight="25dip"
+        android:text="Select your patient informations to pre-set your settings"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18dp" />
+    <TextView
+        android:layout_marginTop="24dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:text="@string/gender" />
+    <CheckBox android:id="@+id/checkbox_mal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#5E6B9F"
+        android:text="@string/mal"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_female"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/female"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+
+    <TextView
+        android:layout_marginTop="32dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:text="@string/age" />
+    <CheckBox android:id="@+id/checkbox_baby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/baby"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_kid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/kid"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_adult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/adult"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+
+    <TextView
+        android:layout_marginTop="32dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:text="@string/fatness" />
+    <CheckBox android:id="@+id/checkbox_small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/small"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/medium"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/large"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+
+
+    <TextView
+        android:layout_marginTop="32dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        android:text="@string/organ" />
+    <CheckBox android:id="@+id/checkbox_uro_digestive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/uro_digestive"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_cardiac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cardiac"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_thoracic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/thoracic"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_obstetrics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/obstetrics"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+    <CheckBox android:id="@+id/checkbox_osteoarthritis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/osteoarthritis"
+        android:textColor="#5E6B9F"
+        android:background="@drawable/layout_bg"
+        android:onClick="onCheckboxClicked"/>
+
+    <Button
+        android:id="@+id/validChoice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="57dp"
+        android:background="@drawable/button_active"
+        android:minWidth="200dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:text="@string/validate"
+        android:textAllCaps="false"
+        android:textColor="@color/colorLight"
+        android:layout_marginBottom="24dp"
+        android:textSize="19sp" />
+</LinearLayout>
+</ScrollView>

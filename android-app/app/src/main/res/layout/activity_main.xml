@@ -1,16 +1,200 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:openDrawer="start"
+    android:background="#000"
+    android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name"
+    <include
+        layout="@layout/app_bar_main2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         />
 
-</LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header_main2"
+        app:menu="@menu/activity_main2_drawer" />
 
+    <FrameLayout
+        android:id="@+id/vFloater"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.echopen.asso.echopen.ui.DrawView
+            android:id="@+id/echo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:src="#000" />
+
+        <LinearLayout
+            android:id="@+id/vMiddle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/theme_blue"
+            android:orientation="vertical">
+            <RelativeLayout
+
+                android:id="@+id/loadingPanel"
+                style="@style/GenericProgressBackground">
+
+                <ProgressBar style="@style/GenericProgressIndicator" />
+            </RelativeLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="90dp"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="cadence d'image"
+            android:textAllCaps="true"
+            android:textColor="#8E9298"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/gainText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="---"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="profondeur"
+            android:textAllCaps="true"
+            android:textColor="#8E9298"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/gainText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:text="---"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        >
+
+        <com.devadvance.circularseekbar.CircularSeekBar
+            android:layout_alignParentBottom="true"
+            android:id="@+id/circularSeekBar1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:max="100"
+            android:progress="1"
+            app:circle_x_radius="180dp"
+            app:circle_y_radius="180dp"
+            app:end_angle="180"
+            app:pointer_alpha_ontouch="100"
+            app:start_angle="180"
+            app:use_custom_radii="true"
+            android:layout_marginBottom="75dp"
+            />
+
+
+        <com.devadvance.circularseekbar.CircularSeekBar
+
+            android:layout_alignParentBottom="true"
+            android:id="@+id/circularSeekBar2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:max="100"
+            android:progress="1"
+            app:circle_x_radius="110dp"
+            app:circle_y_radius="110dp"
+            app:end_angle="180"
+            app:pointer_alpha_ontouch="100"
+            app:start_angle="180"
+            app:use_custom_radii="true"
+            android:layout_marginBottom="75dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/content_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/organ_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:padding="15dp"
+                    android:src="@drawable/organe" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/galery_frame"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#fff"
+                    android:padding="15dp"
+                    android:src="@drawable/galerie" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal">
+
+            <Button
+                android:id="@+id/capture_btn"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/button_circle_blue"
+                android:textColor="#fff" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>

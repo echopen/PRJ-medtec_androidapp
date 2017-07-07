@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#fff">
+
+
+    <GridView
+        android:id="@+id/PhoneImageGrid"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:horizontalSpacing="10dp"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp"
+        android:layout_marginBottom="80dp"
+        android:background="#fff"/>
+
+    <LinearLayout
+        android:id="@+id/set_visible"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:gravity="right"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/remove"
+            android:layout_width="50dp"
+            android:layout_height="65dp"
+            android:background="#fff"
+            android:layout_marginEnd="35dp"
+            android:padding="15dp"
+            android:src="@drawable/trash" />
+    </LinearLayout>
+
+</RelativeLayout>

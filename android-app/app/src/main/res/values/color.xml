@@ -23,4 +23,15 @@
     <color name="yellow">#F0CF43</color>
     <color name="green">#24c4b6</color>
     <color name="transparent_white">#60ffffff</color>
+
+    <color name="colorLight">#FFF</color>
+    <color name="colorMedium">#EBEBEB</color>
+    <color name="colorDark">#C1C4D5</color>
+    <color name="colorPrimaryLight">#A9BBCF</color>
+    <color name="colorPrimary">#397FFF</color>
+    <color name="colorPrimaryDark">#5E6B9F</color>
+    <color name="colorPrimaryVeryDark">#003677</color>
+    <color name="colorAccent">#F3406B</color>
+    <color name="colorAccent2">#32EED2</color>
+
 </resources>
