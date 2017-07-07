@@ -17,14 +17,16 @@
                 android:id="@+id/saved_image1_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/echoimg"
-                android:layout_weight="1" />
+                android:layout_margin="1dp"
+                android:layout_weight="1"
+                android:background="@drawable/echoimg" />
 
             <Button
                 android:id="@+id/saved_image2_bt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/echoimg"
+                android:layout_margin="1dp"
                 android:layout_weight="1" />
         </TableRow>
 
@@ -37,6 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/echoimg"
+                android:layout_margin="1dp"
                 android:layout_weight="1" />
 
             <Button
@@ -44,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/echoimg"
+                android:layout_margin="1dp"
                 android:layout_weight="1"
                 />
         </TableRow>
@@ -57,6 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/echoimg"
+                android:layout_margin="1dp"
                 android:layout_weight="1" />
 
             <Button
@@ -64,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/echoimg"
+                android:layout_margin="1dp"
                 android:layout_weight="1" />
         </TableRow>
 
