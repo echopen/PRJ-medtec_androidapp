@@ -145,12 +145,21 @@
         android:textColor="#5E6B9F"
         android:background="@drawable/layout_bg"
         android:onClick="onCheckboxClicked"/>
+
     <Button
         android:id="@+id/validChoice"
-        android:layout_height = "wrap_content"
-        android:layout_width ="wrap_content"
-        android:text = "@string/validate"
-        android:onClick = "validChoice"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="57dp"
+        android:background="@drawable/button_active"
+        android:minWidth="200dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:text="@string/validate"
+        android:textAllCaps="false"
+        android:textColor="@color/colorLight"
+        android:layout_marginBottom="24dp"
+        android:textSize="19sp" />
 </LinearLayout>
 </ScrollView>
