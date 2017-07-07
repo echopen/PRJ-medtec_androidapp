@@ -220,7 +220,7 @@ public class MainActivity extends AppCompatActivity implements AbstractActionAct
                             fileOutputStream = new FileOutputStream(new_file);
                             Bitmap bitmap = viewToBitmap(echoImage, echoImage.getWidth(), echoImage.getHeight());
                             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                            Toast.makeText(MainActivity.this, "Save success", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Image enregistrée !", Toast.LENGTH_SHORT).show();
                             fileOutputStream.flush();
                             fileOutputStream.close();
                         } catch (FileNotFoundException e) {

@@ -98,7 +98,7 @@ public class GaleryFragment extends Fragment {
                             Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(),
-                            "You've selected Total " + cnt + " image(s).",
+                            "VOus avez sélectionnez " + cnt + " image(s).",
                             Toast.LENGTH_LONG).show();
                     Log.d("SelectedImages", selectImages);
 
