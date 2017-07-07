@@ -7,22 +7,28 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/black" />
+
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/scan"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/scan"
+        android:elevation="0dp"
+        android:layout_marginBottom="20dp"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/popupbutton"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignTop="@+id/button2"
-        android:layout_toEndOf="@+id/button2"
-        android:layout_marginStart="42dp" />
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:background="@drawable/ic_settings"
+        android:src="@null"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/seekBarH"
+        android:layout_marginBottom="20dp"/>
 
     <SeekBar
         android:id="@+id/seekBarV"
@@ -64,7 +70,8 @@
         android:visibility="invisible"
         android:layout_marginBottom="-25dp"
         android:layout_above="@+id/seekBarH"
-        android:layout_alignEnd="@+id/button2" />
+        android:layout_alignEnd="@+id/button2"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/gain"
