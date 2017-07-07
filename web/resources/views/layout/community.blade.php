@@ -29,22 +29,27 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-
-
-
-
-
 </head>
 <body>
 
-<header class="community-header">
-    <ul class="links">
-        <li><a href="/">Découvrir Echopen</a></li>
-    </ul>
-    <a href="/"><div class="logo"></div></a>
-    <ul class="right-cta">
-        <li class="join-us">Me connecter</li>
-    </ul>
+<header>
+    <div class="header">
+        <a href="#" class="header__mobileHamburger">
+            <img src="/img/menu.png" alt="" class="header__mobileHamburger--img">
+        </a>
+        <ul class="header__nav">
+            <li class="header__nav__item"><a href="/" class="header__nav__item--link">Découvrir le projet</a></li>
+        </ul>
+        <a href="#" class="header__logo">
+            <img src="/img/echopen-gradient.png" alt="" class="header__logo--img">
+        </a>
+        <div class="header__mobileCta">
+            <a href="#" class="header__mobileCta--btn">Connexion</a>
+        </div>
+        <div class="header__cta">
+            <a href="#" class="header__cta--btn">Me connecter</a>
+        </div>
+    </div>
 </header>
 
 <div class="container">
@@ -71,9 +76,9 @@
 </footer>
 
 <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
 
