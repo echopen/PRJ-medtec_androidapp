@@ -38,7 +38,7 @@
             <img src="/img/menu.png" alt="" class="header__mobileHamburger--img">
         </a>
         <ul class="header__nav">
-            <li class="header__nav__item"><a href="/" class="header__nav__item--link">Home</a></li>
+            <li class="header__nav__item"><a href="/" class="header__nav__item--link">Accueil</a></li>
             <li class="header__nav__item"><a href="/product" class="header__nav__item--link">Le produit</a></li>
             <li class="header__nav__item"><a href="/faq" class="header__nav__item--link">FAQ</a></li>
             <li class="header__nav__item"><a href="/contact" class="header__nav__item--link">Contact</a></li>
