@@ -2,7 +2,7 @@ In this folder, one can find tool for compiling a program that will emul an echo
 
 For compiling the C code (./srcbin/probe_emulator.c), use the bash file probe_emulator.sh provide here. Option for choosing the device on which the program will run use -m option, RP for RedPitaya and PC for your PC such as:
 
-	sh probe_emulator.sh -m RP
+	sh run.sh -m RP
 
 If you chose PC option, the executable file will be located in this folder. If you chose RP option, the executable will be send in the RedPitaya. This executable need an option in: void, plate, hand and film:
 

@@ -11,4 +11,7 @@
 
     <dimen name="small_brush">5dp</dimen>
     <integer name="small_size">5</integer>
+
+    <dimen name="home_block_width">307dp</dimen>
+    <dimen name="home_block_height">80dp</dimen>
 </resources>

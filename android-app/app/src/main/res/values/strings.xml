@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <string name="app_name">echopen</string>
+    <string name="app_name">echopen</string>
+    <string name="main_view_toobar_title">Probe Status</string>
+    <string name="toobar_title">Probe Status</string>
+    <string name="emergency_button">Start the probe in emergency</string>
+    <string name="connection_status_on">The probe is \n correctly connected </string>
+    <string name="connection_status_off">The probe is \n disconnected</string>
+    <string name="device_status">The probe is on</string>
+    <string name="title_home">Probe State</string>
+    <string name="title_dashboard">New File</string>
+    <string name="title_notifications">Search</string>
+    <string name="help">Help</string>
+    <string name="settings">Settings</string>
+    <string name="help_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="help_content_title">How to connect the probe ?</string>
 </resources>
