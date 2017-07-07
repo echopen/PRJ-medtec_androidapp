@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <string name="app_name">echopen</string>
+    <string name="date">12/12/2017--14h34</string>
+    <string name="gallery">gallery</string>
 </resources>
