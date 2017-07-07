@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_settings"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.07">
+
+        <ImageView
+            android:id="@+id/type_organe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/picto_automatique_white" />
+
+        <ImageView
+            android:id="@+id/echo_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@android:drawable/sym_def_app_icon"
+            tools:ignore="ContentDescription"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
+
+        <ImageView
+            android:id="@+id/baterrie"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="104dp"
+            android:layout_marginTop="10dp"
+            android:adjustViewBounds="false"
+            android:src="@drawable/picto_batterie_white"
+            android:layout_alignTop="@+id/type_organe"
+            android:layout_toEndOf="@+id/type_organe" />
+
+        <ImageView
+            android:id="@+id/regle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/regle_screen"
+            android:layout_marginTop="21dp"
+            android:layout_below="@+id/type_organe"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="40dp" />
+
+        <ImageView
+            android:id="@+id/sonde"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="28dp"
+            app:srcCompat="@drawable/picto_sonde_echec" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            tools:ignore="ObsoleteLayoutParam">
+
+            <ImageButton
+                android:id="@+id/regalge_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:src="@drawable/button_reglage" />
+
+            <ImageButton
+                android:id="@+id/sreenshot_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:src="@drawable/circle_sreen_button" />
+
+            <ImageButton
+                android:id="@+id/galerie_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/transparent"
+                android:src="@drawable/button_galery_go" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>
