@@ -1,12 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="PROFIL"
+    <LinearLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        style="?android:attr/buttonBarStyle">
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/seances"
+            android:text="@string/seances"
+            android:layout_weight="0.33"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue_bar"
+            android:textColor="@color/white"/>
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/profil"
+            android:text="@string/profil"
+            android:layout_weight="0.33"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:textColor="@color/blue_bar"/>
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/faq"
+            android:text="@string/faq"
+            android:layout_weight="0.33"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue_bar"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_below="@+id/bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"/>
-</LinearLayout>
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp"
+        android:paddingTop="120dp"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:background="@drawable/radius_linearlayout">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp"
+            android:textSize="0sp"
+            android:background="#A2A3AA"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="95dp"/>
+
+        <EditText
+            android:id="@+id/nameChange"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/nomChange"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/nicknameChange"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/prenomChange"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/identifiant"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/profession"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"/>
+
+        <EditText
+            android:id="@+id/notes"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
+            android:ems="10"
+            android:hint="@string/parametreFavoris"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"
+            android:layout_marginBottom="40dp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -25,8 +25,8 @@ public class GalleryFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.gallery, container, false);
 
-        if (v.findViewById(R.id.button_register)!= null){
-            v.findViewById(R.id.button_register).setOnClickListener((MainActivity) getActivity());
+        if (v.findViewById(R.id.back)!= null){
+            v.findViewById(R.id.back).setOnClickListener((MainActivity) getActivity());
         }
 
         return v;

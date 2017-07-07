@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#039bef"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
 
     <LinearLayout
         android:id="@+id/containerHandChoice"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:paddingTop="80px"
-        android:layout_centerInParent="true"
         android:background="@null"
-        android:layout_below="@+id/imageView"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="53dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
 
         <TextView
-            android:text="Choisissez vos paramètres favoris"
+            android:text="@string/favoris"
             android:layout_width="200dp"
             android:gravity="center"
-            android:textSize="14sp"
-            android:textColor="#FFF"
+            android:textSize="17sp"
+            android:textColor="@color/white"
             android:layout_gravity="center"
-            android:layout_marginBottom="80px"
+            android:layout_marginBottom="60px"
             android:layout_height="50dp" />
 
         <LinearLayout
@@ -37,45 +35,60 @@
 
             <Button
                 android:id="@+id/sexe"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Sexe"
-                android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
-                android:textSize="16sp"/>
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginRight="5dp"
+                android:background="@color/transparent_white"
+                android:drawableTop="@drawable/female"
+                android:paddingTop="35dp"
+                android:paddingBottom="0dp"
+                android:text="@string/sexe"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/trancheAge"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="Tranche d'age"
-                android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
-                android:textSize="16sp"/>
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@color/transparent_white"
+                android:drawableTop="@drawable/age"
+                android:paddingTop="55dp"
+                android:paddingBottom="0dp"
+                android:text="@string/trancheage"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/corpulence"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="corpulence"
-                android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:paddingTop="35dp"
+                android:paddingBottom="0dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/corpulence"
+                android:textColor="@color/white"
+                android:background="@color/transparent_white"
+                android:drawableTop="@drawable/corpulence"
                 android:textSize="16sp"/>
 
             <Button
                 android:id="@+id/organe"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:text="organe"
-                android:drawableTop="@drawable/common_google_signin_btn_icon_dark"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:paddingTop="35dp"
+                android:paddingBottom="0dp"
+                android:text="@string/organe"
+                android:textColor="@color/white"
+                android:background="@color/transparent_white"
+                android:drawableTop="@drawable/organe"
                 android:textSize="16sp"/>
         </LinearLayout>
 
@@ -84,16 +97,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/containerHandChoice"
         android:layout_gravity="center"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_marginBottom="51dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <Button
             android:id="@+id/valid_param"
-            android:text="Valider"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/common_google_signin_btn_icon_dark"/>
+            android:text="@string/valider"
+            android:layout_width="220dp"
+            android:layout_height="35dp"
+            android:textColor="@color/white"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_bg_rounded_corners_green"/>
 
     </LinearLayout>
 
