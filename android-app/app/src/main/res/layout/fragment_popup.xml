@@ -1,0 +1,152 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.echopen.asso.echopen.PopupFragment"
+    android:background="@color/new_white_grey"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingTop="0dp"
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:text="Choisir un organe"
+        android:textSize="13pt"
+        android:textColor="@color/new_blue"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        />
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="80dp"
+
+        android:layout_alignParentEnd="true">
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/heart"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_below="@+id/imageButton4"
+            android:layout_alignParentStart="true" />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton2"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/kidney"
+            android:layout_alignTop="@+id/imageButton"
+            android:layout_centerHorizontal="true" />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton3"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/liver"
+            android:layout_alignTop="@+id/imageButton2"
+            android:layout_alignParentEnd="true" />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton4"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/obstetrics"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/imageButton" />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton5"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/osteoarthritis"
+            android:layout_alignTop="@+id/imageButton4"
+            android:layout_alignStart="@+id/imageButton2" />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton6"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignBottom="@+id/imageButton5"
+            android:layout_alignEnd="@+id/imageButton3"
+            android:src="@drawable/aorta"
+            />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton7"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/gallbladder"
+            android:layout_below="@+id/imageButton"
+            android:layout_marginEnd="94dp"
+            android:layout_alignStart="@+id/imageButton" />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton8"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/lung"
+            android:layout_alignTop="@+id/imageButton7"
+            android:layout_alignStart="@+id/imageButton5" />
+
+        <ImageButton
+            android:background="@color/new_white_button"
+            android:id="@+id/imageButton9"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignEnd="@+id/imageButton6"
+            android:layout_alignTop="@+id/imageButton8"
+            android:src="@drawable/obstetrics"
+            android:layout_alignStart="@+id/imageButton3" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="40pt"
+        android:id="@+id/relativeLayout"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="10dp">
+
+<TextView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:text="ou"
+    android:layout_alignEnd="@+id/skip"
+    android:layout_marginBottom="50dp"
+    android:gravity="center"
+    android:layout_alignStart="@+id/skip" />
+
+        <Button
+            android:id="@+id/skip"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="SKIP"
+            android:textSize="@dimen/text_large"
+            android:textColor="@color/white"
+            android:background="@color/new_blue_button"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            />
+    </RelativeLayout>
+
+</RelativeLayout>
