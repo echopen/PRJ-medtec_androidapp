@@ -32,7 +32,7 @@ public class ProcessUPDTask extends AbstractDataTask {
     /**
      * A Socket is opened once for all
      * Get the UDP data, converts it via the ScanConversion class, create a bitmap
-     * refreshes the UI with the data in a new thread with the help of runOnUiThread() method
+     * refreshes the UI with the data in a new thread with the help_activity of runOnUiThread() method
      * @param Voids, void argument
      * @return Void
      */

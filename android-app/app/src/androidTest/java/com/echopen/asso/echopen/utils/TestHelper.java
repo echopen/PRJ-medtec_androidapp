@@ -15,7 +15,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 /**
- * Some help functions, refactoring and other utilities.
+ * Some help_activity functions, refactoring and other utilities.
  */
 public class TestHelper {
 
