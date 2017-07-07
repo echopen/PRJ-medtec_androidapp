@@ -41,7 +41,7 @@
     <string name="nomChange">Kelly</string>
     <string name="prenomChange">Mark</string>
     <string name="profession">Médecin généraliste</string>
-    <string name="parametreFavoris">Notes</string>
+    <string name="parametreFavoris">Paramètre favoris</string>
 
     <string name="sauvegarder">Sauvegarder</string>
     <string name="partager">Partager</string>
@@ -53,5 +53,10 @@
     <string name="reprendre">Reprendre</string>
     <string name="partager2">Partager</string>
     <string name="supprimer">Supprimer</string>
+
+    <string name="modifierphoto">Modifier ma photo</string>
+
+    <string name="recherche">Recherche</string>
+    <string name="touteseances">Toutes les séances</string>
 
 </resources>

@@ -33,6 +33,12 @@ public class ScanFragment extends Fragment {
         if (v.findViewById(R.id.button_seances) != null) {
             v.findViewById(R.id.button_seances).setOnClickListener((MainActivity) getActivity());
         }
+
+        if (v.findViewById(R.id.capturePhoto) != null) {
+            v.findViewById(R.id.capturePhoto).setOnClickListener((MainActivity) getActivity());
+        }
+
+
         return v;
     }
 }
