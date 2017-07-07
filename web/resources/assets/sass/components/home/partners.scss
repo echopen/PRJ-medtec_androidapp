@@ -1,0 +1,21 @@
+.partenaire{
+    width: 100%;
+    margin: 0 auto;
+    padding: 50px 0;
+    text-align: center;
+  li{
+    list-style: none;
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 0em 1.625em;
+    width: 22%;
+      @media screen and(max-width: 720px){
+        width: 45%;
+        margin-bottom: 12px;
+      }
+  }
+    img{
+        width: 100%;
+    }
+}
+

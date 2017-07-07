@@ -1,0 +1,29 @@
+ .entry_slick{
+     overflow: hidden;
+        .base_item-content{
+            padding: 3.1875em 3.5em 3.125em 3.3125em;
+            height: 25em;
+            margin-right: 10;
+            background-color: $lightcolor;
+            border-radius: 5px;
+        }
+        .base_item-title{
+            margin: 0 0 0.9375em;
+            font-size: 1.125em;
+            font-weight: 500;
+            overflow: hidden;
+        }
+     .slick-prev img{
+         transform: rotate(180deg);
+     }
+     .slick-next:before,
+     .slick-prev:before{
+         display: none;
+     }
+     .slick-next,
+     .slick-prev{
+         @include tablet(){
+                display: none;
+            }
+     }
+    }

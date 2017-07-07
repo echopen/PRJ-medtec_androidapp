@@ -1,0 +1,32 @@
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+// Variables
+@import "variables";
+@import "./tools/sizes";
+@import "./tools/fonts";
+@import "./tools/mixins";
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "./components/footer";
+@import "./components/header";
+@import "./components/global";
+@import "./components/faq";
+@import "./components/slider";
+@import "./components/home/community";
+@import "./components/history";
+@import "./components/value";
+@import "./components/faq/faq";
+@import "./components/home/partners";
+@import "./components/community/guest";
+@import "./components/community/logged";
+@import "./components/contact/contact";
+@import "./components/product/product";
+body>.container {
+    max-width: 1440px;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+@import "./components/numbers";
+@import "./components/howitworks";

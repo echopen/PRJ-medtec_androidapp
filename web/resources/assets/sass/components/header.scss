@@ -1,0 +1,88 @@
+.header {
+    z-index: 100;
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 60px;
+    width: 100%;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.05);
+    font-family: 'Roboto';
+    @media screen and (min-width: em(738)) {
+        height: 100px;
+        max-width: 1440px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    &__mobileHamburger {
+        @media screen and (min-width: em(738)) {
+            display: none;
+        }
+    }
+    &__nav {
+        display: none;
+        list-style: none;
+        @media screen and (min-width: em(738)) {
+            display: flex;
+            padding-left: 0px;
+            margin-bottom: 0px;
+            &__item {
+                margin-right: 20px;
+                &--link {
+                    color: #545454;
+                    font-size: em(16);
+                    text-decoration: none;
+                    transition: color 0.5s;
+                    text-transform: uppercase;
+                    &:hover {
+                        color: $echopen-blue;
+                    }
+                }
+            }
+        }
+    }
+    &__logo {
+        position: absolute;
+        left: calc(50% - 50px);
+        &--img {
+            width: 100px;
+            @media screen and (min-width: em(738)) {
+                width: 150px;
+                left: calc(50% - 75px);
+            }
+        }
+    }
+    &__mobileCta {
+        &--btn {
+            color: #17EAD9;
+        }
+        @media screen and (min-width: em(738)) {
+            display: none;
+        }
+    }
+    &__cta {
+        display: none;
+        @media screen and (min-width: em(738)) {
+            display: flex;
+            &--btn {
+                border: 2px solid #6078EA;
+                padding: 0.9375em 1.8375em;
+                text-align: center;
+                margin-bottom: 0;
+                background-color: #fff;
+                color: #6078EA;
+                border-radius: 4px;
+                transition: background-color 0.3s, color 0.3s;
+                &:hover {
+                    color: #fff;
+                    background-color: #6078EA;
+                }
+            }
+        }
+    }
+}

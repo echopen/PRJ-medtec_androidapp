@@ -1,0 +1,179 @@
+body {
+    position: relative;
+}
+
+.contact-page {
+    .top-contact {
+        width: 100%;
+        @include aspect-ratio(1440, 702);
+        background-image: url("/img/courbes_header.png");
+        background-size: cover;
+        .content {
+            .contact-title {
+                margin-top: 3em;
+                font-size: em(50);
+                color: #fff;
+                font-family: $font-Roboto-Regular;
+                text-align: center;
+                @include phone() {
+                    margin-top: 0;
+                }
+            }
+            .input-container {
+                width: 55.5%;
+                height: 10%;
+                position: relative;
+                margin: 0 auto;
+                margin-top: 35px;
+                color: $lightcolor;
+                text-align: center;
+                @include phone() {
+                    display: none;
+                }
+            }
+        }
+    }
+    .contact_wrapper {
+        display: table;
+        vertical-align: middle;
+        width: 80%;
+        margin: 0 auto;
+        margin-bottom: 350px;
+        @include phone() {
+            display: block;
+            width: 100%;
+        }
+    }
+    .contact_form {
+        @include phone() {
+            width: 100%;
+            display: inline-table;
+            margin: 20px 0;
+        }
+        .left {
+            margin-bottom: 20px;
+            display: inline-flex;
+            width: 100%;
+        }
+        display: table-cell;
+        width: 50%;
+        width: 45%;
+        height: 70px;
+        form {
+            width: 90%;
+            margin: 0 auto;
+                padding-left: 15px;
+    padding-right: 15px;
+        }
+        .input-name {
+            width: 100%;
+            height: 70px;
+            margin-right: 19px;
+            border: transparent;
+            &::-webkit-input-placeholder {
+                padding-left: 25px;
+            }
+            &:-moz-placeholder {
+                padding-left: 25px;
+            }
+            @include phone() {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+        .input-email {
+            width: 100%;
+            height: 70px;
+            border: transparent;
+            &::-webkit-input-placeholder {
+                padding-left: 25px;
+            }
+            &:-moz-placeholder {
+                padding-left: 25px;
+            }
+            @include phone() {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            border: transparent;
+            &::-webkit-input-placeholder {
+                padding-left: 25px;
+            }
+            &:-moz-placeholder {
+                padding-left: 25px;
+            }
+            @include phone() {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+        }
+        .input-submit {
+            float: right;
+            height: 40px;
+            padding: 0 40px;
+        }
+    }
+    .contact_info {
+        display: table-cell;
+        width: 50%;
+        width: 45%;
+        height: 70px;
+        padding-left: 50px;
+        @include phone() {
+            width: 100%;
+            display: block;
+        }
+    }
+    .input-shadow {
+        position: absolute;
+        z-index: -1;
+        height: 70px;
+        width: 33%;
+        opacity: 0.2;
+        -webkit-filter: blur(20px);
+        filter: blur(20px);
+        background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.5)), linear-gradient(95deg, #17ead9, #6078ea);
+        &--area {
+            margin-top: 20px;
+            height: 200px;
+        }
+        @include phone() {
+            width: 85%;
+            height: 170px;
+        }
+    }
+    .input-submit {
+        background-color: $mainblue;
+        color: $lightcolor;
+        font-size: 14px;
+        border: 1px solid $mainblue;
+        border-radius: 4px;
+        height: 70px;
+        margin-top: 0;
+        padding: 20px 82px;
+    }
+    .info_title {
+        margin-bottom: 0;
+    }
+    .contact_info-sub {
+        padding: 20px 0;
+    }
+}
+
+.contact_map-wrapper {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+    .contact_map {
+        width: 100%;
+        @include aspect-ratio(1440,
+        702);
+        background-image: url("/img/map_contact.jpg");
+        background-size: cover;
+    }
+}

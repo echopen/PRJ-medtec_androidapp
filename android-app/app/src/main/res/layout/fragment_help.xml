@@ -1,0 +1,279 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_help"
+    android:visibility="visible"
+    tools:context="com.echopen.asso.echopen.fragments.HelpFragment">
+
+    <include layout="@layout/header" />
+
+    <RelativeLayout
+            android:id="@+id/relativeLayout4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="64dp"
+            android:background="@drawable/dashboard_bottom">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="88dp"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:id="@+id/linearLayout2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dashboard_button"
+                    android:elevation="1dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/notification_alert"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Why my probe is not sync ?"
+                        android:textColor="?android:attr/colorPrimary" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dashboard_button"
+                    android:elevation="1dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/sonde_id"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="How to config my probe ?"
+                        android:textColor="?android:attr/colorPrimary" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dashboard_button"
+                    android:elevation="1dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/sonde_id"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="How to use the probe ?"
+                        android:textColor="?android:attr/colorPrimary" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dashboard_button"
+                    android:elevation="1dp"
+                    android:orientation="horizontal"
+                    android:padding="15dp">
+
+                    <TextView
+                        android:id="@+id/version_app"
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="How to save my account ?"
+                        android:textColor="?android:attr/colorPrimary" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton5"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_weight="1"
+                        android:background="#fff"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/dashboard_button"
+                    android:elevation="1dp"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:id="@+id/notification_alert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="MORE"
+                        android:textAlignment="center"
+                        android:textColor="?android:attr/colorPrimary"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="26dp"
+            android:layout_marginTop="71dp"
+            android:text="FAQ"
+            android:textColor="?android:attr/colorPrimary"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView4"
+            android:layout_below="@+id/linearLayout2"
+            android:text="Find more"
+            android:textColor="?android:attr/colorPrimary"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="11dp"
+            android:layout_weight="1"
+            android:elevation="1dp"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="#ffff"
+                android:elevation="5dp"
+                android:text="Community"
+                android:textColor="?android:attr/colorPrimary"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="#ffffff"
+                android:elevation="5dp"
+                android:text="Assistance"
+                android:textColor="?android:attr/colorPrimary" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <!--
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_weight="1"
+        android:scaleType="fitStart"
+        app:srcCompat="@drawable/ic_people_black_24px" />-->
+  
+    <TextView
+        android:id="@+id/settings_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/relativeLayout4"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="33dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:text="Help"
+        android:textColor="?android:attr/colorPrimary"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/relativeLayout4"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="33dp"
+        android:layout_toEndOf="@+id/imageView2"
+        android:text="Help"
+        android:textColor="?android:attr/colorPrimary"
+        android:textSize="22sp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/settings_title"
+        android:layout_marginStart="25dp"
+        app:srcCompat="@drawable/ic_help_outline_black_24px" />
+
+    <include layout="@layout/modal_login"/>
+</RelativeLayout>

@@ -1,0 +1,131 @@
+// px to em
+$browser-context: 16; // Default
+@function em($pixels, $context: $browser-context) {
+    @return #{$pixels/$context}em;
+}
+
+//
+// Sizes
+//
+
+/*
+$susy: (
+  columns: 12,
+  gutters:  0,
+  math: fluid,
+  output: float,
+  flow: ltr,
+  container: 1240px
+);
+*/
+
+$susy: ( columns: 12, gutters: 1/4, math: fluid, output: float, gutter-position: inside);
+// Extra small screen / phone
+$screen-xsCustom: em(480) !default;
+$screen-xsCustom-min: $screen-xsCustom !default;
+$screen-phone: $screen-xsCustom-min !default;
+// Small screen / tablet
+$screen-smCustom: em(768) !default;
+$screen-smCustom-min: $screen-smCustom !default;
+$screen-tablet: $screen-smCustom-min !default;
+// Medium screen / desktop
+$screen-mdCustom: em(1024) !default;
+$screen-mdCustom-min: $screen-mdCustom !default;
+$screen-desktop: $screen-mdCustom-min !default;
+// Large screen / wide desktop
+$screen-lgCustom: em(1280) !default;
+$screen-lgCustom-min: $screen-lgCustom !default;
+$screen-lgCustom-desktop: $screen-lgCustom-min !default;
+//
+// Media queries mixins
+//
+@mixin mobile {
+    @media only screen and (max-width: ($screen-smCustom-min - 1)) {
+        @content;
+    }
+}
+
+@mixin tablet-portrait {
+    @media (min-width: $screen-smCustom-min) and (max-width: ($screen-mdCustom-min - 1)) {
+        @content;
+    }
+}
+
+@mixin mobile-to-tablet-portrait {
+    @media (max-width: ($screen-mdCustom-min)) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: ($screen-mdCustom-min + 1)) {
+        @content;
+    }
+}
+
+@mixin large-desktop {
+    @media (min-width: $screen-lgCustom-desktop) {
+        @content;
+    }
+}
+
+// Mix of tablet-landscape AND tablet-portrait
+@mixin tablet {
+    @media (max-width: $screen-smCustom-min) {
+        @content;
+    }
+}
+
+// Mix tablet-portrait AND mobile
+@mixin very-small-device {
+    @media only screen and (max-width: ($screen-xsCustom-min - 1)) {
+        @content;
+    }
+}
+
+// Mix of tablet-portrait AND mobile
+@mixin small-device {
+    @media only screen and (max-width: ($screen-mdCustom-min)) {
+        @content;
+    }
+}
+
+// Mix of upper tablet-portrait
+@mixin main-device {
+    @media (min-width: ($screen-mdCustom-min)) {
+        @content;
+    }
+}
+
+// Mix of tablet-landscape AND desktop
+@mixin big-device {
+    @media (min-width: $screen-mdCustom-min) {
+        @content;
+    }
+}
+
+// Only phone
+@mixin phone {
+    @media only screen and (max-width: ($screen-smCustom-min - 1)) {
+        @content;
+    }
+}
+
+// Not phone
+@mixin not-phone {
+    @media (min-width: $screen-smCustom-min) {
+        @content;
+    }
+}
+
+@mixin retina {
+    @media(-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        @content
+    }
+}
+
+@mixin not-retina {
+    @media(-webkit-max-device-pixel-ratio: 1.99), (max-resolution: 191dpi) {
+        @content
+    }
+}

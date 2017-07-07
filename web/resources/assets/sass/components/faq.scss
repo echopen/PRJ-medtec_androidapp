@@ -1,0 +1,107 @@
+.base_section-faq {
+    .entry_wrapper-small {
+        @media screen and(max-width: 990px){
+            padding: 0 15px;
+        }
+        .alignleft {
+            width: 26%;
+            margin-left: 8.429em;
+            @media screen and(max-width: 990px){
+                width: 100%;
+                margin: 0 auto;
+                display: block;
+                text-align: center;
+            }
+        }
+        .alignright {
+            width: 62%;
+            height: 0;
+            @media screen and(max-width: 990px){
+                width: 100%;
+                margin: 0 auto;
+                display: initial;
+                height: auto;
+            }
+        }
+    }
+    .slick-slide {
+        width: 308px;
+        height: 20.643em;
+        border: 1px solid $lightgrey;
+        margin: 10px;
+        box-shadow: 0 10px 35px 0 rgba(0, 0, 0, 0.1);
+    }
+    .slick_background {
+        background-image: linear-gradient(126deg, #17ead9, #6078ea);
+        padding: 7.929em 0;
+        width: 77%;
+        height: 566px;
+        background-image: linear-gradient(126deg, #17ead9, #6078ea);
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: -1;
+        float: right;
+        @media screen and(max-width: 990px){
+            display: none;
+        }
+    }
+    .entry_title {
+        top: initial;
+        transform: none;
+        margin-top: 150px;
+        @include tablet {
+            margin-top: 0;
+        }
+    }
+    .entry_more {
+        a {
+            text-transform: uppercase;
+        }
+    }
+    .entry_slick {
+        top: -50%;
+        position: relative;
+        transform: translateY(50%);
+        @media screen and(max-width: 990px){
+            transform: none;
+            top: initial;
+            margin: 50px 0;
+        }
+    }
+    .base_btn {
+        margin-top: 80px;
+    }
+    .base_item-content {
+        .base_item-title a {
+            color: #545454;
+            font-size: 25px;
+            text-transform: uppercase;
+        }
+        p {
+            font-size: 14px;
+        }
+        .base_item-more {
+            color: #17EAD9;
+            &:after {
+                content: ">";
+                margin-left: 10px;
+            }
+        }
+    }
+     .slick_controls {
+         width: 25%;
+         display: block;
+         margin: 0 auto;
+         padding-top: 15px;
+         .slick_left {
+             float: left;
+             transform: rotate(180deg);
+             cursor: pointer;
+         }
+         .slick_right {
+             float: right;
+             cursor: pointer;
+         }
+     }
+}

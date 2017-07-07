@@ -1,0 +1,94 @@
+footer {
+    position: relative;
+    .links {
+        margin-top: 3em;
+        padding-left: em(60);
+        position: absolute;
+        bottom: 13%;
+        @include phone() {
+            display: flex;
+            flex-direction: column
+        }
+        li {
+            margin-left: em(35);
+            @include phone() {
+                padding: 10px 0;
+            }
+            &:first-child {
+                margin-left: 0;
+            }
+            a {
+                color: #fff;
+                font-size: em(16);
+                text-decoration: none;
+            }
+            list-style: none;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+        li:first-child {
+            @include phone() {
+                display: none;
+            }
+        }
+    }
+    .bg {
+        background-image: (url("/img/gradient.png"));
+        display: inline-block;
+        background-size: cover;
+        width: 100%;
+        height: 400px;
+        @include phone() {
+            background-image: (url("/img/bg-footer-mobile.png"));
+            height: 900px;
+            background-repeat: no-repeat;
+        }
+    }
+    .logo_footer {
+        position: absolute;
+        bottom: 28%;
+        left: em(50);
+        @include phone() {
+            bottom: 5%;
+            left: em(90);
+        }
+    }
+<<<<<<< Updated upstream
+    .right-cta {
+        margin-top: 1.7em;
+        float: right;
+        padding-right: em(60);
+        @media screen and (max-width: 840px) {
+            display: none;
+        }
+        @include phone() {
+            display: none;
+        }
+        .join-us {
+            cursor: pointer;
+            width: em(250);
+            border: 2px solid #fff;
+            padding: em(15) em(55);
+            color: #fff;
+            border-radius: 4px;
+            transition: background-color 1s, color 1s;
+            position: absolute;
+            bottom: 13%;
+            right: 4%;
+        }
+        li {
+            list-style: none;
+        }
+=======
+  }
+  .bg{
+    background-image: (url("/img/gradient.png"));
+    display: inline-block;
+    width: 100%;
+    height:400px;
+    @include phone(){
+      background-image: (url("/img/gradient.png"));
+
+>>>>>>> Stashed changes
+    }
+}

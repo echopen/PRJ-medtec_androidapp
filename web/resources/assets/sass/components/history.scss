@@ -1,0 +1,119 @@
+.base_section-history{
+    height: 55.75em;
+    background-color: $lightgrey;
+    padding-top: 0;
+    overflow: hidden;
+    margin-top: 0;
+    .entry_desc{
+            padding-bottom: 0;
+    }
+    .entry_wrapper{
+        height: 48.750em;
+        width: 68.750em;
+        margin: 0 auto;
+        @include phone(){
+            width: 100%;
+            padding: 0 15px;
+        }
+        .alignleft{
+            display: block;
+            top: -50%;
+            position: relative;
+            @include tablet(){
+                display: none;
+            }
+        }
+        .alignright{
+            width: 50.487em;
+            @include tablet(){
+                width: 100%;
+            }
+        }
+    }
+    .entry_title{
+        
+    }
+    
+    .entry_slick-solo{
+        .base_item-content{
+            min-height: 28.125em;     
+        }
+        .base_item-title{
+            font-size: 2.188em;
+            text-align: left;
+            color: $greyfirst;
+        }
+        .slick-dots{
+            position: absolute;
+            bottom: 0;
+            width: 50%;
+            top: 3em;
+            @include tablet(){
+                width: 100%;
+                top: initial;
+            }
+            button:before{
+                color: $mainblue;
+                font-size: 15px;
+            }
+        }
+        .slick-arrow{
+            &:before{
+                color: $maingreen;
+            }
+        }
+        .base_item-wrapper{
+            width: 18.125em;
+            float: right;
+            margin-right: 80px;
+        }
+        .slick-prev{
+            left: 70%;
+            top: 100%;
+            &:before{
+                color: $mainblue;
+            }
+        }
+        .slick-next{
+            left: 80%;
+            top: 100%;
+            &:before{
+                color: $mainblue;
+            }
+        }
+        .slick_btn_wrap{
+            width: 100%;
+            height: 90%;
+            position: absolute;
+            z-index: 1;
+            &-left{
+                top: 0;
+            }
+        }
+    }
+    .entry_highlight{
+        width: 45.625em;
+        height: 27.313em;
+        background: url(../../../../public/img/visuel-storytelling.png) no-repeat;
+        background-size: cover;
+    }
+    .slick_controls {
+        width: 30%;
+        display: table;
+        margin: 0 auto;
+        padding: 10px 0;
+        float: right;
+        .slick_left {
+            transform: rotate(180deg);
+            float: left;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+        .slick_right{
+            cursor: pointer;
+        }
+        @include tablet(){
+            display: none;
+        }
+    }
+}

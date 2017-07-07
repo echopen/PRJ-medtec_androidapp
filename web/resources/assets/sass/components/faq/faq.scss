@@ -1,0 +1,88 @@
+div.faq-page-container{
+  .top-faq{
+    width: 100%;
+    @include aspect-ratio(1440,702);
+    background-image: url("/img/courbes_header.png");
+    background-size: cover;
+
+    .content{
+      .faq-title{
+        margin-top: 3em;
+        font-size: em(50);
+        color: #fff;
+        font-family: $font-Roboto-Regular;
+        text-align: center;
+      }
+
+      .input-container{
+        width: 55.5%;
+        height: 10%;
+        background-color: #fff;
+        border-radius: 6px;
+        position: relative;
+        margin: 0 auto;
+        margin-top: 35px;
+
+        input{
+          border-radius: 4px;
+          width: 75%;
+          height: 100%;
+          display: inline-block;
+          float: left;
+          border: none;
+          padding-left: 10%;
+        }
+
+        .magnifier{
+          width: 3.125%;
+          @include aspect-ratio(1,1);
+          position: absolute;
+          background-image: url("/img/magnifier-faq.png");
+          background-size: cover;
+          left: 3.75%;
+          top: 34.3%;
+        }
+
+        .submit{
+          border-radius: 4px;
+          width: 25%;
+          height: 100%;
+          display: inline-block;
+          float: left;
+          border: none;
+          background-color: #6078EA;
+          color: #fff;
+          font-family: $font-Roboto-Regular;
+        }
+
+      }
+
+    }
+
+  }
+
+  .questions{
+    margin: 100px 0;
+    .question{
+      background-color: #fff;
+      width: 82%;
+      margin: 0 auto 70px auto;
+      padding: 55px 40px 45px 40px;
+      border-radius: 4px;
+      -webkit-box-shadow: 0px 11px 64px -16px rgba(189,189,189,0.72);
+      -moz-box-shadow: 0px 11px 64px -16px rgba(189,189,189,0.72);
+      box-shadow: 0px 11px 64px -16px rgba(189,189,189,0.72);
+      .title{
+        text-transform: uppercase;
+        font-size: em(25);
+        margin-bottom: 8px;
+        color: #545454;
+      }
+      .description{
+        font-size: em(16);
+        color: #545454;
+      }
+    }
+  }
+
+}

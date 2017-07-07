@@ -1,0 +1,137 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:visibility="visible"
+    tools:context="com.echopen.asso.echopen.fragments.DocumentFragment">
+  
+    <include layout="@layout/header"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:background="@color/transparent"
+                android:fontFamily="sans-serif"
+                android:text="&lt;"
+                android:textColor="@color/gray_dk"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/nb_pictures"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:fontFamily="sans-serif"
+                android:text="16 pictures"
+                android:textSize="20sp"
+                android:textColor="@color/gray_dk" />
+
+            <!--<LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end">
+                <Button
+                    android:id="@+id/reload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Rafraîchir"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray_light"
+                    android:background="@color/transparent"
+                    android:visibility="invisible"/>
+
+                <Button
+                    android:id="@+id/btn_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Share"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_light"
+                    android:background="@color/transparent" />
+
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Edit"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_light"
+                    android:background="@color/transparent" />
+            </LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <GridView android:id="@+id/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_weight="108.17"
+            android:background="@color/white"
+            android:columnWidth="170dp"
+            android:horizontalSpacing="10dp"
+            android:numColumns="auto_fit"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:verticalSpacing="10dp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_closezoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="240dp"
+        android:layout_marginTop="40dp"
+        android:layout_weight="1"
+        android:background="@color/transparent"
+        android:text="X"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="400dp"
+        android:layout_height="500dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:contentDescription="@string/app_name"
+        android:visibility="invisible" />
+
+
+    <include layout="@layout/modal_login"/>
+</FrameLayout>

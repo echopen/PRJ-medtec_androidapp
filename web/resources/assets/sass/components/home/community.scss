@@ -1,0 +1,176 @@
+header{
+  -webkit-box-shadow: 1px 15px 79px 0px rgba(232,250,255,1);
+  -moz-box-shadow: 1px 15px 79px 0px rgba(232,250,255,1);
+  box-shadow: 1px 15px 79px 0px rgba(232,250,255,1);
+}
+
+
+.container section.home-community{
+  .home-title-community{
+    padding-left: 10%;
+    margin-top: 100px;
+    .category{
+      text-transform: uppercase;
+      font-size: em(13);
+      color: #545454;
+    }
+
+    .title{
+      font-size: em(50);
+      color: #424242;
+      position: relative;
+      display: inline-block;
+      margin-top: 0;
+      &:after{
+        content: "";
+        position: absolute;
+        bottom: -20px;
+        right: 5px;
+        background-image: url("/img/vague.png");
+        width: 112px;
+        height: 10px;
+      }
+    }
+  }
+  .map{
+    margin-top: 7em;
+    width: 94%;
+    margin-left:3%;
+    @include aspect-ratio(1353,684);
+    background-image: url('/img/map.png');
+    background-size: cover;
+
+    .text-container{
+      width: 30.4%;
+      @include aspect-ratio(411,360);
+      background-color: #fff;
+      border-radius: 4px;
+      position: absolute;
+        @media screen and (min-width: 1024){
+            height: auto;
+            width: 100%;
+            left: 50%;
+            z-index: 2;
+            transform: translateX(-50%);
+            background-color: transparent;
+        }
+
+      .content{
+        padding: 6% 10% 0 10%;
+      }
+
+      &:nth-child(1){
+        top: 7.3%;
+        left: 50.6%;
+      }
+
+      &:nth-child(2){
+        top: 37%;
+        left: 42.13%;
+        background-color: transparent;
+      }
+
+
+      .author{
+        font-size: em(35);
+        color: #545454;
+        margin-bottom: 0;
+        font-family: $font-Roboto-Regular;
+      }
+
+      .role{
+        font-size: em(16);
+        font-family: $font-Roboto-Regular;
+        color: #6078EA;
+        width: 75%;
+      }
+
+      .description{
+        font-size: em(16);
+
+      }
+
+
+      .quote{
+        width: 19.5%;
+        @include aspect-ratio(81, 70);
+        background-image: url("/img/icon_quote.png");
+        background-size: cover;
+        position: absolute;
+        top: 10%;
+        right: 10%;
+      }
+
+
+      .profile-picture{
+        background-image: url("/img/map-profile-picture.png");
+        background-size: cover;
+        @include aspect-ratio(1,1);
+        width: 26.76%;
+        position: absolute;
+        left: -21.16%;
+        top: 11.11%;
+        cursor: pointer;
+      }
+    }
+
+  }
+}
+.base_section-community{
+    margin: 0;
+    padding: 250px 0 0 0;
+    @media screen and(max-width: 990px){
+        padding: 0;
+    }
+    .entry_wrapper{
+        background-color: $lightgrey;
+    padding: 40px 0;
+
+        text-align: center;
+        @include phone(){
+            width: 100%;
+            padding: 30px 0;
+        }
+        .entry_title{
+            top: 0;
+            transform: none;
+                width: 70%;
+    margin: 0 auto;
+        }
+    }
+    .entry_wrapper-small{
+        width: 60%;
+        margin: 0 auto;
+        text-align: left;
+        @media screen and(max-width: 990px){
+            width: 100%;
+            padding: 0 15px;
+        }
+    }
+    .entry_strong{
+        display: inline-block;
+        position: relative;
+            &:after{
+                content: "";
+                background: url(../../../../public/img/vague.png) no-repeat;
+                width: 122px;
+                height: 10px;
+                position: absolute;
+                right: -10px;
+                top: 65px;
+                font-family: $font-Roboto-Regular;
+                @include phone(){
+                    top: 100px;
+                }
+                }
+        span{
+            color: $greyfirst;
+        }
+    }
+    .entry_sub_desc{
+        margin-top: 80px;
+    }
+    .base_btn{
+        margin-top: 80px;
+    }
+}
