@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:text="Choisir un organe"
+        android:text="@string/organ"
         android:textSize="13pt"
         android:textColor="@color/new_blue"
         android:layout_marginTop="20dp"
@@ -130,7 +130,7 @@
 <TextView
     android:layout_width="30dp"
     android:layout_height="30dp"
-    android:text="ou"
+    android:text="@string/or"
     android:layout_alignEnd="@+id/skip"
     android:layout_marginBottom="50dp"
     android:gravity="center"

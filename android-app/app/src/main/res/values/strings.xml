@@ -7,4 +7,16 @@
     <string name="menu1">Archives</string>
     <string name="menu2">Scanner</string>
     <string name="menu3">Patient</string>
+
+    <string name="gain">Gain</string>
+    <string name="frequence">Fréquence</string>
+
+    <string name="infosPatient">Informations du patient</string>
+    <string name="valid">Valider</string>
+    <string name="weight">Corpulence :</string>
+    <string name="age">Age :</string>
+    <string name="sex">Sexe :</string>
+
+    <string name="or">ou</string>
+    <string name="organ">Choisir un organe</string>
 </resources>

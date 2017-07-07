@@ -8,7 +8,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
-    android:text="Informations du patient"
+    android:text="@string/infosPatient"
     android:textSize="30sp"></TextView>
 
     <RelativeLayout
@@ -27,7 +27,7 @@
                 android:id="@+id/InfoSexe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sexe :"
+                android:text="@string/sex"
                 android:layout_centerHorizontal="true"
                 android:textSize="36sp"
                 android:gravity="center"
@@ -75,7 +75,7 @@
             android:id="@+id/InfoAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Age :"
+            android:text="@string/age"
             android:layout_centerHorizontal="true"
             android:textSize="36sp"
             android:gravity="center"
@@ -129,7 +129,7 @@
             android:id="@+id/Infocorp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Corpulence :"
+            android:text="@string/weight"
             android:layout_centerHorizontal="true"
             android:textSize="36sp"
             android:gravity="center"
@@ -186,7 +186,7 @@
            android:layout_width="200dp"
            android:layout_centerHorizontal="true"
            android:layout_height="wrap_content"
-           android:text="Valider"
+           android:text="@string/valid"
            android:id="@+id/Valid"
 
            android:textColor="@color/white"
