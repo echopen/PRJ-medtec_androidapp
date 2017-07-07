@@ -71,6 +71,12 @@ public class ImageHandler {
         return name;
     }
 
+    protected File getFileByImageId(int imageId) {
+        File[] allImages = (new File(this.galleryDirectory.toString() + "/" + clientId + "/")).listFiles();
+
+        return allImages[imageId];
+    }
+
     public void setClientId(int clientId) {
         this.clientId = clientId;
     }

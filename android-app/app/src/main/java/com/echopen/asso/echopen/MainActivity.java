@@ -100,8 +100,26 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         return this.ImageHandler;
     }
 
-    public void cantTakePictureNow() {
-        AlertDialog.Builder builder;
+    public AlertDialog cantTakePictureNow() {
+        return new AlertDialog.Builder(this, R.style.AppTheme)
+                .setTitle("Alert")
+                .setCancelable(true)
+                .setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .setNegativeButton("Cancel",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                .show();
+        /*AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder = new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert);
         } else {
@@ -115,7 +133,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
                     }
                 })
                 .setIcon(android.R.drawable.ic_dialog_alert)
-                .show();
+                .show();*/
     }
 
     /**

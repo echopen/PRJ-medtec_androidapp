@@ -36,7 +36,7 @@
             android:layout_alignParentRight="true"
             android:background="@color/transparent"
             android:scaleType="center"
-            android:src="@drawable/search" />
+            android:src="@drawable/share" />
 
     </RelativeLayout>
 
