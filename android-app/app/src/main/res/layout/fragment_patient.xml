@@ -1,17 +1,202 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:theme="@style/AppTheme">
+    android:layout_height="wrap_content"
+    android:theme="@style/AppTheme"
+    android:id="@+id/PatientPage">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_centerHorizontal="true"
+    android:text="Informations du patient"
+    android:textSize="30sp"></TextView>
 
-    <TextView
-        android:id="@+id/textView"
+    <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
+        android:layout_marginTop="60dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="233dp"
-        android:text="Patientttt"
-        android:textSize="36sp" />
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:id="@+id/InfoSexe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sexe :"
+                android:layout_centerHorizontal="true"
+                android:textSize="36sp"
+                android:gravity="center"
+                />
+
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/Sexebtn"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_woman"
+                android:layout_marginStart="140dp"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/imageButton4"
+                android:layout_alignParentStart="true" />
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/Sexebtn1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_man"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/imageButton4"
+                android:layout_alignParentStart="true" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_centerHorizontal="true">
+        <TextView
+            android:id="@+id/InfoAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Age :"
+            android:layout_centerHorizontal="true"
+            android:textSize="36sp"
+            android:gravity="center"
+
+            />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/ageebtn"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_child"
+                android:layout_marginStart="125dp"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/imageButton4"
+                android:layout_alignParentStart="true" />
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/agebtn1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_infant"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/imageButton4"
+                android:layout_alignParentStart="true" />
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/agebtn2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_adult"
+                android:layout_marginTop="60dp"
+                android:layout_marginStart="250dp"
+
+                android:layout_below="@+id/imageButton4"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp">
+        <TextView
+            android:id="@+id/Infocorp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Corpulence :"
+            android:layout_centerHorizontal="true"
+            android:textSize="36sp"
+            android:gravity="center"
+
+            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true">
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/corpbtn"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_thin_man"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/imageButton4"
+                android:layout_alignParentStart="true" />
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/corpbtn1"
+                android:layout_marginStart="160dp"
+
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_normal_man"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/imageButton4"
+                android:layout_alignParentStart="true" />
+            <ImageButton
+                android:background="@color/new_white_button"
+                android:id="@+id/corpbtn4"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_big_man"
+                android:layout_marginStart="290dp"
+
+                android:layout_marginTop="50dp"
+
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+   <RelativeLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="450dp"
+       >
+       <Button
+           android:layout_width="200dp"
+           android:layout_centerHorizontal="true"
+           android:layout_height="wrap_content"
+           android:text="Valider"
+           android:id="@+id/Valid"
+
+           android:textColor="@color/white"
+           android:textSize="@dimen/text_large"
+           android:background="@color/new_blue"
+           >
+
+       </Button>
+   </RelativeLayout>
+
+
+
 </RelativeLayout>
