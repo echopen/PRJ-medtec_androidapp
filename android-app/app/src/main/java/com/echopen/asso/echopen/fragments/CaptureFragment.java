@@ -76,8 +76,9 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
         presenter.start();
 
         final Button btn_capture = (Button) getView().findViewById(R.id.btn_capture);
-        final Button btn_save = (Button) getView().findViewById(R.id.btn_save);
+        final ImageButton btn_save = (ImageButton) getView().findViewById(R.id.btn_save);
         final Button btn_menu = (Button) getView().findViewById(R.id.btn_menu_main);
+        final ImageButton btn_gain = (ImageButton) getView().findViewById(R.id.btn_gain);
         final LinearLayout layout_screenshot = (LinearLayout) getView().findViewById(R.id.layout_screenshot);
         layout_screenshot.setVisibility(View.INVISIBLE);
 
