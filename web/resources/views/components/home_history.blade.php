@@ -70,6 +70,10 @@
 
 
             </div>
+            <div class="slick_controls">
+               <div class="slick_left"><img src="/img/arrow.svg" alt="" ></div>
+               <div class="slick_right"><img src="/img/arrow.svg" alt="" ></div>
+           </div>
         </div>
 
         <div class="entry_highlight alignleft">

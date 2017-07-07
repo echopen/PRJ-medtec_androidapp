@@ -12,9 +12,12 @@
 la F.A.Q.
            </p>
            <p class="entry_sub_desc">
-               Trouvez la réponse à votre problème et participez à la communauté.
-
+               Trouvez la réponse à votre problème et <br>participez à la communauté.
            </p>
+           <div class="slick_controls">
+               <div class="slick_left"><img src="/img/arrow.svg" alt="" ></div>
+               <div class="slick_right"><img src="/img/arrow.svg" alt="" ></div>
+           </div>
             <div class="base_btn">
                 <a href="#">Voir la F.A.Q.</a>
             </div>

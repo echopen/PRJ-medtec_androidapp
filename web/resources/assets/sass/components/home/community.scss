@@ -46,6 +46,14 @@ header{
       background-color: #fff;
       border-radius: 4px;
       position: absolute;
+        @media screen and (min-width: 1024){
+            height: auto;
+            width: 100%;
+            left: 50%;
+            z-index: 2;
+            transform: translateX(-50%);
+            background-color: transparent;
+        }
 
       .content{
         padding: 6% 10% 0 10%;
