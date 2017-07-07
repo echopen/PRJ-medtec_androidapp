@@ -3,6 +3,7 @@ package com.echopen.asso.echopen.fragments;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -17,6 +18,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.echopen.asso.echopen.R;
@@ -44,6 +47,16 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * A simple {@link Fragment} subclass.
  */
 public class CaptureFragment extends Fragment implements EchographyImageVisualisationContract.View {
+
+
+    public static final String PREFS_PERSONNE = "Preferences_user";
+    public static final String PREFS_MORPHO = "Preferences_morpho";
+    public static final String PREFS_ORGANES = "Preferences_organes";
+    SharedPreferences sharedPreferences;
+
+    public String preference_personne;
+    public String preference_morpho;
+    public String preference_organes;
 
 
     public CaptureFragment() {
@@ -96,6 +109,93 @@ public class CaptureFragment extends Fragment implements EchographyImageVisualis
                 layout_screenshot.setVisibility(View.INVISIBLE);
             }
         });
+
+
+        sharedPreferences = getContext().getSharedPreferences(PREFS_PERSONNE, Context.MODE_PRIVATE);
+
+
+        if (sharedPreferences.contains(PREFS_PERSONNE) && sharedPreferences.contains(PREFS_MORPHO) && sharedPreferences.contains(PREFS_ORGANES)) {
+
+            preference_personne = sharedPreferences.getString(PREFS_PERSONNE, null);
+            preference_morpho = sharedPreferences.getString(PREFS_MORPHO, null);
+            preference_organes = sharedPreferences.getString(PREFS_ORGANES, null);
+
+            Log.d("HO", preference_morpho + preference_personne);
+
+            switch (preference_personne){
+                case "woman":
+                    ImageView imageView_personne_woman = (ImageView) getActivity().findViewById(R.id.preference_capture_personne);
+
+                    imageView_personne_woman.setImageResource(R.drawable.woman_icon_white);
+                    break;
+                case "baby":
+                    ImageView imageView_persone_baby = (ImageView) getActivity().findViewById(R.id.preference_capture_personne);
+
+                    imageView_persone_baby.setImageResource(R.drawable.baby_icon_white);
+                    break;
+
+                case "man":
+                    ImageView imageView_persone_man = (ImageView) getActivity().findViewById(R.id.preference_capture_personne);
+
+                    imageView_persone_man.setImageResource(R.drawable.man_icon_white);
+                    break;
+            }
+
+            switch (preference_morpho){
+                case "s":
+                    TextView textView_morpho_s = (TextView) getActivity().findViewById(R.id.preference_capture_morpho);
+
+                    textView_morpho_s.setText(R.string.morpho_s);
+                    textView_morpho_s.setTextColor(getResources().getColor(R.color.white));
+
+                    break;
+                case "l":
+                    TextView textView_morpho_l = (TextView) getActivity().findViewById(R.id.preference_capture_morpho);
+
+                    textView_morpho_l.setText(R.string.morpho_l);
+                    textView_morpho_l.setTextColor(getResources().getColor(R.color.white));
+                    break;
+
+                case "m":
+                    TextView textView_morpho_m = (TextView) getActivity().findViewById(R.id.preference_capture_morpho);
+
+                    textView_morpho_m.setText(R.string.morpho_m);
+                    textView_morpho_m.setTextColor(getResources().getColor(R.color.white));
+
+                    break;
+            }
+            switch (preference_organes){
+                case "coeur":
+                    ImageView imageView_organes_coeur = (ImageView) getActivity().findViewById(R.id.preference_capture_organe);
+
+                    imageView_organes_coeur.setImageResource(R.drawable.organe1_icon_white);
+                    break;
+                case "ovaire":
+                    ImageView imageView_organes_ovaire = (ImageView) getActivity().findViewById(R.id.preference_capture_organe);
+
+                    imageView_organes_ovaire.setImageResource(R.drawable.organe2_icon_white);
+                    break;
+
+                case "poumon":
+                    ImageView imageView_organes_poumon = (ImageView) getActivity().findViewById(R.id.preference_capture_organe);
+
+                    imageView_organes_poumon.setImageResource(R.drawable.organe3_icon_white);
+                    break;
+
+                case "ventre":
+                    ImageView imageView_organes_ventre = (ImageView) getActivity().findViewById(R.id.preference_capture_organe);
+
+                    imageView_organes_ventre.setImageResource(R.drawable.organe4_icon_white);
+                    break;
+            }
+
+
+
+
+
+        }
+
+
 
     }
 

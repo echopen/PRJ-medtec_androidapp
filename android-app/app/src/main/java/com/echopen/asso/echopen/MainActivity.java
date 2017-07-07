@@ -1,11 +1,14 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +17,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.RadioButton;
 
 import com.echopen.asso.echopen.bdd.DAOBase;
 import com.echopen.asso.echopen.bdd.DatabaseHandler;
@@ -24,7 +28,10 @@ import com.echopen.asso.echopen.fragments.GalleryFragment;
 import com.echopen.asso.echopen.fragments.SettingsFragment;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
+
+import static android.R.attr.checked;
 
 
 /**
@@ -46,10 +53,23 @@ public class MainActivity extends FragmentActivity {
      */
     private ViewPager mPager;
 
+
     /**
      * The pager adapter, which provides the pages to the view pager widget.
      */
     private PagerAdapter mPagerAdapter;
+
+
+    public static final String PREFS_PERSONNE = "Preferences_user";
+    public static final String PREFS_MORPHO = "Preferences_morpho";
+    public static final String PREFS_ORGANES = "Preferences_organes";
+
+
+    SharedPreferences sharedPreferences;
+
+    public String preference_personne;
+    public String preference_morphologie;
+    public String preference_organes;
 
 
     /**
@@ -76,6 +96,30 @@ public class MainActivity extends FragmentActivity {
         mPager.setAdapter(mPagerAdapter);
 
         //mPager.setCurrentItem(1);
+
+
+        //sauvegarde préférences
+
+
+
+
+        sharedPreferences = getBaseContext().getSharedPreferences(PREFS_PERSONNE, MODE_PRIVATE);
+
+
+        if (sharedPreferences.contains(PREFS_PERSONNE)){
+
+            preference_personne = sharedPreferences.getString(PREFS_PERSONNE, null);
+
+
+
+            Log.d("pref", preference_personne);
+        }
+
+
+
+
+
+
     }
 
 
@@ -86,7 +130,146 @@ public class MainActivity extends FragmentActivity {
 
     public void goToMainPage(View view) {
 
+
         mPager.setCurrentItem(1);
+
+    }
+
+    public void setPersonnePreference(View view) {
+
+
+        boolean checked = ((RadioButton) view).isChecked();
+
+
+        switch (view.getId()) {
+            case R.id.btn_personne_man:
+                if (checked)
+                // Pirates are the best
+                {
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_PERSONNE, "man")
+                            .apply();
+
+
+                    break;
+                }
+            case R.id.btn_personne_woman:
+                if (checked)
+                // Ninjas rule
+                {
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_PERSONNE, "woman")
+                            .apply();
+
+
+                    break;
+                }
+            case R.id.btn_personne_baby:
+                if (checked) {
+
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_PERSONNE, "baby")
+                            .apply();
+
+                    break;
+                }
+
+        }
+
+    }
+
+    public void setMorphoPreference(View view) {
+
+
+        boolean checked = ((RadioButton) view).isChecked();
+
+
+        switch (view.getId()) {
+            case R.id.btn_morpho_l:
+                if (checked)
+                {
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MORPHO, "l")
+                            .apply();
+                    break;
+                }
+            case R.id.btn_morpho_s:
+                if (checked)
+                {
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MORPHO, "s")
+                            .apply();
+
+
+                    break;
+                }
+            case R.id.btn_morpho_m:
+                if (checked) {
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MORPHO, "m")
+                            .apply();
+
+                    break;
+                }
+
+        }
+
+    }
+
+    public void setOrganePreference(View view) {
+
+
+        switch (view.getId()) {
+            case R.id.btn_organe_coeur:
+                Log.d("LOG", "coeur");
+
+
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "coeur")
+                        .apply();
+
+
+                break;
+            case R.id.btn_organe_ovaire:
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "ovaire")
+                        .apply();
+
+                Log.d("LOG", "ovaire");
+                break;
+            case R.id.btn_organe_ventre:
+
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "ventre")
+                        .apply();
+
+                Log.d("LOG", "ventre");
+                break;
+            case R.id.btn_organe_poumon:
+
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "poumon")
+                        .apply();
+
+                Log.d("LOG", "poumon");
+                break;
+        }
+
+
     }
 
 
@@ -112,7 +295,6 @@ public class MainActivity extends FragmentActivity {
             return this.fragments.size();
         }
     }
-
 
 
 }
