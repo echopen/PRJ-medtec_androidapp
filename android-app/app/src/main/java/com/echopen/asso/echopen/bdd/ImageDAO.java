@@ -45,6 +45,18 @@ public class ImageDAO extends DAOBase {
                 new String[]{String.valueOf(i.getId())});
     }
 
+    public Image getLastImg() {
+        Cursor c = mDb.rawQuery("SELECT * FROM " + TABLE_NAME + " LIMIT 1", null);
+        Image image = new Image();
+        if (c.moveToFirst()) {
+            image.setId(c.getLong(0));
+            image.setImgName(c.getString(1));
+            image.setSettings(c.getString(2));
+            image.setNote(c.getString(3));
+        }
+        return image;
+    }
+
     public List<Image> getAll() {
         List<Image> imageList = new ArrayList<Image>();
         Cursor c = mDb.rawQuery("SELECT * FROM " + TABLE_NAME, null);

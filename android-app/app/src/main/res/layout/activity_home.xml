@@ -52,7 +52,7 @@
         android:width="200dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/border_radius"
+        android:background="@drawable/btn_blue"
         android:padding="10dp"
         android:textColor="@color/white"
         android:text="@string/btn_start_home"

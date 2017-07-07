@@ -4,6 +4,7 @@ package com.echopen.asso.echopen.fragments;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.media.Image;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -14,7 +15,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+
 import android.widget.RadioButton;
+
+import android.widget.TextView;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
@@ -60,6 +64,7 @@ public class SettingsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         ImageButton btn_switch_to_main = (ImageButton) getView().findViewById(R.id.switch_page_settings);
+
 
 
         sharedPreferences = getContext().getSharedPreferences(PREFS_PERSONNE, Context.MODE_PRIVATE);
@@ -115,8 +120,10 @@ public class SettingsFragment extends Fragment {
 
 
 
+        TextView textView = (TextView) getActivity().findViewById(R.id.param);
+        Typeface typeface = Typeface.createFromAsset(getActivity().getAssets(), "fonts/Lato-Bold.ttf");
+        textView.setTypeface(typeface);
+
+
     }
-
-
-
 }
