@@ -152,28 +152,28 @@ var scrollMagicController = new ScrollMagic.Controller();
                 <ul class="s__hiw__content__text__collection">
                     <li class="s__hiw__content__text__collection__item" id="list1">
                         <span></span>
-                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link" data-section="1000">
+                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link" data-section="3600">
                             <p class="s__hiw__content__text__collection__item__texts--title">Quick mode</p>
                             <p class="s__hiw__content__text__collection__item__texts--desc">Le Quick mode permet aux utilisateurs dans l’urgence d’utiliser l’appareil sans prédéfinir de réglages. Des réglages par défaut seront alors appliqués lors de la prise de vue.</p>
                         </a>
                     </li>
                     <li class="s__hiw__content__text__collection__item" id="list2">
                         <span></span>
-                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link"  data-section="2000">
+                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link"  data-section="4500">
                             <p class="s__hiw__content__text__collection__item__texts--title">Custom mode</p>
                             <p class="s__hiw__content__text__collection__item__texts--desc">Le Custom mode permet à tout utilisateurs de paramétrer la prise d’images avant de commencer (âge, sexe du patient, organe a analyser, grain, etc…).</p>
                         </a>
                     </li>
                     <li class="s__hiw__content__text__collection__item" id="list3">
                         <span></span>
-                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link" data-section="2500">
+                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link" data-section="5000">
                             <p class="s__hiw__content__text__collection__item__texts--title">Modifications paramètres en temps réel</p>
                             <p class="s__hiw__content__text__collection__item__texts--desc">Lorsque l’utilisateur arrive sur l’écran de prise d’images, il a l’a possibilité de modifier certains paramètre lors de ses prises de vue (le grain par exemple avec la règle sur le côté droit).</p>
                         </a>
                     </li>
                     <li class="s__hiw__content__text__collection__item" id="list4">
                         <span></span>
-                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link" data-section="3200">
+                        <a href="" alt="jump to section 3" class="s__hiw__content__text__collection__item__texts js-link" data-section="5500">
                             <p class="s__hiw__content__text__collection__item__texts--title">Analyse de l’image</p>
                             <p class="s__hiw__content__text__collection__item__texts--desc">Après avoir pris une ou plusieurs images à l’aide de votre Smartphone. Vous pourrez les retrouver dans la partie dédiée (swipe vers la droite) de l’application pour les analyser et prendre des mesures.</p>
                         </a>
