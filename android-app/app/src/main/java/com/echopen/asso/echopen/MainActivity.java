@@ -4,7 +4,6 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,17 +11,21 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +53,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -65,7 +67,7 @@ import java.util.Date;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends FragmentActivity implements AbstractActionActivity, EchographyImageVisualisationContract.View {
+public class MainActivity extends AppCompatActivity implements AbstractActionActivity, EchographyImageVisualisationContract.View, NavigationView.OnNavigationItemSelectedListener {
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -79,9 +81,9 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         this.rulerView = rulerView;
     }
     /* constant setting the process via local, UDP or TCP */
-    public static boolean LOCAL_ACQUISITION = true;
+    public static boolean LOCAL_ACQUISITION = false;
 
-    public static boolean TCP_ACQUISITION = false;
+    public static boolean TCP_ACQUISITION = true;
 
     public static boolean UDP_ACQUISITION = false;
 
@@ -90,26 +92,8 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
 
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
 
-    private SeekBar mSeekBarLinearLutOffset;
-    private TextView mTextViewLinearLutOffset;
-    private LinearLayout mLayoutLinearLutOffset;
-
-    private SeekBar mSeekBarLinearLutSlope;
-    private TextView mTextViewLinearLutSlope;
-    private LinearLayout mLayoutLinearLutSlope;
-
-    private SeekBar mSeekBarExponentialLutAlpha;
-    private TextView mTextViewExponentialLutAlpha;
-    private LinearLayout mLayoutExponentialLutAlpha;
-
-    private SeekBar mSeekBarGain;
-    private TextView mTextViewGain;
-
     private TextView mTextViewGain1;
     private TextView mTextViewGain2;
-    private FragmentTransaction mFragmentTransaction;
-    private FragmentManager mFragmentManager;
-    private Button btnCapture;
 
     LinearLayout L;
     /**
@@ -161,25 +145,6 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         UIParams.setParam3(Constants.SeekBarParam.SEEK_BAR_HORIZONTAL);
         UIParams.setParam4(Constants.SeekBarParam.SEEK_BAR_VERTICAL);
 
-        /* mTextViewGain = (TextView) findViewById(R.id.textGain);
-        mSeekBarGain = (SeekBar) findViewById(R.id.seekBarGain);
-        mSeekBarGain.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double lGain = progress * 3.0 / 100;
-                mTextViewGain.setText(lGain + " dB");
-                mRenderingContextController.setIntensityGain(lGain);
-            }
-        }); */
-
         Button btnCapture = (Button) findViewById(R.id.capture_btn);
         ImageView organImage = (ImageView) findViewById(R.id.organ_frame);
         final ImageView galeryImage = (ImageView) findViewById(R.id.galery_frame);
@@ -188,7 +153,6 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         galeryImage.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("tag" , "aie click galery!!");
                 // call fragment
                 GaleryFragment galeryFragment = new GaleryFragment();
                 galeryFragment.setArguments(getIntent().getExtras());
@@ -199,7 +163,6 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         organImage.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("tag" , "aie click !!");
                 // call fragment
                 OrganFragment organFragment = new OrganFragment();
                 organFragment.setArguments(getIntent().getExtras());
@@ -234,7 +197,6 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         btnCapture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("tag" , "Click");
                 int id = view.getId();
                 switch (id) {
                     case R.id.capture_btn:
@@ -318,7 +280,30 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
             }
         });
 
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
+
     @Override
     protected void onResume(){
         super.onResume();
@@ -345,122 +330,73 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
 
 
     }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main2, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_camera) {
+            // Handle the camera action
+        } else if (id == R.id.nav_gallery) {
+
+        } else if (id == R.id.nav_slideshow) {
+
+        } else if (id == R.id.nav_manage) {
+            /* Intent assistanceActivity = new Intent(MainActivity.this, AssistanceActivity.class);
+            startActivity(assistanceActivity);
+            Log.d("TAG" , "test"); */
+        } /*else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }*/
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.main);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
     private void initImageManipulationViewComponents() {
-        /* mLayoutLinearLutOffset = (LinearLayout) findViewById(R.id.layoutLinearLutOffset);
-        mTextViewLinearLutOffset = (TextView) findViewById(R.id.textLinearLutOffset);
-        mSeekBarLinearLutOffset = (SeekBar) findViewById(R.id.seekBarLinearLutOffset);
-        mSeekBarLinearLutOffset.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double lOffset = progress * 256 / 100;
-                mTextViewLinearLutOffset.setText(new DecimalFormat("#.00").format(lOffset));
-                mRenderingContextController.setLinearLutOffset(lOffset);
-            }
-        }); */
-
-        /* mLayoutLinearLutSlope = (LinearLayout) findViewById(R.id.layoutLinearLutSlope);
-        mTextViewLinearLutSlope = (TextView) findViewById(R.id.textLinearLutSlope);
-        mSeekBarLinearLutSlope = (SeekBar) findViewById(R.id.seekBarLinearLutSlope);
-
-        mSeekBarLinearLutSlope.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double lSlope = (progress - 50) * 1.0 / 10 + 1;
-                mTextViewLinearLutSlope.setText(new DecimalFormat("#.00").format(lSlope));
-                mRenderingContextController.setLinearLutSlope(lSlope);
-            }
-        }); */
-
-        /* mLayoutExponentialLutAlpha = (LinearLayout) findViewById(R.id.layoutExponentialLutAlpha);
-        mTextViewExponentialLutAlpha = (TextView) findViewById(R.id.textExponentialLutAlpha);
-        mSeekBarExponentialLutAlpha = (SeekBar) findViewById(R.id.seekBarExponentialLutAlpha);
-        mSeekBarExponentialLutAlpha.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double lAlpha = 0.001 * progress;
-                mTextViewExponentialLutAlpha.setText(new DecimalFormat("#.00").format(lAlpha));
-                mRenderingContextController.setExponentialLutAlpha(lAlpha);
-            }
-        }); */
-
-        /* Spinner lDropdownLut = (Spinner)findViewById(R.id.dropdownLut);
-        String[] lLutItems = new String[]{"Linear Lut", "Exponential Lut"};
-        ArrayAdapter<String> lLutItemsAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, lLutItems);
-        lDropdownLut.setAdapter(lLutItemsAdapter);
-
-        lDropdownLut.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                switch(i){
-                    case 0:
-                        // linear lut
-                        selectLinearLut();
-                        break;
-                    case 1:
-                        // exponential lut
-                        selectExponentialLut();
-                        break;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        lDropdownLut.setSelection(0); */
-    }
-
-    private void selectLinearLut(){
-        mSeekBarLinearLutOffset.setProgress(0);
-        mSeekBarLinearLutSlope.setProgress(50);
-        mLayoutLinearLutOffset.setVisibility(View.VISIBLE);
-        mLayoutLinearLutSlope.setVisibility(View.VISIBLE);
-
-        mLayoutExponentialLutAlpha.setVisibility(View.GONE);
-    }
-
-    private void selectExponentialLut(){
-
-        mLayoutLinearLutOffset.setVisibility(View.GONE);
-        mLayoutLinearLutSlope.setVisibility(View.GONE);
-
-        mSeekBarExponentialLutAlpha.setProgress(0);
-        mLayoutExponentialLutAlpha.setVisibility(View.VISIBLE);
     }
 
     public void fetchData(BitmapDisplayerFactory bitmapDisplayerFactory) {
-        try {
-            BitmapDisplayer bitmapDisplayer = bitmapDisplayerFactory.populateBitmap(
-                    this, mainActionController, mRenderingContextController, Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
+        BitmapDisplayer bitmapDisplayer = bitmapDisplayerFactory.populateBitmap(
+                this, mainActionController, mRenderingContextController, Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
 
-            if (UDP_ACQUISITION) {
+            /*if (UDP_ACQUISITION) {
                 bitmapDisplayer.readDataFromUDP();
             } else if (TCP_ACQUISITION) {
                 //bitmapDisplayer.readDataFromTCP();
@@ -470,10 +406,9 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
                 AssetManager assetManager = getResources().getAssets();
                 InputStream inputStream = assetManager.open("data/raw_data/data_phantom.csv");
                 bitmapDisplayer.readDataFromFile(inputStream);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            }*/
+        EchographyImageStreamingTCPMode lTCPMode = new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT);
+        mEchographyImageStreamingService.connect(lTCPMode, this);
     }
 
     private void refreshGallery(File file) {
@@ -633,15 +568,6 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
     } */
 
     /**
-     * @param item, MenuItem instance
-     * @return boolean
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return true;
-    }
-
-    /**
      * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
      * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
      * the resultCode it returned, and any additional data from it.”,
@@ -692,4 +618,6 @@ public class MainActivity extends FragmentActivity implements AbstractActionActi
         File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
         return new File(file, "EchOpen");
     }
+
+
 }

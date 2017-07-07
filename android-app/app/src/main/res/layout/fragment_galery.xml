@@ -14,7 +14,7 @@
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"
         android:verticalSpacing="10dp"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="80dp"
         android:background="#fff"/>
 
     <LinearLayout

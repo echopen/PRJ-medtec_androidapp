@@ -70,4 +70,5 @@
     <string name="obstetrics">Obstetrics</string>
     <string name="osteoarthritis">Osteoarthritis</string>
     <string name="validate">Validate</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
