@@ -98,19 +98,21 @@ android:orientation="vertical">
         android:layout_height="30dp"
         android:layout_marginLeft="42dp"
 
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="13dp"
-        android:src="@drawable/config" />
+        android:layout_marginBottom="14dp"
+        android:src="@drawable/config"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="34dp" />
 
     <ImageView
         android:id="@+id/gallery"
         android:layout_width="36dp"
         android:layout_height="30dp"
-        android:layout_marginEnd="11dp"
         android:layout_marginRight="42dp"
         android:src="@drawable/gallerie"
         android:layout_alignTop="@+id/settings"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="38dp" />
 
 
 </RelativeLayout>
