@@ -2,15 +2,135 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/mainText"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/app_name"
-        />
+        android:gravity="center"
+        android:layout_marginTop="11dp">
+
+        <LinearLayout
+            android:layout_width="120dp"
+            android:layout_height="33.8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/logo_echopen" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#4c3d4654"
+        android:layout_marginTop="14.2dp"></LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="60.5dp">
+
+        <TextView
+            android:id="@+id/welcome_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#898989"
+            android:lineSpacingExtra="7sp"
+            android:text="Bonjour et bienvenue !"
+            />
+        <TextView
+            android:id="@+id/input_text_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#898989"
+            android:text="EMAIL"
+            android:layout_marginTop="42dp"
+            android:layout_marginBottom="2dp"
+            />
+        <EditText
+            android:id="@+id/input_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#4465d8"
+            android:text="Médrick"
+            android:background="@color/transparent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#4465d8"></LinearLayout>
+
+        <TextView
+            android:id="@+id/input_text_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#898989"
+            android:text="MOT DE PASSE"
+            android:layout_marginTop="42dp"
+            android:layout_marginBottom="2dp"
+            />
+        <EditText
+            android:id="@+id/input_2"
+            android:inputType="textWebPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#4465d8"
+            android:text="Médrick"
+            android:background="@color/transparent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#4465d8"
+            android:layout_marginBottom="15dp"></LinearLayout>
+
+        <TextView
+            android:id="@+id/link_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#898989"
+            android:lineSpacingExtra="13sp"
+            android:text="Mot de passe oublié ?"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connexion"
+                android:src="@drawable/cta_connexion"
+                android:background="@color/white"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:id="@+id/link_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:textColor="#898989"
+                android:lineSpacingExtra="13sp"
+                android:text="Créer un nouveau compte"
+                />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
 

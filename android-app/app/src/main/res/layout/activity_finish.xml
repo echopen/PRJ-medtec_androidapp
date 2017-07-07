@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.echopen.asso.echopen.FinishActivity"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="24.5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="26sp"
+            android:textColor="#354ccf"
+            android:letterSpacing="-0.02"
+            android:gravity="center_horizontal"
+            android:text="Fin de l'examen"
+            android:layout_marginTop="38dp"
+            android:layout_marginBottom="14dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#4c3d4654"></LinearLayout>
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="172dp">
+
+        <TextView
+            android:id="@+id/text_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#898989"
+            android:lineSpacingExtra="7sp"
+            android:gravity="center_horizontal"
+            android:text="Ce patient porte le numéro"
+            />
+        <TextView
+            android:id="@+id/id_patient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#4465d8"
+            android:letterSpacing="-0.01"
+            android:gravity="center_horizontal"
+            android:text=""
+            />
+        <ImageButton
+            android:id="@+id/button_dashboard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:src="@drawable/cta_fin"
+            android:layout_marginTop="133dp"/>
+    </LinearLayout>
+</LinearLayout>
