@@ -1,10 +1,13 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+
+import android.widget.Button;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -17,7 +20,7 @@ import android.os.Bundle;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -28,8 +31,53 @@ public class MainActivity extends Activity {
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_main);
+
+        Button enterBt = (Button) findViewById(R.id.enter_bt);
+        enterBt.setOnClickListener(this);
+
+        Button signupBt = (Button) findViewById(R.id.signup_bt);
+        signupBt.setOnClickListener(this);
+
+        Button emergencyBt = (Button) findViewById(R.id.emergency_bt);
+        emergencyBt.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+            case R.id.signup_bt :
+                btSignUpClicked();
+                break;
+            case R.id.emergency_bt :
+                btEmergencyClicked();
+                break;
+            case R.id.enter_bt :
+                btEnterClicked();
+                break;
+        }
+    }
+
+    // UI is ready for signIn but not connected to backend since it doesn't exist yet
+
+    private void btSignUpClicked(){
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+
+    }
+
+    private void btEmergencyClicked(){
+        Intent intent = new Intent(this, EchoActivity.class);
+        startActivity(intent);
+    }
+
+    private void btEnterClicked(){
+        Intent intent = new Intent(this, ChoiceActivity.class);
+        startActivity(intent);
     }
 
     @Override

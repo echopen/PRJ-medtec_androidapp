@@ -8,3 +8,7 @@
 /android-app/openCVLibrary310/build
 /captures
 .externalNativeBuild
+android-app/.idea/
+probe_emulator
+
+android-app/app/src/main/java/com/echopen/asso/echopen/utils/Constants.java

@@ -1,5 +1,7 @@
 package com.echopen.asso.echopen.echography_image_visualisation;
 
+import android.util.Log;
+
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
@@ -39,12 +41,15 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
 
     @Override
     public void listenEchographyImageStreaming() {
+        Log.d("EchogrqphyImageStream", "REGISTER OBSERVER");
         mEchographyImageStreamingService.addObserver(this);
     }
 
     @Override
     public void onEchographyImageStreamingNotification(final EchographyImageStreamingNotification iEchographyImageStreamingNotification)
     {
+        Log.d("EchographyImageStream", "NOTIF IMMAAAAAGEEEE");
+
         mView.refreshImage(iEchographyImageStreamingNotification.getImage());
     }
 }

@@ -59,6 +59,7 @@ public class ProcessTCPTask extends AbstractDataTask {
             s = new Socket(ip, port);
             stream = s.getInputStream();
 
+            Log.d(TAG, "RECEIVE IMMAAAAAGEEEE");
             byte[] message;
             Integer[] lRawImageData;
 

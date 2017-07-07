@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    android:weightSum="1"
+    android:layout_marginTop="30dp"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_width="206dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/logo_echopen"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppCompatTheme">
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <ImageButton
+        android:id="@+id/archive_bt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/archives" />
+
+    <TextView
+        android:id="@+id/archive_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="center"
+        android:text="See your archives"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/gray_light"
+        android:textSize="20dp"
+        android:layout_weight="0.07"
+        />
+
+    <ImageButton
+        android:id="@+id/echo_bt"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/echography"
+
+        />
+
+    <TextView
+        android:id="@+id/echo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Echography"
+        android:textColor="@color/gray_light"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
+

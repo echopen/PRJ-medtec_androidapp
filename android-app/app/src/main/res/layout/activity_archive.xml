@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/archive"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_width="206dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/logo_echopen"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/AppCompatTheme">
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/archive_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="archives"
+        />
+
+    <Button
+        android:id="@+id/archive_folder_1"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright1"
+        android:drawableStart="@drawable/archiveleft1"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°2630178" />
+
+    <Button
+        android:id="@+id/archive_folder_2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright2"
+        android:drawableStart="@drawable/archiveleft2"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°1827930" />
+
+    <Button
+        android:id="@+id/archive_folder_3"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright3"
+        android:drawableStart="@drawable/archiveleft3"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°2904879" />
+
+    <Button
+        android:id="@+id/archive_folder_4"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/whitecardbutton"
+        android:drawableEnd="@drawable/archiveright4"
+        android:drawableStart="@drawable/archiveleft4"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:includeFontPadding="false"
+        android:padding="12dp"
+        android:textAllCaps="false"
+        android:text="Dossier n°8273012" />
+
+</LinearLayout>

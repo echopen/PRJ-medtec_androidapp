@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/echo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000"
+    >
+    <ImageView
+        android:id="@+id/echo_iv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="67dp"
+        android:id="@+id/arrow"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="10dp"
+        android:contentDescription="back page"
+        android:src="@drawable/arrow"
+        android:background="#000000"
+        />
+
+    <ImageView
+        android:id="@+id/echo_iv_load"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/echo_iv" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:id="@+id/arrow_tv"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="Male, 36 years old, 76kg, lunjs"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp"
+        android:visibility="visible"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/param_echo"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="150dp"
+        android:orientation="vertical"
+        >
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/param_1"
+            android:src="@drawable/param_1"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"
+            android:background="#000"
+            android:contentDescription="grain"
+            />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/param_2"
+            android:src="@drawable/param_2"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"
+            android:background="#000"
+            android:contentDescription="Organe"
+            />
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/param_3"
+            android:src="@drawable/param_3"
+            android:layout_marginBottom="20dp"
+            android:visibility="visible"
+            android:background="#000"
+            android:contentDescription="Grid"
+            />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        >
+
+
+
+        <Button
+            android:id="@+id/load_pics"
+            android:layout_width="30dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/save_pics"
+            android:layout_weight="1"
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/rounded"
+
+ />
+
+        <Button
+            android:id="@+id/save_pics"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/circle"
+            android:layout_centerInParent="true"
+ />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,168 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/prob_select"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:weightSum="1"
+    >
+
+    <ImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:translationX="20dp"
+        android:translationY="45dp"
+        app:srcCompat="@drawable/back_btn" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_top"
+        android:layout_width="206dp"
+        android:layout_height="63dp"
+        android:layout_gravity="center"
+        android:background="@drawable/logo_echopen"
+        android:minHeight="?attr/actionBarSize"
+        app:theme="@style/AppCompatTheme">
+
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:id="@+id/fragmentlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </RelativeLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/mydevices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="40dp"
+        android:text="My devices"
+        android:textColor="@color/gray_dk"
+        android:textStyle="bold" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/prob2313"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/whiteroundedbutton"
+        android:drawablePadding="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:drawableStart="@drawable/unconnected_device"
+        android:drawableEnd="@drawable/unconnected_check"
+        android:text="Echopen-2313"
+        android:gravity="start|center_vertical"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_light" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/prob2341"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/whiteroundedbutton"
+        android:drawablePadding="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:drawableStart="@drawable/connected_device"
+        android:drawableEnd="@drawable/connected_check"
+        android:gravity="start|center_vertical"
+        android:text="Echopen-2341"
+        android:textAllCaps="false"
+        android:textColor="@color/blue_dark" />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:id="@+id/prob4534"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/whiteroundedbutton"
+        android:drawablePadding="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:drawableStart="@drawable/unconnected_device"
+        android:drawableEnd="@drawable/unconnected_check"
+        android:gravity="start|center_vertical"
+        android:text="Echopen-4534"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_light" />
+
+    <Button
+        android:id="@+id/newdevice_bt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/transparent"
+        android:elevation="12dp"
+        android:text="Or add new device"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_dk"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+
+    <Button
+        android:id="@+id/next_bt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/blueroundedbutton"
+        android:elevation="12dp"
+        android:text="Next"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+
+</LinearLayout>

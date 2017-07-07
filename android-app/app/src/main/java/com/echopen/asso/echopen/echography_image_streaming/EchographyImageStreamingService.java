@@ -3,6 +3,7 @@ package com.echopen.asso.echopen.echography_image_streaming;
 import android.app.Activity;
 import android.graphics.Bitmap;
 
+import com.echopen.asso.echopen.EchOpenApplication;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingConnectionType;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
@@ -37,10 +38,8 @@ public class EchographyImageStreamingService extends Observable{
 
     /**
      * @brief connect service to device
-     *
-     * @param iMode device connection information
-     *
-     * @param iActivity ideally to be removed
+     *@param iMode device connection information
+     *@param iActivity ideally to be removed
      */
     public void connect(EchographyImageStreamingMode iMode, Activity iActivity){
         if(iMode.getConnectionType() == EchographyImageStreamingConnectionType.Local){
