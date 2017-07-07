@@ -1,10 +1,38 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
+import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
+import android.widget.RadioButton;
+
+import com.echopen.asso.echopen.bdd.DAOBase;
+import com.echopen.asso.echopen.bdd.DatabaseHandler;
+import com.echopen.asso.echopen.bdd.Image;
+import com.echopen.asso.echopen.bdd.ImageDAO;
+import com.echopen.asso.echopen.fragments.CaptureFragment;
+import com.echopen.asso.echopen.fragments.GalleryFragment;
+import com.echopen.asso.echopen.fragments.SettingsFragment;
+
+import java.util.List;
+import java.util.Map;
+import java.util.Vector;
+
+import static android.R.attr.checked;
+
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -17,7 +45,32 @@ import android.os.Bundle;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
+
+    /**
+     * The pager widget, which handles animation and allows swiping horizontally to access previous
+     * and next wizard steps.
+     */
+    private ViewPager mPager;
+
+
+    /**
+     * The pager adapter, which provides the pages to the view pager widget.
+     */
+    private PagerAdapter mPagerAdapter;
+
+
+    public static final String PREFS_PERSONNE = "Preferences_user";
+    public static final String PREFS_MORPHO = "Preferences_morpho";
+    public static final String PREFS_ORGANES = "Preferences_organes";
+
+
+    SharedPreferences sharedPreferences;
+
+    public String preference_personne;
+    public String preference_morphologie;
+    public String preference_organes;
+
 
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
@@ -30,26 +83,218 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        List fragments = new Vector<>();
+
+        fragments.add(Fragment.instantiate(this, SettingsFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, CaptureFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, GalleryFragment.class.getName()));
+
+        // Instantiate a ViewPager and a PagerAdapter.
+        mPager = (ViewPager) findViewById(R.id.pager);
+        mPagerAdapter = new MainPageAdapter(getSupportFragmentManager(), fragments);
+        mPager.setAdapter(mPagerAdapter);
+
+        //mPager.setCurrentItem(1);
+
+
+        //sauvegarde préférences
+
+
+
+
+        sharedPreferences = getBaseContext().getSharedPreferences(PREFS_PERSONNE, MODE_PRIVATE);
+
+
+        if (sharedPreferences.contains(PREFS_PERSONNE)){
+
+            preference_personne = sharedPreferences.getString(PREFS_PERSONNE, null);
+
+
+
+            Log.d("pref", preference_personne);
+        }
+
+
+
+
+
+
     }
 
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
+    }
+
+    public void goToMainPage(View view) {
+
+
+        mPager.setCurrentItem(1);
+
+    }
+
+    public void setPersonnePreference(View view) {
+
+
+        boolean checked = ((RadioButton) view).isChecked();
+
+
+        switch (view.getId()) {
+            case R.id.btn_personne_man:
+                if (checked)
+                // Pirates are the best
+                {
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_PERSONNE, "man")
+                            .apply();
+
+
+                    break;
+                }
+            case R.id.btn_personne_woman:
+                if (checked)
+                // Ninjas rule
+                {
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_PERSONNE, "woman")
+                            .apply();
+
+
+                    break;
+                }
+            case R.id.btn_personne_baby:
+                if (checked) {
+
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_PERSONNE, "baby")
+                            .apply();
+
+                    break;
+                }
+
+        }
+
+    }
+
+    public void setMorphoPreference(View view) {
+
+
+        boolean checked = ((RadioButton) view).isChecked();
+
+
+        switch (view.getId()) {
+            case R.id.btn_morpho_l:
+                if (checked)
+                {
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MORPHO, "l")
+                            .apply();
+                    break;
+                }
+            case R.id.btn_morpho_s:
+                if (checked)
+                {
+
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MORPHO, "s")
+                            .apply();
+
+
+                    break;
+                }
+            case R.id.btn_morpho_m:
+                if (checked) {
+                    sharedPreferences
+                            .edit()
+                            .putString(PREFS_MORPHO, "m")
+                            .apply();
+
+                    break;
+                }
+
+        }
+
+    }
+
+    public void setOrganePreference(View view) {
+
+
+        switch (view.getId()) {
+            case R.id.btn_organe_coeur:
+                Log.d("LOG", "coeur");
+
+
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "coeur")
+                        .apply();
+
+
+                break;
+            case R.id.btn_organe_ovaire:
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "ovaire")
+                        .apply();
+
+                Log.d("LOG", "ovaire");
+                break;
+            case R.id.btn_organe_ventre:
+
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "ventre")
+                        .apply();
+
+                Log.d("LOG", "ventre");
+                break;
+            case R.id.btn_organe_poumon:
+
+                sharedPreferences
+                        .edit()
+                        .putString(PREFS_ORGANES, "poumon")
+                        .apply();
+
+                Log.d("LOG", "poumon");
+                break;
+        }
+
+
     }
 
 
     /**
-     * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
-     * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,
-     * the resultCode it returned, and any additional data from it.”,
-     * See more here : https://stackoverflow.com/questions/20114485/use-onactivityresult-android
-     *
-     * @param requestCode, integer argument that identifies your request
-     * @param resultCode, to get its values, check RESULT_CANCELED, RESULT_OK here https://developer.android.com/reference/android/app/Activity.html#RESULT_OK
-     * @param data,       Intent instance
+     * A simple pager adapter that represents 5 ScreenSlidePageFragment objects, in
+     * sequence.
      */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    private class MainPageAdapter extends FragmentStatePagerAdapter {
+        private final List fragments;
+
+        public MainPageAdapter(FragmentManager fm, List fragments) {
+            super(fm);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return (Fragment) this.fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return this.fragments.size();
+        }
     }
+
+
 }

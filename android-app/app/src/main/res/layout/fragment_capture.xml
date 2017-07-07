@@ -1,0 +1,169 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:seekarc="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/capture"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black">
+
+        <Button
+            android:id="@+id/btn_menu_main"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/white"
+            android:background="@color/transparent"
+            android:text="@string/btn_menu"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+
+            >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:layout_marginLeft="24dp"
+                android:id="@+id/preference_capture_personne"
+                />
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginLeft="18dp"
+               android:textColor="@color/black"
+               android:textSize="25dp"
+               android:id="@+id/preference_capture_morpho"
+               />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="35dp"
+                android:scaleX="1"
+                android:scaleY="1"
+                android:layout_marginLeft="24dp"
+                android:id="@+id/preference_capture_organe"
+                />
+
+        </LinearLayout>
+        
+        
+        <ImageView
+            android:id="@+id/echo_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:adjustViewBounds="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true">
+
+            <com.triggertrap.seekarc.SeekArc
+                android:id="@+id/seekArc_gain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="30dp"
+                seekarc:rotation="180"
+                seekarc:startAngle="90"
+                seekarc:sweepAngle="180"
+                seekarc:touchInside="true" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_capture"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="64dp"
+            android:background="@drawable/rounded_button" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/pre_set_icon_grey"
+                android:background="@drawable/round_border"
+                />
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/profondeur_icon"
+                android:background="@drawable/round_border"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_gain"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/round_border"
+                android:src="@drawable/gain_icon" />
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/galerie_icon"
+                android:background="@drawable/round_border"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_screenshot"
+            android:layout_width="112dp"
+            android:layout_height="48dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="64dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btn_cancelSave"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/round_border"
+                android:src="@drawable/cancel_icon_normal"
+                />
+
+            <ImageButton
+                android:id="@+id/btn_save"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/round_border"
+                android:src="@drawable/save_icon_normal"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>
+

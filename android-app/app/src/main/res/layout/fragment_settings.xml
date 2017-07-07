@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+
+    <LinearLayout
+
+        android:layout_width="370dp"
+        android:layout_height="538dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.514">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/border_shadow"
+            tools:layout_editor_absoluteY="0dp"
+            tools:layout_editor_absoluteX="8dp">
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent">
+
+               <TextView
+                   android:id="@+id/param"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/btn_settings"
+                   android:textColor="@color/blue_dark"
+                   android:textSize="25dp"
+                   android:layout_marginTop="25dp"
+                   android:layout_marginLeft="40dp"
+                   />
+           </LinearLayout>
+
+        </RelativeLayout>
+        <!--personne-->
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="0.999"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/settings_parametre_personne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="30dp"
+                android:text="@string/settings_parametre_personne" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="15dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8">
+
+
+                <RadioGroup
+                    android:id="@+id/radio_group_personne"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="40dp"
+                    android:checkedButton="@+id/btn_personne_man"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/btn_personne_man"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+
+                        android:button="@null"
+                        android:drawableBottom="@drawable/btn_personne_man"
+                        android:gravity="center"
+                        android:onClick="setPersonnePreference" />
+
+                    <RadioButton
+                        android:id="@+id/btn_personne_woman"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:button="@null"
+                        android:drawableBottom="@drawable/btn_personne_woman"
+
+                        android:gravity="center"
+                        android:onClick="setPersonnePreference" />
+
+                    <RadioButton
+                        android:id="@+id/btn_personne_baby"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:drawableBottom="@drawable/btn_personne_baby"
+
+                        android:gravity="center"
+                        android:onClick="setPersonnePreference"
+
+
+                        />
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <!--morpho-->
+        <RelativeLayout
+
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="18dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="28dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/settings_parametre_morpho"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="30dp"
+                android:text="@string/settings_parametre_morpho" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:layout_below="@+id/settings_parametre_morpho">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="70dp"
+                    android:checkedButton="@+id/btn_morpho_m"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/btn_morpho_s"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:onClick="setMorphoPreference"
+                        android:drawableBottom="@drawable/btn_morpho"
+                        android:gravity="center"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:text="@string/option_s"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/btn_morpho_m"
+                        android:onClick="setMorphoPreference"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:button="@null"
+                        android:drawableBottom="@drawable/btn_morpho"
+                        android:gravity="center"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:text="@string/option_m"
+                        android:textColor="@color/black" />
+
+                    <RadioButton
+                        android:id="@+id/btn_morpho_l"
+                        android:layout_width="50dp"
+                        android:onClick="setMorphoPreference"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:drawableBottom="@drawable/btn_morpho"
+                        android:gravity="center"
+                        android:scaleX="1.3"
+                        android:scaleY="1.3"
+                        android:text="@string/option_l"
+                        android:textColor="@color/black"
+
+                        />
+                </RadioGroup>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+        <!--organes-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1.3"
+
+            >
+
+            <TextView
+                android:id="@+id/settings_parametre_organe"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="30dp"
+                android:text="@string/settings_parametre_organe" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="40dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/btn_organe_coeur"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/preset_organe_1"
+                        android:onClick="setOrganePreference"
+                        />
+
+                    <ImageButton
+                        android:id="@+id/btn_organe_ovaire"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="setOrganePreference"
+                        android:src="@drawable/preset_organ_2" />
+
+                    <ImageButton
+                        android:id="@+id/btn_organe_poumon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="setOrganePreference"
+                        android:src="@drawable/preset_organ_3" />
+
+                    <ImageButton
+                        android:id="@+id/btn_organe_ventre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="setOrganePreference"
+                        android:src="@drawable/preset_organ_4" />
+
+                    <ImageButton
+                        android:id="@+id/btn_organe_autre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:onClick="setOrganePreference"
+                        android:src="@drawable/preset_organ_4" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </RelativeLayout>
+
+        <!--floating_button-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+
+            <ImageButton
+                android:id="@+id/switch_page_settings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:onClick="goToMainPage"
+                android:src="@drawable/btn_floating" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
