@@ -16,6 +16,14 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <Button
+        android:id="@+id/popupbutton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@+id/button2"
+        android:layout_toEndOf="@+id/button2"
+        android:layout_marginStart="42dp" />
+
     <SeekBar
         android:id="@+id/seekBarV"
         style="@style/Widget.AppCompat.SeekBar.Discrete"

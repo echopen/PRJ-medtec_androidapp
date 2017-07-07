@@ -1,29 +1,15 @@
 package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
-import android.app.FragmentManager;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-
-import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
-import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-
-import static com.echopen.asso.echopen.utils.Constants.Http.LOCAL_IP;
-import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.view.MenuItem;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -71,45 +57,11 @@ public class MainActivity extends Activity {
                                 selectedFragment = PatientFragment.newInstance();
                                 break;
                         }
-
-
-        final GestureDetector pu = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
-
-            @Override
-            public boolean onSingleTapConfirmed(MotionEvent e) {
-                Log.d("tap","popup "+e);
-               //------
-                FragmentManager fm = getFragmentManager();
-                PopupFragment dialogFragment = new PopupFragment();
-
-                dialogFragment.show(fm, "Sample Fragment");
-
-
-                return true;
-            }
-        });
-
-        //-----------------------------------------------------------------
-        Button popupbtn = (Button) findViewById(R.id.popupbutton);
-
-        popupbtn.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return pu.onTouchEvent(event);
-            }
-        });
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-
                         transaction.replace(R.id.frame_layout, selectedFragment);
                         transaction.commit();
                         return true;
-                    }
-                });
-
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_layout, ScannerFragment.newInstance());
-        transaction.commit();
+                    }});
     }
 
     @Override

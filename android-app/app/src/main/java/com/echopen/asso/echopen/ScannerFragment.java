@@ -1,6 +1,7 @@
 package com.echopen.asso.echopen;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -153,6 +154,32 @@ public class ScannerFragment extends Fragment {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return gd.onTouchEvent(event);
+            }
+        });
+
+        final GestureDetector pu = new GestureDetector(getActivity(), new GestureDetector.SimpleOnGestureListener(){
+
+            @Override
+            public boolean onSingleTapConfirmed(MotionEvent e) {
+                Log.d("tap","popup "+e);
+                //------
+                FragmentManager fm = getFragmentManager();
+                PopupFragment dialogFragment = new PopupFragment();
+
+                dialogFragment.show(fm, "Sample Fragment");
+
+
+                return true;
+            }
+        });
+
+        //-----------------------------------------------------------------
+        Button popupbtn = (Button) view.findViewById(R.id.popupbutton);
+
+        popupbtn.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return pu.onTouchEvent(event);
             }
         });
 
