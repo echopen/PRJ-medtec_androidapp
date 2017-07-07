@@ -213,4 +213,19 @@ public class imagesHandler {
         File image = new File(this.savedDirectory.toString() + "/" + fileName);
         image.delete();
     }
+
+    public Bitmap[] getImagesForFreeze() {
+        Bitmap[] images = new Bitmap[5];
+        Bitmap[] allImages = this.getCachedImages();
+
+        int allImagesLength = allImages.length;
+
+        images[0] = allImages[allImagesLength - 2];
+        images[1] = allImages[allImagesLength - 3];
+        images[2] = allImages[allImagesLength - 4];
+        images[3] = allImages[allImagesLength - 5];
+        images[4] = allImages[allImagesLength - 6];
+
+        return images;
+    }
 }

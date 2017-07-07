@@ -25,5 +25,26 @@
         android:layout_height="60dp"
         android:layout_gravity="end"
         android:background="@null"
+        android:elevation="0dp"
         android:src="@drawable/ic_download" />
+
+    <ImageButton
+        android:id="@+id/previous"
+        android:layout_gravity="start|bottom"
+        android:layout_width="74dp"
+        android:layout_height="60dp"
+        android:background="@null"
+        android:src="@drawable/ic_previous"
+        android:layout_marginBottom="20dp"/>
+
+    <ImageButton
+        android:id="@+id/next"
+        android:layout_width="74dp"
+        android:layout_height="60dp"
+        android:layout_gravity="end|bottom"
+        android:background="@null"
+        android:src="@drawable/ic_next"
+        android:layout_marginBottom="20dp"
+        android:visibility="invisible"
+        />
 </FrameLayout>
