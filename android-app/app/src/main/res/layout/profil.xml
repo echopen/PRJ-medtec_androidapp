@@ -52,21 +52,31 @@
         android:layout_marginRight="20dp"
         android:topLeftRadius="20dp"
         android:topRightRadius="20dp"
-        android:paddingTop="120dp"
+        android:paddingTop="40dp"
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:background="@drawable/radius_linearlayout">
 
         <ImageView
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="30dp"
             android:textSize="0sp"
-            android:background="#A2A3AA"
+            android:src="@drawable/photoprofil"
             android:layout_gravity="center"
             android:gravity="center"
-            android:layout_marginBottom="95dp"/>
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textColor="@color/blue_dark"
+            android:layout_marginBottom="35dp"
+            android:text="@string/modifierphoto" />
 
         <EditText
             android:id="@+id/nameChange"

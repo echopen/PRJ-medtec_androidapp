@@ -43,11 +43,58 @@
 
     </LinearLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_seance"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/rechercheSeance"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/bar">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_below="@+id/bar"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/recherche"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:paddingLeft="12dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:ems="10"
+            android:hint="@string/recherche"
+            android:background="#f2fcf9"
+            android:inputType="textPersonName"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/recherche"
+            android:layout_marginTop="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:gravity="left"
+            android:layout_marginBottom="35dp"
+            android:text="@string/touteseances" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_below="@+id/rechercheSeance">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/list_seance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bar"
+            android:paddingLeft="20dp"
+            android:layout_alignParentStart="true">
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>
