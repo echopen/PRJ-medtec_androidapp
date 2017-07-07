@@ -3,6 +3,7 @@ package com.echopen.asso.echopen;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -32,7 +34,7 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
 
 
 
-public class EchoActivity extends Activity implements EchographyImageVisualisationContract.View {
+public class EchoActivity extends Activity implements EchographyImageVisualisationContract.View, View.OnClickListener {
 
     private String imageNameSave = null;
 
@@ -65,6 +67,9 @@ public class EchoActivity extends Activity implements EchographyImageVisualisati
                 loadImage();
             }
         });
+
+        ImageButton arrow = (ImageButton) findViewById(R.id.arrow);
+        arrow.setOnClickListener(this);
     }
 
     @Override
@@ -130,4 +135,17 @@ public class EchoActivity extends Activity implements EchographyImageVisualisati
         }
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.arrow :
+                arrowClicked();
+                break;
+        }
+    }
+
+    private void arrowClicked() {
+        Intent intent = new Intent(this, ChoiceActivity.class);
+        startActivity(intent);
+    }
 }
