@@ -84,16 +84,8 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
     private ImageView goToGallery;
 
     private SeekBar mSeekBarLinearLutOffset;
-    private TextView mTextViewLinearLutOffset;
-    private LinearLayout mLayoutLinearLutOffset;
 
-    private SeekBar mSeekBarLinearLutSlope;
-    private TextView mTextViewLinearLutSlope;
-    private LinearLayout mLayoutLinearLutSlope;
-
-    private SeekBar mSeekBarExponentialLutAlpha;
-    private TextView mTextViewExponentialLutAlpha;
-    private LinearLayout mLayoutExponentialLutAlpha;
+    private SeekBar mSeekBarGain;
 
 
     /* integer constant that switch whether the photo or the video is on */
@@ -177,6 +169,21 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
                 mSeekBarLinearLutOffset.setProgress(loffset + (int)distance / 10);
             }
 
+            @Override
+            public void onSwipeTop(float distance){
+                mSeekBarGain.setAlpha(1);
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                mSeekBarGain.setAlpha(0);
+                            }
+                        },
+                        5000);
+                Integer loffset =  mSeekBarGain.getProgress();
+                mSeekBarGain.setProgress(loffset + (int)distance /10);
+            }
+
         });
 
         ImageView organ = (ImageView) rootView.findViewById(R.id.organ);
@@ -206,11 +213,13 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
             @Override
             public void onClick(View v) {
                 mSeekBarLinearLutOffset.setAlpha(1);
+                mSeekBarGain.setAlpha(1);
 
                 new android.os.Handler().postDelayed(
                         new Runnable() {
                             public void run() {
                                 mSeekBarLinearLutOffset.setAlpha(0);
+                                mSeekBarGain.setAlpha(0);
                             }
                         },
                         5000);
@@ -364,11 +373,8 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
             }
         });
 
-
-
-        mSeekBarLinearLutSlope = (SeekBar) rootView.findViewById(R.id.seekBarExponentialLutAlpha);
-
-        mSeekBarLinearLutSlope.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        mSeekBarGain = (SeekBar) rootView.findViewById(R.id.seekBarGain);
+        mSeekBarGain.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
             }
@@ -379,11 +385,12 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                double lSlope = (progress - 50) * 1.0 / 10 + 1;
-                mTextViewLinearLutSlope.setText(new DecimalFormat("#.00").format(lSlope));
-                mRenderingContextController.setLinearLutSlope(lSlope);
+                double lGain = progress * 3.0 / 100;
+                mRenderingContextController.setIntensityGain(lGain);
             }
         });
+
+
 
 //        mLayoutExponentialLutAlpha = (LinearLayout) findViewById(R.id.layoutExponentialLutAlpha);
 //        mTextViewExponentialLutAlpha = (TextView) findViewById(R.id.textExponentialLutAlpha);

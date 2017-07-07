@@ -42,15 +42,30 @@ android:orientation="vertical">
 
     <SeekBar
         android:layout_width="match_parent"
-        android:layout_weight="5"
-        android:layout_height="wrap_content"
-        android:id="@+id/seekBarExponentialLutAlpha"
+        android:layout_height="30dp"
+        android:id="@+id/seekBarGain"
+        android:rotation="270"
+        android:alpha="0"
+
         android:progressDrawable="@drawable/progress"
         android:indeterminate="false"
-        android:alpha="0"
-        android:layout_alignBottom="@+id/organ"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="85dp" />
+        android:layout_marginTop="169dp"
+        android:layout_below="@+id/seekBarLinearLutOffset"
+        android:layout_toStartOf="@+id/gallery"
+        android:layout_marginEnd="115dp" />
+
+    <!--<SeekBar-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_weight="5"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/seekBarExponentialLutAlpha"-->
+        <!--android:progressDrawable="@drawable/progress"-->
+        <!--android:indeterminate="false"-->
+        <!--android:alpha="0"-->
+        <!--android:rotation="270"-->
+        <!--android:layout_alignBottom="@+id/organ"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_marginBottom="85dp" />-->
 
     <RelativeLayout
         android:layout_width="wrap_content"
