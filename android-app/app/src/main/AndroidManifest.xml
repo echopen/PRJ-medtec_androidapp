@@ -53,6 +53,11 @@
         <activity
             android:name=".AssistanceActivity"
             android:label="Assistance"
+            android:theme="@android:style/Theme.Black.NoTitleBar"/>
+        <activity
+            android:name=".Login"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat"/>
     </application>
 

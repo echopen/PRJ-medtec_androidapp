@@ -109,6 +109,9 @@ public class MainActivity extends AppCompatActivity implements AbstractActionAct
         //Intent chooseProfile = new Intent(MainActivity.this, chooseProfile.class);
         //startActivity(chooseProfile);
 
+        //Intent Login = new Intent(MainActivity.this, Login.class);
+        //startActivity(Login);
+
         Intent connectDevice = new Intent(MainActivity.this, connectDevice.class);
         startActivity(connectDevice);
 
