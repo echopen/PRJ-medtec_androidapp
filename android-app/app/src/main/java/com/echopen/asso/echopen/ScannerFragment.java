@@ -12,6 +12,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -174,7 +175,7 @@ public class ScannerFragment extends Fragment {
         });
 
         //-----------------------------------------------------------------
-        Button popupbtn = (Button) view.findViewById(R.id.popupbutton);
+        ImageButton popupbtn = (ImageButton) view.findViewById(R.id.popupbutton);
 
         popupbtn.setOnTouchListener(new View.OnTouchListener() {
             @Override

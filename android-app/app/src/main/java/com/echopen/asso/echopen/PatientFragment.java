@@ -28,6 +28,7 @@ public class PatientFragment extends Fragment  {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_patient, container, false);
 
+        //listener on "valider" button to redirect towards scanner
         Button valid = (Button) view.findViewById(R.id.Valid);
         valid.setOnTouchListener(new View.OnTouchListener(){
             @Override
@@ -128,5 +129,4 @@ public class PatientFragment extends Fragment  {
         return  view;
 
     }
-
 }

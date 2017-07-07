@@ -187,4 +187,30 @@ public class imagesHandler {
         Collections.reverse(list);
         return list;
     }
+
+    public Bitmap getSavedImage(int position) {
+        String[] listRaw = this.savedDirectory.list();
+        Arrays.sort(listRaw);
+
+        String fileName = listRaw[position];
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        File image = new File(this.savedDirectory.toString() + "/" + fileName);
+        try {
+            return BitmapFactory.decodeStream(new FileInputStream(image), null, options);
+        } catch (FileNotFoundException e) {
+            return null;
+        }
+    }
+
+    public void deleteImage(int position) {
+        String[] listRaw = this.savedDirectory.list();
+        Arrays.sort(listRaw);
+
+        String fileName = listRaw[position];
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+        File image = new File(this.savedDirectory.toString() + "/" + fileName);
+        image.delete();
+    }
 }

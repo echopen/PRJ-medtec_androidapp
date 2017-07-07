@@ -62,6 +62,10 @@ public class MainActivity extends Activity {
                         transaction.commit();
                         return true;
                     }});
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, ScannerFragment.newInstance());
+        transaction.commit();
     }
 
     @Override

@@ -1,0 +1,28 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.echopen.asso.echopen.ImageFragment">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_gravity="end"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <ImageButton
+        android:id="@+id/imageBack"
+        android:layout_gravity="start"
+        android:layout_width="74dp"
+        android:layout_height="60dp"
+        android:background="@null"
+        android:src="@drawable/ic_left_arrow" />
+    <ImageButton
+        android:id="@+id/imageDelete"
+        android:layout_width="74dp"
+        android:layout_height="60dp"
+        android:layout_gravity="end"
+        android:background="@null"
+        android:src="@drawable/ic_delete" />
+
+</FrameLayout>
