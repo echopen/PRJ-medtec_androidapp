@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <string name="app_name">echopen</string>
+    <string name="app_name">Echopen</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="menu1">Archives</string>
+    <string name="menu2">Scanner</string>
+    <string name="menu3">Patient</string>
 </resources>

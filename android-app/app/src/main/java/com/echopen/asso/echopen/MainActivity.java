@@ -2,8 +2,10 @@ package com.echopen.asso.echopen;
 
 import android.annotation.TargetApi;
 import android.app.FragmentManager;
+import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -34,8 +36,7 @@ import static com.echopen.asso.echopen.utils.Constants.Http.REDPITAYA_PORT;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends FragmentActivity implements View.OnTouchListener {
-
+public class MainActivity extends Activity {
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -49,63 +50,30 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //-----------------------------------------------------------------
-        final imagesHandler imagesHandler = new imagesHandler(getFilesDir());
 
-        final ImageView image = (ImageView) findViewById(R.id.imageView);
+        //bottom nav for main menu
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
-        EchOpenApplication app = (EchOpenApplication) getApplication();
-        EchographyImageStreamingService stream = app.getEchographyImageStreamingService();
-
-        EchographyImageVisualisationPresenter presenter = new EchographyImageVisualisationPresenter(stream, new EchographyImageVisualisationContract.View() {
-            @Override
-            public void refreshImage(final Bitmap iBitmap) {
-                try {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            imagesHandler.saveCacheImage(iBitmap);
-                            image.setImageBitmap(iBitmap);
+        bottomNavigationView.setOnNavigationItemSelectedListener
+                (new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment selectedFragment = null;
+                        //action for each button on menu redirects to another fragment
+                        switch (item.getItemId()) {
+                            case R.id.action_item1:
+                                selectedFragment = ArchivesFragment.newInstance();
+                                break;
+                            case R.id.action_item2:
+                                selectedFragment = ScannerFragment.newInstance();
+                                break;
+                            case R.id.action_item3:
+                                selectedFragment = PatientFragment.newInstance();
+                                break;
                         }
-                    });
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
 
-            @Override
-            public void setPresenter(EchographyImageVisualisationContract.Presenter presenter) {
-
-            }
-        });
-
-        final GestureDetector gd = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
-
-            @Override
-            public boolean onDoubleTapEvent(MotionEvent e) {
-                Log.d("tap","OnDoubleTap"+e);
-
-                return true;
-            }
-
-            @Override
-            public boolean onSingleTapConfirmed(MotionEvent e) {
-                Log.d("tap","onSingleTapConfirmed"+e);
-
-                return true;
-            }
-
-            @Override
-            public void onLongPress(MotionEvent e) {
-                Log.d("tap","onLongPress"+e);
-            }
-
-
-        });
 
         final GestureDetector pu = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener(){
-
-
 
             @Override
             public boolean onSingleTapConfirmed(MotionEvent e) {
@@ -119,23 +87,8 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
 
                 return true;
             }
-
-
-
-        });
-        Button mainButton = (Button) findViewById(R.id.button2);
-        mainButton.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-
-                return gd.onTouchEvent(event);
-            }
         });
 
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode(LOCAL_IP, REDPITAYA_PORT);
-
-        stream.connect(mode,this);
-        presenter.start();
         //-----------------------------------------------------------------
         Button popupbtn = (Button) findViewById(R.id.popupbutton);
 
@@ -146,6 +99,17 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
                 return pu.onTouchEvent(event);
             }
         });
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.commit();
+                        return true;
+                    }
+                });
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.frame_layout, ScannerFragment.newInstance());
+        transaction.commit();
     }
 
     @Override
@@ -153,36 +117,6 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
         super.onResume();
     }
 
-    boolean firstTouch = false;
-    long time = System.currentTimeMillis();
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        this.tapOnView(event.getAction());
-        return true;
-    }
-
-
-
-    public boolean tapOnView(int ev) {
-        if (ev == MotionEvent.ACTION_DOWN) {
-
-            if(firstTouch && (System.currentTimeMillis() - time) <= 400) {
-                //set action to write annotations
-                Log.d("tap on view"," second tap ");
-                firstTouch = false;
-
-                return false;
-
-            } else {
-                firstTouch = true;
-                time = System.currentTimeMillis();
-                Log.d("tap on view"," First Tap time  "+time);
-
-                return false;
-            }
-        }
-        return true;
-    }
 
     /**
          * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
@@ -197,11 +131,5 @@ public class MainActivity extends FragmentActivity implements View.OnTouchListen
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        this.tapOnView (motionEvent.getAction());
-        return false;
     }
 }
