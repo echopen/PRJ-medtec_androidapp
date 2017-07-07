@@ -207,7 +207,7 @@ public class DocumentFragment extends Fragment {
         myAsyncTaskLoadFiles = new AsyncTaskLoadFiles(myImageAdapter);
         myAsyncTaskLoadFiles.execute();
 
-        Button buttonReload = (Button) v.findViewById(R.id.reload);
+        //Button buttonReload = (Button) v.findViewById(R.id.reload);
         final Button buttonCloseZoom = (Button) v.findViewById(R.id.btn_closezoom);
         Button buttonBackToDashboard = (Button) v.findViewById(R.id.btn_back);
         Button btn_login = (Button) v.findViewById(R.id.btn_login);
@@ -268,7 +268,7 @@ public class DocumentFragment extends Fragment {
         gallery.setOnItemClickListener(myOnItemClickListener);
       
         // Reload images list
-        buttonReload.setOnClickListener(new View.OnClickListener(){
+        /*buttonReload.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
 
@@ -281,7 +281,7 @@ public class DocumentFragment extends Fragment {
                 gallery.setAdapter(myImageAdapter);
                 myAsyncTaskLoadFiles = new AsyncTaskLoadFiles(myImageAdapter);
                 myAsyncTaskLoadFiles.execute();
-            }});
+            }});*/
 
         return v;
     }

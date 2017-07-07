@@ -67,7 +67,7 @@
             android:layout_marginBottom="10dp"
             android:paddingRight="3dp"
             android:background="@color/transparent"
-            android:text="Reconnection"
+            android:text="Reconnect"
             android:textColor="#42E695"
             android:textAllCaps="false" />
     </LinearLayout>

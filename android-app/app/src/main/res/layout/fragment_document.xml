@@ -44,7 +44,7 @@
                 android:textSize="20sp"
                 android:textColor="@color/gray_dk" />
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end">
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:fontFamily="sans-serif"
-                    android:text="Partager"
+                    android:text="Share"
                     android:textAllCaps="false"
                     android:textSize="14sp"
                     android:textColor="@color/gray_light"
@@ -79,12 +79,12 @@
                     android:layout_height="wrap_content"
                     android:padding="3dp"
                     android:fontFamily="sans-serif"
-                    android:text="Editer"
+                    android:text="Edit"
                     android:textAllCaps="false"
                     android:textSize="14sp"
                     android:textColor="@color/gray_light"
                     android:background="@color/transparent" />
-            </LinearLayout>
+            </LinearLayout>-->
 
         </LinearLayout>
 

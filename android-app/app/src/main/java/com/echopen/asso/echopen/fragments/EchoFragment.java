@@ -204,7 +204,7 @@ public class EchoFragment extends Fragment {
 
             }
         });
-        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("192.168.1.41", 7538);
+        EchographyImageStreamingMode mode = new EchographyImageStreamingTCPMode("10.154.172.142", 7538);
 
         stream.connect(mode,activity);
         presenter.start();
