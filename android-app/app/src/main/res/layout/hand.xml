@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient">
+
+    <LinearLayout
+        android:id="@+id/containerHandChoice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@null"
+        android:orientation="vertical"
+        android:layout_marginTop="53dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:text="@string/choix"
+            android:layout_width="200dp"
+            android:gravity="center"
+            android:textSize="17sp"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:layout_height="50dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="600px"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/left_hand"
+                android:layout_width="150dp"
+                android:layout_height="300dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/white"
+                android:paddingTop="100dp"
+                android:paddingBottom="90dp"
+                android:text="@string/gauche"
+                android:background="@color/transparent_white"
+                android:drawableTop="@drawable/lefthand"
+                android:textSize="16sp"/>
+
+            <Button
+                android:id="@+id/right_hand"
+                android:layout_width="150dp"
+                android:layout_height="300dp"
+                android:paddingTop="100dp"
+                android:paddingBottom="90dp"
+                android:textColor="@color/white"
+                android:text="@string/droite"
+                android:drawableTop="@drawable/righthand"
+                android:background="@color/transparent_white"
+                android:textSize="16sp"/>
+>>>>>>> ee33ca56eaa5a2ea53a935eb65b6dfe42054f80c
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/containerHandChoice"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/skip"
+        android:layout_width="220dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_bg_rounded_corners_green"
+        android:text="Passer les étapes"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

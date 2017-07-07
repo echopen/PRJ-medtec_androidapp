@@ -1,4 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <string name="app_name">echopen</string>
+    <string name="app_name">echopen</string>
+
+    <string name="connexion">Connexion</string>
+    <string name="inscription">Inscription</string>
+    <string name="scan">Scan</string>
+    <string name="seances">Seances</string>
+    <string name="profil">Profil</string>
+    <string name="faq">Faq</string>
+    <string name="gallery">Gallery</string>
+    <string name="select">Select</string>
+
+    <string name="nom">Nom</string>
+    <string name="prenom">Prenom</string>
+    <string name="mail">Adresse mail</string>
+    <string name="mdp">Mot de passe</string>
+    <string name="inscris">Je m\'inscris</string>
+
+
+    <string name="choix">Choisissez votre main dominante</string>
+    <string name="passerEtapes">Passer les étapes</string>
+    <string name="valider">Valider</string>
+
+    <string name="gauche">Gaucher</string>
+    <string name="droite">Droite</string>
+
+    <string name="favoris">Choisissez vos paramètres favoris</string>
+
+    <string name="sexe">Sexe</string>
+    <string name="trancheage">Tranche d\'âge</string>
+    <string name="corpulence">Corpulence</string>
+    <string name="organe">Organe</string>
+
+    <string name="frequence">Frequence</string>
+    <string name="gain">Gain</string>
+
+    <string name="identifiant">Identifiant</string>
+    <string name="notes">Notes</string>
+
+    <string name="nomChange">Kelly</string>
+    <string name="prenomChange">Mark</string>
+    <string name="profession">Médecin généraliste</string>
+    <string name="parametreFavoris">Paramètre favoris</string>
+
+    <string name="sauvegarder">Sauvegarder</string>
+    <string name="partager">Partager</string>
+    <string name="abandonner">Abandonner</string>
+
+    <string name="identifianttext">2 91 321 144 563 87 </string>
+    <string name="notestext">Symptômes à traiter...</string>
+
+    <string name="reprendre">Reprendre</string>
+    <string name="partager2">Partager</string>
+    <string name="supprimer">Supprimer</string>
+
+    <string name="modifierphoto">Modifier ma photo</string>
+
+    <string name="recherche">Recherche</string>
+    <string name="touteseances">Toutes les séances</string>
+
 </resources>

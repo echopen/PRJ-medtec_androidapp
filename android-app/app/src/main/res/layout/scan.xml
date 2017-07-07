@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/echo"/>
+
+    <LinearLayout
+        android:id="@+id/ScanPage"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:paddingTop="10dp"
+        android:background="@null"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bSearch"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="5dp"
+                android:paddingTop="10dp"
+                android:background="@drawable/button_bg_rounded_corners"
+                android:drawableTop="@drawable/female2"
+                android:textSize="0sp" />
+
+            <Button
+                android:id="@+id/bSearch2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:paddingTop="20dp"
+                android:layout_marginTop="-3dp"
+                android:drawableTop="@drawable/age2"
+                android:layout_marginStart="0dp"
+                android:textSize="0sp"
+                android:background="@drawable/button_bg_rounded_corners"/>
+
+            <Button
+                android:id="@+id/bSearch3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:paddingTop="5dp"
+                android:layout_marginTop="1dp"
+                android:drawableTop="@drawable/corpulence2"
+                android:layout_marginStart="5dp"
+                android:textSize="0sp"
+                android:background="@drawable/button_bg_rounded_corners"/>
+
+            <Button
+                android:id="@+id/bSearch4"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:paddingTop="10dp"
+                android:drawableTop="@drawable/poumon"
+                android:layout_marginStart="5dp"
+                android:textSize="0sp"
+                android:background="@drawable/button_bg_rounded_corners"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/frequence"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:gravity="right"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:text="@string/frequence" />
+
+        <TextView
+            android:id="@+id/gain"
+            android:gravity="right"
+            android:textAllCaps="true"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/gain" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/gallery"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:drawableTop="@drawable/capture"
+                android:textSize="0sp"
+                android:background="@null"/>
+
+            <Button
+                android:id="@+id/capturePhoto"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="30dp"
+                android:textSize="0sp"
+                android:background="@drawable/button_bg_rounded_corners_capture"/>
+
+            <Button
+                android:id="@+id/button_seances"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:drawableTop="@drawable/freeze"
+                android:layout_marginRight="5dp"
+                android:textSize="0sp"
+                android:background="@null"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

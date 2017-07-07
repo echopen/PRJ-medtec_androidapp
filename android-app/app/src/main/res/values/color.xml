@@ -16,11 +16,14 @@
     <color name="black">#000000</color>
     <color name="transparent">#00000000</color>
     <color name="blue_sky">#33b5e5</color>
-    <color name="blue_dark">#003b71</color>
+    <color name="blue_dark">#387cd7</color>
     <color name="gray_light">#808080</color>
     <color name="gray_very_light">#e5e5e5</color>
 
     <color name="yellow">#F0CF43</color>
     <color name="green">#24c4b6</color>
     <color name="transparent_white">#60ffffff</color>
+    <color name="transparent_green">#f1fdfa</color>
+
+    <color name="blue_bar">#65bcbb</color>
 </resources>
