@@ -21,6 +21,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -94,6 +95,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
     private ImageView osteoImage;
 
     private String shootButton;
+    private Button chooseOragn;
 
     /* integer constant that switch whether the photo or the video is on */
     private int display;
@@ -203,7 +205,7 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
                 View mView = getActivity().getLayoutInflater().inflate(R.layout.organ_modal, null);
 
                 mBuilder.setView(mView);
-                AlertDialog dialog = mBuilder.create();
+                final AlertDialog dialog = mBuilder.create();
 
                 WindowManager.LayoutParams wmlp = dialog.getWindow().getAttributes();
 
@@ -268,8 +270,20 @@ public  class Menu1 extends Fragment implements AbstractActionActivity, Echograp
 
                 dialog.show();
 
+                chooseOragn = (Button) mView.findViewById(R.id.chooseOrgan);
+
+                chooseOragn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
             }
         });
+
+
+
         ImageView showSettings = (ImageView) rootView.findViewById(R.id.settings);
         showSettings.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -39,7 +39,7 @@ public class Constants {
 
         public static final String CONTENT_TYPE_JSON = "application/json";
 
-        public static final String REDPITAYA_IP = "10.3.254.20";
+        public static final String REDPITAYA_IP = "92.90.17.86";
 
         public static final int REDPITAYA_PORT = 7538;
     }
