@@ -43,6 +43,15 @@
     <string name="profession">Médecin généraliste</string>
     <string name="parametreFavoris">Notes</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sauvegarder">Sauvegarder</string>
+    <string name="partager">Partager</string>
+    <string name="abandonner">Abandonner</string>
+
+    <string name="identifianttext">2 91 321 144 563 87 </string>
+    <string name="notestext">Symptômes à traiter...</string>
+
+    <string name="reprendre">Reprendre</string>
+    <string name="partager2">Partager</string>
+    <string name="supprimer">Supprimer</string>
+
 </resources>

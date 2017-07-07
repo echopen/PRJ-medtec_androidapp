@@ -29,19 +29,19 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:ems="10"
-            android:hint="@string/identifiant"
+            android:text="@string/identifianttext"
             android:background="#f2fcf9"
             android:inputType="textPersonName"/>
 
         <EditText
             android:id="@+id/notes"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="85dp"
             android:paddingLeft="12dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:ems="10"
-            android:hint="@string/notes"
+            android:text="@string/notestext"
             android:background="#f2fcf9"
             android:inputType="textPersonName"
             android:layout_marginBottom="40dp"/>
@@ -68,7 +68,7 @@
 
         <Button
             android:id="@+id/button_connexion"
-            android:text="@string/connexion"
+            android:text="@string/reprendre"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_width="220dp"
@@ -79,7 +79,7 @@
 
         <Button
             android:id="@+id/button_inscription"
-            android:text="@string/inscription"
+            android:text="@string/partager2"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_width="220dp"
@@ -90,7 +90,7 @@
 
         <Button
             android:id="@+id/button_scan"
-            android:text="@string/scan"
+            android:text="@string/supprimer"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_width="220dp"

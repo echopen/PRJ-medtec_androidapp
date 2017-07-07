@@ -67,7 +67,7 @@
 
         <Button
             android:id="@+id/button_connexion"
-            android:text="@string/connexion"
+            android:text="@string/sauvegarder"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_width="220dp"
@@ -78,7 +78,7 @@
 
         <Button
             android:id="@+id/button_inscription"
-            android:text="@string/inscription"
+            android:text="@string/partager"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_width="220dp"
@@ -89,7 +89,7 @@
 
         <Button
             android:id="@+id/button_valid_seance"
-            android:text="@string/scan"
+            android:text="@string/abandonner"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_width="220dp"
