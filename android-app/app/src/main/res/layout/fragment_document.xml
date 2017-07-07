@@ -18,7 +18,10 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp">
+
             <Button
                 android:id="@+id/btn_back"
                 android:layout_width="20dp"
@@ -27,24 +30,62 @@
                 android:background="@color/transparent"
                 android:fontFamily="sans-serif"
                 android:text="&lt;"
-                android:textColor="@color/gray_dk" />
+                android:textColor="@color/gray_dk"
+                android:textSize="25sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/nb_pictures"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
                 android:fontFamily="sans-serif"
                 android:text="16 pictures"
+                android:textSize="20sp"
                 android:textColor="@color/gray_dk" />
 
-            <Button
-                android:id="@+id/reload"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                android:fontFamily="sans-serif"
-                android:text="Rafraîchir"
-                android:visibility="invisible"/>
+                android:layout_gravity="end">
+                <Button
+                    android:id="@+id/reload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Rafraîchir"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textColor="@color/gray_light"
+                    android:background="@color/transparent"
+                    android:visibility="invisible"/>
+
+                <Button
+                    android:id="@+id/btn_share"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Partager"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_light"
+                    android:background="@color/transparent" />
+
+                <Button
+                    android:id="@+id/btn_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="3dp"
+                    android:fontFamily="sans-serif"
+                    android:text="Editer"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    android:textColor="@color/gray_light"
+                    android:background="@color/transparent" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
