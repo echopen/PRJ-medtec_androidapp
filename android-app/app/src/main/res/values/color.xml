@@ -8,7 +8,12 @@
     <drawable name="theme_green">#49c419</drawable>
     <color name="theme_blue">#2194ff</color>
     <drawable name="theme_blue">#2194ff</drawable>
-    
+
+
+    <color name="new_white_grey">#F1F1F1</color>
+    <color name="new_blue_button">#95C0FD</color>
+    <color name="new_blue">#3D6EB4</color>
+    <color name="new_white_button">#FFFFFF</color>
     <color name="red_light">#e74c3c</color>
     <color name="gray_dk">#313031</color>
     <color name="white_smoke">#F7F7F7</color>
@@ -23,4 +28,9 @@
     <color name="yellow">#F0CF43</color>
     <color name="green">#24c4b6</color>
     <color name="transparent_white">#60ffffff</color>
+
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white_trans">#99FFFFFF</color>
 </resources>
