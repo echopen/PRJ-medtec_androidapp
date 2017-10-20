@@ -8,9 +8,12 @@ public class RenderingContext {
     private LookUpTable mLookUpTable;
     private double mIntensityGain;
 
+    public static final double DEFAULT_LUT_OFFSET = -6.0;
+    public static final double DEFAULT_LUT_SLOPE = 2.30;
+
     public RenderingContext(){
         this.mIntensityGain = 0;
-        this.mLookUpTable = new GreyLevelLinearLookUpTable(0, 1);
+        this.mLookUpTable = new GreyLevelLinearLookUpTable(0.0, 1.0);
     }
 
     public RenderingContext(RenderingContext iRenderingContext) {

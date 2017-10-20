@@ -87,7 +87,7 @@ public class ScanConversionRenderscriptFilter {
             double lProbeAngleRad = iDeviceConfiguration.getProbeSectorAngle() * Math.PI /180;
 
             double start_depth = iDeviceConfiguration.getR0() * Math.cos(lProbeAngleRad / 2.0); /*  Depth for start of image in meters    */
-            double image_size = (iDeviceConfiguration.getRf() - start_depth);  /*  Size of image in meters               */
+            double image_size = 2 * iDeviceConfiguration.getRf() * Math.sin(lProbeAngleRad / 2.0);  /*  Size of image in meters               */
 
             double start_of_data = iDeviceConfiguration.getR0();   /*  Depth for start of data in meters     */
 
