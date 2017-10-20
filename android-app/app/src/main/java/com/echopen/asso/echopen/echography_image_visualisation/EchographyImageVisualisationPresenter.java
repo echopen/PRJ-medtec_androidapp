@@ -1,5 +1,7 @@
 package com.echopen.asso.echopen.echography_image_visualisation;
 
+import android.graphics.Bitmap;
+
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
@@ -17,6 +19,7 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
 
     private EchographyImageStreamingService mEchographyImageStreamingService; /* image streaming service */
 
+    private Boolean mIsFrozen;
 
     /**
      * @brief constructor
@@ -29,6 +32,8 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
 
         mView = iView;
         mView.setPresenter(this);
+
+        mIsFrozen = false;
     }
 
 
@@ -43,8 +48,31 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
     }
 
     @Override
+    public void toggleFreeze() {
+        if(mIsFrozen){
+            unfreeze();
+        }
+        else{
+            freeze();
+        }
+    }
+
+    private void freeze(){
+        mIsFrozen = true;
+        mView.displayFreezeButton();
+    }
+    private void unfreeze() {
+        mIsFrozen = false;
+        mView.displayUnfreezeButton();
+    }
+
+    @Override
     public void onEchographyImageStreamingNotification(final EchographyImageStreamingNotification iEchographyImageStreamingNotification)
     {
+        if(mIsFrozen){
+            return;
+        }
+
         mView.refreshImage(iEchographyImageStreamingNotification.getImage());
     }
 }

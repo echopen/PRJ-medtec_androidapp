@@ -15,12 +15,14 @@ public class EchOpenApplication extends Application {
     private final String TAG = this.getClass().getSimpleName();
 
     private EchographyImageStreamingService mEchographyImageStreaming; /* image streaming service */
+    private RenderingContextController mRenderingContextController;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        mEchographyImageStreaming = new EchographyImageStreamingService(new RenderingContextController());
+        mRenderingContextController = new RenderingContextController();
+        mEchographyImageStreaming = new EchographyImageStreamingService(mRenderingContextController);
     }
 
     /**
