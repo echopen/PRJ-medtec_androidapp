@@ -94,28 +94,52 @@ To debug the mobile application on a device:
 
 ### Probe emulator
 
-In the file ./probe_emulator, one can find source code and executable of a programe that send data such as the echopen prototype. This program can run on a RedPitaya or on your computer (for linux OS).
+The probe emulator is used to mimic message exchanges between the real probe and the mobile application.
+In order to use it in your project you have to consider the following steps:
 
-For compiling the C code, use the bash file probe_emulator.sh provided. To choose the device on which the program will run, use -m option, where option is RP for RedPitaya and PC for your PC such as:
+  * Go to the folder dedicated to probe emulator
+```bash
+cd ~/PRJ-medtech-androidapp/probe_emulator
+ ```
 
-	sh probe_emulator.sh -m RP
+  * compile the **probe emulator binary** using the laptop configuration
 
-If you chose PC option, the executable file will be located in the ./probe_emulator folder. If you chose RP option, the executable will be send in the RedPitaya (you must connect to Red Pitaya wireless network first). This executable need an option in: void, plate, hand and film:
+```bash
+	 ./run.sh -m PC
+```
+  * Normally the binary *probe_emulator* has been created in *PRJ-medtech-androidapp* folder and now you can run it with different options described below:
+	  * *void* option will send on a loop an image fill with only value 8192
+	  * *plate* option will send on a loop an image of a plate
+	  * *hand* option will send on a loop an image of the cross-section of a hand
+	  * *film* will send on a loop an echographic film of the   cross-sections of a hand an harm
 
-	./probe_emulator plate
+```bash
+  ./probe_emulator film
+```
 
-* void option will send on a loop an image fill with only value 8192
-* plate option will send on a loop an image of a plate
-* hand option will send on a loop an image of the cross-section of a hand
-* film will send on a loop an echographic film of the cross-sections of a hand an harm
+The terminal shoud display the following feedback message *film* when probe emulator succeed to start.
 
-To execute the program on the RedPitaya you first need to connect to the RedPitaya *via* ssh:
+  * configure the mobile application to connect to the probe on the same network.
 
-	ssh root@192.168.128.3
+```java
+package com.echopen.asso.echopen.utils;
 
-pass is root. At connection you will be situated in /root folder where is located the program. Now you can just lanch it (with correct option).
+public class Constants{
+	...
+  public static final String REDPITAYA_IP = "your ip adress";
+	...
+}
+```
+* recompile the application for your mobile phone
 
-## Documentation 
+* connect your mobile phone on the same Wifi network as your laptop
+
+* run *echOpen* mobile application on your phone
+
+You should normally receive the images from the probe
+
+
+## Documentation
 
 You can get high-level documentation on our [GitBook](https://echopen.gitbooks.io/android-app/content/) mobile application section.
 
@@ -129,6 +153,3 @@ You have also access to a detailed documentation in the *projectRootDirectory/do
   ![alt tag](http://wiki.echopen.org/images/a/ab/Echopen_MockUp_1.png)
   ![alt tag](http://wiki.echopen.org/images/0/07/Echopen_MockUp_1.2.png)
   ![alt tag](http://wiki.echopen.org/images/e/e2/Echopen_MockUp_1_2.png)
-
-
-
