@@ -4,9 +4,10 @@ buildscript {
     repositories {
         mavenCentral()
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.vanniktech:gradle-android-junit-jacoco-plugin:0.3.0'
     }
 }
@@ -15,5 +16,6 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
+        google()
     }
 }

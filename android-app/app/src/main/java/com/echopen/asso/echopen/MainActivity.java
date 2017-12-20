@@ -35,6 +35,10 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
     private ImageView mCaptureButton;
+    private ImageView mPregnantWomanButton;
+    private ImageView mEndExamButton;
+    private ImageView mBatteryButton;
+    private ImageView mSelectButton;
 
     private final static float IMAGE_ZOOM_FACTOR = 1.75f;
     private final static float IMAGE_ROTATION_FACTOR = 90.f;
@@ -58,13 +62,46 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
         setContentView(R.layout.activity_main);
 
-        mCaptureButton = (ImageView) findViewById(R.id.btnCapture);
+        mCaptureButton = (ImageView) findViewById(R.id.main_button_capture);
         mCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mEchographyImageVisualisationPresenter.toggleFreeze();
             }
         });
+
+        mPregnantWomanButton = (ImageView) findViewById(R.id.main_button_mode);
+        mPregnantWomanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("pregnantButton", "PregnantWomanButton Pressed");
+            }
+        });
+
+        mSelectButton = (ImageView) findViewById(R.id.main_button_select);
+        mSelectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("selectButton", "SelectButton Pressed");
+            }
+        });
+
+        mEndExamButton = (ImageView) findViewById(R.id.main_button_end_exam);
+        mEndExamButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("endExamButton", "EndExamButton Pressed");
+            }
+        });
+
+        mBatteryButton = (ImageView) findViewById(R.id.main_button_battery);
+        mBatteryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("batteryButton", "BatteryButton Pressed");
+            }
+        });
+
 
         mEchographyImageStreamingService.getRenderingContextController().setLinearLutSlope(RenderingContext.DEFAULT_LUT_SLOPE);
         mEchographyImageStreamingService.getRenderingContextController().setLinearLutOffset(RenderingContext.DEFAULT_LUT_OFFSET);

@@ -14,14 +14,63 @@
 
 
     <ImageButton
-        android:id="@+id/btnCapture"
+
+        android:id="@+id/main_button_capture"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:background="@color/transparent"
-        android:scaleType="fitCenter"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="30dp"
-        android:src="@drawable/btn_capture" />
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_save_image" />
+
+    <ImageButton
+        android:id="@+id/main_button_mode"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center|start"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="20dp"
+
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_select_preset" />
+
+    <ImageButton
+        android:id="@+id/main_button_battery"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|center|end"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_battery_3" />
+
+    <ImageButton
+        android:id="@+id/main_button_select"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="top|center|end"
+        android:layout_marginTop="60dp"
+        android:layout_marginRight="10dp"
+
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_select_obstetrics" />
+
+    <ImageButton
+        android:id="@+id/main_button_end_exam"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center|end"
+        android:layout_marginBottom="30dp"
+        android:layout_marginRight="20dp"
+
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_end_exam" />
 
 </FrameLayout>
 
