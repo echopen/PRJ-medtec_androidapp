@@ -6,7 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -29,7 +33,7 @@ import com.echopen.asso.echopen.utils.Constants;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements EchographyImageVisualisationContract.View {
+public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private EchographyImageStreamingService mEchographyImageStreamingService;
@@ -151,5 +155,10 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     public void setPresenter(EchographyImageVisualisationContract.Presenter iPresenter) {
         mEchographyImageVisualisationPresenter = iPresenter;
         mEchographyImageVisualisationPresenter.start();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
     }
 }
