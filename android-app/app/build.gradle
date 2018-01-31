@@ -18,6 +18,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             moduleName "EchOpen"
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    includeCompileClasspath false
+                }
+            }
         }
         javaCompileOptions {
             annotationProcessorOptions {

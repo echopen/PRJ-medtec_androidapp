@@ -18,7 +18,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:name=".EchOpenApplication"
-        android:theme="@style/AppTheme">
+        android:background="@color/black"
+        android:theme="@style/Theme.AppCompat.DayNight">
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name"
