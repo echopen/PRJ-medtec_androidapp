@@ -24,8 +24,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/icon_save_image" />
 
-    <ImageButton
-
+    <com.echopen.asso.echopen.view.CaptureButton
         android:id="@+id/main_button_shadow"
         android:layout_width="80dp"
         android:layout_height="80dp"
