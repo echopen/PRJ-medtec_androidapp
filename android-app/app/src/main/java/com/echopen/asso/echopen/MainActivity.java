@@ -4,10 +4,18 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.MotionEvent;
@@ -36,7 +44,7 @@ import com.echopen.asso.echopen.view.CaptureButton;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends Activity implements EchographyImageVisualisationContract.View {
+public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View, NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private EchographyImageStreamingService mEchographyImageStreamingService;
@@ -47,6 +55,12 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     private ImageView mBatteryButton;
     private ImageView mSelectButton;
     private CaptureButton mCaptureShadow;
+
+    private DrawerLayout mDrawerLayout;
+    private NavigationView mNavigationView;
+
+    private ActionBarDrawerToggle mDrawerToggle;
+
 
     private final static float IMAGE_ZOOM_FACTOR = 1.75f;
     private final static float IMAGE_ROTATION_FACTOR = 90.f;
@@ -71,15 +85,45 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
 
         setContentView(R.layout.activity_main);
 
-        mCaptureButton = findViewById(R.id.main_button_capture);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        mCaptureShadow = findViewById(R.id.main_button_shadow);
-        mCaptureShadow.setOnClickListener(new View.OnClickListener() {
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, 0, 0) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                getSupportActionBar().setTitle("");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                getSupportActionBar().setTitle("");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+
+        mCaptureButton =  findViewById(R.id.main_button_capture);
+        mCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Log.d("captureButton", "Short Press");
             }
         });
+
+        mCaptureShadow = findViewById(R.id.main_button_shadow);
 
         mCaptureShadow.setListener(new CaptureButton.CaptureButtonListener() {
             @Override
@@ -175,5 +219,35 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     public void setPresenter(EchographyImageVisualisationContract.Presenter iPresenter) {
         mEchographyImageVisualisationPresenter = iPresenter;
         mEchographyImageVisualisationPresenter.start();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return false;
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+        // Handle your other action bar items...
+
+        return super.onOptionsItemSelected(item);
     }
 }

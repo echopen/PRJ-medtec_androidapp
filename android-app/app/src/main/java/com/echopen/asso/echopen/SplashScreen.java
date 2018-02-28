@@ -3,12 +3,13 @@ package com.echopen.asso.echopen;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 
 /**
  * This class holds for a custom SplashScreen
  */
-public class SplashScreen extends Activity
+public class SplashScreen extends AppCompatActivity
 {
 
     /* Reflects the state of the activity, when set to false, the activity will finish soon */

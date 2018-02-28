@@ -1,0 +1,29 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_Image_Review"
+            android:icon="@drawable/ic_menu_image_review"
+            android:title="Image Review" />
+        <item
+            android:id="@+id/nav_User_Profile"
+            android:icon="@drawable/ic_menu_user_profile"
+            android:title="User Profile" />
+    </group>
+
+    <item android:title="Assistance">
+        <menu>
+            <item
+                android:id="@+id/nav_FAQ"
+                android:icon="@drawable/ic_menu_faq"
+                android:title="FAQ" />
+            <item
+                android:id="@+id/nav_Contact_Us"
+                android:icon="@drawable/ic_menu_contact_us"
+                android:title="Contact Us" />
+        </menu>
+    </item>
+
+</menu>
