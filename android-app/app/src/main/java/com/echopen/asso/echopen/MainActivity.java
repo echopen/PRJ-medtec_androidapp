@@ -1,5 +1,6 @@
 package com.echopen.asso.echopen;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +10,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.MotionEvent;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+import android.animation.ObjectAnimator;
+import android.view.animation.Animation;
+
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
@@ -39,6 +45,11 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     private ImageView mEndExamButton;
     private ImageView mBatteryButton;
     private ImageView mSelectButton;
+    private ImageView mCaptureShadow;
+
+
+    private Long then;
+    private RotateAnimation rotate_animation_capture;
 
     private final static float IMAGE_ZOOM_FACTOR = 1.75f;
     private final static float IMAGE_ROTATION_FACTOR = 90.f;
@@ -48,6 +59,7 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
      * and then displays them.
      * Also, this method uses the Config singleton class that provides device-specific constants
      */
+    @SuppressLint("ClickableViewAccessibility")
     @TargetApi(Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,12 +75,53 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         setContentView(R.layout.activity_main);
 
         mCaptureButton = (ImageView) findViewById(R.id.main_button_capture);
-        mCaptureButton.setOnClickListener(new View.OnClickListener() {
+
+        mCaptureShadow = (ImageView) findViewById(R.id.main_button_shadow);
+        mCaptureShadow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEchographyImageVisualisationPresenter.toggleFreeze();
+                Log.d("captureButton", "Short Press");
+
+
             }
         });
+        mCaptureShadow.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+
+            public boolean onTouch(View v,final MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_DOWN){
+                    then = System.currentTimeMillis();
+                   mEchographyImageVisualisationPresenter.toggleFreeze();
+
+                    rotate_animation_capture = new RotateAnimation(0,144 ,
+                            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                            0.6f);
+
+                    rotate_animation_capture.setDuration(5000);
+                    mCaptureShadow.clearAnimation();
+                    mCaptureShadow.setAnimation(rotate_animation_capture);
+
+                }
+
+
+                else if(event.getAction() == MotionEvent.ACTION_UP){
+                    mEchographyImageVisualisationPresenter.toggleFreeze();
+                    if(((Long) System.currentTimeMillis() - then) > 5000){
+                        Log.d("mcaptureButton", "Long Press");
+
+                        return true;
+                    }
+                    else {
+
+                        rotate_animation_capture.cancel();
+                        rotate_animation_capture= null;
+
+                    }
+                }
+                return false;
+            }
+        });
+
 
         mPregnantWomanButton = (ImageView) findViewById(R.id.main_button_mode);
         mPregnantWomanButton.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +175,9 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
+
+
     @Override
     public void refreshImage(final Bitmap iBitmap) {
         this.runOnUiThread(new Runnable() {
@@ -138,13 +194,17 @@ public class MainActivity extends Activity implements EchographyImageVisualisati
     }
 
     @Override
-    public void displayFreezeButton() {
-        mCaptureButton.setImageResource(R.drawable.btn_capture_freeze);
+   public void displayFreezeButton() {
+        mCaptureShadow.setImageResource(R.drawable.icon_arc_shadow);
+        mCaptureButton.setImageResource(R.drawable.button_jauge);
+
     }
 
     @Override
     public void displayUnfreezeButton() {
-        mCaptureButton.setImageResource(R.drawable.btn_capture);
+        mCaptureShadow.setImageResource(R.drawable.icon_save_image);
+
+
     }
 
     @Override

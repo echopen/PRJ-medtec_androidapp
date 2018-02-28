@@ -13,7 +13,7 @@
         />
 
 
-    <ImageButton
+   <ImageButton
 
         android:id="@+id/main_button_capture"
         android:layout_width="80dp"
@@ -23,6 +23,31 @@
         android:background="@color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_save_image" />
+
+    <ImageButton
+
+        android:id="@+id/main_button_shadow"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:translationZ="1dp"
+        android:src="@drawable/icon_save_image" />
+
+    <ImageButton
+
+        android:id="@+id/main_button_jauge"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="30dp"
+        android:background="@color/transparent"
+        android:scaleType="fitCenter"
+        android:translationZ="0dp"
+        android:src="@drawable/button_jauge" />
+
 
     <ImageButton
         android:id="@+id/main_button_mode"
@@ -55,7 +80,6 @@
         android:layout_gravity="top|center|end"
         android:layout_marginTop="60dp"
         android:layout_marginRight="10dp"
-
         android:background="@color/transparent"
         android:scaleType="fitCenter"
         android:src="@drawable/icon_select_obstetrics" />
