@@ -23,12 +23,16 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.animation.ObjectAnimator;
 import android.view.animation.Animation;
-
+import android.graphics.drawable.BitmapDrawable;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+
+import com.echopen.asso.echopen.echography_image_capture.EchographyImageCaptureContract;
+import com.echopen.asso.echopen.echography_image_capture.EchographyImageCapturePresenter;
+
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.view.CaptureButton;
@@ -49,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     private static final String TAG = MainActivity.class.getSimpleName();
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
+
+    private EchographyImageCaptureContract.Presenter mEchographyImageCapturePresenter;
+
     private ImageView mCaptureButton;
     private ImageView mPregnantWomanButton;
     private ImageView mEndExamButton;
@@ -120,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
             @Override
             public void onClick(View v) {
                 Log.d("captureButton", "Short Press");
+                shortPressAction();
             }
         });
 
@@ -170,6 +178,10 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         });
 
 
+
+
+
+
         mEchographyImageStreamingService.getRenderingContextController().setLinearLutSlope(RenderingContext.DEFAULT_LUT_SLOPE);
         mEchographyImageStreamingService.getRenderingContextController().setLinearLutOffset(RenderingContext.DEFAULT_LUT_OFFSET);
     }
@@ -199,9 +211,25 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
                 lEchOpenImage.setRotation(IMAGE_ROTATION_FACTOR);
                 lEchOpenImage.setScaleX(IMAGE_ZOOM_FACTOR);
                 lEchOpenImage.setScaleY(IMAGE_ZOOM_FACTOR);
-                lEchOpenImage.setImageBitmap(iBitmap);
+                lEchOpenImage.setImageBitmap(iBitmap); // image affichée
             }
         });
+    }
+    public void longPressAction() {
+        Log.d(TAG, "hello from longPressAction");
+
+        ImageView lEchOpenImage = (ImageView) findViewById(R.id.echopenImage);
+        Bitmap imageCaptured = ((BitmapDrawable)lEchOpenImage.getDrawable()).getBitmap();
+        mEchographyImageCapturePresenter =  new EchographyImageCapturePresenter(imageCaptured);
+
+//        mEchographyImageCapturePresenter =  new EchographyImageCapturePresenter(mEchographyImageStreamingService, this);
+
+        //this.setPresenter(new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this));
+
+    }
+    public void shortPressAction() {
+        Log.d(TAG, "hello from shortPressAction");
+
     }
 
     @Override
