@@ -45,5 +45,10 @@ public class EchographyImageVisualisationContract {
          * @brief switch freeze state
          */
         void toggleFreeze();
+
+        void captureAction(Bitmap imageCaptured);
+
+        void captureSequenceAction();
+
     }
 }

@@ -1,5 +1,6 @@
 package com.echopen.asso.echopen.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -7,6 +8,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+
+import com.echopen.asso.echopen.MainActivity;
 
 /**
  * Created by Yvan Moté on 28/02/2018.
@@ -60,6 +63,8 @@ public class CaptureButton extends android.support.v7.widget.AppCompatImageButto
             this.clearAnimation();
             this.setAnimation(rotateAnimationCapture);
 
+            ((MainActivity)getContext()).longPressBegins();
+
             return true;
         } else if(event.getAction() == MotionEvent.ACTION_UP) {
 
@@ -69,12 +74,15 @@ public class CaptureButton extends android.support.v7.widget.AppCompatImageButto
 
             if(((Long) System.currentTimeMillis() - then) > animationDuration){
                 Log.d("mcaptureButton", "Long Press");
+                ((MainActivity)getContext()).longPressAction();
+                ((MainActivity)getContext()).longPressCompleted();
 
                 return true;
             }
             else {
 
                 Log.d("mcaptureButton", "cancel");
+                ((MainActivity)getContext()).longPressInterrupted();
 
                 rotateAnimationCapture.cancel();
                 rotateAnimationCapture= null;
