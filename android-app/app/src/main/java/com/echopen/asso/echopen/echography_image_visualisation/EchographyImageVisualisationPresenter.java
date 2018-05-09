@@ -75,4 +75,13 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
 
         mView.refreshImage(iEchographyImageStreamingNotification.getImage());
     }
+
+    public void captureAction(Bitmap imageCaptured)
+    {
+     }
+    public void captureSequenceAction()
+    {
+        //show loop sequence action on myView.fragment
+    }
+
 }

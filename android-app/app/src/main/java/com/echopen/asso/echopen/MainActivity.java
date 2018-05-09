@@ -25,6 +25,11 @@ import android.animation.ObjectAnimator;
 import android.view.animation.Animation;
 import android.graphics.drawable.BitmapDrawable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
@@ -52,9 +57,10 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private EchographyImageStreamingService mEchographyImageStreamingService;
-    private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
+    private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter
+            ;
 
-    private EchographyImageCaptureContract.Presenter mEchographyImageCapturePresenter;
+  //  private EchographyImageCaptureContract.Presenter mEchographyImageCapturePresenter;
 
     private ImageView mCaptureButton;
     private ImageView mPregnantWomanButton;
@@ -68,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
 
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
+    private Boolean isRecording;
 
     private final static float IMAGE_ZOOM_FACTOR = 1.75f;
     private final static float IMAGE_ROTATION_FACTOR = 90.f;
@@ -88,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         mEchographyImageStreamingService = ((EchOpenApplication) getApplication()).getEchographyImageStreamingService();
         mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT), this);
 
-        this.setPresenter(new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this));
+        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
 
         setContentView(R.layout.activity_main);
 
@@ -203,6 +211,11 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
 
     @Override
     public void refreshImage(final Bitmap iBitmap) {
+        if(isRecording == Boolean.TRUE)
+        {
+            bitmapArray.add(iBitmap);
+
+        }
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -218,22 +231,38 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     public void longPressAction() {
         Log.d(TAG, "hello from longPressAction");
 
-        ImageView lEchOpenImage = (ImageView) findViewById(R.id.echopenImage);
-        Bitmap imageCaptured = ((BitmapDrawable)lEchOpenImage.getDrawable()).getBitmap();
-        mEchographyImageCapturePresenter =  new EchographyImageCapturePresenter(imageCaptured);
+        //start recording Bitmap images until button stops
 
-//        mEchographyImageCapturePresenter =  new EchographyImageCapturePresenter(mEchographyImageStreamingService, this);
-
-        //this.setPresenter(new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this));
 
     }
+    public void longPressBegins()
+    {
+        bitmapArray = new ArrayList<Bitmap>();
+        isRecording = Boolean.TRUE;
+    }
+    public void longPressCompleted()
+    {
+        mEchographyImageVisualisationPresenter.captureSequenceAction();
+
+    }
+    public void longPressInterrupted()
+    {
+        isRecording = Boolean.FALSE;
+        bitmapArray = new ArrayList<Bitmap>();
+
+    }
+
     public void shortPressAction() {
         Log.d(TAG, "hello from shortPressAction");
+        ImageView lEchOpenImage = (ImageView) findViewById(R.id.echopenImage);
+        Bitmap imageCaptured = ((BitmapDrawable)lEchOpenImage.getDrawable()).getBitmap();
+
+        mEchographyImageVisualisationPresenter.captureAction(imageCaptured);
 
     }
 
     @Override
-   public void displayFreezeButton() {
+    public void displayFreezeButton() {
         mCaptureShadow.setImageResource(R.drawable.icon_arc_shadow);
         mCaptureButton.setImageResource(R.drawable.button_jauge);
     }
