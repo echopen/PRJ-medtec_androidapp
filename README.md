@@ -7,6 +7,7 @@
 [`PRJ-medtec_androidapp`]()
 
 ## Title
+In progress Centrale Students 2018 
 echOpen Android mobile application
 
 ## About
