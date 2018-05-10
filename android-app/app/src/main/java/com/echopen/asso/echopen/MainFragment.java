@@ -50,6 +50,7 @@ public class MainFragment extends Fragment implements EchographyImageVisualisati
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
         mCaptureButton =  rootView.findViewById(R.id.main_button_capture);
         mCaptureButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,18 +106,12 @@ public class MainFragment extends Fragment implements EchographyImageVisualisati
             }
         });
 
-
-
-
-
-        TextView textView = new TextView(getActivity());
-        textView.setText(R.string.hello_blank_fragment);
         return rootView;
     }
 
     private static final String TAG = MainActivity.class.getSimpleName();
-    private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
+
     private ImageView mCaptureButton;
     private ImageView mPregnantWomanButton;
     private ImageView mEndExamButton;
@@ -136,10 +131,8 @@ public class MainFragment extends Fragment implements EchographyImageVisualisati
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setPresenter(new EchographyImageVisualisationPresenter(  ((EchOpenApplication) getActivity().getApplication()).getEchographyImageStreamingService(), this));
 
-
-         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(  ((EchOpenApplication) getActivity().getApplication()).getEchographyImageStreamingService(), this);
-        mEchographyImageVisualisationPresenter.start();
     }
 
     @Override
@@ -206,6 +199,7 @@ public class MainFragment extends Fragment implements EchographyImageVisualisati
 
     public void longPressCompleted()
     {
+        Log.d(TAG, "longPressCompleted");
         mEchographyImageVisualisationPresenter.captureSequenceAction();
         ((MainActivity) getActivity()).GotoImageFragment();
     }

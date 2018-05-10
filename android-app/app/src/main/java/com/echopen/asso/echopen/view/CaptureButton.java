@@ -64,7 +64,7 @@ public class CaptureButton extends android.support.v7.widget.AppCompatImageButto
             this.clearAnimation();
             this.setAnimation(rotateAnimationCapture);
 
-            ((MainActivity)getContext()).getmMainFragment().longPressBegins();
+            ((MainActivity)getContext()).getMainFragment().longPressBegins();
 
             return true;
         } else if(event.getAction() == MotionEvent.ACTION_UP) {
@@ -75,15 +75,15 @@ public class CaptureButton extends android.support.v7.widget.AppCompatImageButto
 
             if(((Long) System.currentTimeMillis() - then) > animationDuration){
                 Log.d("mcaptureButton", "Long Press");
-                ((MainActivity)getContext()).getmMainFragment().longPressAction();
-                ((MainActivity)getContext()).getmMainFragment().longPressCompleted();
+                ((MainActivity)getContext()).getMainFragment().longPressAction();
+                ((MainActivity)getContext()).getMainFragment().longPressCompleted();
 
                 return true;
             }
             else {
 
                 Log.d("mcaptureButton", "cancel");
-                ((MainActivity)getContext()).getmMainFragment().longPressInterrupted();
+                ((MainActivity)getContext()).getMainFragment().longPressInterrupted();
 
                 rotateAnimationCapture.cancel();
                 rotateAnimationCapture= null;

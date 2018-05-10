@@ -79,8 +79,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mMainFragment=new MainFragment();
-        mValidationFragment= new ImageFragment();
+        mValidationFragment = new ImageFragment();
+        mMainFragment = new MainFragment();
+
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
 
         setContentView(R.layout.activity_main);
-
+        goToMainFragment();
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -118,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.addDrawerListener(mDrawerToggle);
@@ -185,13 +188,25 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         return super.onOptionsItemSelected(item);
     }
 
-    public MainFragment getmMainFragment() {
+    public MainFragment getMainFragment() {
         return mMainFragment;
     }
-    public void GotoImageFragment() {
+
+    public void goToMainFragment(){
+        Log.d(TAG, "GOtoMainFragment");
         android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        ft.replace(R.id.main_fragment,mValidationFragment);
+        ft.replace(R.id.main_container, mMainFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    public void GotoImageFragment() {
+        Log.d(TAG, "GOtoImageFragment");
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        ft.replace(R.id.main_container, mValidationFragment);
+        ft.addToBackStack(null);
         ft.commit();
     }
 }
