@@ -2,10 +2,10 @@ package com.echopen.asso.echopen;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,29 +18,19 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.MotionEvent;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
-import android.animation.ObjectAnimator;
-import android.view.animation.Animation;
-import android.graphics.drawable.BitmapDrawable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
-
-import com.echopen.asso.echopen.echography_image_capture.EchographyImageCaptureContract;
-import com.echopen.asso.echopen.echography_image_capture.EchographyImageCapturePresenter;
-
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.view.CaptureButton;
+
+import java.util.ArrayList;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -53,7 +43,7 @@ import com.echopen.asso.echopen.view.CaptureButton;
  * These two methods should be refactored into one
  */
 
-public class MainActivity extends AppCompatActivity implements EchographyImageVisualisationContract.View, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private EchographyImageStreamingService mEchographyImageStreamingService;
@@ -68,14 +58,13 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     private ImageView mBatteryButton;
     private ImageView mSelectButton;
     private CaptureButton mCaptureShadow;
-
+    private MainFragment mMainFragment;
+    private ImageFragment mValidationFragment;
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private ArrayList<Bitmap> bitmapArray = new ArrayList<Bitmap>();
-    private Boolean isRecording;
 
     private final static float IMAGE_ZOOM_FACTOR = 1.75f;
     private final static float IMAGE_ROTATION_FACTOR = 90.f;
@@ -90,17 +79,21 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMainFragment=new MainFragment();
+        mValidationFragment= new ImageFragment();
 
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+
         mEchographyImageStreamingService = ((EchOpenApplication) getApplication()).getEchographyImageStreamingService();
         mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT), this);
+        mEchographyImageStreamingService.getRenderingContextController().setLinearLutSlope(RenderingContext.DEFAULT_LUT_SLOPE);
+        mEchographyImageStreamingService.getRenderingContextController().setLinearLutOffset(RenderingContext.DEFAULT_LUT_OFFSET);
 
-        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, this);
 
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -130,60 +123,6 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-        mCaptureButton =  findViewById(R.id.main_button_capture);
-        mCaptureButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("captureButton", "Short Press");
-                shortPressAction();
-            }
-        });
-
-        mCaptureShadow = findViewById(R.id.main_button_shadow);
-
-        mCaptureShadow.setListener(new CaptureButton.CaptureButtonListener() {
-            @Override
-            public void onTouchDown() {
-                mEchographyImageVisualisationPresenter.toggleFreeze();
-            }
-
-            @Override
-            public void onTouchUp() {
-                mEchographyImageVisualisationPresenter.toggleFreeze();
-            }
-        });
-
-        mPregnantWomanButton = findViewById(R.id.main_button_mode);
-        mPregnantWomanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("pregnantButton", "PregnantWomanButton Pressed");
-            }
-        });
-
-        mSelectButton = findViewById(R.id.main_button_select);
-        mSelectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("selectButton", "SelectButton Pressed");
-            }
-        });
-
-        mEndExamButton = findViewById(R.id.main_button_end_exam);
-        mEndExamButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("endExamButton", "EndExamButton Pressed");
-            }
-        });
-
-        mBatteryButton = findViewById(R.id.main_button_battery);
-        mBatteryButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d("batteryButton", "BatteryButton Pressed");
-            }
-        });
 
 
 
@@ -209,74 +148,12 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-    @Override
-    public void refreshImage(final Bitmap iBitmap) {
-        if(isRecording == Boolean.TRUE)
-        {
-            bitmapArray.add(iBitmap);
-
-        }
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Log.d(TAG, "refreshImage");
-                ImageView lEchOpenImage = (ImageView) findViewById(R.id.echopenImage);
-                lEchOpenImage.setRotation(IMAGE_ROTATION_FACTOR);
-                lEchOpenImage.setScaleX(IMAGE_ZOOM_FACTOR);
-                lEchOpenImage.setScaleY(IMAGE_ZOOM_FACTOR);
-                lEchOpenImage.setImageBitmap(iBitmap); // image affichée
-            }
-        });
-    }
-    public void longPressAction() {
-        Log.d(TAG, "hello from longPressAction");
-
-        //start recording Bitmap images until button stops
 
 
-    }
-    public void longPressBegins()
-    {
-        bitmapArray = new ArrayList<Bitmap>();
-        isRecording = Boolean.TRUE;
-    }
-    public void longPressCompleted()
-    {
-        mEchographyImageVisualisationPresenter.captureSequenceAction();
 
-    }
-    public void longPressInterrupted()
-    {
-        isRecording = Boolean.FALSE;
-        bitmapArray = new ArrayList<Bitmap>();
 
-    }
 
-    public void shortPressAction() {
-        Log.d(TAG, "hello from shortPressAction");
-        ImageView lEchOpenImage = (ImageView) findViewById(R.id.echopenImage);
-        Bitmap imageCaptured = ((BitmapDrawable)lEchOpenImage.getDrawable()).getBitmap();
 
-        mEchographyImageVisualisationPresenter.captureAction(imageCaptured);
-
-    }
-
-    @Override
-    public void displayFreezeButton() {
-        mCaptureShadow.setImageResource(R.drawable.icon_arc_shadow);
-        mCaptureButton.setImageResource(R.drawable.button_jauge);
-    }
-
-    @Override
-    public void displayUnfreezeButton() {
-        mCaptureShadow.setImageResource(R.drawable.icon_save_image);
-    }
-
-    @Override
-    public void setPresenter(EchographyImageVisualisationContract.Presenter iPresenter) {
-        mEchographyImageVisualisationPresenter = iPresenter;
-        mEchographyImageVisualisationPresenter.start();
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -306,5 +183,15 @@ public class MainActivity extends AppCompatActivity implements EchographyImageVi
         // Handle your other action bar items...
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public MainFragment getmMainFragment() {
+        return mMainFragment;
+    }
+    public void GotoImageFragment() {
+        android.support.v4.app.FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        ft.replace(R.id.main_fragment,mValidationFragment);
+        ft.commit();
     }
 }
