@@ -58,18 +58,29 @@ public class EchographyImageVisualisationFragment extends Fragment implements Ec
 
         mCaptureShadow.setListener(new CaptureButton.CaptureButtonListener() {
             @Override
+            public void onTouchDown() {
+                Log.d(TAG, "OnStartRecording");
+                mEchographyImageVisualisationPresenter.startRecording();
+            }
+
+            @Override
             public void onCancel() {
                 Log.d(TAG, "OnCancel");
+                mEchographyImageVisualisationPresenter.endRecording();
             }
 
             @Override
             public void onShortPress() {
                 Log.d(TAG, "onShortPress");
+                mEchographyImageVisualisationPresenter.previewImage();
+                mEchographyImageVisualisationPresenter.endRecording();
             }
 
             @Override
             public void onLongPress() {
                 Log.d(TAG, "onLongPress");
+                mEchographyImageVisualisationPresenter.previewSequence();
+                mEchographyImageVisualisationPresenter.endRecording();
             }
 
         });
@@ -95,17 +106,6 @@ public class EchographyImageVisualisationFragment extends Fragment implements Ec
                 lEchOpenImage.setImageBitmap(iBitmap);
             }
         });
-    }
-
-    @Override
-    public void displayFreezeButton() {
-        mCaptureShadow.setImageResource(R.drawable.icon_arc_shadow);
-        //mCaptureButton.setImageResource(R.drawable.button_jauge);
-    }
-
-    @Override
-    public void displayUnfreezeButton() {
-        mCaptureShadow.setImageResource(R.drawable.icon_save_image);
     }
 
     @Override

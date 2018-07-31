@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 public class CaptureButton extends android.support.v7.widget.AppCompatImageButton {
 
     public interface CaptureButtonListener {
+        void onTouchDown();
         void onCancel();
         void onShortPress();
         void onLongPress();
@@ -89,6 +90,7 @@ public class CaptureButton extends android.support.v7.widget.AppCompatImageButto
             };
             mHandler = new Handler();
             mHandler.postDelayed(mLongPressRunnable, animationDuration);
+            listener.onTouchDown();
 
             return true;
         } else if(event.getAction() == MotionEvent.ACTION_UP) {

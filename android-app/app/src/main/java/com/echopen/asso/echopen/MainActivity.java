@@ -28,10 +28,16 @@ import android.view.animation.Animation;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImagePreviewFragment;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageSaveContract;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageSavePresenter;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationFragment;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographySequencePreviewFragment;
 import com.echopen.asso.echopen.filters.RenderingContext;
+import com.echopen.asso.echopen.model.EchopenImage;
+import com.echopen.asso.echopen.model.EchopenImageSequence;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.view.CaptureButton;
 
@@ -53,14 +59,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EchographyImageVisualisationPresenter mEchographyImageVisualisationPresenter;
     private EchographyImageVisualisationFragment mEchographyImageVisualisationFragment;
 
+    private EchographyImageSavePresenter mImageSavePresenter;
+
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
 
     private ActionBarDrawerToggle mDrawerToggle;
 
 
-    private final static float IMAGE_ZOOM_FACTOR = 1.75f;
-    private final static float IMAGE_ROTATION_FACTOR = 90.f;
+    public final static float IMAGE_ZOOM_FACTOR = 1.75f;
+    public final static float IMAGE_ROTATION_FACTOR = 90.f;
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.
      * UDPToBitmapDisplayer listens to UDP data, processes them with the help of ScanConversion,
@@ -79,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT), this);
 
         mEchographyImageVisualisationFragment = new EchographyImageVisualisationFragment();
-        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, mEchographyImageVisualisationFragment);
+        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, mEchographyImageVisualisationFragment,this);
 
         setContentView(R.layout.activity_main);
 
@@ -168,7 +176,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void goToImageStreaming(){
         FragmentTransaction lTransaction = getSupportFragmentManager().beginTransaction();
 
+
         lTransaction.replace(R.id.main_container, mEchographyImageVisualisationFragment);
+        lTransaction.addToBackStack(null);
+        lTransaction.commit();
+    }
+
+    public void goToImagePreview(EchopenImage iImage){
+        FragmentTransaction lTransaction = getSupportFragmentManager().beginTransaction();
+
+        EchographyImagePreviewFragment lFragment = EchographyImagePreviewFragment.newInstance(iImage);
+        mImageSavePresenter = new EchographyImageSavePresenter(lFragment, this);
+        lTransaction.replace(R.id.main_container, lFragment);
+        lTransaction.addToBackStack(null);
+        lTransaction.commit();
+    }
+
+    public void goToSequencePreview(EchopenImageSequence iSequence) {
+        FragmentTransaction lTransaction = getSupportFragmentManager().beginTransaction();
+
+        Log.d("previewImage", "preview size " + iSequence.getSequenceSize());
+        EchographySequencePreviewFragment lFragment = EchographySequencePreviewFragment.newInstance(iSequence);
+        mImageSavePresenter = new EchographyImageSavePresenter(lFragment, this);
+
+        lTransaction.replace(R.id.main_container, lFragment);
         lTransaction.addToBackStack(null);
         lTransaction.commit();
     }

@@ -1,12 +1,19 @@
 package com.echopen.asso.echopen.echography_image_visualisation;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingObserver;
+import com.echopen.asso.echopen.model.EchopenImage;
+import com.echopen.asso.echopen.model.EchopenImageSequence;
 import com.echopen.asso.echopen.utils.Timer;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by lecoucl on 06/06/17.
@@ -19,7 +26,9 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
 
     private EchographyImageStreamingService mEchographyImageStreamingService; /* image streaming service */
 
-    private Boolean mIsFrozen;
+    private ArrayList<EchopenImage> mRecordedImages;
+    private Boolean mIsRecording;
+    private Activity mCurrentContext;
 
     /**
      * @brief constructor
@@ -27,13 +36,16 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
      * @param iEchographyImageStreamingService image streaming service
      * @param iView view from MVP architecture design
      */
-    public EchographyImageVisualisationPresenter(EchographyImageStreamingService iEchographyImageStreamingService, EchographyImageVisualisationContract.View iView){
+    public EchographyImageVisualisationPresenter(EchographyImageStreamingService iEchographyImageStreamingService, EchographyImageVisualisationContract.View iView, Activity iCurrentContext){
         mEchographyImageStreamingService = iEchographyImageStreamingService;
 
         mView = iView;
         mView.setPresenter(this);
 
-        mIsFrozen = false;
+        mIsRecording = false;
+        mRecordedImages = new ArrayList<>();
+
+        mCurrentContext = iCurrentContext;
     }
 
 
@@ -48,29 +60,52 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
     }
 
     @Override
-    public void toggleFreeze() {
-        if(mIsFrozen){
-            unfreeze();
-        }
-        else{
-            freeze();
-        }
+    public void startRecording() {
+        mIsRecording = true;
     }
 
-    private void freeze(){
-        mIsFrozen = true;
-        mView.displayFreezeButton();
+    @Override
+    public void endRecording() {
+        mIsRecording = false;
+        mRecordedImages.clear();
     }
-    private void unfreeze() {
-        mIsFrozen = false;
-        mView.displayUnfreezeButton();
+
+
+    @Override
+    public void previewImage() {
+        if(mRecordedImages == null || mRecordedImages.size() < 1){
+            return;
+        }
+
+        //TODO: replace MainActivity direct cast
+        ((MainActivity) mCurrentContext).goToImagePreview(mRecordedImages.get(0));
     }
+
+    @Override
+    public void previewSequence() {
+        if(mRecordedImages == null || mRecordedImages.size() < 1){
+            return;
+        }
+
+
+        Log.d("previewImage", "preview size " + mRecordedImages.size());
+        //TODO: replace MainActivity direct cast
+
+        EchopenImageSequence lSequence = new EchopenImageSequence();
+
+        for(EchopenImage lImage :mRecordedImages){
+            lSequence.addImage(lImage);
+        }
+
+        ((MainActivity) mCurrentContext).goToSequencePreview(lSequence);
+    }
+
 
     @Override
     public void onEchographyImageStreamingNotification(final EchographyImageStreamingNotification iEchographyImageStreamingNotification)
     {
-        if(mIsFrozen){
-            return;
+        if(mIsRecording){
+            mRecordedImages.add(new EchopenImage(iEchographyImageStreamingNotification.getImage()));
         }
 
         mView.refreshImage(iEchographyImageStreamingNotification.getImage());

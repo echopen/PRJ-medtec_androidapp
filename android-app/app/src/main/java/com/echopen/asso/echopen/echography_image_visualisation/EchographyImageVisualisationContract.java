@@ -20,17 +20,6 @@ public class EchographyImageVisualisationContract {
          * @param iBitmap bitmap to be displayed
          */
         void refreshImage(final Bitmap iBitmap);
-
-        /**
-         * @brief display freeze button
-         *
-         */
-        void displayFreezeButton();
-
-        /**
-         * @brief display unfreeze button
-         */
-        void displayUnfreezeButton();
     }
 
 
@@ -41,9 +30,21 @@ public class EchographyImageVisualisationContract {
          */
         void listenEchographyImageStreaming();
 
+
+        void startRecording();
+
+        void endRecording();
+
         /**
-         * @brief switch freeze state
+         * @brief preview a single image
          */
-        void toggleFreeze();
+        void previewImage();
+
+        /**
+         * @brief preview a sequence
+         */
+
+        void previewSequence();
+
     }
 }
