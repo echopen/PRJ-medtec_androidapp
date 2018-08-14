@@ -8,8 +8,8 @@ public class RenderingContext {
     private LookUpTable mLookUpTable;
     private double mIntensityGain;
 
-    public static final double DEFAULT_LUT_OFFSET = -6.0;
-    public static final double DEFAULT_LUT_SLOPE = 2.30;
+    public static final double DEFAULT_LUT_OFFSET = 10.0;
+    public static final double DEFAULT_LUT_SLOPE = 4.30;
 
     public RenderingContext(){
         this.mIntensityGain = 0;

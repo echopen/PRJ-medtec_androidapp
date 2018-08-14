@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.model.EchopenImage;
-import com.echopen.asso.echopen.model.EchopenImageSequence;
 
 public class EchographyImageSavePresenter implements EchographyImageSaveContract.Presenter {
 
@@ -28,14 +27,6 @@ public class EchographyImageSavePresenter implements EchographyImageSaveContract
     @Override
     public void saveImage(EchopenImage iImage) {
         Log.d(TAG, "Save Image");
-
-        //TODO: remove direct cast to MainActivity - replace by event triggering
-        ((MainActivity) mCurrentContext).goToImageStreaming();
-    }
-
-    @Override
-    public void saveSequence(EchopenImageSequence iSequence) {
-        Log.d(TAG, "Save Sequence");
 
         //TODO: remove direct cast to MainActivity - replace by event triggering
         ((MainActivity) mCurrentContext).goToImageStreaming();

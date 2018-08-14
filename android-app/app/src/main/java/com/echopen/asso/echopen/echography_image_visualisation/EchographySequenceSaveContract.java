@@ -12,10 +12,14 @@ import com.echopen.asso.echopen.utils.BaseView;
  *
  * @class contract for EchographyImageSaveContract
  */
-public class EchographyImageSaveContract {
+public class EchographySequenceSaveContract {
 
     public interface View extends BaseView<Presenter> {
+        /**
+         * @brief refresh currently displayed image
+         */
 
+        void refreshImage(Bitmap lImageBitmap);
     }
 
 
@@ -27,9 +31,23 @@ public class EchographyImageSaveContract {
         void cancelPreview();
 
         /**
-         * @brief save an image
+         * @brief save currently reviewed sequence
          */
-        void saveImage(EchopenImage iImage);
 
+        void saveSequence();
+
+        /**
+         * @brief change sequence display speed
+         *
+         * @param iSpeed selected display speed
+         */
+
+        void changeSequenceSpeed(SequenceOption.Speed iSpeed);
+
+        /**
+         * @brief shutdown sequence display
+         */
+
+        void stopSequence();
     }
 }

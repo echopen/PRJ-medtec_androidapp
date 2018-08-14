@@ -7,17 +7,21 @@ import android.os.Parcelable;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.UUID;
 
 public class EchopenImageSequence implements Parcelable {
     private ArrayList<EchopenImage> mImageList;
+    private UUID mID;
 
     public EchopenImageSequence(){
         mImageList = new ArrayList<>();
+        mID = UUID.randomUUID();
     }
 
     protected EchopenImageSequence(Parcel in) {
         mImageList = new ArrayList<>();
         in.readTypedList(mImageList, EchopenImage.CREATOR);
+        in.readParcelable(UUID.class.getClassLoader());
     }
 
     public void addImage(EchopenImage iImage){
@@ -52,5 +56,6 @@ public class EchopenImageSequence implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeTypedList(mImageList);
+        dest.writeValue(mID);
     }
 }

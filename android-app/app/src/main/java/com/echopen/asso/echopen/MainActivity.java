@@ -35,6 +35,7 @@ import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVi
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationFragment;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageVisualisationPresenter;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographySequencePreviewFragment;
+import com.echopen.asso.echopen.echography_image_visualisation.EchographySequenceSavePresenter;
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.model.EchopenImage;
 import com.echopen.asso.echopen.model.EchopenImageSequence;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private EchographyImageVisualisationFragment mEchographyImageVisualisationFragment;
 
     private EchographyImageSavePresenter mImageSavePresenter;
+
+    private EchographySequenceSavePresenter mSequenceSavePresenter;
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -195,9 +198,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void goToSequencePreview(EchopenImageSequence iSequence) {
         FragmentTransaction lTransaction = getSupportFragmentManager().beginTransaction();
 
-        Log.d("previewImage", "preview size " + iSequence.getSequenceSize());
-        EchographySequencePreviewFragment lFragment = EchographySequencePreviewFragment.newInstance(iSequence);
-        mImageSavePresenter = new EchographyImageSavePresenter(lFragment, this);
+        EchographySequencePreviewFragment lFragment = EchographySequencePreviewFragment.newInstance();
+        mSequenceSavePresenter = new EchographySequenceSavePresenter(lFragment, this, iSequence);
 
         lTransaction.replace(R.id.main_container, lFragment);
         lTransaction.addToBackStack(null);
