@@ -5,20 +5,23 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ImageStreamingRunnable implements Runnable {
 
 	private static int PORT = 7538;
 
-	private static String IMAGE_FOLDER_PATH = "data/plate/";
+	private static String IMAGE_FOLDER_PATH = "./../../data/film_2/";
 	private static String IMAGE_CONFIG_FILE_NAME = "settings.txt";
-	private static String IMAGE_DATA_FILE_NAME = "plate.txt";
+	private static String IMAGE_DATA_PREFIX = "int";
 
 	private static short NB_PIXELS_PER_LINES = 1689;
 
@@ -88,46 +91,87 @@ public class ImageStreamingRunnable implements Runnable {
 
 		iSocketDataStreamer.write(iProbeImageConfiguration.getBytesArray());
 		iSocketDataStreamer.flush();
-
 	}
 
-	private UltrasoundImageSequence readImageSequence(ProbeImageConfiguration iProbeImageConfiguration) throws IOException {
-		UltrasoundImageSequence lImageSequence = new UltrasoundImageSequence(NB_PIXELS_PER_LINES ,iProbeImageConfiguration.getNLines());
-		File lDataFile = new File(IMAGE_FOLDER_PATH + IMAGE_DATA_FILE_NAME);
-		FileReader lFileReader = new FileReader(lDataFile);
+	/**
+	 * @brief read image
+	 *
+	 * @param iInputFile input data file
+	 * @param iNbPixelsPerLine number of pixels per line
+	 * @param iNbLinesPerImage number of lines per image
+	 *
+	 * @return image
+	 * @throws IOException
+	 */
+
+	private short[] readImage(File iInputFile, short iNbPixelsPerLine ,short iNbLinesPerImage) throws IOException{
+		FileReader lFileReader = new FileReader(iInputFile);
 		BufferedReader lBuffer = new BufferedReader(lFileReader);
 
 		String lLine;
 		String[] lSplitLine;
-		short[] lPixelValues = new short[lImageSequence.getNbLinesPerImage() * lImageSequence.getNbPixelsPerLine()];
-
-		// read header
-		for(int i = 0; i < 8; i++) {
-			lBuffer.readLine();
-		}
+		short[] lPixelValues = new short[iNbLinesPerImage * iNbPixelsPerLine];
 
 		// read ultrasound image data from file
 		int lLineIndex = 0;
 		while ((lLine = lBuffer.readLine()) != null) {
-		       lSplitLine = lLine.split("\\s");
-		       for(int i = 0; i < lSplitLine.length; i++ ) {
-		    	   lPixelValues[i + lLineIndex*lImageSequence.getNbPixelsPerLine()] = Short.valueOf(lSplitLine[i]);
-		       }
-		       lLineIndex++;
+		  lSplitLine = lLine.split("\\s");
+		  for(int i = 0; i < lSplitLine.length; i++ ) {
+			  lPixelValues[i + lLineIndex * iNbPixelsPerLine] = Short.valueOf(lSplitLine[i]);
+		  }
+		  lLineIndex++;
 		}
 
-		System.out.println("Image Readed");
-		lImageSequence.addImage(lPixelValues);
+		System.out.println("Image Readed " + iInputFile.getName());
 
 		lBuffer.close();
 
+		return lPixelValues;
+	}
+
+	/**
+	 * @brief read image sequence
+	 *
+	 * @param iProbeImageConfiguration probe image configuration to be read
+	 *
+	 * @return ultrasound image sequence
+	 * @throws IOException
+	 */
+	private UltrasoundImageSequence readImageSequence(ProbeImageConfiguration iProbeImageConfiguration) throws IOException {
+		UltrasoundImageSequence lImageSequence = new UltrasoundImageSequence(NB_PIXELS_PER_LINES ,iProbeImageConfiguration.getNLines());
+	//	File lDataFile = new File(IMAGE_FOLDER_PATH + IMAGE_DATA_FILE_NAME);
+
+		File lImageFolder = new File(IMAGE_FOLDER_PATH);
+		File[] lImageFiles = lImageFolder.listFiles(new FilenameFilter() {
+    	public boolean accept(File dir, String name) {
+      	return name.toLowerCase().startsWith(ImageStreamingRunnable.IMAGE_DATA_PREFIX);
+    	}
+		});
+		System.out.println("Number of images - " + lImageFiles.length);
+
+		Pattern lPattern = Pattern.compile("\\d+");
+
+		for (File lImageFile : lImageFiles) {
+			short[] lPixelValues = readImage(lImageFile, lImageSequence.getNbPixelsPerLine(), lImageSequence.getNbLinesPerImage());
+			Matcher lMatcher = lPattern.matcher(lImageFile.getName());
+			Integer lImageIndex = -1;
+
+			if(lMatcher.find()){
+				lImageIndex = Integer.parseInt(lMatcher.group());
+			}
+			lImageSequence.addImage(lImageIndex, lPixelValues);
+		}
+
+		System.out.println("Sequence - " +  lImageSequence.getImages().size() + " images");
 		return lImageSequence;
 	}
 
+
 	private void loopOnSendImageSequence(DataOutputStream iSocketDataStreamer, UltrasoundImageSequence iImageSequence) throws IOException{
 		Boolean lIsReversed = true;
+
 		while(true) {
-			for(UltrasoundImage lImage: iImageSequence.getImages()) {
+			for(UltrasoundImage lImage: iImageSequence.getImages().values()) {
 				sendImage(iSocketDataStreamer, lImage, lIsReversed);
 				lIsReversed = !lIsReversed;
 			}

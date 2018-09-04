@@ -1,24 +1,24 @@
 package echopen.emulator.probe;
 
-import java.util.LinkedList;
+import java.util.HashMap;
 
 public class UltrasoundImageSequence {
 
-	private LinkedList<UltrasoundImage> mImageSequence;
+	private HashMap<Integer, UltrasoundImage> mImageSequence;
 	private short mNbPixelsPerLine;
 	private short mNbLinesPerImage;
 
 	public UltrasoundImageSequence(short iNbPixelsPerLine, short iNbLinesPerImage){
 		mNbPixelsPerLine = iNbPixelsPerLine;
 		mNbLinesPerImage = iNbLinesPerImage;
-		mImageSequence = new LinkedList<>();
+		mImageSequence = new HashMap<>();
 	}
 
-	public void addImage(short[] iPixelValues) {
-		mImageSequence.add(new UltrasoundImage(iPixelValues, mNbPixelsPerLine, mNbLinesPerImage));
+	public void addImage(Integer iImageIndex, short[] iPixelValues) {
+    mImageSequence.put(iImageIndex, new UltrasoundImage(iPixelValues, mNbPixelsPerLine, mNbLinesPerImage));
 	}
 
-	public LinkedList<UltrasoundImage> getImages(){
+	public HashMap<Integer, UltrasoundImage> getImages(){
 		return mImageSequence;
 	}
 
