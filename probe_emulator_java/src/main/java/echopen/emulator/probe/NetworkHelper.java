@@ -1,3 +1,5 @@
+package echopen.emulator.probe;
+
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
@@ -5,13 +7,13 @@ import java.util.Enumeration;
 public class NetworkHelper {
 
 	/**
-	 * 
+	 *
 	 * @return
 	 */
-	
+
 	public static String getCurrentBroadcastIp() {
 		Enumeration lEn;
-		
+
 		try {
 			lEn = NetworkInterface.getNetworkInterfaces();
 			while(lEn.hasMoreElements()){
@@ -26,7 +28,7 @@ public class NetworkHelper {
 			 }
 			return "";
 		}
-		
+
 		catch (Exception e) {
 			return "";
 		}

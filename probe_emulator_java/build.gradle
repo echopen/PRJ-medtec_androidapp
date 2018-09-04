@@ -1,0 +1,29 @@
+apply plugin: 'java'
+
+version = '1.0.0-SNAPSHOT'
+
+repositories {
+    jcenter()
+}
+
+// In this section you declare the dependencies for your production and test code
+dependencies {
+    // The production code uses the SLF4J logging API at compile time
+    compile 'org.slf4j:slf4j-api:1.7.13'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+
+    testCompile 'junit:junit:3.8.2'
+}
+
+// Create a single Jar with all dependencies
+task fatJar(type: Jar) {
+    test
+    manifest {
+        attributes 'Implementation-Title': 'Java Probe emulator',
+                   'Implementation-Version': version,
+        	         'Main-Class': 'echopen.emulator.probe.ProbeEmulator'
+    }
+    baseName = 'JavaProbeEmulator'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

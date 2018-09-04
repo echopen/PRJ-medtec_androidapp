@@ -1,3 +1,4 @@
+package echopen.emulator.probe;
 
 public class ProbeServer {
 
@@ -6,13 +7,13 @@ public class ProbeServer {
 
 	private Thread mImageStreamingThread;
 	private Thread mBatteryThread;
-	
+
 	public void start() {
 		mImageStreamingThread = new Thread(new ImageStreamingRunnable(), IMAGE_THREAD);
 		mImageStreamingThread.start();
 		//mBatteryThread = new Thread(lBatteryThreadRunnable, BATTERY_THREAD);
 	}
-	
+
 	public void stop() {
 		mImageStreamingThread.stop();
 	}
