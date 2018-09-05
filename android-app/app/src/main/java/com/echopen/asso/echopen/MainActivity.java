@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mDrawerToggle;
 
 
-    public final static float IMAGE_ZOOM_FACTOR = 1.75f;
+    public final static float IMAGE_ZOOM_FACTOR = 1.4f;
     public final static float IMAGE_ROTATION_FACTOR = 90.f;
     /**
      * This method calls all the UI methods and then gives hand to  UDPToBitmapDisplayer class.

@@ -3,11 +3,14 @@
 .idea
 /android-app/local.properties
 /android-app/build
+/android-app/.idea
+/android-app/app/src/main/jniLibs
+/android-app/app/src/main/jni
+/android-app/libs
 .DS_Store
 /build
 /captures
 .externalNativeBuild
-android-app/.idea
 /probe_emulator_java/build
 /probe_emulator_java/.gradle
 /probe_emulator_java/.idea

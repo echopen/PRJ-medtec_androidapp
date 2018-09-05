@@ -7,7 +7,6 @@ import android.support.v8.renderscript.RenderScript;
 import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.filters.EnvelopeDetectionRenderscriptFilter;
 import com.echopen.asso.echopen.filters.IntensityUniformGainFilter;
 import com.echopen.asso.echopen.filters.IntensityToRGBFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
@@ -16,6 +15,8 @@ import com.echopen.asso.echopen.preproc.ScanConversion;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;
+
+import java.util.Arrays;
 
 /**
  * Core class of data collecting routes. Whether the protocol is chosen to be TCP, UDP or fetching data from local,
@@ -44,23 +45,21 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         int lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
         int lNbLinesPerImage = iDeviceConfiguration.getNbLinesPerImage();
         //TODO: temporary fake image in scan conversion filter input
-        int[] lImageInput = new int[lNbSamplesPerLine * lNbLinesPerImage];
+        int[] lImageInput = new int[Constants.PreProcParam.TCP_NUM_SAMPLES * lNbLinesPerImage];
         Timer.init("RenderingPipeline");
 
-        for (int i = 0; i < lNbLinesPerImage * lNbSamplesPerLine; i++) {
-            lImageInput[i] = (int) iRawImageData[i];
+        Arrays.fill(lImageInput, 0);
+        for (int i = 0; i < lNbLinesPerImage; i++) {
+            for(int j = 0; j < lNbSamplesPerLine; j++){
+                lImageInput[i * Constants.PreProcParam.TCP_NUM_SAMPLES + j] = iRawImageData[i * lNbSamplesPerLine + j];
+            }
         }
 
+        Log.d(TAG, "Receive Image " + lImageInput.length + " " + lImageInput);
         RenderScript lRenderscript = RenderScript.create(activity);
-        // envelop detection filter
-        EnvelopeDetectionRenderscriptFilter lEnvelopDetectionFilter = new EnvelopeDetectionRenderscriptFilter();
-        lEnvelopDetectionFilter.setImageInput(lImageInput, lNbSamplesPerLine, lNbLinesPerImage);
-        lEnvelopDetectionFilter.applyFilter(lRenderscript, Constants.PreProcParam.TCP_NUM_SAMPLES);
-        int[] lEnvelopImageData = lEnvelopDetectionFilter.getImageOutput();
-        Timer.logResult("EnvelopDetection");
 
         ScanConversionRenderscriptFilter lScanConversionFilter = new ScanConversionRenderscriptFilter();
-        lScanConversionFilter.setImageInput(lEnvelopImageData);
+        lScanConversionFilter.setImageInput(lImageInput);
         lScanConversionFilter.applyFilter(lRenderscript, iDeviceConfiguration);
         int[] lresampledCartesianImage = lScanConversionFilter.getImageOutput();
 

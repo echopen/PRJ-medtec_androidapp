@@ -8,17 +8,12 @@ package com.echopen.asso.echopen.model.Data;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
-import android.os.Debug;
 import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.filters.EnvelopDetectionFilter;
 import com.echopen.asso.echopen.filters.RenderingContext;
-import com.echopen.asso.echopen.preproc.ScanConversion;
-import com.echopen.asso.echopen.ui.MainActionController;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
-import com.parse.gdata.Preconditions;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -28,10 +23,6 @@ import java.io.PushbackInputStream;
 import java.net.Socket;
 
 import java.util.Arrays;
-import java.util.Observable;
-
-import static com.echopen.asso.echopen.utils.Constants.PreProcParam.TCP_IMG_DATA;
-import static com.echopen.asso.echopen.utils.Constants.PreProcParam.TCP_NUM_SAMPLES;
 
 public class ProcessTCPTask extends AbstractDataTask {
 
@@ -226,7 +217,6 @@ public class ProcessTCPTask extends AbstractDataTask {
      * @return
      */
     private static InputStream checkStreamIsNotEmpty(InputStream inputStream) throws IOException {
-        Preconditions.checkArgument(inputStream != null, "The InputStream is mandatory");
         PushbackInputStream pushbackInputStream = new PushbackInputStream(inputStream);
         int b;
         b = pushbackInputStream.read();
