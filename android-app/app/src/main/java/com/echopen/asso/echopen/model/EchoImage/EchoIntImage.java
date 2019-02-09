@@ -30,7 +30,7 @@ public class EchoIntImage extends AbstractEchoImage {
     }
 
     public EchoIntImage(int[] pixelsArray) {
-        bitmap = Bitmap.createBitmap(Constants.PreProcParam.N_z, Constants.PreProcParam.N_x, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(Constants.PreProcParam.N_y, Constants.PreProcParam.N_x, Bitmap.Config.ARGB_8888);
         this.pixelsArray = pixelsArray;
     }
 

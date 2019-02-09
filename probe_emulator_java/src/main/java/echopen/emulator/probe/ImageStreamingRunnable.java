@@ -19,11 +19,11 @@ public class ImageStreamingRunnable implements Runnable {
 
 	private static int PORT = 7538;
 
-	private static String IMAGE_FOLDER_PATH = "./../../data/film_2/";
+	private static String IMAGE_FOLDER_PATH = "./../../data/rectangle/";
 	private static String IMAGE_CONFIG_FILE_NAME = "settings.txt";
 	private static String IMAGE_DATA_PREFIX = "int";
 
-	private static short NB_PIXELS_PER_LINES = 1689;
+	private static short NB_PIXELS_PER_LINES = 217;
 
 	@Override
 	public void run() {
@@ -31,7 +31,7 @@ public class ImageStreamingRunnable implements Runnable {
 
 		try {
 			ServerSocket lServerSocket = new ServerSocket(PORT,1,InetAddress.getByName(lIp));
-			System.out.println("Server Image ready to connect");
+			System.out.println("Server Image ready to connect - Ip:" + lIp);
 
 			// Wait until a client is connecting
 			Socket lSocket = lServerSocket.accept();

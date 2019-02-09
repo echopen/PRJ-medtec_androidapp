@@ -30,64 +30,67 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
     protected Activity activity;
 
     protected RenderingContextController mRenderingContextController;
+    protected ProbeCinematicProvider mProbeCinematicProvider;
 
     protected EchographyImageStreamingService mEchographyImageStreamingService; //TODO should remove dependency
 
-    public AbstractDataTask(Activity activity, RenderingContextController iRenderingContextController, EchographyImageStreamingService iEchographyImageStreamingService) {
+    public AbstractDataTask(Activity activity, RenderingContextController iRenderingContextController, ProbeCinematicProvider iProbeCinematicProvider, EchographyImageStreamingService iEchographyImageStreamingService) {
         this.activity = activity;
 
         this.mRenderingContextController = iRenderingContextController;
+        this.mProbeCinematicProvider = iProbeCinematicProvider;
 
         this.mEchographyImageStreamingService = iEchographyImageStreamingService;
 
     }
 
-    protected void rawDataPipeline(RenderingContext iCurrentRenderingContext, DeviceConfiguration iDeviceConfiguration, Integer[] iRawImageData) {
+    protected void rawDataPipeline(RenderingContext iCurrentRenderingContext, DeviceConfiguration iDeviceConfiguration, ProbeCinematicConfiguration iProbeCinematic, Integer[] iRawImageData) {
 
         int lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
         int lNbLinesPerImage = iDeviceConfiguration.getNbLinesPerImage();
         //TODO: temporary fake image in scan conversion filter input
         int[] lImageInput = new int[lNbSamplesPerLine * lNbLinesPerImage];
 
-        prepareRenderingContext(iDeviceConfiguration.getNbLinesPerImage(), iDeviceConfiguration.getNbSamplesPerLine(), iDeviceConfiguration.getProbeSectorAngle(), (float)iDeviceConfiguration.getR0(), (float)iDeviceConfiguration.getRf(), 512, 512);
-
+        if(iProbeCinematic instanceof ProbeCinematicLoungerConfiguration)
+        {
+            ProbeCinematicLoungerConfiguration lProbeLoungerCinematic = (ProbeCinematicLoungerConfiguration) iProbeCinematic;
+            prepareRenderingContext(iDeviceConfiguration.getNbLinesPerImage(), iDeviceConfiguration.getNbSamplesPerLine(), iDeviceConfiguration.getProbeSectorAngle(), (float) iDeviceConfiguration.getR0(), (float) iDeviceConfiguration.getRf(), Constants.PreProcParam.N_x, Constants.PreProcParam.N_y,
+            lProbeLoungerCinematic.mNh0, lProbeLoungerCinematic.mNhp, lProbeLoungerCinematic.mNsr, lProbeLoungerCinematic.mNdx, lProbeLoungerCinematic.mRb, lProbeLoungerCinematic.mL1, lProbeLoungerCinematic.mTr1,
+            Constants.PreProcParam.SPEED_OF_ACOUSTIC_WAVE, iDeviceConfiguration.getDecimation(), iDeviceConfiguration.getEchoDelay());
+        }
+        else{
+            return;
+        }
         Timer.init("RenderingPipeline");
 
+
+        int lRawInput = 0;
+        for (int i = 0; i < lNbLinesPerImage; i++) {
+            for(int j = 0; j < lNbSamplesPerLine; j++){
+                lRawInput += iRawImageData[i * lNbSamplesPerLine + j];
+            }
+        }
+        Log.d(TAG, "Sum of Raw Input " + lRawInput);
         Arrays.fill(lImageInput, 0);
         for (int i = 0; i < lNbLinesPerImage; i++) {
             for(int j = 0; j < lNbSamplesPerLine; j++){
-                lImageInput[i * lNbSamplesPerLine + j] = /*iRawImageData[i * lNbSamplesPerLine + j]*/ i;
+                lImageInput[i * lNbSamplesPerLine + j] = iRawImageData[i * lNbSamplesPerLine + j];
             }
         }
 
 
-       /* Log.d(TAG, "Receive Image " + lImageInput.length + " " + lImageInput);
-        RenderScript lRenderscript = RenderScript.create(activity);
-
-        ScanConversionRenderscriptFilter lScanConversionFilter = new ScanConversionRenderscriptFilter();
-        lScanConversionFilter.setImageInput(lImageInput);
-        lScanConversionFilter.applyFilter(lRenderscript, iDeviceConfiguration);
-        int[] lresampledCartesianImage = lScanConversionFilter.getImageOutput();
-
-        Timer.logResult("ScanConversion");
-        IntensityUniformGainFilter lIntensityGainFilter = new IntensityUniformGainFilter();
-        lIntensityGainFilter.setImageInput(lresampledCartesianImage);
-        lIntensityGainFilter.applyFilter(iCurrentRenderingContext.getIntensityGain());
-        int[] lGainImage = lIntensityGainFilter.getImageOutput();
-
-        Timer.logResult("Uniform Gain");
-
-        IntensityToRGBFilter lIntensityToRGBFilter = new IntensityToRGBFilter();
-        lIntensityToRGBFilter.setImageInput(lGainImage);
-        lIntensityToRGBFilter.applyFilter(iCurrentRenderingContext.getLookUpTable());
-        int colors[] =  lIntensityToRGBFilter.getImageOutput();
-
-        Timer.logResult("Intensity to RGB");*/
+        int lSumInput = 0;
+        for (int i = 0; i < lNbLinesPerImage; i++) {
+            for(int j = 0; j < lNbSamplesPerLine; j++){
+                lSumInput += lImageInput[i * lNbSamplesPerLine + j];
+            }
+        }
+        Log.d(TAG, "Sum of Input " + lSumInput);
 
         int colors [] = render(lImageInput, ((GreyLevelLinearLookUpTable)iCurrentRenderingContext.getLookUpTable()).getSlope(), ((GreyLevelLinearLookUpTable)iCurrentRenderingContext.getLookUpTable()).getOffset() );
 
 
-        final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_x, Constants.PreProcParam.N_z, Bitmap.Config.ARGB_8888);
+        final Bitmap bitmap = Bitmap.createBitmap(colors, Constants.PreProcParam.N_x, Constants.PreProcParam.N_y, Bitmap.Config.ARGB_8888);
         Timer.logResult("Create Bitmap");
 
         mEchographyImageStreamingService.emitNewImage(bitmap);
@@ -97,7 +100,7 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         System.loadLibrary("renderingCpp");
     }
 
-    public native void prepareRenderingContext(int Nr_probe, int Nline_probe, float sector_probe, float R0_probe, float Rf_probe, int Nx_im, int Ny_im);
+    public native void prepareRenderingContext(int Nr_probe, int Nline_probe, float sector_probe, float R0_probe, float Rf_probe, int Nx_im, int Ny_im, float nh0, float nhp, float nsr, float ndx, float Rb, float l1, float tr1, float nspeed, float ndec, float ndelay);
     public native int[] render(int[] iImageInput, double linearQuantificationSlope, double linearQuantificationOffset);
 
 }

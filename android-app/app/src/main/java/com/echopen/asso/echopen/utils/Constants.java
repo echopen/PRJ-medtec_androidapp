@@ -39,7 +39,7 @@ public class Constants {
 
         public static final String CONTENT_TYPE_JSON = "application/json";
 
-        public static final String REDPITAYA_IP = "192.168.128.3";
+        public static final String REDPITAYA_IP = "192.168.1.76";
 
         public static final int REDPITAYA_PORT = 7538;
     }
@@ -90,11 +90,11 @@ public class Constants {
 
         public static final int SAMPLING_FREQUENCY_BIS = (int) 125 /8 * (int) Math.pow(10,6); //real sampling frequency
 
-        public static final double ADC_FREQUENCY_CLOCK = 125 * Math.pow(10, 6);
+        public static final double ADC_FREQUENCY_CLOCK = 94.6 * Math.pow(10, 6);
 
         public static final int N_x = 512;
 
-        public static final int N_z = 512;
+        public static final int N_y = 512;
 
         public static final int NUM_LINES = 64;
 
@@ -172,7 +172,7 @@ public class Constants {
             int[] int_constants = new int[4];
             int_constants[0] = PreProcParam.NUM_LINES;
             int_constants[1] = PreProcParam.SCALE_FACTOR;
-            int_constants[2] = PreProcParam.N_z;
+            int_constants[2] = PreProcParam.N_y;
             int_constants[3] = PreProcParam.N_x;
             return int_constants;
         }

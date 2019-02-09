@@ -7,6 +7,7 @@ import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImage
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingMode;
 import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
+import com.echopen.asso.echopen.model.Data.ProbeCinematicProvider;
 import com.echopen.asso.echopen.model.Data.ProcessTCPTask;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 
@@ -24,15 +25,17 @@ public class EchographyImageStreamingService extends Observable{
 
     private EchographyImageStreamingMode mMode; /* streaming connection information */
     private RenderingContextController mRenderingContextController; /* rendering context controller */
+    private ProbeCinematicProvider mProbeCinematicProvider; /* probe cinematic provider */
 
     /**
      * @brief constructor
      *
      * @param iRenderingContextController rendering context controller
      */
-    public EchographyImageStreamingService(RenderingContextController iRenderingContextController){
+    public EchographyImageStreamingService(RenderingContextController iRenderingContextController, ProbeCinematicProvider iProbeCinematicProvider){
         mMode = null;
         mRenderingContextController = iRenderingContextController;
+        mProbeCinematicProvider = iProbeCinematicProvider;
     }
 
     /**
@@ -50,7 +53,7 @@ public class EchographyImageStreamingService extends Observable{
             EchographyImageStreamingTCPMode lTCPMode = (EchographyImageStreamingTCPMode) iMode;
             mMode = lTCPMode;
             // start TCP receiver + Image builder thread
-            new ProcessTCPTask(iActivity, mRenderingContextController, this, lTCPMode.getDeviceIp(), lTCPMode.getDevicePort()).execute();
+            new ProcessTCPTask(iActivity, mRenderingContextController, mProbeCinematicProvider, this, lTCPMode.getDeviceIp(), lTCPMode.getDevicePort()).execute();
         }
     }
 

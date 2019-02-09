@@ -35,7 +35,7 @@ public class ScanConversionRenderscriptFilter {
     }
 
     public Boolean applyFilter(RenderScript iRenderscript, DeviceConfiguration iDeviceConfiguration){
-        mImageOutput = new int[Constants.PreProcParam.N_x * Constants.PreProcParam.N_z];
+        mImageOutput = new int[Constants.PreProcParam.N_x * Constants.PreProcParam.N_y];
 
         this.prepareScanConversionContext(iDeviceConfiguration);
 
@@ -99,7 +99,7 @@ public class ScanConversionRenderscriptFilter {
             double delta_theta = lProbeAngleRad / N_lines ; /*  Angle between individual lines        */
             double theta_start = lProbeAngleRad / 2;    /*  Angle for first line in image         */
 
-            int Nz = Constants.PreProcParam.N_z;              /*  Size of image in pixels               */
+            int Nz = Constants.PreProcParam.N_y;              /*  Size of image in pixels               */
             int Nx = Constants.PreProcParam.N_x;              /*  Size of image in pixels               */
 
             mNbSamplesPerLines = Constants.PreProcParam.TCP_NUM_SAMPLES;

@@ -35,8 +35,8 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private DataInputStream dataInputStream;
 
-    public ProcessTCPTask(Activity activity, RenderingContextController iRenderingContextController, EchographyImageStreamingService iEchographyImageStreamingService, String ip, int port) {
-        super(activity, iRenderingContextController, iEchographyImageStreamingService);
+    public ProcessTCPTask(Activity activity, RenderingContextController iRenderingContextController,ProbeCinematicProvider iProbeCinematicProvider, EchographyImageStreamingService iEchographyImageStreamingService, String ip, int port) {
+        super(activity, iRenderingContextController, iProbeCinematicProvider, iEchographyImageStreamingService);
         this.ip = ip;
         this.port = port;
     }
@@ -62,7 +62,8 @@ public class ProcessTCPTask extends AbstractDataTask {
                     alignDataStream(stream, lDeviceConfiguration);
                     lRawImageData = getRawImageData(stream, lDeviceConfiguration);
 
-                    rawDataPipeline(lCurrentRenderingContext, lDeviceConfiguration, lRawImageData);
+                    ProbeCinematicConfiguration lProbeCinematic = mProbeCinematicProvider.getProbeCinematic(lDeviceConfiguration.getProbeCinematicName());
+                    rawDataPipeline(lCurrentRenderingContext, lDeviceConfiguration, lProbeCinematic, lRawImageData);
                 } catch (Exception e) {
                     e.printStackTrace();
                     return null;
@@ -109,7 +110,6 @@ public class ProcessTCPTask extends AbstractDataTask {
     }
 
     private Integer[] getRawImageData(InputStream iStream, DeviceConfiguration iDeviceConfiguration) throws IOException{
-        // device config is temporary stored in the app
         Integer lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
         Integer lNbLinesPerImage = iDeviceConfiguration.getNbLinesPerImage();
         Integer lSampleSize = Constants.PreProcParam.NUM_BYTES_PER_SAMPLE;
@@ -127,7 +127,6 @@ public class ProcessTCPTask extends AbstractDataTask {
 
         for(Integer i = 0; i < lNbLinesPerImage; i++){
             dataInputStream.readFully(lLineData);
-
             lLineNumber = (lLineData[1] << 8) | (lLineData[0] & 0x00ff);
             lAliasedLineData = new Integer[lNbSamplesPerLine];
             for(Integer j = 1; j <= lNbSamplesPerLine; j++)
@@ -135,8 +134,10 @@ public class ProcessTCPTask extends AbstractDataTask {
                 lAliasedLineData[(j- 1)] = (lLineData[2*j + 1] << 8) | (lLineData[2*j] & 0x00ff);
             }
             lLineOffset = (lLineNumber - 1) * lNbSamplesPerLine;
+
             System.arraycopy(lAliasedLineData, 0, lRawImageData, lLineOffset , lAliasedLineData.length);
         }
+
         return lRawImageData;
     }
 
@@ -159,7 +160,7 @@ public class ProcessTCPTask extends AbstractDataTask {
         int lNbSamplesPerLine = (int) (2 * (lRf - lR0) * Constants.PreProcParam.ADC_FREQUENCY_CLOCK / (Constants.PreProcParam.SPEED_OF_ACOUSTIC_WAVE * lDecimation));
 
         Log.d(TAG, "R0 " + lR0 + "Rf " + lRf + "Decimation " + lDecimation + "SamplingFrequency " + lSamplingFrequency + "NbLinePerImage "+ lNbLinePerImage + "Probe Sector Angle " + lProbeSectorAngle + "Mode " + lMode + "NbSamplePerLine " + lNbSamplesPerLine);
-        return new DeviceConfiguration(lR0, lRf, lProbeSectorAngle, lSamplingFrequency, lNbLinePerImage, lNbSamplesPerLine);
+        return new DeviceConfiguration(lR0, lRf, lProbeSectorAngle, lSamplingFrequency, lNbLinePerImage, lNbSamplesPerLine, ProbeCinematicEnum.PROBE_V1__3_5MHZ.mName, 0, lDecimation);
     }
 
 

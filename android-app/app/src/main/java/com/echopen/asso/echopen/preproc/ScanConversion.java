@@ -79,7 +79,7 @@ public class ScanConversion {
         int larger_rows = Constants.PreProcParam.opencv_RELATIVE_ANGLE;
         int cols = Constants.PreProcParam.NUM_SAMPLES;
 
-        int Nz = Constants.PreProcParam.N_z;
+        int Nz = Constants.PreProcParam.N_y;
         int Nx = Constants.PreProcParam.N_x;
     }
 
@@ -463,7 +463,7 @@ public class ScanConversion {
         int N_lines = Constants.PreProcParam.NUM_LINES;         /*  Number of acquired lines              */
 
         double scaling = Constants.PreProcParam.SCALE_FACTOR;         /*  Scaling factor form envelope to image */
-        int Nz = Constants.PreProcParam.N_z;              /*  Size of image in pixels               */
+        int Nz = Constants.PreProcParam.N_y;              /*  Size of image in pixels               */
         int Nx = Constants.PreProcParam.N_x;              /*  Size of image in pixels               */
 
         int Ncoef_max = 4;
@@ -541,7 +541,7 @@ public class ScanConversion {
         assert(num != null);
         assert(image != null);
 
-        int Nz = Constants.PreProcParam.N_z;
+        int Nz = Constants.PreProcParam.N_y;
         int Nx = Constants.PreProcParam.N_x;
 
         make_interpolation(envelope_data, N_samples, ScanConversion.indexData, ScanConversion.indexImg, ScanConversion.weight, ScanConversion.numPixels, image);
