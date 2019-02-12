@@ -48,13 +48,11 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
         int lNbSamplesPerLine = iDeviceConfiguration.getNbSamplesPerLine();
         int lNbLinesPerImage = iDeviceConfiguration.getNbLinesPerImage();
-        //TODO: temporary fake image in scan conversion filter input
-        int[] lImageInput = new int[lNbSamplesPerLine * lNbLinesPerImage];
 
         if(iProbeCinematic instanceof ProbeCinematicLoungerConfiguration)
         {
             ProbeCinematicLoungerConfiguration lProbeLoungerCinematic = (ProbeCinematicLoungerConfiguration) iProbeCinematic;
-            prepareRenderingContext(iDeviceConfiguration.getNbLinesPerImage(), iDeviceConfiguration.getNbSamplesPerLine(), iDeviceConfiguration.getProbeSectorAngle(), (float) iDeviceConfiguration.getR0(), (float) iDeviceConfiguration.getRf(), Constants.PreProcParam.N_x, Constants.PreProcParam.N_y,
+            prepareRenderingContext(iDeviceConfiguration.getNbLinesPerImage(), iDeviceConfiguration.getNbSamplesPerLine(), iDeviceConfiguration.getProbeSectorAngle(), iDeviceConfiguration.getR0(), iDeviceConfiguration.getRf(), Constants.PreProcParam.N_x, Constants.PreProcParam.N_y,
             lProbeLoungerCinematic.mNh0, lProbeLoungerCinematic.mNhp, lProbeLoungerCinematic.mNsr, lProbeLoungerCinematic.mNdx, lProbeLoungerCinematic.mRb, lProbeLoungerCinematic.mL1, lProbeLoungerCinematic.mTr1,
             Constants.PreProcParam.SPEED_OF_ACOUSTIC_WAVE, iDeviceConfiguration.getDecimation(), iDeviceConfiguration.getEchoDelay());
         }
@@ -63,7 +61,7 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         }
         Timer.init("RenderingPipeline");
 
-
+        int[] lImageInput = new int[lNbSamplesPerLine * lNbLinesPerImage];
         Arrays.fill(lImageInput, 0);
         for (int i = 0; i < lNbLinesPerImage; i++) {
             for(int j = 0; j < lNbSamplesPerLine; j++){

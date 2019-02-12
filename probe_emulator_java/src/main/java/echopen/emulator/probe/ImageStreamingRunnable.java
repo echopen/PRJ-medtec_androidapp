@@ -19,9 +19,9 @@ public class ImageStreamingRunnable implements Runnable {
 
 	private static int PORT = 7538;
 
-	private static String IMAGE_FOLDER_PATH = "./../../data/rectangle/";
+	private static String IMAGE_FOLDER_PATH = "./../../data/probe_v0_3MHz/";
 	private static String IMAGE_CONFIG_FILE_NAME = "settings.txt";
-	private static String IMAGE_DATA_PREFIX = "int";
+	private static String IMAGE_DATA_PREFIX = "frame";
 
 	private static short NB_PIXELS_PER_LINES = 217;
 
@@ -68,15 +68,18 @@ public class ImageStreamingRunnable implements Runnable {
 		FileReader lFileReader = new FileReader(lConfigFile);
 		BufferedReader lBuffer = new BufferedReader(lFileReader);
 
-		short lR0 = Short.valueOf(lBuffer.readLine()); //lr0
-		short lRf = Short.valueOf(lBuffer.readLine()); //lrf
-		byte lDecimation = Byte.valueOf(lBuffer.readLine()); //ldecimation
+		float lR0 = Float.valueOf(lBuffer.readLine()); //lr0
+		float lRf = Float.valueOf(lBuffer.readLine()); //lrf
+		float lDecimation = Float.valueOf(lBuffer.readLine()); //ldecimation
 		short lNlines = Short.valueOf(lBuffer.readLine()); //llineperimage
-		byte lSector = Byte.valueOf(lBuffer.readLine()); //LprobeSectorAngle
+		float lSector = Float.valueOf(lBuffer.readLine()); //LprobeSectorAngle
 		byte lMode_RP = Byte.valueOf(lBuffer.readLine()); //Lmode
+		String lProbeCinematicName = String.valueOf(lBuffer.readLine());
+		float lEchoDelay = Float.valueOf(lBuffer.readLine());
 
 		lBuffer.close();
-		return new ProbeImageConfiguration(lR0, lRf, lDecimation, lNlines, lSector, lMode_RP);
+		lFileReader.close();
+		return new ProbeImageConfiguration(lR0, lRf, lDecimation, lNlines, lSector, lMode_RP, lProbeCinematicName, lEchoDelay);
 	}
 
 	/**

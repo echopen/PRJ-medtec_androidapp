@@ -142,25 +142,27 @@ public class ProcessTCPTask extends AbstractDataTask {
     }
 
     private DeviceConfiguration getDeviceConfiguration(InputStream iStream) throws IOException{
-        byte[] lConfig = new byte[6];
-
         dataInputStream = new DataInputStream(iStream);
-        dataInputStream.readFully(lConfig);
 
-        double lR0 = ((lConfig[0] + 256) % 256) * 0.001; // in mm
-        double lRf = ((lConfig[1] + 256) % 256) * 0.001; // in mm
-        int lDecimation = (lConfig[2] + 256) % 256; //
+        float lR0 = dataInputStream.readFloat() * 0.001f; // in mm
+        float lRf = dataInputStream.readFloat() * 0.001f; // in mm
+        float lDecimation = dataInputStream.readFloat(); //
 
-        double lSamplingFrequency = Constants.PreProcParam.ADC_FREQUENCY_CLOCK / lDecimation; // in Hz
-        int lNbLinePerImage = (lConfig[3] + 256) % 256;
-        float lProbeSectorAngle = (lConfig[4] + 256) % 256; // in degree
-        byte lMode = lConfig[5]; // data format - 0- raw data value stored on 2 bytes
+        float lSamplingFrequency = (float) (Constants.PreProcParam.ADC_FREQUENCY_CLOCK / lDecimation); // in Hz
+        short lNbLinePerImage = dataInputStream.readShort();
+        float lProbeSectorAngle = dataInputStream.readFloat();// in degree
+        byte lMode =  dataInputStream.readByte(); // data format - 0- raw data value stored on 2 bytes
                                  //               1- envelop data value stored on 1 byte
 
-        int lNbSamplesPerLine = (int) (2 * (lRf - lR0) * Constants.PreProcParam.ADC_FREQUENCY_CLOCK / (Constants.PreProcParam.SPEED_OF_ACOUSTIC_WAVE * lDecimation));
-
-        Log.d(TAG, "R0 " + lR0 + "Rf " + lRf + "Decimation " + lDecimation + "SamplingFrequency " + lSamplingFrequency + "NbLinePerImage "+ lNbLinePerImage + "Probe Sector Angle " + lProbeSectorAngle + "Mode " + lMode + "NbSamplePerLine " + lNbSamplesPerLine);
-        return new DeviceConfiguration(lR0, lRf, lProbeSectorAngle, lSamplingFrequency, lNbLinePerImage, lNbSamplesPerLine, ProbeCinematicEnum.PROBE_V1__3_5MHZ.mName, 0, lDecimation);
+        int lProbeNameLength = dataInputStream.readInt();
+        byte[] lProbeCinematicNameBytes = new byte[lProbeNameLength];
+        dataInputStream.read(lProbeCinematicNameBytes, 0, lProbeNameLength);
+        float lEchoDelay = dataInputStream.readFloat();
+        String lProbeCinematicName =  new String(lProbeCinematicNameBytes);
+        int lNbSamplesPerLine = (int) (2.0 * (lRf - lR0) * Constants.PreProcParam.ADC_FREQUENCY_CLOCK / (Constants.PreProcParam.SPEED_OF_ACOUSTIC_WAVE * lDecimation));
+;
+        Log.d(TAG, "R0 " + lR0 + "Rf " + lRf + "Decimation " + lDecimation + "SamplingFrequency " + lSamplingFrequency + "NbLinePerImage "+ lNbLinePerImage + "Probe Sector Angle " + lProbeSectorAngle + "Mode " + lMode + "NbSamplePerLine " + lNbSamplesPerLine + "Probe Cinematic " + lProbeCinematicName + "Echo Delay " + lEchoDelay);
+        return new DeviceConfiguration(lR0, lRf, lProbeSectorAngle, lSamplingFrequency, lNbLinePerImage, lNbSamplesPerLine, lProbeCinematicName, lEchoDelay, lDecimation);
     }
 
 
