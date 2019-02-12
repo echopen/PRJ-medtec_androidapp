@@ -4,6 +4,7 @@ version = '1.0.0-SNAPSHOT'
 
 repositories {
     jcenter()
+    mavenCentral()
 }
 
 // In this section you declare the dependencies for your production and test code
@@ -11,6 +12,7 @@ dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.13'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+    compile 'commons-cli:commons-cli:1.4'
 
     testCompile 'junit:junit:3.8.2'
 }

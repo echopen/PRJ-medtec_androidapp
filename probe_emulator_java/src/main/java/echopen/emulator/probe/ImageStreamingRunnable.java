@@ -142,7 +142,6 @@ public class ImageStreamingRunnable implements Runnable {
 	 */
 	private UltrasoundImageSequence readImageSequence(ProbeImageConfiguration iProbeImageConfiguration) throws IOException {
 		UltrasoundImageSequence lImageSequence = new UltrasoundImageSequence(NB_PIXELS_PER_LINES ,iProbeImageConfiguration.getNLines());
-	//	File lDataFile = new File(IMAGE_FOLDER_PATH + IMAGE_DATA_FILE_NAME);
 
 		File lImageFolder = new File(IMAGE_FOLDER_PATH);
 		File[] lImageFiles = lImageFolder.listFiles(new FilenameFilter() {
