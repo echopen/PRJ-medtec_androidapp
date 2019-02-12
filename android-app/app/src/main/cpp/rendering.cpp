@@ -33,7 +33,10 @@ Java_com_echopen_asso_echopen_model_Data_AbstractDataTask_render(JNIEnv *env, jo
 
     // apply scan conversion
     image_scan_conversion(gScanConv.get(), lImageInput);
+
+    // clean image input
     free(lImageInput);
+    for (int i=0 ; i<gScanConv->Nline ; i++) {free(lImageInput[i]);}
     env->ReleaseIntArrayElements(iImageInput_, iImageInput, 0);
 
     Image2D<float> lScanConverted(gScanConv->Nx, gScanConv->Ny);

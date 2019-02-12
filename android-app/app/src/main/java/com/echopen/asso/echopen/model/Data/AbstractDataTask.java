@@ -64,28 +64,12 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
         Timer.init("RenderingPipeline");
 
 
-        int lRawInput = 0;
-        for (int i = 0; i < lNbLinesPerImage; i++) {
-            for(int j = 0; j < lNbSamplesPerLine; j++){
-                lRawInput += iRawImageData[i * lNbSamplesPerLine + j];
-            }
-        }
-        Log.d(TAG, "Sum of Raw Input " + lRawInput);
         Arrays.fill(lImageInput, 0);
         for (int i = 0; i < lNbLinesPerImage; i++) {
             for(int j = 0; j < lNbSamplesPerLine; j++){
                 lImageInput[i * lNbSamplesPerLine + j] = iRawImageData[i * lNbSamplesPerLine + j];
             }
         }
-
-
-        int lSumInput = 0;
-        for (int i = 0; i < lNbLinesPerImage; i++) {
-            for(int j = 0; j < lNbSamplesPerLine; j++){
-                lSumInput += lImageInput[i * lNbSamplesPerLine + j];
-            }
-        }
-        Log.d(TAG, "Sum of Input " + lSumInput);
 
         int colors [] = render(lImageInput, ((GreyLevelLinearLookUpTable)iCurrentRenderingContext.getLookUpTable()).getSlope(), ((GreyLevelLinearLookUpTable)iCurrentRenderingContext.getLookUpTable()).getOffset() );
 
