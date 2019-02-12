@@ -19,7 +19,7 @@ public class ImageStreamingRunnable implements Runnable {
 
 	private static int PORT = 7538;
 
-	private static String IMAGE_FOLDER_PATH = "./../../data/probe_v0_3MHz/";
+	private static String IMAGE_FOLDER_PATH = "./../../data/probe_v1_5MHz/";
 	private static String IMAGE_CONFIG_FILE_NAME = "settings.txt";
 	private static String IMAGE_DATA_PREFIX = "frame";
 
