@@ -11,6 +11,8 @@ import com.echopen.asso.echopen.model.Data.ProbeCinematicProvider;
 import com.echopen.asso.echopen.model.Data.ProcessTCPTask;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Observable;
 
 /**
@@ -70,8 +72,7 @@ public class EchographyImageStreamingService extends Observable{
      * @param iImage bitmap image generated
      */
     public void emitNewImage(Bitmap iImage){
-        this.setChanged();
-        this.notifyObservers(new EchographyImageStreamingNotification(iImage));
+        EventBus.getDefault().post(new EchographyImageStreamingNotification(iImage));
     }
 
     /**

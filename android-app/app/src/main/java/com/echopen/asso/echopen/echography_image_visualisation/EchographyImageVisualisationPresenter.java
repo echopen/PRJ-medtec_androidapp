@@ -9,7 +9,6 @@ import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
-import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingObserver;
 import com.echopen.asso.echopen.model.EchopenImage;
 import com.echopen.asso.echopen.model.EchopenImageSequence;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
@@ -28,11 +27,9 @@ import java.util.LinkedList;
  *
  * @class presenter used to display real time image streaming to user
  */
-public class EchographyImageVisualisationPresenter extends EchographyImageStreamingObserver implements EchographyImageVisualisationContract.Presenter {
+public class EchographyImageVisualisationPresenter implements EchographyImageVisualisationContract.Presenter {
 
     private final EchographyImageVisualisationContract.View mView; /* view from MVP design */
-
-    private EchographyImageStreamingService mEchographyImageStreamingService; /* image streaming service */
 
     private ArrayList<EchopenImage> mRecordedImages;
     private Boolean mIsRecording;
@@ -41,12 +38,9 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
     /**
      * @brief constructor
      *
-     * @param iEchographyImageStreamingService image streaming service
      * @param iView view from MVP architecture design
      */
-    public EchographyImageVisualisationPresenter(EchographyImageStreamingService iEchographyImageStreamingService, EchographyImageVisualisationContract.View iView, Activity iCurrentContext){
-        mEchographyImageStreamingService = iEchographyImageStreamingService;
-
+    public EchographyImageVisualisationPresenter(EchographyImageVisualisationContract.View iView, Activity iCurrentContext){
         mView = iView;
         mView.setPresenter(this);
 
@@ -64,14 +58,8 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
 
     @Override
     public void start() {
-        listenEchographyImageStreaming();
         EventBus.getDefault().register(this);
 
-    }
-
-    @Override
-    public void listenEchographyImageStreaming() {
-        mEchographyImageStreamingService.addObserver(this);
     }
 
     @Override
@@ -135,13 +123,13 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
         }
     }
 
-    @Override
-    public void onEchographyImageStreamingNotification(final EchographyImageStreamingNotification iEchographyImageStreamingNotification)
-    {
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEchographyImageStreamingNotification(EchographyImageStreamingNotification iEchographyImageStreamingNotification) {
         if(mIsRecording){
             mRecordedImages.add(new EchopenImage(iEchographyImageStreamingNotification.getImage()));
         }
 
         mView.refreshImage(iEchographyImageStreamingNotification.getImage());
     }
+
 }

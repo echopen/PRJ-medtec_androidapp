@@ -51,7 +51,6 @@ public class ProcessTCPTask extends AbstractDataTask {
         InputStream stream;
         int rows = Constants.PreProcParam.NUM_SAMPLES;
         //int cols = Constants.PreProcParam.NUM_IMG_DATA;
-        Log.d(TAG, "Start Socket");
 
         try {
             s = new Socket(ip, port);

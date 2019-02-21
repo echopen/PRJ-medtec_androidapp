@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Initiate Connection"/>
+            android:text="@string/wifi_initiate_connection"/>
         <ProgressBar
             android:id="@+id/pending_progress_bar"
             android:layout_width="100dp"

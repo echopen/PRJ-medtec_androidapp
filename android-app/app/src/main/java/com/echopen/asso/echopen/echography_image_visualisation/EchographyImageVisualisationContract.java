@@ -43,12 +43,6 @@ public class EchographyImageVisualisationContract {
 
     public interface Presenter extends BasePresenter {
 
-        /**
-         * @brief listen to image streaming notification event
-         */
-        void listenEchographyImageStreaming();
-
-
         void startRecording();
 
         void endRecording();

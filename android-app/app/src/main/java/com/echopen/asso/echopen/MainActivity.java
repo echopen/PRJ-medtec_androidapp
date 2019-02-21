@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mEchographyImageStreamingService.getRenderingContextController().setLinearLutOffset(RenderingContext.DEFAULT_LUT_OFFSET);
 
         mEchographyImageVisualisationFragment = new EchographyImageVisualisationFragment();
-        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, mEchographyImageVisualisationFragment,this);
+        mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageVisualisationFragment,this);
 
         setContentView(R.layout.activity_main);
 

@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
-import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingObserver;
 import com.echopen.asso.echopen.utils.Config;
 import com.echopen.asso.echopen.utils.Timer;
 
