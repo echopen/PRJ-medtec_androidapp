@@ -24,8 +24,8 @@ public class ProcessUPDTask extends AbstractDataTask {
 
     private final int port;
 
-    public ProcessUPDTask(Activity activity, RenderingContextController iRenderingContextController, int port) {
-        super(activity, iRenderingContextController, null, null);
+    public ProcessUPDTask(RenderingContextController iRenderingContextController, int port) {
+        super(iRenderingContextController, null, null);
         this.port = port;
     }
 

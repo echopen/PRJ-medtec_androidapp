@@ -19,8 +19,8 @@ public class FileTask extends AbstractDataTask {
     private final String TAG = this.getClass().getSimpleName();
     private final Data data;
 
-    public FileTask(Activity activity, MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream, RenderingContextController iRenderingContextController) {
-        super(activity, iRenderingContextController, null, null);
+    public FileTask(MainActionController mainActionController, ScanConversion scanConversion, InputStream inputStream, RenderingContextController iRenderingContextController) {
+        super( iRenderingContextController, null, null);
         InputStreamReader isReader = new InputStreamReader(inputStream);
         data = new Data(isReader);
     }

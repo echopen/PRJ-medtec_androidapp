@@ -43,9 +43,8 @@ public class EchographyImageStreamingService extends Observable{
      *
      * @param iMode device connection information
      *
-     * @param iActivity ideally to be removed
      */
-    public void connect(EchographyImageStreamingMode iMode, Activity iActivity){
+    public void connect(EchographyImageStreamingMode iMode){
         if(iMode.getConnectionType() == EchographyImageStreamingConnectionType.Local){
             // TODO:to be plugged
         }
@@ -53,7 +52,7 @@ public class EchographyImageStreamingService extends Observable{
             EchographyImageStreamingTCPMode lTCPMode = (EchographyImageStreamingTCPMode) iMode;
             mMode = lTCPMode;
             // start TCP receiver + Image builder thread
-            new ProcessTCPTask(iActivity, mRenderingContextController, mProbeCinematicProvider, this, lTCPMode.getDeviceIp(), lTCPMode.getDevicePort()).execute();
+            new ProcessTCPTask(mRenderingContextController, mProbeCinematicProvider, this, lTCPMode.getDeviceIp(), lTCPMode.getDevicePort()).execute();
         }
     }
 

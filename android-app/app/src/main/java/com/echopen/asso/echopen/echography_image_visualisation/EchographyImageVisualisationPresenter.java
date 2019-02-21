@@ -3,14 +3,22 @@ package com.echopen.asso.echopen.echography_image_visualisation;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.util.Log;
+import android.view.View;
 
 import com.echopen.asso.echopen.MainActivity;
+import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingObserver;
 import com.echopen.asso.echopen.model.EchopenImage;
 import com.echopen.asso.echopen.model.EchopenImageSequence;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotificationState;
 import com.echopen.asso.echopen.utils.Timer;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -48,10 +56,17 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
         mCurrentContext = iCurrentContext;
     }
 
+    public void finalize() throws Throwable {
+        EventBus.getDefault().unregister(this);
+        super.finalize();
+    }
+
 
     @Override
     public void start() {
         listenEchographyImageStreaming();
+        EventBus.getDefault().register(this);
+
     }
 
     @Override
@@ -100,6 +115,25 @@ public class EchographyImageVisualisationPresenter extends EchographyImageStream
         ((MainActivity) mCurrentContext).goToSequencePreview(lSequence);
     }
 
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessage(ProbeCommunicationWifiNotification iWifiCommunicationNotification) {
+        if(iWifiCommunicationNotification.getState() == ProbeCommunicationWifiNotificationState.WIFI_ENABLED){
+            mView.displayWifiProgress(mCurrentContext.getResources().getString(R.string.wifi_enabled));
+        }
+        else if(iWifiCommunicationNotification.getState() == ProbeCommunicationWifiNotificationState.WIFI_ENABLED_ERROR){
+            mView.displayWifiError(mCurrentContext.getResources().getString(R.string.wifi_enabled_error));
+        }
+        else if(iWifiCommunicationNotification.getState() == ProbeCommunicationWifiNotificationState.WIFI_CONNECTED){
+            mView.displayWifiProgress(mCurrentContext.getResources().getString(R.string.wifi_probe_connected));
+        }
+        else if(iWifiCommunicationNotification.getState() == ProbeCommunicationWifiNotificationState.WIFI_CONNECTED_ERROR){
+            mView.displayWifiError(mCurrentContext.getResources().getString(R.string.wifi_probe_connected_error));
+        }
+        else if(iWifiCommunicationNotification.getState() == ProbeCommunicationWifiNotificationState.WIFI_START_SCANNING) {
+            mView.closeWifiProgress();
+        }
+    }
 
     @Override
     public void onEchographyImageStreamingNotification(final EchographyImageStreamingNotification iEchographyImageStreamingNotification)

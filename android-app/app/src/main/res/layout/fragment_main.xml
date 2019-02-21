@@ -12,6 +12,31 @@
         android:layout_gravity="center"
         android:src="@null" />
 
+
+    <LinearLayout
+        android:id="@+id/pending_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+        <TextView
+            android:id="@+id/pending_text"
+            android:textSize="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Initiate Connection"/>
+        <ProgressBar
+            android:id="@+id/pending_progress_bar"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:indeterminateTint="@color/white"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
     <ImageButton
         android:id="@+id/main_button_capture"
         android:layout_width="80dp"

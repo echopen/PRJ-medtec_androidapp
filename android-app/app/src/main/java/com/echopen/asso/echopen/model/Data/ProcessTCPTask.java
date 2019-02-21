@@ -12,8 +12,13 @@ import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.filters.RenderingContext;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotificationState;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
+import com.thanosfisherman.wifiutils.WifiUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.DataInputStream;
 import java.io.IOException;
@@ -35,16 +40,18 @@ public class ProcessTCPTask extends AbstractDataTask {
 
     private DataInputStream dataInputStream;
 
-    public ProcessTCPTask(Activity activity, RenderingContextController iRenderingContextController,ProbeCinematicProvider iProbeCinematicProvider, EchographyImageStreamingService iEchographyImageStreamingService, String ip, int port) {
-        super(activity, iRenderingContextController, iProbeCinematicProvider, iEchographyImageStreamingService);
+    public ProcessTCPTask( RenderingContextController iRenderingContextController,ProbeCinematicProvider iProbeCinematicProvider, EchographyImageStreamingService iEchographyImageStreamingService, String ip, int port) {
+        super(iRenderingContextController, iProbeCinematicProvider, iEchographyImageStreamingService);
         this.ip = ip;
         this.port = port;
     }
 
     protected Void doInBackground(Void... Voids) {
+
         InputStream stream;
         int rows = Constants.PreProcParam.NUM_SAMPLES;
         //int cols = Constants.PreProcParam.NUM_IMG_DATA;
+        Log.d(TAG, "Start Socket");
 
         try {
             s = new Socket(ip, port);
@@ -54,7 +61,7 @@ public class ProcessTCPTask extends AbstractDataTask {
             Integer[] lRawImageData;
 
             DeviceConfiguration lDeviceConfiguration = getDeviceConfiguration(stream);
-
+            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(ProbeCommunicationWifiNotificationState.WIFI_START_SCANNING));
             while (true) {
                 try {
                     RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();
@@ -94,19 +101,6 @@ public class ProcessTCPTask extends AbstractDataTask {
             lPreviousLineNumber = lLineNumber;
             lLineNumber = (lLineData[1] << 8) | (lLineData[0] & 0x00ff);
         }
-    }
-
-    private Integer[] getRawImageDataFromLocal() {
-        AssetManager assetManager = activity.getResources().getAssets();
-        InputStream inputStream = null;
-        try {
-            inputStream = assetManager.open("data/raw_data/data_simu.csv");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        InputStreamReader isReader = new InputStreamReader(inputStream);
-        Data data = new Data(isReader);
-        return data.getEnvelopeIntegerData();
     }
 
     private Integer[] getRawImageData(InputStream iStream, DeviceConfiguration iDeviceConfiguration) throws IOException{

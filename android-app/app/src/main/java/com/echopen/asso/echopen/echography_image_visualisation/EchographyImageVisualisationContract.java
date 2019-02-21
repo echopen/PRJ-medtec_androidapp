@@ -20,6 +20,24 @@ public class EchographyImageVisualisationContract {
          * @param iBitmap bitmap to be displayed
          */
         void refreshImage(final Bitmap iBitmap);
+
+        /**
+         *
+         * @param iMessage message to be displayed
+         */
+        void displayWifiProgress(final String iMessage);
+
+        /**
+         *
+         * @param iErrorMessage error to be displayed
+         */
+        void displayWifiError(final String iErrorMessage);
+
+        /**
+         *
+         *
+         */
+        void closeWifiProgress();
     }
 
 

@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.model.Data.ProbeCinematicProvider;
+import com.echopen.asso.echopen.probe_communication.ProbeCommunicationService;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 
 /**
@@ -15,9 +16,10 @@ public class EchOpenApplication extends Application {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private EchographyImageStreamingService mEchographyImageStreaming; /* image streaming service */
+    private EchographyImageStreamingService mEchographyImageStreamingService; /* image streaming service */
     private ProbeCinematicProvider mProbeCinematicProvider;
     private RenderingContextController mRenderingContextController;
+    private ProbeCommunicationService mProbeCommunicationService;
 
     @Override
     public void onCreate() {
@@ -25,7 +27,9 @@ public class EchOpenApplication extends Application {
 
         mRenderingContextController = new RenderingContextController();
         mProbeCinematicProvider = new ProbeCinematicProvider();
-        mEchographyImageStreaming = new EchographyImageStreamingService(mRenderingContextController, mProbeCinematicProvider);
+        mEchographyImageStreamingService = new EchographyImageStreamingService(mRenderingContextController, mProbeCinematicProvider);
+        /*TODO: implement a real Android Service */
+        mProbeCommunicationService = new ProbeCommunicationService(getApplicationContext(), mEchographyImageStreamingService);
     }
 
     /**
@@ -34,6 +38,10 @@ public class EchOpenApplication extends Application {
      * @return image streaming service
      */
     public EchographyImageStreamingService getEchographyImageStreamingService(){
-        return mEchographyImageStreaming;
+        return mEchographyImageStreamingService;
+    }
+
+    public ProbeCommunicationService getProbeCommunicationService(){
+        return mProbeCommunicationService;
     }
 }

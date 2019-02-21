@@ -52,10 +52,10 @@ public class BitmapDisplayer extends Displayer {
      */
 
     public void readDataFromUDP() throws IOException {
-        new ProcessUPDTask(activity, mRenderingContextController, port).execute();
+        new ProcessUPDTask(mRenderingContextController, port).execute();
     }
 
     public void readDataFromFile(final InputStream is) throws IOException {
-        new FileTask(activity, mainActionController, scanConversion, is, mRenderingContextController).execute();
+        new FileTask(mainActionController, scanConversion, is, mRenderingContextController).execute();
     }
 }

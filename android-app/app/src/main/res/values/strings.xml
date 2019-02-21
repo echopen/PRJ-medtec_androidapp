@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
    <string name="app_name">echopen</string>
+
+    <string name="missing_location_permission">You have to accept the Location permission in order to connect to the probe</string>
+   <string name="wifi_enabled"> Wifi enabled</string>
+    <string name="wifi_probe_connected"> Probe connected </string>
+    <string name="wifi_enabled_error"> Cannot enabled Wifi,\nCheck your smartphone configuration</string>
+    <string name="wifi_probe_connected_error"> Cannot connect to the probe,\nCheck if echOpen probe is turned on </string>
+
 </resources>

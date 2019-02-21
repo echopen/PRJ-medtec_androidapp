@@ -1,16 +1,27 @@
 package com.echopen.asso.echopen;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +35,7 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.animation.ObjectAnimator;
 import android.view.animation.Animation;
+import android.widget.Toast;
 
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
@@ -39,8 +51,16 @@ import com.echopen.asso.echopen.echography_image_visualisation.EchographySequenc
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.model.EchopenImage;
 import com.echopen.asso.echopen.model.EchopenImageSequence;
+import com.echopen.asso.echopen.probe_communication.ProbeCommunicationService;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.view.CaptureButton;
+import com.thanosfisherman.wifiutils.WifiUtils;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static java.lang.Thread.sleep;
 
 /**
  * MainActivity class handles the main screen of the app.
@@ -56,6 +76,7 @@ import com.echopen.asso.echopen.view.CaptureButton;
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
+    private ProbeCommunicationService mProbeCommunicationService;
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private EchographyImageVisualisationPresenter mEchographyImageVisualisationPresenter;
     private EchographyImageVisualisationFragment mEchographyImageVisualisationFragment;
@@ -69,6 +90,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private ActionBarDrawerToggle mDrawerToggle;
 
+    private List<ScanResult> mScanResults;
+    private WifiManager mWifiManager;
+
+
+    private final static int REQUEST_CODE_ASK_PERMISSIONS = 1;
+
+    private static final String[] REQUIRED_APP_PERMISSIONS = new String[] {Manifest.permission.ACCESS_FINE_LOCATION};
 
     public final static float IMAGE_ZOOM_FACTOR = 1.4f;
     public final static float IMAGE_ROTATION_FACTOR = 90.f;
@@ -84,10 +112,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         mEchographyImageStreamingService = ((EchOpenApplication) getApplication()).getEchographyImageStreamingService();
-        mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT), this);
+        mEchographyImageStreamingService.getRenderingContextController().setLinearLutSlope(RenderingContext.DEFAULT_LUT_SLOPE);
+        mEchographyImageStreamingService.getRenderingContextController().setLinearLutOffset(RenderingContext.DEFAULT_LUT_OFFSET);
 
         mEchographyImageVisualisationFragment = new EchographyImageVisualisationFragment();
         mEchographyImageVisualisationPresenter = new EchographyImageVisualisationPresenter(mEchographyImageStreamingService, mEchographyImageVisualisationFragment,this);
@@ -125,12 +152,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         mDrawerToggle.syncState();
 
-        mEchographyImageStreamingService.getRenderingContextController().setLinearLutSlope(RenderingContext.DEFAULT_LUT_SLOPE);
-        mEchographyImageStreamingService.getRenderingContextController().setLinearLutOffset(RenderingContext.DEFAULT_LUT_OFFSET);
-
         goToImageStreaming();
+
+        checkPermissions();
+
+
     }
 
+    protected void checkPermissions() {
+        final List<String> missingPermissions = new ArrayList<String>();
+        // check all required dynamic permissions
+        for (final String permission : REQUIRED_APP_PERMISSIONS) {
+            final int result = ContextCompat.checkSelfPermission(this, permission);
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                missingPermissions.add(permission);
+            }
+        }
+        if (!missingPermissions.isEmpty()) {
+            // request all missing permissions
+            final String[] permissions = missingPermissions
+                    .toArray(new String[missingPermissions.size()]);
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_CODE_ASK_PERMISSIONS);
+        } else {
+            final int[] grantResults = new int[REQUIRED_APP_PERMISSIONS.length];
+            Arrays.fill(grantResults, PackageManager.PERMISSION_GRANTED);
+            onRequestPermissionsResult(REQUEST_CODE_ASK_PERMISSIONS, REQUIRED_APP_PERMISSIONS,
+                    grantResults);
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_CODE_ASK_PERMISSIONS:
+                for (int index = permissions.length - 1; index >= 0; --index) {
+                    if (grantResults[index] != PackageManager.PERMISSION_GRANTED) {
+
+                        mEchographyImageVisualisationFragment.displayWifiError(getResources().getString(R.string.missing_location_permission));
+                        return;
+                    }
+                }
+
+                // all permissions were granted
+                mProbeCommunicationService = ((EchOpenApplication) getApplication()).getProbeCommunicationService();
+                mProbeCommunicationService.connect();
+                break;
+        }
+    }
     /**
      * Following the doc https://developer.android.com/intl/ko/training/basics/intents/result.html,
      * onActivityResult is “Called when an activity you launched exits, giving you the requestCode you started it with,

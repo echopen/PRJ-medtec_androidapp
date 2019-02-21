@@ -100,4 +100,6 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'org.boofcv:android:0.18'
     implementation 'com.github.warkiz.widget:indicatorseekbar:2.0.9'
+    implementation 'org.greenrobot:eventbus:3.1.1'
+    compile 'com.thanosfisherman.wifiutils:wifiutils:1.4.0'
 }

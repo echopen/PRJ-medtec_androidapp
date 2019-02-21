@@ -8,9 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotificationState;
 import com.echopen.asso.echopen.view.CaptureButton;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,11 +29,6 @@ public class EchographyImageVisualisationFragment extends Fragment implements Ec
 
     public static final String TAG = EchographyImageVisualisationFragment.class.getSimpleName();
     private EchographyImageVisualisationContract.Presenter mEchographyImageVisualisationPresenter;
-    /*@BindView(R.id.main_button_capture) ImageView mCaptureButton;
-    @OnClick(R.id.main_button_capture)
-    public void captureImage(View v){
-        Log.d(TAG, "Short Press");
-    }*/
 
     @BindView(R.id.main_preset_configuration) ImageView mPresetConfigurationButton;
     @OnClick(R.id.main_preset_configuration)
@@ -40,6 +44,9 @@ public class EchographyImageVisualisationFragment extends Fragment implements Ec
     @BindView(R.id.main_button_battery) ImageView mBatteryStatus;
     @BindView(R.id.main_selected_organ) ImageView mSelectedOrgan;
     @BindView(R.id.main_button_shadow) CaptureButton mCaptureShadow;
+    @BindView(R.id.pending_text) TextView mPendingTextView;
+    @BindView(R.id.pending_progress_bar) ProgressBar mProgressBar;
+    @BindView(R.id.pending_layout) LinearLayout mPendingLayout;
 
 
     private final static float IMAGE_ZOOM_FACTOR = 1.75f;
@@ -106,6 +113,28 @@ public class EchographyImageVisualisationFragment extends Fragment implements Ec
                 lEchOpenImage.setImageBitmap(iBitmap);
             }
         });
+    }
+
+    @Override
+    public void displayWifiProgress(String iMessage) {
+        mPendingLayout.setVisibility(View.VISIBLE);
+
+        mPendingTextView.setText(iMessage);
+        mProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void displayWifiError(String iErrorMessage) {
+        mPendingLayout.setVisibility(View.VISIBLE);
+
+        mPendingTextView.setText(iErrorMessage);
+        mProgressBar.setVisibility(View.GONE);
+
+    }
+
+    @Override
+    public void closeWifiProgress() {
+        mPendingLayout.setVisibility(View.GONE);
     }
 
     @Override

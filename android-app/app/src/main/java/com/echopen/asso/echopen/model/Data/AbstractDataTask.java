@@ -27,15 +27,12 @@ abstract public class AbstractDataTask extends AsyncTask<Void, Void, Void> {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    protected Activity activity;
-
     protected RenderingContextController mRenderingContextController;
     protected ProbeCinematicProvider mProbeCinematicProvider;
 
     protected EchographyImageStreamingService mEchographyImageStreamingService; //TODO should remove dependency
 
-    public AbstractDataTask(Activity activity, RenderingContextController iRenderingContextController, ProbeCinematicProvider iProbeCinematicProvider, EchographyImageStreamingService iEchographyImageStreamingService) {
-        this.activity = activity;
+    public AbstractDataTask(RenderingContextController iRenderingContextController, ProbeCinematicProvider iProbeCinematicProvider, EchographyImageStreamingService iEchographyImageStreamingService) {
 
         this.mRenderingContextController = iRenderingContextController;
         this.mProbeCinematicProvider = iProbeCinematicProvider;
