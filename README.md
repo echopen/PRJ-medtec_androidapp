@@ -1,7 +1,5 @@
-[![Build Status](https://travis-ci.org/benchoufi/android-app.svg?branch=master)](https://travis-ci.org/benchoufi/android-app)
-
 # Project
-![](viewme.jpg)
+![](doc/ic_echopen.png)
 
 ## Name
 [`PRJ-medtec_androidapp`]()
@@ -26,7 +24,7 @@ First you have to follow [Installation Guide](##Installation-(for-Developers)) t
 
 We references all in-progress or future developpements on cards in [Github Project](https://github.com/echopen/PRJ-medtec_androidapp/projects/1).
 
-You can **pick one card** you are interested to work on and you can also contact [authors](###Authors) to discuss best way to contribute on a task. 
+You can **pick one card** you are interested to work on and you can also contact [authors](###Authors) to discuss best way to contribute on a task.
 You can also report a bug or ask for new features on [Github issues](https://github.com/echopen/android-app/issues)
 
 We follow the described integration process:
@@ -54,7 +52,7 @@ We follow the described integration process:
 ### Setup environment
 In order to ease the developement and to prevent the contributor from the hassle of spending days configuring. We set up a [Virtual Machine](https://drive.google.com/open?id=0B0V8htWBLPWBVEh6ZEJPcFpmTEU), with all the tools needed. You can find all the informations [here](https://echopen.gitbooks.io/android-app/content/echopens_virtual_machine.html).
 
-You can also configure manually your development environement. 
+You can also configure manually your development environement.
 
 As an android app, you need to install the following dependencies:
 
@@ -66,7 +64,7 @@ As an android app, you need to install the following dependencies:
 ### Setup echOpen mobile application
 First you need to clone echOpen android mobile application project.
 
-Before being able to build the app, you have to configure your local android project settings, in *local.properties* file: 
+Before being able to build the app, you have to configure your local android project settings, in *local.properties* file:
 ```
 	sdk.dir=/Path/To/Your/.../Android/sdk
 	ndk.dir=/Path/To/Your/.../android-ndk-r10e
@@ -147,7 +145,7 @@ You have also access to a detailed documentation in the *projectRootDirectory/do
 
 ## Challenges and To Dos
 
-### Mockups 
+### Mockups
   To drive your code, here's the MOCKUP that we have set with medical doctors, engineers and designers.  
 
   ![alt tag](http://wiki.echopen.org/images/a/ab/Echopen_MockUp_1.png)
