@@ -37,10 +37,6 @@ public class ProbeCommunicationService {
         EventBus.getDefault().register(this);
     }
 
-    public void finalize() throws Throwable {
-        super.finalize();
-    }
-
     public void connect(){
         WifiUtils.withContext(mApplicationContext).enableWifi(this::checkResult);
 
