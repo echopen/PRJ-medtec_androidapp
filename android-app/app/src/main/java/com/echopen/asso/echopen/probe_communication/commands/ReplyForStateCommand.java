@@ -15,4 +15,8 @@ public class ReplyForStateCommand extends Reply{
         mStateMachineState = iStateMachineState;
         mLastError = iLastError;
     }
+
+    public String toString(){
+        return super.toString() + " " + mInternalProbeTemperature + " " + mBatteryLevel + " " + mStateMachineState + " " + mLastError;
+    }
 }

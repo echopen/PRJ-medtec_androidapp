@@ -2,10 +2,13 @@ package com.echopen.asso.echopen.probe_communication;
 
 import com.echopen.asso.echopen.probe_communication.commands.CommandType;
 import com.echopen.asso.echopen.probe_communication.commands.ErrorType;
+import com.echopen.asso.echopen.probe_communication.commands.PatternType;
 import com.echopen.asso.echopen.probe_communication.commands.Reply;
 import com.echopen.asso.echopen.probe_communication.commands.ReplyForScanningCommand;
 import com.echopen.asso.echopen.probe_communication.commands.ReplyForStateCommand;
+import com.echopen.asso.echopen.probe_communication.commands.ReplyForTestPatternCommand;
 import com.echopen.asso.echopen.probe_communication.commands.Request;
+import com.echopen.asso.echopen.probe_communication.commands.RequestForTestPatternCommand;
 import com.echopen.asso.echopen.probe_communication.commands.StateMachineState;
 
 import java.nio.ByteBuffer;
@@ -25,6 +28,16 @@ public class CommandInterpreter {
          ByteBuffer lBuffer = ByteBuffer.allocate(iRequest.getSize());
          if(iRequest.getCommand() == CommandType.REQUEST_FOR_SCANNING || iRequest.getCommand() == CommandType.REQUEST_FOR_STATE){
              lBuffer.putInt(iRequest.getCommand().mCommandTypeId);
+         }
+         else if(iRequest.getCommand() == CommandType.REQUEST_FOR_TEST_PATTERN){
+             RequestForTestPatternCommand lTestPatRequest = (RequestForTestPatternCommand) iRequest;
+             lBuffer.putInt(lTestPatRequest.getCommand().mCommandTypeId);
+             lBuffer.putInt(lTestPatRequest.getPatternType().mPatternTypeId);
+             lBuffer.putInt(lTestPatRequest.getFrameInterval());
+             lBuffer.putInt(lTestPatRequest.getLinePerFrame());
+             lBuffer.putInt(lTestPatRequest.getLineInterval());
+             lBuffer.putInt(lTestPatRequest.getSamplesPerLine());
+             lBuffer.putInt(lTestPatRequest.getBitsPerSample());
          }
 
          return lBuffer.array();
@@ -46,6 +59,10 @@ public class CommandInterpreter {
         if(lReplyType == CommandType.REQUEST_FOR_SCANNING){
             ErrorType lErrorType = ErrorType.fromId(lBuffer.getInt());
             return new ReplyForScanningCommand(lErrorType);
+        }
+        else if(lReplyType == CommandType.REQUEST_FOR_TEST_PATTERN){
+            ErrorType lErrorType = ErrorType.fromId(lBuffer.getInt());
+            return new ReplyForTestPatternCommand(lErrorType);
         }
         else if(lReplyType == CommandType.REQUEST_FOR_STATE){
             ErrorType lErrorType = ErrorType.fromId(lBuffer.getInt());

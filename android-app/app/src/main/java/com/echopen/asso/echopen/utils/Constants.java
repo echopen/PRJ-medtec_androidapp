@@ -47,7 +47,7 @@ public class Constants {
 
         public static final int PROBE_V0_COMMAND_CHANNEL_PORT = 50000;
 
-        public static final int PROBE_V0_IMAGE_PORT = 51000;
+        public static final int PROBE_V0_IMAGE_CHANNEL_PORT = 51000;
     }
 
     public static class Settings{

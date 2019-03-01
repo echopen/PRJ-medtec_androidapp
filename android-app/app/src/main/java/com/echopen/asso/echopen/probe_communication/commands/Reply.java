@@ -7,4 +7,16 @@ public class Reply {
     public Reply(){
         mCommand = CommandType.REQUEST_UNKNOWN;
     }
+
+    public CommandType getCommand(){
+        return mCommand;
+    }
+
+    public ErrorType getError(){
+        return mError;
+    }
+
+    public String toString(){
+        return mCommand + " " + mError;
+    }
 }

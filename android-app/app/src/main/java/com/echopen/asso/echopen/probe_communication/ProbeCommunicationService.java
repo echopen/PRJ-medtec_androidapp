@@ -1,9 +1,12 @@
 package com.echopen.asso.echopen.probe_communication;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
+import com.echopen.asso.echopen.probe_communication.commands.PatternType;
 import com.echopen.asso.echopen.probe_communication.commands.RequestForStateCommand;
+import com.echopen.asso.echopen.probe_communication.commands.RequestForTestPatternCommand;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationSocketStateNotification;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
 import com.echopen.asso.echopen.probe_communication.notifications.SocketState;
@@ -21,6 +24,7 @@ public class ProbeCommunicationService {
     private Context mApplicationContext;
     private EchographyImageStreamingService mEchographyImageStreamingService;
     private TCPCommandChannel mTcpCommandChannel;
+    private UDPImageStreamChannel mUdpImageStreamChannel;
     private CommandManager mCommandManager;
 
     private static final String PROBE_AP_SSID = "demoEcho";
@@ -28,11 +32,12 @@ public class ProbeCommunicationService {
 
     private static final int PROBE_AP_CONNECTION_TIME = 1000; // in milliseconds
 
-    public ProbeCommunicationService(Context iApplicationContext, EchographyImageStreamingService iEchographyImageStreamingService, TCPCommandChannel iTcpCommandChannel, CommandManager iCommandManager) {
+    public ProbeCommunicationService(Context iApplicationContext, EchographyImageStreamingService iEchographyImageStreamingService, TCPCommandChannel iTcpCommandChannel, UDPImageStreamChannel iUdpImageStreamChannel, CommandManager iCommandManager) {
         mApplicationContext = iApplicationContext;
         mEchographyImageStreamingService = iEchographyImageStreamingService;
         mCommandManager = iCommandManager;
         mTcpCommandChannel = iTcpCommandChannel;
+        mUdpImageStreamChannel = iUdpImageStreamChannel;
 
         EventBus.getDefault().register(this);
     }
@@ -76,7 +81,8 @@ public class ProbeCommunicationService {
             EventBus.getDefault().post(new ProbeCommunicationWifiNotification(WifiState.WIFI_CONNECTED));
 
             // start communication sockets
-            mTcpCommandChannel.execute();
+            mTcpCommandChannel.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+            mUdpImageStreamChannel.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             //mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT));
         }
         else{
@@ -99,6 +105,14 @@ public class ProbeCommunicationService {
      */
     private void initProbeCommunication(){
         mCommandManager.sendRequest(new RequestForStateCommand());
+        mCommandManager.sendRequest(
+                new RequestForTestPatternCommand(PatternType.PAT_GRAY,
+                                    1000000,
+                                    100,
+                                    5000,
+                                    800,
+                                    8));
+
     }
 
 }

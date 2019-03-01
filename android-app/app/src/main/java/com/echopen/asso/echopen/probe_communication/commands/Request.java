@@ -2,7 +2,7 @@ package com.echopen.asso.echopen.probe_communication.commands;
 
 public class Request {
     protected CommandType mCommand;
-    protected int mSize; // request message size
+    protected int mSize; // request message size in octets
 
     public Request(){
         mCommand = CommandType.REQUEST_UNKNOWN;

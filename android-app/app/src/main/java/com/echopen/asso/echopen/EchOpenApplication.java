@@ -8,6 +8,7 @@ import com.echopen.asso.echopen.probe_communication.TCPCommandChannel;
 import com.echopen.asso.echopen.probe_communication.CommandInterpreter;
 import com.echopen.asso.echopen.probe_communication.CommandManager;
 import com.echopen.asso.echopen.probe_communication.ProbeCommunicationService;
+import com.echopen.asso.echopen.probe_communication.UDPImageStreamChannel;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 
@@ -26,6 +27,7 @@ public class EchOpenApplication extends Application {
     private ProbeCommunicationService mProbeCommunicationService;
     private CommandManager mCommandManager;
     private TCPCommandChannel mTcpCommandChannel;
+    private UDPImageStreamChannel mUdpImageStreamChannel;
 
     @Override
     public void onCreate() {
@@ -36,9 +38,10 @@ public class EchOpenApplication extends Application {
         mEchographyImageStreamingService = new EchographyImageStreamingService(mRenderingContextController, mProbeCinematicProvider);
         mCommandManager = new CommandManager(new CommandInterpreter());
         mTcpCommandChannel = new TCPCommandChannel(Constants.Http.PROBE_V0_IP, Constants.Http.PROBE_V0_COMMAND_CHANNEL_PORT);
+        mUdpImageStreamChannel = new UDPImageStreamChannel(Constants.Http.PROBE_V0_IMAGE_CHANNEL_PORT);
 
         /*TODO: implement a real Android Service */
-        mProbeCommunicationService = new ProbeCommunicationService(getApplicationContext(), mEchographyImageStreamingService, mTcpCommandChannel, mCommandManager);
+        mProbeCommunicationService = new ProbeCommunicationService(getApplicationContext(), mEchographyImageStreamingService, mTcpCommandChannel, mUdpImageStreamChannel, mCommandManager);
     }
 
     /**
