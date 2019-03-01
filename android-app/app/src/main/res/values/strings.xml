@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-   <string name="app_name">echopen</string>
+   <string name="app_name">echOpen</string>
 
     <string name="missing_location_permission">You have to accept the Location permission in order to connect to the probe</string>
     <string name="wifi_initiate_connection">Initiate connection</string>
