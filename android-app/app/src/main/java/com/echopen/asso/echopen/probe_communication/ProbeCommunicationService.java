@@ -1,37 +1,44 @@
 package com.echopen.asso.echopen.probe_communication;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
+import com.echopen.asso.echopen.probe_communication.commands.RequestForStateCommand;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationSocketStateNotification;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
-import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotificationState;
-import com.echopen.asso.echopen.utils.Constants;
+import com.echopen.asso.echopen.probe_communication.notifications.SocketState;
+import com.echopen.asso.echopen.probe_communication.notifications.WifiState;
 import com.thanosfisherman.wifiutils.WifiUtils;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
-/**
- * Created by lecoucl on 15/04/17.
- */
 public class ProbeCommunicationService {
 
     private static final String TAG = ProbeCommunicationService.class.getSimpleName();
 
     private Context mApplicationContext;
     private EchographyImageStreamingService mEchographyImageStreamingService;
+    private TCPCommandChannel mTcpCommandChannel;
+    private CommandManager mCommandManager;
 
     private static final String PROBE_AP_SSID = "demoEcho";
     private static final String PROBE_AP_PASSWORD = "demoEcho";
 
     private static final int PROBE_AP_CONNECTION_TIME = 1000; // in milliseconds
 
-    public ProbeCommunicationService(Context iApplicationContext, EchographyImageStreamingService iEchographyImageStreamingService) {
+    public ProbeCommunicationService(Context iApplicationContext, EchographyImageStreamingService iEchographyImageStreamingService, TCPCommandChannel iTcpCommandChannel, CommandManager iCommandManager) {
         mApplicationContext = iApplicationContext;
         mEchographyImageStreamingService = iEchographyImageStreamingService;
+        mCommandManager = iCommandManager;
+        mTcpCommandChannel = iTcpCommandChannel;
+
+        EventBus.getDefault().register(this);
+    }
+
+    public void finalize() throws Throwable {
+        super.finalize();
     }
 
     public void connect(){
@@ -42,14 +49,25 @@ public class ProbeCommunicationService {
                 .onConnectionResult(this::checkConnectionResult).start();
     }
 
+    /**
+     * @brief check result of wifi enabling and update application state
+     *
+     * @param isSuccess wifi enabled
+     */
     private void checkResult(boolean isSuccess){
         if (isSuccess) {
-            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(ProbeCommunicationWifiNotificationState.WIFI_ENABLED));
+            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(WifiState.WIFI_ENABLED));
         }
         else{
-            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(ProbeCommunicationWifiNotificationState.WIFI_ENABLED_ERROR));
+            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(WifiState.WIFI_ENABLED_ERROR));
         }
     }
+
+    /**
+     * @brief check connection result following attempt to connect to an acces point
+     *
+     * @param isSuccess connection to Acces Point succeed
+     */
 
     private void checkConnectionResult(boolean isSuccess){
         if(isSuccess) {
@@ -59,13 +77,32 @@ public class ProbeCommunicationService {
                 e.printStackTrace();
             }
 
-            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(ProbeCommunicationWifiNotificationState.WIFI_CONNECTED));
-            mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT));
+            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(WifiState.WIFI_CONNECTED));
+
+            // start communication sockets
+            mTcpCommandChannel.execute();
+            //mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT));
         }
         else{
-            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(ProbeCommunicationWifiNotificationState.WIFI_CONNECTED_ERROR));
+            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(WifiState.WIFI_CONNECTED_ERROR));
         }
 
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.BACKGROUND)
+    public void onReply(ProbeCommunicationSocketStateNotification iSocketNotification) {
+        // initialize probe configuration when command socket is connected
+        if(iSocketNotification.getSocketState() == SocketState.CONNECTED && iSocketNotification.getSocketName().equals("TCP")){
+            initProbeCommunication();
+        }
+    }
+
+    /**
+     * @brief initialize probe configuration
+     */
+    private void initProbeCommunication(){
+        mCommandManager.sendRequest(new RequestForStateCommand());
     }
 
 }

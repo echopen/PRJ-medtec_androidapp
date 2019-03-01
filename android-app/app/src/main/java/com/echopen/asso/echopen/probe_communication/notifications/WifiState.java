@@ -1,6 +1,6 @@
 package com.echopen.asso.echopen.probe_communication.notifications;
 
-public enum ProbeCommunicationWifiNotificationState {
+public enum WifiState {
     WIFI_ENABLED,
     WIFI_ENABLED_ERROR,
     WIFI_CONNECTED,

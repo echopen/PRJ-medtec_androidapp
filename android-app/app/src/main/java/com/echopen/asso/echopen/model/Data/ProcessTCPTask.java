@@ -6,24 +6,20 @@ package com.echopen.asso.echopen.model.Data;
  * After the data is processed, it gets it back and displays the final image through the main UI thread.
  */
 
-import android.app.Activity;
-import android.content.res.AssetManager;
 import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.filters.RenderingContext;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
-import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotificationState;
+import com.echopen.asso.echopen.probe_communication.notifications.WifiState;
 import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
-import com.thanosfisherman.wifiutils.WifiUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PushbackInputStream;
 import java.net.Socket;
 
@@ -60,7 +56,7 @@ public class ProcessTCPTask extends AbstractDataTask {
             Integer[] lRawImageData;
 
             DeviceConfiguration lDeviceConfiguration = getDeviceConfiguration(stream);
-            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(ProbeCommunicationWifiNotificationState.WIFI_START_SCANNING));
+            EventBus.getDefault().post(new ProbeCommunicationWifiNotification(WifiState.WIFI_START_SCANNING));
             while (true) {
                 try {
                     RenderingContext lCurrentRenderingContext = mRenderingContextController.getCurrentRenderingContext();

@@ -42,6 +42,12 @@ public class Constants {
         public static final String REDPITAYA_IP = "192.168.1.76";
 
         public static final int REDPITAYA_PORT = 7538;
+
+        public static final String PROBE_V0_IP = "192.168.4.1";
+
+        public static final int PROBE_V0_COMMAND_CHANNEL_PORT = 50000;
+
+        public static final int PROBE_V0_IMAGE_PORT = 51000;
     }
 
     public static class Settings{
