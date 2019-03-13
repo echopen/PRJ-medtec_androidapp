@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
 import com.echopen.asso.echopen.probe_communication.commands.PatternType;
-import com.echopen.asso.echopen.probe_communication.commands.RequestForStateCommand;
+import com.echopen.asso.echopen.probe_communication.commands.RequestForStatusCommand;
 import com.echopen.asso.echopen.probe_communication.commands.RequestForTestPatternCommand;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationSocketStateNotification;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
@@ -104,7 +104,7 @@ public class ProbeCommunicationService {
      * @brief initialize probe configuration
      */
     private void initProbeCommunication(){
-        mCommandManager.sendRequest(new RequestForStateCommand());
+        mCommandManager.sendRequest(new RequestForStatusCommand());
         mCommandManager.sendRequest(
                 new RequestForTestPatternCommand(PatternType.PAT_GRAY,
                                     1000000,

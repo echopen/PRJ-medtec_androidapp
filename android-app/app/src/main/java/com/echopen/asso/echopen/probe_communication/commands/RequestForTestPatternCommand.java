@@ -11,7 +11,7 @@ public class RequestForTestPatternCommand extends Request {
 
     public RequestForTestPatternCommand(PatternType iPatternType, int iFrameInterval, int iLinePerFrame, int iLineInterval, int iSamplesPerLine, int iBitsPerSample){
         mCommand = CommandType.REQUEST_FOR_TEST_PATTERN;
-        mSize = 28;
+        mSize = 8;
         mPatternType = iPatternType;
         mFrameInterval = iFrameInterval;
         mLinePerFrame = iLinePerFrame;

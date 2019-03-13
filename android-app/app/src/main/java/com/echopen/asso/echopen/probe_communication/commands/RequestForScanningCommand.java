@@ -4,7 +4,7 @@ public class RequestForScanningCommand extends Request {
 
     public RequestForScanningCommand(){
         mCommand = CommandType.REQUEST_FOR_SCANNING;
-        mSize = 4;
+        mSize = 2;
     }
 }
 
