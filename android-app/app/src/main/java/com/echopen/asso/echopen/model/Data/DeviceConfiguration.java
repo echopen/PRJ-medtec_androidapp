@@ -8,18 +8,16 @@ public class DeviceConfiguration {
     private float mR0; // measure initial depth in m
     private float mRf; // measure final depth in m
     private float mProbeSectorAngle; // measure sector angle in degree
-    private float mSamplingFrequency; // sampling frequency in Hz
     private int mNbLinesPerImage;
     private int mNbSamplesPerLine;
     private String mProbeCinematicName;
     private float mEchoDelay; // echo delay measurement in milliseconds
     private float mDecimation; // echo decimation
 
-    public DeviceConfiguration(float iR0, float iRf, float iProbeSectorAngle, float iSamplingFrequency, int iNbLinePerImage, int iNbSamplesPerLine, String iProbeCinematicName, float iEchoDelay, float iDecimation) {
+    public DeviceConfiguration(float iR0, float iRf, float iProbeSectorAngle, int iNbLinePerImage, int iNbSamplesPerLine, String iProbeCinematicName, float iEchoDelay, float iDecimation) {
         mR0 = iR0;
         mRf = iRf;
         mProbeSectorAngle = iProbeSectorAngle;
-        mSamplingFrequency = iSamplingFrequency;
         mNbLinesPerImage = iNbLinePerImage;
         mNbSamplesPerLine = iNbSamplesPerLine;
         mProbeCinematicName = iProbeCinematicName;
@@ -37,10 +35,6 @@ public class DeviceConfiguration {
 
     public float getProbeSectorAngle(){
         return mProbeSectorAngle;
-    }
-
-    public float getSamplingFrequency(){
-        return mSamplingFrequency;
     }
 
     public int getNbSamplesPerLine(){

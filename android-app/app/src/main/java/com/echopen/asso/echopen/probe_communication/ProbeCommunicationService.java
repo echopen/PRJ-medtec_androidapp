@@ -83,7 +83,6 @@ public class ProbeCommunicationService {
             // start communication sockets
             mTcpCommandChannel.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
             mUdpImageStreamChannel.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-            //mEchographyImageStreamingService.connect(new EchographyImageStreamingTCPMode(Constants.Http.REDPITAYA_IP, Constants.Http.REDPITAYA_PORT));
         }
         else{
             EventBus.getDefault().post(new ProbeCommunicationWifiNotification(WifiState.WIFI_CONNECTED_ERROR));
@@ -107,11 +106,11 @@ public class ProbeCommunicationService {
         mCommandManager.sendRequest(new RequestForStatusCommand());
         mCommandManager.sendRequest(
                 new RequestForTestPatternCommand(PatternType.PAT_GRAY,
-                                    1000000,
+                                    5000000,
                                     100,
-                                    5000,
+                                    30000,
                                     800,
-                                    8));
+                                    16));
 
     }
 

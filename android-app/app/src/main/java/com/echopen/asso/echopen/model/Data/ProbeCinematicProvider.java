@@ -19,7 +19,7 @@ public class ProbeCinematicProvider {
     }
 
 
-    ProbeCinematicConfiguration getProbeCinematic(String iProbeCinematicName){
+    public ProbeCinematicConfiguration getProbeCinematic(String iProbeCinematicName){
         for(ProbeCinematicConfiguration lProbeCinematic : mProbeCinematicList){
             if(lProbeCinematic.mName.equals(iProbeCinematicName)){
                 return lProbeCinematic;

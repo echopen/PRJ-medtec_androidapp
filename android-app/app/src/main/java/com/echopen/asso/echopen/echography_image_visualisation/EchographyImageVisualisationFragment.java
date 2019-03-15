@@ -117,6 +117,10 @@ public class EchographyImageVisualisationFragment extends Fragment implements Ec
 
     @Override
     public void displayWifiProgress(String iMessage) {
+        if(getView() == null){
+            return;
+        }
+
         mPendingLayout.setVisibility(View.VISIBLE);
 
         mPendingTextView.setText(iMessage);

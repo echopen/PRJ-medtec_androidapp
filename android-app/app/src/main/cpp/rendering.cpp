@@ -16,7 +16,7 @@ std::shared_ptr<ThreadPool> gPool;
 
 extern "C"
 JNIEXPORT jintArray JNICALL
-Java_com_echopen_asso_echopen_model_Data_AbstractDataTask_render(JNIEnv *env, jobject instance,
+Java_com_echopen_asso_echopen_echography_1image_1streaming_EchographyImageStreamingService_render(JNIEnv *env, jobject instance,
                                                                  jintArray iImageInput_,
                                                                  jdouble slope, jdouble offset) {
     jint *iImageInput = env->GetIntArrayElements(iImageInput_, NULL);
@@ -51,7 +51,7 @@ Java_com_echopen_asso_echopen_model_Data_AbstractDataTask_render(JNIEnv *env, jo
     Image2D<int> lImageRGBOutput(gScanConv->Nx, gScanConv->Ny);
     LinearQuantificationFilter lLinearQuantificationFilter = LinearQuantificationFilter();
     lLinearQuantificationFilter.setUp(gPool);
-    lLinearQuantificationFilter.applyFilter(lScanConverted, lImageRGBOutput, 0.f, 100.f);
+    lLinearQuantificationFilter.applyFilter(lScanConverted, lImageRGBOutput, 0, 1000);
 
     // return generated image
     jintArray oImage_ = env->NewIntArray(gScanConv->Nx * gScanConv->Ny);
@@ -69,7 +69,7 @@ Java_com_echopen_asso_echopen_model_Data_AbstractDataTask_render(JNIEnv *env, jo
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_echopen_asso_echopen_model_Data_AbstractDataTask_prepareRenderingContext(JNIEnv *env,
+Java_com_echopen_asso_echopen_echography_1image_1streaming_EchographyImageStreamingService_prepareRenderingContext(JNIEnv *env,
                                                                                   jobject instance,
                                                                                   jint Nr_probe,
                                                                                   jint Nline_probe,
