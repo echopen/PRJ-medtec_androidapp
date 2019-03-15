@@ -5,7 +5,7 @@ import android.support.v8.renderscript.Element;
 import android.support.v8.renderscript.RenderScript;
 
 import com.echopen.asso.echopen.gpuchallenge.ScriptC_scanConversion;
-import com.echopen.asso.echopen.model.Data.DeviceConfiguration;
+import com.echopen.asso.echopen.echography_image_streaming.DeviceConfiguration;
 import com.echopen.asso.echopen.utils.Constants;
 
 /**

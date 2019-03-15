@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import com.echopen.asso.echopen.MainActivity;
 import com.echopen.asso.echopen.R;
 import com.echopen.asso.echopen.model.EchopenImage;
+import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

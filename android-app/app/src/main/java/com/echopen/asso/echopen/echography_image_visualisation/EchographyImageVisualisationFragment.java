@@ -13,13 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.echopen.asso.echopen.R;
-import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
-import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotificationState;
 import com.echopen.asso.echopen.view.CaptureButton;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

@@ -1,20 +1,14 @@
 package com.echopen.asso.echopen.echography_image_streaming;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import com.echopen.asso.echopen.echography_image_streaming.notifications.EchographyImageStreamingNotification;
 import com.echopen.asso.echopen.filters.GreyLevelLinearLookUpTable;
 import com.echopen.asso.echopen.filters.RenderingContext;
-import com.echopen.asso.echopen.model.Data.DeviceConfiguration;
-import com.echopen.asso.echopen.model.Data.ProbeCinematicConfiguration;
-import com.echopen.asso.echopen.model.Data.ProbeCinematicLoungerConfiguration;
-import com.echopen.asso.echopen.model.Data.ProbeCinematicProvider;
 import com.echopen.asso.echopen.probe_communication.commands.LineData;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationSendLineNotification;
 import com.echopen.asso.echopen.probe_communication.notifications.ProbeCommunicationWifiNotification;
 import com.echopen.asso.echopen.probe_communication.notifications.WifiState;
-import com.echopen.asso.echopen.ui.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 import com.echopen.asso.echopen.utils.Timer;
 
@@ -25,9 +19,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.Arrays;
 import java.util.Observable;
 import java.util.concurrent.Semaphore;
-
-import static com.echopen.asso.echopen.utils.Constants.PreProcParam.ADC_FREQUENCY_CLOCK;
-import static com.echopen.asso.echopen.utils.Constants.PreProcParam.getLoadDoubleConstants;
 
 /**
  *

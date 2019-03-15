@@ -3,13 +3,13 @@ package com.echopen.asso.echopen;
 import android.app.Application;
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.model.Data.ProbeCinematicProvider;
+import com.echopen.asso.echopen.echography_image_streaming.ProbeCinematicProvider;
 import com.echopen.asso.echopen.probe_communication.TCPCommandChannel;
 import com.echopen.asso.echopen.probe_communication.CommandInterpreter;
 import com.echopen.asso.echopen.probe_communication.CommandManager;
 import com.echopen.asso.echopen.probe_communication.ProbeCommunicationService;
 import com.echopen.asso.echopen.probe_communication.UDPImageStreamChannel;
-import com.echopen.asso.echopen.ui.RenderingContextController;
+import com.echopen.asso.echopen.echography_image_streaming.RenderingContextController;
 import com.echopen.asso.echopen.utils.Constants;
 
 /**

@@ -39,7 +39,6 @@ import android.widget.Toast;
 
 
 import com.echopen.asso.echopen.echography_image_streaming.EchographyImageStreamingService;
-import com.echopen.asso.echopen.echography_image_streaming.modes.EchographyImageStreamingTCPMode;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImagePreviewFragment;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageSaveContract;
 import com.echopen.asso.echopen.echography_image_visualisation.EchographyImageSavePresenter;
